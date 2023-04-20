@@ -2,3 +2,9 @@
 main:
   - title: "Archives"
     url: /pages/recent-posts/
+  - title: "Roadmaps"
+    url: /pages/roadmaps/
+  - title: "Promo"
+    url: /pages/discount/
+  - title: "Private class"
+    url: /pages/private-class/
