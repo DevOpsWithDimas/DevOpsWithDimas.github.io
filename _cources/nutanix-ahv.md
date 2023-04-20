@@ -1,6 +1,10 @@
 ---
 title: "Nutanix AHV"
-visible: true
+subtitle: "Nutanix AHV for DevOps"
+url: nutanix-ahv
+publish: 
+visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/nutanix-ahv.png
 sidebar:

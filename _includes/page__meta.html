@@ -1,6 +1,13 @@
 {% assign document = post | default: page %}
 {% if document.read_time or document.show_date %}
   <p class="page__meta">
+    {% if post.coming_soon == true %}
+    <span style="color: rgb(207, 207, 109);">
+      <i class="fas fa-rss" aria-hidden="true"></i>
+      comming soon!
+    </span>
+    <span class="page__meta-sep"></span>
+    {% endif %}
     {% if document.show_date and document.date %}
       {% assign date = document.date %}
       <span class="page__meta-date">
@@ -27,5 +34,6 @@
         {% endif %}
       </span>
     {% endif %}
+    
   </p>
 {% endif %}

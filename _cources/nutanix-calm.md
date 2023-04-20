@@ -1,6 +1,10 @@
 ---
 title: "Nutanix CALM"
+subtitle: "Nutanix CALM for DevOps"
+url: nutanix-calm
+publish: 
 visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/nutanix-ahv.png
 sidebar:

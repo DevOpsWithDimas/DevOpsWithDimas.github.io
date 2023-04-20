@@ -1,6 +1,10 @@
 ---
-title: "PostgreSQL for Database Administrator"
-visible: true
+title: "PostgreSQL"
+subtitle: "PostgreSQL Certified Proffesional"
+url: postgres
+publish: 2022-01-16T20:50:50+07:00
+visible: false
+coming_soon: false
 header:
   teaser: assets/images/cources/postgresql.png
 sidebar:

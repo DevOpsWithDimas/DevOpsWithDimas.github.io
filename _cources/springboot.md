@@ -1,6 +1,10 @@
 ---
-title: "Springboot for Backend Developer"
+title: "Springboot"
+subtitle: "Springboot for Backend Developer"
+url: springboot
+publish: 
 visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/spring-boot.png
 sidebar:

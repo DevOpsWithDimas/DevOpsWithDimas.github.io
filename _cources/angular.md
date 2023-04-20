@@ -1,6 +1,10 @@
 ---
-title: "Angular for Frontend Developer"
+title: "Angular"
+subtitle: "Angular for Frontend Developer"
+url: angular
+publish: 
 visible: false
+coming_soon: true
 header:
   overlay_image: "assets/images/cources/angular.png"
   overlay_filter: 0.7

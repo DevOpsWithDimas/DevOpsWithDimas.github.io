@@ -1,6 +1,10 @@
 ---
 title: "Pemograman golang"
+subtitle: "Bahasa pemograman golang"
+url: golang
+publish: 
 visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/java-se.png
 tags:

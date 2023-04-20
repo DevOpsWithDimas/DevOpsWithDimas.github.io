@@ -1,6 +1,10 @@
 ---
-title: "Oracle DB Certified Professional (OCP)"
+title: "Oracle Database (OCP)"
+subtitle: "Oracle Database Certified Professional (OCA)"
+url: oracledb-ocp
+publish: 2021-02-07T12:26:00+07:00
 visible: false
+coming_soon: false
 header:
   teaser: assets/images/cources/oracle-associate.png
 sidebar:

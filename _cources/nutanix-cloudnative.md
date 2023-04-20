@@ -1,6 +1,10 @@
 ---
-title: "Nutanix CloudNative for DevOps Engineer"
-visible: true
+title: "Nutanix CloudNative"
+subtitle: "Nutanix CloudNative for DevOps"
+url: nutanix-cloudnative
+publish: 
+visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/nutanix-cloud-native.png
 sidebar:

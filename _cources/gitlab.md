@@ -1,6 +1,10 @@
 ---
-title: "GitOps with Gitlab"
-visible: true
+title: "Gitlab"
+subtitle: "Gitlab for GitOps"
+url: gitlab
+publish: 
+visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/gitlab.png
 tags:

@@ -1,6 +1,10 @@
 ---
 title: "Pemograman Java"
-visible: true
+subtitle: "Bahasa pemograman Java"
+url: java
+publish: 
+visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/java-se.png
 tags:

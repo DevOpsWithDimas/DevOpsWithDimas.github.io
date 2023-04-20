@@ -27,7 +27,7 @@
     {% include page__meta.html type=include.type %}
     {% if post.content contains '<!--more-->' %}
       <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt |  split: '<!--more-->' | first }}</p>
-    {% endif %}
+    {% else %}
       <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | markdownify | strip_html | truncate: 160 }}</p>
     {% endif %}
   </article>

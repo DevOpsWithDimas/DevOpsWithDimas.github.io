@@ -1,6 +1,10 @@
 ---
 title: "Pemograman JavaScript (js)"
-visible: true
+subtitle: "Bahasa pemograman Javascript"
+url: js
+publish: 
+visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/js.png
 tags:

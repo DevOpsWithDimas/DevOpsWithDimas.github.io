@@ -18,6 +18,8 @@ pagination:
   collection: cources
   title: ':title'
   per_page: 8
+  sort_field: 'publish'
+  sort_reverse: true
 ---
 
 {% if paginator %}

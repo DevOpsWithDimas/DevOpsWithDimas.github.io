@@ -1,6 +1,10 @@
 ---
 title: "Pemograman Typescript (ts)"
+subtitle: "Bahasa pemograman typescript"
+url: angular
+publish: 
 visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/typescript.png
 sidebar:

@@ -1,6 +1,10 @@
 ---
-title: "Testing with Apache JMeter"
+title: "Apache JMeter"
+subtitle: "Testing with Apache JMeter"
+url: apache-jmeter
+publish: 
 visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/apache-jmeter.png
 tags:

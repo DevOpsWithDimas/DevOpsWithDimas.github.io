@@ -1,7 +1,10 @@
 ---
 title: "Docker"
+subtitle: "Docker for DevOps engineer"
 url: docker
+publish: 2023-03-26T18:46:00+07:00
 visible: true
+coming_soon: false
 tagline: "Dengan menggunakan technology container khususnya dengan Docker kita bisa melakukan banyak hal seperti untuk **Development, Automated testing, Automated deployment, menjalankan CI/CD** dan lain-lain. <br><br>Docker dirancang dapat dijalankan di semua platform seperti Linux, Mac OS serta Windows. Dengan docker kita bisa mem-virtualisasikan aplikasi di PC/Laptop dengan mudah berbasikan `docker run` command"
 tags:
   - DevOps

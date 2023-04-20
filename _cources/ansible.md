@@ -1,6 +1,10 @@
 ---
-title: "Ansible for DevOps Engineer"
-visible: true
+title: "Ansible"
+subtitle: "Ansible for DevOps Engineer"
+url: ansible
+publish: 
+visible: false
+coming_soon: true
 header:
   teaser: assets/images/cources/ansible.png
 tags:

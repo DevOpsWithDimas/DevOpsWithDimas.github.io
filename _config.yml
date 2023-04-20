@@ -110,6 +110,18 @@ author:
   location         : "Bandung, Jawa Barat (Indonesia)"
   email            : 
   links:
+    - label: "Youtube"
+      icon: "fab fa-fw fa-youtube"
+      url: "https://www.youtube.com/@DimasMaryanto"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/dimmaryanto93"
+    - label: "Instagram"
+      icon: "fab fa-fw fa-instagram"
+      url: "https://instagram.com/dimmaryanto93"
+    - label: "Facebook"
+      icon: "fab fa-fw fa-facebook-square"
+      url: "https://facebook.com/dimmaryanto93/"
     - label: "Personal Email"
       icon: "fas fa-fw fa-envelope-square"
       url: "mailto:software.dimas_m@icloud.com"
@@ -119,18 +131,6 @@ author:
     - label: "Work Email (Nutanix Inc)"
       icon: "fas fa-fw fa-envelope-square"
       url: "mailto:dimas.maryanto@nutanix.com"
-    - label: "Facebook"
-      icon: "fab fa-fw fa-facebook-square"
-      url: "https://facebook.com/dimmaryanto93/"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/dimmaryanto93"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/dimmaryanto93"
-    - label: "Youtube"
-      icon: "fab fa-fw fa-youtube"
-      url: "https://www.youtube.com/@DimasMaryanto"
 
 # Site Footer
 footer:
@@ -147,7 +147,6 @@ footer:
     - label: "Youtube"
       icon: "fab fa-fw fa-youtube"
       url: "https://www.youtube.com/@DimasMaryanto"
-
 
 # Reading Files
 include:
@@ -306,6 +305,7 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
+      show_date: true
       comments: true
       share: true
       related: true
@@ -315,6 +315,7 @@ defaults:
     values:
       layout: single
       excerpt_separator: "<!--more-->"
+      show_date: true
       author_profile: false
       read_time: true
       comments: false
