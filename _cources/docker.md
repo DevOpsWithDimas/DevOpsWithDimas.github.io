@@ -22,8 +22,8 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   teaser: assets/images/cources/docker.png
   actions:
-    - label: "Join premium member"
-      url: https://www.udemy.com/course/docker-pemula-sampai-mahir/
+    - label: "Learn more"
+      url: /posts/container/docker/
 toc: true
 toc_sticky: true
 sidebar:

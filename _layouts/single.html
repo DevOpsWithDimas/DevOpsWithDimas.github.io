@@ -50,17 +50,16 @@ layout: default
               </header>
               <ul class="toc__menu">
                 <li class="text-right">
-                  <h3>
-                    <del>{{ page.udemy.price }}</del> <span class="ui-text">{{page.udemy.discount}}</span>
-                  </h3>
-                  <span class="text-danger">
+                  <del class="udemy-price-del">{{ page.udemy.price }}</del> 
+                  <span class="udemy-price-discount">{{page.udemy.discount}}</span>                  
+                </li>
+                <li class="text-right udemy-expired-time">
                     <i class="far fa-clock" aria-hidden="true"></i>
                     expired until {{page.udemy.expired}}
-                  </span>
                 </li>
                 <br>
                 <li>
-                  <a href="{{page.udemy.url}}" class="btn btn--large btn--info">Buy this cource</a>
+                  <a href="{{page.udemy.url}}" class="btn btn--large btn--success udemy-btn-buy" target="_blank">Buy this cource</a>
                 </li>
               </ul>
             </nav>
