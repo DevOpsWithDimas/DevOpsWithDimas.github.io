@@ -3,6 +3,7 @@ title: "Archives"
 permalink: /pages/recent-posts/
 layout: home
 author_profile: true
+entries_layout: list
 pagination:
   enabled: true
 classes: wide
