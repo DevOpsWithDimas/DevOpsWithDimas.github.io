@@ -1,16 +1,25 @@
 ---
-title: "Pemograman Typescript (ts): pemula s/d mahir"
+title: "Pemograman Typescript (ts)"
+visible: true
 header:
-  image: /assets/images/foo-bar-identity.jpg
-  teaser: /assets/images/foo-bar-identity-th.jpg
+  teaser: assets/images/cources/typescript.png
 sidebar:
   - title: "Role"
-    image: http://placehold.it/350x250
+    image: assets/images/cources/typescript.png
     image_alt: "logo"
-    text: "Designer, Front-End Developer"
+    text: "Frontend Developer, Designer & Programmer"
   - title: "Responsibilities"
-    text: "Reuters try PR stupid commenters should isn't a business model"
-udemy:
-  url:
-  enabled: false
+    text: "Temen-teman akan belajar Relational Database Management System (RDBMS) dengan PostgreSQL"
+tags:
+  - web
+  - js
+  - ts
+udemy: 
+  url: https://www.udemy.com/course/pemograman-ts-pemula-sampai-mahir/
+  price: Rp.280.000,-
+  discount: Rp.99.000,-
+  couponCode: BUKBER.2023.10
+  release: false
+  referralCode: 8080BE598C39D7652D33
+  expired: 15/04/2023
 ---

@@ -1,16 +1,25 @@
 ---
-title: "DevOps with Ansible: pemula s/d mahir"
+title: "Ansible for DevOps Engineer"
+visible: true
 header:
-  image: /assets/images/foo-bar-identity.jpg
-  teaser: /assets/images/foo-bar-identity-th.jpg
+  teaser: assets/images/cources/ansible.png
+tags:
+  - DevOps
+  - IaC
+  - Ansible
 sidebar:
   - title: "Role"
-    image: http://placehold.it/350x250
+    image: assets/images/cources/ansible.png
     image_alt: "logo"
-    text: "Designer, Front-End Developer"
+    text: "DevOps Engineer, Operation team, & GitOps Engineer"
   - title: "Responsibilities"
-    text: "Reuters try PR stupid commenters should isn't a business model"
-udemy:
-  url:
-  enabled: false
+    text: "Temen-temen akan belajar IT automation tool untuk configure system, deploy software dan orchestrate more advance IT tasks seperti continues dpeloyment or zero downtime rolling update dan lain-lain."
+udemy: 
+  url: https://www.udemy.com/course/devops-ansible-pemula-sampai-mahir/
+  price: Rp280.000,-
+  discount: Rp99.000,-
+  release: false
+  couponCode: BUKBER.2023.10
+  referralCode: 8DA27E06BF0BA6935CCC
+  expired: 15/04/2023
 ---

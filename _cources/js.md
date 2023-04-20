@@ -1,16 +1,24 @@
 ---
-title: "Pemograman JavaScript (js): pemula s/d mahir"
+title: "Pemograman JavaScript (js)"
+visible: true
 header:
-  image: /assets/images/foo-bar-identity.jpg
-  teaser: /assets/images/foo-bar-identity-th.jpg
+  teaser: assets/images/cources/js.png
+tags:
+  - web
+  - js
 sidebar:
   - title: "Role"
-    image: http://placehold.it/350x250
+    image: assets/images/cources/js.png
     image_alt: "logo"
-    text: "Designer, Front-End Developer"
+    text: "Developer, Front-End Developer & Programmer"
   - title: "Responsibilities"
-    text: "Reuters try PR stupid commenters should isn't a business model"
-udemy:
-  url:
-  enabled: false
+    text: "Temen-teman akan belajar tentang Pemograman scripting language menggunakan Javascript."
+udemy: 
+  url: https://www.udemy.com/course/pemograman-js-pemula-sampai-mahir/
+  price: Rp280.000,-
+  discount: Rp99.000,-
+  release: false
+  couponCode: BUKBER.2023.10
+  referralCode: 8DA27E06BF0BA6935CCC
+  expired: 15/04/2023
 ---

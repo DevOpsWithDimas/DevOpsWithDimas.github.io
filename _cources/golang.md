@@ -1,16 +1,25 @@
 ---
-title: "Pemograman golang: pemula s/d mahir"
+title: "Pemograman golang"
+visible: true
 header:
-  image: /assets/images/foo-bar-identity.jpg
-  teaser: /assets/images/foo-bar-identity-th.jpg
+  teaser: assets/images/cources/java-se.png
+tags:
+  - Pemograman
+  - Go
+  - Golang
 sidebar:
   - title: "Role"
-    image: http://placehold.it/350x250
+    image: assets/images/cources/java-se.png
     image_alt: "logo"
-    text: "Designer, Front-End Developer"
+    text: "Developer, & Programmer"
   - title: "Responsibilities"
-    text: "Reuters try PR stupid commenters should isn't a business model"
-udemy:
-  url:
-  enabled: false
+    text: "Temen-temen akan belajar bahasa pemograman Java untuk Pemula sampai Mahir diantaranya, Basic Java, Konsep & Impl OOP, JDBC, Multithreads, Client/Server, Java Desktop, Java Web, etc"
+udemy: 
+  url: https://www.udemy.com/course/pemograman-golang-pemula-sampai-mahir/
+  price: Rp280.000,-
+  discount: Rp99.000,-
+  release: false
+  couponCode: BUKBER.2023.10
+  referralCode: 8DA27E06BF0BA6935CCC
+  expired: 15/04/2023
 ---

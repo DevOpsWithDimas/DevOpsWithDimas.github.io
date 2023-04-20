@@ -1,17 +1,102 @@
 ---
-title: "Pemograman Java: pemula s/d mahir"
+title: "Pemograman Java"
+visible: true
 header:
-  image: /assets/images/foo-bar-identity.jpg
-  teaser: /assets/images/foo-bar-identity-th.jpg
+  teaser: assets/images/cources/java-se.png
+tags:
+  - Pemograman
+  - Java
 sidebar:
   - title: "Role"
-    image: http://placehold.it/350x250
+    image: assets/images/cources/java-se.png
     image_alt: "logo"
-    text: "Designer, Front-End Developer"
+    text: "Developer, & Programmer"
   - title: "Responsibilities"
-    text: "Reuters try PR stupid commenters should isn't a business model"
-udemy:
-  url:
-  enabled: false
+    text: "Temen-temen akan belajar bahasa pemograman Java untuk Pemula sampai Mahir diantaranya, Basic Java, Konsep & Impl OOP, JDBC, Multithreads, Client/Server, Java Desktop, Java Web, etc"
+udemy: 
+  url: https://www.udemy.com/course/pemograman-java-pemula-sampai-mahir/
+  price: Rp.280.000,-
+  discount: Rp.99.000,-
+  couponCode: BUKBER.2023.10
+  release: false
+  referralCode: 8080BE598C39D7652D33
+  expired: 15/04/2023 
+catalogs:
+  - name: Pengenalan Java language
+    key: introduction
+    description: 'Eps 1: Pengenalan Java Programming language'
+    messages: ''
+  - name: Getting started
+    key: getting-started
+    description: 'Eps 2: Getting started with Java'
+    messages: ''
+  - name: Variables, Data Types and Methods
+    key: basic
+    description: 'Eps 3: Variables, Data Types and Methods'
+    messages: ''
+  - name: Build-in Functions & Operators
+    key: function-and-operators
+    description: 'Eps 4: Build-in Function and Operators'
+    messages: ''
+  - name: Classes and Packages
+    key: class-package
+    description: 'Eps 5: Classes and Packages'
+    messages: ''
+  - name: Structure Control
+    key: structure-control
+    description: 'Eps 6: Structure Control'
+    messages: ''
+  - name: Array, Collections & Generics
+    key: collections-generics
+    description: 'Eps 6: Array, Collections and Generics'
+    messages: ''
+  - name: Object Oriented Programming (OOP)
+    key: oop
+    description: 'Eps 7: Object Oriented Programming (OOP)'
+    messages: ''
+  - name: Exceptions Handling
+    key: exceptions
+    description: 'Eps 8: Exceptions Handling'
+    messages: ''
+  - name: Lamda Expressions
+    key: lamda
+    description: 'Eps 8: Lamda Expressions'
+    messages: ''
+  - name: Aggregate Operations
+    key: aggregate
+    description: 'Eps 9: Aggregate Operations'
+    messages: ''
+  - name: Thread and Concurrency
+    key: thread
+    description: 'Eps 10: Thread and Concurrency'
+    messages: ''
+  - name: Graphical User Interface - Swing
+    key: gui-swing
+    description: 'Eps 11: Graphical User Interface with Swing'
+    messages: ''
+  - name: Database Access (JDBC)
+    key: jdbc
+    description: 'Eps 12: Java Database Connectivity (JDBC)'
+    messages: ''
+  - name: Client / Server - JNDI
+    key: jndi
+    description: 'Eps 13: Java Naming and Directory Interface'
+    messages: ''
+  - name: Client / Server - RMI
+    key: rmi
+    description: 'Eps 14: The Remote Method Invocation API'
+    messages: ''
+  - name: 'Study Kasus: Membuat aplikasi'
+    key: study-cases
+    description: 'Eps 15: Study Kasus membuat aplikasi'
+    messages: ''
+  - name: Java Web (Servlet)
+    key: servlet
+    description: 'Eps 16: Java Servlet'
+    messages: ''
+  - name: Java Server Pages (JSP)
+    key: jsp
+    description: 'Eps 16: Java Server Pages'
+    messages: ''
 ---
 

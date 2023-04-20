@@ -2,6 +2,7 @@
 title: 'Grow your **Future Skill ...**'
 layout: collection
 permalink: /pages/cources/
+entries_layout: grid
 classes: wide
 author_profile: true
 tagline: "Hundreds of videos! Thousands of tutorial blog posts! Feeling lost yet? <br><br>**Watch. Learn. Do. Learn.**<br><br>Watching video tutorials is just the beginning. Get hands-on assignments with course videos that allow you to actually apply and implement what is being taught in the course material."
@@ -24,7 +25,7 @@ pagination:
   {% assign posts = site.cources %}
 {% endif %}
 
-{% assign entries_layout = page.entries_layout | default: 'grid' %}
+{% assign entries_layout = page.entries_layout %}
 <div class="entries-{{ entries_layout }}">
   {% for post in posts %}
     {% include archive-single-card.html type=entries_layout %}
