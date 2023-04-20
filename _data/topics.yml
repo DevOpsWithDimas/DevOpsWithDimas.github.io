@@ -1,0 +1,1172 @@
+- name: Java Basic
+  fullname: 
+  url: java-core
+  icon: "devicons devicons-java"
+  language: Java
+  color: yellow lighten-5
+  tags:
+  - Java
+  - Essential
+  descriptions:
+   Temen-teman akan belajar tentang Java Core diantaranya Data Types, Variables, Scope Variables, Class, Object Oritented Programming etc.
+  messages:
+    Temen-temen akan dipandu untuk mulai belajar bahasa pemograman Java dari nol sampai mahir untuk membuat aplikasi Java, selain itu juga sedikit-demi-sedikit akan belajar algoritma seleksi dan perulangan dan yang terakhir temen-temen di akhir materi akan diberikan soal yang harus dikerjakan agar materi yang diberikan dapat diserap dengan baik.
+  publish: 2017-10-15T20:50:50+07:00
+  github: https://github.com/BootcampYoutubeChannel/belajar-java8
+  youtube:
+  udemy:
+  coming_soon: false
+  visible: true
+
+- name: JDBC with Postgresql
+  fullname: 
+  url: java-jdbc-psql
+  icon: "devicons devicons-java"
+  language: Java
+  color: yellow lighten-3
+  tags:
+  - java
+  - maven
+  - maven-archetype-quickstart
+  - jdbc
+  - PostgreSQL
+  descriptions: 
+    Temen-teman akan belajar Java Database dengan JDBC Technology menggunakan PostgreSQL Database
+  messages:
+    Temen-temen diharapkan mampu dan memahami fitur jdbc seperti fungsi-fungsi statement, prepared-statement, result-set, batch prcessiong, transactional dan lain-lain.
+  publish: 2017-10-23T20:50:50+07:00
+  github: https://github.com/BootcampYoutubeChannel/belajar-jdbc-postgresql
+  youtube:
+  udemy:
+  coming_soon: false
+  visible: true
+
+- name: Javascript
+  fullname: 
+  url: js
+  icon: "devicons devicons-js"
+  language: JavaScript
+  color: lime lighten-5
+  tags:
+  - web
+  - js
+  descriptions:
+    Temen-teman akan belajar tentang Pemograman scripting language menggunakan Javascript. 
+  messages:
+    Temen-temen diharapkan memahami dan mengimplementasikan pemograman Javascript di sebuah website yang teman-teman akan buat, sesuai dengan materi ini.
+  publish: 2017-10-24T20:50:50+07:00
+  github: http://repository.dimas-maryanto.com/youtube/bootcamp-2019/js-basic
+  youtube:
+  udemy:
+  coming_soon: false
+  visible: true
+
+- name: Typescript Essentials
+  fullname: 'Developer - Typescript: Pemula sampai Mahir'
+  url: typescript
+  icon: "devicons devicons-js"
+  language: JavaScript
+  color: lime lighten-5
+  tags:
+  - web
+  - js
+  - ts
+  descriptions:
+    Temen-teman akan belajar tentang Pemograman scripting language menggunakan Typescript. 
+  messages:
+    Temen-temen diharapkan memahami dan mengimplementasikan pemograman Typescript di sebuah website yang teman-teman akan buat, sesuai dengan materi ini.
+  publish: 2022-04-17T13:32:00+07:00
+  github: 
+  youtube:
+  udemy:
+  coming_soon: true
+  visible: true
+  catalogs:
+    - name: Pengenalan Typescript
+      key: introduction
+      description: ''
+      messages: ''
+
+- name: Angular Framework
+  fullname: 'Frontend Dev - Angular: Pemula sampai Mahir'
+  url: angular-ts
+  icon: "devicons devicons-js"
+  language: JavaScript
+  color: lime lighten-5
+  tags:
+  - web
+  - js
+  - ts
+  - angular
+  descriptions:
+    Temen-teman akan belajar membuat aplikasi Web Single Pages Application (SPA) system dengan menggunakan Angular Framework.
+  messages:
+  publish: 2022-04-18T13:32:00+07:00
+  github: 
+  youtube:
+  udemy:
+  coming_soon: true
+  visible: true
+  catalogs:
+    - name: Pengenalan Angular Framework
+      key: introduction
+      description: ''
+      messages: ''
+
+- name: React Library
+  fullname: 'Frontend Dev - React: Pemula sampai Mahir'
+  url: react-ts
+  icon: "devicons devicons-js"
+  language: JavaScript
+  color: lime lighten-5
+  tags:
+  - web
+  - js
+  - ts
+  - react
+  descriptions:
+    Temen-teman akan belajar membuat aplikasi Web Single Pages Application (SPA) system dengan menggunakan React Library.
+  messages:
+  publish: 2022-04-19T13:32:00+07:00
+  github: 
+  youtube:
+  udemy:
+  coming_soon: true
+  visible: true
+  catalogs:
+    - name: Pengenalan React Library
+      key: introduction
+      description: ''
+      messages: ''
+
+- name: Java Web (Servlet & JSP)
+  fullname: 
+  url: java-web
+  icon: "devicons devicons-java"
+  language: Java
+  color: orange lighten-4
+  tags:
+  - java
+  - maven
+  - tomcat-7
+  - servlet
+  - jsp
+  descriptions:
+    Temen-teman akan belajar tentang Pemograman Web dengan Java, diantaranya yaitu pemograman servlet, jsp, dan lain-lain.
+  messages:
+    Temen-temen diharapkan memahami konsep dan implementasi pemograman web dengan Java, seperti membuat page dengan jsp atau servlet, mengirimkan request, menerima request, dan lain-lain.
+  publish: 2017-10-25T20:50:50+07:00
+  github: https://github.com/BootcampYoutubeChannel/belajar-java-web
+  youtube:
+  udemy:
+  coming_soon: false
+  visible: true
+
+- name: ORM dengan Hibernate
+  fullname: 'Developer - ORM Hibernetes: Pemula sampai Mahir'
+  url: orm-hibernate
+  icon: "devicons devicons-java"
+  language: Java
+  color: brown darken-1
+  tags:
+  - java
+  - jdbc
+  - maven
+  - PostgreSQL
+  - Hiberate
+  descriptions: 
+    Temen-teman akan belajar tentang menggunakan hibernate, serta memahami konsep ORM
+  messages:
+    Temen-temen diharapkan mampu dan memahami fitur yang diberikan oleh ORM Hibernate seperti sebelumnya kita belajar JDBC yaitu CRUD, Transaction management, HQL, dan lain-lain.
+  publish: 2017-10-26T20:59:50+07:00
+  github: https://github.com/BootcampYoutubeChannel/belajar-orm-hibernate
+  youtube:
+  udemy: 
+    url: https://www.udemy.com/course/hibernate-orm-bahasa-indonesia/
+    price: Rp280.000,-
+    discount: Rp99.000,-
+    release: false
+    couponCode: BUKBER.2023.10
+    referralCode: 8DA27E06BF0BA6935CCC
+    expired: 15/04/2023
+  coming_soon: false
+  visible: true
+  catalogs:
+    - name: Pengenalan ORM Hibernate
+      key: introduction
+      description: ''
+      messages: ''
+    - name: ORM Mappings
+      key: orm-mapping
+      description: ''
+      messages: ''
+    - name: Hibernete Query Language (HQL)
+      key: hql
+      description: ''
+      messages: ''
+    - name: Hibernete Criteria API
+      key: criteria-api
+      description: ''
+      messages: ''
+    - name: Java Persistence Query Language (JPQL)
+      key: jpql
+      description: ''
+      messages: ''
+    - name: Audit with Hibernete Envers
+      key: hibernate-envers
+      description: ''
+      messages: ''
+    - name: Caching
+      key: hibernate-cache
+      description: ''
+      messages: ''
+      
+- name: Reporting with JasperReport
+  fullname: 
+  url: jasper-report
+  icon: "devicons devicons-java"
+  language: Java
+  color:
+  tags:
+  - java
+  - jdbc
+  - maven
+  - PostgreSQL
+  - JasperReport
+  descriptions: 
+    Temen-teman akan belajar membuat reporting menggunakan JasperReport Studio
+  messages:
+    Temen-temen diharapkan mampu membuat reporting dengan menggunakan JasperReport Studio
+  publish: 2017-10-27T20:59:50+07:00
+  github: 
+  youtube:
+  udemy:
+  coming_soon: true
+  visible: false
+
+- name: Oracle Database
+  fullname: "DBA - Oracle Database: Pemula sampai Mahir"
+  url: oracle18c
+  icon: "devicons devicons-java"
+  language: Database
+  color: blue lighten-5
+  tags:
+  - Oracle
+  - Database
+  descriptions:
+    Temen-teman akan belajar Relational Database Management System (RDBMS) dengan Oracle yang sifatnya Big Data.
+  messages:
+  publish: 2021-02-07T12:26:00+07:00
+  github: https://github.com/BootcampYoutubeChannel/belajar-rdbms-oraclexe-18c
+  youtube: https://www.youtube.com/playlist?list=PLV1-tdmPblvzqS-Z57hZ_spTRtVvnYYpV
+  udemy: 
+    url: https://www.udemy.com/course/rdbms-oracle-18c-indonesia/
+    price: Rp350.000,-
+    discount: Rp99.000,-
+    couponCode: BUKBER.2023.10
+    referralCode: D1F375D96C53FC20DB42
+    release: true
+    expired: 15/04/2023
+  coming_soon: false
+  visible: true
+  catalogs:
+    - name: Pengenalan Oracle Database
+      key: introduction
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: SQL - Select Statement
+      key: sql-select
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: SQL - Select with where clause
+      key: sql-where-clause
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: SQL - Functions
+      key: sql-functions
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: SQL - Join Tables
+      key: sql-join-tables
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: SQL - Sub Queries
+      key: sql-subquery
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: SQL - Expressions
+      key: sql-expression
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: SQL - Data Manipulation Language
+      key: sql-dml
+      description: ''
+      messages: ''
+      deprecated: false
+    - name: SQL - Data Definition Language
+      key: sql-ddl
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: Indexing
+      key: index-table
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: DDL - User Management
+      key: ddl-user-management
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: Monitor database activity
+      key: monitor-audit-trail
+      description: ''
+      messages: ''
+      deprecated: false
+    - name: Database Design
+      key: design-db
+      description: ''
+      deprecated: false
+      messages: ''
+
+- name: Docker
+  fullname: "DevOps - Docker: Pemula sampai Mahir"
+  url: docker
+  icon: "devicons devicons-java"
+  language: DevOps
+  color: amber lighten-2
+  tags:
+  - DevOps
+  - Docker
+  - Container
+  descriptions:
+    Temen-teman akan belajar Containerization dengan Docker untuk Pemula sampai Mahir.
+  messages:
+  publish: 2023-03-26T18:46:00+07:00
+  github: https://github.com/BootcampYoutubeChannel/belajar-docker.git
+  youtube: https://www.youtube.com/playlist?list=PLV1-tdmPblvztpGmVOoRU4Sp1gUr2H72B
+  udemy: 
+    url: https://www.udemy.com/course/docker-pemula-sampai-mahir/
+    price: Rp560.000,-
+    discount: Rp99.000,-
+    couponCode: BUKBER.2023.10
+    release: true
+    referralCode: 8D13D85D4D34027B76BE
+    expired: 15/04/2023
+  coming_soon: false
+  visible: true
+  catalogs:
+    - name: Pengenalan Docker
+      key: introduction
+      description: 'Eps. 1 - Pengenalan Container dengan Docker'
+      deprecated: false
+      messages: ''
+    - name: Docker Registry
+      key: docker-registry
+      description: 'Eps. 2 - Docker Registry'
+      deprecated: false
+      messages: ''
+    - name: Docker Container CLI
+      key: docker-container
+      description: 'Eps. 3 - Docker Container'
+      deprecated: false
+      messages: ''
+    - name: Docker Networks
+      key: docker-network
+      description: 'Eps. 4 - Docker Network'
+      deprecated: false
+      messages: ''
+    - name: Docker Volumes
+      key: docker-volume
+      description: 'Eps.5 - Docker Volumes'
+      deprecated: false
+      messages: ''
+    - name: Dockerfile
+      key: dockerfile
+      description: 'Eps.6 - Dockerfile'
+      deprecated: false
+      messages: ''
+    - name: 'Study Kasus: Build docker image'
+      key: study-cases-dockerfile
+      description: 'Eps.7 - Study kasus: building your own docker images'
+      deprecated: false
+      messages: ''
+    - name: Docker Compose
+      key: docker-compose
+      description: 'Eps.8 - Docker Compose'
+      deprecated: false
+      messages: ''
+    - name: 'Study Kasus: Docker Compose'
+      key: study-cases-compose-files
+      description: 'Eps.9 - Study kasus: run multiple container using docker-compose'
+      deprecated: false
+      messages: ''
+    - name: Docker Context
+      key: docker-context
+      desciption: 'Eps.10 - Docker Context'
+      deprecated: false
+      messages: ''
+    - name: 'Study Kasus: Docker for CI'
+      key: study-cases-docker-ci
+      description: 'Eps.11 - Study kasus: Docker for Continues Integration'
+      deprecated: false
+      messages: ''
+    - name: Docker Machine
+      key: docker-machine
+      description: 'Eps.12 - Docker Machine'
+      deprecated: true
+      messages: ''
+    - name: 'Study Kasus: Ansible for Docker'
+      key: study-cases-ansible
+      description: 'Eps.13 - Study kasus: Create multiple Docker Host'
+      deprecated: false
+      messages: ''
+    - name: Docker Swarm
+      key: docker-swarm
+      description: 'Eps.14 - Docker Swarm'
+      deprecated: false
+      messages: ''
+    - name: 'Study Kasus: Docker Swarm'
+      key: study-cases-docker-swarm
+      description: 'Eps.15 - Study kasus: Orchestration with docker swarm'
+      deprecated: false
+      messages: ''
+    - name: Docker on Cloud using GCP
+      key: docker-cloud
+      description: 'Eps.16 - Docker on Cloud using Google Cloud Platform'
+      deprecated: false
+      messages: ''
+
+- name: Kubernetes (k8s)
+  fullname: "DevOps - Kubernetes: Pemula sampai Mahir"
+  url: k8s
+  icon: "devicons devicons-java"
+  language: DevOps
+  color: white
+  tags:
+  - DevOps
+  - Kubernetes
+  - Orchestration
+  - Docker
+  descriptions:
+    Temen-teman akan belajar Managing Orchestration dengan menggunakan Kubernetes (k8s) untuk Pemula sampai Mahir.
+  messages:
+  publish: 2022-01-03T13:26:00+07:00
+  github: https://github.com/BootcampYoutubeChannel/belajar-kubernetes
+  youtube: https://www.youtube.com/playlist?list=PLV1-tdmPblvy9cHYEG7b-qcXMkpBPm8ZN
+  udemy: 
+    url: https://www.udemy.com/course/devops-kubernetes-pemula-sampai-mahir/
+    price: Rp350.000,-
+    discount: Rp99.000,-
+    couponCode: BUKBER.2023.10
+    release: true
+    referralCode: 58BDCE6103ADC4C9C11D
+    expired: 15/04/2023
+  coming_soon: false
+  visible: true
+  catalogs:
+    - name: Pengenalan Kubernetes
+      key: introduction
+      description: 'Eps. 1 - Pengenakan Kubernetes (k8s)'
+      deprecated: false
+      messages: ''
+    - name: Getting started with minikube
+      key: minikube
+      description: 'Eps. 2 - Getting started with Minikube Cluster'
+      deprecated: false
+      messages: ''
+    - name: 'Pods and Containers'
+      key: pod-container
+      description: 'Eps. 3 - Pod and Containers configuration'
+      deprecated: false
+      messages: ''
+    - name: 'Workload resources'
+      key: workloads
+      description: 'Eps. 4 - Workload resources'
+      deprecated: false
+      messages: ''
+    - name: 'Networking (service)'
+      key: networking
+      description: 'Eps. 5 - Kubernetes networking (service)'
+      deprecated: false
+      messages: ''
+    - name: 'Store data using Volumes'
+      key: volumes
+      description: 'Eps. 6 - Kubernetes Volumes'
+      deprecated: false
+      messages: ''
+    - name: 'Kubernetes Client'
+      key: kubernetes-client
+      description: 'Eps. 7 - Kubernetes Client (kubectl, kustomize)'
+      deprecated: false
+      messages: ''
+    - name: 'Security RBAC'
+      key: security-rbac
+      description: 'Eps. 8 - Security RBAC (Role Based Access Control)'
+      deprecated: false
+      messages: ''
+    - name: 'Kubernetes Package manager'
+      key: helm
+      description: 'Eps. 9 - Kubernetes Package manager (helm)'
+      deprecated: false
+      messages: ''
+    - name: 'Kubernetes cluster for Production grade'
+      key: admin-cluster
+      description: 'Eps. 10 - Kubernetes cluster for Production grade'
+      deprecated: false
+      messages: ''
+    - name: 'Service mesh with istio'
+      key: istio
+      description: 'Eps. 11 - Service mesh with istio'
+      deprecated: false
+      messages: ''
+    - name: 'Kubernetes on Cloud provider'
+      key: k8s-cloud
+      description: 'Kubernetes on Cloud provider (GCP/AWS)'
+      deprecated: false
+      messages: ''
+
+- name: Ansible
+  fullname: "IaC - RedHat Ansible: Pemula sampai Mahir"
+  url: ansible
+  icon: "devicons devicons-java"
+  language: DevOps
+  color: red
+  tags:
+  - DevOps
+  - IaC
+  - Ansible
+  descriptions:
+    Temen-teman akan belajar IT Automation tool menggunakan Infrastructure As a Code dengan Ansible.
+  messages: Temen-temen akan belajar IT automation tool untuk configure system, deploy software dan orchestrate more advance IT tasks seperti continues dpeloyment or zero downtime rolling update dan lain-lain.
+  publish: 2022-07-06T13:26:00+07:00
+  github: 
+  youtube: 
+  udemy: 
+  coming_soon: true
+  visible: true
+  catalogs:
+    - name: Pengenalan Ansible
+      key: introduction
+      description: 'Eps.1 Pengenalan IaC with Ansible'
+      deprecated: false
+      messages: ''
+    - name: Writing task, plays, and playbooks
+      key: task
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: Working with inventory
+      key: inventory
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: Interacting with data
+      key: data
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: Structure control
+      key: statement
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: Including & Importing
+      key: include
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: Testing
+      key: test
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: Ansible Collection
+      key: collection
+      description: ''
+      deprecated: false
+      messages: ''
+    - name: Ansible Galaxy
+      key: galaxy
+      description: ''
+      deprecated: false
+      messages: ''
+    
+- name: Openshift
+  fullname: 'DevOps - RedHat Openshift: Pemula sampai Mahir'
+  url: redhat-openshift
+  icon: "devicons devicons-java"
+  language: DevOps
+  color: white
+  tags:
+  - DevOps
+  - Docker
+  - Kubernates
+  - Openshift
+  descriptions:
+    Temen-teman akan belajar Management Containerization dengan Openshift Kubernetes.
+  messages:
+  publish: 2022-03-26T13:26:00+07:00
+  github: 
+  youtube:
+  udemy: 
+  coming_soon: true
+  visible: true
+  catalogs:
+    - name: Pengenalan RedHat Openshift
+      key: introduction
+      description: 'Eps 1: Pengenalan RedHat Openshift'
+      messages: ''
+    - name: Getting started with minishift
+      key: getting-started
+      description: 'Eps 2: Getting started with free of Openshift using minishift'
+      messages: ''
+
+- name: Gitlab
+  fullname: 'GitOps - Gitlab: Pemula sampai Mahir'
+  url: gitlab
+  icon: "devicons devicons-java"
+  language: DevOps
+  color: amber lighten-2
+  tags:
+  - DevOps
+  - GitOps
+  - Gitlab
+  - Docker
+  - Kubernetes
+  descriptions:
+    Temen-teman akan belajar GitOps dengan menggunakan Gitlab Stack terkait Automation Deployment, Monitoring, Issues Tracking, dan lain-lain.
+  messages:
+  publish: 2022-06-19T13:26:00+07:00
+  github: 
+  youtube: 
+  udemy: 
+    url: https://www.udemy.com/course/gitops-gitlab-pemula-sampai-mahir/
+    price: Rp250.000,-
+    discount: Rp99.000,-
+    couponCode: BUKBER.2023.10
+    release: true
+    referralCode: 8D13D85D4D34027B76BE
+    expired: 15/04/2023
+  coming_soon: false
+  visible: true
+  catalogs:
+    - name: Pengenalan Git
+      key: introduction
+      description: 'Eps 1: Pengenalan Git Version Control'
+      messages: ''
+    - name: Gitlab SaaS
+      key: gitlab-saas
+      description: 'Eps 2: Gitlab SaaS'
+      messages: ''
+    - name: Gitlab self-managed service
+      key: gitlab-self-managed
+      description: 'Eps 3: Gitlab self-managed service'
+      messages: ''
+    - name: Issues Tracker
+      key: issues-tracker
+      description: 'Eps 4: Gitlab for Project Manager'
+      messages: ''
+    - name: Release Management
+      key: release-management
+      description: 'Eps 5: Management Release'
+      messages: ''
+    - name: Gitlab CI/CD
+      key: gitlab-cicd
+      description: 'Eps 6: Gitlab CI/CD'
+      messages: ''
+    - name: Gitlab Integration
+      key: gitlab-integration
+      description: 'Eps 7: Integration'
+      messages: ''
+    - name: Gitlab Monitoring
+      key: gitlab-monitor
+      description: 'Eps 8: Gitlab CI/CD'
+      messages: ''
+    - name: Gitlab Migration
+      key: gitlab-migration
+      description: 'Eps 9: Migrations from Bitbucket'
+      messages: ''
+
+- name: PostgreSQL
+  fullname: "DBA - PostgreSQL: Pemula sampai Mahir"
+  url: postgresql
+  icon: "devicons devicons-postgresql"
+  language: Database
+  color: light-blue lighten-3
+  tags:
+  - Database
+  - PostgreSQL
+  descriptions:
+    Temen-temen akan belajar Relational Database Management System (RDBMS) dengan menggunakan PostgreSQL untuk Pemula sampai Mahir. 
+  messages:
+    Temen-temen akan di pandu untuk menguasai perintah SQL dengan salah satu Relational Database Management System (RDBMS) yaitu dengan PostgreSQL. Dengan menggunakan Relational Database Management Sistem kita dengan mudah dapat melakukan baca-tulis data dengan mudah dan cepat tidak seperti menggunakan baca-tulis di file.
+  publish: 2022-01-16T20:50:50+07:00
+  github: https://github.com/BootcampYoutubeChannel/belajar-postgres14
+  youtube: https://www.youtube.com/playlist?list=PLV1-tdmPblvypZXSk2GC932nludT345xk
+  udemy: 
+    url: https://www.udemy.com/course/dba-postgresql-pemula-sampai-mahir/
+    price: Rp.280.000,-
+    discount: Rp.99.000,-
+    couponCode: BUKBER.2023.10
+    release: true
+    referralCode: 8080BE598C39D7652D33
+    expired: 15/04/2023
+  coming_soon: false
+  visible: true
+  catalogs:
+    - name: Pengenalan PostgreSQL
+      key: introduction
+      description: 'Eps 1: Pengenalan PostgreSQL Database'
+      messages: ''
+    - name: Getting started
+      key: getting-started
+      description: 'Eps 2: Getting Started with PostgreSQL Database for Learning env'
+      messages: ''
+    - name: SQL - Select Statement
+      key: select-statement
+      description: 'Eps 3: Query with Select statement'
+      messages: ''
+    - name: SQL - Data manipulation
+      key: dml-statement
+      description: 'Eps. 4: Data Manipulation'
+      messages: ''
+    - name: SQL - Data definition (Tables)
+      key: ddl-statement-table
+      description: ''
+      messages: ''
+    - name: 'Study Kasus: Database design (Mapping)'
+      key: study-cases-database-design
+      description: ''
+      messages: ''
+    - name: SQL - Indexes
+      key: indexes
+      description: ''
+      messages: ''
+    - name: SQL - Users Management
+      key: user-management
+      description: ''
+      messages: ''
+    - name: Type Conversion
+      key: type-conversion
+      description: ''
+      messages: ''
+    - name: Query Performance Tips
+      key: query-tunning-tips
+      description: ''
+      messages: ''
+    - name: 'Study Kasus: Tokopedia clone'
+      key: study-cases-tokopedia-clone
+      description: ''
+      messages: ''
+    - name: 'Server Administration'
+      key: server-administration
+      description: ''
+      messages: ''
+    - name: 'Pg/PL SQL'
+      key: pg-plsql
+      description: ''
+      messages: ''
+    - name: 'Study Kasus: Backend engine'
+      key: study-cases-backend-engine
+      description: ''
+      messages: ''
+
+- name: Java
+  fullname: "Developer - Java: Pemula sampai Mahir"
+  url: java-se
+  icon: "devicons devicons-postgresql"
+  language: Java
+  color: light-blue lighten-3
+  tags:
+  - Java
+  - JavaSE
+  descriptions:
+    Temen-temen akan belajar bahasa pemograman Java untuk Pemula sampai Mahir diantaranya, Basic Java, Konsep & Impl OOP, JDBC, Multithreads, Client/Server, Java Desktop, Java Web, etc
+  messages:
+    Temen-temen akan di pandu untuk menguasai bahasa pemograman Java dengan versi terbaru (jdk17-lts) dan selalu up to date. Materi yang dibahas baik secara konsep dan implementasinya mulai dari yang paling dasar hingga advanced jadi sangat cocok sekali buat temen-temen baru mulai jurney sebagai Java Developer.
+  publish: 2022-03-27T20:50:50+07:00
+  github: 
+  youtube: 
+  udemy: 
+    url: https://www.udemy.com/course/pemograman-java-pemula-sampai-mahir/
+    price: Rp.280.000,-
+    discount: Rp.99.000,-
+    couponCode: BUKBER.2023.10
+    release: false
+    referralCode: 8080BE598C39D7652D33
+    expired: 15/04/2023 
+  coming_soon: false
+  visible: true
+  catalogs:
+    - name: Pengenalan Java language
+      key: introduction
+      description: 'Eps 1: Pengenalan Java Programming language'
+      messages: ''
+    - name: Getting started
+      key: getting-started
+      description: 'Eps 2: Getting started with Java'
+      messages: ''
+    - name: Variables, Data Types and Methods
+      key: basic
+      description: 'Eps 3: Variables, Data Types and Methods'
+      messages: ''
+    - name: Build-in Functions & Operators
+      key: function-and-operators
+      description: 'Eps 4: Build-in Function and Operators'
+      messages: ''
+    - name: Classes and Packages
+      key: class-package
+      description: 'Eps 5: Classes and Packages'
+      messages: ''
+    - name: Structure Control
+      key: structure-control
+      description: 'Eps 6: Structure Control'
+      messages: ''
+    - name: Array, Collections & Generics
+      key: collections-generics
+      description: 'Eps 6: Array, Collections and Generics'
+      messages: ''
+    - name: Object Oriented Programming (OOP)
+      key: oop
+      description: 'Eps 7: Object Oriented Programming (OOP)'
+      messages: ''
+    - name: Exceptions Handling
+      key: exceptions
+      description: 'Eps 8: Exceptions Handling'
+      messages: ''
+    - name: Lamda Expressions
+      key: lamda
+      description: 'Eps 8: Lamda Expressions'
+      messages: ''
+    - name: Aggregate Operations
+      key: aggregate
+      description: 'Eps 9: Aggregate Operations'
+      messages: ''
+    - name: Thread and Concurrency
+      key: thread
+      description: 'Eps 10: Thread and Concurrency'
+      messages: ''
+    - name: Graphical User Interface - Swing
+      key: gui-swing
+      description: 'Eps 11: Graphical User Interface with Swing'
+      messages: ''
+    - name: Database Access (JDBC)
+      key: jdbc
+      description: 'Eps 12: Java Database Connectivity (JDBC)'
+      messages: ''
+    - name: Client / Server - JNDI
+      key: jndi
+      description: 'Eps 13: Java Naming and Directory Interface'
+      messages: ''
+    - name: Client / Server - RMI
+      key: rmi
+      description: 'Eps 14: The Remote Method Invocation API'
+      messages: ''
+    - name: 'Study Kasus: Membuat aplikasi'
+      key: study-cases
+      description: 'Eps 15: Study Kasus membuat aplikasi'
+      messages: ''
+    - name: Java Web (Servlet)
+      key: servlet
+      description: 'Eps 16: Java Servlet'
+      messages: ''
+    - name: Java Server Pages (JSP)
+      key: jsp
+      description: 'Eps 16: Java Server Pages'
+      messages: ''
+    
+- name: Spring Framework
+  fullname: 'Developer - Spring Framework: Pemula sampai Mahir'
+  url: spring-core
+  icon: "devicons devicons-java"
+  language: Java
+  color: green accent-2
+  tags:
+  - framework
+  - java
+  - spring-framework
+  descriptions:
+    Temen-temen akan belajar Konsep dan Implementasi Dependency Injection dengan menggunakan Spring Framework menggunakan Bahasa pemograman Java
+  messages:
+    Temen-temen akan di pandu untuk menjadi Java / Backend Developer menggunakan teknologi Spring Framework. Di harapkan temen-temen setelah mengikuti kelas ini dapat memahami konsep dan meng-implementasikan beberapa Feature yang di tawarkan oleh Spring Framework seperti Dependency Injection, Data Binding, Type conversion, Expression Language dan lain-lain
+  publish: 2022-03-27T16:26:00+07:00
+  github: 
+  youtube:
+  udemy: 
+    url: https://www.udemy.com/course/spring-framework-pemula-sampai-mahir/
+    price: Rp.280.000,-
+    discount: Rp.99.000,-
+    couponCode: BUKBER.2023.10
+    release: false
+    referralCode: 8080BE598C39D7652D33
+    expired: 15/04/2023
+  coming_soon: true
+  visible: true
+  catalogs:
+    - name: Pengenalan Spring Framework
+      key: introduction
+      description: 'Eps 1: Pengenalan Spring Framework'
+      messages: ''
+    - name: Dependency Injection
+      key: dep-injection
+      description: 'Eps 3: Dependency Injection'
+      messages: ''
+    - name:  Handles Resources
+      key: resources
+      description: 'Eps 4: Resources'
+      messages: ''
+    - name:  Validation, Data Binding, and Type Conversion
+      key: validation
+      description: 'Eps 5: Validation, Data Binding, and Type Conversion'
+      messages: ''
+
+- name: Spring Boot
+  fullname: 'Developer - Spring Boot: Pemula sampai Mahir'
+  url: spring-boot
+  icon: "devicons devicons-java"
+  language: Java
+  color: green accent-2
+  tags:
+  - framework
+  - java
+  - spring-boot
+  descriptions:
+    Temen-temen akan belajar membuat aplikasi ber-standart production-grade menggunakan Spring Boot.
+  messages:
+    Temen-temen akan di pandu untuk menjadi Backend Developer menggunakan framework Spring Boot. Di harapkan temen-temen setelah mengikuti kelas ini dapat memahami dan meng-implementasikan dalam project berscala besar.
+  publish: 2022-03-27T16:26:00+07:00
+  github: 
+  youtube:
+  udemy: 
+    url: https://www.udemy.com/course/spring-boot-pemula-sampai-mahir/
+    price: Rp.280.000,-
+    discount: Rp.99.000,-
+    couponCode: BUKBER.2023.10
+    release: false
+    referralCode: 8080BE598C39D7652D33
+    expired: 15/04/2023
+  coming_soon: true
+  visible: true
+  catalogs:
+    - name: Pengenalan Spring Boot
+      key: introduction
+      description: 'Eps 1: Pengenalan Spring Boot'
+      messages: ''
+    - name: Getting started with Spring Boot
+      key: getting-started
+      description: 'Eps 2: Getting started with Spring Boot'
+      messages: ''
+    - name: Spring applications as stand-alone
+      key: stand-alone
+      description: 'Eps 3: Spring applications as stand-alone'
+      messages: ''
+    - name: Spring Web MVC
+      key: spring-mvc
+      description: 'Eps 4: Spring Web MVC'
+      messages: ''
+    - name: Spring Rest API
+      key: spring-rest
+      description: 'Eps 5: Spring Rest API'
+      messages: ''
+    - name: Spring Data JDBC
+      key: spring-data-jdbc
+      description: 'Eps 5: Spring Data JDBC'
+      messages: ''
+    - name: Spring Data JPA
+      key: spring-data-jpa
+      description: 'Eps 6: Spring Data JPA with Hibernate provider'
+      messages: ''
+
+- name: Apache JMeter
+  fullname: 'DevOps - Apache JMeter: Pemula sampai Mahir'
+  url: apache-jmeter
+  icon: "devicons devicons-java"
+  language: DevOps
+  color: green accent-2
+  tags:
+  - DevOps
+  - Testing
+  descriptions:
+    Temen-temen akan belajar LoadPerformance dengan menggunakan tools Apache JMeter untuk Web, Web Service, Jdbc, dan lain-lain.
+  messages:
+  publish: 2022-03-06T16:26:00+07:00
+  github: 
+  youtube:
+  udemy:
+  coming_soon: true
+  visible: true
+  catalogs: []
+
+- name: Google Cloud Platform (GCP)
+  fullname: 'Cloud Computing - Google Cloud Platform: Pemula sampai Mahir'
+  url: cloud-gcp
+  language: DevOps
+  color: blue accent-2
+  tags:
+  - DevOps
+  - Cloud-Computing
+  descriptions:
+    Temen-temen akan belajar Cloud Computing dengan menggunakan Google Cloud Platform (GCP) seperti IaaS, PaaS dan SaaS
+  messages:
+  publish: 2022-05-06T16:26:00+07:00
+  github: 
+  youtube:
+  udemy:
+  coming_soon: true
+  visible: true
+  catalogs:
+    - name: Pengenalan Cloud Computing
+      key: introduction
+      description: 'Eps 1: Cloud computing dengan GCP'
+      messages: ''
+    - name: Getting Started with Google Cloud Platform
+      key: getting-started
+      description: 'Eps 2: Getting Started with Google Cloud Platform'
+      messages: ''
+    - name: Regions and Zones
+      key: regions-and-zones
+      description: 'Eps 3: Regions and Zones in Google Cloud Platform'
+      messages: ''
+    - name: Compute Engine
+      key: compute-engine
+      description: 'Eps 4: Compute Engine in Google Cloud Platform'
+      messages: ''
+    - name: Managed Services - IaaS, PaaS, and SAAS
+      key: cloud-services
+      description: 'Eps 5: Managed Cloud Services'
+      messages: ''
+    - name: Block, File and Object Storage as a Services
+      key: object-storage
+      description: 'Eps 6: Block, File and Object Storage as a Services'
+      messages: ''
+    - name: Database as a Services
+      key: database-sql
+      description: 'Eps 7: Database as a Services'
+      messages: ''
+    - name: Cloud IAM
+      key: iam
+      description: 'Eps 8: Cloud IAM'
+      messages: ''
+
+- name: Nutanix AHV
+  fullname: 'Nutanix AHV: Pemula sampai Mahir'
+  url: nutanix-ahv
+  language: DevOps
+  color: blue accent-2
+  tags:
+  - DevOps
+  - AHV
+  descriptions:
+    Temen-temen akan belajar virtualization platform dengan menggunakan Nutanix AHV yang bisa digunakan untuk cloud-native workloads on-premise and in public clouds
+  messages:
+  publish: 2022-10-06T16:26:00+07:00
+  github: 
+  youtube:
+  udemy: 
+    url: https://www.udemy.com/course/nutanix-ahv-pemula-sampai-mahir/
+    price: Rp.280.000,-
+    discount: Rp.99.000,-
+    couponCode: BUKBER.2023.10
+    release: false
+    referralCode: 8080BE598C39D7652D33
+    expired: 15/04/2023
+  coming_soon: false
+  visible: true
+  catalogs:
+    - name: Pengenalan Nutanix AHV
+      key: introduction
+      description: 'Eps 1: Pengenalan Nutanix AHV'
+      messages: ''
+    - name: PRISM Element
+      key: prism-element
+      description: 'Eps 2: Prism Element'
+      messages: ''
+    - name: PRISM Central
+      key: prism-central
+      description: 'Eps 3: Prism Central'
+      messages: ''
+    - name: Compute VM
+      key: compute-vm
+      description: 'Eps 4: Compute VM (Virtual Machine)'
+      messages: ''
+    - name: Networking
+      key: networking
+      description: 'Eps 5: Networking'
+      messages: ''
+    - name: Unified Storage
+      key: storage
+      description: 'Eps 6: Unified storage'
+      messages: ''
+    - name: IAM (Identity and Access Management)
+      key: iam
+      description: 'Eps 6: IAM (Identity and Access Management)'
+      messages: ''
+    - name: Cluster Administration
+      key: cluster
+      description: 'Eps 7: Cluster Administration'
+      messages: ''
+    - name: Nutanix products
+      key: ntnx-products
+      description: 'Eps 5: Nutanix Products'
+      messages: ''
+
+- name: Nutanix Cloud Native
+  fullname: 'Nutanix Cloud Native: Pemula sampai Mahir'
+  url: nutanix-cloud-native
+  language: DevOps
+  color: blue accent-2
+  tags:
+  - DevOps
+  - Cloud-Native
+  - Kubernetes
+  descriptions:
+    Temen-temen akan belajar Cloud Native technologies seperti Containers, Object storage, Kubernetes dengan menggunakan platform Nutanix HCI (Hyper-Converged Infrastructure)
+  messages:
+  publish: 2022-10-06T16:26:00+07:00
+  github: 
+  youtube:
+  udemy:
+  coming_soon: true
+  visible: true
+  catalogs:
+    - name: Pengenalan Cloud native with Nutanix
+      key: introduction
+      description: 'Eps 1: Cloud Native with Nutanix'
+      messages: ''
+    - name: Containers
+      key: container
+      description: 'Eps 2: Containers'
+      messages: ''
+    - name: Kubernetes
+      key: ntnx-karbon
+      description: 'Eps 3: Nutanix Kubernetes'
+      messages: ''
+    - name: Nutanix Files
+      key: ntnx-files
+      description: 'Eps 4: Nutanix Files'
+      messages: ''
+    - name: Nutanix Objects
+      key: ntnx-files
+      description: 'Eps 5: Nutanix Object storage'
+      messages: ''
+    - name: Nutanix Database (ERA)
+      key: ntnx-era
+      description: 'Eps 6: Nutanix Database (ERA)'
+      messages: ''
+    - name: Nutanix CALM
+      key: ntnx-calm
+      description: 'Eps 7: CALM & Blueprint'
+      messages: ''
+    - name: Nutanix Runbook
+      key: ntnx-runbook
+      description: 'Eps 8: Scheduling and Runbook'
+      messages: ''
+    
