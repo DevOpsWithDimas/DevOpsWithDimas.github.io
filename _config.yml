@@ -287,6 +287,13 @@ compress_html:
   ignore:
     envs: development
 
+collections:
+  cources:
+    output: true
+    permalink: /:collection/:path/
+  roadmaps:
+    output: true
+    permalink: /:collection/:path/
 
 # Defaults
 defaults:
@@ -295,12 +302,33 @@ defaults:
       path: ""
       type: posts
     values:
+      excerpt_separator: "<!--more-->"
       layout: single
       author_profile: true
       read_time: true
       comments: true
       share: true
       related: true
+  - scope:
+      path: ""
+      type: cources
+    values:
+      layout: single
+      author_profile: false
+      read_time: false
+      comments: false
+      share: false
+      related: false
+  - scope:
+      path: ""
+      type: roadmaps
+    values:
+      layout: single
+      author_profile: true
+      read_time: false
+      comments: false
+      share: false
+      related: false
 
 udemy:
   profile: dimas-maryanto-2

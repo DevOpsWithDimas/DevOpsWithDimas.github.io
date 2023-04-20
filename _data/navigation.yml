@@ -2,9 +2,11 @@
 main:
   - title: "Archives"
     url: /pages/recent-posts/
+  - title: "Cources"
+    url: /pages/cources/
   - title: "Roadmaps"
     url: /pages/roadmaps/
-  - title: "Promo"
-    url: /pages/discount/
   - title: "Private class"
     url: /pages/private-class/
+  - title: "Promo"
+    url: /pages/discount/
