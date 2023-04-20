@@ -12,6 +12,14 @@
     <li><a href="#" class="disabled"><span aria-hidden="true">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</span></a></li>
     {% endif %}
 
+    {% if paginator.page_trail %}
+    {% for trail in paginator.page_trail %}
+    <li {% if page.url==trail.path %}{% endif %}>
+        <a href="{{ trail.path | prepend: site.baseurl }}" title="{{trail.title}}">{{ trail.num }}</a>
+    </li>
+    {% endfor %}
+    {% endif %}
+
     {% comment %} Ellipsis for truncated links {% endcomment %}
     {% if pages_to_end > 3 %}
       <li><a href="#" class="disabled">&hellip;</a></li>
