@@ -5,7 +5,8 @@ url: docker
 publish: 2023-03-26T18:46:00+07:00
 visible: true
 coming_soon: false
-tagline: "Dengan menggunakan technology container khususnya dengan Docker kita bisa melakukan banyak hal seperti untuk **Development, Automated testing, Automated deployment, menjalankan CI/CD** dan lain-lain. <br><br>Docker dirancang dapat dijalankan di semua platform seperti Linux, Mac OS serta Windows. Dengan docker kita bisa mem-virtualisasikan aplikasi di PC/Laptop dengan mudah berbasikan `docker run` command"
+toc: true
+toc_sticky: true
 tags:
   - DevOps
   - Docker
@@ -19,6 +20,7 @@ udemy:
   referralCode: 8D13D85D4D34027B76BE
   expired: 15/04/2023
   toc: true
+tagline: "Dengan menggunakan technology container khususnya dengan Docker kita bisa melakukan banyak hal seperti untuk **Development, Automated testing, Automated deployment, menjalankan CI/CD** dan lain-lain. <br><br>Docker dirancang dapat dijalankan di semua platform seperti Linux, Mac OS serta Windows. Dengan docker kita bisa mem-virtualisasikan aplikasi di PC/Laptop dengan mudah berbasikan `docker run` command"
 header:
   overlay_image: "assets/images/cources/docker.png"
   overlay_filter: 0.7
@@ -27,8 +29,6 @@ header:
   actions:
     - label: "Learn more"
       url: /posts/container/docker/
-toc: true
-toc_sticky: true
 sidebar:
   - title: "Role"
     image: assets/images/cources/docker.png
@@ -158,3 +158,7 @@ Beberapa benefit jika temen-temen mengikuti kelas ini, diantaranya:
 - Materi yang disampaikan disertai dengan Latihan baik pilihan ganda maupun hand's on
 - Temen-temen bisa bertanya ke group/community baik melalu channel Udemy maupun Discord untuk premium members
 - Temen-temen bisa konsultasi secara langsung dengan saya (Instruktur) melalui off/online meet jika dibutuhkan. (Contact Me!)
+
+## Description
+
+Tell me something about this cources, why you should learn this
