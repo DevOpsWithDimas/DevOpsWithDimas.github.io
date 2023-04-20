@@ -1,6 +1,6 @@
 ---
 title: "Pemograman Typescript (ts)"
-visible: true
+visible: false
 header:
   teaser: assets/images/cources/typescript.png
 sidebar:

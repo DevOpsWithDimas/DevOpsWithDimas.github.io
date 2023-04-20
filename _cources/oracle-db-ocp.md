@@ -1,6 +1,6 @@
 ---
 title: "Oracle DB Certified Professional (OCP)"
-visible: true
+visible: false
 header:
   teaser: assets/images/cources/oracle-associate.png
 sidebar:

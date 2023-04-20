@@ -314,8 +314,9 @@ defaults:
       type: cources
     values:
       layout: single
+      excerpt_separator: "<!--more-->"
       author_profile: false
-      read_time: false
+      read_time: true
       comments: false
       share: false
       related: false

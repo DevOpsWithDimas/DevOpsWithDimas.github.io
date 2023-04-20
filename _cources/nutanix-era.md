@@ -1,6 +1,6 @@
 ---
 title: "Nutanix Database (NDB)"
-visible: true
+visible: false
 header:
   teaser: assets/images/cources/nutanix-cloud-native.png
 sidebar:

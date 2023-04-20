@@ -1,6 +1,6 @@
 ---
 title: "Pemograman golang"
-visible: true
+visible: false
 header:
   teaser: assets/images/cources/java-se.png
 tags:

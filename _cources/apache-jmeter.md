@@ -1,6 +1,6 @@
 ---
 title: "Testing with Apache JMeter"
-visible: true
+visible: false
 header:
   teaser: assets/images/cources/apache-jmeter.png
 tags:

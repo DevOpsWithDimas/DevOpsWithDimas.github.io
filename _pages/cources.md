@@ -25,12 +25,3 @@ pagination:
 {% else %}
   {% assign posts = site.cources %}
 {% endif %}
-
-{% assign entries_layout = page.entries_layout %}
-<div class="entries-{{ entries_layout }}">
-  {% for post in posts %}
-    {% include archive-single-card.html type=entries_layout %}
-  {% endfor %}
-</div>
-
-{% include paginator.html %}

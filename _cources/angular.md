@@ -1,6 +1,6 @@
 ---
 title: "Angular for Frontend Developer"
-visible: true
+visible: false
 header:
   teaser: assets/images/cources/angular.png
 tags:
@@ -24,3 +24,7 @@ udemy:
   referralCode: 8DA27E06BF0BA6935CCC
   expired: 15/04/2023
 ---
+
+Hai semuanya, di cource ini kita akan membahas salah satu teknologi frontend framework yang menggunakan Single Page Application (SPA) yaitu [angular.io](https://angular.io/). 
+
+<!--more-->

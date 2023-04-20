@@ -1,6 +1,6 @@
 ---
 title: "Springboot for Backend Developer"
-visible: true
+visible: false
 header:
   teaser: assets/images/cources/spring-boot.png
 sidebar:

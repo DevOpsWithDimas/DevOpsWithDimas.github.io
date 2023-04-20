@@ -1,6 +1,6 @@
 ---
 title: "Nutanix CALM"
-visible: true
+visible: false
 header:
   teaser: assets/images/cources/nutanix-ahv.png
 sidebar:
