@@ -21,7 +21,7 @@ pagination:
 ---
 
 {% if paginator %}
-  {% assign posts = paginator.posts %}
+  {% assign posts = paginator.posts where %}
 {% else %}
   {% assign posts = site.cources %}
 {% endif %}

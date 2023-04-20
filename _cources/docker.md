@@ -1,21 +1,31 @@
 ---
 title: "Docker"
+url: docker
 visible: true
-header:
-  teaser: assets/images/cources/docker.png
+tagline: "Dengan menggunakan technology container khususnya dengan Docker kita bisa melakukan banyak hal seperti untuk **Development, Automated testing, Automated deployment, menjalankan CI/CD** dan lain-lain. <br><br>Docker dirancang dapat dijalankan di semua platform seperti Linux, Mac OS serta Windows. Dengan docker kita bisa mem-virtualisasikan aplikasi di PC/Laptop dengan mudah berbasikan `docker run` command"
 tags:
   - DevOps
   - Docker
   - Container
 udemy: 
   url: https://www.udemy.com/course/docker-pemula-sampai-mahir/
-  price: Rp560.000,-
+  price: Rp560.000
   discount: Rp99.000,-
   couponCode: BUKBER.2023.10
   release: true
   referralCode: 8D13D85D4D34027B76BE
   expired: 15/04/2023
+  toc: true
+header:
+  overlay_image: "assets/images/cources/docker.png"
+  overlay_filter: 0.7
+  caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
+  teaser: assets/images/cources/docker.png
+  actions:
+    - label: "Join premium member"
+      url: https://www.udemy.com/course/docker-pemula-sampai-mahir/
 toc: true
+toc_sticky: true
 sidebar:
   - title: "Role"
     image: assets/images/cources/docker.png
@@ -106,92 +116,42 @@ catalogs:
     messages: ''
 ---
 
-Hai semuanya, Selamat datang di kelas ini kita akan membahas teknology container yang sedang popular saat ini yaitu Docker. 
-
-Dengan menggunakan teknology container kita bisa melakukan banyak hal mulai dari development, Automate testing, Automate deployment dan lain-lain. Adapun materi/silabus yang akan kita bahas di kelas ini kita akan bagi menjadi 3 section yaitu fundamental, intermediate dan Advanced. Diantaranya:
+Hai semuanya selamat datang di kelas **Docker untuk pemula s/d mahir**, jadi kali ini kita akan membahas teknology container yaitu menggunakan [Docker](https://www.docker.com/). 
 
 <!--more-->
 
-## Fundamental
+## What you'll learn
 
-Dilevel fundamental, temen-teman akan belajar hal yang paling basic yaitu:
+Pada topic DevOps, Docker adalah salah satu teknologi container yang paling banyak digunakan oleh Developer dan Operation team karena kemudahannya selain itu juga ada alternative lainnya yaitu 
 
-1. Docker Overview
-2. Docker Architecture
-3. Why Docker so popular?
-4. Installing Docker
-    1. Install on Windows 10
-    2. Install on Linux
-    3. Install on Mac ARM/Intel Based
-5. Getting Started with Docker
-    1. Pull Image from registry
-    2. Test Run docker container
-6. Docker CLI
-    1. Docker `images` command
-    2. Docker `container` command
-    3. Docker `logs` / `ps` command
-    4. Docker `inspect` command
-    5. Docker `rm` command
-    6. Docker `exec` command
-    8. Docker `cp` command
-    7. Docker `save` & `load` command
-7. Docker Network
-    1. Legacy Container Links
-    2. Use Default bridge Network
-    3. Create user-defined from bridge Network
-    4. Host Networks
-    5. None Network
-8. Docker Volume
-    1. Using volume
-    2. Using bind-mount
-    3. Using share data among containers
-    4. Using share data among machine `vieux/docker-volume-sshfs`
+- [containerd](https://containerd.io/), 
+- [podman](https://podman.io/), 
+- [CRI-O](https://cri-o.io/)
 
-## Intermediate
+Secara garis besar apa saja sih yang akan temen-temen pelajari:
 
-Setelah temen-temen memahami functional dari docker seperti menjalankan container, menggunakan perintah docker cli. Tahap selanjutnya dalah mempelajari lebih lanjut untuk level menengah yaitu :
+1. Bagaimana menggunakan Docker, & Compose pada PC/Laptop kamu supaya bisa membantu task dalam Development maupun Deployment.
+2. Hand's-on terkait best practices untuk membuat Dockerfile and Compose files like a Pro!
+3. Membuat custom Container Image kemudian di-build serta di-publish ke public/private container registry di environment kamu
+4. Disertai dengan berbagai macam workload, bahasa pemograman seperti PHP, Java Web, Springboot, Angular dan lain-lain
+5. Me-running / deploy Container image ke environment server kamu
 
-1. Dockerfile
-  - Build your own image
-  - Publish your image to [hub.docker.com](https://hub.docker.com/)
-  - publish your image to private registry (nexus oss)
-2. Study Cases: Build images for specific programming language
-  - Build for Java Web Application
-  - Build for Springboot Application
-  - Build for Angular
-  - Build for ReactJS
-  - Build for PHP Native
-  - Build for PHP framework like Laravel, CakePHP dll
-3. Docker Compose CLI
-    1. Overview
-    2. Getting started dengan Docker Compose
-    3. Communication between containers
-    4. Environtment Variables
-    5. Networking
-    6. Volumes
-    7. Build image
-4. Docker Daemon CLI
-5. Docker Dashboard
+## Requirement
 
-## Advanced
+Untuk mengikut kelas ini disarankan temen-temen sudah memenuhi beberapa syarat berikut:
 
-Lalu dilanjutkan ke level Advanced yaitu kita akan mempelajari docker orchestration, dimana kita akan menjalan docker lebih dari 1 host seperti berikut:
+- Memiliki PC / Laptop / Virtual Machine dengan memenuhi standard minimum menjalankan Docker engine atau Docker Desktop
+- Memahami sedikit basic tentang commandline / terminal command
+- Memiliki account [github](https://github.com/) and [Docker Hub](https://hub.docker.com/)
+- Memahami perintah `git` dasar, seperti `clone`, `pull`, `checkout`, dan `push`
+- Memahami basic networking, seperti bagaimana setiap node/server berkomunikasi.
+- Memahami basic web server dan database, seperti bagaimana mereka saling berkomunikasi melalui protocol TCP/IP
 
-1. Docker Machine
-    1. Create simple machine
-    2. Create multiple machine
-    3. Configure insecure registry
-    4. Example use-cases for docker-machine
-    5. Alternative docker-machine
-2. Docker Swarm
-    1. Swarm Node
-    2. Swarm Stack
-    7. Docker Service Logging Commnad
-    8. Docker Service Inspact Command
-    9. Docker Service Update Command
-    6. Docker Service Rollback 
-    5. Limiting Resources
-    4. Scaling Container
-3. Kubernetes in Docker (Kind)
+## What you'll get from this cource
 
-Selain itu juga masih banyak lagi yang akan kita bahas di cource ini, Ok mungkin sekian dulu yang bisa saya sampaikan terkait silabus belajar Docker untuk Pemula sampai Mahir. Sampai jumpa di cource nanti!
+Beberapa benefit jika temen-temen mengikuti kelas ini, diantaranya:
+
+- Materi yang disampakan akan terus bertambah dan di-update seiring dengan bertambahnya waktu
+- Materi yang disampaikan disertai dengan Latihan baik pilihan ganda maupun hand's on
+- Temen-temen bisa bertanya ke group/community baik melalu channel Udemy maupun Discord untuk premium members
+- Temen-temen bisa konsultasi secara langsung dengan saya (Instruktur) melalui off/online meet jika dibutuhkan. (Contact Me!)
