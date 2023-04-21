@@ -2,7 +2,6 @@
 title: "Docker"
 subtitle: "Docker for DevOps engineer"
 url: docker
-date: 2023-03-26T18:46:00+07:00
 publish: 2023-03-26T18:46:00+07:00
 visible: true
 coming_soon: false
