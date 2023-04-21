@@ -120,6 +120,10 @@ Tell me about what you will get from this source
 
 Tell me something about this cources, why you should learn this
 
-## After taking this course, you'll be able to:
+## After taking this course, you'll be able to
 
 Tell me something about this cource, what will you be able to
+
+## Who this course is for
+
+Tell me someting about this cource, who is this class for?
