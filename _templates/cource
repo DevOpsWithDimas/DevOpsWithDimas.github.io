@@ -1,40 +1,39 @@
 ---
-title: "Ansible"
-subtitle: "Ansible for DevOps Engineer"
-url: ansible
+title: {{ title }}
+subtitle: {{ title }}
+url: {{ title }}
 publish: 
 visible: false
 coming_soon: true
-toc: true
-toc_sticky: true
 header:
-  overlay_image: "assets/images/cources/ansible.png"
-  teaser: assets/images/cources/ansible.png
+  overlay_image: "assets/images/cources/{{ title | downcase }}.png"
+  teaser: assets/images/cources/{{ title | downcase }}.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/angular/
-tagline: "xxx"
-tags:
-  - DevOps
-  - IaC
-  - Ansible
+      url: /posts/container/{{ title | downcase }}/
+tagline: "{{ title }}"
+toc: true
+toc_sticky: true
+tags: []
 sidebar:
   - title: "Role"
-    image: assets/images/cources/ansible.png
+    image: assets/images/cources/{{ title | downcase }}.png
     image_alt: "logo"
-    text: "DevOps Engineer, Operation team, & GitOps Engineer"
+    text: "xxx"
   - title: "Responsibilities"
-    text: "Temen-temen akan belajar IT automation tool untuk configure system, deploy software dan orchestrate more advance IT tasks seperti continues dpeloyment or zero downtime rolling update dan lain-lain."
+    text: "xxx"
+toc: true
+toc_sticky: true
 udemy: 
-  url: https://www.udemy.com/course/devops-ansible-pemula-sampai-mahir/
+  url: https://www.udemy.com/course/{{ title | downcase }}/
   price: Rp280.000,-
   discount: Rp99.000,-
   release: false
-  couponCode: BUKBER.2023.10
-  referralCode: 8DA27E06BF0BA6935CCC
-  expired: 15/04/2023
+  couponCode: xxx
+  referralCode: xxx
+  expired: xxx
   toc: true
 ---
 

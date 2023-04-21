@@ -162,3 +162,7 @@ Beberapa benefit jika temen-temen mengikuti kelas ini, diantaranya:
 ## Description
 
 Tell me something about this cources, why you should learn this
+
+## After taking this course, you'll be able to:
+
+Tell me something about this cource, what will you be able to
