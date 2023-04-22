@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01g-git-branch-merge"
 lang: gitlab
 authors:

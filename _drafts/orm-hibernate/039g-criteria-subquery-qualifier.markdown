@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "SubQuery Qualifier dengan Criteria API"
 lang: orm-hibernate
 authors:

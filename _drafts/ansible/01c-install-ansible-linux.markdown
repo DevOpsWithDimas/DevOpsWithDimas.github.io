@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Install and Configure Ansible on Linux"
 lang: ansible
 authors:

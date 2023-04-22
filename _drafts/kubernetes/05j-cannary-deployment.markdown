@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "05j-cannary-deployment"
 lang: k8s
 authors:

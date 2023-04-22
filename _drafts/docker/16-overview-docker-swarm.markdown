@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "15-overview-docker-swarm"
 lang: docker
 authors:

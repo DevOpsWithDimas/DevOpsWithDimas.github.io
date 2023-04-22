@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Java Platform, Architecture & Versions"
 lang: java-se
 authors:

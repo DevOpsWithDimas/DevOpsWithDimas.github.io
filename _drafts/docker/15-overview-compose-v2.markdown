@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Overview of Docker Compose v2"
 lang: docker
 authors:

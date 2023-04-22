@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Server Infrastructure"
 lang: nutanix-ahv
 authors:

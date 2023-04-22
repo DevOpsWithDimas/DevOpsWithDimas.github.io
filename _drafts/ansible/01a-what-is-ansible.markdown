@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "What is RedHad Ansible?"
 lang: ansible
 authors:

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "030-database-tunning"
 lang: oracle18c
 authors:

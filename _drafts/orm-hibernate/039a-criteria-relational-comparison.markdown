@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Relational Comparison dengan Criteria API"
 lang: orm-hibernate
 authors:

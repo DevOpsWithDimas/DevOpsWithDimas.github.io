@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Java is Object Oriented Programming"
 lang: java-se
 authors:

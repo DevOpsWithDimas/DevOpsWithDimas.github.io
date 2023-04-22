@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "018a-query-merge"
 lang: oracle18c
 authors:

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "02a-install-jdk17-mac-apple"
 lang: java-se
 authors:

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Automate your use cases with Ansible"
 lang: ansible
 authors:

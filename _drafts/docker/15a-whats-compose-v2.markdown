@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "What's new in Docker Compose v2"
 lang: docker
 authors:

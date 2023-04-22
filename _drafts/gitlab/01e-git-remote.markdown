@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01f-git-working-remote"
 lang: gitlab
 authors:

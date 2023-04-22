@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Getting started"
 lang: spring-core
 authors:

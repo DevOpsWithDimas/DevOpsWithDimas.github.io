@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Time is your to practice part 3"
 date: 2020-01-06T14:55:25+07:00
 lang: psql

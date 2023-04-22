@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "03-install-apache-jmeter-linux"
 lang: apache-jmeter
 authors:

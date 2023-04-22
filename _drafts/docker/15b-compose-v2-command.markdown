@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "docker compose commands"
 lang: docker
 authors:

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01d-nutanix-ce-install"
 lang: nutanix-ahv
 authors:

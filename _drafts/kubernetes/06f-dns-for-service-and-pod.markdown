@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06f-dns-for-service-and-pod"
 lang: k8s
 authors:

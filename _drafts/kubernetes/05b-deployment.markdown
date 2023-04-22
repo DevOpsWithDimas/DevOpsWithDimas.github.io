@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Workload with Deployment"
 lang: k8s
 authors:

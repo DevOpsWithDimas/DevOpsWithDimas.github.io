@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "02-getting-started"
 lang: java-se
 authors:

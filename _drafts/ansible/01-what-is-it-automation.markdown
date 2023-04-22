@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "What is IT Automation?"
 lang: ansible
 authors:

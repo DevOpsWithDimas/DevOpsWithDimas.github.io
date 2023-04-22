@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "05k-pod-distribution-budget"
 lang: k8s
 authors:

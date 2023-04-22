@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "04e-workload-auto-cleanup-job"
 lang: k8s
 authors:

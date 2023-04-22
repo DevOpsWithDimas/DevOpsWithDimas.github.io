@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "DDL - Generator default value untuk Primary Key"
 date: 2020-01-03T14:33:33+07:00
 lang: psql

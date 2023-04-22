@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "02b-install-setup-jetbraint-idea"
 lang: java-se
 authors:

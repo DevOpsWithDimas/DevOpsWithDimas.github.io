@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Selecting a tuple dengan Criteria API"
 lang: orm-hibernate
 authors:

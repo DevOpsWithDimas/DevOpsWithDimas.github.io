@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "DDL - Management Tabel di PostgreSQL"
 date: 2019-12-31T16:07:16+07:00
 lang: psql

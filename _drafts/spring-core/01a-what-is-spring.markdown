@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "What is Spring Framework"
 lang: spring-core
 authors:

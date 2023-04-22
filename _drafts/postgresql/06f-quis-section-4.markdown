@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06f-quis-4"
 lang: postgresql
 authors:

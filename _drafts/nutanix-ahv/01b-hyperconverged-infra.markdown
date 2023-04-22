@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01a-what-is-hci"
 lang: nutanix-ahv
 authors:

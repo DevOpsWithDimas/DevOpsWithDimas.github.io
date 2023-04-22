@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Install and Setup Integrated Development Editor (IDE)"
 lang: spring-core
 authors:

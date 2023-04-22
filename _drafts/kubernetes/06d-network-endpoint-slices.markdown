@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06d-network-endpoint-slices"
 lang: k8s
 authors:

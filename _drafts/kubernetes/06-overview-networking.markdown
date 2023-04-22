@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06-overview-networking"
 lang: k8s
 authors:

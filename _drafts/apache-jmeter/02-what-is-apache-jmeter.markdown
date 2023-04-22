@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "02-what-is-apache-jmeter"
 lang: apache-jmeter
 authors:

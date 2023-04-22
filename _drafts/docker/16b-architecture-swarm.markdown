@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "15b-architecture-swarm"
 lang: docker
 authors:

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06b-network-ingress"
 lang: k8s
 authors:

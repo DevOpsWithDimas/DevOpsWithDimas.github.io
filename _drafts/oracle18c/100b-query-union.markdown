@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "018b-query-union"
 lang: oracle18c
 authors:

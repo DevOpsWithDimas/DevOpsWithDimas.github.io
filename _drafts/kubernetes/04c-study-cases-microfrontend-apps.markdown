@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "04c-study-cases-microservice-frontend-apps"
 lang: k8s
 authors:

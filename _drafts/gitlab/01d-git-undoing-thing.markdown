@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01e-git-undoing-thing"
 lang: gitlab
 authors:

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "04g-workload-replication-controller"
 lang: k8s
 authors:

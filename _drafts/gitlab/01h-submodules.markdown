@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01h-submodules"
 lang: gitlab
 authors:

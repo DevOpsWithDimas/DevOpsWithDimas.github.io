@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "018c-batch-insert"
 lang: oracle18c
 authors:

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01e-nutanix-test-drive-trail"
 lang: nutanix-ahv
 authors:

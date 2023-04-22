@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Transaction isolation"
 lang: postgresql
 authors:

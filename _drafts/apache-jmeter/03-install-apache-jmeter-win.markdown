@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "03-install-apache-jmeter-win"
 lang: apache-jmeter
 authors:

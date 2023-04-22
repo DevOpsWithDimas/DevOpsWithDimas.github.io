@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06a-kubernetes-services"
 lang: k8s
 authors:

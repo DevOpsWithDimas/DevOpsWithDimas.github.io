@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Managing PDBs dan Application Containers"
 lang: oracle18c
 authors:

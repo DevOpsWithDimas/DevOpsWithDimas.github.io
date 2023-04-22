@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01f-nutanix-prism-central"
 lang: nutanix-ahv
 authors:

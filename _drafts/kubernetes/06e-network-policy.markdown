@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06e-network-policy"
 lang: k8s
 authors:

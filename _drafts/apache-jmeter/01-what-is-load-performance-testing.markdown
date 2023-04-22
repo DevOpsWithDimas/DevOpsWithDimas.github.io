@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01-what-is-load-performance-testing"
 lang: apache-jmeter
 authors:

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Hibernate Criteria API"
 lang: orm-hibernate
 authors:

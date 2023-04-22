@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06c-transaction-locking"
 lang: postgresql
 authors:

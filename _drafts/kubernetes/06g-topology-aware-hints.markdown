@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06g-topology-aware-hints"
 lang: k8s
 authors:

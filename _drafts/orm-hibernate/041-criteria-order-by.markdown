@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Order By dengan Criteria API"
 lang: orm-hibernate
 authors:

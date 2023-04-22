@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Getting started with Ansible ad-hoc commands"
 lang: ansible
 authors:

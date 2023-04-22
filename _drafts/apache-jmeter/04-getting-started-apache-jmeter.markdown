@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "03-getting-started-apache-jmeter"
 lang: apache-jmeter
 authors:

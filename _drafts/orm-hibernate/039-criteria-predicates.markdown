@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Criteria Predicates dengan Criteria API"
 lang: orm-hibernate
 authors:

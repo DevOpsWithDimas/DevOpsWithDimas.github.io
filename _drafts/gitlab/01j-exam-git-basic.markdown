@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01k-exam-git-basic"
 lang: gitlab
 authors:

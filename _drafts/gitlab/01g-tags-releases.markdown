@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01h-tags-releases"
 lang: gitlab
 authors:

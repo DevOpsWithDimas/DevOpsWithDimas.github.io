@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Install and Configure Ansible on Windows 10/11"
 lang: ansible
 authors:

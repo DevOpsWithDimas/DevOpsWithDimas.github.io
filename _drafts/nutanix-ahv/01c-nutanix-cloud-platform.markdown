@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "01c-nutanix-cloud-platform"
 lang: nutanix-ahv
 authors:

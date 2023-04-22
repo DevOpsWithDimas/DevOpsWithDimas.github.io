@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Silabus - Apache JMeter: Pemula sampai Mahir"
 lang: apache-jmeter
 authors:

@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Group By dengan Criteria API"
 lang: orm-hibernate
 authors:

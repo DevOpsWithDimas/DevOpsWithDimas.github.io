@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "02c-say-hello-console"
 lang: java-se
 authors:

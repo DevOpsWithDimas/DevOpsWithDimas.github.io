@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Selecting an entity dengan Criteria API"
 lang: orm-hibernate
 authors:

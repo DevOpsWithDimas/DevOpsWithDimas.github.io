@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06d-data-consistency-check"
 lang: postgresql
 authors:

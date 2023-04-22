@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Between Predicate dengan Criteria API"
 lang: orm-hibernate
 authors:

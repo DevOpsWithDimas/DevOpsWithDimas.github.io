@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "06c-network-loadbalancer"
 lang: k8s
 authors:

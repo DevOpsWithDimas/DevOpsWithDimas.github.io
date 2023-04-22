@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "15a-orchestration-container-docker"
 lang: docker
 authors:

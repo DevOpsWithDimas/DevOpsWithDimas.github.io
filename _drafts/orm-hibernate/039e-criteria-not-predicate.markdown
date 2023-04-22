@@ -1,5 +1,5 @@
 ---
-layout: post
+
 title: "Negation Predicate dengan Criteria API"
 lang: orm-hibernate
 authors:
