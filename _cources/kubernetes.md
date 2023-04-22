@@ -8,14 +8,14 @@ coming_soon: false
 toc: true
 toc_sticky: true
 header:
-  overlay_image: "assets/images/cources/k8s.png"
+  overlay_image: assets/images/cources/k8s.png
   teaser: assets/images/cources/k8s.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/angular/
-tagline: "xxx"
+      url: /posts/container/kubernetes/
+tagline: "Container memang baik untuk mem-package/mem-bungkus aplikasi supaya lightwight, build once run anyware, tetapi ada problem lainnya misalnya aplikasi mulai banyak dipake biasanya akan ada issue performace atau bahkan downtime. <br><br>Dengan menggunakan Container Orchestration System khususnya dengan Kubernetes (k8s) akan memudahkan operational team dalam me-manage container. <br><br>Kubernetes menawarkan feature seperti High Available, Self healing, Automatic rollout and rollback, Horizontal scalling dan lain-lain."
 tags:
   - DevOps
   - Kubernetes
@@ -100,7 +100,7 @@ catalogs:
     messages: ''
 ---
 
-Hai semuanya selamat datang di kelas **xxx**, jadi kali ini kita akan membahas xxx yaitu menggunakan [xxx](link). 
+Hai semuanya selamat datang di kelas **Kubernetes untuk pemula s/d mahir**, jadi kali ini kita akan membahas Orchestration Container system yang paling popular yaitu menggunakan [Kubernetes](https://kubernetes.io/). 
 
 <!--more-->
 
