@@ -1,0 +1,33 @@
+---
+layout: post
+title: "Time is your to practice part 3"
+date: 2020-01-06T14:55:25+07:00
+lang: psql
+categories:
+- RDBMS
+- PostgreSQL
+refs: []
+youtube: enh3vegBch0
+comments: true
+image_path: /resources/posts/psql/psql-quis-3
+gist: dimMaryanto93/62ffa0d81f3835a4e9401baf14590cd2
+downloads: []
+---
+
+<!--more-->
+
+
+4. Buatlah tabel `karyawan_tdi` dengan perancagan seperti berikut:
+![perancangan tabel]({{ page.image_path | prepend: site.baseurl }}/soal4.png)
+**Keterangan**
+    1. column `kode_karyawan` adalah _primary key_
+    2. column `alamat_rumah` berelasi dengan table `locations`
+    3. column `alamat_domisili` berelasi dengan tabel `locations`
+    4. column `jabatan` berelasi dengan `jobs`
+    5. column `bagian` berelasi dengan `departments`
+5. Buatlah data pada tabel `karyawan_tdi` seperti berikut:
+![data insert query tabel karyawan_tdi]({{ page.image_path | prepend: site.baseurl }}/soal5.png)
+6. Buatlah query untuk menapilkan data seperti berikut:
+![data karyawan_tdi]({{ page.image_path | prepend: site.baseurl }}/soal6.png)
+7. Buatlah query untuk menggabungkan data dari table `employees` dan `karyawan_tdi` yang memiliki `job_id = 'IT_PROG'` seperti berikut:
+![union table]({{ page.image_path | prepend: site.baseurl }}/soal7.png)
