@@ -1,0 +1,74 @@
+---
+
+title: "DML - Merge Statement di Oracle"
+date: 2021-02-21T17:08:58+07:00
+lang: oracle18c
+authors:
+- dimasm93
+categories:
+- RDBMS
+- Oracle18c
+refs: 
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/MERGE.html#GUID-5692CCB7-24D9-4C0E-81A7-A22436DC968F
+youtube: NY6PC-_j2N8
+comments: true
+catalog_key: sql-dml
+image_path: /resources/posts/oracle12c/
+gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
+downloads: []
+---
+
+Pada materi kali ini kita akan membahas `Merge` statement, perintah `merge` biasanya digunakan untuk `update if exists and insert when not exists` contoh penggunaanya seperti berikut: 
+
+<!--more-->
+
+{% gist page.gist "014d-dml-merge-statement.sql" %}
+
+Berikut adalah hasilnya:
+
+{% highlight sql %}
+SQL> merge into REGIONS rg
+using (select &reg_id              as region_id,
+              &reg_name as region_name
+       from DUAL) du
+on (rg.REGION_ID = du.region_id)
+when matched then
+    update
+    set rg.REGION_NAME = du.region_name
+    where rg.REGION_ID = du.region_id
+when not matched then
+    insert (REGION_ID, REGION_NAME)
+    values (du.region_id, du.region_name); 
+
+Enter value for reg_id: 5
+Enter value for reg_name: 'South asian'
+
+1 row merged.
+
+SQL> select * from regions;
+
+ REGION_ID REGION_NAME
+---------- -------------------------
+         5 South asian
+         1 Europe
+         2 Americas
+         3 Asia
+         4 Middle East and Africa
+
+SQL> /
+
+Enter value for reg_id: 5
+Enter value for reg_name: 'Asia Tenggara'
+
+1 row merged.
+
+SQL> select * from regions;
+
+ REGION_ID REGION_NAME
+---------- -------------------------
+         5 Asia Tenggara
+         1 Europe
+         2 Americas
+         3 Asia
+         4 Middle East and Africa
+{% endhighlight %}

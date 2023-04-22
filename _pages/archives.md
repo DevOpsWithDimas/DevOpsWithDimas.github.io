@@ -6,6 +6,8 @@ author_profile: true
 entries_layout: list
 pagination:
   enabled: true
+  per_page: 5
+  sort_reverse: true
 classes: wide
 ---
 

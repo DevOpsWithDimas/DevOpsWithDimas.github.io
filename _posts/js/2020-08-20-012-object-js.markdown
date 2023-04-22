@@ -1,0 +1,42 @@
+---
+
+title: "Object Oriented Programming dengan Javascript"
+date: 2020-08-20T16:48:19+07:00
+lang: js
+authors:
+- dimasm93
+categories:
+- web
+- js
+refs: 
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript
+youtube: 7hwhXRghcUE
+comments: true
+gist: dimMaryanto93/b956151354fb8a1454d3b36d22d61a63
+image_path: /resources/posts/js/js-6
+downloads: []
+---
+
+JavaScript is Object Oriented Programming. Untuk menulis object di JavaScript ada banyak cara yaitu cara paling sederhana adalah seperti berikut:
+
+<!--more-->
+
+```js
+var mhs = { key:"value" };
+```
+
+dan untuk mengakses object tersebut adalah seperti berikut:
+
+```js
+console.log("get value from key is "+ mhs.key);
+```
+
+Contoh lainya adalah seperti berikut:
+
+{% gist page.gist "intro-obj.js" %}
+
+Output yang dihasilkan seperti berikut:
+
+![intro obj hasilnya]({{ page.image_path | prepend: site.baseurl }}/intro-obj-1.png)
+
+Nah jadi object ini sama konsepnya seperti map di Java jadi memiliki key dan value. keynya harus bersifat unique dan direkomendasikan untuk menggunakan hurus di awal sama halnya seperit kita membuat variable. Dan klo anda perhatikan object yang kita buat formatnya mengerupai dengan JSON.

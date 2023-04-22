@@ -1,0 +1,69 @@
+---
+
+title: "Time is your practice"
+lang: orm-hibernate
+authors:
+- dimasm93
+date: 2021-01-04T08:36:52+07:00
+categories:
+- Java
+- ORM
+- Hibernate
+- PostgreSQL
+refs: 
+- http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
+youtube: Ii9yV3ZHpNQ
+comments: true
+catalog_key: introduction
+image_path: 
+gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
+image_path: /resources/posts/orm-hibernate/
+downloads: []
+---
+
+Hi, setelah kita belajar materi tentang hibernate supaya temen-temen lebih memahami dan meresap kita akan latihan dulu ya... ok berikut soal latihannya
+
+<!--more-->
+
+1. Buatlah project dengan menggunakan Apache Maven dengan archetype `maven-archetype-quistart` dengan konfirgurasi 
+    ```properties
+    artifactId=quis1-hibernate
+    groupId=[isi dengan nama email anda contoh: `com.maryanto.dimas.bootcamp.latihan`]
+    version=[isi dengan tanggal anda mengerjakan contoh `2020.12.01`]
+    ```
+
+2. Buatlah database dengan setting serbagai berikut:
+    ```yaml
+    databaseName: `quis1_hibernate`
+    userName: [isi dengan nama anda contoh 'dimas_maryanto']
+    password: [isi bebas]
+    ```
+
+3. Buatlah koneksi antara Java dengan Database sesuai dengan konfigurasi di atas
+
+4. Buatlah Entity sesuai dengan spesifikasi table seperti berikut:
+
+    **Table name: `jobs`**
+
+    | Columns       | Data Type             | constraint    | default value         |
+    | :---          | :---                  | :---          | :---                  |
+    | kode          | serial                | primary key   | sequance generator    |
+    | nama          | character varying(50) | not null      | -                     |
+    | keterangan    | text                  | -             | -                     |
+    {: .striped .highlight .responsive-table }
+
+    **Table name: `employees`**
+    
+    | Columns       | Data Type             | constraint        | default value         | check                     |
+    | :---          | :---                  | :---              | :---                  | :---                      |
+    | kode          | character varying(64) | primary key       | uuid generator        | -                         |
+    | nip           | character varying(64) | not null, unique  | -                     | -                         |
+    | nama          | character varying(100)| not null          | -                     | -                         |
+    | tanggal_lahir | date                  | not null          | -                     | `tanggal_lahir <= now()`  |
+    | gaji_sebulan  | decimal(8, 2)         | not null          | default 0             | `gaji_sebulan >= 2000000` |
+    | aktif         | boolean               | -                 | default false         | -                         |
+    {: .striped .highlight .responsive-table }
+
+5. Buatlah CRUD dan sesuai dengan entity yang telah teman-teman buat dengan design pattern Data Access Object (DAO)
+
+6. Buatlah Unit Testing untuk semua method yang temen-teman buat pada no 5

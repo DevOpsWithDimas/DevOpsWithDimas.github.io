@@ -1,0 +1,47 @@
+---
+
+title: "Inner Join di Oracle"
+date: 2021-02-15T07:37:36+07:00
+lang: oracle18c
+authors:
+- dimasm93
+categories:
+- RDBMS
+- Oracle18c
+refs: 
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Joins.html#GUID-794F7DD5-FB18-4ADC-9E46-ADDA8C30C3C6
+youtube: J3_YdH97US0
+comments: true
+catalog_key: sql-join-tables
+image_path: /resources/posts/oracle12c/
+gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
+downloads: []
+---
+
+Inner Join, atau kebanyakan orang bilang **simple join** ini adalah table yang terdiri dari 2 atau lebih yang di gabungkan menjadi satu hasil berbentuk tabel dengan menggunakan kriteria tertentu, Biasanya dengan menggunakan klausa `on` sebagai penghubungnya.
+
+<!--more-->
+
+Contoh kasusnya, saya mau mencari data setiap department dan tampilkan siapa nama managernya. Berikut querynya:
+
+{% gist page.gist "010c-inner-join-on.sql" %}
+
+Berikut hasilnya:
+
+{% highlight sql %}
+ DEP_ID    DEP_NAME                       MANAGER_NAME
+---------- ------------------------------ ----------------------------------------------
+        10 Administration                 Jennifer Whalen
+        20 Marketing                      Michael Hartstein
+        30 Purchasing                     Den Raphaely
+        40 Human Resources                Susan Mavris
+        50 Shipping                       Adam Fripp
+        60 IT                             Alexander Hunold
+        70 Public Relations               Hermann Baer
+        80 Sales                          John Russell
+        90 Executive                      Steven King
+       100 Finance                        Nancy Greenberg
+       110 Accounting                     Shelley Higgins
+
+11 rows selected.
+{% endhighlight %}

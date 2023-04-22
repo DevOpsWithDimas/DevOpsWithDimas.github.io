@@ -1,12 +1,10 @@
 ---
-lang: ansible
-catalog: introduction
+
 title: "Silabus IaC - Ansible: Pemula sampai Mahir"
 date: 2022-07-06T04:47:42+07:00
-last_modified_at: 2022-04-02T09:15:38+07:00
-classes: 
-- wide
-- dark
+lang: ansible
+authors:
+- dimasm93
 categories:
 - DevOps
 - IaC
@@ -15,6 +13,7 @@ refs:
 - https://docs.ansible.com/ansible-core/devel/index.html
 youtube: 
 comments: true
+catalog_key: introduction
 image_path: /resources/posts/ansible/00-silabus
 gist: dimMaryanto93/ab4bbfd903a7ae297349960787a45ff4
 downloads: []

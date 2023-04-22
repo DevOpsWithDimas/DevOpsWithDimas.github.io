@@ -1,9 +1,10 @@
 ---
-lang: k8s
-catalog: introduction
+
 title: "Silabus - DevOps Kubernetes: Pemula sampai Mahir"
 date: 2021-12-19T23:52:39+07:00
-author: dimasm93
+lang: k8s
+authors:
+- dimasm93
 categories:
 - DevOps
 - Orchestration
@@ -14,10 +15,12 @@ refs:
 - https://minikube.sigs.k8s.io/docs/
 youtube: agYCNlb8-rA
 comments: true
+catalog_key: introduction
 image_path: /resources/posts/kubernetes/01-silabus
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []
 ---
+
 
 Hai semuanya, di materi kali ini kita membahas Container-Orchestration System menggunakan Kubernetes (k8s). Sebelum temen-temen mengikuti cource ini disarankan untuk memahami system Container dan Virtualization seperti 
 

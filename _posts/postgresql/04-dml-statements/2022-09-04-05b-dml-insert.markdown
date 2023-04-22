@@ -1,0 +1,478 @@
+---
+
+title: "Deep dive into INSERT Statement"
+date: 2022-09-04T11:38:35+07:00
+lang: postgres-dba
+authors:
+- dimasm93
+categories:
+- RDBMS
+- PostgreSQL
+- SQL
+- DML
+refs: 
+- https://www.postgresql.org/docs/14/sql-insert.html
+youtube: 
+image_path: /resources/posts/postgresql/05b-dml-insert
+comments: true
+gist: dimMaryanto93/7ae7632f9418feb724bc431eff412a3f
+catalog_key: dml-statement
+downloads: []
+---
+
+Hai semuanya, pada materi sebelumnya kita sudah membahas sedikit tentang Data Manipulation language atau di singkat DML. Nah sekarang kita akan bahas lebih detail khususnya untuk perintah `INSERT` yang telah kita pelajari di materi sebelumnya hanyalah simple sebetulnya secara syntax perintahnya seperti berikut:
+
+{% highlight sql %}
+[ WITH [ RECURSIVE ] with_query [, ...] ]
+INSERT INTO table_name [ AS alias ] [ ( column_name [, ...] ) ]
+    [ OVERRIDING { SYSTEM | USER } VALUE ]
+    { DEFAULT VALUES | VALUES ( { expression | DEFAULT } [, ...] ) [, ...] | query }
+    [ ON CONFLICT [ conflict_target ] conflict_action ]
+    [ RETURNING * | output_expression [ [ AS ] output_name ] [, ...] ]
+
+where conflict_target can be one of:
+
+    ( { index_column_name | ( index_expression ) } [ COLLATE collation ] [ opclass ] [, ...] ) [ WHERE index_predicate ]
+    ON CONSTRAINT constraint_name
+
+and conflict_action is one of:
+
+    DO NOTHING
+    DO UPDATE SET { column_name = { expression | DEFAULT } |
+                    ( column_name [, ...] ) = [ ROW ] ( { expression | DEFAULT } [, ...] ) |
+                    ( column_name [, ...] ) = ( sub-SELECT )
+                  } [, ...]
+              [ WHERE condition ]
+{% endhighlight %}
+
+Nah jadi jika kita perhatikan ada beberapa clause yang kita bisa gunakan diantaranya:
+
+1. Insert with specific columns and data type
+2. Insert with `DEFAULT VALUE`
+3. Insert single and multiple rows
+4. Insert with `ON CONFLICT`
+5. Insert with `OVERRIDING` keyword
+6. Using with query in INSERT statement
+7. Error message on insert statement
+
+Nah lumayan banyak dan panjang juga ya ternyata untuk perintah insert yang kita bisa gunakan, jadi kita akan coba break-down aja ya masing-masing feature:
+
+<!--more-->
+
+## Insert with specific columns and data type
+
+The target column names can be listed in any order. If no list of column names is given at all, the default is all the columns of the table in their declared order; or the first `N` column names, if there are only `N` columns supplied by the VALUES clause or query. The values supplied by the `VALUES` clause or query are associated with the explicit or implicit column list left-to-right.
+
+If the expression for any column is not of the correct data type, automatic type conversion will be attempted.
+
+{% highlight sql %}
+INSERT INTO <table_name> [ ( column_name [, ...] ) ]
+    { VALUES ( { expression | DEFAULT } [, ...] ) [, ...] }
+{% endhighlight %}
+
+Sebagai contoh, saya ingin menambahkan data pada table `employees` dengan struktur table seperti berikut
+
+```sql
+hr=# \d employees
+                                            Table "public.employees"
+     Column     |         Type          | Collation | Nullable |                    Default                     
+----------------+-----------------------+-----------+----------+------------------------------------------------
+ employee_id    | integer               |           | not null | nextval('employees_employee_id_seq'::regclass)
+ first_name     | character varying(20) |           |          | 
+ last_name      | character varying(25) |           | not null | 
+ email          | character varying(25) |           | not null | 
+ phone_number   | character varying(20) |           |          | 
+ job_id         | character varying(10) |           |          | 
+ salary         | numeric(8,2)          |           |          | 
+ commission_pct | numeric(2,2)          |           |          | 
+ manager_id     | integer               |           |          | 
+ department_id  | integer               |           |          | 
+```
+
+Data yang saya inputkan ke table `employees` tersebut adalah seperti berikut
+
+| first_name    | last_name  | email    | job_id    | salary    |
+| :---          | :---       | :---     | :---      | :---      |
+| Dimas         | Maryanto   | DIMAS    | IT_PROG   | 15000     |
+
+Berikut adalah querynya:
+
+{% gist page.gist "05b-dml-insert-specific-columns.sql" %}
+
+Jika dijalankan hasilnya seperti berikut:
+
+```sql
+hr=# INSERT INTO employees (email, first_name, last_name, job_id, salary)
+hr-# values ('DIMAS', initcap('dimas'), initcap('maryanto'), upper('it_prog'), 15000);
+INSERT 0 1
+
+hr=# select * from employees where email = 'DIMAS';
+ employee_id | first_name | last_name | email | phone_number | job_id  |  salary  | commission_pct | manager_id | department_id 
+-------------+------------+-----------+-------+--------------+---------+----------+----------------+------------+---------------
+           2 | Dimas      | Maryanto  | DIMAS |              | IT_PROG | 15000.00 |                |            |              
+(1 row)
+```
+
+Selain itu juga klo kita mau menyimpan data dengan tipe data date/timestamp misalnya pada table `job_history` seperti berikut struktur tablenya:
+
+```sql
+hr=# \d job_history
+                          Table "public.job_history"
+    Column     |            Type             | Collation | Nullable | Default 
+---------------+-----------------------------+-----------+----------+---------
+ employee_id   | integer                     |           |          | 
+ start_date    | timestamp without time zone |           |          | 
+ end_date      | timestamp without time zone |           |          | 
+ job_id        | character varying(10)       |           |          | 
+ department_id | integer                     |           |          | 
+```
+
+Maka querynya seperti berikut:
+
+{% gist page.gist "05b-dml-insert-specific-datatype.sql" %}
+
+Jika dijalankan hasilnya seperti berikut:
+
+```sql
+hr=# INSERT INTO job_history (employee_id, start_date, job_id) 
+hr-# VALUES (2, '2016-07-15', 'IT_PROG');
+INSERT 0 1
+
+hr=# select * from job_history where employee_id = 2;
+ employee_id |     start_date      | end_date | job_id  | department_id 
+-------------+---------------------+----------+---------+---------------
+           2 | 2016-07-15 00:00:00 |          | IT_PROG |              
+(1 row)
+```
+
+## Insert with `DEFAULT VALUE`
+
+All columns will be filled with their default values, as if `DEFAULT` were explicitly specified for each column. (An `OVERRIDING` clause is not permitted in this form.)
+
+Each column not present in the explicit or implicit column list will be filled with a default value, either its declared default value or `null` if there is none.
+
+Sebagai contoh kita akan edit struktur table `employees` pada columnn `salary` dengan menambahkan default value dengan query seperti berikut:
+
+{% highlight sql %}
+alter table employees
+alter column salary SET default 0;
+{% endhighlight %}
+
+Nah sekarang kita lihat struktur tablenya seperti berikut:
+
+```sql
+hr=# \d employees
+                                            Table "public.employees"
+     Column     |         Type          | Collation | Nullable |                    Default                     
+----------------+-----------------------+-----------+----------+------------------------------------------------
+ employee_id    | integer               |           | not null | nextval('employees_employee_id_seq'::regclass)
+ first_name     | character varying(20) |           |          | 
+ last_name      | character varying(25) |           | not null | 
+ email          | character varying(25) |           | not null | 
+ phone_number   | character varying(20) |           |          | 
+ job_id         | character varying(10) |           |          | 
+ salary         | numeric(8,2)          |           |          | 0
+ commission_pct | numeric(2,2)          |           |          | 
+ manager_id     | integer               |           |          | 
+ department_id  | integer               |           |          | 
+```
+
+Kemudian jika kita lakukan insert data dengan query seperti berikut:
+
+{% gist page.gist "05b-dml-insert-no-specify-salary-column.sql" %}
+
+Jika di jalankan hasilnya seperti berikut:
+
+```sql
+hr=# INSERT INTO employees (email, first_name, last_name, job_id)
+hr-# values ('YUSUF', initcap('Muhamad'), initcap('yusuf'), upper('it_prog'));
+INSERT 0 1
+
+hr=# select * from employees where email = 'YUSUF';
+ employee_id | first_name | last_name | email | phone_number | job_id  | salary | commission_pct | manager_id | department_id 
+-------------+------------+-----------+-------+--------------+---------+--------+----------------+------------+---------------
+           3 | Muhamad    | Yusuf     | YUSUF |              | IT_PROG |   0.00 |                |            |              
+(1 row)
+```
+
+Kemudian jika kita specify column `salary` tetapi jika kita kasih nilai `null` dengan query seperti berikut:
+
+{% gist page.gist "05b-dml-insert-null-value-salary.sql" %}
+
+Jika dijalankan hasilnya seperti berikut:
+
+```sql
+hr=# INSERT INTO employees (email, first_name, last_name, job_id, salary)
+hr-# values ('PURWADI', initcap('muhamad'), initcap('purwadi'), upper('it_prog'), null);
+INSERT 0 1
+
+hr=# select * from employees where email = 'PURWADI';
+ employee_id | first_name | last_name |  email  | phone_number | job_id  | salary | commission_pct | manager_id | department_id 
+-------------+------------+-----------+---------+--------------+---------+--------+----------------+------------+---------------
+           4 | Muhamad    | Purwadi   | PURWADI |              | IT_PROG |        |                |            |              
+(1 row)
+```
+
+Kemudian bagaimana jika kita mau menggunakan nilai defaultnya jika kita specify column tersebut, kita bisa gunakan keyword `DEFAULT` seperti berikut:
+
+{% gist page.gist "05b-dml-insert-using-default-value.sql" %}
+
+Jika dijalankan hasilnya seperti berikut:
+
+```sql
+hr=# INSERT INTO employees (email, first_name, last_name, job_id, salary)
+hr-# values ('JUNAEDI', null, initcap('junaedi'), upper('it_prog'), DEFAULT);
+INSERT 0 1
+
+hr=# select * from employees where email  = 'JUNAEDI';
+ employee_id | first_name | last_name |  email  | phone_number | job_id  | salary | commission_pct | manager_id | department_id 
+-------------+------------+-----------+---------+--------------+---------+--------+----------------+------------+---------------
+           5 |            | Junaedi   | JUNAEDI |              | IT_PROG |   0.00 |                |            |              
+(1 row)
+```
+
+Jadi kesimpulannya jika kita mau menggunakan default value kita bisa menggunakan 2 cara yaitu tidak men-specify kolom yang kita input dan juga menggunakan expression atau keyword `DEFAULT` pada values form.
+
+## Insert single and multiple rows
+
+`INSERT` statement is inserts new rows into a table. One can insert one or more rows specified by value expressions, or zero or more rows resulting from a query. Berikut syntax dasarnya:
+
+{% highlight sql %}
+INSERT INTO table_name [ AS alias ] [ ( column_name [, ...] ) ]
+    VALUES ( { expression | DEFAULT } [, ...] ) [, ( { expression | DEFAULT } , ... )] 
+{% endhighlight %}
+
+Implementasi pada querynya seperti berikut:
+
+{% gist page.gist "05b-dml-insert-multiple-rows.sql" %}
+
+Jika dijalankan hasilnya seperti berikut:
+
+```sql
+hr=# INSERT INTO countries (country_id, country_name, region_id)
+hr-# values ('ID', 'Indonesia', 3),
+hr-#        ('SI', 'Singapore', 3),
+hr-#        ('TH', 'Thailand', 3);
+INSERT 0 3
+
+hr=# select * from countries where country_id in ('ID', 'SI', 'TH');
+ country_id | country_name | region_id 
+------------+--------------+-----------
+ ID         | Indonesia    |         3
+ SI         | Singapore    |         3
+ TH         | Thailand     |         3
+(3 rows)
+```
+
+Meskipun kita bisa mengirimkan data lebih dari satu bahkan bisa ribuan data tpi temen-temen juga perlu pertimbahkan kerkait performa databasenya. Karena semakin banyak data yang dikirimkan dalam satu query biasanya akan menghambat proses lainnya. 
+
+Jadi biasanya jika misalnya saya akan mengimput jutaan data biasanya akan saya bagi-bagi menjadi beberapa bulk misalnya query pertama berisi 1000 baris, kemudian query kedua kita kirimkan lagi 1000 baris selanjutnya dan begitu pula selanjutnya sampai semua data selesai.
+
+## Insert with `ON CONFLICT`
+
+The optional `ON CONFLICT` clause specifies an alternative action to raising a unique violation or exclusion constraint violation error. For each individual row proposed for insertion, either the insertion proceeds, or, if an arbiter constraint or index specified by `conflict_target` is violated, the alternative conflict_action is taken. `ON CONFLICT DO NOTHING` simply avoids inserting a row as its alternative action. `ON CONFLICT DO UPDATE` updates the existing row that conflicts with the row proposed for insertion as its alternative action.
+
+Pastikan jika temen-temen mau menggunakan feature ini harus menggunakan PostgreSQL Server versi minimum 9.5 atau lebih tinggi.
+
+Berikut syntax dasarnya:
+
+{% highlight sql %}
+INSERT INTO table_name [ AS alias ] [ ( column_name [, ...] ) ]
+    { DEFAULT VALUES | VALUES ( { expression | DEFAULT } [, ...] ) [, ...] | query }
+    [ ON CONFLICT [ conflict_target ] conflict_action ]
+
+where conflict_target can be one of:
+
+    ( { index_column_name | ( index_expression ) } [ COLLATE collation ] [ opclass ] [, ...] ) [ WHERE index_predicate ]
+    ON CONSTRAINT constraint_name
+
+and conflict_action is one of:
+
+    DO NOTHING
+    DO UPDATE SET { column_name = { expression | DEFAULT } |
+                    ( column_name [, ...] ) = [ ROW ] ( { expression | DEFAULT } [, ...] ) |
+                    ( column_name [, ...] ) = ( sub-SELECT )
+                  } [, ...]
+              [ WHERE condition ]
+{% endhighlight %}
+
+Contoh yang paling umum adalah seperti berikut, misalnya saya mau insert data jika key sudah ada maka update value tersebut dengan perintah seperti berikut:
+
+{% gist page.gist "05b-dml-insert-on-conflict-update.sql" %}
+
+Jika dijalankan hasilnya seperti berikut:
+
+```sql
+hr=# INSERT INTO countries as newValue (country_id, country_name, region_id)
+hr-# values ('ID', 'Republic Indonesia', 3)
+hr-# on conflict (country_id) do update SET country_name = excluded.country_name,
+hr-#                                       region_id    = excluded.region_id;
+INSERT 0 1
+
+hr=# select * from countries where country_id = 'ID';
+ country_id |    country_name    | region_id 
+------------+--------------------+-----------
+ ID         | Republic Indonesia |         3
+(1 row)
+```
+
+Selain itu juga, misalnya ketika mau insert data jika key sudah ada maka jangan di update/insert dengan menggunakan perintah berikut:
+
+{% gist page.gist "05b-dml-insert-on-conflict-nothing.sql" %}
+
+Jika dijalankan maka hasilnya seperti berikut: 
+
+```sql
+hr=# INSERT INTO countries as newValue (country_id, country_name, region_id)
+hr-# values ('ID', 'Indonesia', 3)
+hr-# on conflict (country_id) do nothing;
+INSERT 0 0
+
+hr=# select * from countries where country_id = 'ID';
+ country_id |    country_name    | region_id 
+------------+--------------------+-----------
+ ID         | Republic Indonesia |         3
+(1 row)
+```
+
+## Insert with `OVERRIDING` keyword
+
+The optional `OVERRIDING` clause specifies an alternative action to replace default or initialize value defined on Data Definition (DML). Berikut adalah contoh syntaxnya:
+
+{% highlight sql %}
+INSERT INTO table_name [ AS alias ] [ ( column_name [, ...] ) ]
+    [ OVERRIDING { SYSTEM | USER } VALUE ]
+    { DEFAULT VALUES | VALUES ( { expression | DEFAULT } [, ...] ) [, ...] | query }
+{% endhighlight %}
+
+Ada 2 clause pada `OVERRIDING` yaitu 
+
+1. `OVERRIDING SYSTEM VALUE`, If this clause is specified, then any values supplied for identity columns will override the default sequence-generated values.
+2. `OVERRIDING USER VALUE`, If this clause is specified, then any values supplied for identity columns are ignored and the default sequence-generated values are applied.
+
+Karena disini kita belum punya workloadnya atau belum memiliki tabel dengan structure identity, jadi kita belum bisa praktekan tapi most commons `OVERRIDING` query digunakan untuk mengcopy data dari 1 tabel ke tabel lainnya dengan meng-replace value dari column yang menjadi primary key.
+
+Mungkin nanti kita akan praktekan di section selanjutnya yaitu Data Definition Language (DDL).
+
+## Using with query in INSERT statement
+
+The WITH clause allows you to specify one or more subqueries that can be referenced by name in the INSERT query.
+
+{% highlight sql %}
+[ WITH [ RECURSIVE ] with_query [, ...] ]
+    (SELECT * from ...)
+INSERT INTO table_name [ AS alias ] [ ( column_name [, ...] ) ]
+    { DEFAULT VALUES | VALUES ( { expression | DEFAULT } [, ...] ) [, ...] | query }
+    [ RETURNING * | output_expression [ [ AS ] output_name ] [, ...] ]
+{% endhighlight %}
+
+It is possible for the query (`SELECT` statement) to also contain a WITH clause. In such a case both sets of **with_query** can be referenced within the query, but the second one takes precedence since it is more closely nested.
+
+Sebagai contoh misalnnya saya mau insert ke tabel `employees` beserta `job_history` sekaligus dengan structur table seperti berikut:
+
+```sql
+hr=# \d employees
+                                            Table "public.employees"
+     Column     |         Type          | Collation | Nullable |                    Default
+----------------+-----------------------+-----------+----------+------------------------------------------------
+ employee_id    | integer               |           | not null | nextval('employees_employee_id_seq'::regclass)
+ first_name     | character varying(20) |           |          |
+ last_name      | character varying(25) |           | not null |
+ email          | character varying(25) |           | not null |
+ phone_number   | character varying(20) |           |          |
+ job_id         | character varying(10) |           |          |
+ salary         | numeric(8,2)          |           |          |
+ commission_pct | numeric(2,2)          |           |          |
+ manager_id     | integer               |           |          |
+ department_id  | integer               |           |          |
+Indexes:
+    "employees_pkey" PRIMARY KEY, btree (employee_id)
+Referenced by:
+    TABLE "departments" CONSTRAINT "fk_departments_manager_id" FOREIGN KEY (manager_id) REFERENCES employees(employee_id) ON UPDATE CASCADE ON DELETE CASCADE
+    TABLE "employees" CONSTRAINT "fk_employees_manager_id" FOREIGN KEY (manager_id) REFERENCES employees(employee_id) ON UPDATE CASCADE ON DELETE CASCADE
+
+hr=# \d job_history
+                          Table "public.job_history"
+    Column     |            Type             | Collation | Nullable | Default
+---------------+-----------------------------+-----------+----------+---------
+ employee_id   | integer                     |           |          |
+ start_date    | timestamp without time zone |           |          |
+ end_date      | timestamp without time zone |           |          |
+ job_id        | character varying(10)       |           |          |
+ department_id | integer                     |           |          |
+Foreign-key constraints:
+    "fk_job_history_department_id" FOREIGN KEY (department_id) REFERENCES departments(department_id) ON UPDATE CASCADE ON DELETE CASCADE
+    "fk_job_history_job_id" FOREIGN KEY (job_id) REFERENCES jobs(job_id) ON UPDATE CASCADE ON DELETE CASCADE
+```
+
+Karena `employee_id` by default digenerate oleh object sequance jadi kita perlu ambil dulu sequancenya kemudian kita masukan value hasil generate tersebut ke column `employee_id` pada tabel `job_history` berikut adalah implementasi querynya:
+
+{% gist page.gist "05b-nested-insert-with-query.sql" %}
+
+Maka jika dijalankan hasilnya seperti berikut
+
+```sql
+hr=# with insert_emp as (
+hr(#     insert into employees (first_name, last_name, email, job_id, salary, manager_id, department_id)
+hr(#         VALUES (initcap('Dimas'), initcap('Maryanto'), upper('dimas'), 'IT_PROG', 5000, 102, 90)
+hr(#         RETURNING employee_id, job_id, department_id
+hr(# )
+hr-# insert into job_history (employee_id, start_date, job_id, department_id)
+hr-# select employee_id, now(), job_id, department_id
+hr-# from insert_emp;
+INSERT 0 1
+
+hr=# select emp.employee_id, emp.first_name, emp.salary, h.start_date, h.department_id, h.job_id
+hr-# from employees emp
+hr-#          join job_history h on emp.employee_id = h.employee_id
+hr-# where email = upper('dimas');
+ employee_id | first_name | salary  |         start_date         | department_id | job_id
+-------------+------------+---------+----------------------------+---------------+---------
+           2 | Dimas      | 5000.00 | 2022-09-04 03:48:42.894234 |            90 | IT_PROG
+```
+
+## Error message on insert statement
+
+Jika temen-temen praktekan materi sebelumnya it's just works, but tidak selamanya pasti berhasil kadangkala kita akan menghadapi error yang sebetulnya di bagi jadi 3 yaitu syntax, semantic, dan logic tapi kita kali ini tidak akan membahas secara detail terkait itu tetapi kita memfokuskan beberapa kesalahan yang sering terjadi pada saat kita menggunakan Insert statement.
+
+Beberapa kesalahan yang sering terjadi bagi temen-temen yang masih pemula yaitu biasanya adalah typo, invalid syntax dan missing keyword. Terlepas dari itu ada juga kesalah yang secara syntax sudah betul tetapi begitu di execute erorr ini bisanya kita sebut runtime exception/error seperti 
+
+1. Duplicate constraint/key, contohnya duplicate primary key seperti berikut
+
+    ```sql
+    hr=# insert into regions(region_id, region_name) values (1, 'Other');
+    ERROR:  duplicate key value violates unique constraint "regions_pkey"
+    DETAIL:  Key (region_id)=(1) already exists.
+    ```
+
+2. Error validation, contohnya pada struktur table tidak boleh null tpi kita input null seperti berikut:
+
+    ```sql
+    hr=# insert into employees (first_name) values ('Dimas Maryanto');
+    ERROR:  null value in column "last_name" of relation "employees" violates not-null constraint
+    DETAIL:  Failing row contains (3, Dimas Maryanto, null, null, null, null, null, null, null, null).
+    ```
+
+3. Refference value does't match with foreign-key, contohnya kita ke tabel `employees` pada column `job_id` yang nilainya belum di definisikan pada table `jobs` seperti berikut:
+
+    ```sql
+    hr=# INSERT INTO employees (email, first_name, last_name, job_id)
+    hr-# values ('YUSUF', initcap('Muhamad'), initcap('yusuf'), 'IT');
+    ERROR:  insert or update on table "employees" violates foreign key constraint "fk_employees_job_id"
+    DETAIL:  Key (job_id)=(IT) is not present in table "jobs".
+    ```
+
+4. Invalid data type, contohnya column spec menggunakan date tetapi yang kita input tidak sesuai seperti berikut:
+
+    ```sql
+    ERROR:  date/time field value out of range: "2020/28/10"
+    LINE 2: values (100, '2020/28/10', 'IT_PROG', 90)
+                        ^
+    HINT:  Perhaps you need a different "datestyle" setting.
+    ```
+
+Selain itu juga masih ada beberapa failure yang terjadi karena factor external seperti service postgresql mati, server mati, network unreachable dan lain-lain.
+
+Ok begitulah kurang lebih ya beberapa kesalahan/error/failure yang mengebabkan data yang kita input tidak dapat di simpan pada Database PostgreSQL yang perlu temen-temen perhatikan adalah bagaimana cara troubleshoot dan handling error tersebut menggunakan beberapa strategi.
+
+Untuk strategi tersebut nanti kita akan bahas di materi server administration.

@@ -1,0 +1,42 @@
+---
+
+title: "Sub Query di Oracle"
+date: 2021-02-18T07:08:08+07:00
+lang: oracle18c
+authors:
+- dimasm93
+categories:
+- RDBMS
+- Oracle18c
+refs: 
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Using-Subqueries.html#GUID-53A705B6-0358-4E2B-92ED-A83DE83DFD20
+youtube: IUtvJpB7Mzo
+comments: true
+catalog_key: sql-subquery
+image_path: /resources/posts/oracle12c/
+gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
+downloads: []
+---
+
+Sub Query yaitu query dalam query atau query yang memiliki dua perintah `select`. SubQuery bisa diterapkan di `column` dan di `where` clause. 
+
+<!--more-->
+
+Untuk pembahasan kali ini, saya mau bahas yang sub query yang simple dulu ya, yaitu seperti berikut:
+
+{% gist page.gist "011-select-sub-query.sql" %}
+
+Berikut hasilnya:
+
+{% highlight sql %}
+       NIK NAMA                 JABATAN                         MINIMUN_SALARY
+---------- -------------------- ------------------------------- ---------------
+       198 Donald               Shipping Clerk                  2500
+       199 Douglas              Shipping Clerk                  2500
+       200 Jennifer             Administration Assistant        3000
+       201 Michael              Marketing Manager               9000
+       202 Pat                  Marketing Representative        4000
+       203 Susan                Human Resources Representative  4000
+
+107 rows selected.
+{% endhighlight %}

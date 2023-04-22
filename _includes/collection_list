@@ -1,4 +1,4 @@
-{% assign navigation = include.nav[0] %}
+{% assign navigation = include.nav %}
 <nav class="nav__list">
   <h3 class="nav__title" style="padding-left: 0;">Course content</h3>
   <ul class="nav__items">

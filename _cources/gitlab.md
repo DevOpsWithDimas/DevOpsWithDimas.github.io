@@ -2,7 +2,7 @@
 title: "Gitlab"
 subtitle: "Gitlab for GitOps"
 key: gitlab
-publish: 
+publish: 2022-06-18T16:08:32+07:00
 visible: false
 coming_soon: false
 toc: true

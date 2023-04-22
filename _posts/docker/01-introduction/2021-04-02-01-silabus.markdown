@@ -1,12 +1,10 @@
 ---
-lang: docker
-catalog: introduction
+
 title: "Silabus Belajar Docker: Pemula sampai Mahir"
 date: 2021-04-02T09:15:38+07:00
-last_modified_at: 2022-04-02T09:15:38+07:00
-classes: 
-- wide
-- dark
+lang: docker
+authors:
+- dimasm93
 categories:
 - DevOps
 - Docker
@@ -14,16 +12,17 @@ refs:
 - https://docs.docker.com/
 youtube: oWKiax_drXQ
 comments: true
-image_path: /resources/posts/docker/01-introduction/01-silabus
+catalog_key: introduction
+image_path: /resources/posts/docker/01-silabus
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---
 
 Hai semuanya, di cource ini `DevOps - Docker: Pemula sampai Mahir` kita akan membahas teknology container yang sedang popular saat ini yaitu Docker. 
 
-<!--more-->
-
 Dengan menggunakan teknology container kita bisa melakukan banyak hal mulai dari development, Automate testing, Automate deployment dan lain-lain. Adapun materi/silabus yang akan kita bahas di kelas ini kita akan bagi menjadi 3 section yaitu fundamental, intermediate dan Advanced. Diantaranya:
+
+<!--more-->
 
 ## Fundamental
 

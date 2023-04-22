@@ -16,12 +16,24 @@
     {% endif %}
   {% endif %}
 
-  {% assign language = page.lang | default: page.key %}
-  {% assign catalog = site.cources | where: 'key', language | map: 'catalogs' %}
-  
-  {% if catalog[0] %}
+  {% if page.sidebar %}
     <hr>
-    {% include collection_list nav=catalog %}
+    {% assign language = page.lang | default: page.key %}
+    {%- assign collection = site.cources | where: 'key', language | first -%}
+    <h4>
+      {% if collection.header.teaser %}
+      <a href="{{ collection.url | relative_url }}" target="_blank" rel="noopener noreferrer">
+        <img src="{{ collection.header.teaser | relative_url }}" alt="{{ collection.subtitle }}">
+      </a>
+      {% else %}
+      <a href="{{ collection.url | relative_url }}" target="_blank" rel="noopener noreferrer">
+        {{ collection.title }}
+      </a>
+      {% endif %}
+    </h4>
+    {% if collection.catalogs %}
+      {% include collection_list nav=collection.catalogs %}
+    {% endif %}
   {% endif %}
   </div>
 {% endif %}

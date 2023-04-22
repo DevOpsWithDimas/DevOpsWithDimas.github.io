@@ -1,0 +1,38 @@
+---
+
+title: "Klausa where untuk filter data di Oracle"
+date: 2021-02-11T20:06:34+07:00
+lang: oracle18c
+authors:
+- dimasm93
+categories:
+- RDBMS
+- Oracle18c
+refs: 
+- https://docs.oracle.com/en/database/oracle/oracle-database/19/sqlrf/Conditions.html#GUID-C2E3ED44-16E7-4924-9125-E1693B1022A8
+youtube: yjPRZreMSss
+comments: true
+catalog_key: sql-where-clause
+image_path: /resources/posts/oracle12c/006-where
+gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
+downloads: []
+---
+
+Penggunaan klausa `where` digunakan untuk melakukan filter berdasarkan kolom dan operator tertentu contoh paling basic adalah operator `equals` atau `=`, Kasusnya saya punya beberapa nah kemudian saya cuman mau data yang ditampilkan berdasarkan criteria tertentu contohnya ilustrasi seperti berikut:
+
+<!--more-->
+
+![where basic]({{ page.image_path | prepend: site.baseurl }}/konsep-where.png)
+
+## Predicates / Conditional
+
+Predicate / Conditional ada beberapa operator yang bisa digunakan diantaranya
+
+1. Comparison Predicate
+2. Floating Point Condition
+3. Like Predicate
+4. Between Predicate
+5. Nulless Predicate
+6. Exist Condition
+7. In Condition
+8. Logical Statement
