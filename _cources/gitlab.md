@@ -4,7 +4,7 @@ subtitle: "Gitlab for GitOps"
 url: gitlab
 publish: 
 visible: false
-coming_soon: true
+coming_soon: false
 toc: true
 toc_sticky: true
 header:
