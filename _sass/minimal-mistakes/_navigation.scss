@@ -499,6 +499,12 @@
   border-bottom: 1px solid $border-color;
 }
 
+.nav__collapside {
+  display: block;
+  font-family: $sans-serif-narrow;
+  font-size: $type-size-6;
+}
+
 /*
      Table of contents navigation
      ========================================================================== */

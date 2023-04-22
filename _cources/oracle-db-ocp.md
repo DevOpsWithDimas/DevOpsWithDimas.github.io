@@ -1,7 +1,7 @@
 ---
 title: "Oracle Database (OCP)"
 subtitle: "Oracle Database Certified Professional (OCA)"
-url: oracledb-ocp
+key: oracledb-ocp
 publish: 
 visible: false
 coming_soon: true

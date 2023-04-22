@@ -1,7 +1,7 @@
 ---
 title: "Pemograman golang"
 subtitle: "Bahasa pemograman golang"
-url: golang
+key: golang
 publish: 
 visible: false
 coming_soon: true

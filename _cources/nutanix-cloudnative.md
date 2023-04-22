@@ -1,7 +1,7 @@
 ---
 title: "Nutanix CloudNative"
 subtitle: "Nutanix CloudNative for DevOps"
-url: nutanix-cloudnative
+key: nutanix-cloudnative
 publish: 
 visible: false
 coming_soon: true

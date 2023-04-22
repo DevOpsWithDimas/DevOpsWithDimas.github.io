@@ -1,7 +1,7 @@
 ---
 title: "Kubernetes (k8s)"
 subtitle: "Kubernetes for DevOps"
-url: k8s
+key: k8s
 publish: 2023-04-21T18:46:00+07:00
 visible: false
 coming_soon: false

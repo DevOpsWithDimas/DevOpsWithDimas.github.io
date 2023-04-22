@@ -1,7 +1,7 @@
 ---
 title: "Nutanix Database (NDB)"
 subtitle: "Nutanix Database for DevOps"
-url: nutanix-ndb
+key: nutanix-ndb
 publish: 
 visible: false
 coming_soon: true

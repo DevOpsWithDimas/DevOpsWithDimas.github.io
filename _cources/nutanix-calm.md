@@ -1,7 +1,7 @@
 ---
 title: "Nutanix CALM"
 subtitle: "Nutanix CALM for DevOps"
-url: nutanix-calm
+key: nutanix-calm
 publish: 
 visible: false
 coming_soon: true

@@ -1,7 +1,7 @@
 ---
 title: "Apache JMeter"
 subtitle: "Testing with Apache JMeter"
-url: apache-jmeter
+key: apache-jmeter
 publish: 
 visible: false
 coming_soon: true

@@ -1,7 +1,7 @@
 ---
 title: "Gitlab"
 subtitle: "Gitlab for GitOps"
-url: gitlab
+key: gitlab
 publish: 
 visible: false
 coming_soon: false

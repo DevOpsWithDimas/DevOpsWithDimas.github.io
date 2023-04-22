@@ -1,7 +1,7 @@
 ---
 title: "Pemograman Java"
 subtitle: "Bahasa pemograman Java"
-url: java
+key: java
 publish: 
 visible: false
 coming_soon: true

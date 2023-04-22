@@ -1,7 +1,7 @@
 ---
 title: "PostgreSQL"
 subtitle: "PostgreSQL Certified Proffesional"
-url: postgres
+key: postgres
 publish: 2022-01-16T20:50:50+07:00
 visible: false
 coming_soon: false

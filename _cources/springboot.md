@@ -1,7 +1,7 @@
 ---
 title: "Springboot"
 subtitle: "Springboot for Backend Developer"
-url: springboot
+key: springboot
 publish: 
 visible: false
 coming_soon: true

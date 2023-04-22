@@ -1,7 +1,7 @@
 ---
 title: "Angular"
 subtitle: "Angular for Frontend Developer"
-url: angular
+key: angular
 publish: 
 visible: false
 coming_soon: true

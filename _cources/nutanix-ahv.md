@@ -1,7 +1,7 @@
 ---
 title: "Nutanix AHV"
 subtitle: "Nutanix AHV for DevOps"
-url: nutanix-ahv
+key: nutanix-ahv
 publish: 
 visible: false
 coming_soon: true

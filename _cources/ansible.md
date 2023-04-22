@@ -1,7 +1,7 @@
 ---
 title: "Ansible"
 subtitle: "Ansible for DevOps Engineer"
-url: ansible
+key: ansible
 publish: 
 visible: false
 coming_soon: true

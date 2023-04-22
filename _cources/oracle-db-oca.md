@@ -1,7 +1,7 @@
 ---
 title: "Oracle Database (OCA)"
 subtitle: "Oracle Database Certified Associate (OCA)"
-url: oracledb-oca
+key: oracledb-oca
 publish: 2021-02-07T12:26:00+07:00
 visible: false
 coming_soon: false

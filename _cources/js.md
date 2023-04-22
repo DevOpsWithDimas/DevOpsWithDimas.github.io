@@ -1,7 +1,7 @@
 ---
 title: "Pemograman JavaScript (js)"
 subtitle: "Bahasa pemograman Javascript"
-url: js
+key: js
 publish: 
 visible: false
 coming_soon: true

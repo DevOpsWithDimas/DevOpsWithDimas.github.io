@@ -1,7 +1,7 @@
 ---
 title: "Docker"
 subtitle: "Docker for DevOps engineer"
-url: docker
+key: docker
 publish: 2023-03-26T18:46:00+07:00
 visible: true
 coming_soon: false
@@ -110,11 +110,6 @@ catalogs:
   - name: 'Study Kasus: Docker Swarm'
     key: study-cases-docker-swarm
     description: 'Eps.15 - Study kasus: Orchestration with docker swarm'
-    deprecated: false
-    messages: ''
-  - name: Docker on Cloud using GCP
-    key: docker-cloud
-    description: 'Eps.16 - Docker on Cloud using Google Cloud Platform'
     deprecated: false
     messages: ''
 ---

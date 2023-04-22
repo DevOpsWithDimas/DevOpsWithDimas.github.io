@@ -1,7 +1,7 @@
 ---
 title: "Pemograman Typescript (ts)"
 subtitle: "Bahasa pemograman typescript"
-url: angular
+key: angular
 publish: 
 visible: false
 coming_soon: true
