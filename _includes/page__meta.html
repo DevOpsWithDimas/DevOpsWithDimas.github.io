@@ -4,7 +4,7 @@
   {% assign collection = site.cources | where: 'key', document.lang | first %}
   {% if collection %}
     <a href="{{ collection.url | relative_url }}" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-terminal"></i>
+      <i class="fas fa-link"></i>
       {{ collection.subtitle }}
     </a>
     <span class="page__meta-sep"></span>
