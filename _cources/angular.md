@@ -14,8 +14,6 @@ header:
     - label: "Learn more"
       url: /posts/container/angular/
 tagline: "xxx"
-toc: true
-toc_sticky: true
 tags:
   - web
   - js
@@ -28,8 +26,6 @@ sidebar:
     text: "Designer, Front-End Developer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar membuat aplikasi Web Single Pages Application (SPA) system dengan menggunakan Angular Framework"
-toc: true
-toc_sticky: true
 udemy: 
   url: https://www.udemy.com/course/angular-pemula-sampai-mahir/
   price: Rp280.000,-

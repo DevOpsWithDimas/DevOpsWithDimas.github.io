@@ -17,13 +17,13 @@ pagination:
   enabled: true
   collection: cources
   title: ':title'
-  per_page: 8
+  per_page: 16
   sort_field: 'publish'
   sort_reverse: true
 ---
 
 {% if paginator %}
-  {% assign posts = paginator.posts where %}
+  {% assign posts = paginator.cources %}
 {% else %}
   {% assign posts = site.cources %}
 {% endif %}

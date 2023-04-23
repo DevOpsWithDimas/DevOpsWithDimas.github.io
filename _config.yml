@@ -321,6 +321,9 @@ defaults:
       excerpt_separator: "<!--more-->"
       show_date: true
       author_profile: false
+      toc: true
+      coming_soon: true
+      toc_sticky: true
       read_time: true
       comments: false
       share: false
@@ -330,7 +333,10 @@ defaults:
       type: roadmaps
     values:
       layout: single
-      author_profile: true
+      author_profile: false
+      toc: true
+      coming_soon: true
+      toc_sticky: true
       read_time: false
       comments: false
       share: false

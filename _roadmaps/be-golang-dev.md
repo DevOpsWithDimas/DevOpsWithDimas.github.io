@@ -1,13 +1,11 @@
 ---
-title: "Ansible"
-subtitle: "Ansible for DevOps Engineer"
-key: ansible
+title: "Golang Backend Developer"
+key: go-be-dev
 publish: 
-visible: false
 coming_soon: true
 header:
-  overlay_image: "assets/images/cources/ansible.png"
-  teaser: assets/images/cources/ansible.png
+  overlay_image: "assets/images/roadmap/backend-dev.png"
+  teaser: assets/images/roadmap/backend-dev.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
@@ -15,25 +13,18 @@ header:
       url: /posts/container/angular/
 tagline: "xxx"
 tags:
-  - DevOps
-  - IaC
-  - Ansible
+  - devops
+  - developer
+  - operation
+  - tools
+  - automation
 sidebar:
   - title: "Role"
-    image: assets/images/cources/ansible.png
+    image: assets/images/roadmap/backend-dev.png
     image_alt: "logo"
-    text: "DevOps Engineer, Operation team, & GitOps Engineer"
+    text: "Designer, Front-End Developer"
   - title: "Responsibilities"
-    text: "Temen-temen akan belajar IT automation tool untuk configure system, deploy software dan orchestrate more advance IT tasks seperti continues dpeloyment or zero downtime rolling update dan lain-lain."
-udemy: 
-  url: https://www.udemy.com/course/devops-ansible-pemula-sampai-mahir/
-  price: Rp280.000,-
-  discount: Rp99.000,-
-  release: false
-  couponCode: BUKBER.2023.10
-  referralCode: 8DA27E06BF0BA6935CCC
-  expired: 15/04/2023
-  toc: true
+    text: "Temen-teman akan belajar membuat aplikasi Web Single Pages Application (SPA) system dengan menggunakan Angular Framework"
 ---
 
 Hai semuanya selamat datang di kelas **xxx**, jadi kali ini kita akan membahas xxx yaitu menggunakan [xxx](link). 
