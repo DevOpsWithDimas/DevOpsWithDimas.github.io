@@ -1,18 +1,18 @@
 ---
 title: "Gitlab"
-subtitle: "Gitlab for GitOps"
+subtitle: "GitOps with Gitlab"
 key: gitlab
 publish: 2022-06-18T16:08:32+07:00
 visible: false
 coming_soon: false
 header:
-  overlay_image: "assets/images/cources/gitlab.png"
+  overlay_image: "assets/images/cources/gitlab-teaser.png"
   teaser: assets/images/cources/gitlab.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/angular/
+      url: /posts/gitops/gitlab/
 tagline: "xxx"
 tags:
   - DevOps

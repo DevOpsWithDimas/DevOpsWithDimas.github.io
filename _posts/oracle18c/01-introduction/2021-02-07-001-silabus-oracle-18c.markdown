@@ -1,8 +1,8 @@
 ---
-
+lang: oracle18c-oca
+catalog_key: introduction
 title: "Silabus Belajar RDBMS Oracle 18c"
 date: 2021-02-07T13:18:37+07:00
-lang: oracle18c-oca
 authors:
 - dimasm93
 categories:
@@ -14,7 +14,6 @@ refs:
 - https://www.oracle.com/database/technologies/appdev/xe.html
 youtube: Va-DhT3W2nI
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/oracle12c/
 gist: 
 downloads: []
