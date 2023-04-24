@@ -8,8 +8,8 @@ coming_soon: true
 toc: true
 toc_sticky: true
 header:
-  overlay_image: "assets/images/cources/oracle-associate.png"
-  teaser: assets/images/cources/oracle-associate.png
+  overlay_image: "assets/images/cources/oracle18cx-ocp.png"
+  teaser: assets/images/cources/oracle18cx-ocp.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
@@ -18,7 +18,7 @@ header:
 tagline: "xxx"
 sidebar:
   - title: "Role"
-    image: assets/images/cources/oracle-associate.png
+    image: assets/images/cources/oracle18cx-ocp.png
     image_alt: "logo"
     text: "Database Administrator/Engineer"
   - title: "Responsibilities"
