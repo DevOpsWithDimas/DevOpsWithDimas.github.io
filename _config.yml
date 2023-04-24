@@ -338,10 +338,10 @@ defaults:
       toc: false
       toc_sticky: false
       coming_soon: true
-      read_time: false
+      read_time: true
       comments: false
-      share: false
-      related: false
+      share: true
+      related: true
 
 udemy:
   profile: dimas-maryanto-2

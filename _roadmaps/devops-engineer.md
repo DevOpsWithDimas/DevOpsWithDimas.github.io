@@ -29,10 +29,6 @@ Hai semuanya selamat datang di kelas **xxx**, jadi kali ini kita akan membahas x
 
 <!--more-->
 
-## What you'll learn
-
-Tell me about what will you learn this cource
-
 ## Skill-sets requirement
 
 Ada beberapa skill-set yang harus ditempuh untuk menjadi seorang DevOps (Develoment & Operation) Engineer diataranya seperti berikut:
@@ -79,11 +75,11 @@ mindmap
 
 ## Description
 
-Tell me something about this cources, why you should learn this
+Tell me something about this roadmap, why you should learn this
 
 ## Cources
 
-Tell me something about this cource, what will you be able to
+Tell me something about courses should be taken to complete skill set of this roadmap
 
 ## Frequently Asked Questions
 

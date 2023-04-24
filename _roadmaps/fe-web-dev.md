@@ -27,6 +27,12 @@ sidebar:
 
 Hai semuanya selamat datang di kelas **xxx**, jadi kali ini kita akan membahas xxx yaitu menggunakan [xxx](link). 
 
+<!--more-->
+
+## Skill-sets requirement
+
+Ada beberapa skill-set yang harus ditempuh untuk menjadi seorang Frontend WEB Developer diataranya seperti berikut:
+
 {% mermaid %}
 mindmap
   root((Frontend <br>Developer))
@@ -34,12 +40,12 @@ mindmap
       [What is HTTP?]
       [How does the internet works?]
       [What & How Rest API works?]
-      impl (Implementation)
-        pwa [Progressive Web Apps]
-          Performance Metrics
-          Measuring and improving performance
-        spa [Single Page Application]
-        uiux [UI / UX]
+    sow (Scope of work/tasks)
+      pwa [Progressive Web Apps]
+        Performance Metrics
+        Measuring and improving performance
+      spa [Single Page Application]
+      uiux [UI / UX]
       security (Security)
         jwt [Json Web Token]
         oauth [OAuth]
@@ -61,37 +67,18 @@ mindmap
         Material UI
     Tools
       vcs (Version Control System)
-        git
-        github (Github)
-        gitlab (Gitlab)
-        bitbucket (Bitbucket)
-      packagemanager (Package Manager)
-        npm
-        yarn
+      package_manager (Package Manager)
+      build_tools (Build Tools)
 {% endmermaid %}
-
-<!--more-->
-
-## What you'll learn
-
-Tell me about what will you learn this cource
-
-## Requirement
-
-Tell me about what requirement to learn this cource
-
-## What you'll get from this cource
-
-Tell me about what you will get from this source
 
 ## Description
 
-Tell me something about this cources, why you should learn this
+Tell me something about this roadmap, why you should learn this
 
-## After taking this course, you'll be able to
+## Cources
 
-Tell me something about this cource, what will you be able to
+Tell me something about courses should be taken to complete skill set of this roadmap
 
-## Who this course is for
+## Frequently Asked Questions
 
 Tell me someting about this cource, who is this class for?
