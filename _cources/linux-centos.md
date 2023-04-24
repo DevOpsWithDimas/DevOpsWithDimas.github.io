@@ -2,7 +2,7 @@
 title: "Linux CentOS"
 subtitle: "Linux for Server using CentOS"
 key: linux-centos
-publish: 2023-03-26T18:46:00+07:00
+publish: 
 visible: false
 coming_soon: true
 tags:

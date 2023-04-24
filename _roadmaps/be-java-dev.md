@@ -20,6 +20,8 @@ tags:
   - automation
 cources:
   - java
+  - springboot
+  - postgres
 sidebar:
   - title: "Role"
     image: assets/images/roadmap/backend-dev.png

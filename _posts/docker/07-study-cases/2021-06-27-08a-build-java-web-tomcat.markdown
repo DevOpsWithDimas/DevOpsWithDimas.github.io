@@ -103,7 +103,7 @@ kita gak akan terlalu detail di bagian ini klo temen-temen mau belajar tentang J
 
 ## Deployment using Tomcat Web Server
 
-Untuk deployment Java web, juga sebetulnya udah saya bahas di [article berikut]({% post_url java-web/2020-12-15-032-deploy-java-webapp %})
+Untuk deployment Java web, juga sebetulnya udah saya bahas di [article berikut]({% post_url java/19-web-jsp/2020-12-15-032-deploy-java-webapp %})
 
 Jadi yang kita butuhkan sebetulnya yaitu 
 
