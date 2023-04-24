@@ -12,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/gitops/gitlab/
+      url: /posts/git/gitops/gitlab/00-silabus-gitlab.html
 tagline: "xxx"
 tags:
   - DevOps

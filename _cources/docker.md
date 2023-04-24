@@ -26,7 +26,7 @@ header:
   teaser: assets/images/cources/docker.png
   actions:
     - label: "Learn more"
-      url: /posts/container/docker/
+      url: /posts/devops/docker/01-silabus.html
 sidebar:
   - title: "Role"
     image: assets/images/cources/docker.png

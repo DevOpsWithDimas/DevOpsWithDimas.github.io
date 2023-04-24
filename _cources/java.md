@@ -1,6 +1,6 @@
 ---
 title: "Pemograman Java"
-subtitle: "Bahasa pemograman Java"
+subtitle: "Bahasa Pemograman Java"
 key: java
 publish: 
 visible: false
@@ -12,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/angular/
+      url: /posts/language/java/01-silabus.html
 tagline: "xxx"
 tags:
   - Pemograman

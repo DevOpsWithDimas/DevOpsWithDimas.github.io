@@ -20,16 +20,16 @@ udemy:
   toc: true
 tagline: "xxx"
 header:
-  overlay_image: "assets/images/cources/docker.png"
+  overlay_image: assets/images/cources/linux-centos.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
-  teaser: assets/images/cources/docker.png
+  teaser: assets/images/cources/linux-centos.png
   actions:
     - label: "Learn more"
       url: /posts/server/linux/centos
 sidebar:
   - title: "Role"
-    image: assets/images/cources/docker.png
+    image: assets/images/cources/linux-centos.png
     image_alt: "logo"
     text: "DevOps Engineer, Developer & Programmer"
   - title: "Responsibilities"

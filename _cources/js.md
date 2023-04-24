@@ -1,6 +1,6 @@
 ---
-title: "Pemograman JavaScript (js)"
-subtitle: "Bahasa pemograman Javascript"
+title: "Pemograman JavaScript"
+subtitle: "Bahasa Pemograman Javascript"
 key: js
 publish: 
 visible: false

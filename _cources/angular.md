@@ -1,5 +1,5 @@
 ---
-title: "Angular"
+title: "Angular Framework"
 subtitle: "Angular for Frontend Developer"
 key: angular
 publish: 

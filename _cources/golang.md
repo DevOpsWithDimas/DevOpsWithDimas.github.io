@@ -1,6 +1,6 @@
 ---
 title: "Pemograman golang"
-subtitle: "Bahasa pemograman golang"
+subtitle: "Bahasa Pemograman golang"
 key: golang
 publish: 
 visible: false
