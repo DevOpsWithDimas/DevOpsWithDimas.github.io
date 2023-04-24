@@ -38,54 +38,18 @@ udemy:
 catalogs:
   - name: Pengenalan PostgreSQL
     key: introduction
-    description: 'Eps 1: Pengenalan PostgreSQL Database'
-    messages: ''
-  - name: Getting started
-    key: getting-started
-    description: 'Eps 2: Getting Started with PostgreSQL Database for Learning env'
-    messages: ''
-  - name: SQL - Select Statement
-    key: select-statement
-    description: 'Eps 3: Query with Select statement'
-    messages: ''
-  - name: SQL - Data manipulation
-    key: dml-statement
-    description: 'Eps. 4: Data Manipulation'
-    messages: ''
-  - name: SQL - Data definition (Tables)
-    key: ddl-statement-table
     description: ''
     messages: ''
-  - name: 'Study Kasus: Database design (Mapping)'
-    key: study-cases-database-design
-    description: ''
-    messages: ''
-  - name: SQL - Indexes
-    key: indexes
-    description: ''
-    messages: ''
-  - name: SQL - Users Management
-    key: user-management
-    description: ''
-    messages: ''
-  - name: Type Conversion
-    key: type-conversion
+  - name: 'Pg/PL SQL'
+    key: pg-plsql
     description: ''
     messages: ''
   - name: Query Performance Tips
     key: query-tunning-tips
     description: ''
     messages: ''
-  - name: 'Study Kasus: Tokopedia clone'
-    key: study-cases-tokopedia-clone
-    description: ''
-    messages: ''
   - name: 'Server Administration'
     key: server-administration
-    description: ''
-    messages: ''
-  - name: 'Pg/PL SQL'
-    key: pg-plsql
     description: ''
     messages: ''
   - name: 'Study Kasus: Backend engine'

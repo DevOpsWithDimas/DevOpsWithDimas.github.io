@@ -54,8 +54,8 @@ catalogs:
     key: dml-statement
     description: 'Eps. 4: Data Manipulation'
     messages: ''
-  - name: SQL - Data definition (Tables)
-    key: ddl-statement-table
+  - name: SQL - Data definition
+    key: ddl-statement
     description: ''
     messages: ''
   - name: 'Study Kasus: Database design (Mapping)'
@@ -72,26 +72,6 @@ catalogs:
     messages: ''
   - name: Type Conversion
     key: type-conversion
-    description: ''
-    messages: ''
-  - name: Query Performance Tips
-    key: query-tunning-tips
-    description: ''
-    messages: ''
-  - name: 'Study Kasus: Tokopedia clone'
-    key: study-cases-tokopedia-clone
-    description: ''
-    messages: ''
-  - name: 'Server Administration'
-    key: server-administration
-    description: ''
-    messages: ''
-  - name: 'Pg/PL SQL'
-    key: pg-plsql
-    description: ''
-    messages: ''
-  - name: 'Study Kasus: Backend engine'
-    key: study-cases-backend-engine
     description: ''
     messages: ''
 ---

@@ -1,8 +1,8 @@
 ---
-
+lang: postgres
+catalog_key: ddl-statement
 title: "DDL - Membuat User pada Database PostgreSQL"
 date: 2019-12-30T17:26:24+07:00
-lang: psql
 categories:
 - RDBMS
 - PostgreSQL

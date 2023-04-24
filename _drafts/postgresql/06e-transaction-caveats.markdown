@@ -1,7 +1,7 @@
 ---
-
+lang: postgres
+catalog_key: dml-statement
 title: "06e-transaction-caveats"
-lang: postgresql
 authors:
 - dimasm93
 categories:
@@ -15,7 +15,6 @@ youtube:
 image_path: /resources/posts/postgresql/06e-transaction-caveats
 comments: true
 gist: dimMaryanto93/7ae7632f9418feb724bc431eff412a3f
-catalog_key: dml-statement
 downloads: []
 ---
 

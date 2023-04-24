@@ -1,7 +1,7 @@
 ---
-
+lang: postgres
+catalog_key: dml-statement
 title: "06d-data-consistency-check"
-lang: postgresql
 authors:
 - dimasm93
 categories:
@@ -15,7 +15,6 @@ youtube:
 image_path: /resources/posts/postgresql/06d-data-consistency-check
 comments: true
 gist: dimMaryanto93/7ae7632f9418feb724bc431eff412a3f
-catalog_key: dml-statement
 downloads: []
 ---
 

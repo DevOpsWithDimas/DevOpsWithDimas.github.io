@@ -1,8 +1,8 @@
 ---
-
+lang: postgres
+catalog_key: ddl-statement
 title: "DDL - Management schema di PostgreSQL"
 date: 2019-12-31T14:16:53+07:00
-lang: psql
 categories:
 - RDBMS
 - PostgreSQL
