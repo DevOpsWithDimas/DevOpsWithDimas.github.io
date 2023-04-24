@@ -2,7 +2,7 @@
 
 title: "DDL - Merubah struktur table"
 date: 2021-02-22T15:21:08+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

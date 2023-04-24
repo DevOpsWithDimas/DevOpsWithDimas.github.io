@@ -2,7 +2,7 @@
 
 title: "In Predicates dengan Sub Query di Oracle"
 date: 2021-02-18T17:26:21+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

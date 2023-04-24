@@ -2,7 +2,7 @@
 
 title: "Casting Build-In Data Type di Oracle"
 date: 2021-02-14T20:50:29+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "Mengurutkan data dengan klausa ORDER BY di Oracle"
 date: 2021-02-13T19:11:07+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

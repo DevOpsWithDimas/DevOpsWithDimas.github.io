@@ -2,7 +2,7 @@
 
 title: "Date & Time Single Row Function di Oracle"
 date: 2021-02-14T16:18:31+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

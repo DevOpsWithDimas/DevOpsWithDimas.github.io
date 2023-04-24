@@ -2,7 +2,7 @@
 
 title: "Data Manipulation Language (DML)"
 date: 2021-02-21T15:59:58+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "DDL - Enabled, Disabled & Drop Constraints"
 date: 2021-02-27T06:03:22+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "Perancangan / Design Table (Relationship)"
 date: 2021-03-22T14:49:26+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "Exists Condition pada klausa where di Oracle"
 date: 2021-02-12T20:06:51+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "DDL - Foreign Key Constraint"
 date: 2021-02-25T16:55:14+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

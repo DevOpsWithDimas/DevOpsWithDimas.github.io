@@ -2,7 +2,7 @@
 
 title: "Expressions di Oracle"
 date: 2021-02-21T14:40:34+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

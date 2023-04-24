@@ -2,7 +2,7 @@
 
 title: "Sub Query Inline View di Oracle"
 date: 2021-02-19T20:04:07+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

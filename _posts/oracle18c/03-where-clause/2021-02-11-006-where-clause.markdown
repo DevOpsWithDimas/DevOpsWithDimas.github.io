@@ -2,7 +2,7 @@
 
 title: "Klausa where untuk filter data di Oracle"
 date: 2021-02-11T20:06:34+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

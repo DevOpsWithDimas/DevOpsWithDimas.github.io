@@ -2,7 +2,7 @@
 
 title: "Interface untuk Oracle Database"
 date: 2021-02-09T14:43:51+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

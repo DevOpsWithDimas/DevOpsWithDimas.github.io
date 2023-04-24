@@ -2,7 +2,7 @@
 
 title: "Database Interaction dengan SQL"
 date: 2021-02-09T15:31:08+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

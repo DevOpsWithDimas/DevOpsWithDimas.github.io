@@ -2,7 +2,7 @@
 
 title: "Sub Query EXIST Predicates di Oracle"
 date: 2021-02-18T19:23:41+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

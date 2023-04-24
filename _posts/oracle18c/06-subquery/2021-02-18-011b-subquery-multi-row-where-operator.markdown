@@ -2,7 +2,7 @@
 
 title: "Handle Sub Query Multiple rows Result dengan where operator"
 date: 2021-02-18T17:03:14+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

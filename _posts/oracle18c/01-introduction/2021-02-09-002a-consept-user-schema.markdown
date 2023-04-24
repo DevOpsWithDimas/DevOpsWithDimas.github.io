@@ -2,7 +2,7 @@
 
 title: "Konsep User dan Schema di Oracle Database 18c"
 date: 2021-02-09T13:55:09+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "Pengenalan Oracle Database 18c"
 date: 2021-02-09T11:40:06+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

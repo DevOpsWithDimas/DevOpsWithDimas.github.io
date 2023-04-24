@@ -2,7 +2,7 @@
 
 title: "Persiapan Sebelum mulai belajar"
 date: 2021-02-10T18:04:50+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "Not Predicate pada klausa where di Oracle"
 date: 2021-02-12T20:34:06+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "Managing Users and Resource di Oracle"
 date: 2021-03-11T11:25:26+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "Default value untuk Primary Key di Oracle"
 date: 2021-02-27T18:01:39+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

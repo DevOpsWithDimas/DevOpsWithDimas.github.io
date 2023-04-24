@@ -2,7 +2,7 @@
 
 title: "Many To Many Relationship Tables"
 date: 2021-03-22T17:31:03+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

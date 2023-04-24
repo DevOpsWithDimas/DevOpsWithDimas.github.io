@@ -2,7 +2,7 @@
 
 title: "Outer Join di Oracle"
 date: 2021-02-15T08:16:24+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

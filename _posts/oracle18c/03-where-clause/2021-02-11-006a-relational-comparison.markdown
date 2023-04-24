@@ -2,7 +2,7 @@
 
 title: "Comparison Predicate pada klausa where di Oracle"
 date: 2021-02-11T20:26:16+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

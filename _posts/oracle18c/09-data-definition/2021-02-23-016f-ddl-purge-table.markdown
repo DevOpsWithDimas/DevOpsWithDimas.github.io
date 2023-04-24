@@ -2,7 +2,7 @@
 
 title: "DDL - Purge Table & Recyclebin"
 date: 2021-02-23T19:22:07+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

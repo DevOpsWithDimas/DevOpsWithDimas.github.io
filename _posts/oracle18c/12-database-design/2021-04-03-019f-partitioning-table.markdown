@@ -2,7 +2,7 @@
 
 title: "Partitioning Table (Very Large Databases)"
 date: 2021-04-03T11:59:24+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

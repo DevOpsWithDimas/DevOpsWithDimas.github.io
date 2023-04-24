@@ -2,7 +2,7 @@
 
 title: "Null Conditions pada klausa where di Oracle"
 date: 2021-02-12T19:33:57+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

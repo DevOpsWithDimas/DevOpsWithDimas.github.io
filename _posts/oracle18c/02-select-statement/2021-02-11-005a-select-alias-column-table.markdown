@@ -2,7 +2,7 @@
 
 title: "Pemberian alias pada column dan table"
 date: 2021-02-11T11:45:33+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

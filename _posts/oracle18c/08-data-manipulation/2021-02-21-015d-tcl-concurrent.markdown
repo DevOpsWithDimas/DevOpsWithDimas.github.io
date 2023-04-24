@@ -2,7 +2,7 @@
 
 title: "TCL - Concurrent Transaction"
 date: 2021-02-21T21:36:21+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

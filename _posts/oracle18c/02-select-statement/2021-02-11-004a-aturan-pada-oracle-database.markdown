@@ -2,7 +2,7 @@
 
 title: "Aturan Penulisan SQL pada Oracle Database"
 date: 2021-02-11T09:33:40+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

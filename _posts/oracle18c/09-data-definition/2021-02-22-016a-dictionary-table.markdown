@@ -2,7 +2,7 @@
 
 title: "DDL - Static Data Dictionary View"
 date: 2021-02-22T14:12:28+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

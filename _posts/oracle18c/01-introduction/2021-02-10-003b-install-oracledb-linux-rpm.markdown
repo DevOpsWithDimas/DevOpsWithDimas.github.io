@@ -2,7 +2,7 @@
 
 title: "Install Oracle 18c XE untuk Linux"
 date: 2021-02-10T02:05:10+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

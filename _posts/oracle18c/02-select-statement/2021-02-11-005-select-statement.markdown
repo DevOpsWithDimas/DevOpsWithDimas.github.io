@@ -2,7 +2,7 @@
 
 title: "Select Statement dalam SQL"
 date: 2021-02-11T11:19:32+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

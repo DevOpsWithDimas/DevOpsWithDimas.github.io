@@ -2,7 +2,7 @@
 
 title: "Inherintance Mapping (OODMBS)"
 date: 2021-03-23T09:47:31+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

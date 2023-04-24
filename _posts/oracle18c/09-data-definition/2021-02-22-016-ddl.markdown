@@ -2,7 +2,7 @@
 
 title: "Data Definition Language (DDL) di Oracle"
 date: 2021-02-22T12:44:57+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:

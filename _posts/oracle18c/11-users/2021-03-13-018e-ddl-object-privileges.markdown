@@ -2,7 +2,7 @@
 
 title: "DDL - Object Privileges"
 date: 2021-03-13T03:44:03+07:00
-lang: oracle18c
+lang: oracle18c-oca
 authors:
 - dimasm93
 categories:
