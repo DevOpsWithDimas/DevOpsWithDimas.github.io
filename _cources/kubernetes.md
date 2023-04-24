@@ -8,7 +8,7 @@ coming_soon: false
 toc: true
 toc_sticky: true
 header:
-  overlay_image: assets/images/cources/k8s.png
+  overlay_image: assets/images/cources/kubernetes-teaser.png
   teaser: assets/images/cources/k8s.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"

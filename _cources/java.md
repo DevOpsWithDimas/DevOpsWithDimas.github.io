@@ -6,8 +6,8 @@ publish:
 visible: false
 coming_soon: true
 header:
-  overlay_image: "assets/images/cources/java-se.png"
-  teaser: assets/images/cources/java-se.png
+  overlay_image: "assets/images/cources/java.png"
+  teaser: assets/images/cources/java.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
@@ -19,7 +19,7 @@ tags:
   - Java
 sidebar:
   - title: "Role"
-    image: assets/images/cources/java-se.png
+    image: assets/images/cources/java.png
     image_alt: "logo"
     text: "Developer, & Programmer"
   - title: "Responsibilities"
