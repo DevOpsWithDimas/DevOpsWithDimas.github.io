@@ -5,8 +5,6 @@ key: k8s
 publish: 2023-04-21T18:46:00+07:00
 visible: false
 coming_soon: false
-toc: true
-toc_sticky: true
 header:
   overlay_image: assets/images/cources/kubernetes-teaser.png
   teaser: assets/images/cources/k8s.png
@@ -14,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/kubernetes/
+      url: /posts/devops/orchestration/kubernetes/01-silabus.html
 tagline: "Container memang baik untuk mem-package/mem-bungkus aplikasi supaya lightwight, build once run anyware, tetapi ada problem lainnya misalnya aplikasi mulai banyak dipake biasanya akan ada issue performace atau bahkan downtime. <br><br>Dengan menggunakan Container Orchestration System khususnya dengan Kubernetes (k8s) akan memudahkan operational team dalam me-manage container. <br><br>Kubernetes menawarkan feature seperti High Available, Self healing, Automatic rollout and rollback, Horizontal scalling dan lain-lain."
 tags:
   - DevOps
