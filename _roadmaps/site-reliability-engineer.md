@@ -12,6 +12,12 @@ header:
     - label: "Learn more"
       url: /posts/container/angular/
 tagline: "xxx"
+cources:
+  - linux-centos
+  - nutanix-ahv
+  - nutanix-cloudnative
+  - nutanix-calm
+  - nutanix-ndb
 tags:
   - devops
   - developer

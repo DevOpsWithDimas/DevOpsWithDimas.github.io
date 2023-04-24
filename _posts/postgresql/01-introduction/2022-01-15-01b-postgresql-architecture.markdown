@@ -2,7 +2,7 @@
 
 title: "Architecture of PostgreSQL Database"
 date: 2022-01-15T21:36:17+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

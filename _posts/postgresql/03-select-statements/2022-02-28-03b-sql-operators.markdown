@@ -2,7 +2,7 @@
 
 title: "Build-in Operators"
 date: 2022-02-28T11:11:32+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

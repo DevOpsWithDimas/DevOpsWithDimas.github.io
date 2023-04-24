@@ -2,7 +2,7 @@
 
 title: "Deep dive into Select Statements"
 date: 2022-03-12T11:10:36+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

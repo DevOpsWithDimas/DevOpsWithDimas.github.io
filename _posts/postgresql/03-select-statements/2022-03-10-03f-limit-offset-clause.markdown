@@ -2,7 +2,7 @@
 
 title: "Limit dan Offset rows"
 date: 2022-03-10T14:28:18+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

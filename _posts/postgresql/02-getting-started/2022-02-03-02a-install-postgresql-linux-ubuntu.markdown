@@ -2,7 +2,7 @@
 
 title: "Install PostgreSQL for Linux Ubuntu users"
 date: 2022-02-03T05:06:50+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

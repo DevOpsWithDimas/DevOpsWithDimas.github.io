@@ -12,7 +12,9 @@ header:
     - label: "Learn more"
       url: /posts/container/angular/
 tagline: "Frontend Developer yaitu Profesi IT yang spesialis menangani graphical user interface dari suatu website dengan menggunakan HTML, Javascript dan CSS berserta frameworknya"
-
+cources:
+  - js
+  - angular
 tags:
   - web
   - js

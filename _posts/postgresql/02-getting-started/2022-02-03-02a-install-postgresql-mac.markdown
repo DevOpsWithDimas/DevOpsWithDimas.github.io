@@ -2,7 +2,7 @@
 
 title: "Install PostgreSQL for Mac users"
 date: 2022-02-03T03:40:43+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

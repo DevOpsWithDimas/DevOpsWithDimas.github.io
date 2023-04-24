@@ -5,8 +5,6 @@ key: java
 publish: 
 visible: false
 coming_soon: true
-toc: true
-toc_sticky: true
 header:
   overlay_image: "assets/images/cources/java-se.png"
   teaser: assets/images/cources/java-se.png

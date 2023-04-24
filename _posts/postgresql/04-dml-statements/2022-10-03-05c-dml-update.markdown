@@ -2,7 +2,7 @@
 
 title: "Deep dive into UPDATE Statement"
 date: 2022-10-03T21:57:19+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

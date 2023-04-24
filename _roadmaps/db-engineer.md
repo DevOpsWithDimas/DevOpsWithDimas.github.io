@@ -18,6 +18,9 @@ tags:
   - operation
   - tools
   - automation
+cources:
+  - oracledb-oca
+  - postgres
 sidebar:
   - title: "Role"
     image: assets/images/roadmap/devops-engineer.png

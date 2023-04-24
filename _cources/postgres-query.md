@@ -1,10 +1,12 @@
 ---
-title: "DBA: PostgreSQL"
-subtitle: "PostgreSQL Certified Proffesional"
-key: postgres-dba
+title: "PostgreSQL"
+subtitle: "PostgreSQL"
+key: postgres
 publish: 2022-01-16T20:50:50+07:00
 visible: false
 coming_soon: false
+toc: true
+toc_sticky: true
 header:
   overlay_image: "assets/images/cources/postgresql.png"
   teaser: assets/images/cources/postgresql.png

@@ -2,7 +2,7 @@
 
 title: "Prepared Statement in SQL"
 date: 2022-10-10T20:51:35+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

@@ -18,6 +18,8 @@ tags:
   - operation
   - tools
   - automation
+cources:
+  - golang
 sidebar:
   - title: "Role"
     image: assets/images/roadmap/backend-dev.png

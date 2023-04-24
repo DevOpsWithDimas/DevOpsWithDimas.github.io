@@ -2,7 +2,7 @@
 
 title: "Overview of Object Relational Database Management System (ORDBMS)"
 date: 2022-01-16T09:30:20+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

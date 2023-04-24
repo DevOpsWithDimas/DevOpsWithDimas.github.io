@@ -18,6 +18,8 @@ tags:
   - operation
   - tools
   - automation
+cources:
+  - java
 sidebar:
   - title: "Role"
     image: assets/images/roadmap/backend-dev.png

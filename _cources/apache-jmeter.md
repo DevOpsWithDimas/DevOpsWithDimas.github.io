@@ -5,8 +5,6 @@ key: apache-jmeter
 publish: 
 visible: false
 coming_soon: true
-toc: true
-toc_sticky: true
 header:
   overlay_image: "assets/images/cources/apache-jmeter.png"
   teaser: assets/images/cources/apache-jmeter.png

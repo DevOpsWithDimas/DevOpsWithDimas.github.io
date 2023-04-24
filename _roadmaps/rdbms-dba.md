@@ -25,6 +25,12 @@ sidebar:
     text: "Designer, Front-End Developer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar membuat aplikasi Web Single Pages Application (SPA) system dengan menggunakan Angular Framework"
+oracle_cources:
+  - oracledb-oca
+  - oracledb-ocp
+postgres_cources:
+  - postgres
+  - postgres-dba
 mermaidjs: >
   mindmap
     root((mindmap))

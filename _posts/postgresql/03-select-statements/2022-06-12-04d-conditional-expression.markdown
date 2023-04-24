@@ -2,7 +2,7 @@
 
 title: "Conditional Expressions"
 date: 2022-06-12T11:16:21+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

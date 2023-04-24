@@ -5,8 +5,6 @@ key: nutanix-ndb
 publish: 
 visible: false
 coming_soon: true
-toc: true
-toc_sticky: true
 header:
   overlay_image: "assets/images/cources/nutanix-cloud-native.png"
   teaser: assets/images/cources/nutanix-cloud-native.png

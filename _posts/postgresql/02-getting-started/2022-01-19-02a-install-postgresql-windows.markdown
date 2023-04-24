@@ -2,7 +2,7 @@
 
 title: "Install PostgreSQL for Windows users"
 date: 2022-01-19T06:53:44+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

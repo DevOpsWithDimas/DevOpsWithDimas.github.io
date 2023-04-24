@@ -2,7 +2,7 @@
 
 title: "Overview SQL Select statements"
 date: 2022-02-24T05:20:30+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

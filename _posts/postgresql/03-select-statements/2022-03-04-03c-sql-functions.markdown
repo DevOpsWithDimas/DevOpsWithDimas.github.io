@@ -2,7 +2,7 @@
 
 title: "Build-in Functions"
 date: 2022-03-04T19:22:24+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

@@ -2,7 +2,7 @@
 
 title: "Using pgAdmin4 as PostgreSQL editor"
 date: 2022-02-06T15:15:41+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

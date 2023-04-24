@@ -2,7 +2,7 @@
 
 title: "Joined Tables"
 date: 2022-04-03T20:18:30+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

@@ -1,24 +1,24 @@
 ---
-title: "Docker"
-subtitle: "Docker for DevOps engineer"
-key: docker
+title: "Linux CentOS"
+subtitle: "Linux for Server using CentOS"
+key: linux-centos
 publish: 2023-03-26T18:46:00+07:00
-visible: true
-coming_soon: false
+visible: false
+coming_soon: true
 tags:
-  - DevOps
-  - Container
-  - Docker
+  - Server
+  - Linux
+  - CentOS
 udemy: 
-  url: https://www.udemy.com/course/docker-pemula-sampai-mahir/
-  price: Rp560.000
+  url: https://www.udemy.com/course/linux-centos-pemula-sampai-mahir/
+  price: Rp250.000
   discount: Rp99.000,-
   couponCode: BUKBER.2023.10
-  release: true
+  release: false
   referralCode: 8D13D85D4D34027B76BE
   expired: 15/04/2023
   toc: true
-tagline: "Dengan menggunakan technology container khususnya dengan Docker kita bisa melakukan banyak hal seperti untuk **Development, Automated testing, Automated deployment, menjalankan CI/CD** dan lain-lain. <br><br>Docker dirancang dapat dijalankan di semua platform seperti Linux, Mac OS serta Windows. Dengan docker kita bisa mem-virtualisasikan aplikasi di PC/Laptop dengan mudah berbasikan `docker run` command"
+tagline: "xxx"
 header:
   overlay_image: "assets/images/cources/docker.png"
   overlay_filter: 0.7
@@ -26,88 +26,18 @@ header:
   teaser: assets/images/cources/docker.png
   actions:
     - label: "Learn more"
-      url: /posts/container/docker/
+      url: /posts/server/linux/centos
 sidebar:
   - title: "Role"
     image: assets/images/cources/docker.png
     image_alt: "logo"
     text: "DevOps Engineer, Developer & Programmer"
   - title: "Responsibilities"
-    text: "Temen-teman akan belajar Containerization dengan Docker untuk Pemula sampai Mahir."
+    text: "Temen-teman akan belajar Linux untuk Server dengan CentOS untuk Pemula sampai Mahir."
 catalogs:
-  - name: Pengenalan Docker
+  - name: Pengenalan Server dan Linux
     key: introduction
     description: 'Eps. 1 - Pengenalan Container dengan Docker'
-    deprecated: false
-    messages: ''
-  - name: Docker Registry
-    key: docker-registry
-    description: 'Eps. 2 - Docker Registry'
-    deprecated: false
-    messages: ''
-  - name: Docker Container CLI
-    key: docker-container
-    description: 'Eps. 3 - Docker Container'
-    deprecated: false
-    messages: ''
-  - name: Docker Networks
-    key: docker-network
-    description: 'Eps. 4 - Docker Network'
-    deprecated: false
-    messages: ''
-  - name: Docker Volumes
-    key: docker-volume
-    description: 'Eps.5 - Docker Volumes'
-    deprecated: false
-    messages: ''
-  - name: Dockerfile
-    key: dockerfile
-    description: 'Eps.6 - Dockerfile'
-    deprecated: false
-    messages: ''
-  - name: 'Study Kasus: Build docker image'
-    key: study-cases-dockerfile
-    description: 'Eps.7 - Study kasus: building your own docker images'
-    deprecated: false
-    messages: ''
-  - name: Docker Compose
-    key: docker-compose
-    description: 'Eps.8 - Docker Compose'
-    deprecated: false
-    messages: ''
-  - name: 'Study Kasus: Docker Compose'
-    key: study-cases-compose-files
-    description: 'Eps.9 - Study kasus: run multiple container using docker-compose'
-    deprecated: false
-    messages: ''
-  - name: Docker Context
-    key: docker-context
-    desciption: 'Eps.10 - Docker Context'
-    deprecated: false
-    messages: ''
-  - name: 'Study Kasus: Docker for CI'
-    key: study-cases-docker-ci
-    description: 'Eps.11 - Study kasus: Docker for Continues Integration'
-    deprecated: false
-    messages: ''
-  - name: Docker Machine
-    key: docker-machine
-    description: 'Eps.12 - Docker Machine'
-    deprecated: true
-    messages: ''
-  - name: 'Study Kasus: Ansible for Docker'
-    key: study-cases-ansible
-    description: 'Eps.13 - Study kasus: Create multiple Docker Host'
-    deprecated: false
-    messages: ''
-  - name: Docker Swarm
-    key: docker-swarm
-    description: 'Eps.14 - Docker Swarm'
-    deprecated: false
-    messages: ''
-  - name: 'Study Kasus: Docker Swarm'
-    key: study-cases-docker-swarm
-    description: 'Eps.15 - Study kasus: Orchestration with docker swarm'
     deprecated: false
     messages: ''
 ---

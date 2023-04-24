@@ -5,8 +5,6 @@ key: js
 publish: 
 visible: false
 coming_soon: true
-toc: true
-toc_sticky: true
 header:
   overlay_image: "assets/images/cources/js.png"
   teaser: assets/images/cources/js.png

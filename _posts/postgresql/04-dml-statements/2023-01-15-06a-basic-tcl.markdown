@@ -2,7 +2,7 @@
 
 title: "Getting started with Transaction Control (TCL)"
 date: 2023-01-15T10:31:46+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

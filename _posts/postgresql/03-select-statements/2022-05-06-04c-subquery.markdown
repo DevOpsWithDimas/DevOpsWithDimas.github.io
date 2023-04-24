@@ -2,7 +2,7 @@
 
 title: "Queries inside a query (subquery)"
 date: 2022-05-06T16:03:42+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

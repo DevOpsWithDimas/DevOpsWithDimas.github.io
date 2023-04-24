@@ -2,7 +2,7 @@
 
 title: "Basic SQL Select statements"
 date: 2022-02-24T06:05:06+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

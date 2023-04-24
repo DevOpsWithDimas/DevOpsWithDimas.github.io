@@ -5,8 +5,6 @@ key: gitlab
 publish: 2022-06-18T16:08:32+07:00
 visible: false
 coming_soon: false
-toc: true
-toc_sticky: true
 header:
   overlay_image: "assets/images/cources/gitlab.png"
   teaser: assets/images/cources/gitlab.png

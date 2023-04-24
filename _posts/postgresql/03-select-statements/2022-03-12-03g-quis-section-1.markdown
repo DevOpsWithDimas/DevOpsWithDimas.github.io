@@ -2,7 +2,7 @@
 
 title: "Time your practice (part 1)"
 date: 2022-03-12T10:57:41+07:00
-lang: postgres-dba
+lang: postgres
 authors:
 - dimasm93
 categories:

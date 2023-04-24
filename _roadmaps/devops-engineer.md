@@ -18,6 +18,12 @@ tags:
   - operation
   - tools
   - automation
+cources:
+  - linux-centos
+  - docker
+  - k8s
+  - gitlab
+  - ansible
 sidebar:
   - title: "Role"
     image: assets/images/roadmap/devops-engineer.png
