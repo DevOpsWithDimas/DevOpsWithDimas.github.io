@@ -1,6 +1,6 @@
 ---
-title: "Database Administrator"
-key: dba
+title: "Database Administrator for RDBMS"
+key: rdbms-dba
 publish: 
 coming_soon: false
 header:
@@ -11,7 +11,7 @@ header:
   actions:
     - label: "Learn more"
       url: /posts/container/angular/
-tagline: "xxx"
+tagline: "Database administrator yaitu Profesi IT yang spesialis menangani Software untuk menyimpan dan meng-organiasi data, contohnya seperti Oracle Database, PostgreSQL, MySQL dan lain-lain."
 tags:
   - devops
   - developer
@@ -25,6 +25,17 @@ sidebar:
     text: "Designer, Front-End Developer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar membuat aplikasi Web Single Pages Application (SPA) system dengan menggunakan Angular Framework"
+mermaidjs: >
+  mindmap
+    root((mindmap))
+      Origins
+        Long history
+      Research
+        On effectiveness<br/>and features
+        On Automatic creation            
+      Tools
+        Pen and paper
+        Mermaid
 ---
 
 Hai semuanya selamat datang di kelas **xxx**, jadi kali ini kita akan membahas xxx yaitu menggunakan [xxx](link). 
