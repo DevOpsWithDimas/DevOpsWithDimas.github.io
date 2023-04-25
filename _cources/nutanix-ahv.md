@@ -3,7 +3,7 @@ title: "Nutanix AHV"
 subtitle: "Nutanix AHV for DevOps"
 key: nutanix-ahv
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 toc: true
 toc_sticky: true

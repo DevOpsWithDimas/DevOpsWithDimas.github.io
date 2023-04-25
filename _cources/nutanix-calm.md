@@ -3,7 +3,7 @@ title: "Nutanix CALM"
 subtitle: "Nutanix CALM for DevOps"
 key: nutanix-calm
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 toc: true
 toc_sticky: true

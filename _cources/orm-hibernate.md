@@ -3,7 +3,7 @@ title: "ORM Hibernate"
 subtitle: "Object Relational Framework for Java"
 key: orm-hibernate
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 header:
   overlay_image: assets/images/cources/orm-hibernate.png

@@ -3,7 +3,7 @@ title: "DBA: PostgreSQL"
 subtitle: "PostgreSQL Certified Proffesional"
 key: postgres-dba
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 header:
   overlay_image: "assets/images/cources/postgresql.png"

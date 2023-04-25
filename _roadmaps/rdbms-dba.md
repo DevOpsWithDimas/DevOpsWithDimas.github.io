@@ -3,6 +3,7 @@ title: "Database Administrator for RDBMS"
 key: rdbms-dba
 publish: 
 coming_soon: false
+hidden: false
 header:
   overlay_image: "assets/images/roadmap/dba.png"
   teaser: assets/images/roadmap/dba.png

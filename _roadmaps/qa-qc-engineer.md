@@ -3,6 +3,7 @@ title: "QA/QC Engineer"
 key: qa-qc-engineer
 publish: 
 coming_soon: true
+hidden: true
 header:
   overlay_image: "assets/images/roadmap/testing.png"
   teaser: assets/images/roadmap/testing.png

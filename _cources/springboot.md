@@ -3,7 +3,7 @@ title: "Springboot"
 subtitle: "Springboot for Backend Developer"
 key: springboot
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 toc: true
 toc_sticky: true

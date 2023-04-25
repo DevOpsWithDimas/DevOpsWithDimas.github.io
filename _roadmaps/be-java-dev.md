@@ -2,7 +2,8 @@
 title: "Java Backend Developer"
 key: java-be-dev
 publish: 
-coming_soon: false
+hidden: false
+coming_soon: true
 header:
   overlay_image: "assets/images/roadmap/backend-dev.png"
   teaser: assets/images/roadmap/backend-dev.png

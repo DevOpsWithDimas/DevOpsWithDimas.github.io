@@ -3,7 +3,7 @@ title: "Pemograman Typescript (ts)"
 subtitle: "Bahasa pemograman typescript"
 key: angular
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 toc: true
 toc_sticky: true

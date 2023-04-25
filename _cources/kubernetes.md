@@ -3,7 +3,7 @@ title: "Kubernetes (k8s)"
 subtitle: "Kubernetes for DevOps"
 key: k8s
 publish: 2023-04-21T18:46:00+07:00
-visible: false
+hidden: false
 coming_soon: false
 header:
   overlay_image: assets/images/cources/kubernetes-teaser.png

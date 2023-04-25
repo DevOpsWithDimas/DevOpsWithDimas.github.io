@@ -3,7 +3,7 @@ title: "PostgreSQL"
 subtitle: "PostgreSQL"
 key: postgres
 publish: 2022-01-16T20:50:50+07:00
-visible: false
+hidden: false
 coming_soon: false
 toc: true
 toc_sticky: true

@@ -3,7 +3,7 @@ title: "Pemograman Java"
 subtitle: "Bahasa Pemograman Java"
 key: java
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 header:
   overlay_image: "assets/images/cources/java.png"

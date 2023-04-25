@@ -3,7 +3,7 @@ title: "Gitlab"
 subtitle: "GitOps with Gitlab"
 key: gitlab
 publish: 2022-06-18T16:08:32+07:00
-visible: false
+hidden: false
 coming_soon: false
 header:
   overlay_image: "assets/images/cources/gitlab-teaser.png"

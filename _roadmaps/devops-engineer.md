@@ -3,6 +3,7 @@ title: "DevOps Engineer"
 key: devops-engineer
 publish: 2023-04-24T14:41:00+07:00
 coming_soon: false
+hidden: false
 header:
   overlay_image: "assets/images/roadmap/devops-engineer.png"
   teaser: assets/images/roadmap/devops-engineer.png

@@ -3,7 +3,7 @@ title: "Apache JMeter"
 subtitle: "Testing with Apache JMeter"
 key: apache-jmeter
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 header:
   overlay_image: "assets/images/cources/apache-jmeter.png"

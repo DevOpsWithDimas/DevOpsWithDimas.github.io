@@ -3,7 +3,7 @@ title: "Angular Framework"
 subtitle: "Angular for Frontend Developer"
 key: angular
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 header:
   overlay_image: "assets/images/cources/angular.png"

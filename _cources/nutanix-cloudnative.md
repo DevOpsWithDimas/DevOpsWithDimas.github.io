@@ -3,7 +3,7 @@ title: "Nutanix CloudNative"
 subtitle: "Nutanix CloudNative for DevOps"
 key: nutanix-cloudnative
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 toc: true
 toc_sticky: true

@@ -2,6 +2,7 @@
 title: "Golang Backend Developer"
 key: go-be-dev
 publish: 
+hidden: false
 coming_soon: true
 header:
   overlay_image: "assets/images/roadmap/backend-dev.png"

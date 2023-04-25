@@ -3,7 +3,7 @@ title: "Ansible"
 subtitle: "Ansible for DevOps Engineer"
 key: ansible
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 header:
   overlay_image: "assets/images/cources/ansible.png"

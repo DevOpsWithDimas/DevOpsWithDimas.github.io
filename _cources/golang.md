@@ -3,7 +3,7 @@ title: "Pemograman golang"
 subtitle: "Bahasa Pemograman golang"
 key: golang
 publish: 
-visible: false
+hidden: false
 coming_soon: true
 header:
   overlay_image: "assets/images/cources/golang.png"
