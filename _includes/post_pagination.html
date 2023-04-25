@@ -1,14 +1,93 @@
-{% if paginator.previous_page or paginator.next_page %}
+<!-- {% if paginator.previous_page or paginator.next_page %}
   <nav class="pagination">
     {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination--pager" title="{{ page.previous.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+      <a href="{{ paginator.previous_page_path | relative_url }}" class="" title="{{ page.previous.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
     {% else %}
-      <a href="#" class="pagination--pager disabled">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+      <a href="#" class=" disabled">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
     {% endif %}
     {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path | relative_url }}" class="pagination--pager" title="{{ page.next.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+      <a href="{{ paginator.next_page_path | relative_url }}" class="" title="{{ page.next.title | markdownify | strip_html }}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
     {% else %}
-      <a href="#" class="pagination--pager disabled">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+      <a href="#" class=" disabled">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
     {% endif %}
   </nav>
-{% endif %}
+{% endif %} -->
+{% assign pages = site.posts | where: 'lang', page.lang | sort: 'date' %}
+{% assign current_idx = 1 %}
+{% assign next_post = null %}
+{% assign prev_post = null %}
+{% assign first_post = pages | first %}
+{% assign last_post = pages | last %}
+{% for post in pages %}
+    {% if post.url == page.url %}
+        {% assign current_idx = forloop.index  %}
+    {% endif %}
+{% endfor %}
+
+{% assign prev_index = current_idx | plus: 1 %}
+{% assign next_index = current_idx | minus: 1 %}
+
+{% for post in pages %}
+    {% if forloop.index == prev_index %}
+        {% assign next_post = post %}
+    {% endif %}
+    {% if forloop.index == next_index %}
+        {% assign prev_post = post %}
+    {% endif %}
+{% endfor %}
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      {% if first_post and first_post.url != page.url %}
+      <a href="{{ first_post.url | relative_url }}"  class="" title="{{ first_post.title }}">
+        First page
+      </a>
+      {% else %}
+      <a href="#" class=" disabled">
+        First page
+      </a>
+      {% endif %}
+    </li>
+    <li id="previous_page" class="page-item">
+      {% if prev_post %}
+      <a href="{{ prev_post.url | relative_url }}" class="" 
+        title="{{ prev_post.title | markdownify | strip_html }}">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      {% else %}
+      <a href="#" class=" disabled">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+      {% endif %} 
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page {{ current_idx }} to {{ pages | size }}
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      {% if next_post %}
+      <a href="{{ next_post.url | relative_url }}" class="" 
+        title="{{ next_post.title | markdownify | strip_html }}">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      {% else %}
+      <a href="#" class=" disabled">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      {% endif %}
+    </li>
+    <li id="last_post" class="page-item">
+      {% if last_post and last_post.url != page.url %}
+      <a href="{{ last_post.url | relative_url }}"  class="" title="{{ last_post.title }}">
+        Last page
+      </a>
+      {% else %}
+      <a href="#" class=" disabled">
+        Last page
+      </a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>

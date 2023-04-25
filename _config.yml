@@ -313,6 +313,7 @@ defaults:
       share: true
       related: true
       sidebar: true
+      show_pagination: true
   - scope:
       path: ""
       type: cources
