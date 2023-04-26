@@ -6,7 +6,7 @@ permalink: /pages/discount/
 layout: single
 author_profile: true
 toc: true
-toc_stiky: true
+toc_sticky: true
 ---
 
 Diskon special, Buat temen-temen yang belum bergabung yuuuk join, munpung ada promo nih harga Rp. 99K berlalu selama 4hari aja sampai 01/05/2025 dengan menggunakan link berikut
