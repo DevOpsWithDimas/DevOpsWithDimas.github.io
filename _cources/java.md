@@ -6,7 +6,7 @@ publish:
 hidden: false
 coming_soon: true
 header:
-  overlay_image: "assets/images/cources/java.png"
+  overlay_image: "assets/images/cources/java-teaser.png"
   teaser: assets/images/cources/java.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
