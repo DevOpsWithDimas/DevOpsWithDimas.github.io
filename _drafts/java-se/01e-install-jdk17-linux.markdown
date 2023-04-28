@@ -1,9 +1,7 @@
 ---
-
-title: "02a-install-jdk17-win"
-lang: java-se
-authors:
-- dimasm93
+lang: java
+catalog_key: getting-started
+title: "02a-install-jdk17-linux"
 categories:
 - language
 - java
@@ -12,8 +10,7 @@ refs:
 youtube: 
 comments: true
 gist: dimMaryanto93/96aad3c6bed60d010757c7d1acba930a
-catalog_key: getting-started
-image_path: /resources/posts/java-se/02a-install-jdk17-win
+image_path: /resources/posts/java-se/02a-install-jdk17-linux
 downloads: []
 ---
 

@@ -2,8 +2,6 @@
 lang: postgres
 catalog_key: dml-statement
 title: "06c-transaction-locking"
-authors:
-- dimasm93
 categories:
 - RDBMS
 - PostgreSQL

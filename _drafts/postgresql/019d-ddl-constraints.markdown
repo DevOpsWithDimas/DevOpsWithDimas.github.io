@@ -2,7 +2,6 @@
 lang: postgres
 catalog_key: ddl-statement
 title: "DDL - Macam-macam Constraint pada Database PostgreSQL"
-date: 2020-01-02T16:01:04+07:00
 categories:
 - RDBMS
 - PostgreSQL

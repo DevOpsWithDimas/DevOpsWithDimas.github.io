@@ -1,9 +1,7 @@
 ---
-
-title: "04g-workload-replication-controller"
 lang: k8s
-authors:
-- dimasm93
+catalog_key: workloads
+title: "04g-workload-replication-controller"
 categories:
 - DevOps
 - Orchestration
@@ -13,7 +11,6 @@ refs:
 - https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/
 youtube: 
 comments: true
-catalog_key: workloads
 image_path: /resources/posts/kubernetes/04g-workload-replication-controller
 gist: dimMaryanto93/96f6954c9a27a6b1934113b10223196a
 downloads: []

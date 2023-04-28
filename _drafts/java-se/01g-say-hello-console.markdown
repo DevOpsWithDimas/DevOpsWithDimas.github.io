@@ -1,9 +1,7 @@
 ---
-
+lang: java
+catalog_key: introduction
 title: "02c-say-hello-console"
-lang: java-se
-authors:
-- dimasm93
 categories:
 - language
 - java
@@ -12,7 +10,6 @@ refs:
 youtube: 
 comments: true
 gist: dimMaryanto93/96aad3c6bed60d010757c7d1acba930a
-catalog_key: getting-started
 image_path: /resources/posts/java-se/02c-say-hello-console
 downloads: []
 ---

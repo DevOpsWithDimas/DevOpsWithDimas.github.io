@@ -2,8 +2,6 @@
 lang: postgres
 catalog_key: dml-statement
 title: "06f-quis-4"
-authors:
-- dimasm93
 categories:
 - RDBMS
 - PostgreSQL

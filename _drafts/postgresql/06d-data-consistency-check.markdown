@@ -2,8 +2,6 @@
 lang: postgres
 catalog_key: dml-statement
 title: "06d-data-consistency-check"
-authors:
-- dimasm93
 categories:
 - RDBMS
 - PostgreSQL

@@ -1,9 +1,7 @@
 ---
-
-title: "05j-cannary-deployment"
 lang: k8s
-authors:
-- dimasm93
+catalog_key: workloads
+title: "05j-cannary-deployment"
 categories:
 - DevOps
 - Orchestration
@@ -15,7 +13,6 @@ refs:
 - https://minikube.sigs.k8s.io/docs/
 youtube: 
 comments: true
-catalog_key: workloads
 image_path: /resources/posts/kubernetes/05j-cannary-deployment
 gist: dimMaryanto93/96f6954c9a27a6b1934113b10223196a
 downloads: []

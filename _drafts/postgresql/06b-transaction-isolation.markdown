@@ -2,8 +2,6 @@
 lang: postgres
 catalog_key: dml-statement
 title: "Transaction isolation"
-authors:
-- dimasm93
 categories:
 - RDBMS
 - PostgreSQL

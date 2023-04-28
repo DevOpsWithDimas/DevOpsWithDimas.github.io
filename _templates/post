@@ -1,8 +1,7 @@
 ---
-layout: {{ layout }}
+lang: {{ lang }}
 title: "{{ title }}"
 date: {{ date }}
-lang: {{ lang }}
 categories:
 - {{ category1 }}
 refs: []

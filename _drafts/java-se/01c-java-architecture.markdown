@@ -1,9 +1,7 @@
 ---
-
+lang: java
+catalog_key: introduction
 title: "Java Platform, Architecture & Versions"
-lang: java-se
-authors:
-- dimasm93
 categories:
 - language
 - java
@@ -12,8 +10,7 @@ refs:
 youtube: 
 comments: true
 gist: dimMaryanto93/96aad3c6bed60d010757c7d1acba930a
-catalog_key: introduction
-image_path: /resources/posts/java-se/01c-java-tools
+image_path: /resources/posts/java/01c-java-tools
 downloads: []
 ---
 

@@ -1,9 +1,7 @@
 ---
-
-title: "Workload with Deployment"
 lang: k8s
-authors:
-- dimasm93
+catalog_key: workloads
+title: "Workload with Deployment"
 categories:
 - DevOps
 - Orchestration
@@ -14,7 +12,6 @@ refs:
 - https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/deployment-v1/
 youtube: 
 comments: true
-catalog_key: workloads
 image_path: /resources/posts/kubernetes/05b-deployment
 gist: dimMaryanto93/96f6954c9a27a6b1934113b10223196a
 downloads: []

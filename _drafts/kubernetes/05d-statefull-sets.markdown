@@ -1,9 +1,7 @@
 ---
-
-title: "04c-workload-statefull-sets"
 lang: k8s
-authors:
-- dimasm93
+image_path: /resources/posts/kubernetes/04c-workload-statefull-sets
+title: "04c-workload-statefull-sets"
 categories:
 - DevOps
 - Orchestration
@@ -14,7 +12,6 @@ refs:
 youtube: 
 comments: true
 catalog_key: workloads
-image_path: /resources/posts/kubernetes/04c-workload-statefull-sets
 gist: dimMaryanto93/96f6954c9a27a6b1934113b10223196a
 downloads: []
 ---

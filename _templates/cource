@@ -24,8 +24,6 @@ sidebar:
     text: "xxx"
   - title: "Responsibilities"
     text: "xxx"
-toc: true
-toc_sticky: true
 udemy: 
   url: https://www.udemy.com/course/{{ title | downcase }}/
   price: Rp280.000,-

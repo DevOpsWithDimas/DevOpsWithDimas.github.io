@@ -1,16 +1,14 @@
 ---
-lang: docker
-title: "{{ title }}"
+lang: java
 catalog_key: introduction
-authors:
-- dimasm93
+title: "{{ title }}"
 categories:
-- DevOps
-- Docker
+- language
+- java
 refs: 
-- https://docs.docker.com/
+- https://docs.oracle.com/en/java/
 youtube: {{ youtube }}
-image_path: /resources/posts/docker/{{ catalog_key }}/{{ title }}
+image_path: /resources/posts/{{ lang }}/{{ catalog_key }}/{{ title }}
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---

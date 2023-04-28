@@ -1,9 +1,7 @@
 ---
-
-title: "06e-network-policy"
 lang: k8s
-authors:
-- dimasm93
+catalog_key: networking
+title: "06e-network-policy"
 categories:
 - DevOps
 - Orchestration
@@ -15,7 +13,6 @@ refs:
 - https://minikube.sigs.k8s.io/docs/
 youtube: 
 comments: true
-catalog_key: networking
 image_path: /resources/posts/kubernetes/06e-network-policy
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []
