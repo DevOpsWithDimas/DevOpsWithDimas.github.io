@@ -10,7 +10,7 @@ refs:
 youtube: 
 comments: true
 gist: dimMaryanto93/96aad3c6bed60d010757c7d1acba930a
-image_path: /resources/posts/java/01c-java-tools
+image_path: /resources/posts/java/01c-java-architecture
 downloads: []
 ---
 
@@ -41,3 +41,30 @@ All Java platforms consist of a Java Virtual Machine (VM) and an application pro
 
 ## Java Architecture
 
+![JDK vs JRE]({{ page.image_path | prepend: site.baseurl }}/java-arc.png)
+
+### Level Tools & Tools APIs
+1. `javac` untuk melakukan compilasi
+2. `java` untuk menjalankan hasil compilasi atau bytecode
+3. `javadoc` untuk membuat Dokumentasi di dalam koding Java
+4. `jar`, `war`, `ejb` dan `ear` hasil akhir project Java, defaultnya `jar` untuk aplikasi desktop dan `war` untuk aplikasi web atau Java EE.
+
+### Level Development
+
+1. `Java Web`, web development di Java biasanya menggunakan teknologi `Servlet` & `JSP`
+2. `Applet`, Aplikasi desktop yang bisa berjalan di Browser
+3. `JavaFX`, Aplikasi desktop yang modern sebelumya sebagai pengganti `Java Swing`
+4. `Java Swing`, Aplikasi desktop yang berfokus pada component
+
+### Level Base Libraries
+
+1. `JDBC`, API yang digunakan untuk mengakses Database Relational seperti MySQL, Oracle, PostgreSQL dan lain-lain.
+2. `RMI`, Remote Method Invocation untuk mengakses resourse server (Client-Server Application)
+3. `Networking`, Java API untuk Jaringan.
+4. `Date & Time`, Java API untuk mengakses waktu dan date di system (Operation System)
+5. `Internationalization`, digunakan untuk membuat aplikasi multi bahasa contohnya ingin membuat aplikasi yang menggunakan bahasa indonesia, bahasa arab dll.
+6. `Math`, Java API untuk melakukan perhitungan matematika, fisika dll
+7. `Collections`, Java API untuk menyimpan nilai yang multi value (Array)
+8. dll masih banyak lagi ya... gak bisa disebutin satu-satu karena kebanyakan wkwkw
+
+Nah semua teknologi diatas mulai dari level tools & tools API, development, dan base libraries itu berjalan di atas Java Virtual Machine atau yang bisa disebut JVM. OK nah mungkin dari temen-temen agak pusing kok banyak banget ya... ya teknologi Java itu memang luas banget blum lagi klo integrasi sama teknologi lain atau frameworknya Java seperti `Spring Framework`, `Play Framework`, `ZKoss`, `Vaadin` dll.
