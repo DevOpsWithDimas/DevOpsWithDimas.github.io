@@ -3,7 +3,7 @@ title: "Linux CentOS"
 subtitle: "Linux for Server using CentOS"
 key: linux-centos
 publish: 
-hidden: false
+hidden: true
 coming_soon: true
 tags:
   - Server

@@ -3,7 +3,7 @@ title: "Pemograman JavaScript"
 subtitle: "Bahasa Pemograman Javascript"
 key: js
 publish: 
-hidden: false
+hidden: true
 coming_soon: true
 header:
   overlay_image: "assets/images/cources/js.png"

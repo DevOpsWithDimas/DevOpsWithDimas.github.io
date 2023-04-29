@@ -3,7 +3,7 @@ title: "Site Reliability Engineer"
 key: sre-engineer
 publish: 
 coming_soon: true
-hidden: false
+hidden: true
 header:
   overlay_image: "assets/images/roadmap/sre-engineer.png"
   teaser: assets/images/roadmap/sre-engineer.png

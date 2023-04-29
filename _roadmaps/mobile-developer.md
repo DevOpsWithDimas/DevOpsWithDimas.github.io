@@ -3,7 +3,7 @@ title: "Mobile Developer"
 key: mobile-dev
 publish: 
 coming_soon: true
-hidden: false
+hidden: true
 header:
   overlay_image: "assets/images/roadmap/mobile-dev.png"
   teaser: assets/images/roadmap/mobile-dev.png

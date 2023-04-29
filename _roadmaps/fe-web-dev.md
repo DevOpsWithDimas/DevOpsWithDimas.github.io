@@ -3,7 +3,7 @@ title: "Frontend WEB Developer"
 key: fe-web-dev
 publish: 
 coming_soon: true
-hidden: false
+hidden: true
 header:
   overlay_image: "assets/images/roadmap/frontend-dev.png"
   teaser: assets/images/roadmap/frontend-dev.png

@@ -3,7 +3,7 @@ title: "Nutanix Database (NDB)"
 subtitle: "Nutanix Database for DevOps"
 key: nutanix-ndb
 publish: 
-hidden: false
+hidden: true
 coming_soon: true
 header:
   overlay_image: "assets/images/cources/nutanix-cloud-native.png"

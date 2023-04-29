@@ -3,7 +3,7 @@ title: "Oracle Database (OCP)"
 subtitle: "Oracle Database Certified Professional (OCA)"
 key: oracledb-ocp
 publish: 
-hidden: false
+hidden: true
 coming_soon: true
 toc: true
 toc_sticky: true
