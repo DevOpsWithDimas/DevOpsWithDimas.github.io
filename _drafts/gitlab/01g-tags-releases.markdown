@@ -1,9 +1,8 @@
 ---
 
-title: "01h-tags-releases"
 lang: gitlab
-authors:
-- dimasm93
+catalog_key: introduction
+title: "01h-tags-releases"
 categories:
 - git
 - gitops
@@ -12,7 +11,6 @@ refs:
 - https://git-scm.com/doc
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/git/01h-tags-releases
 gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
 downloads: []

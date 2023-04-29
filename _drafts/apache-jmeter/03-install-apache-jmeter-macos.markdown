@@ -1,9 +1,7 @@
 ---
-
-title: "03-install-apache-jmeter-macos"
 lang: apache-jmeter
-authors:
-- dimasm93
+catalog_key: introduction
+title: "03-install-apache-jmeter-macos"
 categories:
 - DevOps
 - Testing

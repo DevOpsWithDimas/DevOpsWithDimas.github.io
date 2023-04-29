@@ -1,9 +1,7 @@
 ---
-
-title: "03-getting-started-apache-jmeter"
 lang: apache-jmeter
-authors:
-- dimasm93
+catalog_key: introduction
+title: "03-getting-started-apache-jmeter"
 categories:
 - DevOps
 - Testing

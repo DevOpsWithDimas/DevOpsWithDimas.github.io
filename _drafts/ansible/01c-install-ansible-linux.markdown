@@ -1,9 +1,7 @@
 ---
-
-title: "Install and Configure Ansible on Linux"
 lang: ansible
-authors:
-- dimasm93
+catalog_key: introduction
+title: "Install and Configure Ansible on Linux"
 categories:
 - DevOps
 - IaC
@@ -12,7 +10,6 @@ refs:
 - https://docs.ansible.com/ansible-core/devel/index.html
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/ansible/01b-install-ansible-linux
 gist: dimMaryanto93/ab4bbfd903a7ae297349960787a45ff4
 downloads: []

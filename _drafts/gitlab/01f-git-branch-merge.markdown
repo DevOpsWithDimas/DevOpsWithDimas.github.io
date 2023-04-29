@@ -1,9 +1,7 @@
 ---
-
-title: "01g-git-branch-merge"
 lang: gitlab
-authors:
-- dimasm93
+catalog_key: introduction
+title: "01g-git-branch-merge"
 categories:
 - git
 - gitops
@@ -12,7 +10,6 @@ refs:
 - https://git-scm.com/doc
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/git/01g-git-branch-merge
 gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
 downloads: []
