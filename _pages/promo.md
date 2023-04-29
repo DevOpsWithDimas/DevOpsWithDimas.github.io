@@ -25,7 +25,3 @@ Diskon special, Buat temen-temen yang belum bergabung yuuuk join, munpung ada pr
 
 - [Oracle: Pemula sampai Mahir](https://www.udemy.com/course/rdbms-oracle-18c-indonesia/?couponCode=IDULFITRI.2023)
 - [PostgreSQL: Pemula sampai Mahir](https://www.udemy.com/course/dba-postgresql-pemula-sampai-mahir/?couponCode=IDULFITRI.2023)
-
-## Site Reliability Engineer Class (SRE)
-
-- [Nutanix AHV: Pemula sampai Mahir](https://www.udemy.com/course/nutanix-ahv-pemula-sampai-mahir/?couponCode=IDULFITRI.2023)

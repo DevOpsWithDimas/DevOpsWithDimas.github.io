@@ -1,7 +1,8 @@
 ---
+lang: java
+catalog_key: introduction
 title: "Silabus - Java: Pemula sampai Mahir"
 date: 2022-03-27T18:05:08+07:00
-lang: java
 categories:
 - language
 - java
@@ -10,7 +11,6 @@ refs:
 youtube: 
 comments: true
 gist: dimMaryanto93/96aad3c6bed60d010757c7d1acba930a
-catalog_key: introduction
 image_path: /resources/posts/java-se/01-silabus
 downloads: []
 ---

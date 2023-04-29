@@ -25,3 +25,5 @@ classes: wide
 </div>
 
 {% include paginator.html %}
+
+<a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
