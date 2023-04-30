@@ -6,7 +6,7 @@ hidden: false
 coming_soon: true
 header:
   overlay_image: "assets/images/roadmap/backend-dev.png"
-  teaser: assets/images/roadmap/backend-dev.png
+  teaser: assets/images/roadmap/backend-dev-teaser.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
@@ -25,7 +25,7 @@ cources:
   - postgres
 sidebar:
   - title: "Role"
-    image: assets/images/roadmap/backend-dev.png
+    image: assets/images/roadmap/backend-dev-teaser.png
     image_alt: "logo"
     text: "Designer, Front-End Developer"
   - title: "Responsibilities"

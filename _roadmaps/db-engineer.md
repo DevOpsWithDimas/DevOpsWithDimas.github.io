@@ -6,7 +6,7 @@ coming_soon: false
 hidden: false
 header:
   overlay_image: "assets/images/roadmap/devops-engineer.png"
-  teaser: assets/images/roadmap/devops-engineer.png
+  teaser: assets/images/roadmap/devops-engineer-teaser.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
@@ -24,7 +24,7 @@ cources:
   - postgres
 sidebar:
   - title: "Role"
-    image: assets/images/roadmap/devops-engineer.png
+    image: assets/images/roadmap/devops-engineer-teaser.png
     image_alt: "logo"
     text: "Designer, Front-End Developer"
   - title: "Responsibilities"

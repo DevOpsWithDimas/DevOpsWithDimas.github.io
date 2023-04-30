@@ -3,15 +3,13 @@ title: "DevOps Engineer"
 key: devops-engineer
 publish: 2023-04-24T14:41:00+07:00
 coming_soon: false
+image_path: /resources/roadmap/devops
 hidden: false
 header:
   overlay_image: "assets/images/roadmap/devops-engineer.png"
-  teaser: assets/images/roadmap/devops-engineer.png
+  teaser: assets/images/roadmap/devops-engineer-teaser.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
-  actions:
-    - label: "Learn more"
-      url: /posts/container/angular/
 tagline: "DevOps alias Development & Operation adalah Profesi IT yang sedang hype lagi saat ini karena menggabungkan 2 divisi sekaligus yaitu Developer dan Operation team, Profesi ini menangani suatu mekanisme release management pada suatu perusahan tergantung dari culture yang diterapkan."
 tags:
   - devops
@@ -27,16 +25,32 @@ cources:
   - ansible
 sidebar:
   - title: "Role"
-    image: assets/images/roadmap/devops-engineer.png
+    image: assets/images/roadmap/devops-engineer-teaser.png
     image_alt: "logo"
-    text: "Developer, Programmer, & Operation Team"
+    text: "Developer, Operation Team, Network Engineer, System Admin, & Database Administrator (DBA)"
 ---
 
-Hai semuanya selamat datang di kelas **xxx**, jadi kali ini kita akan membahas xxx yaitu menggunakan [xxx](link). 
+Hai semuanya 👋, Selamat datang Roadmap menjadi seorang `DevOps Engineer`. 
+
+Disini temen-temen akah diarahkan Step by Step menjadi seorang DevOps Engineer, Jadi Beberapa tahun belakangan sampai saat ini (2023) posisi DevOps Engineer menjadi topic hangat di industri IT sehingga kebutuhan akan profesi DevOps Engineer meningkat. Sebelum lebih jauh kita lihat dulu yuk apa sih Itu DevOps?
 
 <!--more-->
 
-## Skill-sets requirement
+DevOps alias Development & Operation adalah kombinasi dari culture, implementasi dan tools yang digunakan untuk meningkatkan/meng-improve dalam membangun, mengembangkan, mendeliver produk secara stabil dan cepat serta mengelola infrastruktur.
+
+![diagram]({{ page.image_path | prepend: relative_url }}/devops-diagram.png)
+
+## Bagaimana DevOps bekerja?
+
+DevOps adalah gabungan/kombinasi antara Development & Operation, Nah klo kita lihat kebelakang dimana dalam suatu organisasi memiliki team Development dan Operation yang biasanya saling **"terisolasi"**. Misalnya ada requirement product yang telah di develop kemudian takeover oleh operation supaya di deploy ke environment, yang jadi pertanyaan 
+
+> "Apakah product yang telah didevelop tersebut bisa langsung berjalan? (ditangani Operation team)"
+
+Jawabannya mungkin bisa, tetapi yang pasti tidak akan berjalan secara baik/sempurna. Nah loh kok bisa gitu? ya jelas karena **Operation team khan gak tau secara detail feature** yang didevelop oleh developer team begitu pula sebaliknya. Dengan hadirnya DevOps masalah tersebut bisa di minimalisir karena DevOps adalah sebagai jembatan antara Development team dan Operation team.
+
+Selain itu juga DevOps Engineer perlu melakukan automation, Task yang sifatnya manual dan repetisi jika bisa di automatisasi dengan menggunakan teknologi atau tools sehingga dalam mengoprasikan task tersebut bisa lebih cepat dan andal. Tools ini juga dapat membantu team teknis menyeleasikan task secara independen contohnya proses _build_, _testing_, _release_ bisa menggunakan **CI/CD automation**.
+
+## Skill-set yang dibutuhkan?
 
 Ada beberapa skill-set yang harus ditempuh untuk menjadi seorang DevOps (Develoment & Operation) Engineer diataranya seperti berikut:
 

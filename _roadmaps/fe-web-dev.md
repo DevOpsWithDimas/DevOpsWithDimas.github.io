@@ -6,7 +6,7 @@ coming_soon: true
 hidden: true
 header:
   overlay_image: "assets/images/roadmap/frontend-dev.png"
-  teaser: assets/images/roadmap/frontend-dev.png
+  teaser: assets/images/roadmap/frontend-dev-teaser.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
@@ -23,7 +23,7 @@ tags:
   - angular
 sidebar:
   - title: "Role"
-    image: assets/images/roadmap/frontend-dev.png
+    image: assets/images/roadmap/frontend-dev-teaser.png
     image_alt: "logo"
     text: "Designer, Front-End Developer"
 ---

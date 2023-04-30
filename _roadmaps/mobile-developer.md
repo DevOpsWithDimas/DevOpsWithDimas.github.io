@@ -6,7 +6,7 @@ coming_soon: true
 hidden: true
 header:
   overlay_image: "assets/images/roadmap/mobile-dev.png"
-  teaser: assets/images/roadmap/mobile-dev.png
+  teaser: assets/images/roadmap/mobile-dev-teaser.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
@@ -21,7 +21,7 @@ tags:
   - automation
 sidebar:
   - title: "Role"
-    image: assets/images/roadmap/mobile-dev.png
+    image: assets/images/roadmap/mobile-dev-teaser.png
     image_alt: "logo"
     text: "Designer, Front-End Developer"
   - title: "Responsibilities"
