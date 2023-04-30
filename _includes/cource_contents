@@ -1,0 +1,11 @@
+{% if include.cource_name %}
+  {% assign cource = page[include.cource_name] %}
+{% else %}
+  {% assign cource = page.cource %}
+{% endif %}
+
+{% if include.category_key %}
+  {% assign cource_category = page[include.category_key] %}
+{% else %}
+  {% assign cource_category = nil %}
+{% endif %}

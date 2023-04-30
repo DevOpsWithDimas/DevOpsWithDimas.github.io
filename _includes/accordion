@@ -8,7 +8,7 @@
 <div class="accordion-container">
     <div class="acordion-item">
         <input type="checkbox" id="qna{{forloop.index}}">
-        <label class="acordion-item-label" for="qna{{forloop.index}}">{{ qna.question | markdownify}}</label>
+        <label class="acordion-item-label" for="qna{{forloop.index}}">{{ qna.question }}</label>
         <div class="acordion-item-content">
             {{ qna.answer | markdownify }}
         </div>
