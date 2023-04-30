@@ -86,6 +86,9 @@ cources:
     btn_label: "Read More"
     btn_class: "btn--primary"
     excerpt: "Mempelajari GitOps adalah tahap ke-lima untuk menjadi seorang **DevOps Engineer**. <br><br>Saat ini hampir semuanya profesi IT membutuhkan Version Control System, Version Control berperan untuk menjaga/membaca perubahan pada suatu file, berkolaborasi dengan team, handle versioning/release management dan handle automation CI/CD dan lain-lain. <br><br>Salah satu tools yang kita bisa gunakan adalah git dan Gitlab"
+qna_list:
+  - question: "Apakah dengan adanya DevOps akan menggantikan Operation Team?"
+    answer: "**Of course not!**, dengan adanya DevOps justru akan membantu tugas dari Operation Team, Sehinga Operation team bisa fokus ke main/bisnis operational tasks"
 ---
 
 Hai semuanya 👋, Selamat datang Roadmap menjadi seorang `DevOps Engineer`. 
@@ -174,5 +177,10 @@ Setelah temen-temen mengikuti semua kelasnya, Tahap selanjutnya adalah jangan be
 - [RedHat Certified Ansible Automation](https://www.redhat.com/en/services/certification/rhcs-ansible-automation)
 
 ## Frequently Asked Questions
+
+Berikut adalah beberapa pertanyaan yang sering muncul ditanyakan:
+
+{% include accordion list="qna_list" %}
+<br>
 
 Jika temen-temen ada pertanyaan silahkan tulis di kolom komentar ya!
