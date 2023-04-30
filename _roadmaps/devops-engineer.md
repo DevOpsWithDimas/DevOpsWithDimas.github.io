@@ -49,6 +49,27 @@ feature_row:
     title: "Kecepatan deliver"
     alt: "delivery"
     excerpt: "Tingkatkan frekuensi dan kecepatan peluncuran sehingga Anda dapat berinovasi dan meningkatkan produk Anda dengan lebih cepat. Semakin cepat Anda dapat meluncurkan fitur baru dan memperbaiki bug, semakin cepat Anda dapat merespons kebutuhan pelanggan dan mendapatkan keuntungan yang kompetitif."
+cources:
+  - image_path: assets/images/cources/linux-centos.png
+    title: "Linux CentOS: Pemula s/d Mahir"
+    alt: "linux-centos"
+    excerpt: ""
+  - image_path: assets/images/cources/docker.png
+    title: "Docker: Pemula s/d Mahir"
+    alt: "docker"
+    excerpt: ""
+  - image_path: assets/images/cources/k8s.png
+    title: "Kubernetes: Pemula s/d Mahir"
+    alt: "k8s"
+    excerpt: ""
+  - image_path: assets/images/cources/gitlab.png
+    title: "GitOps - Gitlab: Pemula s/d Mahir"
+    alt: "gitops-gitlab"
+    excerpt: ""
+  - image_path: assets/images/cources/ansible.png
+    title: "Ansible: Pemula s/d Mahir"
+    alt: "ansible"
+    excerpt: ""
 ---
 
 Hai semuanya 👋, Selamat datang Roadmap menjadi seorang `DevOps Engineer`. 
@@ -75,7 +96,7 @@ Selain itu juga DevOps Engineer perlu melakukan automation, Task yang sifatnya m
 
 Software dan internet telah mengubah dunia dan industri, dari belanja, hiburan, perbankan sampai pemerintahan. Software tidak lagi sekadar mendukung bisnis; tetapi telah menjadi komponen integral dari setiap bagian bisnis. Perusahaan berinteraksi dengan pelanggan mereka melalui software yang diluncurkan sebagai layanan online atau aplikasi dan pada berbagai perangkat. Mereka juga menggunakan software untuk meningkatkan efisiensi operasional dengan mengubah tiap bagian rantai nilai, seperti logistik, komunikasi, dan pengoperasian. Perusahaan di masa kini harus mengubah bagaimana mereka membangun dan menghadirkan software. 
 
-{% include feature_row id="feature_row" type="left" %}
+{% include feature_row id="feature_row" %}
 
 Beralih ke DevOps memerlukan perubahan dalam budaya dan pola pikir. Pada tingkat paling sederhana, DevOps adalah tentang menghilangkan pemisah antara dua tim yang terisolasi secara tradisional, yaitu pengembangan dan pengoperasian. Dengan DevOps, dua tim bekerja bersama untuk mengoptimalkan produktivitas pengembang dan keandalan pengoperasian. Mereka berusaha untuk sering berkomunikasi, meningkatkan efisiensi, dan meningkatkan kualitas layanan
 
@@ -123,9 +144,11 @@ mindmap
 
 {% endmermaid %}
 
-## Cources
+## Kelas berkaitan dengan DevOps
 
 Tell me something about courses should be taken to complete skill set of this roadmap
+
+{% include feature_row id="cources" type="left" %}
 
 ## Frequently Asked Questions
 
