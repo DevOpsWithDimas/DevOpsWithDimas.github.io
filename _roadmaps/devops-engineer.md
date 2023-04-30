@@ -28,6 +28,27 @@ sidebar:
     image: assets/images/roadmap/devops-engineer-teaser.png
     image_alt: "logo"
     text: "Developer, Operation Team, Network Engineer, System Admin, & Database Administrator (DBA)"
+feature_row:
+  - image_path: resources/roadmap/devops/devops-scale.png
+    title: "Skala"
+    alt: "scalability"
+    excerpt: "Automasi dan konsistensi membantu Anda mengelola sistem yang kompleks atau berubah secara efisien dan dengan risiko yang berkurang"
+  - image_path: resources/roadmap/devops/devops-collaboration.png
+    title: "Kolaborasi"
+    alt: "collaboration"
+    excerpt: "Tim pengembang dan pengoperasian berkolaborasi dengan erat, mengemban tanggung jawab bersama, dan menggabungkan alur kerja mereka. Ini mengurangi inefisiensi dan menghemat waktu"
+  - image_path: resources/roadmap/devops/devops-security.png
+    title: "Keamanan"
+    alt: "security"
+    excerpt: "Anda dapat menggunakan model DevOps tanpa mengorbankan keamanan dengan menggunakan kebijakan kepatuhan yang terautomasi, kontrol yang menyeluruh, dan teknik manajemen konfigurasi."
+  - image_path: resources/roadmap/devops/devops-reliability.png
+    title: "Keandalan"
+    alt: "realibility"
+    excerpt: "Memastikan kualitas pembaruan aplikasi dan perubahan infrastruktur sehingga Anda dapat memberikan dengan andal pada kecepatan yang lebih tinggi sambil mempertahankan pengalaman yang positif bagi pengguna akhir."
+  - image_path: resources/roadmap/devops/devops-delivery.png
+    title: "Kecepatan deliver"
+    alt: "delivery"
+    excerpt: "Tingkatkan frekuensi dan kecepatan peluncuran sehingga Anda dapat berinovasi dan meningkatkan produk Anda dengan lebih cepat. Semakin cepat Anda dapat meluncurkan fitur baru dan memperbaiki bug, semakin cepat Anda dapat merespons kebutuhan pelanggan dan mendapatkan keuntungan yang kompetitif."
 ---
 
 Hai semuanya 👋, Selamat datang Roadmap menjadi seorang `DevOps Engineer`. 
@@ -49,6 +70,14 @@ DevOps adalah gabungan/kombinasi antara Development & Operation, Nah klo kita li
 Jawabannya mungkin bisa, tetapi yang pasti tidak akan berjalan secara baik/sempurna. Nah loh kok bisa gitu? ya jelas karena **Operation team khan gak tau secara detail feature** yang didevelop oleh developer team begitu pula sebaliknya. Dengan hadirnya DevOps masalah tersebut bisa di minimalisir karena DevOps adalah sebagai jembatan antara Development team dan Operation team.
 
 Selain itu juga DevOps Engineer perlu melakukan automation, Task yang sifatnya manual dan repetisi jika bisa di automatisasi dengan menggunakan teknologi atau tools sehingga dalam mengoprasikan task tersebut bisa lebih cepat dan andal. Tools ini juga dapat membantu team teknis menyeleasikan task secara independen contohnya proses _build_, _testing_, _release_ bisa menggunakan **CI/CD automation**.
+
+## Mengapa DevOps Penting?
+
+Software dan internet telah mengubah dunia dan industri, dari belanja, hiburan, perbankan sampai pemerintahan. Software tidak lagi sekadar mendukung bisnis; tetapi telah menjadi komponen integral dari setiap bagian bisnis. Perusahaan berinteraksi dengan pelanggan mereka melalui software yang diluncurkan sebagai layanan online atau aplikasi dan pada berbagai perangkat. Mereka juga menggunakan software untuk meningkatkan efisiensi operasional dengan mengubah tiap bagian rantai nilai, seperti logistik, komunikasi, dan pengoperasian. Perusahaan di masa kini harus mengubah bagaimana mereka membangun dan menghadirkan software. 
+
+{% include feature_row id="feature_row" type="left" %}
+
+Beralih ke DevOps memerlukan perubahan dalam budaya dan pola pikir. Pada tingkat paling sederhana, DevOps adalah tentang menghilangkan pemisah antara dua tim yang terisolasi secara tradisional, yaitu pengembangan dan pengoperasian. Dengan DevOps, dua tim bekerja bersama untuk mengoptimalkan produktivitas pengembang dan keandalan pengoperasian. Mereka berusaha untuk sering berkomunikasi, meningkatkan efisiensi, dan meningkatkan kualitas layanan
 
 ## Skill-set yang dibutuhkan?
 
@@ -93,10 +122,6 @@ mindmap
         [SSH]
 
 {% endmermaid %}
-
-## Description
-
-Tell me something about this roadmap, why you should learn this
 
 ## Cources
 
