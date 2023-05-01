@@ -50,53 +50,15 @@ layout: default
             {% assign cource_name = page.lang %}
             {% assign cource = site.cources | where: 'key', cource_name | first %}
             {% if cource.catalogs %}
-                {% for catalog in cource.catalogs %}
-                <nav class="toc accordion-container">                  
-                  <header>
-                    <h4 class="nav__title">
-                      <i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> 
-                      {{ catalog.name }}
-                    </h4>
-                  </header>
-                  {% assign posts = site.posts | where: 'lang', cource_name | where: 'catalog_key', catalog.key | sort: date | reverse %}
-                  {% for post in posts %}
-                  <ul class="toc__menu">
-                    <li>                      
-                      <a href="{{ post.url | relative_url }}">
-                        {% if post.url == page.url %} 
-                        <i class="fas fa-bookmark"></i>
-                        {% endif %}
-                        {{ post.title | truncate: 30 }}
-                      </a>
-                    </li>
-                  </ul>
-                  {% endfor %}
-                </nav>
-                <br>  
-                {% endfor %}  
+              {% for catalog in cource.catalogs %}
+                {% assign posts = site.posts | where: 'lang', cource_name | where: 'catalog_key', catalog.key | sort: date | reverse %}
+                {% assign page_title = catalog.name %}
+                {% include toc_link_list.html page_title=page_title posts="posts" %}
+              {% endfor %}  
             {% else %}
-              <nav class="toc accordion-container">
-                <header>
-                  <h4 class="nav__title">
-                    <i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> 
-                    {{ cource.title }}
-                  </h4>
-                </header>
                 {% assign posts = site.posts | where: 'lang', cource_name | sort: date | reverse %}
-                {% for post in posts %}
-                <ul class="toc__menu">
-                  <li>
-                    <a href="{{ post.url | relative_url }}">
-                      {% if post.url == page.url %} 
-                      <i class="fas fa-bookmark"></i>
-                      {% endif %}
-                      {{ post.title | truncate: 30 }}
-                    </a>
-                  </li>
-                </ul>
-                {% endfor %}
-              </nav>
-              <br> 
+                {% assign page_title = cource.title %}
+                {% include toc_link_list.html page_title=page_title posts="posts" %}
             {% endif %}          
           {% endif %}
         </aside>

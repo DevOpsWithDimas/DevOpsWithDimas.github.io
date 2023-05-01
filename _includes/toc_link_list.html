@@ -1,0 +1,36 @@
+{% if include.page_title %}
+  {% assign page_title = include.page_title %}
+{% endif %}
+
+{% if include.list_link %}
+  {% assign posts = include.list_link %}
+{% endif %}
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-{{page_title}}">
+        <label class="acordion-item-label" for="content-{{page_title}}">
+            {{ page_title }}
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            {% if posts.size >= 1 %}
+                {% for post in posts %}
+                <li>
+                    <a href="{{ post.url | relative_url }}">
+                        {% if post.url == page.url %}
+                        <i class="fas fa-bookmark"></i>
+                        {% endif %}
+                        {{ post.title | truncate: 30 }}
+                    </a>
+                </li>
+                {% endfor %}
+            {% else %}
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
