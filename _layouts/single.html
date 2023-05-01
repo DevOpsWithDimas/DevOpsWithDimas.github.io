@@ -61,8 +61,13 @@ layout: default
                   {% assign posts = site.posts | where: 'lang', cource_name | where: 'catalog_key', catalog.key | sort: date %}
                   {% for post in posts %}
                   <ul class="toc__menu">
-                    <li>
-                      <a href="{{ post.url | relative_url }}">{{ post.title | truncate: 30 }}</a>
+                    <li>                      
+                      <a href="{{ post.url | relative_url }}">
+                        {% if post.url == page.url %} 
+                        <i class="fas fa-bookmark"></i>
+                        {% endif %}
+                        {{ post.title | truncate: 30 }}
+                      </a>
                     </li>
                   </ul>
                   {% endfor %}
@@ -81,7 +86,12 @@ layout: default
                 {% for post in posts %}
                 <ul class="toc__menu">
                   <li>
-                    <a href="{{ post.url | relative_url }}">{{ post.title | truncate: 30 }}</a>
+                    <a href="{{ post.url | relative_url }}">
+                      {% if post.url == page.url %} 
+                      <i class="fas fa-bookmark"></i>
+                      {% endif %}
+                      {{ post.title | truncate: 30 }}
+                    </a>
                   </li>
                 </ul>
                 {% endfor %}
