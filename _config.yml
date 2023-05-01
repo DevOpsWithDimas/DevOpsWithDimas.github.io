@@ -289,10 +289,10 @@ compress_html:
 collections:
   cources:
     output: true
-    permalink: /:collection/:path/
+    permalink: /pages/:collection/:path
   roadmaps:
     output: true
-    permalink: /:collection/:path/
+    permalink: /pages/:collection/:path
 
 # Defaults
 defaults:
@@ -305,7 +305,7 @@ defaults:
       layout: single
       classes: 
       - wide
-      author_profile: false
+      author_profile: true
       author: dimasm93
       sidebar_toc: true
       read_time: true
@@ -326,6 +326,7 @@ defaults:
       author_profile: false
       toc: false
       sidebar_toc: true
+      show_cource: true
       coming_soon: true
       toc_sticky: true
       read_time: true

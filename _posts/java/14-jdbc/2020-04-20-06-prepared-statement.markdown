@@ -14,6 +14,7 @@ comments: true
 gist: dimMaryanto93/96aad3c6bed60d010757c7d1acba930a
 image_path: /resources/posts/java-se/01-silabus
 downloads: []
+---
 
 Hai, [sebelumnya]() kita udah bisa mengambil data dengan menggunakan API class `Statement` sekarang kita bahas kaka-nya yaitu API class `java.sql.PreparedStatement`. Penggunaan API `PreparedStatement` biasanya digunakan untuk melakukan Insert, Update, Delete, Find By id, atau query yang membutuhkan parameter.
 
