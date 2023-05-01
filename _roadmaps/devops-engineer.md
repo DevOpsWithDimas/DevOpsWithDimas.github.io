@@ -53,7 +53,7 @@ cources:
   - image_path: assets/images/cources/linux-centos.png
     title: "Linux CentOS: Pemula s/d Mahir"
     alt: "linux-centos"
-    url: "/cources/linux-centos/"
+    url: "/pages/cources/linux-centos"
     btn_label: "Read More"
     btn_class: "btn--primary"
     excerpt: "Mempelajari System Operation adalah tahap awal/pertama untuk menjadi seorang **DevOps Engineer**. Salah satunya mempelajari OS Linux server dengan CentOS. <br><br>
@@ -61,28 +61,28 @@ cources:
   - image_path: assets/images/cources/docker.png
     title: "Docker: Pemula s/d Mahir"
     alt: "docker"
-    url: "/cources/docker/"
+    url: "/pages/cources/docker"
     btn_label: "Read More"
     btn_class: "btn--primary"
     excerpt: "Mempelajari Container adalah tahap ke-dua untuk menjadi seorang **DevOps Engineer**. <br><br>Untuk saat ini teknology container masih menjadi tools utama dalam mem-package aplikasi, melakukan automation testing, membangun Engine Continues Integration dan Continues Delivery serta dalam Deployment baik untuk dev, staging, dan production. <br>Salah satu toolsnya adalah Docker, Containerd, CRI-O dan lain-lain"
   - image_path: assets/images/cources/k8s.png
     title: "Kubernetes: Pemula s/d Mahir"
     alt: "k8s"
-    url: "/cources/kubernetes/"
+    url: "/pages/cources/kubernetes"
     btn_label: "Read More"
     btn_class: "btn--primary"
     excerpt: "Mempelajari Container Orchestration adalah tahap ke-tiga untuk menjadi seorang **DevOps Engineer**. <br><br>Dalam membangun workload aplikasi yang bisa High Available (HA), Zero Downtime, Horizontal scalling dan lain-lain membutuhkan tools Container Orchestration System. Container Orchestration System biasanya digunakan untuk menjalankan workload aplikasi kita di environment dev, stagging dan production. <br><br>Salah satu tools dari Container Orchestration System adalah Kubernetes alias k8s."
   - image_path: assets/images/cources/ansible.png
     title: "Ansible: Pemula s/d Mahir"
     alt: "ansible"
-    url: "/cources/ansible/"
+    url: "/pages/cources/ansible"
     btn_label: "Read More"
     btn_class: "btn--primary"
     excerpt: "Mempelajar Automation adalah tahap ke-empat untuk menjadi seorang **DevOps Engineer**. <br><br>Saat ini hampir semua IT Automation baik untuk Infrastructure as a Code (IaaC), Configuration as a Code (CaaC) dan Network as a Code (NaaC) atau gabungan dari semua itu adalah Anything as a Code (XaaC) menggunakan code dalam mem-provision suatu task tertentu contohnya Menginstall database, configurasi master/slave database dan lain-lain. <br><br>Salah satu tools yang kita bisa gunakan untuk Configuration as a Code (CaaC) yaitu ansible"
   - image_path: assets/images/cources/gitlab.png
     title: "GitOps - Gitlab: Pemula s/d Mahir"
     alt: "gitops-gitlab"
-    url: "/cources/gitlab/"
+    url: "/pages/cources/gitlab"
     btn_label: "Read More"
     btn_class: "btn--primary"
     excerpt: "Mempelajari GitOps adalah tahap ke-lima untuk menjadi seorang **DevOps Engineer**. <br><br>Saat ini hampir semuanya profesi IT membutuhkan Version Control System, Version Control berperan untuk menjaga/membaca perubahan pada suatu file, berkolaborasi dengan team, handle versioning/release management dan handle automation CI/CD dan lain-lain. <br><br>Salah satu tools yang kita bisa gunakan adalah git dan Gitlab"
