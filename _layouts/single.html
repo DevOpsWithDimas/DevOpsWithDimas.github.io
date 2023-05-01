@@ -58,7 +58,7 @@ layout: default
                       {{ catalog.name }}
                     </h4>
                   </header>
-                  {% assign posts = site.posts | where: 'lang', cource_name | where: 'catalog_key', catalog.key | sort: date %}
+                  {% assign posts = site.posts | where: 'lang', cource_name | where: 'catalog_key', catalog.key | sort: date | reverse %}
                   {% for post in posts %}
                   <ul class="toc__menu">
                     <li>                      
@@ -82,7 +82,7 @@ layout: default
                     {{ cource.title }}
                   </h4>
                 </header>
-                {% assign posts = site.posts | where: 'lang', cource_name | sort: date %}
+                {% assign posts = site.posts | where: 'lang', cource_name | sort: date | reverse %}
                 {% for post in posts %}
                 <ul class="toc__menu">
                   <li>
