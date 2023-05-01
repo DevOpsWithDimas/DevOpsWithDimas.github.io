@@ -29,8 +29,6 @@ header:
       url: /posts/devops/docker/01-silabus.html
 sidebar:
   - title: "Role"
-    image: assets/images/cources/docker.png
-    image_alt: "logo"
     text: "DevOps Engineer, Developer & Programmer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar Containerization dengan Docker untuk Pemula sampai Mahir."
@@ -171,6 +169,10 @@ Dan juga yang sudah bekerja seperti:
 
 - Developer (programmer)
 - Operation team
+
+## Cource content
+
+{% include cource_contents.html cource_name="key" %}
 
 ## After taking this course, you'll be able to?
 

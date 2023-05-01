@@ -16,8 +16,6 @@ header:
 tagline: "xxx"
 sidebar:
   - title: "Role"
-    image: assets/images/cources/nutanix-cloud-native.png
-    image_alt: "logo"
     text: "DevOps Engineer, Operation team, Developer & Programmer"
   - title: "Responsibilities"
     text: "Temen-temen akan belajar memprovision dan day 2 operation pada Database dengan menggunakan Nutanix Database formally (ERA)"

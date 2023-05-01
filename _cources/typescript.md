@@ -18,8 +18,6 @@ header:
 tagline: "xxx"
 sidebar:
   - title: "Role"
-    image: assets/images/cources/typescript.png
-    image_alt: "logo"
     text: "Frontend Developer, Designer & Programmer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar Relational Database Management System (RDBMS) dengan PostgreSQL"

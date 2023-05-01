@@ -18,8 +18,6 @@ header:
 tagline: "xxx"
 sidebar:
   - title: "Role"
-    image: assets/images/cources/oracle18cx-ocp.png
-    image_alt: "logo"
     text: "Database Administrator/Engineer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar Administration pada Relational Database Management System (RDBMS) dengan Oracle Database / RAC."

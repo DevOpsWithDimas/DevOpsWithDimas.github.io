@@ -20,8 +20,6 @@ tags:
   - Ansible
 sidebar:
   - title: "Role"
-    image: assets/images/cources/ansible.png
-    image_alt: "logo"
     text: "DevOps Engineer, Operation team, & GitOps Engineer"
   - title: "Responsibilities"
     text: "Temen-temen akan belajar IT automation tool untuk configure system, deploy software dan orchestrate more advance IT tasks seperti continues dpeloyment or zero downtime rolling update dan lain-lain."

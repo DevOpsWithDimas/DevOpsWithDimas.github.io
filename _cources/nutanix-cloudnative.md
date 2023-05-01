@@ -18,8 +18,6 @@ header:
 tagline: "xxx"
 sidebar:
   - title: "Role"
-    image: assets/images/cources/nutanix-cloud-native.png
-    image_alt: "logo"
     text: "DevOps Engineer, Operation team, Developer & Programmer"
   - title: "Responsibilities"
     text: "Temen-temen akan belajar Cloud Native technologies seperti Containers, Object storage, Kubernetes dengan menggunakan platform Nutanix HCI (Hyper-Converged Infrastructure)"

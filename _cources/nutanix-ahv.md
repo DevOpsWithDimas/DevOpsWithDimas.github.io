@@ -18,8 +18,6 @@ header:
 tagline: "xxx"
 sidebar:
   - title: "Role"
-    image: assets/images/cources/nutanix-ahv.png
-    image_alt: "logo"
     text: "DevOps Engineer, Developer & Programmer"
   - title: "Responsibilities"
     text: "Temen-temen akan belajar virtualization platform dengan menggunakan Nutanix AHV yang bisa digunakan untuk cloud-native workloads on-premise and in public clouds."

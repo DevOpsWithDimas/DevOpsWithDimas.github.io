@@ -21,8 +21,6 @@ tags:
   - Java
 sidebar:
   - title: "Role"
-    image: assets/images/cources/java.png
-    image_alt: "logo"
     text: "Developer, & Programmer"
   - title: "Responsibilities"
     text: "Temen-temen akan belajar bahasa pemograman Java untuk Pemula sampai Mahir diantaranya, Basic Java, Konsep & Impl OOP, JDBC, Multithreads, Client/Server, Java Desktop, Java Web, etc"

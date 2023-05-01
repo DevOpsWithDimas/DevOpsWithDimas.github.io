@@ -18,8 +18,6 @@ header:
 tagline: "xxx"
 sidebar:
   - title: "Role"
-    image: assets/images/cources/spring-boot.png
-    image_alt: "logo"
     text: "Database Administrator/Engineer, Developer, & Programmer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar Relational Database Management System (RDBMS) dengan PostgreSQL"

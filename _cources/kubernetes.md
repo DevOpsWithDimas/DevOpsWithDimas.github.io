@@ -21,8 +21,6 @@ tags:
   - Orchestration
 sidebar:
   - title: "Role"
-    image: assets/images/cources/k8s.png
-    image_alt: "logo"
     text: "DevOps Engineer, Developer & Programmer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar Managing Orchestration dengan menggunakan Kubernetes (k8s) untuk Pemula sampai Mahir."

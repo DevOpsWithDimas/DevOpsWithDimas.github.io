@@ -21,8 +21,6 @@ tags:
   - Hibernate
 sidebar:
   - title: "Role"
-    image: assets/images/cources/orm-hibernate.png
-    image_alt: "logo"
     text: "Designer, Front-End Developer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar membuat aplikasi Web Single Pages Application (SPA) system dengan menggunakan Angular Framework"

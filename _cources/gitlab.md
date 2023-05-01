@@ -20,8 +20,6 @@ tags:
   - Gitlab
 sidebar:
   - title: "Role"
-    image: assets/images/cources/gitlab.png
-    image_alt: "logo"
     text: "DevOps Engineer, Developer, Programmer, & Project Manager"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar GitOps dengan menggunakan Gitlab Stack terkait Project Manager, Automation Deployment, Monitoring, Issues Tracking, dan lain-lain."

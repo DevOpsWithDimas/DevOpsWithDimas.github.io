@@ -18,8 +18,6 @@ header:
 tagline: "xxx"
 sidebar:
   - title: "Role"
-    image: assets/images/cources/nutanix-ahv.png
-    image_alt: "logo"
     text: "DevOps Engineer, Operation team"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar Automation dengan Nutanix CALM dengan tujuan memprovision workload seperti Infrastructure, Virtual Machine dan lain-lain"

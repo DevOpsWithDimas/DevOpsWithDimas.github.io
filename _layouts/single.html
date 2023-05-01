@@ -38,45 +38,7 @@ layout: default
       {% endunless %}
 
       <section class="page__content e-content" itemprop="text">
-        {% if page.toc %}
-          <aside class="sidebar__right {% if page.toc_sticky %}sticky{% endif %}">
-            {% if page.udemy.release == true and page.udemy.toc == true %}
-            <nav class="toc">
-              <header>
-                <h4 class="nav__title">
-                  <i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> 
-                  {{ page.toc_label | default: "Udemy class" }}
-                </h4>
-              </header>
-              <ul class="toc__menu">
-                <li class="text-right">
-                  <del class="udemy-price-del">{{ page.udemy.price }}</del> 
-                  <span class="udemy-price-discount">{{page.udemy.discount}}</span>                  
-                </li>
-                <li class="text-right udemy-expired-time">
-                    <i class="far fa-clock" aria-hidden="true"></i>
-                    expired until {{page.udemy.expired}}
-                </li>
-                <br>
-                <li>
-                  <a href="{{page.udemy.url}}" class="btn btn--large btn--success udemy-btn-buy" target="_blank">Buy this cource</a>
-                </li>
-              </ul>
-            </nav>
-            <br>
-            {% endif %}
-            <nav class="toc">
-              <header>
-                <h4 class="nav__title">
-                  <i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> 
-                  {{ page.toc_label | default: "On this page" }}
-                </h4>
-              </header>
-              {% include toc.html sanitize=true html=content h_min=1 h_max=6 class="toc__menu" skip_no_ids=true %}
-            </nav>
-          </aside>
-        {% endif %}
-        <hr>
+        <br>
         {{ content }}
         {% if page.link %}
         <div>

@@ -19,8 +19,6 @@ tags:
   - js
 sidebar:
   - title: "Role"
-    image: assets/images/cources/js.png
-    image_alt: "logo"
     text: "Developer, Front-End Developer & Programmer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar tentang Pemograman scripting language menggunakan Javascript."

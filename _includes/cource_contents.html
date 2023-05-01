@@ -1,0 +1,32 @@
+{% if include.cource_name %}
+  {% assign cource_name = page[include.cource_name] %}
+{% else %}
+  {% assign cource_name = page.key %}
+{% endif %}
+
+{% assign cource = site.cources | where: 'key', cource_name | first %}
+
+{% if cource.catalogs %}
+    {% for catalog in cource.catalogs %}
+    {% assign posts = site.posts | where: 'lang', cource_name | where: 'catalog_key', catalog.key | sort: date %}
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content{{forloop.index}}">
+        <label class="acordion-item-label" for="content{{forloop.index}}">{{ catalog.name }}</label>
+        <div class="acordion-item-content">
+            <ul>
+              {% for post in posts %}
+              <li>
+                <a href="{{ post.url | relative_url }}">
+                  <span>{{ post.title }}</span>
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+{% else %}
+
+{% endif %}

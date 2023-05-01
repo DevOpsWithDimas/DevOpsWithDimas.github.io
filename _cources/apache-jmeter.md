@@ -19,8 +19,6 @@ tags:
   - Testing
 sidebar:
   - title: "Role"
-    image: assets/images/cources/apache-jmeter.png
-    image_alt: "logo"
     text: "DevOps Engineer, & Operation team"
   - title: "Responsibilities"
     text: "Temen-temen akan belajar LoadPerformance dengan menggunakan tools Apache JMeter untuk Web, Web Service, Jdbc, dan lain-lain."

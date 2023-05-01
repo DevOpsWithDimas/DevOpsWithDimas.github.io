@@ -29,8 +29,6 @@ header:
       url: /posts/server/linux/centos
 sidebar:
   - title: "Role"
-    image: assets/images/cources/linux-centos.png
-    image_alt: "logo"
     text: "DevOps Engineer, Developer & Programmer"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar Linux untuk Server dengan CentOS untuk Pemula sampai Mahir."
