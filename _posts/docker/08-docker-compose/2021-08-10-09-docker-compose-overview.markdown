@@ -3,6 +3,7 @@
 title: "Overview of Docker Compose"
 date: 2021-08-10T18:55:52+07:00
 lang: docker
+sidebar_toc: false
 authors:
 - dimasm93
 categories:

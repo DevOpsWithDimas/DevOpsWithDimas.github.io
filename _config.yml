@@ -307,6 +307,7 @@ defaults:
       - wide
       author_profile: true
       author: dimasm93
+      show_cource_content: true
       sidebar_toc: true
       read_time: true
       show_date: true

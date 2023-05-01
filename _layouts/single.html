@@ -38,7 +38,59 @@ layout: default
       {% endunless %}
 
       <section class="page__content e-content" itemprop="text">
-        <br>
+        {% if page.show_cource_content == true %}
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          {% if page.lang %}
+            {% assign cource_name = page.lang %}
+            {% assign cource = site.cources | where: 'key', cource_name | first %}
+            {% if cource.catalogs %}
+                {% for catalog in cource.catalogs %}
+                <nav class="toc accordion-container">                  
+                  <header>
+                    <h4 class="nav__title">
+                      <i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> 
+                      {{ catalog.name }}
+                    </h4>
+                  </header>
+                  {% assign posts = site.posts | where: 'lang', cource_name | where: 'catalog_key', catalog.key | sort: date %}
+                  {% for post in posts %}
+                  <ul class="toc__menu">
+                    <li>
+                      <a href="{{ post.url | relative_url }}">{{ post.title | truncate: 30 }}</a>
+                    </li>
+                  </ul>
+                  {% endfor %}
+                </nav>
+                <br>  
+                {% endfor %}  
+            {% else %}
+              <nav class="toc accordion-container">
+                <header>
+                  <h4 class="nav__title">
+                    <i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> 
+                    {{ cource.title }}
+                  </h4>
+                </header>
+                {% assign posts = site.posts | where: 'lang', cource_name | sort: date %}
+                {% for post in posts %}
+                <ul class="toc__menu">
+                  <li>
+                    <a href="{{ post.url | relative_url }}">{{ post.title | truncate: 30 }}</a>
+                  </li>
+                </ul>
+                {% endfor %}
+              </nav>
+              <br> 
+            {% endif %}          
+          {% endif %}
+        </aside>
+        {% endif %}
         {{ content }}
         {% if page.link %}
         <div>
@@ -93,3 +145,16 @@ layout: default
     </div>
   {% endif %}
 </div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>

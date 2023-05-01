@@ -69,20 +69,6 @@
     {% include toc.html sanitize=true html=content h_min=1 h_max=6 class="toc__menu" skip_no_ids=true %}
   </nav>
   {% endif %}
-
-  {% if page.show_cource_content %}
-    <hr>
-    {% assign language = page.lang | default: page.key %}
-    {% assign collection = site.cources | where: 'key', language | first %}
-    {% if collection.catalogs %}
-      <h3>Cource Content</h2>
-      {% for catalog in collection.catalogs %}
-        {% assign children = site.posts | where: 'lang', language | where: 'catalog_key', catalog.key | sort: date %}
-        {% include collection_list nav=catalog sub_nav=children %}
-      {% endfor %}
-      
-    {% endif %}
-  {% endif %}
   </div>
 {% endif %}
 

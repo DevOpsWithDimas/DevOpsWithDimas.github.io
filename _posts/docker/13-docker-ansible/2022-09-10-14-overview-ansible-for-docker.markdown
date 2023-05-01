@@ -3,6 +3,7 @@
 title: "Overview Study cases: IT Automation Platform for Docker Operations"
 date: 2022-09-10T11:48:17+07:00
 lang: docker
+sidebar_toc: false
 authors:
 - dimasm93
 categories:
