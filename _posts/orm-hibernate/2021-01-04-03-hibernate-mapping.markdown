@@ -1,8 +1,8 @@
 ---
-
+lang: orm-hibernate
+catalog_key: orm-mapping
 title: "Hibernate ORM Relationship Mapping"
 date: 2021-01-04T14:21:26+07:00
-lang: orm-hibernate
 authors:
 - dimasm93
 categories:
@@ -14,7 +14,6 @@ refs:
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: 0kKbp6bLwLE
 comments: true
-catalog_key: orm-mapping
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
 image_path: /resources/posts/orm-hibernate/
 downloads: []

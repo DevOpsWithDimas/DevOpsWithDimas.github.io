@@ -1,10 +1,8 @@
 ---
-
+lang: orm-hibernate
+catalog_key: introduction
 title: "Silabus Belajar JPA Hibernate"
 date: 2020-08-21T19:27:29+07:00
-lang: orm-hibernate
-authors:
-- dimasm93
 categories:
 - Java
 - ORM
@@ -14,7 +12,6 @@ refs:
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: Fa7q1O0z8Q4
 comments: true
-catalog_key: introduction
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
 image_path: /resources/posts/orm-hibernate/
 downloads: []

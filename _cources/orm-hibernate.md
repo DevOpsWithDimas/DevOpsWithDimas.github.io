@@ -4,15 +4,15 @@ subtitle: "Object Relational Framework for Java"
 key: orm-hibernate
 publish: 
 hidden: false
-coming_soon: true
+coming_soon: false
 header:
-  overlay_image: assets/images/cources/orm-hibernate.png
+  overlay_image: assets/images/cources/orm-hibernetes-teaser.png
   teaser: assets/images/cources/orm-hibernate.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/java/framework/orm-hibernate/
+      url: /posts/java/orm/hibernate/postgresql/01-silabus-orm-hibernate.html
 tagline: "xxx"
 tags:
   - Java
@@ -33,6 +33,27 @@ udemy:
   referralCode: 8DA27E06BF0BA6935CCC
   expired: 15/04/2023
   toc: true
+catalogs:
+  - name: Pengenalan ORM Hibernetes
+    key: introduction
+    description: 'Eps. 1 - Pengenakan ORM Framework'
+    deprecated: false
+    messages: ''
+  - name: Mapping types of Hibernetes
+    key: orm-mapping
+    description: 'Eps. 2 - Mapping di Hibernetes'
+    deprecated: false
+    messages: ''
+  - name: Hibernetes query language (HQL)
+    key: hql
+    description: 'Eps. 3 - Query di Hibernetes'
+    deprecated: false
+    messages: ''
+  - name: Java Query Persistence query language
+    key: jpql
+    description: 'Eps. 3 - Query di Hibernetes'
+    deprecated: false
+    messages: ''
 ---
 
 Hai semuanya selamat datang di kelas **xxx**, jadi kali ini kita akan membahas xxx yaitu menggunakan [xxx](link). 

@@ -1,7 +1,7 @@
 ---
-
-title: "Time is your practice"
 lang: orm-hibernate
+catalog_key: introduction
+title: "Time is your practice"
 authors:
 - dimasm93
 date: 2021-01-04T08:36:52+07:00
@@ -14,7 +14,6 @@ refs:
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: Ii9yV3ZHpNQ
 comments: true
-catalog_key: introduction
 image_path: 
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
 image_path: /resources/posts/orm-hibernate/

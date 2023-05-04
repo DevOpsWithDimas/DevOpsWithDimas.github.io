@@ -1,10 +1,8 @@
 ---
-
+lang: orm-hibernate
+catalog_key: introduction
 title: "Setup Development Environment"
 date: 2020-11-21T12:16:35+07:00
-lang: orm-hibernate
-authors:
-- dimasm93
 categories:
 - Java
 - ORM
@@ -14,13 +12,12 @@ refs:
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: Uc34EfF6LT8
 comments: true
-catalog_key: introduction
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
 image_path: /resources/posts/orm-hibernate/
 downloads: []
 ---
 
-Halo di [postingan sebelumnya]({% post_url orm-hibernate/2020-11-21-002-pengenalan-jpa-with-hibernate %}) kita udah berkenalan nih dengan Hibernate Framework, jadi sekarang kita akan mulai untuk persiapan-persiapan apa aja yang perlu di setup sebelum memulai koding dengan Hibernate.
+Hai semuanya kita udah berkenalan nih dengan Hibernate Framework, jadi sekarang kita akan mulai untuk persiapan-persiapan apa aja yang perlu di setup sebelum memulai koding dengan Hibernate.
 
 <!--more-->
 

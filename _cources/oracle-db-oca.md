@@ -5,11 +5,9 @@ key: oracle18c-oca
 publish: 2021-02-07T12:26:00+07:00
 hidden: false
 coming_soon: false
-toc: true
-toc_sticky: true
 header:
-  overlay_image: "assets/images/cources/oracle18c-oca.png"
-  teaser: assets/images/cources/oracle18c-oca.png
+  overlay_image: assets/images/cources/oracledb18c-oca-teaser.png
+  teaser: assets/images/cources/oracledb18c-oca.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:

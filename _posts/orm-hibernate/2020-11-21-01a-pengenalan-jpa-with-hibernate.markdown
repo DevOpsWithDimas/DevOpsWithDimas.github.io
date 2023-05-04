@@ -1,10 +1,8 @@
 ---
-
+lang: orm-hibernate
+catalog_key: introduction
 title: "Pengenalan ORM dengan Hibernate Framework"
 date: 2020-11-21T11:44:22+07:00
-lang: orm-hibernate
-authors:
-- dimasm93
 categories:
 - Java
 - ORM
@@ -15,7 +13,6 @@ refs:
 - https://dzone.com/articles/about-transparent-persistence
 youtube: HlLrTQMX0E0
 comments: true
-catalog_key: introduction
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
 image_path: /resources/posts/orm-hibernate/
 downloads: []

@@ -1,8 +1,8 @@
 ---
-
+lang: orm-hibernate
+catalog_key: introduction
 title: "Macam Macam Generator Value di Hibernate"
 date: 2021-01-03T16:41:23+07:00
-lang: orm-hibernate
 authors:
 - dimasm93
 categories:
@@ -14,7 +14,6 @@ refs:
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: MCjohxKO8Tk
 comments: true
-catalog_key: introduction
 image_path: 
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
 image_path: /resources/posts/orm-hibernate/

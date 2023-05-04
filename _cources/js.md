@@ -3,8 +3,8 @@ title: "Pemograman JavaScript"
 subtitle: "Bahasa Pemograman Javascript"
 key: js
 publish: 
-hidden: true
-coming_soon: true
+hidden: false
+coming_soon: false
 header:
   overlay_image: "assets/images/cources/js.png"
   teaser: assets/images/cources/js.png
@@ -12,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/angular/
+      url: /posts/web/js/01-silabus-js.html
 tagline: "xxx"
 tags:
   - web
