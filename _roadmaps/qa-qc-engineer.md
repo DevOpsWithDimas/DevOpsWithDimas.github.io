@@ -1,9 +1,9 @@
 ---
 title: "QA/QC Engineer"
-key: qa-qc-engineer
+key: qaqc-engineer
 publish: 
 coming_soon: true
-hidden: true
+hidden: false
 header:
   overlay_image: "assets/images/roadmap/testing.png"
   teaser: assets/images/roadmap/testing-teaser.png

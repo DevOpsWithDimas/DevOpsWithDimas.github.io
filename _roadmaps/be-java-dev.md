@@ -1,6 +1,6 @@
 ---
 title: "Java Backend Developer"
-key: java-be-dev
+key: java-backend
 publish: 
 hidden: false
 coming_soon: true

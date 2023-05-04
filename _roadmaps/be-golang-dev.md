@@ -1,6 +1,6 @@
 ---
 title: "Golang Backend Developer"
-key: go-be-dev
+key: go-backend
 publish: 
 hidden: false
 coming_soon: true
