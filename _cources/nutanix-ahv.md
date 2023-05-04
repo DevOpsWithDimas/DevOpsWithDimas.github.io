@@ -8,7 +8,7 @@ coming_soon: true
 toc: true
 toc_sticky: true
 header:
-  overlay_image: "assets/images/cources/nutanix-ahv.png"
+  overlay_image: assets/images/cources/nutanix-ahv-teaser.png
   teaser: assets/images/cources/nutanix-ahv.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
