@@ -17,7 +17,7 @@ udemy:
   release: false
   referralCode: 8D13D85D4D34027B76BE
   expired: 15/04/2023
-  toc: true
+  toc: false
 tagline: "xxx"
 header:
   overlay_image: assets/images/cources/linux-centos.png

@@ -6,13 +6,13 @@ publish: 2021-02-07T12:26:00+07:00
 hidden: false
 coming_soon: false
 header:
-  overlay_image: assets/images/cources/oracledb18c-oca-teaser.png
-  teaser: assets/images/cources/oracledb18c-oca.png
+  overlay_image: assets/images/cources/oracledb-18c-oca-teaser.png
+  teaser: assets/images/cources/oracledb-18c-oca.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/angular/
+      linkContentUrl: _posts/oracle18c/01-introduction/2021-02-07-001-silabus-oracle-18c.markdown
 tagline: "xxx"
 sidebar:
   - title: "Role"

@@ -1,18 +1,16 @@
 ---
-
-title: "Linux - Install and Setup Software Development Kit (SDK)"
 lang: spring-core
-authors:
-- dimasm93
+catalog_key: introduction
+title: "Linux - Install and Setup Software Development Kit (SDK)"
 categories:
 - java
+- framework
 - spring
 refs: 
 - https://spring.io/projects/spring-framework
 youtube: 
 comments: true
 gist: dimMaryanto93/18ec7d7d241ffdac192d249106d35500
-catalog_key: introduction
 image_path: /resources/posts/spring-core/01c-install-sdk-linux
 downloads: []
 ---

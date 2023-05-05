@@ -12,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/java/orm/hibernate/postgresql/01-silabus-orm-hibernate.html
+      linkContentUrl: _posts/orm-hibernate/01-introduction/2020-08-21-01-silabus-orm-hibernate.markdown
 tagline: "xxx"
 tags:
   - Java

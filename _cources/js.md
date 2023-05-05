@@ -12,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/web/js/01-silabus-js.html
+      linkContentUrl: _posts/js/2020-08-20-01-silabus-js.markdown
 tagline: "xxx"
 tags:
   - web

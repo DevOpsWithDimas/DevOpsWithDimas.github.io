@@ -1,20 +1,15 @@
 ---
-title: "Nutanix CloudNative"
-subtitle: "Nutanix CloudNative for DevOps"
+title: "Nutanix Cloud Native"
+subtitle: "Nutanix Cloud Native for DevOps"
 key: nutanix-cloudnative
 publish: 
-hidden: true
+hidden: false
 coming_soon: true
-toc: true
-toc_sticky: true
 header:
-  overlay_image: "assets/images/cources/nutanix-cloud-native.png"
+  overlay_image: assets/images/cources/nutanix-cloud-native-teaser.png
   teaser: assets/images/cources/nutanix-cloud-native.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
-  actions:
-    - label: "Learn more"
-      url: /posts/container/angular/
 tagline: "xxx"
 sidebar:
   - title: "Role"
@@ -37,7 +32,7 @@ udemy:
     expired: 15/04/2023
     toc: true
 catalogs:
-  - name: Pengenalan Cloud native with Nutanix
+  - name: Pengenalan Cloud native
     key: introduction
     description: 'Eps 1: Cloud Native with Nutanix'
     messages: ''

@@ -12,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/angular/
+      linkContentUrl: _posts/ansible/01-introduction/2022-07-06-00-silabus.markdown
 tagline: "xxx"
 tags:
   - DevOps

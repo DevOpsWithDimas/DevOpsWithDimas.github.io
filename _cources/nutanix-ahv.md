@@ -5,8 +5,6 @@ key: nutanix-ahv
 publish: 
 hidden: false
 coming_soon: true
-toc: true
-toc_sticky: true
 header:
   overlay_image: assets/images/cources/nutanix-ahv-teaser.png
   teaser: assets/images/cources/nutanix-ahv.png
@@ -14,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/angular/
+      linkContentUrl: _posts/nutanix-ahv/01-introduction/2023-02-04-00-silabus-nutanix-ahv.markdown
 tagline: "xxx"
 sidebar:
   - title: "Role"

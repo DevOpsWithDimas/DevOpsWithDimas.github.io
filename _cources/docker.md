@@ -26,7 +26,7 @@ header:
   teaser: assets/images/cources/docker.png
   actions:
     - label: "Learn more"
-      url: /posts/devops/docker/01-silabus.html
+      linkContentUrl: _posts/docker/01-introduction/2021-04-02-01-silabus.markdown
 sidebar:
   - title: "Role"
     text: "DevOps Engineer, Developer & Programmer"

@@ -1,22 +1,18 @@
 ---
-
+lang: spring-core
+catalog_key: introduction
 title: "Silabus - Spring Framework: Pemula sampai Mahir"
 date: 2022-03-27T14:45:51+07:00
-lang: spring-core
-authors:
-- dimasm93
 categories:
-- framework
 - java
-- spring-framework
+- framework
+- spring
 refs: 
 - https://spring.io/projects/spring-framework
 youtube: 
 comments: true
 gist: dimMaryanto93/18ec7d7d241ffdac192d249106d35500
-comments: true
 image_path: /resources/posts/spring-core/01-silabus
-catalog_key: introduction
 downloads: []
 ---
 

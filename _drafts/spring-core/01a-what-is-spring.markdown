@@ -1,18 +1,16 @@
 ---
-
-title: "What is Spring Framework"
 lang: spring-core
-authors:
-- dimasm93
+catalog_key: introduction
+title: "What is Spring Framework"
 categories:
 - java
+- framework
 - spring
 refs: 
 - https://docs.spring.io/spring-framework/docs/current/reference/html/overview.html#overview
 youtube: 
 comments: true
 gist: dimMaryanto93/18ec7d7d241ffdac192d249106d35500
-catalog_key: introduction
 image_path: /resources/posts/spring-core/01a-what-is-spring
 downloads: []
 ---

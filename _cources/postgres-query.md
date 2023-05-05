@@ -14,7 +14,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      url: /posts/container/angular/
+      linkContentUrl: _posts/postgresql/01-introduction/2022-01-15-01-silabus-psql.markdown
 tagline: "xxx"
 sidebar:
   - title: "Role"

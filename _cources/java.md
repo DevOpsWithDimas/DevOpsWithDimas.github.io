@@ -14,7 +14,7 @@ header:
     - label: "Get source-code"
       url: https://github.com/BootcampYoutubeChannel/belajar-java8
     - label: "Learn more"
-      url: /posts/language/java/01-silabus.html
+      linkContentUrl: _posts/java/01-introduction/2022-03-27-01-silabus.markdown
 tagline: "xxx"
 tags:
   - Pemograman

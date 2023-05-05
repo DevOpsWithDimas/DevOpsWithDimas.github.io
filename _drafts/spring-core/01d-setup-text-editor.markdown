@@ -1,18 +1,16 @@
 ---
-
-title: "Install and Setup Integrated Development Editor (IDE)"
 lang: spring-core
-authors:
-- dimasm93
+catalog_key: introduction
+title: "Install and Setup Integrated Development Editor (IDE)"
 categories:
 - java
+- framework
 - spring
 refs: 
 - https://spring.io/projects/spring-framework
 youtube: 
 comments: true
 gist: dimMaryanto93/18ec7d7d241ffdac192d249106d35500
-catalog_key: introduction
 image_path: /resources/posts/spring-core/01d-setup-text-editor
 downloads: []
 ---

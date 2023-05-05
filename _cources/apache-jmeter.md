@@ -10,9 +10,6 @@ header:
   teaser: assets/images/cources/apache-jmeter.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
-  actions:
-    - label: "Learn more"
-      url: /posts/container/angular/
 tagline: "xxx"
 tags:
   - DevOps

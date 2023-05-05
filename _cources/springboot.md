@@ -12,9 +12,6 @@ header:
   teaser: assets/images/cources/spring-boot.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
-  actions:
-    - label: "Learn more"
-      url: /posts/container/angular/
 tagline: "xxx"
 sidebar:
   - title: "Role"

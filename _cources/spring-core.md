@@ -1,15 +1,18 @@
 ---
-title: "DBA: PostgreSQL"
-subtitle: "PostgreSQL Certified Proffesional"
-key: postgres-dba
+title: "Spring Framework"
+subtitle: "Spring Framework for Backend Developer"
+key: spring-core
 publish: 
-hidden: true
+hidden: false
 coming_soon: true
 header:
-  overlay_image: "assets/images/cources/postgresql.png"
-  teaser: assets/images/cources/postgresql.png
+  overlay_image: assets/images/cources/spring-core-teaser.png
+  teaser: assets/images/cources/spring-core.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
+  actions:
+    - label: "Learn more"
+      linkContentUrl: _posts/spring-core/01-introduction/2022-03-27-01-silabus.markdown
 tagline: "xxx"
 sidebar:
   - title: "Role"
@@ -22,34 +25,38 @@ tags:
   - PostgreSQL
   - SQL
 udemy: 
-  url: https://www.udemy.com/course/dba-postgresql-pemula-sampai-mahir/
+  url: https://www.udemy.com/course/spring-boot-pemula-sampai-mahir/
   price: Rp.280.000,-
   discount: Rp.99.000,-
   couponCode: BUKBER.2023.10
-  release: true
+  release: false
   referralCode: 8080BE598C39D7652D33
   expired: 15/04/2023
-  toc: true
+  toc: false
 catalogs:
-  - name: Pengenalan PostgreSQL
+  - name: Pengenalan Spring Framework
     key: introduction
-    description: ''
+    description: 'Eps 1: Pengenalan Spring Boot'
     messages: ''
-  - name: 'Pg/PL SQL'
-    key: pg-plsql
-    description: ''
+  - name: Core technologies
+    key: dependency-injection
+    description: 'Eps 2: Dependency Injection'
     messages: ''
-  - name: Query Performance Tips
-    key: query-tunning-tips
-    description: ''
+  - name: Testing
+    key: testing
+    description: 'Eps 3: Testing'
     messages: ''
-  - name: 'Server Administration'
-    key: server-administration
-    description: ''
+  - name: Data Access
+    key: data
+    description: 'Eps 4: Spring Data'
     messages: ''
-  - name: 'Study Kasus: Backend engine'
-    key: study-cases-backend-engine
-    description: ''
+  - name: Spring Web
+    key: web
+    description: 'Eps 5: Spring MVC / WebFlux'
+    messages: ''
+  - name: Integration
+    key: integration
+    description: 'Eps 6: Spring Integration'
     messages: ''
 ---
 

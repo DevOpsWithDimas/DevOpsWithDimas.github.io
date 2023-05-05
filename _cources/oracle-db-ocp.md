@@ -8,13 +8,10 @@ coming_soon: true
 toc: true
 toc_sticky: true
 header:
-  overlay_image: "assets/images/cources/oracle18cx-ocp.png"
-  teaser: assets/images/cources/oracle18cx-ocp.png
+  overlay_image: assets/images/cources/oracledb-18c-ocp.png
+  teaser: assets/images/cources/oracledb-18c-ocp.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
-  actions:
-    - label: "Learn more"
-      url: /posts/container/angular/
 tagline: "xxx"
 sidebar:
   - title: "Role"

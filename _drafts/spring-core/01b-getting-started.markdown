@@ -1,18 +1,16 @@
 ---
-
-title: "Getting started"
 lang: spring-core
-authors:
-- dimasm93
+catalog_key: introduction
+title: "Getting started"
 categories:
 - java
+- framework
 - spring
 refs: 
 - https://spring.io/projects/spring-framework
 youtube: 
 comments: true
 gist: dimMaryanto93/18ec7d7d241ffdac192d249106d35500
-catalog_key: introduction
 image_path: /resources/posts/spring-core/01b-getting-started
 downloads: []
 ---
