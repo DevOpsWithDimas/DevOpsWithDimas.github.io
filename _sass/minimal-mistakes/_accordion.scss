@@ -22,6 +22,19 @@ input {
   padding-inline-start: 0px;
 }
 
+.acordion-item-content ul a {
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  text-decoration: none;
+}
+
+.acordion-item-content-title:hover{
+  text-decoration: none;
+  font-size: large;
+  transition: all .35s;
+}
+
 /* Accordion styles */
 .accordion-container {
   border-radius: 8px;
