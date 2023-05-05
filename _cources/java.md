@@ -2,9 +2,9 @@
 title: "Pemograman Java"
 subtitle: "Bahasa Pemograman Java"
 key: java
-publish: 
+publish: 2019-09-28T18:46:00+07:00
 hidden: false
-coming_soon: true
+coming_soon: false
 header:
   overlay_image: "assets/images/cources/java-teaser.png"
   teaser: assets/images/cources/java.png
