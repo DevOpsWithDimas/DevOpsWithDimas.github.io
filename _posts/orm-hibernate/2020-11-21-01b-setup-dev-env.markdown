@@ -30,7 +30,7 @@ Hai semuanya kita udah berkenalan nih dengan Hibernate Framework, jadi sekarang 
 
 ## Setup Java 1.8
 
-Untuk setup java 1.8 udah pernah saya bahas di materi [Java Core]({{site.baseurl}}{% post_url java-core/2017-10-16-001-silabus-java %})
+Untuk setup java 1.8 udah pernah saya bahas di materi [Java Core]({{site.baseurl}}{% post_url java/01-introduction/2022-03-27-01-silabus %})
 
 ## Setup Apache Maven
 

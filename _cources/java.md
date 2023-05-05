@@ -38,25 +38,21 @@ catalogs:
     key: introduction
     description: 'Eps 1: Pengenalan Java Programming language'
     messages: ''
-  - name: Getting started
-    key: getting-started
-    description: 'Eps 2: Getting started with Java'
-    messages: ''
-  - name: Variables, Data Types and Methods
+  - name: Basic
     key: basic
-    description: 'Eps 3: Variables, Data Types and Methods'
+    description: 'Eps 2: Basic Pemograman Java'
     messages: ''
-  - name: Build-in Functions & Operators
-    key: function-and-operators
-    description: 'Eps 4: Build-in Function and Operators'
+  - name: Control statement
+    key: control-statement
+    description: 'Eps 3: Control statement'
     messages: ''
-  - name: Classes and Packages
-    key: class-package
-    description: 'Eps 5: Classes and Packages'
+  - name: Functions & Methods
+    key: method-and-functions
+    description: 'Eps 4: Control statement'
     messages: ''
-  - name: Structure Control
-    key: structure-control
-    description: 'Eps 6: Structure Control'
+  - name: Class and Packages
+    key: package-classes
+    description: 'Eps 4: Control statement'
     messages: ''
   - name: Array, Collections & Generics
     key: collections-generics
