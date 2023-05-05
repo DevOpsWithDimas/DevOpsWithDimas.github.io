@@ -1,10 +1,8 @@
 ---
-
+lang: orm-hibernate
+catalog_key: hql
 title: "Hibernate Query Language (HQL-JPQL)"
 date: 2021-01-21T11:14:37+07:00
-lang: orm-hibernate
-authors:
-- dimasm93
 categories:
 - Java
 - ORM
@@ -14,7 +12,6 @@ refs:
 - https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#hql
 youtube: sSzUOkFiQlE
 comments: true
-catalog_key: hql
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
 image_path: /resources/posts/orm-hibernate/orm-hibernate-29
 downloads: []
