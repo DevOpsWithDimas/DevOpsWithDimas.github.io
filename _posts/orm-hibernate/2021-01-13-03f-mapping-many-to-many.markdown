@@ -1,10 +1,8 @@
 ---
-
+lang: orm-hibernate
+catalog_key: orm-mapping
 title: "ManyToMany Mapping"
 date: 2021-01-13T15:08:30+07:00
-lang: orm-hibernate
-authors:
-- dimasm93
 categories:
 - Java
 - ORM
@@ -14,9 +12,8 @@ refs:
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: cz0jiWqM2HY
 comments: true
-catalog_key: orm-mapping
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
-image_path: /resources/posts/orm-hibernate/orm-hibernate-24
+image_path: /resources/posts/orm-hibernate/03f-many-to-many-mapping
 downloads: []
 ---
 

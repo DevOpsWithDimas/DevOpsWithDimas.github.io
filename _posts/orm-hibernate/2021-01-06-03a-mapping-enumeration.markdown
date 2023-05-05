@@ -1,10 +1,8 @@
 ---
-
+lang: orm-hibernate
+catalog_key: orm-mapping
 title: "Mapping Enum Ordinal & String"
 date: 2021-01-06T14:05:37+07:00
-lang: orm-hibernate
-authors:
-- dimasm93
 categories:
 - Java
 - ORM
@@ -14,8 +12,7 @@ refs:
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: 3e3kZ-OKyp8
 comments: true
-catalog_key: orm-mapping
-image_path: /resources/posts/orm-hibernate/orm-hibernate-15
+image_path: /resources/posts/orm-hibernate/03a-mapping-enum
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
 downloads: []
 ---
