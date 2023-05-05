@@ -2,7 +2,7 @@
 title: "ORM Hibernate"
 subtitle: "Object Relational Framework for Java"
 key: orm-hibernate
-publish: 
+publish: 2020-01-01T18:46:00+07:00
 hidden: false
 coming_soon: false
 header:
