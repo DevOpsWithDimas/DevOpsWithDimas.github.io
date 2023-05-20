@@ -19,3 +19,9 @@ jobs:
       - uses: helaili/jekyll-action@2.0.5    # Choose any one of the Jekyll Actions
         with:                                # Some relative inputs of your action
           token: ${{ secrets.GITHUB_TOKEN }}
+          jekyll_src: ./
+          target_branch: 'gh-pages'
+          build_only: true
+          bundler_version: 2.4.8
+        env:
+          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
