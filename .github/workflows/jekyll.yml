@@ -23,3 +23,4 @@ jobs:
           build_only: true
           bundler_version: 2.4.8
           jekyll_src: ./
+          pre_build_commands: 'gem update --system'
