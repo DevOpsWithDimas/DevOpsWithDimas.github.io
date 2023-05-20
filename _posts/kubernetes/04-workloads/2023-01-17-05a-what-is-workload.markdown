@@ -1,10 +1,8 @@
 ---
-
+lang: k8s
+catalog_key: workloads
 title: "What is Workload Resources?"
 date: 2023-01-17T20:07:04+07:00
-lang: k8s
-authors:
-- dimasm93
 categories:
 - DevOps
 - Orchestration
@@ -15,7 +13,6 @@ refs:
 - https://cloud.google.com/kubernetes-engine/docs/how-to/deploying-workloads-overview
 youtube: 
 comments: true
-catalog_key: workloads
 image_path: /resources/posts/kubernetes/05a-what-is-workload
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []

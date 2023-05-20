@@ -26,6 +26,7 @@ Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes worklo
   1. Updating a Deployment
   2. Rolling Back a Deployment
   3. Pause and Resume rollout of a Deployment
+4. Deployment status
 
 Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:
 
