@@ -9,16 +9,15 @@ jobs:
   github-pages:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
           key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
             ${{ runner.os }}-gems-
-      - uses: helaili/jekyll-action@2.5.0    # Choose any one of the Jekyll Actions
-        with:                                # Some relative inputs of your action
+      - uses: helaili/jekyll-action@v2
+        with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target_branch: 'gh-pages'
           jekyll_src: ./
-          pre_build_commands: 'gem update --system'
