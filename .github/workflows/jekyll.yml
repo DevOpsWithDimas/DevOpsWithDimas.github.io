@@ -22,3 +22,4 @@ jobs:
           target_branch: 'gh-pages'
           build_only: true
           bundler_version: 2.4.8
+          jekyll_src: ./
