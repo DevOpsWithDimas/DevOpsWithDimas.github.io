@@ -6,7 +6,7 @@ cache:
   - vendor/
 
 build-jekyll:
-  image: ruby:alpine3.17
+  image: ruby:3.2.2-alpine
   before_script:
     - apk add git
     - gem install bundler
