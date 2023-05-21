@@ -28,7 +28,7 @@ deploy-pages:
     GIT_REMOTE_BRANCH: github-pages
     GIT_REMOTE_REPO: "$CI_SERVER_PROTOCOL://${GIT_ACCESS_TOKEN}:${GIT_ACCESS_TOKEN}@$CI_SERVER_HOST:$CI_SERVER_PORT/$CI_PROJECT_PATH_SLUG.git"
   needs:
-    - build-html
+    - build-jekyll
   before_script:
     - cd ${DIR_BUILD}
     - git init -b $GIT_LOCAL_BRANCH
