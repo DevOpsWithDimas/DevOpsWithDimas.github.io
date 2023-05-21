@@ -1,0 +1,42 @@
+variables:
+  DIR_BUILD: public
+
+build-jekyll:
+  image: ruby:alpine3.17
+  before_script:
+    - gem install bundler
+    - bundle install
+    - touch ${DIR_BUILD}/.nojekyll
+  script: 
+    - bundle exec jekyll build -d ${DIR_BUILD}
+  artifacts:
+    name: "$CI_JOB_NAME-${CI_COMMIT_SHORT_SHA}"
+    paths:
+      - ${DIR_BUILD}/*
+  only:    
+    - /-release$/
+
+deploy-pages:
+  image: 
+    entrypoint: ['']
+    name: alpine/git:${GIT_VERSION}
+  variables:
+    GIT_VERSION: v2.30.1  
+    PUSH_OPTIONS: --force
+    COMMIT_MESSAGE: "build project ${CI_COMMIT_SHORT_SHA} on branch ${CI_COMMIT_BRANCH} at ${CI_COMMIT_TIMESTAMP}"
+    GIT_LOCAL_BRANCH: main
+    GIT_REMOTE_BRANCH: github-pages
+    GIT_REMOTE_REPO: "$CI_SERVER_PROTOCOL://${GIT_ACCESS_TOKEN}:${GIT_ACCESS_TOKEN}@$CI_SERVER_HOST:$CI_SERVER_PORT/$CI_PROJECT_PATH_SLUG.git"
+  needs:
+    - build-html
+  before_script:
+    - cd ${DIR_BUILD}
+    - git init -b $GIT_LOCAL_BRANCH
+    - git config --global user.email "bot-gitlab-ci@$CI_SERVER_HOST"
+    - git config --global user.name "bot-gitlab-ci"
+  script: 
+    - git add .
+    - git commit $COMMIT_OPTIONS -m "${COMMIT_MESSAGE}"
+    - git push $PUSH_OPTIONS $GIT_REMOTE_REPO $GIT_LOCAL_BRANCH:$GIT_REMOTE_BRANCH
+  only:    
+    - /-release$/
