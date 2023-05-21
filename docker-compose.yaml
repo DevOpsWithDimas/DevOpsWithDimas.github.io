@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+  jekyll:
+    image: dimmaryanto93/jekyll-build:v1
+    build: 
+      dockerfile: Dockerfile
+      context: ./

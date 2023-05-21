@@ -1,0 +1,9 @@
+## gem and package manager
+Gemfile.lock
+.jekyll-cache
+
+## build local folder
+_site
+
+## git engine
+.git/
