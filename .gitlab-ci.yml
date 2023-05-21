@@ -1,5 +1,5 @@
 variables:
-  DIR_BUILD: public
+  DIR_BUILD: _site
 
 cache:
   paths:
@@ -8,7 +8,8 @@ cache:
 build-jekyll:
   image: dimmaryanto93/jekyll-build:v3.2.2-debian
   before_script:
-    - bundle install --path vendor
+    - mkdir -p ${DIR_BUILD}
+    - bundle install
     - touch ${DIR_BUILD}/.nojekyll
   script: 
     - bundle exec jekyll build -d ${DIR_BUILD}
