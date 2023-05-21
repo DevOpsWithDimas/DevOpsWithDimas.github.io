@@ -1,12 +1,16 @@
 variables:
   DIR_BUILD: public
 
+cache:
+  paths:
+  - vendor/
+
 build-jekyll:
   image: ruby:alpine3.17
   before_script:
     - apk add git
     - gem install bundler
-    - bundle install
+    - bundle install --path vendor
     - touch ${DIR_BUILD}/.nojekyll
   script: 
     - bundle exec jekyll build -d ${DIR_BUILD}
