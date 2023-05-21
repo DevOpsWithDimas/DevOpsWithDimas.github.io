@@ -177,6 +177,9 @@ exclude:
   - Rakefile
   - README
   - tmp
+  - Dockerfile
+  - docker-compose
+  - .dockerignore
   - /docs # ignore Minimal Mistakes /docs
   - /test # ignore Minimal Mistakes /test
 keep_files:
