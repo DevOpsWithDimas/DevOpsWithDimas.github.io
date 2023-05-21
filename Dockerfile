@@ -5,7 +5,8 @@ RUN apt update && \
 RUN gem install bundler && \
     gem install bundle
 
-# WORKDIR /src/apps
+WORKDIR /src/apps
+ENTRYPOINT [ "" ]
 # COPY . /src/apps
 # RUN mkdir -p /var/www/html
 # RUN bundle install && \
