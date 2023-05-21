@@ -6,10 +6,8 @@ cache:
   - vendor/
 
 build-jekyll:
-  image: ruby:3.2.2-alpine
+  image: dimmaryanto93/jekyll-build:v3.2.2-debian
   before_script:
-    - apk add git
-    - gem install bundler
     - bundle install --path vendor
     - touch ${DIR_BUILD}/.nojekyll
   script: 
