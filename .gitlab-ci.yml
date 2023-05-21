@@ -4,6 +4,7 @@ variables:
 build-jekyll:
   image: ruby:alpine3.17
   before_script:
+    - apk add git
     - gem install bundler
     - bundle install
     - touch ${DIR_BUILD}/.nojekyll
