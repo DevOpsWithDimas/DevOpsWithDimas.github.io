@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Combine Logical pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006h-combine-logical"
+    }
+    ,
+    {
+      "title": "Not Predicate pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006g-not-predicate"
+    }
+    ,
+    {
+      "title": "Exists Condition pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006f-exist-condition"
+    }
+    ,
+    {
+      "title": "In Predicates pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006e-in-predicate"
+    }
+    ,
+    {
+      "title": "Null Conditions pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006d-null-predicate"
+    }
+    ,
+    {
+      "title": "Between Predicate pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006c-between-predicate"
+    }
+    ,
+    {
+      "title": "Like Predicate pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006b-like-predicate"
+    }
+    ,
+    {
+      "title": "Comparison Predicate pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006a-relational-comparison"
+    }
+    ,
+    {
+      "title": "Klausa where untuk filter data di Oracle",
+      "link": "/posts/rdbms/oracle18c/006-where-clause"
+    }
+    ,
+    {
+      "title": "Menghilangkan nilai redundansi dengan klausa Distinct",
+      "link": "/posts/rdbms/oracle18c/005e-select-distinct"
+    }
+  ]
+}

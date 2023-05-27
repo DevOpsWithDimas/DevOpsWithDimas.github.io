@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Install Oracle 18c XE untuk Linux",
+      "link": "/posts/rdbms/oracle18c/003b-install-oracledb-linux-rpm"
+    }
+    ,
+    {
+      "title": "Install Oracle 18c XE untuk Windows 10",
+      "link": "/posts/rdbms/oracle18c/003a-install-oracledb-win"
+    }
+    ,
+    {
+      "title": "Persiapan install Oracle Database 18c",
+      "link": "/posts/rdbms/oracle18c/003-pre-install-oracledb"
+    }
+    ,
+    {
+      "title": "Database Interaction dengan SQL",
+      "link": "/posts/rdbms/oracle18c/002c-interaction-oracle-database-sql"
+    }
+    ,
+    {
+      "title": "Interface untuk Oracle Database",
+      "link": "/posts/rdbms/oracle18c/002b-interface-for-oracle-database"
+    }
+    ,
+    {
+      "title": "Konsep User dan Schema di Oracle Database 18c",
+      "link": "/posts/rdbms/oracle18c/002a-consept-user-schema"
+    }
+    ,
+    {
+      "title": "Pengenalan Oracle Database 18c",
+      "link": "/posts/rdbms/oracle18c/002-pengenalan-oracledb"
+    }
+    ,
+    {
+      "title": "Silabus Belajar RDBMS Oracle 18c",
+      "link": "/posts/rdbms/oracle18c/001-silabus-oracle-18c"
+    }
+    ,
+    {
+      "title": "Time is your Practice",
+      "link": "/posts/java/orm/hibernate/postgresql/10-quis-3"
+    }
+    ,
+    {
+      "title": "Read Only Entity dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/09-read-only-entity"
+    }
+  ]
+}

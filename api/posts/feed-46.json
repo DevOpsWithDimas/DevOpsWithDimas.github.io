@@ -1,0 +1,39 @@
+{
+  "pages": [
+    
+    {
+      "title": "Macam macam Operator di Java",
+      "link": "/posts/language/java/basic/03-operator"
+    }
+    ,
+    {
+      "title": "Tipe data untuk menyimpan Tanggal",
+      "link": "/posts/language/java/basic/02e-tipe-data-tanggal"
+    }
+    ,
+    {
+      "title": "Tipe data untuk bernilai Karakter",
+      "link": "/posts/language/java/basic/02c-tipe-data-string"
+    }
+    ,
+    {
+      "title": "Tipe data logika (true of false)",
+      "link": "/posts/language/java/basic/02d-tipe-data-logika"
+    }
+    ,
+    {
+      "title": "Tipe data yang bernilai Number",
+      "link": "/posts/language/java/basic/02b-tipe-data-number"
+    }
+    ,
+    {
+      "title": "Variabel dan Tipe Data",
+      "link": "/posts/language/java/basic/02a-data-type-and-variables"
+    }
+    ,
+    {
+      "title": "Standarisasi penulisan coding di Java",
+      "link": "/posts/language/java/basic/02-role-java"
+    }
+  ]
+}

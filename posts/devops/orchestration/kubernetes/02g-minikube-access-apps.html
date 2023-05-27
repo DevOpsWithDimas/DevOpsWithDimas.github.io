@@ -1,0 +1,1544 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Access your apps/service in minikube - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas bagaimana cara mengakses apps/service pada kubernetes menggunakan Minikube. Diantaranya     Using minikube service command   Using minikube tunnel command   Ok langsung aja kita ke pembahasan yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Access your apps/service in minikube">
+<meta property="og:url" content="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas bagaimana cara mengakses apps/service pada kubernetes menggunakan Minikube. Diantaranya     Using minikube service command   Using minikube tunnel command   Ok langsung aja kita ke pembahasan yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-02-20T15:01:52+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#using-minikube-service-command">Using minikube service command</a></li><li><a href="#using-minikube-tunnel-command">Using minikube tunnel command</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Access your apps/service in minikube">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas bagaimana cara mengakses apps/service pada kubernetes menggunakan Minikube. Diantaranya  Using minikube service command  Using minikube tunnel commandOk langsung aja kita ke pembahasan yang pertama">
+    <meta itemprop="datePublished" content="2022-02-20T15:01:52+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps" class="u-url" itemprop="url">Access your apps/service in minikube
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-02-20T15:01:52+07:00">February 20, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        4 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Kubernetes">
+        <label class="acordion-item-label" for="content-Pengenalan Kubernetes">
+            Pengenalan Kubernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01-silabus">
+                        
+                        Silabus - DevOps Kubernetes...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes">
+                        
+                        What is Kubernetes (k8s) ?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01b-k8s-components">
+                        
+                        Kubernetes Components
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01c-k8s-api">
+                        
+                        The Kubernetes API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01d-k8s-objects">
+                        
+                        What is Kubernetes Objects?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01e-k8s-object-management">
+                        
+                        Managing Kubernetes Object
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids">
+                        
+                        Kubernetes Object Names and...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01g-k8s-namespaces">
+                        
+                        What is Kubernetes Namespaces?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments">
+                        
+                        Kubernetes cluster environt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started with minikube">
+        <label class="acordion-item-label" for="content-Getting started with minikube">
+            Getting started with minikube
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02-overview-learn-env">
+                        
+                        Overview learning environme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos">
+                        
+                        Install minikube on Mac (In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon">
+                        
+                        Install minikube on Mac (Ap...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows">
+                        
+                        Install minikube for Window...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+                        
+                        Install minikube for Linux ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+                        
+                        Deploying an apps/services ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02c-minikube-basic-control">
+                        
+                        Minikube basic control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images">
+                        
+                        Using your own image into M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+                        
+                        Minikube addons features
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Access your apps/service in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02h-minikube-mount">
+                        
+                        Mounting filesystems to min...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pods and Containers">
+        <label class="acordion-item-label" for="content-Pods and Containers">
+            Pods and Containers
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers">
+                        
+                        Overview Pod and Container ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03a-workload-pods">
+                        
+                        Kubernetes Workloads with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+                        
+                        Working with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config">
+                        
+                        Basic Pods and Containers C...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+                        
+                        Pod & Container Lifecycle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers">
+                        
+                        Initialization of Containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+                        
+                        Configure env (Environment ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit">
+                        
+                        Configure Request and Limit...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+                        
+                        Configure liveness, readine...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions">
+                        
+                        Pod Disruptions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases">
+                        
+                        Overview Study Cases: Pod a...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps">
+                        
+                        Study Cases: Monolith apps ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps">
+                        
+                        Study cases: Microservice a...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Workload resources">
+        <label class="acordion-item-label" for="content-Workload resources">
+            Workload resources
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources">
+                        
+                        Overview Kubernetes Workloa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload">
+                        
+                        What is Workload Resources?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment">
+                        
+                        Working with Deployment object
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking (service)">
+        <label class="acordion-item-label" for="content-Networking (service)">
+            Networking (service)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Store data using Volumes">
+        <label class="acordion-item-label" for="content-Store data using Volumes">
+            Store data using Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Client">
+        <label class="acordion-item-label" for="content-Kubernetes Client">
+            Kubernetes Client
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Security RBAC">
+        <label class="acordion-item-label" for="content-Security RBAC">
+            Security RBAC
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Package manager">
+        <label class="acordion-item-label" for="content-Kubernetes Package manager">
+            Kubernetes Package manager
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes cluster for Production grade">
+        <label class="acordion-item-label" for="content-Kubernetes cluster for Production grade">
+            Kubernetes cluster for Production grade
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Service mesh with istio">
+        <label class="acordion-item-label" for="content-Service mesh with istio">
+            Service mesh with istio
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes on Cloud provider">
+        <label class="acordion-item-label" for="content-Kubernetes on Cloud provider">
+            Kubernetes on Cloud provider
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas bagaimana cara mengakses apps/service pada kubernetes menggunakan Minikube. Diantaranya</p>
+
+<ol>
+  <li>Using <code class="language-plaintext highlighter-rouge">minikube service</code> command</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">minikube tunnel</code> command</li>
+</ol>
+
+<p>Ok langsung aja kita ke pembahasan yang pertama</p>
+
+<!--more-->
+
+<h2 id="using-minikube-service-command">Using <code class="language-plaintext highlighter-rouge">minikube service</code> command</h2>
+
+<p>A NodePort service is the most basic way to get external traffic directly to your service. NodePort, as the name implies, opens a specific port, and any traffic that is sent to this port is forwarded to the service.</p>
+
+<p>We also have a shortcut for fetching the minikube IP and a service’s <code class="language-plaintext highlighter-rouge">NodePort</code>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">minikube service <span class="nt">--url</span> &lt;service-name&gt;</code></pre></figure>
+
+<p>Untuk mencobanya, kita coba buat pod baru dan expose menggunakan <code class="language-plaintext highlighter-rouge">NodePort</code> seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  kubectl run nginx-app <span class="nt">--image</span> nginx <span class="nt">--port</span> 80
+pod/nginx-app created
+
+➜ ~  kubectl get pod
+NAME        READY   STATUS    RESTARTS   AGE
+nginx-app   1/1     Running   0          35s
+
+➜ ~  kubectl expose pod/nginx-app <span class="nt">--type</span><span class="o">=</span>NodePort <span class="nt">--port</span> 80
+service/nginx-app exposed
+
+➜ ~  kubectl get service
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>        AGE
+kubernetes   ClusterIP   10.96.0.1       &lt;none&gt;        443/TCP        109s
+nginx-app    NodePort    10.111.221.57   &lt;none&gt;        80:31915/TCP   13s
+
+➜ ~  minikube ip
+192.168.59.104
+</code></pre></div></div>
+
+<p>Nah jadi biasanya khan jika kita mau access aplikasinya kita perlu <code class="language-plaintext highlighter-rouge">minikube ip</code> dan exposed portnya yaitu <code class="language-plaintext highlighter-rouge">310915</code> dengan menggunakan <code class="language-plaintext highlighter-rouge">kubectl get svc</code>. minikube mengediakan shortcutnya yaitu dengan menggunakan perintah</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02g-minikube-svc-list.bash"> </script>
+
+<p>Atau kita juga bisa menggunakan specific service namenya yaitu</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02g-minikube-svc-name.bash"> </script>
+
+<p>Jika kita jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  minikube service list
+|-------------|----------------|--------------|-----------------------------|
+|  NAMESPACE  |      NAME      | TARGET PORT  |             URL             |
+|-------------|----------------|--------------|-----------------------------|
+| default     | kubernetes     | No node port |
+| default     | nginx-app      |           80 | http://192.168.59.104:31915 |
+| kube-system | kube-dns       | No node port |
+| kube-system | metrics-server | No node port |
+|-------------|----------------|--------------|-----------------------------|
+
+➜ ~  minikube service <span class="nt">--url</span> nginx-app
+http://192.168.59.104:31915
+
+➜ ~  curl <span class="si">$(</span>minikube service <span class="nt">--url</span> nginx-app<span class="si">)</span>
+StatusCode        : 200
+StatusDescription : OK
+Content           : &lt;<span class="o">!</span>DOCTYPE html&gt;
+                    &lt;html&gt;
+                    &lt;<span class="nb">head</span><span class="o">&gt;</span>
+                    &lt;title&gt;Welcome to nginx!&lt;/title&gt;
+                    &lt;style&gt;
+                    html <span class="o">{</span> color-scheme: light dark<span class="p">;</span> <span class="o">}</span>
+                    body <span class="o">{</span> width: 35em<span class="p">;</span> margin: 0 auto<span class="p">;</span>
+                    font-family: Tahoma, Verdana, Arial, sans-serif<span class="p">;</span> <span class="o">}</span>
+                    &lt;/style...
+Headers           : <span class="o">{[</span>Connection, keep-alive], <span class="o">[</span>Accept-Ranges, bytes], <span class="o">[</span>Content-Length, 615], <span class="o">[</span>Content-Type,
+                    text/html]...<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="using-minikube-tunnel-command">Using <code class="language-plaintext highlighter-rouge">minikube tunnel</code> command</h2>
+
+<p>Selain menggunakan service type <code class="language-plaintext highlighter-rouge">NodePort</code>, kita juga bisa menggunakan <code class="language-plaintext highlighter-rouge">LoadBalancer</code>. A LoadBalancer service is the standard way to expose a service to the internet. With this method, each service gets its own IP address.</p>
+
+<p>Services of type <code class="language-plaintext highlighter-rouge">LoadBalancer</code> can be exposed via the <code class="language-plaintext highlighter-rouge">minikube tunnel</code> command. It must be run in a separate terminal window to keep the LoadBalancer running. <code class="language-plaintext highlighter-rouge">Ctrl-C</code> in the terminal can be used to terminate the process at which time the network routes will be cleaned up.</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02g-minikube-tunnel.bash"> </script>
+
+<p>The <code class="language-plaintext highlighter-rouge">minikube tunnel</code> runs as a process, creating a network route on the host to the service CIDR of the cluster using the cluster’s IP address as a gateway. The <code class="language-plaintext highlighter-rouge">tunnel</code> command exposes the external IP directly to any program running on the host operating system.</p>
+
+<p>Jika di jalankan outputnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  minikube addons <span class="nb">enable </span>metallb
+    ▪ Using image metallb/speaker:v0.9.6
+    ▪ Using image metallb/controller:v0.9.6
+🌟  The <span class="s1">'metallb'</span> addon is enabled
+
+➜ ~  minikube ip
+192.168.59.104
+
+➜ ~  minikube addons configure metallb
+<span class="nt">--</span> Enter Load Balancer Start IP: 192.168.59.100
+<span class="nt">--</span> Enter Load Balancer End IP: 192.168.59.120
+    ▪ Using image metallb/controller:v0.9.6
+    ▪ Using image metallb/speaker:v0.9.6
+✅  metallb was successfully configured
+
+➜ ~  kubectl get pods <span class="nt">-n</span> metallb-system
+NAME                          READY   STATUS    RESTARTS   AGE
+controller-7dd4bdf68f-skn58   1/1     Running   0          93s
+speaker-9884v                 1/1     Running   0          93s
+
+➜ ~  kubectl run nginx-app <span class="nt">--image</span> nginx <span class="nt">--port</span> 80
+pod/nginx-app created
+
+➜ ~  kubectl expose pod/nginx-app <span class="nt">--type</span><span class="o">=</span>LoadBalancer <span class="nt">--port</span> 80
+service/nginx-app exposed
+
+➜  ~ kubectl get svc   
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP    PORT<span class="o">(</span>S<span class="o">)</span>        AGE
+kubernetes   ClusterIP      10.96.0.1       &lt;none&gt;         443/TCP        66s
+nginx-app    LoadBalancer   10.98.114.127   192.168.49.1   80:31832/TCP   4s
+</code></pre></div></div>
+
+<p>Jika kita mau akses applicationnya brati kita menggunakan ip external seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  ~ curl 192.168.49.1
+&lt;<span class="o">!</span>DOCTYPE html&gt;
+&lt;html&gt;
+&lt;<span class="nb">head</span><span class="o">&gt;</span>
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+html <span class="o">{</span> color-scheme: light dark<span class="p">;</span> <span class="o">}</span>
+body <span class="o">{</span> width: 35em<span class="p">;</span> margin: 0 auto<span class="p">;</span>
+font-family: Tahoma, Verdana, Arial, sans-serif<span class="p">;</span> <span class="o">}</span>
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">"http://nginx.org/"</span><span class="o">&gt;</span>nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">"http://nginx.com/"</span><span class="o">&gt;</span>nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you <span class="k">for </span>using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<p>Nah jadi minikube punya alternatif lain yaitu menggunakan protocol tunneling, dengan perintah <code class="language-plaintext highlighter-rouge">minikube tunnel</code> jika kita jalankan pada windows terminal baru seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  ~ minikube tunnel <span class="nt">-c</span>
+Status:	
+	machine: minikube
+	pid: 14486
+	route: 10.96.0.0/12 -&gt; 192.168.49.2
+	minikube: Running
+	services: <span class="o">[</span>nginx-app]
+    errors: 
+		minikube: no errors
+		router: no errors
+		loadbalancer emulator: no errors
+</code></pre></div></div>
+
+<p><strong>NOTE:</strong> currently only work oh Linux/Mac OS</p>
+
+<p>Kita bisa akses Cluster ipnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  ~ curl 10.98.114.127
+&lt;<span class="o">!</span>DOCTYPE html&gt;
+&lt;html&gt;
+&lt;<span class="nb">head</span><span class="o">&gt;</span>
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+html <span class="o">{</span> color-scheme: light dark<span class="p">;</span> <span class="o">}</span>
+body <span class="o">{</span> width: 35em<span class="p">;</span> margin: 0 auto<span class="p">;</span>
+font-family: Tahoma, Verdana, Arial, sans-serif<span class="p">;</span> <span class="o">}</span>
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">"http://nginx.org/"</span><span class="o">&gt;</span>nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">"http://nginx.com/"</span><span class="o">&gt;</span>nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you <span class="k">for </span>using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/01-silabus"  class="" title="Silabus - DevOps Kubernetes: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons" class="" 
+        title="Minikube addons features
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 19 to 36
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/02h-minikube-mount" class="" 
+        title="Mounting filesystems to minikube cluster
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"  class="" title="Working with Deployment object">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#kubernetes" class="page__taxonomy-item p-category" rel="tag">Kubernetes</a><span class="sep">, </span>
+    
+      <a href="/categories/#orchestration" class="page__taxonomy-item p-category" rel="tag">Orchestration</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-02-20T15:01:52+07:00">February 20, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Access+your+apps%2Fservice+in+minikube%20%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02g-minikube-access-apps" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02g-minikube-access-apps" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02g-minikube-access-apps" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

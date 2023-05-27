@@ -1,0 +1,24 @@
+{
+  "pages": [
+    
+    {
+      "title": "Pemograman Java",
+      "link": "/pages/cources/java"
+    }
+    ,
+    {
+      "title": "Gitlab",
+      "link": "/pages/cources/gitlab"
+    }
+    ,
+    {
+      "title": "Docker",
+      "link": "/pages/cources/docker"
+    }
+    ,
+    {
+      "title": "Ansible",
+      "link": "/pages/cources/ansible"
+    }
+  ]
+}

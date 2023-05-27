@@ -1,0 +1,2259 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Laravel deployment using compose file - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas deployment untuk laravel menggunakan compose file berdasarkan artikel berikut. Adapun yang akan kita bahas kali ini yaitu:     Development on local environment using compose file   Development on docker environment using compose file   Deployment using compose file">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Laravel deployment using compose file">
+<meta property="og:url" content="/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas deployment untuk laravel menggunakan compose file berdasarkan artikel berikut. Adapun yang akan kita bahas kali ini yaitu:     Development on local environment using compose file   Development on docker environment using compose file   Deployment using compose file">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-09-12T14:40:46+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#dev-on-local-env-using-compose-file">Dev on local env using compose file</a></li><li><a href="#dev-on-docker-env-using-compose-file">Dev on docker env using compose file</a></li><li><a href="#deployment-using-compose-file">Deployment using compose file</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Laravel deployment using compose file">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas deployment untuk laravel menggunakan compose file berdasarkan artikel berikut. Adapun yang akan kita bahas kali ini yaitu:  Development on local environment using compose file  Development on docker environment using compose file  Deployment using compose file">
+    <meta itemprop="datePublished" content="2021-09-12T14:40:46+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case" class="u-url" itemprop="url">Laravel deployment using compose file
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Docker for DevOps engineer
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-09-12T14:40:46+07:00">September 12, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        6 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Docker">
+        <label class="acordion-item-label" for="content-Pengenalan Docker">
+            Pengenalan Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/01-silabus">
+                        
+                        Silabus Belajar Docker: Pem...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01a-docker-overview">
+                        
+                        Docker Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01b-container-overview">
+                        
+                        What is Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02-system-requirement">
+                        
+                        What to know before you ins...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02a-install-on-windows10-wls">
+                        
+                        How to install Docker on Wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02b-install-on-linux-centos">
+                        
+                        How to install Docker on Li...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02c-install-on-mac">
+                        
+                        How to install Docker on Ma...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/03-getting-started">
+                        
+                        Getting Started with Docker
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Registry">
+        <label class="acordion-item-label" for="content-Docker Registry">
+            Docker Registry
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03a-docker-registry">
+                        
+                        Docker Registry (Docker HUB)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
+                        
+                        Insecure Registry
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03c-install-nexus-oss">
+                        
+                        Installing Nexus OSS
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Container CLI">
+        <label class="acordion-item-label" for="content-Docker Container CLI">
+            Docker Container CLI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04-docker-cli">
+                        
+                        Docker CLI (Command Line In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04a-docker-container-command">
+                        
+                        Management Docker Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04b-docker-image-command">
+                        
+                        Management Docker Images
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04c-docker-exec-command">
+                        
+                        Run a command in a running ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04d-expose-service-outside">
+                        
+                        Expose services to outside ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04e-docker-copy">
+                        
+                        Copying files/content betwe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04f-logging-inspect-stats-container">
+                        
+                        Logging, Inspect, & Resourc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04g-docker-run-env-file">
+                        
+                        Run a Container using Envir...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Networks">
+        <label class="acordion-item-label" for="content-Docker Networks">
+            Docker Networks
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05-docker-network">
+                        
+                        Networking overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05a-connect-to-other-container-use-link">
+                        
+                        Legacy feature of Docker Ne...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05b-docker-bridge-network">
+                        
+                        Use default bridge networks
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05c-docker-user-defined-briged-network">
+                        
+                        Use user-defined bridge net...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05d-docker-advance-user-defined-bridge-network">
+                        
+                        Advanced user-defined bridg...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05e-docker-host-network">
+                        
+                        Use host networking
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05g-docker-none-network">
+                        
+                        Disable networking for a co...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Volumes">
+        <label class="acordion-item-label" for="content-Docker Volumes">
+            Docker Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06-docker-volume">
+                        
+                        Docker Volume Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06a-management-volume">
+                        
+                        Management Volume
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06b-use-binding-volume-flag">
+                        
+                        Use Bind Mounts
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06c-share-data-among-containers">
+                        
+                        Share data among containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06e-share-data-among-machines">
+                        
+                        Share data among machines
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Dockerfile">
+        <label class="acordion-item-label" for="content-Dockerfile">
+            Dockerfile
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07-dockerfile">
+                        
+                        Build Docker Image Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07a-usage-docker-build">
+                        
+                        Usage docker build
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction">
+                        
+                        FROM Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07c-dockerfile-env">
+                        
+                        Environtment Replacement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07d-dockerfile-copy">
+                        
+                        Copying Resources
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07e-dockerfile-ignore">
+                        
+                        Excluding files/directories
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07f-dockerfile-label">
+                        
+                        Label Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07g-dockerfile-exec">
+                        
+                        Execution Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07h-dockerfile-cmd-vs-entrypoint">
+                        
+                        CMD vs ENTRYPOINT?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07i-dockerfile-expose">
+                        
+                        Exposing Ports
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07j-dockerfile-user-workdir">
+                        
+                        User, Volumes and Working D...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck">
+                        
+                        Health Check Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages">
+                        
+                        Multiple Stage Builds
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07m-best-practice-dockerfile">
+                        
+                        Best practices for writing ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07n-docker-image-scan">
+                        
+                        Best practices for scanning...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Build docker image">
+        <label class="acordion-item-label" for="content-Study Kasus: Build docker image">
+            Study Kasus: Build docker image
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage">
+                        
+                        Build specific docker image...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat">
+                        
+                        Build Docker Image for Java...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08b-using-maven-docker-plugin">
+                        
+                        Build Java Web using maven-...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08c-build-springboot">
+                        
+                        Build docker image for spri...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env">
+                        
+                        Springboot - using Environt...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file">
+                        
+                        Springboot - where data suc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db">
+                        
+                        Springboot - Using Database
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08g-build-angular-project">
+                        
+                        Build docker image for Angu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api">
+                        
+                        Angular - Access Rest API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend">
+                        
+                        Angular - Proxy to backend
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08j-build-php">
+                        
+                        Build docker image for PHP
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08k-build-laravel-apps">
+                        
+                        Build Docker image for Lara...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08l-build-laravel-webapp-and-restapi">
+                        
+                        Laravel - Using Frontend & ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db">
+                        
+                        Laravel - Using Database
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Compose">
+        <label class="acordion-item-label" for="content-Docker Compose">
+            Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09-docker-compose-overview">
+                        
+                        Overview of Docker Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09a-compose-getting-started">
+                        
+                        Get started with Docker Com...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09b-compose-cli">
+                        
+                        Overview of docker-compose CLI
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09c-syntax-compose-file">
+                        
+                        Compose file specification ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/environtment/09d-compose-using-env-variables">
+                        
+                        Environment variables in Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09e-compose-volume">
+                        
+                        Volume in Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09f-compose-share-data-between-containers">
+                        
+                        Share data between Containe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09g-share-data-using-sshfs-in-compose">
+                        
+                        Using sshfs for share data ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09h-share-data-using-nfs-in-compose">
+                        
+                        Using NFS for share data in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09i-compose-network-overview">
+                        
+                        Networking Overview in Comp...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09j-compose-network-link">
+                        
+                        Network links in Compose file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09k-compose-network-specify-custom">
+                        
+                        Specify custom networks in ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/dependency/09l-compose-depend-on">
+                        
+                        Dependency between services...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/build/09m-compose-build-image">
+                        
+                        Build docker image using Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09n-compose-using-profile">
+                        
+                        Using profiles with Compose...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09o-multiple-compose-add-override-attr">
+                        
+                        Multiple Compose files to A...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases">
+                        
+                        Example use case of multipl...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/scale/09q-compose-scale-services">
+                        
+                        Scale services using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflow/09r-compose-in-production">
+                        
+                        Use Compose in production
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Compose">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Compose">
+            Study Kasus: Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10-overview-compose-study-case">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10a-compose-php-study-case">
+                        
+                        PHP deployment using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Laravel deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case">
+                        
+                        Springboot deployment using...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case">
+                        
+                        Angular deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker">
+                        
+                        Deploy httpd with ssl/https...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects">
+                        
+                        Compose file for multiple g...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Context">
+        <label class="acordion-item-label" for="content-Docker Context">
+            Docker Context
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11-overview-docker-engine">
+                        
+                        Overview of Docker Context
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11a-docker-context">
+                        
+                        Usage & Managing Docker Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11b-docker-compose-remote-access">
+                        
+                        Remote deployment using doc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11c-dind">
+                        
+                        Docker Inside Docker (DinD)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11d-docker-desktop">
+                        
+                        Dashboard using Docker Desktop
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11e-docker-jetbraint">
+                        
+                        Using Docker on Jetbraint IDE
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11f-docker-portainer">
+                        
+                        Using docker on portainer.io
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11g-deprecated-features">
+                        
+                        Deprecated Engine Features
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker for CI">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker for CI">
+            Study Kasus: Docker for CI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12-overview-docker-for-ci">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12a-setup-gitlab-ci">
+                        
+                        Setup environment for CI us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12b-syntax-gitlab-ci-yml">
+                        
+                        The `.gitlab-ci.yml` file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12c-pipeline-php-gitlab-ci">
+                        
+                        Pipeline: PHP deployment us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12d-pipeline-javaweb-gitlab-ci">
+                        
+                        Pipeline: Java Web deployme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12e-pipeline-spring-boot-gitlab-ci">
+                        
+                        Pipeline: spring-boot deplo...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12f-pipeline-angular-gitlab-ci">
+                        
+                        Pipeline: Angular deploy wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12g-pipeline-laravel-gitlab-ci">
+                        
+                        Pipeline: Laravel deploy wi...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Machine">
+        <label class="acordion-item-label" for="content-Docker Machine">
+            Docker Machine
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13-docker-machine-overview">
+                        
+                        Overview of Docker machines
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-windows">
+                        
+                        Install docker-machine on W...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-linux">
+                        
+                        Install docker-machine on L...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-mac">
+                        
+                        Install docker-machine on M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13b-getting-started">
+                        
+                        Getting started with docker...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13c-managed-machines">
+                        
+                        Managing a machines in dock...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13d-usecases-docker-machine">
+                        
+                        Example Use Cases of docker...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Ansible for Docker">
+        <label class="acordion-item-label" for="content-Study Kasus: Ansible for Docker">
+            Study Kasus: Ansible for Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker">
+                        
+                        Overview Study cases: IT Au...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14a-it-automation-platform">
+                        
+                        IT Automation Platform for ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment">
+                        
+                        Setup Ansible Control and M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14c-ansible-for-docker-operations">
+                        
+                        Getting started with Ansibl...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Swarm">
+        <label class="acordion-item-label" for="content-Docker Swarm">
+            Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Swarm">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Swarm">
+            Study Kasus: Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas deployment untuk laravel menggunakan compose file berdasarkan <a href="/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db">artikel berikut</a>. Adapun yang akan kita bahas kali ini yaitu:</p>
+
+<ol>
+  <li>Development on local environment using compose file</li>
+  <li>Development on docker environment using compose file</li>
+  <li>Deployment using compose file</li>
+</ol>
+
+<!--more-->
+
+<h2 id="dev-on-local-env-using-compose-file">Dev on local env using compose file</h2>
+
+<p>Untuk development pada local environment pada dasarnya kita perlu install</p>
+
+<ol>
+  <li>PHP 8.0</li>
+  <li>PHP Extension</li>
+  <li>NodeJS</li>
+  <li>MySQL Database</li>
+</ol>
+
+<p>Jadi biasanya untuk bahasa pemograman kita intall di host kita sedangkan untuk service seperti database kita jalankan di docker, Maka berikut adalah configuration <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code></p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-deps.docker-compose.yaml"> </script>
+
+<p>Kemudian kita sesuaikan <code class="language-plaintext highlighter-rouge">.env</code> file untuk variable berikut dengan docker compose yang kita define.</p>
+
+<figure class="highlight"><pre><code class="language-.env" data-lang=".env">DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=example_laravel
+DB_USERNAME=example_laravel
+DB_PASSWORD=example_laravel</code></pre></figure>
+
+<p>Kemudian kita bisa normal menjalan laravel dengan perintah <code class="language-plaintext highlighter-rouge">php artisan serve</code></p>
+
+<h2 id="dev-on-docker-env-using-compose-file">Dev on docker env using compose file</h2>
+
+<p>Untuk development di docker environment, pertama kita siapkan dulu environment dengan meng-update <code class="language-plaintext highlighter-rouge">Dockerfile</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-dockerfile"> </script>
+
+<p>Kemudian kita update juga file <code class="language-plaintext highlighter-rouge">.docker/apache2-foreground</code></p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-apache2-foreground"> </script>
+
+<p>Dan kita buat juga file <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> serta <code class="language-plaintext highlighter-rouge">docker-compose.override.yaml</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-docker-env.docker-compose.yaml"> </script>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-docker-env.docker-compose.override.yaml"> </script>
+
+<p>Lalu kita buat file <code class="language-plaintext highlighter-rouge">.docker/laramix-entrypoint</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-laramix-entrypoint"> </script>
+
+<p>Yang terakhir berikut adalah file <code class="language-plaintext highlighter-rouge">.docker/.env</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-dotenv"> </script>
+
+<p>Jika kita jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/laravel</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nx">\.docker\.env.example</span><span class="w"> </span><span class="nx">config</span><span class="w">
+</span><span class="n">services:</span><span class="w">
+  </span><span class="nx">laramix:</span><span class="w">
+    </span><span class="kr">command</span><span class="p">:</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="o">.</span><span class="nf">docker</span><span class="n">/laramix-entrypoint</span><span class="w">
+    </span><span class="nx">image:</span><span class="w"> </span><span class="nx">node:14.15-alpine3.13</span><span class="w">
+    </span><span class="n">profiles:</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="nx">dev</span><span class="w">
+    </span><span class="n">volumes:</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="nx">C:\Users\dimasm93\Workspaces\udemy\docker:/var/www/php:rw</span><span class="w">
+    </span><span class="n">working_dir:</span><span class="w"> </span><span class="nx">/var/www/php</span><span class="w">
+  </span><span class="n">laravel:</span><span class="w">
+    </span><span class="nx">build:</span><span class="w">
+      </span><span class="n">context:</span><span class="w"> </span><span class="nx">C:\Users\dimasm93\Workspaces\udemy\docker</span><span class="w">
+      </span><span class="n">dockerfile:</span><span class="w"> </span><span class="nx">Dockerfile</span><span class="w">
+      </span><span class="n">target:</span><span class="w"> </span><span class="nx">php_laravel</span><span class="w">
+    </span><span class="n">depends_on:</span><span class="w">
+      </span><span class="nx">mysql:</span><span class="w">
+        </span><span class="n">condition:</span><span class="w"> </span><span class="nx">service_started</span><span class="w">
+    </span><span class="n">environment:</span><span class="w">
+      </span><span class="nx">APP_DEBUG:</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+      </span><span class="n">APP_ENV:</span><span class="w"> </span><span class="nx">local</span><span class="w">
+      </span><span class="n">APP_URL:</span><span class="w"> </span><span class="s1">'""'</span><span class="w">
+      </span><span class="n">DB_CONNECTION:</span><span class="w"> </span><span class="nx">mysql</span><span class="w">
+      </span><span class="n">DB_DATABASE:</span><span class="w"> </span><span class="nx">laravel_app</span><span class="w">
+      </span><span class="n">DB_HOST:</span><span class="w"> </span><span class="nx">mysql</span><span class="w">
+      </span><span class="n">DB_PASSWORD:</span><span class="w"> </span><span class="nx">laravel_app</span><span class="w">
+      </span><span class="n">DB_PORT:</span><span class="w"> </span><span class="s1">'3306'</span><span class="w">
+      </span><span class="n">DB_USERNAME:</span><span class="w"> </span><span class="nx">laravel_app</span><span class="w">
+      </span><span class="n">LOG_LEVEL:</span><span class="w"> </span><span class="nx">debug</span><span class="w">
+    </span><span class="n">image:</span><span class="w"> </span><span class="nx">dimmaryanto93/laravel8-apps:latest</span><span class="w">
+    </span><span class="n">ports:</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="nx">published:</span><span class="w"> </span><span class="nx">8000</span><span class="w">
+      </span><span class="n">target:</span><span class="w"> </span><span class="nx">80</span><span class="w">
+    </span><span class="n">volumes:</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="nx">C:\Users\dimasm93\Workspaces\udemy\docker:/var/www/php:rw</span><span class="w">
+  </span><span class="n">mysql:</span><span class="w">
+    </span><span class="nx">environment:</span><span class="w">
+      </span><span class="n">MYSQL_DATABASE:</span><span class="w"> </span><span class="nx">laravel_app</span><span class="w">
+      </span><span class="n">MYSQL_PASSWORD:</span><span class="w"> </span><span class="nx">laravel_app</span><span class="w">
+      </span><span class="n">MYSQL_ROOT_PASSWORD:</span><span class="w"> </span><span class="nx">secretPasswd</span><span class="w">
+      </span><span class="n">MYSQL_USER:</span><span class="w"> </span><span class="nx">laravel_app</span><span class="w">
+    </span><span class="n">image:</span><span class="w"> </span><span class="nx">mysql:5.7</span><span class="w">
+    </span><span class="n">ports:</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="nx">published:</span><span class="w"> </span><span class="nx">3306</span><span class="w">
+      </span><span class="n">target:</span><span class="w"> </span><span class="nx">3306</span><span class="w">
+    </span><span class="n">volumes:</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="nx">db_data:/var/lib/mysql:rw</span><span class="w">
+  </span><span class="n">phpmyadmin:</span><span class="w">
+    </span><span class="nx">depends_on:</span><span class="w">
+      </span><span class="n">mysql:</span><span class="w">
+        </span><span class="nx">condition:</span><span class="w"> </span><span class="nx">service_started</span><span class="w">
+    </span><span class="n">environment:</span><span class="w">
+      </span><span class="nx">MYSQL_ROOT_PASSWORD:</span><span class="w"> </span><span class="nx">secretPasswd</span><span class="w">
+      </span><span class="n">PMA_HOST:</span><span class="w"> </span><span class="nx">mysql</span><span class="w">
+    </span><span class="n">image:</span><span class="w"> </span><span class="nx">phpmyadmin</span><span class="w">
+    </span><span class="n">ports:</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="nx">published:</span><span class="w"> </span><span class="nx">33306</span><span class="w">
+      </span><span class="n">target:</span><span class="w"> </span><span class="nx">80</span><span class="w">
+    </span><span class="n">profiles:</span><span class="w">
+    </span><span class="o">-</span><span class="w"> </span><span class="nx">debug</span><span class="w">
+</span><span class="n">version:</span><span class="w"> </span><span class="s1">'3.9'</span><span class="w">
+</span><span class="n">volumes:</span><span class="w">
+  </span><span class="nx">db_data:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/laravel</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nx">\.docker\.env.example</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">dev</span><span class="w"> </span><span class="nt">--profile</span><span class="w"> </span><span class="nx">debug</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nt">-d</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="nx">network</span><span class="w"> </span><span class="s2">"dev_default"</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">default</span><span class="w"> </span><span class="nx">driver</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="nx">volume</span><span class="w"> </span><span class="s2">"dev_db_data"</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">default</span><span class="w"> </span><span class="nx">driver</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="nx">dev_mysql_1</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="nx">done</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="nx">dev_laravel_1</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="nx">done</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="nx">dev_phpmyadmin_1</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="nx">done</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/laravel</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nx">\.docker\.env.example</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">dev</span><span class="w"> </span><span class="nt">--profile</span><span class="w"> </span><span class="nx">debug</span><span class="w"> </span><span class="nx">ps</span><span class="w">
+      </span><span class="n">Name</span><span class="w">                    </span><span class="nx">Command</span><span class="w">               </span><span class="nx">State</span><span class="w">                 </span><span class="nx">Ports</span><span class="w">
+</span><span class="o">---------------------------------------------------------------------------------------------</span><span class="w">
+</span><span class="n">dev_laramix_1</span><span class="w">      </span><span class="nx">docker-entrypoint.sh</span><span class="w"> </span><span class="o">.</span><span class="nf">dock</span><span class="w"> </span><span class="o">...</span><span class="w">   </span><span class="nx">Exit</span><span class="w"> </span><span class="nx">0</span><span class="w">
+</span><span class="n">dev_laravel_1</span><span class="w">      </span><span class="nx">docker-php-entrypoint</span><span class="w"> </span><span class="o">.</span><span class="nf">doc</span><span class="w"> </span><span class="o">...</span><span class="w">   </span><span class="nx">Up</span><span class="w">       </span><span class="nx">0.0.0.0:8000-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="p">,:::</span><span class="nx">8000-</span><span class="err">&gt;</span><span class="nx">80</span><span class="w">
+                                                             </span><span class="n">/tcp</span><span class="w">
+</span><span class="nx">dev_mysql_1</span><span class="w">        </span><span class="nx">docker-entrypoint.sh</span><span class="w"> </span><span class="nx">mysqld</span><span class="w">      </span><span class="nx">Up</span><span class="w">       </span><span class="nx">0.0.0.0:3306-</span><span class="err">&gt;</span><span class="nx">3306/tcp</span><span class="p">,:::</span><span class="nx">3306-</span><span class="err">&gt;</span><span class="w">
+                                                             </span><span class="mi">3306</span><span class="n">/tcp</span><span class="p">,</span><span class="w"> </span><span class="nx">33060/tcp</span><span class="w">
+</span><span class="n">dev_phpmyadmin_1</span><span class="w">   </span><span class="nx">/docker-entrypoint.sh</span><span class="w"> </span><span class="nx">apac</span><span class="w"> </span><span class="o">...</span><span class="w">   </span><span class="nx">Up</span><span class="w">       </span><span class="nx">0.0.0.0:33306-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="p">,:::</span><span class="nx">33306-</span><span class="err">&gt;</span><span class="w">
+                                                             </span><span class="mi">80</span><span class="n">/tcp</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/laravel</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nx">\.docker\.env.example</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">dev</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nx">laramix</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w">    </span><span class="n">Laravel</span><span class="w"> </span><span class="nx">Mix</span><span class="w"> </span><span class="nx">v6.0.27</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">✔</span><span class="w"> </span><span class="n">Compiled</span><span class="w"> </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">4211ms</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">┌───────────────────────────────────┬──────────┐</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">│</span><span class="w">                              </span><span class="n">File</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="nx">Size</span><span class="w">     </span><span class="err">│</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">├───────────────────────────────────┼──────────┤</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">│</span><span class="w">                        </span><span class="n">/js/app.js</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="nx">1.45</span><span class="w"> </span><span class="nx">MiB</span><span class="w"> </span><span class="err">│</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">│</span><span class="w">                       </span><span class="n">css/app.css</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="nx">243</span><span class="w"> </span><span class="nx">KiB</span><span class="w">  </span><span class="err">│</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">│</span><span class="w">  </span><span class="err">…</span><span class="n">b43027f47b20503057dfbbaa9401fef</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="nx">162</span><span class="w"> </span><span class="nx">KiB</span><span class="w">  </span><span class="err">│</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">│</span><span class="w">  </span><span class="err">…</span><span class="mi">1</span><span class="n">e38fd9e0e74ba58f7a2b77ef29fdd3</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="nx">434</span><span class="w"> </span><span class="nx">KiB</span><span class="w">  </span><span class="err">│</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">│</span><span class="w">  </span><span class="err">…</span><span class="n">e59d2330b4c6deb84b340635ed36249</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="nx">162</span><span class="w"> </span><span class="nx">KiB</span><span class="w">  </span><span class="err">│</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">│</span><span class="w">  </span><span class="err">…</span><span class="mi">0</span><span class="n">fd1704ea223900efa9fd4e869efb08</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="nx">75.4</span><span class="w"> </span><span class="nx">KiB</span><span class="w"> </span><span class="err">│</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">│</span><span class="w">  </span><span class="err">…</span><span class="mi">691</span><span class="n">f37e57f04c152e2315ab7dbad881</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="nx">95.7</span><span class="w"> </span><span class="nx">KiB</span><span class="w"> </span><span class="err">│</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">└───────────────────────────────────┴──────────┘</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">✔</span><span class="w"> </span><span class="n">Mix:</span><span class="w"> </span><span class="nx">Compiled</span><span class="w"> </span><span class="nx">successfully</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">4.36s</span><span class="w">
+</span><span class="n">laramix_1</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">webpack</span><span class="w"> </span><span class="nx">compiled</span><span class="w"> </span><span class="nx">successfully</span><span class="w">
+</span><span class="n">dev_laramix_1</span><span class="w"> </span><span class="nx">exited</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">code</span><span class="w"> </span><span class="nx">0</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker-compose</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nx">\.docker\.env.example</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">dev</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">laravel</span><span class="w"> </span><span class="nx">php</span><span class="w"> </span><span class="nx">artisan</span><span class="w"> </span><span class="nx">migrate</span><span class="w">
+</span><span class="n">Migration</span><span class="w"> </span><span class="nx">table</span><span class="w"> </span><span class="nx">created</span><span class="w"> </span><span class="nx">successfully.</span><span class="w">
+</span><span class="n">Migrating:</span><span class="w"> </span><span class="nx">2014_10_12_000000_create_users_table</span><span class="w">
+</span><span class="n">Migrated:</span><span class="w">  </span><span class="nx">2014_10_12_000000_create_users_table</span><span class="w"> </span><span class="p">(</span><span class="mf">54.60</span><span class="n">ms</span><span class="p">)</span><span class="w">
+</span><span class="n">Migrating:</span><span class="w"> </span><span class="nx">2014_10_12_100000_create_password_resets_table</span><span class="w">
+</span><span class="n">Migrated:</span><span class="w">  </span><span class="nx">2014_10_12_100000_create_password_resets_table</span><span class="w"> </span><span class="p">(</span><span class="mf">29.31</span><span class="n">ms</span><span class="p">)</span><span class="w">
+</span><span class="n">Migrating:</span><span class="w"> </span><span class="nx">2019_08_19_000000_create_failed_jobs_table</span><span class="w">
+</span><span class="n">Migrated:</span><span class="w">  </span><span class="nx">2019_08_19_000000_create_failed_jobs_table</span><span class="w"> </span><span class="p">(</span><span class="mf">33.95</span><span class="n">ms</span><span class="p">)</span><span class="w">
+</span><span class="n">Migrating:</span><span class="w"> </span><span class="nx">2021_08_09_164144_create_mahasiswa_table</span><span class="w">
+</span><span class="n">Migrated:</span><span class="w">  </span><span class="nx">2021_08_09_164144_create_mahasiswa_table</span><span class="w"> </span><span class="p">(</span><span class="mf">63.05</span><span class="n">ms</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Sekarang kita coba access, maka hasilnya seperti berikut:</p>
+
+<p><img src="/resources/posts/docker/10b-compose-laravel/02a-phpmyadmin.png" alt="docker-env" /></p>
+
+<p><img src="/resources/posts/docker/10b-compose-laravel/02b-laravel-app.png" alt="docker-env.app" /></p>
+
+<h2 id="deployment-using-compose-file">Deployment using compose file</h2>
+
+<p>Untuk deployment menggunakan docker compose, ada beberapa hal yang harus kita ubah yaitu</p>
+
+<ol>
+  <li>Remove mount-bind, copy your source-code to Docker Image</li>
+  <li>Use diffrent port bind, or expose port only you need</li>
+  <li>Use difreent environment, such as strong password for credential database, reduce verbose logging, etc</li>
+  <li>Spesify network for isolate environment</li>
+</ol>
+
+<p>Berikut implementasinya, buat file baru dengan nama <code class="language-plaintext highlighter-rouge">docker-compose.production.yaml</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-docker-env.docker-compose.production.yaml"> </script>
+
+<p>Kemudian kita buat file config untuk nginx dengan nama <code class="language-plaintext highlighter-rouge">.docker/default.template.conf</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-nginx-conf.default-template.conf"> </script>
+
+<p>Dan yang terakhir buat file baru untuk <code class="language-plaintext highlighter-rouge">.docker/Dockerfile-nginx</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10b-dockerfile-nginx"> </script>
+
+<p>Sekarang kita bisa jalankan dengan perintah:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">-f</span> docker-compose.yaml <span class="nt">-f</span> docker-compose.production.yaml up <span class="nt">-d</span> <span class="nt">--build</span></code></pre></figure>
+
+<p>Seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/laravel</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">prod</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nx">\.docker\.env.example</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">docker-compose.yaml</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\docker-compose.production.yaml</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">--build</span><span class="w">
+</span><span class="n">Building</span><span class="w"> </span><span class="nx">laravel</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Building</span><span class="w"> </span><span class="nx">53.7s</span><span class="w"> </span><span class="p">(</span><span class="mi">24</span><span class="n">/24</span><span class="p">)</span><span class="w"> </span><span class="nx">FINISHED</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nx">definition</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">Dockerfile</span><span class="w">                                    </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">transferring</span><span class="w"> </span><span class="nx">dockerfile:</span><span class="w"> </span><span class="nx">2.19kB</span><span class="w">                                                  </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">.</span><span class="nf">dockerignore</span><span class="w">                                                       </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">transferring</span><span class="w"> </span><span class="nx">context:</span><span class="w"> </span><span class="nx">35B</span><span class="w">                                                        </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="nx">metadata</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">docker.io/library/php:8.0-apache</span><span class="w">                       </span><span class="nx">1.3s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="nx">metadata</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">docker.io/library/node:14.15-alpine3.13</span><span class="w">                </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">php_laravel</span><span class="w"> </span><span class="mi">1</span><span class="n">/7</span><span class="p">]</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">docker.io/library/php:8.0-apache</span><span class="err">@</span><span class="nx">sha256:4334b8e1e1e8bb02a66</span><span class="w">  </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">laramix_build</span><span class="w"> </span><span class="mi">1</span><span class="n">/4</span><span class="p">]</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">docker.io/library/node:14.15-alpine3.13</span><span class="w">                    </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">context</span><span class="w">                                                       </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">transferring</span><span class="w"> </span><span class="n">context</span><span class="p">:</span><span class="w"> </span><span class="mf">9.52</span><span class="n">kB</span><span class="w">                                                     </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">CACHED</span><span class="w"> </span><span class="p">[</span><span class="n">laramix_build</span><span class="w"> </span><span class="mi">2</span><span class="n">/4</span><span class="p">]</span><span class="w"> </span><span class="n">WORKDIR</span><span class="w"> </span><span class="n">/var/www/php</span><span class="w">                                     </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">laramix_build</span><span class="w"> </span><span class="mi">3</span><span class="n">/4</span><span class="p">]</span><span class="w"> </span><span class="n">COPY</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w">                                                        </span><span class="mf">0.1</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">CACHED</span><span class="w"> </span><span class="p">[</span><span class="n">php_laravel</span><span class="w"> </span><span class="mi">2</span><span class="n">/7</span><span class="p">]</span><span class="w"> </span><span class="n">RUN</span><span class="w"> </span><span class="n">apt</span><span class="nt">-get</span><span class="w"> </span><span class="n">update</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">apt</span><span class="nt">-get</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nt">-y</span><span class="w">   </span><span class="n">curl</span><span class="w">   </span><span class="n">git</span><span class="w">   </span><span class="n">l</span><span class="w">  </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">CACHED</span><span class="w"> </span><span class="p">[</span><span class="n">php_laravel</span><span class="w"> </span><span class="mi">3</span><span class="n">/7</span><span class="p">]</span><span class="w"> </span><span class="n">RUN</span><span class="w"> </span><span class="n">pecl</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">mcrypt</span><span class="nt">-1</span><span class="o">.</span><span class="nf">0</span><span class="o">.</span><span class="nf">4</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">   </span><span class="n">docker</span><span class="nt">-php-ext-install</span><span class="w">  </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">CACHED</span><span class="w"> </span><span class="p">[</span><span class="n">php_laravel</span><span class="w"> </span><span class="mi">4</span><span class="n">/7</span><span class="p">]</span><span class="w"> </span><span class="n">RUN</span><span class="w"> </span><span class="n">curl</span><span class="w"> </span><span class="nt">-sS</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="n">//getcomposer.org/installer</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">php</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="o">-</span><span class="w">  </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">CACHED</span><span class="w"> </span><span class="p">[</span><span class="n">php_laravel</span><span class="w"> </span><span class="mi">5</span><span class="n">/7</span><span class="p">]</span><span class="w"> </span><span class="n">RUN</span><span class="w"> </span><span class="n">sed</span><span class="w"> </span><span class="nt">-i</span><span class="w"> </span><span class="s2">"s|DocumentRoot /var/www/html|DocumentRoot /va  0.0s
+ =&gt; CACHED [php_laravel 6/7] WORKDIR /var/www/php                                       0.0s
+ =&gt; CACHED [php_laravel 7/7] COPY .docker/apache2-foreground apache2-foreground         0.0s
+ =&gt; CACHED [executeable 1/7] WORKDIR /var/www/php                                       0.0s
+ =&gt; [executeable 2/7] COPY . .                                                          0.1s
+ =&gt; [laramix_build 4/4] RUN npm install -q &amp;&amp;     npm run-script prod                  43.6s
+ =&gt; [executeable 3/7] COPY --from=laramix_build /var/www/php/public/css public/css      0.0s
+ =&gt; [executeable 4/7] COPY --from=laramix_build /var/www/php/public/fonts public/fonts  0.1s
+ =&gt; [executeable 5/7] COPY --from=laramix_build /var/www/php/public/js public/js        0.1s
+ =&gt; [executeable 6/7] RUN mkdir -p public/storage &amp;&amp;     chmod -R 777 storage/* &amp;&amp;      0.2s
+ =&gt; [executeable 7/7] RUN php -r "</span><span class="n">file_exists</span><span class="p">(</span><span class="s1">'.env'</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="s1">'.env.example'</span><span class="p">,</span><span class="w"> </span><span class="s1">'.env'</span><span class="p">);</span><span class="w">  </span><span class="mf">7.8</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">exporting</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">image</span><span class="w">                                                                  </span><span class="mf">0.5</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">exporting</span><span class="w"> </span><span class="n">layers</span><span class="w">                                                                 </span><span class="mf">0.4</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">writing</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="n">a2a2f2988c744c06f6290083c5f0ddc43de8f80fa47d2dc546d3703819</span><span class="w">  </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">naming</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">docker.io/dimmaryanto93/laravel8-apps:latest</span><span class="w">                           </span><span class="nx">0.0s</span><span class="w">
+</span><span class="n">Building</span><span class="w"> </span><span class="n">proxy</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Building</span><span class="w"> </span><span class="mf">13.8</span><span class="n">s</span><span class="w"> </span><span class="p">(</span><span class="mi">8</span><span class="n">/8</span><span class="p">)</span><span class="w"> </span><span class="nx">FINISHED</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">definition</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">Dockerfile</span><span class="nt">-nginx</span><span class="w">                              </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">transferring</span><span class="w"> </span><span class="n">dockerfile</span><span class="p">:</span><span class="w"> </span><span class="mi">233</span><span class="n">B</span><span class="w">                                                    </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">.</span><span class="nf">dockerignore</span><span class="w">                                                       </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">transferring</span><span class="w"> </span><span class="n">context</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="n">B</span><span class="w">                                                         </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="n">for</span><span class="w"> </span><span class="n">docker.io/library/nginx:mainline</span><span class="w">                       </span><span class="nx">4.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">auth</span><span class="p">]</span><span class="w"> </span><span class="n">library/nginx:pull</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">registry-1.docker.io</span><span class="w">                            </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">context</span><span class="w">                                                       </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">transferring</span><span class="w"> </span><span class="n">context</span><span class="p">:</span><span class="w"> </span><span class="mi">349</span><span class="n">B</span><span class="w">                                                       </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="n">/2</span><span class="p">]</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">docker.io/library/nginx:mainline</span><span class="err">@</span><span class="nx">sha256:853b221d3341add7aaadf5f81dd088e</span><span class="w">  </span><span class="nx">9.5s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">resolve</span><span class="w"> </span><span class="n">docker.io/library/nginx:mainline</span><span class="err">@</span><span class="nx">sha256:853b221d3341add7aaadf5f81dd088e</span><span class="w">  </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">09</span><span class="n">f31c94adc624db7764fc3b46eb26c110c49056e18573e8d81f8cf9afb5</span><span class="w"> </span><span class="mi">891</span><span class="n">B</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">891B</span><span class="w">  </span><span class="nx">1.2s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">853</span><span class="n">b221d3341add7aaadf5f81dd088ea943ab9c918766e295321294b</span><span class="w"> </span><span class="mf">1.86</span><span class="n">kB</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="nx">1.86kB</span><span class="w">  </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">6</span><span class="n">fe11397c34b973f3c957f0da22b09b7f11a4802e1db47aef54c29e2</span><span class="w"> </span><span class="mf">1.57</span><span class="n">kB</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="nx">1.57kB</span><span class="w">  </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="n">ad4c705f24d392b982b2f0747704b1c5162e45674294d5640cca7076</span><span class="w"> </span><span class="mf">7.73</span><span class="n">kB</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="nx">7.73kB</span><span class="w">  </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="n">e0ad2c0621bc497b97748af8ca5767c8e7528f6d3fe9118fdb4d5d</span><span class="w"> </span><span class="mf">26.64</span><span class="n">MB</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="nx">26.64MB</span><span class="w">  </span><span class="nx">8.3s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">9</span><span class="n">e56c3e0e6b7d4a8cc1719050e6573d2da2703b9d20097a3522b890e0ecf</span><span class="w"> </span><span class="mi">602</span><span class="n">B</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">602B</span><span class="w">  </span><span class="nx">1.8s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">32</span><span class="n">b26e9cdb837f314a3de1e50ba33e841eff1638c93e244b57304caf91b0</span><span class="w"> </span><span class="mi">665</span><span class="n">B</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">665B</span><span class="w">  </span><span class="nx">1.6s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">20</span><span class="n">ab512bbb071cf0ca402b08d84c317f21cb888e49d6ffca7f851f1d</span><span class="w"> </span><span class="mf">1.39</span><span class="n">kB</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="nx">1.39kB</span><span class="w">  </span><span class="nx">2.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">extracting</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="n">e0ad2c0621bc497b97748af8ca5767c8e7528f6d3fe9118fdb4d5d11faf49</span><span class="w">  </span><span class="mf">0.7</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">extracting</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">9</span><span class="n">e56c3e0e6b7d4a8cc1719050e6573d2da2703b9d20097a3522b890e0ecf9</span><span class="w">  </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">extracting</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">09</span><span class="n">f31c94adc624db7764fc3b46eb26c110c49056e18573e8d81f8cf9afb5a</span><span class="w">  </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">extracting</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">32</span><span class="n">b26e9cdb837f314a3de1e50ba33e841eff1638c93e244b57304caf91b0f</span><span class="w">  </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">extracting</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">20</span><span class="n">ab512bbb071cf0ca402b08d84c317f21cb888e49d6ffca7f851f1db3438</span><span class="w">  </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="n">/2</span><span class="p">]</span><span class="w"> </span><span class="n">COPY</span><span class="w"> </span><span class="n">default.template.conf</span><span class="w"> </span><span class="n">/etc/nginx/templates/default.conf.template</span><span class="w">         </span><span class="nx">0.1s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">exporting</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">image</span><span class="w">                                                                  </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">exporting</span><span class="w"> </span><span class="n">layers</span><span class="w">                                                                 </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">writing</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="n">e22b93854b3606a54ff9d4c1472d5bee631953bfe3c18a36d9b91d4073</span><span class="w">  </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">naming</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">docker.io/library/nginx:mainline</span><span class="w">                                       </span><span class="nx">0.0s</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="n">prod_mysql_1</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="n">done</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="n">prod_laravel_1</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="n">done</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="n">prod_laravel_2</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="n">done</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="n">prod_laravel_3</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="n">done</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="n">prod_proxy_1</span><span class="w">   </span><span class="o">...</span><span class="w"> </span><span class="n">done</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">git</span><span class="p">:(</span><span class="n">compose/laravel</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">prod</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nx">\.docker\.env.example</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">docker-compose.yaml</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\docker-compose.production.yaml</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">laravel</span><span class="w"> </span><span class="nx">php</span><span class="w"> </span><span class="nx">artisan</span><span class="w"> </span><span class="nx">migrate</span><span class="w">
+</span><span class="o">**************************************</span><span class="w">
+</span><span class="o">*</span><span class="w">     </span><span class="n">Application</span><span class="w"> </span><span class="n">In</span><span class="w"> </span><span class="n">Production</span><span class="o">!</span><span class="w">     </span><span class="o">*</span><span class="w">
+</span><span class="o">**************************************</span><span class="w">
+
+ </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">really</span><span class="w"> </span><span class="n">wish</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">command</span><span class="nf">?</span><span class="w"> </span><span class="p">(</span><span class="n">yes/no</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="n">no</span><span class="p">]:</span><span class="w">
+ </span><span class="err">&gt;</span><span class="w"> </span><span class="n">y</span><span class="w">
+
+</span><span class="n">Migration</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="n">created</span><span class="w"> </span><span class="n">successfully.</span><span class="w">
+</span><span class="n">Migrating</span><span class="p">:</span><span class="w"> </span><span class="mi">2014</span><span class="err">_</span><span class="mi">10</span><span class="err">_</span><span class="mi">12</span><span class="err">_</span><span class="mi">000000</span><span class="err">_</span><span class="n">create_users_table</span><span class="w">
+</span><span class="n">Migrated</span><span class="p">:</span><span class="w">  </span><span class="mi">2014</span><span class="err">_</span><span class="mi">10</span><span class="err">_</span><span class="mi">12</span><span class="err">_</span><span class="mi">000000</span><span class="err">_</span><span class="n">create_users_table</span><span class="w"> </span><span class="p">(</span><span class="mf">32.25</span><span class="n">ms</span><span class="p">)</span><span class="w">
+</span><span class="n">Migrating</span><span class="p">:</span><span class="w"> </span><span class="mi">2014</span><span class="err">_</span><span class="mi">10</span><span class="err">_</span><span class="mi">12</span><span class="err">_</span><span class="mi">100000</span><span class="err">_</span><span class="n">create_password_resets_table</span><span class="w">
+</span><span class="n">Migrated</span><span class="p">:</span><span class="w">  </span><span class="mi">2014</span><span class="err">_</span><span class="mi">10</span><span class="err">_</span><span class="mi">12</span><span class="err">_</span><span class="mi">100000</span><span class="err">_</span><span class="n">create_password_resets_table</span><span class="w"> </span><span class="p">(</span><span class="mf">30.17</span><span class="n">ms</span><span class="p">)</span><span class="w">
+</span><span class="n">Migrating</span><span class="p">:</span><span class="w"> </span><span class="mi">2019</span><span class="err">_</span><span class="mi">08</span><span class="err">_</span><span class="mi">19</span><span class="err">_</span><span class="mi">000000</span><span class="err">_</span><span class="n">create_failed_jobs_table</span><span class="w">
+</span><span class="n">Migrated</span><span class="p">:</span><span class="w">  </span><span class="mi">2019</span><span class="err">_</span><span class="mi">08</span><span class="err">_</span><span class="mi">19</span><span class="err">_</span><span class="mi">000000</span><span class="err">_</span><span class="n">create_failed_jobs_table</span><span class="w"> </span><span class="p">(</span><span class="mf">34.39</span><span class="n">ms</span><span class="p">)</span><span class="w">
+</span><span class="n">Migrating</span><span class="p">:</span><span class="w"> </span><span class="mi">2021</span><span class="err">_</span><span class="mi">08</span><span class="err">_</span><span class="mi">09</span><span class="err">_</span><span class="mi">164144</span><span class="err">_</span><span class="n">create_mahasiswa_table</span><span class="w">
+</span><span class="n">Migrated</span><span class="p">:</span><span class="w">  </span><span class="mi">2021</span><span class="err">_</span><span class="mi">08</span><span class="err">_</span><span class="mi">09</span><span class="err">_</span><span class="mi">164144</span><span class="err">_</span><span class="n">create_mahasiswa_table</span><span class="w"> </span><span class="p">(</span><span class="mf">64.72</span><span class="n">ms</span><span class="p">)</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">git</span><span class="p">:(</span><span class="n">compose/laravel</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">prod</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nx">\.docker\.env.example</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">docker-compose.yaml</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\docker-compose.production.yaml</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nx">ps</span><span class="w">
+     </span><span class="n">Name</span><span class="w">                   </span><span class="n">Command</span><span class="w">               </span><span class="n">State</span><span class="w">                </span><span class="n">Ports</span><span class="w">
+</span><span class="o">------------------------------------------------------------------------------------------</span><span class="w">
+</span><span class="n">prod_laravel_1</span><span class="w">   </span><span class="n">docker</span><span class="nt">-php-entrypoint</span><span class="w"> </span><span class="o">.</span><span class="nf">doc</span><span class="w"> </span><span class="o">...</span><span class="w">   </span><span class="n">Up</span><span class="w">      </span><span class="mi">80</span><span class="n">/tcp</span><span class="w">
+</span><span class="nx">prod_laravel_2</span><span class="w">   </span><span class="nx">docker-php-entrypoint</span><span class="w"> </span><span class="o">.</span><span class="nf">doc</span><span class="w"> </span><span class="o">...</span><span class="w">   </span><span class="nx">Up</span><span class="w">      </span><span class="nx">80/tcp</span><span class="w">
+</span><span class="n">prod_laravel_3</span><span class="w">   </span><span class="n">docker</span><span class="nt">-php-entrypoint</span><span class="w"> </span><span class="o">.</span><span class="nf">doc</span><span class="w"> </span><span class="o">...</span><span class="w">   </span><span class="n">Up</span><span class="w">      </span><span class="mi">80</span><span class="n">/tcp</span><span class="w">
+</span><span class="nx">prod_mysql_1</span><span class="w">     </span><span class="nx">docker-entrypoint.sh</span><span class="w"> </span><span class="nx">mysqld</span><span class="w">      </span><span class="nx">Up</span><span class="w">      </span><span class="nx">3306/tcp</span><span class="p">,</span><span class="w"> </span><span class="nx">33060/tcp</span><span class="w">
+</span><span class="n">prod_proxy_1</span><span class="w">     </span><span class="n">/docker-entrypoint.sh</span><span class="w"> </span><span class="nx">ngin</span><span class="w"> </span><span class="o">...</span><span class="w">   </span><span class="nx">Up</span><span class="w">      </span><span class="nx">0.0.0.0:80-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="p">,:::</span><span class="nx">80-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="w">
+</span></code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/docker/01-silabus"  class="" title="Silabus Belajar Docker: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/docker/compose/study-cases/10a-compose-php-study-case" class="" 
+        title="PHP deployment using compose file
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 82 to 113
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case" class="" 
+        title="Springboot deployment using compose file
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/docker/14c-ansible-for-docker-operations"  class="" title="Getting started with Ansible role, tasks for docker">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#compose" class="page__taxonomy-item p-category" rel="tag">Compose</a><span class="sep">, </span>
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#docker" class="page__taxonomy-item p-category" rel="tag">Docker</a><span class="sep">, </span>
+    
+      <a href="/categories/#study-cases" class="page__taxonomy-item p-category" rel="tag">Study-Cases</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-09-12T14:40:46+07:00">September 12, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Laravel+deployment+using+compose+file%20%2Fposts%2Fdevops%2Fdocker%2Fcompose%2Fstudy-cases%2F10b-compose-laravel-study-case" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Fdocker%2Fcompose%2Fstudy-cases%2F10b-compose-laravel-study-case" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Fdocker%2Fcompose%2Fstudy-cases%2F10b-compose-laravel-study-case" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

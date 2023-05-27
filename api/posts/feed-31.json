@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Handle Null value dengan Coalesce",
+      "link": "/posts/rdbms/oracle18c/005d-handle-null-value"
+    }
+    ,
+    {
+      "title": "Menggabungkan column dengan concatnation",
+      "link": "/posts/rdbms/oracle18c/005c-select-concatnation"
+    }
+    ,
+    {
+      "title": "Operation Arithmetic di Oracle",
+      "link": "/posts/rdbms/oracle18c/005b-select-arithmetic"
+    }
+    ,
+    {
+      "title": "Pemberian alias pada column dan table",
+      "link": "/posts/rdbms/oracle18c/005a-select-alias-column-table"
+    }
+    ,
+    {
+      "title": "Select Statement dalam SQL",
+      "link": "/posts/rdbms/oracle18c/005-select-statement"
+    }
+    ,
+    {
+      "title": "Data Types di Oracle Database",
+      "link": "/posts/rdbms/oracle18c/004b-tipe-data"
+    }
+    ,
+    {
+      "title": "Aturan Penulisan SQL pada Oracle Database",
+      "link": "/posts/rdbms/oracle18c/004a-aturan-pada-oracle-database"
+    }
+    ,
+    {
+      "title": "Persiapan Sebelum mulai belajar",
+      "link": "/posts/rdbms/oracle18c/004-preparation-before-start"
+    }
+    ,
+    {
+      "title": "Install Database Editor untuk Oracle 18c",
+      "link": "/posts/rdbms/oracle18c/003d-install-database-editor"
+    }
+    ,
+    {
+      "title": "Install Oracle 18c XE dengan Docker",
+      "link": "/posts/rdbms/oracle18c/003c-install-oracledb-docker-images"
+    }
+  ]
+}

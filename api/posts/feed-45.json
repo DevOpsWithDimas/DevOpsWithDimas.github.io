@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Time is your for practice part 2",
+      "link": "/posts/language/java/control/07-quis-section-2"
+    }
+    ,
+    {
+      "title": "Break dan Continue statement",
+      "link": "/posts/language/java/control/06c-break-or-continue"
+    }
+    ,
+    {
+      "title": "WHILE dan DO-WHILE statement",
+      "link": "/posts/language/java/control/06b-while-statement"
+    }
+    ,
+    {
+      "title": "For statement #2",
+      "link": "/posts/language/java/control/06a-for-statement-2"
+    }
+    ,
+    {
+      "title": "For statement",
+      "link": "/posts/language/java/control/06-for-statement"
+    }
+    ,
+    {
+      "title": "SWITCH-CASE statement",
+      "link": "/posts/language/java/control/05b-swith-statement"
+    }
+    ,
+    {
+      "title": "IF statement",
+      "link": "/posts/language/java/control/05a-if-statement"
+    }
+    ,
+    {
+      "title": "FLow control statement",
+      "link": "/posts/language/java/control/05-control-flow"
+    }
+    ,
+    {
+      "title": "Time is your practice",
+      "link": "/posts/language/java/basic/04-quis-section-1"
+    }
+    ,
+    {
+      "title": "Konversi tipe data otomatis di Java",
+      "link": "/posts/language/java/basic/03a-conversi-tipe-data"
+    }
+  ]
+}

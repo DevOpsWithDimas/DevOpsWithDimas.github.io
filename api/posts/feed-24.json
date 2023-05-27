@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "DDL - View di Oracle",
+      "link": "/posts/rdbms/oracle18c/016p-views"
+    }
+    ,
+    {
+      "title": "DDL - Deferring Constraint Checks",
+      "link": "/posts/rdbms/oracle18c/016o-constraint-deferrable"
+    }
+    ,
+    {
+      "title": "DDL - Enabled, Disabled & Drop Constraints",
+      "link": "/posts/rdbms/oracle18c/016n-management-constraints"
+    }
+    ,
+    {
+      "title": "DDL - Foreign Key Constraint dengan Options",
+      "link": "/posts/rdbms/oracle18c/016m-constraint-foreign-key-cascade-options"
+    }
+    ,
+    {
+      "title": "DDL - Foreign Key Constraint",
+      "link": "/posts/rdbms/oracle18c/016l-constraint-foreign-key"
+    }
+    ,
+    {
+      "title": "DDL - Primary Key Constraint",
+      "link": "/posts/rdbms/oracle18c/016k-constraint-primary-key"
+    }
+    ,
+    {
+      "title": "DDL - Check Constraint",
+      "link": "/posts/rdbms/oracle18c/016j-constraint-check"
+    }
+    ,
+    {
+      "title": "DDL - Unqiue Constraint",
+      "link": "/posts/rdbms/oracle18c/016i-constraint-unique"
+    }
+    ,
+    {
+      "title": "DDL - Not Null Constraint",
+      "link": "/posts/rdbms/oracle18c/016h-constraint-not-null"
+    }
+    ,
+    {
+      "title": "DDL - Macam-macam Constraint di Oracle",
+      "link": "/posts/rdbms/oracle18c/016g-ddl-contraints-table"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Pengenalan scripting language dengan Javascript",
+      "link": "/posts/web/js/02-pengenalan-js"
+    }
+    ,
+    {
+      "title": "Silabus Belajar Javascript",
+      "link": "/posts/web/js/01-silabus-js"
+    }
+    ,
+    {
+      "title": "Batch processing dengan JDBC",
+      "link": "/posts/language/java/jdbc/010-batch"
+    }
+    ,
+    {
+      "title": "Mengenal Transactional dengan JDBC",
+      "link": "/posts/language/java/jdbc/09-transactional"
+    }
+    ,
+    {
+      "title": "Mengenal class ResultSet",
+      "link": "/posts/language/java/jdbc/08-resultset"
+    }
+    ,
+    {
+      "title": "Perbedaan method executeQuery() dan executeUpdate()",
+      "link": "/posts/language/java/jdbc/07-execute-query-and-update"
+    }
+    ,
+    {
+      "title": "Mengenal class java.sql.PreparedStatement",
+      "link": "/posts/language/java/jdbc/06-prepared-statement"
+    }
+    ,
+    {
+      "title": "Mengenal class java.sql.Statement",
+      "link": "/posts/language/java/jdbc/05-statement"
+    }
+    ,
+    {
+      "title": "Using Database Versioning with flyway",
+      "link": "/posts/language/java/jdbc/04-using-flyway"
+    }
+    ,
+    {
+      "title": "Membuat connection ke Database PostgreSQL via JDBC",
+      "link": "/posts/language/java/jdbc/03-create-connection"
+    }
+  ]
+}

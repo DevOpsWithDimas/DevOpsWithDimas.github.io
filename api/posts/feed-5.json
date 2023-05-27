@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Queries inside a query (subquery)",
+      "link": "/posts/rdbms/postgresql/sql/select/04c-subquery"
+    }
+    ,
+    {
+      "title": "Initialization of Containers",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03e-init-containers"
+    }
+    ,
+    {
+      "title": "Pod & Container Lifecycle",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle"
+    }
+    ,
+    {
+      "title": "Basic Pods and Containers Configs",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config"
+    }
+    ,
+    {
+      "title": "Working with Pods",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods"
+    }
+    ,
+    {
+      "title": "Kubernetes Workloads with Pods",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03a-workload-pods"
+    }
+    ,
+    {
+      "title": "Example Use Cases of docker-machine",
+      "link": "/posts/devops/docker/machine/13d-usecases-docker-machine"
+    }
+    ,
+    {
+      "title": "Overview Pod and Container in Kubernetes",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers"
+    }
+    ,
+    {
+      "title": "Joined Tables",
+      "link": "/posts/rdbms/postgresql/sql/select/04b-join-tables"
+    }
+    ,
+    {
+      "title": "Managing a machines in docker-machine",
+      "link": "/posts/devops/docker/machine/13c-managed-machines"
+    }
+  ]
+}

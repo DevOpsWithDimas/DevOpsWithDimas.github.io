@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Deep dive into INSERT Statement",
+      "link": "/posts/rdbms/postgresql/sql/dml/05b-dml-insert"
+    }
+    ,
+    {
+      "title": "Basic Create, Update, Delete statement",
+      "link": "/posts/rdbms/postgresql/sql/dml/05a-cud-statement"
+    }
+    ,
+    {
+      "title": "Overview of Data Manipulation Language (DML)",
+      "link": "/posts/rdbms/postgresql/sql/dml/05-overview-dml"
+    }
+    ,
+    {
+      "title": "Time your practice (part 2)",
+      "link": "/posts/rdbms/postgresql/sql/select/04g-quis-section-2"
+    }
+    ,
+    {
+      "title": "WITH Queries (Common Table Expressions)",
+      "link": "/posts/rdbms/postgresql/sql/select/04f-with-queries"
+    }
+    ,
+    {
+      "title": "Getting started with git",
+      "link": "/posts/git/gitops/gitlab/01c-basic-git-command"
+    }
+    ,
+    {
+      "title": "How to Install git on Linux",
+      "link": "/posts/git/gitops/gitlab/01b-install-git-linux"
+    }
+    ,
+    {
+      "title": "How to Install git on Windows",
+      "link": "/posts/git/gitops/gitlab/01b-install-git-windows"
+    }
+    ,
+    {
+      "title": "How to Install git on MacOS",
+      "link": "/posts/git/gitops/gitlab/01b-install-git-mac"
+    }
+    ,
+    {
+      "title": "What is Git SCM",
+      "link": "/posts/git/gitops/gitlab/01a-what-is-git"
+    }
+  ]
+}

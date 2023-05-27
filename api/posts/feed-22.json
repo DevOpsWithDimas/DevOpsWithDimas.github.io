@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Auditing Specific Activities with Fine-Grained Auditing",
+      "link": "/posts/rdbms/oracle18c/018l-audit-fine-grained"
+    }
+    ,
+    {
+      "title": "Administering the Audit Trail",
+      "link": "/posts/rdbms/oracle18c/018k-managing-audit-trail"
+    }
+    ,
+    {
+      "title": "Predefined Unified Audit Policies",
+      "link": "/posts/rdbms/oracle18c/018j-audit-predefined-unified-policy"
+    }
+    ,
+    {
+      "title": "Auditing Activities with Unified Audit Policies",
+      "link": "/posts/rdbms/oracle18c/018i-audit-general-activity-policy"
+    }
+    ,
+    {
+      "title": "Monitoring Database Activity dengan Audit",
+      "link": "/posts/rdbms/oracle18c/018h-auditing"
+    }
+    ,
+    {
+      "title": "DDL - Managing Resource & Password dengan Profiles",
+      "link": "/posts/rdbms/oracle18c/018g-ddl-profiles"
+    }
+    ,
+    {
+      "title": "DDL - Grouping Privileges dengan Roles",
+      "link": "/posts/rdbms/oracle18c/018f-ddl-roles"
+    }
+    ,
+    {
+      "title": "DDL - Object Privileges",
+      "link": "/posts/rdbms/oracle18c/018e-ddl-object-privileges"
+    }
+    ,
+    {
+      "title": "DDL - System Privileges",
+      "link": "/posts/rdbms/oracle18c/018d-ddl-system-privileges"
+    }
+    ,
+    {
+      "title": "DDL - Dropping User Account",
+      "link": "/posts/rdbms/oracle18c/018c-drop-user"
+    }
+  ]
+}

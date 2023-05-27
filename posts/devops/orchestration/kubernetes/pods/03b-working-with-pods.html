@@ -1,0 +1,1820 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Working with Pods - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas Working with pods in kubernetes cluster. Seperti yang telah kita bahas di artikel sebelumnya mekipun kita sebetulnnya akan jarang sekali membuat pods secara explicit tpi tidak ada salahnya untuk kita bahas lebih detail ya tentang pod ini.  Pods are designed as relatively ephemeral, disposable entities. When a Pod gets created (directly by you, or indirectly by a controller), the new Pod is scheduled to run on a Node in your cluster. The Pod remains on that node until the Pod finishes execution, the Pod object is deleted, the Pod is evicted for lack of resources, or the node fails.     Note: Restarting a container in a Pod should not be confused with restarting a Pod. A Pod is not a process, but an environment for running container(s). A Pod persists until it is deleted.   When you create the manifest for a Pod object, make sure the name specified is a valid DNS subdomain name.  Untuk pembahasan lebih lanjutnya, seperti biasa kita akan bagi menjadi beberapa bagian diantaranya:     Pods and Controllers   Pod templates   Pod update and replacement   Pod networking   Resource sharing in pods   Privileged mode for containers   Static pods   Container probes   Ok langsung ja kita bahas materi yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Working with Pods">
+<meta property="og:url" content="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas Working with pods in kubernetes cluster. Seperti yang telah kita bahas di artikel sebelumnya mekipun kita sebetulnnya akan jarang sekali membuat pods secara explicit tpi tidak ada salahnya untuk kita bahas lebih detail ya tentang pod ini.  Pods are designed as relatively ephemeral, disposable entities. When a Pod gets created (directly by you, or indirectly by a controller), the new Pod is scheduled to run on a Node in your cluster. The Pod remains on that node until the Pod finishes execution, the Pod object is deleted, the Pod is evicted for lack of resources, or the node fails.     Note: Restarting a container in a Pod should not be confused with restarting a Pod. A Pod is not a process, but an environment for running container(s). A Pod persists until it is deleted.   When you create the manifest for a Pod object, make sure the name specified is a valid DNS subdomain name.  Untuk pembahasan lebih lanjutnya, seperti biasa kita akan bagi menjadi beberapa bagian diantaranya:     Pods and Controllers   Pod templates   Pod update and replacement   Pod networking   Resource sharing in pods   Privileged mode for containers   Static pods   Container probes   Ok langsung ja kita bahas materi yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-04-22T15:41:53+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#pods-and-controllers">Pods and Controllers</a></li><li><a href="#pod-templates">Pod templates</a></li><li><a href="#pod-update-and-replacement">Pod update and replacement</a></li><li><a href="#pod-networking">Pod networking</a></li><li><a href="#resource-sharing-in-pods">Resource sharing in pods</a></li><li><a href="#privileged-mode-for-containers">Privileged mode for containers</a></li><li><a href="#static-pods">Static pods</a></li><li><a href="#container-probes">Container probes</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Working with Pods">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas Working with pods in kubernetes cluster. Seperti yang telah kita bahas di artikel sebelumnya mekipun kita sebetulnnya akan jarang sekali membuat pods secara explicit tpi tidak ada salahnya untuk kita bahas lebih detail ya tentang pod ini.Pods are designed as relatively ephemeral, disposable entities. When a Pod gets created (directly by you, or indirectly by a controller), the new Pod is scheduled to run on a Node in your cluster. The Pod remains on that node until the Pod finishes execution, the Pod object is deleted, the Pod is evicted for lack of resources, or the node fails.  Note: Restarting a container in a Pod should not be confused with restarting a Pod. A Pod is not a process, but an environment for running container(s). A Pod persists until it is deleted.When you create the manifest for a Pod object, make sure the name specified is a valid DNS subdomain name.Untuk pembahasan lebih lanjutnya, seperti biasa kita akan bagi menjadi beberapa bagian diantaranya:  Pods and Controllers  Pod templates  Pod update and replacement  Pod networking  Resource sharing in pods  Privileged mode for containers  Static pods  Container probesOk langsung ja kita bahas materi yang pertama">
+    <meta itemprop="datePublished" content="2022-04-22T15:41:53+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods" class="u-url" itemprop="url">Working with Pods
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-04-22T15:41:53+07:00">April 22, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        12 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Kubernetes">
+        <label class="acordion-item-label" for="content-Pengenalan Kubernetes">
+            Pengenalan Kubernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01-silabus">
+                        
+                        Silabus - DevOps Kubernetes...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes">
+                        
+                        What is Kubernetes (k8s) ?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01b-k8s-components">
+                        
+                        Kubernetes Components
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01c-k8s-api">
+                        
+                        The Kubernetes API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01d-k8s-objects">
+                        
+                        What is Kubernetes Objects?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01e-k8s-object-management">
+                        
+                        Managing Kubernetes Object
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids">
+                        
+                        Kubernetes Object Names and...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01g-k8s-namespaces">
+                        
+                        What is Kubernetes Namespaces?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments">
+                        
+                        Kubernetes cluster environt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started with minikube">
+        <label class="acordion-item-label" for="content-Getting started with minikube">
+            Getting started with minikube
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02-overview-learn-env">
+                        
+                        Overview learning environme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos">
+                        
+                        Install minikube on Mac (In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon">
+                        
+                        Install minikube on Mac (Ap...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows">
+                        
+                        Install minikube for Window...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+                        
+                        Install minikube for Linux ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+                        
+                        Deploying an apps/services ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02c-minikube-basic-control">
+                        
+                        Minikube basic control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images">
+                        
+                        Using your own image into M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+                        
+                        Minikube addons features
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+                        
+                        Access your apps/service in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02h-minikube-mount">
+                        
+                        Mounting filesystems to min...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pods and Containers">
+        <label class="acordion-item-label" for="content-Pods and Containers">
+            Pods and Containers
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers">
+                        
+                        Overview Pod and Container ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03a-workload-pods">
+                        
+                        Kubernetes Workloads with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Working with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config">
+                        
+                        Basic Pods and Containers C...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+                        
+                        Pod & Container Lifecycle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers">
+                        
+                        Initialization of Containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+                        
+                        Configure env (Environment ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit">
+                        
+                        Configure Request and Limit...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+                        
+                        Configure liveness, readine...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions">
+                        
+                        Pod Disruptions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases">
+                        
+                        Overview Study Cases: Pod a...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps">
+                        
+                        Study Cases: Monolith apps ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps">
+                        
+                        Study cases: Microservice a...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Workload resources">
+        <label class="acordion-item-label" for="content-Workload resources">
+            Workload resources
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources">
+                        
+                        Overview Kubernetes Workloa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload">
+                        
+                        What is Workload Resources?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment">
+                        
+                        Working with Deployment object
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking (service)">
+        <label class="acordion-item-label" for="content-Networking (service)">
+            Networking (service)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Store data using Volumes">
+        <label class="acordion-item-label" for="content-Store data using Volumes">
+            Store data using Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Client">
+        <label class="acordion-item-label" for="content-Kubernetes Client">
+            Kubernetes Client
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Security RBAC">
+        <label class="acordion-item-label" for="content-Security RBAC">
+            Security RBAC
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Package manager">
+        <label class="acordion-item-label" for="content-Kubernetes Package manager">
+            Kubernetes Package manager
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes cluster for Production grade">
+        <label class="acordion-item-label" for="content-Kubernetes cluster for Production grade">
+            Kubernetes cluster for Production grade
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Service mesh with istio">
+        <label class="acordion-item-label" for="content-Service mesh with istio">
+            Service mesh with istio
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes on Cloud provider">
+        <label class="acordion-item-label" for="content-Kubernetes on Cloud provider">
+            Kubernetes on Cloud provider
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas Working with pods in kubernetes cluster. Seperti yang telah kita bahas di artikel sebelumnya mekipun kita sebetulnnya akan jarang sekali membuat pods secara explicit tpi tidak ada salahnya untuk kita bahas lebih detail ya tentang pod ini.</p>
+
+<p>Pods are designed as relatively ephemeral, disposable entities. When a Pod gets created (directly by you, or indirectly by a controller), the new Pod is scheduled to run on a Node in your cluster. The Pod remains on that node until the Pod finishes execution, the Pod object is deleted, the Pod is evicted for lack of resources, or the node fails.</p>
+
+<blockquote>
+  <p>Note: Restarting a container in a Pod should not be confused with restarting a Pod. A Pod is not a process, but an environment for running container(s). A Pod persists until it is deleted.</p>
+</blockquote>
+
+<p>When you create the manifest for a Pod object, make sure the name specified is a valid DNS subdomain name.</p>
+
+<p>Untuk pembahasan lebih lanjutnya, seperti biasa kita akan bagi menjadi beberapa bagian diantaranya:</p>
+
+<ol>
+  <li>Pods and Controllers</li>
+  <li>Pod templates</li>
+  <li>Pod update and replacement</li>
+  <li>Pod networking</li>
+  <li>Resource sharing in pods</li>
+  <li>Privileged mode for containers</li>
+  <li>Static pods</li>
+  <li>Container probes</li>
+</ol>
+
+<p>Ok langsung ja kita bahas materi yang pertama</p>
+
+<!--more-->
+
+<h2 id="pods-and-controllers">Pods and Controllers</h2>
+
+<p>Pods are designed as relatively ephemeral, disposable entities.</p>
+
+<p>You can use workload resources to create and manage multiple Pods for you. A controller for the resource handles replication and rollout and automatic healing in case of Pod failure. For example, if a Node fails, a controller notices that Pods on that Node have stopped working and creates a replacement Pod. The scheduler places the replacement Pod onto a healthy Node.</p>
+
+<p>Here are some examples of workload resources that manage one or more Pods:</p>
+
+<ol>
+  <li><strong>Deployment</strong>, managed replicated application on your cluster</li>
+  <li><strong>StatefulSet</strong>, managed deployment and scalling of a set of Pods with durable storage and persisten identifiers for each Pod.</li>
+  <li><strong>DaemonSet</strong>, Ensures a copy of a Pod is running accress a set of nodes in a cluster</li>
+</ol>
+
+<h2 id="pod-templates">Pod templates</h2>
+
+<p>Controllers for workload resources create Pods from a pod template and manage those Pods on your behalf.</p>
+
+<p>PodTemplates are specifications for creating Pods, and are included in workload resources such as <strong>Deployments</strong>, <strong>Jobs</strong>, and <strong>DaemonSets</strong>.</p>
+
+<p>Each controller for a workload resource uses the <code class="language-plaintext highlighter-rouge">PodTemplate</code> inside the workload object to make actual Pods. The <code class="language-plaintext highlighter-rouge">PodTemplate</code> is part of the desired state of whatever workload resource you used to run your app.</p>
+
+<p>The sample below is a manifest for a simple Job with a <code class="language-plaintext highlighter-rouge">template</code> that starts one container. The container in that Pod prints a message then pauses.</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">batch/v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Job</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">hello</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">template</span><span class="pi">:</span>
+    <span class="c1"># This is the pod template</span>
+    <span class="na">spec</span><span class="pi">:</span>
+      <span class="na">containers</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">hello</span>
+        <span class="na">image</span><span class="pi">:</span> <span class="s">busybox:1.28</span>
+        <span class="na">command</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">sh'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">-c'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">echo</span><span class="nv"> </span><span class="s">"Hello,</span><span class="nv"> </span><span class="s">Kubernetes!"</span><span class="nv"> </span><span class="s">&amp;&amp;</span><span class="nv"> </span><span class="s">sleep</span><span class="nv"> </span><span class="s">3600'</span><span class="pi">]</span>
+      <span class="na">restartPolicy</span><span class="pi">:</span> <span class="s">OnFailure</span>
+    <span class="c1"># The pod template ends here</span></code></pre></figure>
+
+<p>Modifying the pod template or switching to a new pod template has no direct effect on the Pods that already exist. If you change the pod template for a workload resource, that resource needs to create replacement Pods that use the updated template.</p>
+
+<p>For example, the StatefulSet controller ensures that the running Pods match the current pod template for each StatefulSet object. If you edit the StatefulSet to change its pod template, the StatefulSet starts to create new Pods based on the updated template. Eventually, all of the old Pods are replaced with new Pods, and the update is complete.</p>
+
+<blockquote>
+  <p>Note: Each workload resource implements its own rules for handling changes to the Pod template.</p>
+</blockquote>
+
+<h2 id="pod-update-and-replacement">Pod update and replacement</h2>
+
+<p>As mentioned in the previous section, when the Pod template for a workload resource is changed, the controller creates new Pods based on the updated template instead of updating or patching the existing Pods.</p>
+
+<p>Kubernetes doesn’t prevent you from managing Pods directly. It is possible to update some fields of a running Pod, in place. However, Pod update operations like <code class="language-plaintext highlighter-rouge">patch</code>, and <code class="language-plaintext highlighter-rouge">replace</code> have some limitations:</p>
+
+<ol>
+  <li>
+    <p>Most of the metadata about a Pod is immutable. For example, you cannot change the <code class="language-plaintext highlighter-rouge">namespace</code>, <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">uid</code>, or <code class="language-plaintext highlighter-rouge">creationTimestamp</code> fields; the <code class="language-plaintext highlighter-rouge">generation</code> field is unique. It only accepts updates that increment the field’s current value.</p>
+  </li>
+  <li>
+    <p>If the <code class="language-plaintext highlighter-rouge">metadata.deletionTimestamp</code> is set, no new entry can be added to the <code class="language-plaintext highlighter-rouge">metadata.finalizers</code> list.</p>
+  </li>
+  <li>
+    <p>Pod updates may not change fields other than <code class="language-plaintext highlighter-rouge">spec.containers[*].image</code>, <code class="language-plaintext highlighter-rouge">spec.initContainers[*].image</code>, <code class="language-plaintext highlighter-rouge">spec.activeDeadlineSeconds</code> or <code class="language-plaintext highlighter-rouge">spec.tolerations</code>. For <code class="language-plaintext highlighter-rouge">spec.tolerations</code>, you can only add new entries.</p>
+  </li>
+</ol>
+
+<p>Jika kita coba seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">nginx</span><span class="w"> </span><span class="nt">--image</span><span class="w"> </span><span class="nx">nginx:mainline</span><span class="w"> </span><span class="nt">--port</span><span class="w"> </span><span class="nx">80</span><span class="w">
+</span><span class="n">pod/nginx</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pods</span><span class="w">
+</span><span class="n">NAME</span><span class="w">    </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">nginx</span><span class="w">   </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">33s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">patch</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">nginx</span><span class="w"> </span><span class="nt">--type</span><span class="o">=</span><span class="s1">'json'</span><span class="w"> </span><span class="nt">-p</span><span class="o">=</span><span class="s1">'[{"op": "replace", "path": "/spec/containers/0/image", "value": "nginx:latest"}]'</span><span class="w">
+</span><span class="n">pod/nginx</span><span class="w"> </span><span class="nx">patched</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">nginx</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">nginx</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube/192.168.49.2</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">06:54:59</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">run</span><span class="o">=</span><span class="n">nginx</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">nginx:</span><span class="w">
+    </span><span class="n">Container</span><span class="w"> </span><span class="nx">ID:</span><span class="w">   </span><span class="nx">docker://02537095696f9ddcb0075dc26267004fbf71ed50cdd419ce3ca576d372fb519e</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">nginx:latest</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">80/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">07:13:10</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Last</span><span class="w"> </span><span class="nx">State:</span><span class="w">     </span><span class="nx">Terminated</span><span class="w">
+      </span><span class="n">Reason:</span><span class="w">       </span><span class="nx">Completed</span><span class="w">
+      </span><span class="kr">Exit</span><span class="w"> </span><span class="n">Code:</span><span class="w">    </span><span class="nx">0</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">06:58:34</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+      </span><span class="n">Finished:</span><span class="w">     </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">07:13:10</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">2</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">    </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-b8jcq</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">True</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">True</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">QoS</span><span class="w"> </span><span class="nx">Class:</span><span class="w">                   </span><span class="nx">BestEffort</span><span class="w">
+</span><span class="n">Node-Selectors:</span><span class="w">              </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Tolerations:</span><span class="w">                 </span><span class="nx">node.kubernetes.io/not-ready:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+                             </span><span class="n">node.kubernetes.io/unreachable:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">                  </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">                 </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">21m</span><span class="w">                  </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/nginx</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulling</span><span class="w">    </span><span class="nx">21m</span><span class="w">                  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Pulling</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:mainline"</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">21m</span><span class="w">                  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">pulled</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:mainline"</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">5.4689168s</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">18m</span><span class="w">                  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx"</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">3m33s</span><span class="w"> </span><span class="p">(</span><span class="n">x3</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">21m</span><span class="p">)</span><span class="w">  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">nginx</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">3m33s</span><span class="w"> </span><span class="p">(</span><span class="n">x3</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">21m</span><span class="p">)</span><span class="w">  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">nginx</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Killing</span><span class="w">    </span><span class="nx">3m33s</span><span class="w"> </span><span class="p">(</span><span class="n">x2</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">18m</span><span class="p">)</span><span class="w">  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">nginx</span><span class="w"> </span><span class="nx">definition</span><span class="w"> </span><span class="nx">changed</span><span class="p">,</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">restarted</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">3m33s</span><span class="w">                </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:latest"</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="pod-networking">Pod networking</h2>
+
+<p>Each Pod is assigned a unique IP address for each address family. Every container in a Pod shares the network namespace, including the IP address and network ports. Inside a Pod (and only then), the containers that belong to the Pod can communicate with one another using <code class="language-plaintext highlighter-rouge">localhost</code>. When containers in a Pod communicate with entities outside the Pod, they must coordinate how they use the shared network resources (such as ports). Within a Pod, containers share an IP address and port space, and can find each other via <code class="language-plaintext highlighter-rouge">localhost</code>.</p>
+
+<p>For example if you run multiple containers with same image it will failed to start</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03b-failed-port-same-binding.yaml"> </script>
+
+<p>Jika di jalankan seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\03-workloads\01-working-pods\failed-port-same-binding.yaml</span><span class="w">
+</span><span class="n">pod/webapps-same-image</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pods</span><span class="w"> </span><span class="nx">webapps-same-image</span><span class="w">
+</span><span class="kr">NAMESPACE</span><span class="w">     </span><span class="n">NAME</span><span class="w">                               </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">        </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">default</span><span class="w">       </span><span class="nx">webapps-same-image</span><span class="w">                 </span><span class="nx">1/2</span><span class="w">     </span><span class="nx">Error</span><span class="w">     </span><span class="nx">1</span><span class="w"> </span><span class="p">(</span><span class="mi">8</span><span class="n">s</span><span class="w"> </span><span class="nx">ago</span><span class="p">)</span><span class="w">      </span><span class="nx">12s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">webapps-same-image</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">webapps-same-image</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube/192.168.49.2</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">10:53:31</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">webapps-same-image</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">172.17.0.4</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">172.17.0.4</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">nginx1:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">nginx:mainline</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">80/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">10:53:32</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+  </span><span class="n">nginx2:</span><span class="w">
+    </span><span class="nx">Image:</span><span class="w">          </span><span class="nx">nginx</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">80/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Waiting</span><span class="w">
+      </span><span class="n">Reason:</span><span class="w">       </span><span class="nx">CrashLoopBackOff</span><span class="w">
+    </span><span class="n">Last</span><span class="w"> </span><span class="nx">State:</span><span class="w">     </span><span class="nx">Terminated</span><span class="w">
+      </span><span class="n">Reason:</span><span class="w">       </span><span class="nx">Error</span><span class="w">
+      </span><span class="kr">Exit</span><span class="w"> </span><span class="n">Code:</span><span class="w">    </span><span class="nx">1</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">10:59:50</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+      </span><span class="n">Finished:</span><span class="w">     </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">10:59:52</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">False</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">7</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="err">✗</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">logs</span><span class="w"> </span><span class="nx">webapps-same-image</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">nginx2</span><span class="w">
+</span><span class="n">/docker-entrypoint.sh:</span><span class="w"> </span><span class="nx">/docker-entrypoint.d/</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">empty</span><span class="p">,</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">attempt</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">perform</span><span class="w"> </span><span class="nx">configuration</span><span class="w">
+</span><span class="n">/docker-entrypoint.sh:</span><span class="w"> </span><span class="nx">Looking</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">shell</span><span class="w"> </span><span class="nx">scripts</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">/docker-entrypoint.d/</span><span class="w">
+</span><span class="n">/docker-entrypoint.sh:</span><span class="w"> </span><span class="nx">Launching</span><span class="w"> </span><span class="nx">/docker-entrypoint.d/10-listen-on-ipv6-by-default.sh</span><span class="w">
+</span><span class="mi">10</span><span class="nt">-listen-on-ipv6-by-default</span><span class="o">.</span><span class="nf">sh</span><span class="p">:</span><span class="w"> </span><span class="n">info:</span><span class="w"> </span><span class="nx">Getting</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">checksum</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">/etc/nginx/conf.d/default.conf</span><span class="w">
+</span><span class="mi">10</span><span class="nt">-listen-on-ipv6-by-default</span><span class="o">.</span><span class="nf">sh</span><span class="p">:</span><span class="w"> </span><span class="n">info:</span><span class="w"> </span><span class="nx">Enabled</span><span class="w"> </span><span class="nx">listen</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">IPv6</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">/etc/nginx/conf.d/default.conf</span><span class="w">
+</span><span class="n">/docker-entrypoint.sh:</span><span class="w"> </span><span class="nx">Launching</span><span class="w"> </span><span class="nx">/docker-entrypoint.d/20-envsubst-on-templates.sh</span><span class="w">
+</span><span class="n">/docker-entrypoint.sh:</span><span class="w"> </span><span class="nx">Launching</span><span class="w"> </span><span class="nx">/docker-entrypoint.d/30-tune-worker-processes.sh</span><span class="w">
+</span><span class="n">/docker-entrypoint.sh:</span><span class="w"> </span><span class="nx">Configuration</span><span class="w"> </span><span class="nx">complete</span><span class="p">;</span><span class="w"> </span><span class="n">ready</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="nx">up</span><span class="w">
+</span><span class="mi">2022</span><span class="n">/04/22</span><span class="w"> </span><span class="nx">03:54:25</span><span class="w"> </span><span class="p">[</span><span class="n">emerg</span><span class="p">]</span><span class="w"> </span><span class="nx">1</span><span class="c">#1: bind() to 0.0.0.0:80 failed (98: Address already in use)</span><span class="w">
+</span><span class="n">nginx:</span><span class="w"> </span><span class="p">[</span><span class="n">emerg</span><span class="p">]</span><span class="w"> </span><span class="nx">bind</span><span class="p">()</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nx">0.0.0.0:80</span><span class="w"> </span><span class="nx">failed</span><span class="w"> </span><span class="p">(</span><span class="mi">98</span><span class="p">:</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">use</span><span class="p">)</span><span class="w">
+</span><span class="n">nginx:</span><span class="w"> </span><span class="p">[</span><span class="n">emerg</span><span class="p">]</span><span class="w"> </span><span class="nx">bind</span><span class="p">()</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="p">[::]:</span><span class="nx">80</span><span class="w"> </span><span class="nx">failed</span><span class="w"> </span><span class="p">(</span><span class="mi">98</span><span class="p">:</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">use</span><span class="p">)</span><span class="w">
+</span><span class="mi">2022</span><span class="n">/04/22</span><span class="w"> </span><span class="nx">03:54:25</span><span class="w"> </span><span class="p">[</span><span class="n">notice</span><span class="p">]</span><span class="w"> </span><span class="nx">1</span><span class="c">#1: try again to bind() after 500ms</span><span class="w">
+</span><span class="mi">2022</span><span class="n">/04/22</span><span class="w"> </span><span class="nx">03:54:25</span><span class="w"> </span><span class="p">[</span><span class="n">emerg</span><span class="p">]</span><span class="w"> </span><span class="nx">1</span><span class="c">#1: still could not bind()</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Sekarang jika kita coba ganti imagenya dengan <code class="language-plaintext highlighter-rouge">bitnami/nginx</code> yang meng-expose port <code class="language-plaintext highlighter-rouge">8080</code> dengan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kubectl patch pods webapps-same-image <span class="nt">--type</span><span class="o">=</span><span class="s1">'json'</span> <span class="nt">-p</span> <span class="s1">'[{"op": "replace", "path": "/spec/containers/1/image", "value": "bitnami/nginx"}]'</span></code></pre></figure>
+
+<p>Sekarang jika kita jalankan dan lihat hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="err">✗</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">patch</span><span class="w"> </span><span class="nx">pods</span><span class="w"> </span><span class="nx">webapps-same-image</span><span class="w"> </span><span class="nt">--type</span><span class="o">=</span><span class="s1">'json'</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="s1">'[{"op": "replace", "path": "/
+spec/containers/1/image", "value": "bitnami/nginx"}]'</span><span class="w">
+</span><span class="n">pod/webapps-same-image</span><span class="w"> </span><span class="nx">patched</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pods</span><span class="w"> </span><span class="nx">webapps-same-image</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                 </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">        </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">webapps-same-image</span><span class="w">   </span><span class="nx">2/2</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">8</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="n">m55s</span><span class="w"> </span><span class="nx">ago</span><span class="p">)</span><span class="w">   </span><span class="nx">9m16s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="mi">01</span><span class="nt">-working-pods</span><span class="w">  </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">pod/webapps-same-image</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">nginx1</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">curl</span><span class="w"> </span><span class="nx">localhost</span><span class="w">
+  </span><span class="o">%</span><span class="w"> </span><span class="n">Total</span><span class="w">    </span><span class="o">%</span><span class="w"> </span><span class="nx">Received</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">Xferd</span><span class="w">  </span><span class="nx">Average</span><span class="w"> </span><span class="nx">Speed</span><span class="w">   </span><span class="nx">Time</span><span class="w">    </span><span class="nx">Time</span><span class="w">     </span><span class="nx">Time</span><span class="w">  </span><span class="nx">Current</span><span class="w">
+                                 </span><span class="n">Dload</span><span class="w">  </span><span class="nx">Upload</span><span class="w">   </span><span class="nx">Total</span><span class="w">   </span><span class="nx">Spent</span><span class="w">    </span><span class="nx">Left</span><span class="w">  </span><span class="nx">Speed</span><span class="w">
+</span><span class="mi">100</span><span class="w">   </span><span class="mi">615</span><span class="w">  </span><span class="mi">100</span><span class="w">   </span><span class="mi">615</span><span class="w">    </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span><span class="w">   </span><span class="mi">600</span><span class="n">k</span><span class="w">      </span><span class="nx">0</span><span class="w"> </span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="w"> </span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="w"> </span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="w">  </span><span class="nx">600k</span><span class="w">
+</span><span class="err">&lt;</span><span class="o">!</span><span class="n">DOCTYPE</span><span class="w"> </span><span class="nx">html</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">html</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">head</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">title</span><span class="err">&gt;</span><span class="nx">Welcome</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">nginx</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/title</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">style</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">html</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color-scheme:</span><span class="w"> </span><span class="nx">light</span><span class="w"> </span><span class="nx">dark</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="n">body</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width:</span><span class="w"> </span><span class="nx">35em</span><span class="p">;</span><span class="w"> </span><span class="n">margin:</span><span class="w"> </span><span class="nx">0</span><span class="w"> </span><span class="nx">auto</span><span class="p">;</span><span class="w">
+</span><span class="n">font-family:</span><span class="w"> </span><span class="nx">Tahoma</span><span class="p">,</span><span class="w"> </span><span class="nx">Verdana</span><span class="p">,</span><span class="w"> </span><span class="nx">Arial</span><span class="p">,</span><span class="w"> </span><span class="nx">sans-serif</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/style</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/head</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">body</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">h1</span><span class="err">&gt;</span><span class="nx">Welcome</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">nginx</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/h1</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">p</span><span class="err">&gt;</span><span class="nx">If</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">see</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">page</span><span class="p">,</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">nginx</span><span class="w"> </span><span class="nx">web</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">successfully</span><span class="w"> </span><span class="nx">installed</span><span class="w"> </span><span class="nx">and</span><span class="w">
+</span><span class="n">working.</span><span class="w"> </span><span class="nx">Further</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">required.</span><span class="err">&lt;</span><span class="nx">/p</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="err">&lt;</span><span class="n">p</span><span class="err">&gt;</span><span class="nx">For</span><span class="w"> </span><span class="nx">online</span><span class="w"> </span><span class="nx">documentation</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">support</span><span class="w"> </span><span class="nx">please</span><span class="w"> </span><span class="nx">refer</span><span class="w"> </span><span class="nx">to</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">a</span><span class="w"> </span><span class="nx">href</span><span class="o">=</span><span class="s2">"http://nginx.org/"</span><span class="err">&gt;</span><span class="n">nginx.org</span><span class="err">&lt;</span><span class="nx">/a</span><span class="err">&gt;</span><span class="o">.</span><span class="err">&lt;</span><span class="nx">br/</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Commercial</span><span class="w"> </span><span class="nx">support</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">available</span><span class="w"> </span><span class="nx">at</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">a</span><span class="w"> </span><span class="nx">href</span><span class="o">=</span><span class="s2">"http://nginx.com/"</span><span class="err">&gt;</span><span class="n">nginx.com</span><span class="err">&lt;</span><span class="nx">/a</span><span class="err">&gt;</span><span class="o">.</span><span class="err">&lt;</span><span class="nx">/p</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="err">&lt;</span><span class="n">p</span><span class="err">&gt;&lt;</span><span class="nx">em</span><span class="err">&gt;</span><span class="nx">Thank</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">nginx.</span><span class="err">&lt;</span><span class="nx">/em</span><span class="err">&gt;&lt;</span><span class="nx">/p</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/body</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/html</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="mi">01</span><span class="nt">-working-pods</span><span class="w">  </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">pod/webapps-same-image</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">nginx1</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">curl</span><span class="w"> </span><span class="nx">localhost:8080</span><span class="w">
+  </span><span class="o">%</span><span class="w"> </span><span class="n">Total</span><span class="w">    </span><span class="o">%</span><span class="w"> </span><span class="nx">Received</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nx">Xferd</span><span class="w">  </span><span class="nx">Average</span><span class="w"> </span><span class="nx">Speed</span><span class="w">   </span><span class="nx">Time</span><span class="w">    </span><span class="nx">Time</span><span class="w">     </span><span class="nx">Time</span><span class="w">  </span><span class="nx">Current</span><span class="w">
+                                 </span><span class="n">Dload</span><span class="w">  </span><span class="nx">Upload</span><span class="w">   </span><span class="nx">Total</span><span class="w">   </span><span class="nx">Spent</span><span class="w">    </span><span class="nx">Left</span><span class="w">  </span><span class="nx">Speed</span><span class="w">
+</span><span class="mi">100</span><span class="w">   </span><span class="mi">615</span><span class="w">  </span><span class="mi">100</span><span class="w">   </span><span class="mi">615</span><span class="w">    </span><span class="mi">0</span><span class="w">     </span><span class="mi">0</span><span class="w">   </span><span class="mi">600</span><span class="n">k</span><span class="w">      </span><span class="nx">0</span><span class="w"> </span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="w"> </span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="w"> </span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="p">:</span><span class="o">--</span><span class="w">  </span><span class="nx">600k</span><span class="w">
+</span><span class="err">&lt;</span><span class="o">!</span><span class="n">DOCTYPE</span><span class="w"> </span><span class="nx">html</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">html</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">head</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">title</span><span class="err">&gt;</span><span class="nx">Welcome</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">nginx</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/title</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">style</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">html</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color-scheme:</span><span class="w"> </span><span class="nx">light</span><span class="w"> </span><span class="nx">dark</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="n">body</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width:</span><span class="w"> </span><span class="nx">35em</span><span class="p">;</span><span class="w"> </span><span class="n">margin:</span><span class="w"> </span><span class="nx">0</span><span class="w"> </span><span class="nx">auto</span><span class="p">;</span><span class="w">
+</span><span class="n">font-family:</span><span class="w"> </span><span class="nx">Tahoma</span><span class="p">,</span><span class="w"> </span><span class="nx">Verdana</span><span class="p">,</span><span class="w"> </span><span class="nx">Arial</span><span class="p">,</span><span class="w"> </span><span class="nx">sans-serif</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/style</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/head</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">body</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">h1</span><span class="err">&gt;</span><span class="nx">Welcome</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">nginx</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/h1</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">p</span><span class="err">&gt;</span><span class="nx">If</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">see</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">page</span><span class="p">,</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">nginx</span><span class="w"> </span><span class="nx">web</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">successfully</span><span class="w"> </span><span class="nx">installed</span><span class="w"> </span><span class="nx">and</span><span class="w">
+</span><span class="n">working.</span><span class="w"> </span><span class="nx">Further</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">required.</span><span class="err">&lt;</span><span class="nx">/p</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="err">&lt;</span><span class="n">p</span><span class="err">&gt;</span><span class="nx">For</span><span class="w"> </span><span class="nx">online</span><span class="w"> </span><span class="nx">documentation</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">support</span><span class="w"> </span><span class="nx">please</span><span class="w"> </span><span class="nx">refer</span><span class="w"> </span><span class="nx">to</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">a</span><span class="w"> </span><span class="nx">href</span><span class="o">=</span><span class="s2">"http://nginx.org/"</span><span class="err">&gt;</span><span class="n">nginx.org</span><span class="err">&lt;</span><span class="nx">/a</span><span class="err">&gt;</span><span class="o">.</span><span class="err">&lt;</span><span class="nx">br/</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Commercial</span><span class="w"> </span><span class="nx">support</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">available</span><span class="w"> </span><span class="nx">at</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">a</span><span class="w"> </span><span class="nx">href</span><span class="o">=</span><span class="s2">"http://nginx.com/"</span><span class="err">&gt;</span><span class="n">nginx.com</span><span class="err">&lt;</span><span class="nx">/a</span><span class="err">&gt;</span><span class="o">.</span><span class="err">&lt;</span><span class="nx">/p</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="err">&lt;</span><span class="n">p</span><span class="err">&gt;&lt;</span><span class="nx">em</span><span class="err">&gt;</span><span class="nx">Thank</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">nginx.</span><span class="err">&lt;</span><span class="nx">/em</span><span class="err">&gt;&lt;</span><span class="nx">/p</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/body</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/html</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="resource-sharing-in-pods">Resource sharing in pods</h2>
+
+<p>Pods enable data sharing among their containers. A Pod can specify a set of shared storage volumes. All containers in the Pod can access the shared volumes, allowing those containers to share data. Volumes also allow persistent data in a Pod to survive in case one of the containers within needs to be restarted. See Storage for more information on how Kubernetes implements shared storage and makes it available to Pods.</p>
+
+<p>For example we’ll create 2 containers using same volumes using <code class="language-plaintext highlighter-rouge">hostPath</code> driver, yang perlu kita siapkan adalah file <code class="language-plaintext highlighter-rouge">index.html</code> dan <code class="language-plaintext highlighter-rouge">pods.yaml</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03b-index.html"> </script>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03b-pods-share-volumes.yaml"> </script>
+
+<p>Jika kita jalankan seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">minikube</span><span class="w"> </span><span class="nx">ssh</span><span class="w">
+</span><span class="n">Last</span><span class="w"> </span><span class="nx">login:</span><span class="w"> </span><span class="nx">Fri</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">00:41:21</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">192.168.49.1</span><span class="w">
+
+</span><span class="n">docker</span><span class="err">@</span><span class="nx">minikube:~</span><span class="err">$</span><span class="w"> </span><span class="nx">sudo</span><span class="w"> </span><span class="nx">mkdir</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">/data/nginx/html</span><span class="w">
+
+</span><span class="n">docker</span><span class="err">@</span><span class="nx">minikube:~</span><span class="err">$</span><span class="w"> </span><span class="nx">sudo</span><span class="w"> </span><span class="nx">chmod</span><span class="w"> </span><span class="nt">-R</span><span class="w"> </span><span class="nx">777</span><span class="w"> </span><span class="nx">/data/nginx/html</span><span class="w">
+
+</span><span class="n">docker</span><span class="err">@</span><span class="nx">minikube:~</span><span class="err">$</span><span class="w"> </span><span class="nx">exit</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">minikube</span><span class="w"> </span><span class="nx">cp</span><span class="w"> </span><span class="o">.</span><span class="nx">\03-workloads\01-working-pods\index.html</span><span class="w"> </span><span class="nx">minikube:/data/nginx/html/index</span><span class="w">
+</span><span class="o">.</span><span class="nf">html</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">minikube</span><span class="w"> </span><span class="nx">ssh</span><span class="w">
+</span><span class="n">Last</span><span class="w"> </span><span class="nx">login:</span><span class="w"> </span><span class="nx">Fri</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">00:44:38</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">192.168.49.1</span><span class="w">
+
+</span><span class="n">docker</span><span class="err">@</span><span class="nx">minikube:~</span><span class="err">$</span><span class="w"> </span><span class="nx">ls</span><span class="w"> </span><span class="nx">/data/nginx/html/</span><span class="w">
+</span><span class="n">index.html</span><span class="w">
+
+</span><span class="n">docker</span><span class="err">@</span><span class="nx">minikube:~</span><span class="err">$</span><span class="w"> </span><span class="nx">exit</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\03-workloads\01-working-pods\pod-storage-volume.yaml</span><span class="w">
+</span><span class="n">pod/webapps</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">webapps</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">webapps</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube/192.168.49.2</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">08:18:40</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">webapps</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">nginx:</span><span class="w">
+    </span><span class="n">Container</span><span class="w"> </span><span class="nx">ID:</span><span class="w">   </span><span class="nx">docker://5d38a4c5ec182e594499560130cd621e4e5111196db63181f41269fa9665ed1e</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">nginx:mainline</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">80/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">08:18:41</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">
+      </span><span class="nx">NGINX_PORT:</span><span class="w">  </span><span class="nx">80</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/usr/share/nginx/html/index.html</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">index-html-file</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">,</span><span class="nx">path</span><span class="o">=</span><span class="s2">"index.html"</span><span class="p">)</span><span class="w">
+  </span><span class="n">bitnami:</span><span class="w">
+    </span><span class="nx">Container</span><span class="w"> </span><span class="nx">ID:</span><span class="w">   </span><span class="nx">docker://21d739a004cddc6659892d3e8921950c4a7df4e6431804046f39d4b99717737b</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">bitnami/nginx</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">90/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Fri</span><span class="p">,</span><span class="w"> </span><span class="nx">22</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">08:18:58</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">    </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/app/index.html</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">index-html-file</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">,</span><span class="nx">path</span><span class="o">=</span><span class="s2">"index.html"</span><span class="p">)</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">True</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">True</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">Volumes:</span><span class="w">
+  </span><span class="nx">index-html-file:</span><span class="w">
+    </span><span class="kr">Type</span><span class="p">:</span><span class="w">          </span><span class="n">HostPath</span><span class="w"> </span><span class="p">(</span><span class="n">bare</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">directory</span><span class="w"> </span><span class="nx">volume</span><span class="p">)</span><span class="w">
+    </span><span class="n">Path:</span><span class="w">          </span><span class="nx">/data/nginx/html</span><span class="w">
+    </span><span class="n">HostPathType:</span><span class="w">  </span><span class="nx">DirectoryOrCreate</span><span class="w">
+</span><span class="n">QoS</span><span class="w"> </span><span class="nx">Class:</span><span class="w">                   </span><span class="nx">BestEffort</span><span class="w">
+</span><span class="n">Node-Selectors:</span><span class="w">              </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Tolerations:</span><span class="w">                 </span><span class="nx">node.kubernetes.io/not-ready:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+                             </span><span class="n">node.kubernetes.io/unreachable:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">   </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">  </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">85s</span><span class="w">   </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/webapps</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">84s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:mainline"</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">mac</span><span class="w">
+</span><span class="n">hine</span><span class="w">
+  </span><span class="nx">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">84s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">nginx</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">84s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">nginx</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulling</span><span class="w">    </span><span class="nx">84s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Pulling</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"bitnami/nginx"</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">67s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">pulled</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"bitnami/nginx"</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">16.8660425</span><span class="w">
+</span><span class="n">s</span><span class="w">
+  </span><span class="nx">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">67s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">bitnami</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">67s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">bitnami</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="err">✗</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nt">-it</span><span class="w"> </span><span class="nx">pod/webapps</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">nginx</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">curl</span><span class="w"> </span><span class="nx">localhost</span><span class="w">
+</span><span class="err">&lt;</span><span class="o">!</span><span class="n">doctype</span><span class="w"> </span><span class="nx">html</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">html</span><span class="w"> </span><span class="nx">lang</span><span class="o">=</span><span class="s2">"en"</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">head</span><span class="err">&gt;</span><span class="w">
+    </span><span class="err">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="nx">charset</span><span class="o">=</span><span class="s2">"UTF-8"</span><span class="err">&gt;</span><span class="w">
+    </span><span class="err">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="nx">name</span><span class="o">=</span><span class="s2">"viewport"</span><span class="w">
+          </span><span class="n">content</span><span class="o">=</span><span class="s2">"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimu
+m-scale=1.0"</span><span class="err">&gt;</span><span class="w">
+    </span><span class="err">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="nx">http-equiv</span><span class="o">=</span><span class="s2">"X-UA-Compatible"</span><span class="w"> </span><span class="n">content</span><span class="o">=</span><span class="s2">"ie=edge"</span><span class="err">&gt;</span><span class="w">
+    </span><span class="err">&lt;</span><span class="n">title</span><span class="err">&gt;</span><span class="nx">Belajar</span><span class="w"> </span><span class="nx">Kubernetes</span><span class="err">&lt;</span><span class="nx">/title</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/head</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">body</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">h3</span><span class="err">&gt;</span><span class="nx">Halo</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kubernetes</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">volume</span><span class="err">&lt;</span><span class="nx">/h3</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/body</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/html</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nt">-it</span><span class="w"> </span><span class="nx">pod/webapps</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">bitnami</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">curl</span><span class="w"> </span><span class="nx">localhost:8080</span><span class="w">
+</span><span class="err">&lt;</span><span class="o">!</span><span class="n">doctype</span><span class="w"> </span><span class="nx">html</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">html</span><span class="w"> </span><span class="nx">lang</span><span class="o">=</span><span class="s2">"en"</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">head</span><span class="err">&gt;</span><span class="w">
+    </span><span class="err">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="nx">charset</span><span class="o">=</span><span class="s2">"UTF-8"</span><span class="err">&gt;</span><span class="w">
+    </span><span class="err">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="nx">name</span><span class="o">=</span><span class="s2">"viewport"</span><span class="w">
+          </span><span class="n">content</span><span class="o">=</span><span class="s2">"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimu
+m-scale=1.0"</span><span class="err">&gt;</span><span class="w">
+    </span><span class="err">&lt;</span><span class="n">meta</span><span class="w"> </span><span class="nx">http-equiv</span><span class="o">=</span><span class="s2">"X-UA-Compatible"</span><span class="w"> </span><span class="n">content</span><span class="o">=</span><span class="s2">"ie=edge"</span><span class="err">&gt;</span><span class="w">
+    </span><span class="err">&lt;</span><span class="n">title</span><span class="err">&gt;</span><span class="nx">Belajar</span><span class="w"> </span><span class="nx">Kubernetes</span><span class="err">&lt;</span><span class="nx">/title</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/head</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">body</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">h3</span><span class="err">&gt;</span><span class="nx">Halo</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kubernetes</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">volume</span><span class="err">&lt;</span><span class="nx">/h3</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/body</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/html</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="privileged-mode-for-containers">Privileged mode for containers</h2>
+
+<p>In Linux, any container in a Pod can enable privileged mode using the <code class="language-plaintext highlighter-rouge">privileged</code> (Linux) flag on the <a href="https://kubernetes.io/docs/tasks/configure-pod-container/security-context/">security context</a> of the container spec. This is useful for containers that want to use operating system administrative capabilities such as manipulating the network stack or accessing hardware devices.</p>
+
+<p>If your cluster has the <code class="language-plaintext highlighter-rouge">WindowsHostProcessContainers</code> feature enabled, you can create a <a href="https://kubernetes.io/docs/tasks/configure-pod-container/create-hostprocess-pod">Windows HostProcess pod</a> by setting the <code class="language-plaintext highlighter-rouge">windowsOptions.hostProcess</code> flag on the security context of the pod spec. All containers in these pods must run as Windows HostProcess containers. HostProcess pods run directly on the host and can also be used to perform administrative tasks as is done with Linux privileged containers.</p>
+
+<p>Untuk lebih detailnya nanti kita bahas di section security.</p>
+
+<h2 id="static-pods">Static pods</h2>
+
+<p>Static Pods are managed directly by the kubelet daemon on a specific node, without the API server observing them. Whereas most Pods are managed by the control plane (for example, a Deployment), for static Pods, the kubelet directly supervises each static Pod (and restarts it if it fails).</p>
+
+<p>Static Pods are always bound to one Kubelet on a specific node. The main use for static Pods is to run a self-hosted control plane: in other words, using the kubelet to supervise the individual <a href="https://kubernetes.io/docs/concepts/overview/components/#control-plane-components">control plane components</a>.</p>
+
+<p>For examples:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pods</span><span class="w"> </span><span class="nt">-n</span><span class="w"> </span><span class="nx">kube-system</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                               </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">     </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">coredns-64897985d-ltz54</span><span class="w">            </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">            </span><span class="nx">9h</span><span class="w">
+</span><span class="n">etcd-minikube</span><span class="w">                      </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">            </span><span class="nx">9h</span><span class="w">
+</span><span class="n">kube-apiserver-minikube</span><span class="w">            </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">            </span><span class="nx">9h</span><span class="w">
+</span><span class="n">kube-controller-manager-minikube</span><span class="w">   </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">            </span><span class="nx">9h</span><span class="w">
+</span><span class="n">kube-proxy-6l2r2</span><span class="w">                   </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">            </span><span class="nx">9h</span><span class="w">
+</span><span class="n">kube-scheduler-minikube</span><span class="w">            </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">            </span><span class="nx">9h</span><span class="w">
+</span><span class="n">storage-provisioner</span><span class="w">                </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">1</span><span class="w"> </span><span class="p">(</span><span class="mi">9</span><span class="n">h</span><span class="w"> </span><span class="nx">ago</span><span class="p">)</span><span class="w">   </span><span class="nx">9h</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="container-probes">Container probes</h2>
+
+<p>A probe is a diagnostic performed periodically by the kubelet on a container. To perform a diagnostic, the kubelet can invoke different actions:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">ExecAction</code> (performed with the help of the container runtime)</li>
+  <li><code class="language-plaintext highlighter-rouge">TCPSocketAction</code> (checked directly by the kubelet)</li>
+  <li><code class="language-plaintext highlighter-rouge">HTTPGetAction</code> (checked directly by the kubelet)</li>
+</ol>
+
+<p>Untuk lebih detailnya nanti kita akan bahas di materi selanjutnya.</p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/01-silabus"  class="" title="Silabus - DevOps Kubernetes: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/pods/03a-workload-pods" class="" 
+        title="Kubernetes Workloads with Pods
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 23 to 36
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config" class="" 
+        title="Basic Pods and Containers Configs
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"  class="" title="Working with Deployment object">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#kubernetes" class="page__taxonomy-item p-category" rel="tag">Kubernetes</a><span class="sep">, </span>
+    
+      <a href="/categories/#orchestration" class="page__taxonomy-item p-category" rel="tag">Orchestration</a><span class="sep">, </span>
+    
+      <a href="/categories/#pods" class="page__taxonomy-item p-category" rel="tag">Pods</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-04-22T15:41:53+07:00">April 22, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Working+with+Pods%20%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03b-working-with-pods" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03b-working-with-pods" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03b-working-with-pods" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1694 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Pod &amp; Container Lifecycle - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Pod Lifecycle. Pods follow a defined lifecycle, starting in the Pending phase, moving through Running if at least one of its primary containers starts OK, and then through either the Succeeded or Failed phases depending on whether any container in the Pod terminated in failure.  Whilst a Pod is running, the kubelet is able to restart containers to handle some kind of faults. Within a Pod, Kubernetes tracks different container states and determines what action to take to make the Pod healthy again.  In the Kubernetes API, Pods have both a specification and an actual status. The status for a Pod object consists of a set of Pod conditions. You can also inject custom readiness information into the condition data for a Pod, if that is useful to your application.  Pods are only scheduled once in their lifetime. Once a Pod is scheduled (assigned) to a Node, the Pod runs on that Node until it stops or is terminated.  Ok untuk lebih detailnya kita akan bagi-bagi menjadi beberapa section yaitu:     Pod lifetime   Pod phase   Container states   Container restart policy   Container probes   Termination of Pods   Ok lansung aja kita bahas materi yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Pod &amp; Container Lifecycle">
+<meta property="og:url" content="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Pod Lifecycle. Pods follow a defined lifecycle, starting in the Pending phase, moving through Running if at least one of its primary containers starts OK, and then through either the Succeeded or Failed phases depending on whether any container in the Pod terminated in failure.  Whilst a Pod is running, the kubelet is able to restart containers to handle some kind of faults. Within a Pod, Kubernetes tracks different container states and determines what action to take to make the Pod healthy again.  In the Kubernetes API, Pods have both a specification and an actual status. The status for a Pod object consists of a set of Pod conditions. You can also inject custom readiness information into the condition data for a Pod, if that is useful to your application.  Pods are only scheduled once in their lifetime. Once a Pod is scheduled (assigned) to a Node, the Pod runs on that Node until it stops or is terminated.  Ok untuk lebih detailnya kita akan bagi-bagi menjadi beberapa section yaitu:     Pod lifetime   Pod phase   Container states   Container restart policy   Container probes   Termination of Pods   Ok lansung aja kita bahas materi yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-04-30T05:41:45+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#pod-lifetime">Pod lifetime</a></li><li><a href="#pod-phase">Pod phase</a></li><li><a href="#container-states">Container states</a></li><li><a href="#container-restart-policy">Container restart policy</a></li><li><a href="#container-probes">Container probes</a></li><li><a href="#termination-of-pods">Termination of Pods</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Pod &amp; Container Lifecycle">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Pod Lifecycle. Pods follow a defined lifecycle, starting in the Pending phase, moving through Running if at least one of its primary containers starts OK, and then through either the Succeeded or Failed phases depending on whether any container in the Pod terminated in failure.Whilst a Pod is running, the kubelet is able to restart containers to handle some kind of faults. Within a Pod, Kubernetes tracks different container states and determines what action to take to make the Pod healthy again.In the Kubernetes API, Pods have both a specification and an actual status. The status for a Pod object consists of a set of Pod conditions. You can also inject custom readiness information into the condition data for a Pod, if that is useful to your application.Pods are only scheduled once in their lifetime. Once a Pod is scheduled (assigned) to a Node, the Pod runs on that Node until it stops or is terminated.Ok untuk lebih detailnya kita akan bagi-bagi menjadi beberapa section yaitu:  Pod lifetime  Pod phase  Container states  Container restart policy  Container probes  Termination of PodsOk lansung aja kita bahas materi yang pertama">
+    <meta itemprop="datePublished" content="2022-04-30T05:41:45+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle" class="u-url" itemprop="url">Pod &amp; Container Lifecycle
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-04-30T05:41:45+07:00">April 30, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        12 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Kubernetes">
+        <label class="acordion-item-label" for="content-Pengenalan Kubernetes">
+            Pengenalan Kubernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01-silabus">
+                        
+                        Silabus - DevOps Kubernetes...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes">
+                        
+                        What is Kubernetes (k8s) ?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01b-k8s-components">
+                        
+                        Kubernetes Components
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01c-k8s-api">
+                        
+                        The Kubernetes API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01d-k8s-objects">
+                        
+                        What is Kubernetes Objects?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01e-k8s-object-management">
+                        
+                        Managing Kubernetes Object
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids">
+                        
+                        Kubernetes Object Names and...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01g-k8s-namespaces">
+                        
+                        What is Kubernetes Namespaces?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments">
+                        
+                        Kubernetes cluster environt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started with minikube">
+        <label class="acordion-item-label" for="content-Getting started with minikube">
+            Getting started with minikube
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02-overview-learn-env">
+                        
+                        Overview learning environme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos">
+                        
+                        Install minikube on Mac (In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon">
+                        
+                        Install minikube on Mac (Ap...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows">
+                        
+                        Install minikube for Window...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+                        
+                        Install minikube for Linux ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+                        
+                        Deploying an apps/services ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02c-minikube-basic-control">
+                        
+                        Minikube basic control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images">
+                        
+                        Using your own image into M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+                        
+                        Minikube addons features
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+                        
+                        Access your apps/service in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02h-minikube-mount">
+                        
+                        Mounting filesystems to min...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pods and Containers">
+        <label class="acordion-item-label" for="content-Pods and Containers">
+            Pods and Containers
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers">
+                        
+                        Overview Pod and Container ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03a-workload-pods">
+                        
+                        Kubernetes Workloads with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+                        
+                        Working with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config">
+                        
+                        Basic Pods and Containers C...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Pod & Container Lifecycle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers">
+                        
+                        Initialization of Containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+                        
+                        Configure env (Environment ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit">
+                        
+                        Configure Request and Limit...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+                        
+                        Configure liveness, readine...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions">
+                        
+                        Pod Disruptions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases">
+                        
+                        Overview Study Cases: Pod a...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps">
+                        
+                        Study Cases: Monolith apps ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps">
+                        
+                        Study cases: Microservice a...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Workload resources">
+        <label class="acordion-item-label" for="content-Workload resources">
+            Workload resources
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources">
+                        
+                        Overview Kubernetes Workloa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload">
+                        
+                        What is Workload Resources?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment">
+                        
+                        Working with Deployment object
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking (service)">
+        <label class="acordion-item-label" for="content-Networking (service)">
+            Networking (service)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Store data using Volumes">
+        <label class="acordion-item-label" for="content-Store data using Volumes">
+            Store data using Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Client">
+        <label class="acordion-item-label" for="content-Kubernetes Client">
+            Kubernetes Client
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Security RBAC">
+        <label class="acordion-item-label" for="content-Security RBAC">
+            Security RBAC
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Package manager">
+        <label class="acordion-item-label" for="content-Kubernetes Package manager">
+            Kubernetes Package manager
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes cluster for Production grade">
+        <label class="acordion-item-label" for="content-Kubernetes cluster for Production grade">
+            Kubernetes cluster for Production grade
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Service mesh with istio">
+        <label class="acordion-item-label" for="content-Service mesh with istio">
+            Service mesh with istio
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes on Cloud provider">
+        <label class="acordion-item-label" for="content-Kubernetes on Cloud provider">
+            Kubernetes on Cloud provider
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas tentang Pod Lifecycle. Pods follow a defined lifecycle, starting in the <code class="language-plaintext highlighter-rouge">Pending</code> phase, moving through <code class="language-plaintext highlighter-rouge">Running</code> if at least one of its primary containers starts OK, and then through either the <code class="language-plaintext highlighter-rouge">Succeeded</code> or <code class="language-plaintext highlighter-rouge">Failed</code> phases depending on whether any container in the Pod terminated in failure.</p>
+
+<p>Whilst a Pod is <code class="language-plaintext highlighter-rouge">running</code>, the kubelet is able to <code class="language-plaintext highlighter-rouge">restart</code> containers to handle some kind of faults. Within a Pod, Kubernetes tracks different container <code class="language-plaintext highlighter-rouge">states</code> and determines what action to take to make the Pod healthy again.</p>
+
+<p>In the Kubernetes API, Pods have both a specification and an actual status. The status for a Pod object consists of a set of Pod conditions. You can also inject custom readiness information into the condition data for a Pod, if that is useful to your application.</p>
+
+<p>Pods are only scheduled once in their lifetime. Once a Pod is scheduled (assigned) to a Node, the Pod runs on that Node until it stops or is terminated.</p>
+
+<p>Ok untuk lebih detailnya kita akan bagi-bagi menjadi beberapa section yaitu:</p>
+
+<ol>
+  <li>Pod lifetime</li>
+  <li>Pod phase</li>
+  <li>Container states</li>
+  <li>Container restart policy</li>
+  <li>Container probes</li>
+  <li>Termination of Pods</li>
+</ol>
+
+<p>Ok lansung aja kita bahas materi yang pertama</p>
+
+<!--more-->
+
+<h2 id="pod-lifetime">Pod lifetime</h2>
+
+<p>Like individual application containers, Pods are considered to be relatively ephemeral (rather than durable) entities. Pods are created, assigned a unique ID (<code class="language-plaintext highlighter-rouge">UID</code>), and scheduled to nodes where they remain until termination (according to restart policy) or deletion. If a Node dies, the Pods scheduled to that node are scheduled for deletion after a timeout period.</p>
+
+<p>Pods do not, by themselves, self-heal. If a Pod is scheduled to a node that then fails, the Pod is deleted; likewise, a Pod won’t survive an eviction due to a lack of resources or Node maintenance. Kubernetes uses a higher-level abstraction, called a controller, that handles the work of managing the relatively disposable Pod instances.</p>
+
+<p>A given Pod (as defined by a UID) is never “rescheduled” to a different node; instead, that Pod can be replaced by a new, near-identical Pod, with even the same name if desired, but with a different UID.</p>
+
+<p>When something is said to have the same lifetime as a Pod, such as a volume, that means that the thing exists as long as that specific Pod (with that exact UID) exists. If that Pod is deleted for any reason, and even if an identical replacement is created, the related thing (a volume, in this example) is also destroyed and created anew.</p>
+
+<h2 id="pod-phase">Pod phase</h2>
+
+<p>A Pod’s <code class="language-plaintext highlighter-rouge">status</code> field is a <a href="https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#podstatus-v1-core">PodStatus</a> object, which has a <code class="language-plaintext highlighter-rouge">phase</code> field.</p>
+
+<p>The phase of a Pod is a simple, high-level summary of where the Pod is in its lifecycle. The phase is not intended to be a comprehensive rollup of observations of container or Pod state, nor is it intended to be a comprehensive state machine.</p>
+
+<p>The number and meanings of Pod phase values are tightly guarded. Other than what is documented here, nothing should be assumed about Pods that have a given <code class="language-plaintext highlighter-rouge">phase</code> value.</p>
+
+<p>Here are the possible values for <code class="language-plaintext highlighter-rouge">phase</code>:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Pending</code>, The Pod has been accepted by the Kubernetes cluster, but one or more of the containers has not been set up and made ready to run. This includes time a Pod spends waiting to be scheduled as well as the time spent downloading container images over the network.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Running</code>, The Pod has been bound to a node, and all of the containers have been created. At least one container is still running, or is in the process of starting or restarting.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Succeeded</code>, All containers in the Pod have terminated in success, and will not be restarted.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Failed</code>, All containers in the Pod have terminated, and at least one container has terminated in failure. That is, the container either exited with non-zero status or was terminated by the system.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Unknown</code>, For some reason the state of the Pod could not be obtained. This phase typically occurs due to an error in communicating with the node where the Pod should be running.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Note: When a Pod is being deleted, it is shown as <code class="language-plaintext highlighter-rouge">Terminating</code> by some <code class="language-plaintext highlighter-rouge">kubectl</code> commands. This <code class="language-plaintext highlighter-rouge">Terminating</code> status is not one of the Pod phases</p>
+</blockquote>
+
+<p>Jika kita gambarkan workflownya seperti berikut:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart LR
+    Pending --&gt; Running --&gt; IsRunning{ Is Running? }
+    IsRunning -- Yes --&gt; Succeeded
+    IsRunning -- No --&gt; Failed --&gt; IsRestartable{ Restarted? } 
+    IsRunning -- No reason --&gt; Unknown --&gt; Terminating
+
+    IsRestartable -- Yes --&gt; Running
+    IsRestartable -- No --&gt; Terminating
+</div>
+
+<h2 id="container-states">Container states</h2>
+
+<p>As well as the phase of the Pod overall, Kubernetes tracks the state of each container inside a Pod.</p>
+
+<p>Once the scheduler assigns a Pod to a Node, the kubelet starts creating containers for that Pod using a container runtime. There are three possible container states: <code class="language-plaintext highlighter-rouge">Waiting</code>, <code class="language-plaintext highlighter-rouge">Running</code>, and <code class="language-plaintext highlighter-rouge">Terminated</code>.</p>
+
+<p>To check the state of a Pod’s containers, you can use <code class="language-plaintext highlighter-rouge">kubectl describe pod &lt;name-of-pod&gt;</code>. The output shows the state for each container within that Pod.</p>
+
+<p>Each state has a specific meaning:</p>
+
+<ol>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Waiting</code>, A container in the <code class="language-plaintext highlighter-rouge">Waiting</code> state is still running the operations it requires in order to complete start up: for example, pulling the container image from a container image registry, or applying Secret data.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Running</code>, The <code class="language-plaintext highlighter-rouge">Running</code> status indicates that a container is executing without issues.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">Terminated</code>, A container in the <code class="language-plaintext highlighter-rouge">Terminated</code> state began execution and then either ran to completion or failed for some reason. When you use <code class="language-plaintext highlighter-rouge">kubectl</code> to query a Pod with a container that is <code class="language-plaintext highlighter-rouge">Terminated</code>, you see a reason, an exit code, and the start and finish time for that container’s period of execution.</p>
+  </li>
+</ol>
+
+<p>Jika kita gambarkan workflownya seperti berikut:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart LR
+    Waiting --&gt; Running --&gt; IsRunning{ Is Running? }
+    IsRunning -- Yes --&gt; Succeeded
+    IsRunning -- Completed --&gt; Terminated
+    IsRunning -- Failed --&gt; Terminated
+</div>
+
+<h2 id="container-restart-policy">Container restart policy</h2>
+
+<p>The spec of a Pod has a restartPolicy field with possible values <code class="language-plaintext highlighter-rouge">Always</code>, <code class="language-plaintext highlighter-rouge">OnFailure</code>, and <code class="language-plaintext highlighter-rouge">Never</code>. The default value is <code class="language-plaintext highlighter-rouge">Always</code>.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">restartPolicy</code> applies to all containers in the Pod. <code class="language-plaintext highlighter-rouge">restartPolicy</code> only refers to restarts of the containers by the kubelet on the same node. After containers in a Pod exit, the kubelet restarts them with an exponential back-off delay (<code class="language-plaintext highlighter-rouge">10s</code>, <code class="language-plaintext highlighter-rouge">20s</code>, <code class="language-plaintext highlighter-rouge">40s</code>, …), that is capped at five minutes. Once a container has executed for 10 minutes without any problems, the kubelet resets the restart backoff timer for that container.</p>
+
+<p>For example:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03c-container-restart-policy.yaml"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&gt;</span><span class="w"> </span><span class="n">minikube</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="nt">--driver</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nt">--memory</span><span class="w"> </span><span class="nx">2g</span><span class="w">
+
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\02-workloads\01-pod\pod-restart-policy.yaml</span><span class="w">
+</span><span class="n">pod/webapp</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">     </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">webapp</span><span class="w">   </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">90s</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">minikube</span><span class="w"> </span><span class="nx">stop</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">Stopping</span><span class="w"> </span><span class="nx">node</span><span class="w"> </span><span class="s2">"minikube"</span><span class="w">  </span><span class="o">...</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">node</span><span class="w"> </span><span class="nx">stopped.</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">minikube</span><span class="w"> </span><span class="nx">start</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="n">Done</span><span class="o">!</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">now</span><span class="w"> </span><span class="nx">configured</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="s2">"minikube"</span><span class="w"> </span><span class="nx">cluster</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="s2">"default"</span><span class="w"> </span><span class="nx">namespace</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">default</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">     </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">      </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">webapp</span><span class="w">   </span><span class="nx">0/1</span><span class="w">     </span><span class="nx">Completed</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">106s</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">webapp</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube/192.168.49.2</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">28</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">03:33:11</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">webapp</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Succeeded</span><span class="w">
+</span><span class="n">IP:</span><span class="w">
+</span><span class="nx">IPs:</span><span class="w">          </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">webapp:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">nginx:mainline</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Terminated</span><span class="w">
+      </span><span class="n">Reason:</span><span class="w">       </span><span class="nx">Completed</span><span class="w">
+      </span><span class="kr">Exit</span><span class="w"> </span><span class="n">Code:</span><span class="w">    </span><span class="nx">0</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">28</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">03:33:41</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+      </span><span class="n">Finished:</span><span class="w">     </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">28</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">03:33:56</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">False</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">    </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">False</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">False</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">   </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">  </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">2m3s</span><span class="w">  </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/webapp</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulling</span><span class="w">    </span><span class="nx">2m3s</span><span class="w">  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Pulling</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:mainline"</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">93s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">pulled</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:mainline"</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">29.1412459s</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">93s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">93s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="container-probes">Container probes</h2>
+
+<p>A probe is a diagnostic performed periodically by the kubelet on a container. To perform a diagnostic, the kubelet either executes code within the container, or makes a network request.</p>
+
+<p>In Container probes, There are four different ways to check a container using a probe. Each probe must define exactly one of these four mechanisms:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">exec</code>, Executes a specified command inside the container. The diagnostic is considered successful if the command exits with a status code of <code class="language-plaintext highlighter-rouge">0</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">grpc</code>, Performs a remote procedure call using gRPC. The target should implement gRPC health checks.</li>
+  <li><code class="language-plaintext highlighter-rouge">httpGet</code>, Performs an HTTP GET request against the Pod’s IP address on a specified port and path. The diagnostic is considered successful if the response has a status code greater than or equal to <code class="language-plaintext highlighter-rouge">200</code> and less than <code class="language-plaintext highlighter-rouge">400</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">tcpSocket</code>, Performs a TCP check against the Pod’s IP address on a specified port. The diagnostic is considered successful if the port is open. If the remote system (the container) closes the connection immediately after it opens, this counts as healthy.</li>
+</ol>
+
+<p>Each probe has one of three results:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">Success</code>, The container passed the diagnostic.</li>
+  <li><code class="language-plaintext highlighter-rouge">Failure</code>, The container failed the diagnostic.</li>
+  <li><code class="language-plaintext highlighter-rouge">Unknown</code>, The diagnostic failed (no action should be taken, and the kubelet will make further checks).</li>
+</ol>
+
+<p>Types of probe, The kubelet can optionally perform and react to three kinds of probes on running containers:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">livenessProbe</code>, Indicates whether the container is running. If the liveness probe fails, the kubelet kills the container, and the container is subjected to its restart policy. If a container does not provide a liveness probe, the default state is <code class="language-plaintext highlighter-rouge">Success</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">readinessProbe</code>, Indicates whether the container is ready to respond to requests. If the readiness probe fails, the endpoints controller removes the Pod’s IP address from the endpoints of all Services that match the Pod. The default state of readiness before the initial delay is Failure. If a container does not provide a readiness probe, the default state is <code class="language-plaintext highlighter-rouge">Success</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">startupProbe</code>, Indicates whether the application within the container is started. All other probes are disabled if a startup probe is provided, until it succeeds. If the startup probe fails, the kubelet kills the container, and the container is subjected to its restart policy. If a container does not provide a startup probe, the default state is <code class="language-plaintext highlighter-rouge">Success</code>.</li>
+</ol>
+
+<p>Implementasinya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03c-container-http-probes.yaml"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&gt;</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\02-workloads\01-pod\container-http-probes.yaml</span><span class="w">
+</span><span class="n">pod/webapp</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">     </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">webapp</span><span class="w">   </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">20s</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">webapp</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube/192.168.49.2</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">28</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">05:06:36</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">webapp</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">webapp:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">nginx:mainline</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">80/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">28</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">05:06:37</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Liveness:</span><span class="w">       </span><span class="nx">http-get</span><span class="w"> </span><span class="nx">http://:8080/</span><span class="w"> </span><span class="nx">delay</span><span class="o">=</span><span class="mi">10</span><span class="n">s</span><span class="w"> </span><span class="nx">timeout</span><span class="o">=</span><span class="mi">1</span><span class="n">s</span><span class="w"> </span><span class="nx">period</span><span class="o">=</span><span class="mi">10</span><span class="n">s</span><span class="w"> </span><span class="c">#success=1 #failure=3</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">    </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-x8q49</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">True</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">True</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">     </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">               </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">     </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">              </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">34s</span><span class="w">               </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/webapp</span><span class="w"> </span><span class="nx">to</span><span class="w">
+ </span><span class="n">minikube</span><span class="w">
+  </span><span class="nx">Normal</span><span class="w">   </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">33s</span><span class="w">               </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:mainline"</span><span class="w"> </span><span class="nx">alread</span><span class="w">
+</span><span class="n">y</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Created</span><span class="w">    </span><span class="nx">33s</span><span class="w">               </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Started</span><span class="w">    </span><span class="nx">33s</span><span class="w">               </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+
+</span><span class="c">## wait 30s</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">     </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">      </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">webapp</span><span class="w">   </span><span class="nx">0/1</span><span class="w">     </span><span class="nx">Completed</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">2m14s</span><span class="w">
+
+</span><span class="err">&gt;</span><span class="w"> </span><span class="n">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">webapp</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube/192.168.49.2</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">28</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">05:06:36</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">webapp</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Succeeded</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">webapp:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">nginx:mainline</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">80/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Terminated</span><span class="w">
+      </span><span class="n">Reason:</span><span class="w">       </span><span class="nx">Completed</span><span class="w">
+      </span><span class="kr">Exit</span><span class="w"> </span><span class="n">Code:</span><span class="w">    </span><span class="nx">0</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">28</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">05:06:37</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+      </span><span class="n">Finished:</span><span class="w">     </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">28</span><span class="w"> </span><span class="nx">Apr</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">05:07:16</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">False</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Liveness:</span><span class="w">       </span><span class="nx">http-get</span><span class="w"> </span><span class="nx">http://:8080/</span><span class="w"> </span><span class="nx">delay</span><span class="o">=</span><span class="mi">10</span><span class="n">s</span><span class="w"> </span><span class="nx">timeout</span><span class="o">=</span><span class="mi">1</span><span class="n">s</span><span class="w"> </span><span class="nx">period</span><span class="o">=</span><span class="mi">10</span><span class="n">s</span><span class="w"> </span><span class="c">#success=1 #failure=3</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">    </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-x8q49</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">False</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">False</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">     </span><span class="nx">Reason</span><span class="w">       </span><span class="nx">Age</span><span class="w">                </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">     </span><span class="o">------</span><span class="w">       </span><span class="o">----</span><span class="w">               </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Scheduled</span><span class="w">    </span><span class="nx">87s</span><span class="w">                </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/webapp</span><span class="w">
+ </span><span class="n">to</span><span class="w"> </span><span class="nx">minikube</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Pulled</span><span class="w">       </span><span class="nx">86s</span><span class="w">                </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:mainline"</span><span class="w"> </span><span class="nx">alr</span><span class="w">
+</span><span class="n">eady</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Created</span><span class="w">      </span><span class="nx">86s</span><span class="w">                </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Started</span><span class="w">      </span><span class="nx">86s</span><span class="w">                </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+  </span><span class="n">Warning</span><span class="w">  </span><span class="nx">Unhealthy</span><span class="w">    </span><span class="nx">47s</span><span class="w"> </span><span class="p">(</span><span class="n">x3</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">67s</span><span class="p">)</span><span class="w">  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Liveness</span><span class="w"> </span><span class="nx">probe</span><span class="w"> </span><span class="nx">failed:</span><span class="w"> </span><span class="nx">Get</span><span class="w"> </span><span class="s2">"http://1
+72.17.0.3:8080/"</span><span class="p">:</span><span class="w"> </span><span class="nx">dial</span><span class="w"> </span><span class="nx">tcp</span><span class="w"> </span><span class="nx">172.17.0.3:8080:</span><span class="w"> </span><span class="nx">connect:</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="nx">refused</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Killing</span><span class="w">      </span><span class="nx">47s</span><span class="w">                </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Stopping</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapp</span><span class="w">
+  </span><span class="n">Warning</span><span class="w">  </span><span class="nx">FailedMount</span><span class="w">  </span><span class="nx">14s</span><span class="w"> </span><span class="p">(</span><span class="n">x7</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">46s</span><span class="p">)</span><span class="w">  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">MountVolume.SetUp</span><span class="w"> </span><span class="nx">failed</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">volume</span><span class="w">
+</span><span class="s2">"kube-api-access-x8q49"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="s2">"default"</span><span class="nx">/</span><span class="s2">"kube-root-ca.crt"</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">registered</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="termination-of-pods">Termination of Pods</h2>
+
+<p>Because Pods represent processes running on nodes in the cluster, it is important to allow those processes to gracefully terminate when they are no longer needed (rather than being abruptly stopped with a <code class="language-plaintext highlighter-rouge">KILL</code> signal and having no chance to clean up).</p>
+
+<p>The design aim is for you to be able to request deletion and know when processes terminate, but also be able to ensure that deletes eventually complete. When you request deletion of a Pod, the cluster records and tracks the intended grace period before the Pod is allowed to be forcefully killed. With that forceful shutdown tracking in place, the kubelet attempts graceful shutdown.</p>
+
+<p>Typically, the container runtime sends a TERM signal to the main process in each container. Many container runtimes respect the STOPSIGNAL value defined in the container image and send this instead of TERM. Once the grace period has expired, the KILL signal is sent to any remaining processes, and the Pod is then deleted from the API Server. If the kubelet or the container runtime’s management service is restarted while waiting for processes to terminate, the cluster retries from the start including the full original grace period.</p>
+
+<p>An example flow:</p>
+
+<ol>
+  <li>You use the <code class="language-plaintext highlighter-rouge">kubectl</code> tool to manually delete a specific Pod, with the default grace period (30 seconds).</li>
+  <li>The Pod in the API server is updated with the time beyond which the Pod is considered “dead” along with the grace period. If you use <code class="language-plaintext highlighter-rouge">kubectl describe</code> to check on the Pod you’re deleting, that Pod shows up as “Terminating”. On the node where the Pod is running: as soon as the kubelet sees that a Pod has been marked as terminating (a graceful shutdown duration has been set), the kubelet begins the local Pod shutdown process.</li>
+  <li>At the same time as the kubelet is starting graceful shutdown, the control plane removes that shutting-down Pod from Endpoints (and, if enabled, EndpointSlice) objects where these represent a Service with a configured selector.</li>
+  <li>When the grace period expires, the kubelet triggers forcible shutdown. The container runtime sends <code class="language-plaintext highlighter-rouge">SIGKILL</code> to any processes still running in any container in the Pod. The kubelet also cleans up a hidden pause container if that container runtime uses one.</li>
+  <li>The kubelet triggers forcible removal of Pod object from the API server, by setting grace period to 0 (immediate deletion).</li>
+  <li>The API server deletes the Pod’s API object, which is then no longer visible from any client.</li>
+</ol>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/01-silabus"  class="" title="Silabus - DevOps Kubernetes: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config" class="" 
+        title="Basic Pods and Containers Configs
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 25 to 36
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers" class="" 
+        title="Initialization of Containers
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"  class="" title="Working with Deployment object">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#kubernetes" class="page__taxonomy-item p-category" rel="tag">Kubernetes</a><span class="sep">, </span>
+    
+      <a href="/categories/#orchestration" class="page__taxonomy-item p-category" rel="tag">Orchestration</a><span class="sep">, </span>
+    
+      <a href="/categories/#pods" class="page__taxonomy-item p-category" rel="tag">Pods</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-04-30T05:41:45+07:00">April 30, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Pod+%26+Container+Lifecycle%20%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03d-pod-lifecycle" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03d-pod-lifecycle" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03d-pod-lifecycle" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

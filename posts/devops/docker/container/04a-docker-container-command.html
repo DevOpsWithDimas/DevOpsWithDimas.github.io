@@ -1,0 +1,2306 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Management Docker Container - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas lebih dalam tentang perintah / command line docker container. diantaranya tentang:     Membuat container dengan argument   Melihat daftar container   Management proccess (start, stop, pause, kill) dalam container   Cleanup">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Management Docker Container">
+<meta property="og:url" content="/posts/devops/docker/container/04a-docker-container-command">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas lebih dalam tentang perintah / command line docker container. diantaranya tentang:     Membuat container dengan argument   Melihat daftar container   Management proccess (start, stop, pause, kill) dalam container   Cleanup">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-05-03T06:29:41+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/docker/container/04a-docker-container-command">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#docker-run">Docker Run</a></li><li><a href="#list-containers">List containers</a></li><li><a href="#start-stop-pause-containers">Start, Stop, Pause Containers</a></li><li><a href="#menghapus-container">Menghapus container</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Management Docker Container">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas lebih dalam tentang perintah / command line docker container. diantaranya tentang:  Membuat container dengan argument  Melihat daftar container  Management proccess (start, stop, pause, kill) dalam container  Cleanup">
+    <meta itemprop="datePublished" content="2021-05-03T06:29:41+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/docker/container/04a-docker-container-command" class="u-url" itemprop="url">Management Docker Container
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Docker for DevOps engineer
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-05-03T06:29:41+07:00">May 3, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        8 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Docker">
+        <label class="acordion-item-label" for="content-Pengenalan Docker">
+            Pengenalan Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/01-silabus">
+                        
+                        Silabus Belajar Docker: Pem...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01a-docker-overview">
+                        
+                        Docker Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01b-container-overview">
+                        
+                        What is Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02-system-requirement">
+                        
+                        What to know before you ins...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02a-install-on-windows10-wls">
+                        
+                        How to install Docker on Wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02b-install-on-linux-centos">
+                        
+                        How to install Docker on Li...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02c-install-on-mac">
+                        
+                        How to install Docker on Ma...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/03-getting-started">
+                        
+                        Getting Started with Docker
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Registry">
+        <label class="acordion-item-label" for="content-Docker Registry">
+            Docker Registry
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03a-docker-registry">
+                        
+                        Docker Registry (Docker HUB)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
+                        
+                        Insecure Registry
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03c-install-nexus-oss">
+                        
+                        Installing Nexus OSS
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Container CLI">
+        <label class="acordion-item-label" for="content-Docker Container CLI">
+            Docker Container CLI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04-docker-cli">
+                        
+                        Docker CLI (Command Line In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04a-docker-container-command">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Management Docker Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04b-docker-image-command">
+                        
+                        Management Docker Images
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04c-docker-exec-command">
+                        
+                        Run a command in a running ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04d-expose-service-outside">
+                        
+                        Expose services to outside ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04e-docker-copy">
+                        
+                        Copying files/content betwe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04f-logging-inspect-stats-container">
+                        
+                        Logging, Inspect, & Resourc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04g-docker-run-env-file">
+                        
+                        Run a Container using Envir...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Networks">
+        <label class="acordion-item-label" for="content-Docker Networks">
+            Docker Networks
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05-docker-network">
+                        
+                        Networking overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05a-connect-to-other-container-use-link">
+                        
+                        Legacy feature of Docker Ne...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05b-docker-bridge-network">
+                        
+                        Use default bridge networks
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05c-docker-user-defined-briged-network">
+                        
+                        Use user-defined bridge net...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05d-docker-advance-user-defined-bridge-network">
+                        
+                        Advanced user-defined bridg...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05e-docker-host-network">
+                        
+                        Use host networking
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05g-docker-none-network">
+                        
+                        Disable networking for a co...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Volumes">
+        <label class="acordion-item-label" for="content-Docker Volumes">
+            Docker Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06-docker-volume">
+                        
+                        Docker Volume Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06a-management-volume">
+                        
+                        Management Volume
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06b-use-binding-volume-flag">
+                        
+                        Use Bind Mounts
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06c-share-data-among-containers">
+                        
+                        Share data among containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06e-share-data-among-machines">
+                        
+                        Share data among machines
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Dockerfile">
+        <label class="acordion-item-label" for="content-Dockerfile">
+            Dockerfile
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07-dockerfile">
+                        
+                        Build Docker Image Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07a-usage-docker-build">
+                        
+                        Usage docker build
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction">
+                        
+                        FROM Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07c-dockerfile-env">
+                        
+                        Environtment Replacement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07d-dockerfile-copy">
+                        
+                        Copying Resources
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07e-dockerfile-ignore">
+                        
+                        Excluding files/directories
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07f-dockerfile-label">
+                        
+                        Label Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07g-dockerfile-exec">
+                        
+                        Execution Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07h-dockerfile-cmd-vs-entrypoint">
+                        
+                        CMD vs ENTRYPOINT?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07i-dockerfile-expose">
+                        
+                        Exposing Ports
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07j-dockerfile-user-workdir">
+                        
+                        User, Volumes and Working D...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck">
+                        
+                        Health Check Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages">
+                        
+                        Multiple Stage Builds
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07m-best-practice-dockerfile">
+                        
+                        Best practices for writing ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07n-docker-image-scan">
+                        
+                        Best practices for scanning...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Build docker image">
+        <label class="acordion-item-label" for="content-Study Kasus: Build docker image">
+            Study Kasus: Build docker image
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage">
+                        
+                        Build specific docker image...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat">
+                        
+                        Build Docker Image for Java...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08b-using-maven-docker-plugin">
+                        
+                        Build Java Web using maven-...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08c-build-springboot">
+                        
+                        Build docker image for spri...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env">
+                        
+                        Springboot - using Environt...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file">
+                        
+                        Springboot - where data suc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db">
+                        
+                        Springboot - Using Database
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08g-build-angular-project">
+                        
+                        Build docker image for Angu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api">
+                        
+                        Angular - Access Rest API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend">
+                        
+                        Angular - Proxy to backend
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08j-build-php">
+                        
+                        Build docker image for PHP
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08k-build-laravel-apps">
+                        
+                        Build Docker image for Lara...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08l-build-laravel-webapp-and-restapi">
+                        
+                        Laravel - Using Frontend & ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db">
+                        
+                        Laravel - Using Database
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Compose">
+        <label class="acordion-item-label" for="content-Docker Compose">
+            Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09-docker-compose-overview">
+                        
+                        Overview of Docker Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09a-compose-getting-started">
+                        
+                        Get started with Docker Com...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09b-compose-cli">
+                        
+                        Overview of docker-compose CLI
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09c-syntax-compose-file">
+                        
+                        Compose file specification ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/environtment/09d-compose-using-env-variables">
+                        
+                        Environment variables in Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09e-compose-volume">
+                        
+                        Volume in Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09f-compose-share-data-between-containers">
+                        
+                        Share data between Containe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09g-share-data-using-sshfs-in-compose">
+                        
+                        Using sshfs for share data ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09h-share-data-using-nfs-in-compose">
+                        
+                        Using NFS for share data in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09i-compose-network-overview">
+                        
+                        Networking Overview in Comp...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09j-compose-network-link">
+                        
+                        Network links in Compose file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09k-compose-network-specify-custom">
+                        
+                        Specify custom networks in ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/dependency/09l-compose-depend-on">
+                        
+                        Dependency between services...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/build/09m-compose-build-image">
+                        
+                        Build docker image using Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09n-compose-using-profile">
+                        
+                        Using profiles with Compose...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09o-multiple-compose-add-override-attr">
+                        
+                        Multiple Compose files to A...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases">
+                        
+                        Example use case of multipl...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/scale/09q-compose-scale-services">
+                        
+                        Scale services using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflow/09r-compose-in-production">
+                        
+                        Use Compose in production
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Compose">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Compose">
+            Study Kasus: Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10-overview-compose-study-case">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10a-compose-php-study-case">
+                        
+                        PHP deployment using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case">
+                        
+                        Laravel deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case">
+                        
+                        Springboot deployment using...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case">
+                        
+                        Angular deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker">
+                        
+                        Deploy httpd with ssl/https...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects">
+                        
+                        Compose file for multiple g...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Context">
+        <label class="acordion-item-label" for="content-Docker Context">
+            Docker Context
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11-overview-docker-engine">
+                        
+                        Overview of Docker Context
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11a-docker-context">
+                        
+                        Usage & Managing Docker Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11b-docker-compose-remote-access">
+                        
+                        Remote deployment using doc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11c-dind">
+                        
+                        Docker Inside Docker (DinD)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11d-docker-desktop">
+                        
+                        Dashboard using Docker Desktop
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11e-docker-jetbraint">
+                        
+                        Using Docker on Jetbraint IDE
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11f-docker-portainer">
+                        
+                        Using docker on portainer.io
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11g-deprecated-features">
+                        
+                        Deprecated Engine Features
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker for CI">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker for CI">
+            Study Kasus: Docker for CI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12-overview-docker-for-ci">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12a-setup-gitlab-ci">
+                        
+                        Setup environment for CI us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12b-syntax-gitlab-ci-yml">
+                        
+                        The `.gitlab-ci.yml` file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12c-pipeline-php-gitlab-ci">
+                        
+                        Pipeline: PHP deployment us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12d-pipeline-javaweb-gitlab-ci">
+                        
+                        Pipeline: Java Web deployme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12e-pipeline-spring-boot-gitlab-ci">
+                        
+                        Pipeline: spring-boot deplo...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12f-pipeline-angular-gitlab-ci">
+                        
+                        Pipeline: Angular deploy wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12g-pipeline-laravel-gitlab-ci">
+                        
+                        Pipeline: Laravel deploy wi...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Machine">
+        <label class="acordion-item-label" for="content-Docker Machine">
+            Docker Machine
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13-docker-machine-overview">
+                        
+                        Overview of Docker machines
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-windows">
+                        
+                        Install docker-machine on W...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-linux">
+                        
+                        Install docker-machine on L...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-mac">
+                        
+                        Install docker-machine on M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13b-getting-started">
+                        
+                        Getting started with docker...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13c-managed-machines">
+                        
+                        Managing a machines in dock...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13d-usecases-docker-machine">
+                        
+                        Example Use Cases of docker...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Ansible for Docker">
+        <label class="acordion-item-label" for="content-Study Kasus: Ansible for Docker">
+            Study Kasus: Ansible for Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker">
+                        
+                        Overview Study cases: IT Au...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14a-it-automation-platform">
+                        
+                        IT Automation Platform for ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment">
+                        
+                        Setup Ansible Control and M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14c-ansible-for-docker-operations">
+                        
+                        Getting started with Ansibl...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Swarm">
+        <label class="acordion-item-label" for="content-Docker Swarm">
+            Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Swarm">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Swarm">
+            Study Kasus: Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas lebih dalam tentang perintah / command line <code class="language-plaintext highlighter-rouge">docker container</code>. diantaranya tentang:</p>
+
+<ol>
+  <li>Membuat container dengan argument</li>
+  <li>Melihat daftar container</li>
+  <li>Management proccess (start, stop, pause, kill) dalam container</li>
+  <li>Cleanup</li>
+</ol>
+
+<!--more-->
+
+<p>Berikut daftar perintahnya, dengan melihat <code class="language-plaintext highlighter-rouge">help</code></p>
+
+<script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-docker-container-help.bash"> </script>
+
+<p>Berikut hasilnya:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Windows</span><span class="w"> </span><span class="nx">PowerShell</span><span class="w">
+</span><span class="n">Copyright</span><span class="w"> </span><span class="p">(</span><span class="n">C</span><span class="p">)</span><span class="w"> </span><span class="nx">Microsoft</span><span class="w"> </span><span class="nx">Corporation.</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="nx">rights</span><span class="w"> </span><span class="nx">reserved.</span><span class="w">
+
+</span><span class="kr">Try</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">cross-platform</span><span class="w"> </span><span class="nx">PowerShell</span><span class="w"> </span><span class="nx">https://aka.ms/pscore6</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nt">--help</span><span class="w">
+
+</span><span class="n">Usage:</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">COMMAND</span><span class="w">
+
+</span><span class="n">Manage</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+
+</span><span class="n">Commands:</span><span class="w">
+  </span><span class="nx">attach</span><span class="w">      </span><span class="nx">Attach</span><span class="w"> </span><span class="nx">local</span><span class="w"> </span><span class="nx">standard</span><span class="w"> </span><span class="nx">input</span><span class="p">,</span><span class="w"> </span><span class="nx">output</span><span class="p">,</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">error</span><span class="w"> </span><span class="nx">streams</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">container</span><span class="w">
+  </span><span class="n">commit</span><span class="w">      </span><span class="nx">Create</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">containers</span><span class="w"> </span><span class="nx">changes</span><span class="w">
+  </span><span class="n">cp</span><span class="w">          </span><span class="nx">Copy</span><span class="w"> </span><span class="nx">files/folders</span><span class="w"> </span><span class="nx">between</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">local</span><span class="w"> </span><span class="nx">filesystem</span><span class="w">
+  </span><span class="n">create</span><span class="w">      </span><span class="nx">Create</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">container</span><span class="w">
+  </span><span class="n">diff</span><span class="w">        </span><span class="nx">Inspect</span><span class="w"> </span><span class="nx">changes</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">files</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">directories</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">containers</span><span class="w"> </span><span class="nx">filesystem</span><span class="w">
+  </span><span class="n">exec</span><span class="w">        </span><span class="nx">Run</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">container</span><span class="w">
+  </span><span class="n">export</span><span class="w">      </span><span class="nx">Export</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">containers</span><span class="w"> </span><span class="nx">filesystem</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">tar</span><span class="w"> </span><span class="nx">archive</span><span class="w">
+  </span><span class="n">inspect</span><span class="w">     </span><span class="nx">Display</span><span class="w"> </span><span class="nx">detailed</span><span class="w"> </span><span class="nx">information</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">kill</span><span class="w">        </span><span class="nx">Kill</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">logs</span><span class="w">        </span><span class="nx">Fetch</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">logs</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">container</span><span class="w">
+  </span><span class="n">ls</span><span class="w">          </span><span class="nx">List</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">pause</span><span class="w">       </span><span class="nx">Pause</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">processes</span><span class="w"> </span><span class="nx">within</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">port</span><span class="w">        </span><span class="nx">List</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">mappings</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">specific</span><span class="w"> </span><span class="nx">mapping</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w">
+  </span><span class="n">prune</span><span class="w">       </span><span class="nx">Remove</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">stopped</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">rename</span><span class="w">      </span><span class="nx">Rename</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">container</span><span class="w">
+  </span><span class="n">restart</span><span class="w">     </span><span class="nx">Restart</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">rm</span><span class="w">          </span><span class="nx">Remove</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">run</span><span class="w">         </span><span class="nx">Run</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">container</span><span class="w">
+  </span><span class="n">start</span><span class="w">       </span><span class="nx">Start</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">stopped</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">stats</span><span class="w">       </span><span class="nx">Display</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">live</span><span class="w"> </span><span class="nx">stream</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">container</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="nx">resource</span><span class="w"> </span><span class="nx">usage</span><span class="w"> </span><span class="nx">statistics</span><span class="w">
+  </span><span class="n">stop</span><span class="w">        </span><span class="nx">Stop</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">top</span><span class="w">         </span><span class="nx">Display</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">processes</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">container</span><span class="w">
+  </span><span class="n">unpause</span><span class="w">     </span><span class="nx">Unpause</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">processes</span><span class="w"> </span><span class="nx">within</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">update</span><span class="w">      </span><span class="nx">Update</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+  </span><span class="n">wait</span><span class="w">        </span><span class="nx">Block</span><span class="w"> </span><span class="nx">until</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">containers</span><span class="w"> </span><span class="nx">stop</span><span class="p">,</span><span class="w"> </span><span class="nx">then</span><span class="w"> </span><span class="nx">print</span><span class="w"> </span><span class="nx">their</span><span class="w"> </span><span class="nx">exit</span><span class="w"> </span><span class="nx">codes</span><span class="w">
+
+</span><span class="n">Run</span><span class="w"> </span><span class="s1">'docker container COMMAND --help'</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">information</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">command.</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Ok kita bahas, satu persatu ya. Mulai dari menjalankan container</p>
+
+<h2 id="docker-run">Docker Run</h2>
+
+<p>Perintah run, digunakan untuk menjalankan container baru setiap kali di execute. Dalam menggunakan <code class="language-plaintext highlighter-rouge">docker run</code> ada beberapa argument yang kita bisa gunakan diantaranya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Windows</span><span class="w"> </span><span class="nx">PowerShell</span><span class="w">
+</span><span class="n">Copyright</span><span class="w"> </span><span class="p">(</span><span class="n">C</span><span class="p">)</span><span class="w"> </span><span class="nx">Microsoft</span><span class="w"> </span><span class="nx">Corporation.</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="nx">rights</span><span class="w"> </span><span class="nx">reserved.</span><span class="w">
+
+</span><span class="kr">Try</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">cross-platform</span><span class="w"> </span><span class="nx">PowerShell</span><span class="w"> </span><span class="nx">https://aka.ms/pscore6</span><span class="w">
+
+</span><span class="n">Loading</span><span class="w"> </span><span class="nx">personal</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">system</span><span class="w"> </span><span class="nx">profiles</span><span class="w"> </span><span class="nx">took</span><span class="w"> </span><span class="nx">515ms.</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">--help</span><span class="w">
+
+</span><span class="n">Usage:</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span><span class="w"> </span><span class="nx">IMAGE</span><span class="w"> </span><span class="p">[</span><span class="n">COMMAND</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="n">ARG.</span><span class="o">..</span><span class="p">]</span><span class="w">
+
+</span><span class="n">Run</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">container</span><span class="w">
+
+</span><span class="n">Options:</span><span class="w">
+      </span><span class="nt">--add-host</span><span class="w"> </span><span class="nx">list</span><span class="w">                  </span><span class="nx">Add</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">custom</span><span class="w"> </span><span class="nx">host-to-IP</span><span class="w"> </span><span class="nx">mapping</span><span class="w">
+                                       </span><span class="p">(</span><span class="n">host:ip</span><span class="p">)</span><span class="w">
+  </span><span class="nt">-a</span><span class="p">,</span><span class="w"> </span><span class="nt">--attach</span><span class="w"> </span><span class="n">list</span><span class="w">                    </span><span class="nx">Attach</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">STDIN</span><span class="p">,</span><span class="w"> </span><span class="nx">STDOUT</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">STDERR</span><span class="w">
+      </span><span class="nt">--blkio-weight</span><span class="w"> </span><span class="n">uint16</span><span class="w">            </span><span class="nx">Block</span><span class="w"> </span><span class="nx">IO</span><span class="w"> </span><span class="p">(</span><span class="n">relative</span><span class="w"> </span><span class="nx">weight</span><span class="p">),</span><span class="w">
+                                       </span><span class="n">between</span><span class="w"> </span><span class="nx">10</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">1000</span><span class="p">,</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">0</span><span class="w"> </span><span class="nx">to</span><span class="w">
+                                       </span><span class="n">disable</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nx">0</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--blkio-weight-device</span><span class="w"> </span><span class="n">list</span><span class="w">       </span><span class="nx">Block</span><span class="w"> </span><span class="nx">IO</span><span class="w"> </span><span class="nx">weight</span><span class="w"> </span><span class="p">(</span><span class="n">relative</span><span class="w"> </span><span class="nx">device</span><span class="w">
+                                       </span><span class="n">weight</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="p">[])</span><span class="w">
+      </span><span class="nt">--cap-add</span><span class="w"> </span><span class="n">list</span><span class="w">                   </span><span class="nx">Add</span><span class="w"> </span><span class="nx">Linux</span><span class="w"> </span><span class="nx">capabilities</span><span class="w">
+      </span><span class="nt">--cap-drop</span><span class="w"> </span><span class="n">list</span><span class="w">                  </span><span class="nx">Drop</span><span class="w"> </span><span class="nx">Linux</span><span class="w"> </span><span class="nx">capabilities</span><span class="w">
+      </span><span class="nt">--cgroup-parent</span><span class="w"> </span><span class="n">string</span><span class="w">           </span><span class="nx">Optional</span><span class="w"> </span><span class="nx">parent</span><span class="w"> </span><span class="nx">cgroup</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">the</span><span class="w">
+                                       </span><span class="n">container</span><span class="w">
+      </span><span class="nt">--cgroupns</span><span class="w"> </span><span class="nx">string</span><span class="w">                </span><span class="nx">Cgroup</span><span class="w"> </span><span class="nx">namespace</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w">
+                                       </span><span class="p">(</span><span class="n">host</span><span class="o">|</span><span class="kr">private</span><span class="p">)</span><span class="w">
+                                       </span><span class="s1">'host'</span><span class="p">:</span><span class="w">    </span><span class="n">Run</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">in</span><span class="w">
+                                       </span><span class="n">the</span><span class="w"> </span><span class="nx">Docker</span><span class="w"> </span><span class="nx">host</span><span class="s1">''</span><span class="nx">s</span><span class="w"> </span><span class="nx">cgroup</span><span class="w"> </span><span class="nx">namespace</span><span class="w">
+                                       </span><span class="s1">'private'</span><span class="p">:</span><span class="w"> </span><span class="n">Run</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">in</span><span class="w">
+                                       </span><span class="n">its</span><span class="w"> </span><span class="nx">own</span><span class="w"> </span><span class="nx">private</span><span class="w"> </span><span class="nx">cgroup</span><span class="w"> </span><span class="nx">namespace</span><span class="w">
+                                       </span><span class="s1">''</span><span class="p">:</span><span class="w">        </span><span class="n">Use</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">cgroup</span><span class="w">
+                                       </span><span class="kr">namespace</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="nx">configured</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">the</span><span class="w">
+                                                  </span><span class="n">default-cgroupns-mode</span><span class="w">
+                                       </span><span class="nx">option</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">daemon</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--cidfile</span><span class="w"> </span><span class="n">string</span><span class="w">                 </span><span class="nx">Write</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">ID</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">file</span><span class="w">
+      </span><span class="nt">--cpu-period</span><span class="w"> </span><span class="n">int</span><span class="w">                 </span><span class="nx">Limit</span><span class="w"> </span><span class="nx">CPU</span><span class="w"> </span><span class="nx">CFS</span><span class="w"> </span><span class="p">(</span><span class="n">Completely</span><span class="w"> </span><span class="nx">Fair</span><span class="w">
+                                       </span><span class="n">Scheduler</span><span class="p">)</span><span class="w"> </span><span class="nx">period</span><span class="w">
+      </span><span class="nt">--cpu-quota</span><span class="w"> </span><span class="n">int</span><span class="w">                  </span><span class="nx">Limit</span><span class="w"> </span><span class="nx">CPU</span><span class="w"> </span><span class="nx">CFS</span><span class="w"> </span><span class="p">(</span><span class="n">Completely</span><span class="w"> </span><span class="nx">Fair</span><span class="w">
+                                       </span><span class="n">Scheduler</span><span class="p">)</span><span class="w"> </span><span class="nx">quota</span><span class="w">
+      </span><span class="nt">--cpu-rt-period</span><span class="w"> </span><span class="n">int</span><span class="w">              </span><span class="nx">Limit</span><span class="w"> </span><span class="nx">CPU</span><span class="w"> </span><span class="nx">real-time</span><span class="w"> </span><span class="nx">period</span><span class="w"> </span><span class="nx">in</span><span class="w">
+                                       </span><span class="n">microseconds</span><span class="w">
+      </span><span class="nt">--cpu-rt-runtime</span><span class="w"> </span><span class="nx">int</span><span class="w">             </span><span class="nx">Limit</span><span class="w"> </span><span class="nx">CPU</span><span class="w"> </span><span class="nx">real-time</span><span class="w"> </span><span class="nx">runtime</span><span class="w"> </span><span class="nx">in</span><span class="w">
+                                       </span><span class="n">microseconds</span><span class="w">
+  </span><span class="nt">-c</span><span class="p">,</span><span class="w"> </span><span class="nt">--cpu-shares</span><span class="w"> </span><span class="nx">int</span><span class="w">                 </span><span class="nx">CPU</span><span class="w"> </span><span class="nx">shares</span><span class="w"> </span><span class="p">(</span><span class="n">relative</span><span class="w"> </span><span class="nx">weight</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--cpus</span><span class="w"> </span><span class="n">decimal</span><span class="w">                   </span><span class="nx">Number</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">CPUs</span><span class="w">
+      </span><span class="nt">--cpuset-cpus</span><span class="w"> </span><span class="n">string</span><span class="w">             </span><span class="nx">CPUs</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">allow</span><span class="w"> </span><span class="nx">execution</span><span class="w">
+                                       </span><span class="p">(</span><span class="mi">0</span><span class="nt">-3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--cpuset-mems</span><span class="w"> </span><span class="n">string</span><span class="w">             </span><span class="nx">MEMs</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">allow</span><span class="w"> </span><span class="nx">execution</span><span class="w">
+                                       </span><span class="p">(</span><span class="mi">0</span><span class="nt">-3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w">
+  </span><span class="nt">-d</span><span class="p">,</span><span class="w"> </span><span class="nt">--detach</span><span class="w">                         </span><span class="n">Run</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">background</span><span class="w"> </span><span class="nx">and</span><span class="w">
+                                       </span><span class="n">print</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">ID</span><span class="w">
+      </span><span class="nt">--detach-keys</span><span class="w"> </span><span class="n">string</span><span class="w">             </span><span class="nx">Override</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="nx">sequence</span><span class="w"> </span><span class="nx">for</span><span class="w">
+                                       </span><span class="n">detaching</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">container</span><span class="w">
+      </span><span class="nt">--device</span><span class="w"> </span><span class="n">list</span><span class="w">                    </span><span class="nx">Add</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">device</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w">
+      </span><span class="nt">--device-cgroup-rule</span><span class="w"> </span><span class="n">list</span><span class="w">        </span><span class="nx">Add</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">rule</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">cgroup</span><span class="w"> </span><span class="nx">allowed</span><span class="w">
+                                       </span><span class="n">devices</span><span class="w"> </span><span class="nx">list</span><span class="w">
+      </span><span class="nt">--device-read-bps</span><span class="w"> </span><span class="n">list</span><span class="w">           </span><span class="nx">Limit</span><span class="w"> </span><span class="nx">read</span><span class="w"> </span><span class="nx">rate</span><span class="w"> </span><span class="p">(</span><span class="n">bytes</span><span class="w"> </span><span class="nx">per</span><span class="w"> </span><span class="nx">second</span><span class="p">)</span><span class="w">
+                                       </span><span class="kr">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nx">device</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="p">[])</span><span class="w">
+      </span><span class="nt">--device-read-iops</span><span class="w"> </span><span class="n">list</span><span class="w">          </span><span class="nx">Limit</span><span class="w"> </span><span class="nx">read</span><span class="w"> </span><span class="nx">rate</span><span class="w"> </span><span class="p">(</span><span class="n">IO</span><span class="w"> </span><span class="nx">per</span><span class="w"> </span><span class="nx">second</span><span class="p">)</span><span class="w">
+                                       </span><span class="kr">from</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nx">device</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="p">[])</span><span class="w">
+      </span><span class="nt">--device-write-bps</span><span class="w"> </span><span class="n">list</span><span class="w">          </span><span class="nx">Limit</span><span class="w"> </span><span class="nx">write</span><span class="w"> </span><span class="nx">rate</span><span class="w"> </span><span class="p">(</span><span class="n">bytes</span><span class="w"> </span><span class="nx">per</span><span class="w">
+                                       </span><span class="n">second</span><span class="p">)</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">device</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="p">[])</span><span class="w">
+      </span><span class="nt">--device-write-iops</span><span class="w"> </span><span class="n">list</span><span class="w">         </span><span class="nx">Limit</span><span class="w"> </span><span class="nx">write</span><span class="w"> </span><span class="nx">rate</span><span class="w"> </span><span class="p">(</span><span class="n">IO</span><span class="w"> </span><span class="nx">per</span><span class="w"> </span><span class="nx">second</span><span class="p">)</span><span class="w">
+                                       </span><span class="n">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">device</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="p">[])</span><span class="w">
+      </span><span class="nt">--disable-content-trust</span><span class="w">          </span><span class="n">Skip</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="nx">verification</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nx">true</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--dns</span><span class="w"> </span><span class="n">list</span><span class="w">                       </span><span class="nx">Set</span><span class="w"> </span><span class="nx">custom</span><span class="w"> </span><span class="nx">DNS</span><span class="w"> </span><span class="nx">servers</span><span class="w">
+      </span><span class="nt">--dns-option</span><span class="w"> </span><span class="n">list</span><span class="w">                </span><span class="nx">Set</span><span class="w"> </span><span class="nx">DNS</span><span class="w"> </span><span class="nx">options</span><span class="w">
+      </span><span class="nt">--dns-search</span><span class="w"> </span><span class="n">list</span><span class="w">                </span><span class="nx">Set</span><span class="w"> </span><span class="nx">custom</span><span class="w"> </span><span class="nx">DNS</span><span class="w"> </span><span class="nx">search</span><span class="w"> </span><span class="nx">domains</span><span class="w">
+      </span><span class="nt">--domainname</span><span class="w"> </span><span class="n">string</span><span class="w">              </span><span class="nx">Container</span><span class="w"> </span><span class="nx">NIS</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="nx">name</span><span class="w">
+      </span><span class="nt">--entrypoint</span><span class="w"> </span><span class="n">string</span><span class="w">              </span><span class="nx">Overwrite</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">default</span><span class="w"> </span><span class="nx">ENTRYPOINT</span><span class="w">
+                                       </span><span class="n">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">image</span><span class="w">
+  </span><span class="nt">-e</span><span class="p">,</span><span class="w"> </span><span class="nt">--env</span><span class="w"> </span><span class="n">list</span><span class="w">                       </span><span class="nx">Set</span><span class="w"> </span><span class="nx">environment</span><span class="w"> </span><span class="nx">variables</span><span class="w">
+      </span><span class="nt">--env-file</span><span class="w"> </span><span class="n">list</span><span class="w">                  </span><span class="nx">Read</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">environment</span><span class="w"> </span><span class="nx">variables</span><span class="w">
+      </span><span class="nt">--expose</span><span class="w"> </span><span class="n">list</span><span class="w">                    </span><span class="nx">Expose</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">range</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">ports</span><span class="w">
+      </span><span class="nt">--gpus</span><span class="w"> </span><span class="n">gpu-request</span><span class="w">               </span><span class="nx">GPU</span><span class="w"> </span><span class="nx">devices</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w">
+                                       </span><span class="n">container</span><span class="w"> </span><span class="p">(</span><span class="s1">'all'</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nx">pass</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">GPUs</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--group-add</span><span class="w"> </span><span class="n">list</span><span class="w">                 </span><span class="nx">Add</span><span class="w"> </span><span class="nx">additional</span><span class="w"> </span><span class="nx">groups</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">join</span><span class="w">
+      </span><span class="nt">--health-cmd</span><span class="w"> </span><span class="n">string</span><span class="w">              </span><span class="nx">Command</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">check</span><span class="w"> </span><span class="nx">health</span><span class="w">
+      </span><span class="nt">--health-interval</span><span class="w"> </span><span class="n">duration</span><span class="w">       </span><span class="nx">Time</span><span class="w"> </span><span class="nx">between</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">check</span><span class="w">
+                                       </span><span class="p">(</span><span class="n">ms</span><span class="o">|</span><span class="n">s</span><span class="o">|</span><span class="n">m</span><span class="o">|</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nx">0s</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--health-retries</span><span class="w"> </span><span class="n">int</span><span class="w">             </span><span class="nx">Consecutive</span><span class="w"> </span><span class="nx">failures</span><span class="w"> </span><span class="nx">needed</span><span class="w"> </span><span class="nx">to</span><span class="w">
+                                       </span><span class="n">report</span><span class="w"> </span><span class="nx">unhealthy</span><span class="w">
+      </span><span class="nt">--health-start-period</span><span class="w"> </span><span class="n">duration</span><span class="w">   </span><span class="nx">Start</span><span class="w"> </span><span class="nx">period</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">to</span><span class="w">
+                                       </span><span class="n">initialize</span><span class="w"> </span><span class="nx">before</span><span class="w"> </span><span class="nx">starting</span><span class="w">
+                                       </span><span class="n">health-retries</span><span class="w"> </span><span class="nx">countdown</span><span class="w">
+                                       </span><span class="p">(</span><span class="n">ms</span><span class="o">|</span><span class="n">s</span><span class="o">|</span><span class="n">m</span><span class="o">|</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nx">0s</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--health-timeout</span><span class="w"> </span><span class="n">duration</span><span class="w">        </span><span class="nx">Maximum</span><span class="w"> </span><span class="nx">time</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">allow</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">check</span><span class="w"> </span><span class="nx">to</span><span class="w">
+                                       </span><span class="n">run</span><span class="w"> </span><span class="p">(</span><span class="n">ms</span><span class="o">|</span><span class="n">s</span><span class="o">|</span><span class="n">m</span><span class="o">|</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nx">0s</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--help</span><span class="w">                           </span><span class="n">Print</span><span class="w"> </span><span class="nx">usage</span><span class="w">
+  </span><span class="nt">-h</span><span class="p">,</span><span class="w"> </span><span class="nt">--hostname</span><span class="w"> </span><span class="n">string</span><span class="w">                </span><span class="nx">Container</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">name</span><span class="w">
+      </span><span class="nt">--init</span><span class="w">                           </span><span class="n">Run</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">init</span><span class="w"> </span><span class="nx">inside</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w">
+                                       </span><span class="n">that</span><span class="w"> </span><span class="nx">forwards</span><span class="w"> </span><span class="nx">signals</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">reaps</span><span class="w">
+                                       </span><span class="n">processes</span><span class="w">
+  </span><span class="nt">-i</span><span class="p">,</span><span class="w"> </span><span class="nt">--interactive</span><span class="w">                    </span><span class="nx">Keep</span><span class="w"> </span><span class="nx">STDIN</span><span class="w"> </span><span class="nx">open</span><span class="w"> </span><span class="nx">even</span><span class="w"> </span><span class="nx">if</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">attached</span><span class="w">
+      </span><span class="nt">--ip</span><span class="w"> </span><span class="n">string</span><span class="w">                      </span><span class="nx">IPv4</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="p">(</span><span class="n">e.g.</span><span class="p">,</span><span class="w"> </span><span class="nx">172.30.100.104</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--ip6</span><span class="w"> </span><span class="n">string</span><span class="w">                     </span><span class="nx">IPv6</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="p">(</span><span class="n">e.g.</span><span class="p">,</span><span class="w"> </span><span class="nx">2001:db8::33</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--ipc</span><span class="w"> </span><span class="n">string</span><span class="w">                     </span><span class="nx">IPC</span><span class="w"> </span><span class="nx">mode</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w">
+      </span><span class="nt">--isolation</span><span class="w"> </span><span class="n">string</span><span class="w">               </span><span class="nx">Container</span><span class="w"> </span><span class="nx">isolation</span><span class="w"> </span><span class="nx">technology</span><span class="w">
+      </span><span class="nt">--kernel-memory</span><span class="w"> </span><span class="n">bytes</span><span class="w">            </span><span class="nx">Kernel</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">limit</span><span class="w">
+  </span><span class="nt">-l</span><span class="p">,</span><span class="w"> </span><span class="nt">--label</span><span class="w"> </span><span class="n">list</span><span class="w">                     </span><span class="nx">Set</span><span class="w"> </span><span class="nx">meta</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">container</span><span class="w">
+      </span><span class="nt">--label-file</span><span class="w"> </span><span class="n">list</span><span class="w">                </span><span class="nx">Read</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="nx">delimited</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">labels</span><span class="w">
+      </span><span class="nt">--link</span><span class="w"> </span><span class="n">list</span><span class="w">                      </span><span class="nx">Add</span><span class="w"> </span><span class="nx">link</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">another</span><span class="w"> </span><span class="nx">container</span><span class="w">
+      </span><span class="nt">--link-local-ip</span><span class="w"> </span><span class="n">list</span><span class="w">             </span><span class="nx">Container</span><span class="w"> </span><span class="nx">IPv4/IPv6</span><span class="w"> </span><span class="nx">link-local</span><span class="w">
+                                       </span><span class="n">addresses</span><span class="w">
+      </span><span class="nt">--log-driver</span><span class="w"> </span><span class="nx">string</span><span class="w">              </span><span class="nx">Logging</span><span class="w"> </span><span class="nx">driver</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w">
+      </span><span class="nt">--log-opt</span><span class="w"> </span><span class="n">list</span><span class="w">                   </span><span class="nx">Log</span><span class="w"> </span><span class="nx">driver</span><span class="w"> </span><span class="nx">options</span><span class="w">
+      </span><span class="nt">--mac-address</span><span class="w"> </span><span class="n">string</span><span class="w">             </span><span class="nx">Container</span><span class="w"> </span><span class="nx">MAC</span><span class="w"> </span><span class="nx">address</span><span class="w"> </span><span class="p">(</span><span class="n">e.g.</span><span class="p">,</span><span class="w">
+                                       </span><span class="mi">92</span><span class="p">:</span><span class="n">d0:c6:0a:29:33</span><span class="p">)</span><span class="w">
+  </span><span class="nt">-m</span><span class="p">,</span><span class="w"> </span><span class="nt">--memory</span><span class="w"> </span><span class="n">bytes</span><span class="w">                   </span><span class="nx">Memory</span><span class="w"> </span><span class="nx">limit</span><span class="w">
+      </span><span class="nt">--memory-reservation</span><span class="w"> </span><span class="n">bytes</span><span class="w">       </span><span class="nx">Memory</span><span class="w"> </span><span class="nx">soft</span><span class="w"> </span><span class="nx">limit</span><span class="w">
+      </span><span class="nt">--memory-swap</span><span class="w"> </span><span class="n">bytes</span><span class="w">              </span><span class="nx">Swap</span><span class="w"> </span><span class="nx">limit</span><span class="w"> </span><span class="nx">equal</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">plus</span><span class="w">
+                                       </span><span class="n">swap:</span><span class="w"> </span><span class="s1">'-1'</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">enable</span><span class="w"> </span><span class="nx">unlimited</span><span class="w"> </span><span class="nx">swap</span><span class="w">
+      </span><span class="nt">--memory-swappiness</span><span class="w"> </span><span class="n">int</span><span class="w">          </span><span class="nx">Tune</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">memory</span><span class="w"> </span><span class="nx">swappiness</span><span class="w">
+                                       </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nx">100</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nt">-1</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--mount</span><span class="w"> </span><span class="n">mount</span><span class="w">                    </span><span class="nx">Attach</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">filesystem</span><span class="w"> </span><span class="nx">mount</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w">
+                                       </span><span class="n">container</span><span class="w">
+      </span><span class="nt">--name</span><span class="w"> </span><span class="nx">string</span><span class="w">                    </span><span class="nx">Assign</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w">
+      </span><span class="nt">--network</span><span class="w"> </span><span class="n">network</span><span class="w">                </span><span class="nx">Connect</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">network</span><span class="w">
+      </span><span class="nt">--network-alias</span><span class="w"> </span><span class="n">list</span><span class="w">             </span><span class="nx">Add</span><span class="w"> </span><span class="nx">network-scoped</span><span class="w"> </span><span class="nx">alias</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">the</span><span class="w">
+                                       </span><span class="n">container</span><span class="w">
+      </span><span class="nt">--no-healthcheck</span><span class="w">                 </span><span class="nx">Disable</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">container-specified</span><span class="w">
+                                       </span><span class="n">HEALTHCHECK</span><span class="w">
+      </span><span class="nt">--oom-kill-disable</span><span class="w">               </span><span class="nx">Disable</span><span class="w"> </span><span class="nx">OOM</span><span class="w"> </span><span class="nx">Killer</span><span class="w">
+      </span><span class="nt">--oom-score-adj</span><span class="w"> </span><span class="n">int</span><span class="w">              </span><span class="nx">Tune</span><span class="w"> </span><span class="nx">host</span><span class="s1">''</span><span class="nx">s</span><span class="w"> </span><span class="nx">OOM</span><span class="w"> </span><span class="nx">preferences</span><span class="w"> </span><span class="p">(</span><span class="nt">-1000</span><span class="w">
+                                       </span><span class="n">to</span><span class="w"> </span><span class="nx">1000</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--pid</span><span class="w"> </span><span class="n">string</span><span class="w">                     </span><span class="nx">PID</span><span class="w"> </span><span class="nx">namespace</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w">
+      </span><span class="nt">--pids-limit</span><span class="w"> </span><span class="n">int</span><span class="w">                 </span><span class="nx">Tune</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">pids</span><span class="w"> </span><span class="nx">limit</span><span class="w"> </span><span class="p">(</span><span class="n">set</span><span class="w"> </span><span class="nt">-1</span><span class="w">
+                                       </span><span class="kr">for</span><span class="w"> </span><span class="n">unlimited</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--platform</span><span class="w"> </span><span class="n">string</span><span class="w">                </span><span class="nx">Set</span><span class="w"> </span><span class="nx">platform</span><span class="w"> </span><span class="nx">if</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="nx">is</span><span class="w">
+                                       </span><span class="n">multi-platform</span><span class="w"> </span><span class="nx">capable</span><span class="w">
+      </span><span class="nt">--privileged</span><span class="w">                     </span><span class="n">Give</span><span class="w"> </span><span class="nx">extended</span><span class="w"> </span><span class="nx">privileges</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">this</span><span class="w">
+                                       </span><span class="n">container</span><span class="w">
+  </span><span class="nt">-p</span><span class="p">,</span><span class="w"> </span><span class="nt">--publish</span><span class="w"> </span><span class="nx">list</span><span class="w">                   </span><span class="nx">Publish</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">container</span><span class="s1">''</span><span class="nx">s</span><span class="w"> </span><span class="nx">port</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="nx">to</span><span class="w">
+                                       </span><span class="n">the</span><span class="w"> </span><span class="nx">host</span><span class="w">
+  </span><span class="nt">-P</span><span class="p">,</span><span class="w"> </span><span class="nt">--publish-all</span><span class="w">                    </span><span class="n">Publish</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">exposed</span><span class="w"> </span><span class="nx">ports</span><span class="w"> </span><span class="nx">to</span><span class="w">
+                                       </span><span class="n">random</span><span class="w"> </span><span class="nx">ports</span><span class="w">
+      </span><span class="nt">--pull</span><span class="w"> </span><span class="n">string</span><span class="w">                    </span><span class="nx">Pull</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="nx">before</span><span class="w"> </span><span class="nx">running</span><span class="w">
+                                       </span><span class="p">(</span><span class="s2">"always"</span><span class="o">|</span><span class="s2">"missing"</span><span class="o">|</span><span class="s2">"never"</span><span class="p">)</span><span class="w">
+                                       </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="s2">"missing"</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--read-only</span><span class="w">                      </span><span class="n">Mount</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="s1">''</span><span class="nx">s</span><span class="w"> </span><span class="nx">root</span><span class="w">
+                                       </span><span class="n">filesystem</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">read</span><span class="w"> </span><span class="nx">only</span><span class="w">
+      </span><span class="nt">--restart</span><span class="w"> </span><span class="n">string</span><span class="w">                 </span><span class="nx">Restart</span><span class="w"> </span><span class="nx">policy</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">a</span><span class="w">
+                                       </span><span class="n">container</span><span class="w"> </span><span class="nx">exits</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="s2">"no"</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--rm</span><span class="w">                             </span><span class="n">Automatically</span><span class="w"> </span><span class="nx">remove</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w">
+                                       </span><span class="n">when</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">exits</span><span class="w">
+      </span><span class="nt">--runtime</span><span class="w"> </span><span class="n">string</span><span class="w">                 </span><span class="nx">Runtime</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">container</span><span class="w">
+      </span><span class="nt">--security-opt</span><span class="w"> </span><span class="n">list</span><span class="w">              </span><span class="nx">Security</span><span class="w"> </span><span class="nx">Options</span><span class="w">
+      </span><span class="nt">--shm-size</span><span class="w"> </span><span class="n">bytes</span><span class="w">                 </span><span class="nx">Size</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">/dev/shm</span><span class="w">
+      </span><span class="nt">--sig-proxy</span><span class="w">                      </span><span class="n">Proxy</span><span class="w"> </span><span class="nx">received</span><span class="w"> </span><span class="nx">signals</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w">
+                                       </span><span class="kr">process</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nx">true</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--stop-signal</span><span class="w"> </span><span class="n">string</span><span class="w">             </span><span class="nx">Signal</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">stop</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">container</span><span class="w">
+                                       </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="s2">"15"</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--stop-timeout</span><span class="w"> </span><span class="n">int</span><span class="w">               </span><span class="nx">Timeout</span><span class="w"> </span><span class="p">(</span><span class="kr">in</span><span class="w"> </span><span class="n">seconds</span><span class="p">)</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">stop</span><span class="w"> </span><span class="nx">a</span><span class="w">
+                                       </span><span class="n">container</span><span class="w">
+      </span><span class="nt">--storage-opt</span><span class="w"> </span><span class="nx">list</span><span class="w">               </span><span class="nx">Storage</span><span class="w"> </span><span class="nx">driver</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">the</span><span class="w">
+                                       </span><span class="n">container</span><span class="w">
+      </span><span class="nt">--sysctl</span><span class="w"> </span><span class="nx">map</span><span class="w">                     </span><span class="nx">Sysctl</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nx">map</span><span class="p">[])</span><span class="w">
+      </span><span class="nt">--tmpfs</span><span class="w"> </span><span class="n">list</span><span class="w">                     </span><span class="nx">Mount</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">tmpfs</span><span class="w"> </span><span class="nx">directory</span><span class="w">
+  </span><span class="nt">-t</span><span class="p">,</span><span class="w"> </span><span class="nt">--tty</span><span class="w">                            </span><span class="n">Allocate</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">pseudo-TTY</span><span class="w">
+      </span><span class="nt">--ulimit</span><span class="w"> </span><span class="n">ulimit</span><span class="w">                  </span><span class="nx">Ulimit</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="p">[])</span><span class="w">
+  </span><span class="nt">-u</span><span class="p">,</span><span class="w"> </span><span class="nt">--user</span><span class="w"> </span><span class="n">string</span><span class="w">                    </span><span class="nx">Username</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">UID</span><span class="w"> </span><span class="p">(</span><span class="n">format:</span><span class="w">
+                                       </span><span class="err">&lt;</span><span class="nx">name</span><span class="o">|</span><span class="n">uid</span><span class="err">&gt;</span><span class="p">[:</span><span class="err">&lt;</span><span class="n">group</span><span class="o">|</span><span class="n">gid</span><span class="err">&gt;</span><span class="p">])</span><span class="w">
+      </span><span class="nt">--userns</span><span class="w"> </span><span class="n">string</span><span class="w">                  </span><span class="nx">User</span><span class="w"> </span><span class="nx">namespace</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w">
+      </span><span class="nt">--uts</span><span class="w"> </span><span class="n">string</span><span class="w">                     </span><span class="nx">UTS</span><span class="w"> </span><span class="nx">namespace</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w">
+  </span><span class="nt">-v</span><span class="p">,</span><span class="w"> </span><span class="nt">--volume</span><span class="w"> </span><span class="n">list</span><span class="w">                    </span><span class="nx">Bind</span><span class="w"> </span><span class="nx">mount</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">volume</span><span class="w">
+      </span><span class="nt">--volume-driver</span><span class="w"> </span><span class="n">string</span><span class="w">           </span><span class="nx">Optional</span><span class="w"> </span><span class="nx">volume</span><span class="w"> </span><span class="nx">driver</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">the</span><span class="w">
+                                       </span><span class="n">container</span><span class="w">
+      </span><span class="nt">--volumes-from</span><span class="w"> </span><span class="nx">list</span><span class="w">              </span><span class="nx">Mount</span><span class="w"> </span><span class="nx">volumes</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">specified</span><span class="w">
+                                       </span><span class="n">container</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w">
+  </span><span class="nt">-w</span><span class="p">,</span><span class="w"> </span><span class="nt">--workdir</span><span class="w"> </span><span class="n">string</span><span class="w">                 </span><span class="nx">Working</span><span class="w"> </span><span class="nx">directory</span><span class="w"> </span><span class="nx">inside</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">container</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Di antara sekian banyak argument, biasanya yang paling sering saya gunakan adalah:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">--detach</code>. Digunakan supaya container yang di buat jalan di background</li>
+  <li><code class="language-plaintext highlighter-rouge">--env</code>, <code class="language-plaintext highlighter-rouge">--env-file</code>. Digunakan untuk meng-override variable di dalam runable container (<code class="language-plaintext highlighter-rouge">Dockerfile</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">--health-cmd</code>. Digunakan untuk check container is up atau down.</li>
+  <li><code class="language-plaintext highlighter-rouge">--publish</code>. Digunakan untuk melakukan binding port dari container ke host.</li>
+  <li><code class="language-plaintext highlighter-rouge">--volume</code>. Digunakan untuk melakukan binding file dari dalam container atau ke luar container.</li>
+  <li><code class="language-plaintext highlighter-rouge">--name</code>. Digunakan untuk memberikan nama pada container.</li>
+  <li><code class="language-plaintext highlighter-rouge">--network</code>. Digunakan untuk assign container ke network.</li>
+  <li><code class="language-plaintext highlighter-rouge">--label</code>. Digunakan untuk memberikan label pada container sebagai tanda.</li>
+</ol>
+
+<p>Sebagai contoh penggunaanya, seperti berikut</p>
+
+<p>For Bash script:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-docker-run-args.bash"> </script>
+
+<p>For Powershell script:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-docker-run-args.ps1"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Windows</span><span class="w"> </span><span class="nx">PowerShell</span><span class="w">
+</span><span class="n">Copyright</span><span class="w"> </span><span class="p">(</span><span class="n">C</span><span class="p">)</span><span class="w"> </span><span class="nx">Microsoft</span><span class="w"> </span><span class="nx">Corporation.</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="nx">rights</span><span class="w"> </span><span class="nx">reserved.</span><span class="w">
+
+</span><span class="kr">Try</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">cross-platform</span><span class="w"> </span><span class="nx">PowerShell</span><span class="w"> </span><span class="nx">https://aka.ms/pscore6</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">--name</span><span class="w"> </span><span class="nx">my_db</span><span class="w"> </span><span class="nt">--env</span><span class="w"> </span><span class="nx">POSTGRES_PASSWORD</span><span class="o">=</span><span class="n">password</span><span class="w"> </span><span class="nt">--publish</span><span class="w"> </span><span class="nx">5431:5432</span><span class="w"> </span><span class="nt">--volume</span><span class="w"> </span><span class="nx">/var/lib/postgresql/data</span><span class="w"> </span><span class="nt">--label</span><span class="w"> </span><span class="nx">env</span><span class="o">=</span><span class="n">production</span><span class="w"> </span><span class="nt">--detach</span><span class="w"> </span><span class="nx">postgres:12.3</span><span class="w">
+
+</span><span class="n">Unable</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">find</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s1">'postgres:12.3'</span><span class="w"> </span><span class="nx">locally</span><span class="w">
+</span><span class="mf">12.3</span><span class="p">:</span><span class="w"> </span><span class="n">Pulling</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">library/postgres</span><span class="w">
+</span><span class="n">bf5952930446:</span><span class="w"> </span><span class="nx">Pull</span><span class="w"> </span><span class="nx">complete</span><span class="w">
+</span><span class="mi">9577476</span><span class="n">abb00:</span><span class="w"> </span><span class="nx">Pull</span><span class="w"> </span><span class="nx">complete</span><span class="w">
+</span><span class="mi">2</span><span class="n">bd105512d5c:</span><span class="w"> </span><span class="nx">Pull</span><span class="w"> </span><span class="nx">complete</span><span class="w">
+</span><span class="mi">14771</span><span class="n">c2930e9:</span><span class="w"> </span><span class="nx">Pull</span><span class="w"> </span><span class="nx">complete</span><span class="w">
+</span><span class="mi">2</span><span class="n">f30edd0ce8a:</span><span class="w"> </span><span class="nx">Pull</span><span class="w"> </span><span class="nx">complete</span><span class="w">
+</span><span class="n">Digest:</span><span class="w"> </span><span class="nx">sha256:a06e6e6e519b7a329c419f8221edec66cfc45511e8b80e262c12103ba745cf19</span><span class="w">
+</span><span class="n">Status:</span><span class="w"> </span><span class="nx">Downloaded</span><span class="w"> </span><span class="nx">newer</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">postgres:12.3</span><span class="w">
+</span><span class="mi">4</span><span class="n">d1fe2e3440b11d2fbc9dd212c68232a12bc634230feb1200434c0f0ff705275</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">ls</span><span class="w">
+</span><span class="n">CONTAINER</span><span class="w"> </span><span class="nx">ID</span><span class="w">   </span><span class="nx">IMAGE</span><span class="w">           </span><span class="nx">COMMAND</span><span class="w">                  </span><span class="nx">CREATED</span><span class="w">         </span><span class="nx">STATUS</span><span class="w">         </span><span class="nx">PORTS</span><span class="w">                    </span><span class="nx">NAMES</span><span class="w">
+</span><span class="mi">4</span><span class="n">d1fe2e3440b</span><span class="w">   </span><span class="nx">postgres:12.3</span><span class="w">   </span><span class="s2">"docker-entrypoint.s…"</span><span class="w">   </span><span class="nx">3</span><span class="w"> </span><span class="nx">seconds</span><span class="w"> </span><span class="nx">ago</span><span class="w">   </span><span class="nx">Up</span><span class="w"> </span><span class="nx">5</span><span class="w"> </span><span class="nx">seconds</span><span class="w">   </span><span class="nx">0.0.0.0:5431-</span><span class="err">&gt;</span><span class="nx">5432/tcp</span><span class="w">   </span><span class="nx">my_db</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Dalam membuat container, biasanya harus memiliki <code class="language-plaintext highlighter-rouge">name</code> yang unique. Secara default kalo kita gak spesific <code class="language-plaintext highlighter-rouge">--name</code> maka namanya akan di generate secara random. Selain itu juga klo kita melakukan binding <code class="language-plaintext highlighter-rouge">port</code> terhadap container biasanya harus unique juga jika tidak maka biasanya terjadi error message <code class="language-plaintext highlighter-rouge">duplicate port</code>.</p>
+
+<h2 id="list-containers">List containers</h2>
+
+<p>Dalam suatu docker engine terdiri dari banyak apps atau containers, untuk menampilkan semua container kita bisa menggunakan perintah <code class="language-plaintext highlighter-rouge">docker container ls</code> atau simply <code class="language-plaintext highlighter-rouge">docker ps</code>. Berikut adalah detailnya:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">ps</span><span class="w"> </span><span class="nt">--help</span><span class="w">
+
+</span><span class="n">Usage:</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">ps</span><span class="w"> </span><span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span><span class="w">
+
+</span><span class="n">List</span><span class="w"> </span><span class="nx">containers</span><span class="w">
+
+</span><span class="n">Options:</span><span class="w">
+  </span><span class="nt">-a</span><span class="p">,</span><span class="w"> </span><span class="nt">--all</span><span class="w">             </span><span class="nx">Show</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">containers</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nx">shows</span><span class="w"> </span><span class="nx">just</span><span class="w"> </span><span class="nx">running</span><span class="p">)</span><span class="w">
+  </span><span class="nt">-f</span><span class="p">,</span><span class="w"> </span><span class="nt">--filter</span><span class="w"> </span><span class="kr">filter</span><span class="w">   </span><span class="kr">Filter</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="nx">based</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">conditions</span><span class="w"> </span><span class="nx">provided</span><span class="w">
+      </span><span class="nt">--format</span><span class="w"> </span><span class="n">string</span><span class="w">   </span><span class="nx">Pretty-print</span><span class="w"> </span><span class="nx">containers</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">Go</span><span class="w"> </span><span class="nx">template</span><span class="w">
+  </span><span class="nt">-n</span><span class="p">,</span><span class="w"> </span><span class="nt">--last</span><span class="w"> </span><span class="n">int</span><span class="w">        </span><span class="nx">Show</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="nx">last</span><span class="w"> </span><span class="nx">created</span><span class="w"> </span><span class="nx">containers</span><span class="w"> </span><span class="p">(</span><span class="n">includes</span><span class="w"> </span><span class="nx">all</span><span class="w">
+                        </span><span class="n">states</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">default</span><span class="w"> </span><span class="nt">-1</span><span class="p">)</span><span class="w">
+  </span><span class="nt">-l</span><span class="p">,</span><span class="w"> </span><span class="nt">--latest</span><span class="w">          </span><span class="n">Show</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">latest</span><span class="w"> </span><span class="nx">created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="p">(</span><span class="n">includes</span><span class="w"> </span><span class="nx">all</span><span class="w">
+                        </span><span class="n">states</span><span class="p">)</span><span class="w">
+      </span><span class="nt">--no-trunc</span><span class="w">        </span><span class="n">Don</span><span class="s1">''</span><span class="nx">t</span><span class="w"> </span><span class="nx">truncate</span><span class="w"> </span><span class="nx">output</span><span class="w">
+  </span><span class="nt">-q</span><span class="p">,</span><span class="w"> </span><span class="nt">--quiet</span><span class="w">           </span><span class="n">Only</span><span class="w"> </span><span class="nx">display</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">IDs</span><span class="w">
+  </span><span class="nt">-s</span><span class="p">,</span><span class="w"> </span><span class="nt">--size</span><span class="w">            </span><span class="n">Display</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">sizes</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Berikut adalah sebagai contoh:</p>
+
+<ol>
+  <li>
+    <p>Untuk menapilkan semua containers
+  <script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-list-all.bash"> </script></p>
+  </li>
+  <li>
+    <p>Untuk menampilkan container dengan filter
+  <script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-list-filter.bash"> </script></p>
+  </li>
+  <li>
+    <p>Untuk menampilkan container dengan format
+  <script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-list-format.bash"> </script></p>
+  </li>
+</ol>
+
+<h2 id="start-stop-pause-containers">Start, Stop, Pause Containers</h2>
+
+<p>Selain membuat container kita juga bisa <code class="language-plaintext highlighter-rouge">start</code> / <code class="language-plaintext highlighter-rouge">stop</code> / <code class="language-plaintext highlighter-rouge">pause</code> / <code class="language-plaintext highlighter-rouge">unpause</code> proccess dalam container. Berikut perintahnya</p>
+
+<ol>
+  <li>
+    <p>Untuk melakukan <code class="language-plaintext highlighter-rouge">stop</code> Container, berikut perintahnya:
+  <script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-stop.bash"> </script></p>
+  </li>
+  <li>
+    <p>Untuk melakukan <code class="language-plaintext highlighter-rouge">start</code> Container, berikut perintahnya:
+  <script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-start.bash"> </script></p>
+  </li>
+  <li>
+    <p>Untuk melakukan <code class="language-plaintext highlighter-rouge">pause</code> suatu container, berikut perintahnya:
+  <script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-pause.bash"> </script></p>
+  </li>
+  <li>
+    <p>Untuk melakukan <code class="language-plaintext highlighter-rouge">unpause</code> suatu container, berikut perintahnya:
+  <script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-unpause.bash"> </script></p>
+  </li>
+  <li>
+    <p>Untuk menghetikan paksa (<code class="language-plaintext highlighter-rouge">kill</code>) suatu container, berikut perintahnya:
+  <script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-kill.bash"> </script></p>
+  </li>
+</ol>
+
+<h2 id="menghapus-container">Menghapus container</h2>
+
+<p>Untuk menghapus container yang telah kita buat bisa menggunakan perintah <code class="language-plaintext highlighter-rouge">docker container rm</code>. Seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-rm.bash"> </script>
+
+<p>Atau jika kita mau menghapus semua container yang sudah tidak jalan. kita bisa menggunakan perintah seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=04a-container-prune.bash"> </script>
+
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/docker/01-silabus"  class="" title="Silabus Belajar Docker: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/docker/container/04-docker-cli" class="" 
+        title="Docker CLI (Command Line Interface)
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 13 to 113
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/docker/container/04b-docker-image-command" class="" 
+        title="Management Docker Images
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/docker/14c-ansible-for-docker-operations"  class="" title="Getting started with Ansible role, tasks for docker">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#container" class="page__taxonomy-item p-category" rel="tag">Container</a><span class="sep">, </span>
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#docker" class="page__taxonomy-item p-category" rel="tag">Docker</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-05-03T06:29:41+07:00">May 3, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Management+Docker+Container%20%2Fposts%2Fdevops%2Fdocker%2Fcontainer%2F04a-docker-container-command" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Fdocker%2Fcontainer%2F04a-docker-container-command" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Fdocker%2Fcontainer%2F04a-docker-container-command" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

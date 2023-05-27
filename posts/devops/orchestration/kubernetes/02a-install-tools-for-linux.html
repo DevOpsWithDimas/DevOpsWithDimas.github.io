@@ -1,0 +1,1723 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Install minikube for Linux users - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas cara install minikube di Linux menggunakan Ubuntu. Diantaranya:     What you’ll need?   Installing Container or virtual machine as backend minikube   Installing minikube binary   Installing kubernetes client   Create cluster using Virtualbox driver   Create cluster using Docker driver (alternative)   Ok langsung aja kita bahas ke materi yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Install minikube for Linux users">
+<meta property="og:url" content="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas cara install minikube di Linux menggunakan Ubuntu. Diantaranya:     What you’ll need?   Installing Container or virtual machine as backend minikube   Installing minikube binary   Installing kubernetes client   Create cluster using Virtualbox driver   Create cluster using Docker driver (alternative)   Ok langsung aja kita bahas ke materi yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-01-27T11:51:22+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#what-youll-need">What you’ll need?</a></li><li><a href="#installing-container-or-virtual-machine-as-backend-minikube">Installing Container or virtual machine as backend minikube</a></li><li><a href="#installing-minikube-binary">Installing minikube binary</a></li><li><a href="#installing-kubernetes-client">Installing kubernetes client</a></li><li><a href="#create-cluster-using-virtualbox-driver">Create cluster using Virtualbox driver</a></li><li><a href="#create-cluster-using-docker-driver-alternative">Create cluster using Docker driver (alternative)</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Install minikube for Linux users">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas cara install minikube di Linux menggunakan Ubuntu. Diantaranya:  What you’ll need?  Installing Container or virtual machine as backend minikube  Installing minikube binary  Installing kubernetes client  Create cluster using Virtualbox driver  Create cluster using Docker driver (alternative)Ok langsung aja kita bahas ke materi yang pertama">
+    <meta itemprop="datePublished" content="2022-01-27T11:51:22+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux" class="u-url" itemprop="url">Install minikube for Linux users
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-01-27T11:51:22+07:00">January 27, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        11 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Kubernetes">
+        <label class="acordion-item-label" for="content-Pengenalan Kubernetes">
+            Pengenalan Kubernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01-silabus">
+                        
+                        Silabus - DevOps Kubernetes...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes">
+                        
+                        What is Kubernetes (k8s) ?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01b-k8s-components">
+                        
+                        Kubernetes Components
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01c-k8s-api">
+                        
+                        The Kubernetes API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01d-k8s-objects">
+                        
+                        What is Kubernetes Objects?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01e-k8s-object-management">
+                        
+                        Managing Kubernetes Object
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids">
+                        
+                        Kubernetes Object Names and...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01g-k8s-namespaces">
+                        
+                        What is Kubernetes Namespaces?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments">
+                        
+                        Kubernetes cluster environt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started with minikube">
+        <label class="acordion-item-label" for="content-Getting started with minikube">
+            Getting started with minikube
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02-overview-learn-env">
+                        
+                        Overview learning environme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos">
+                        
+                        Install minikube on Mac (In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon">
+                        
+                        Install minikube on Mac (Ap...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows">
+                        
+                        Install minikube for Window...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Install minikube for Linux ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+                        
+                        Deploying an apps/services ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02c-minikube-basic-control">
+                        
+                        Minikube basic control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images">
+                        
+                        Using your own image into M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+                        
+                        Minikube addons features
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+                        
+                        Access your apps/service in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02h-minikube-mount">
+                        
+                        Mounting filesystems to min...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pods and Containers">
+        <label class="acordion-item-label" for="content-Pods and Containers">
+            Pods and Containers
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers">
+                        
+                        Overview Pod and Container ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03a-workload-pods">
+                        
+                        Kubernetes Workloads with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+                        
+                        Working with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config">
+                        
+                        Basic Pods and Containers C...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+                        
+                        Pod & Container Lifecycle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers">
+                        
+                        Initialization of Containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+                        
+                        Configure env (Environment ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit">
+                        
+                        Configure Request and Limit...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+                        
+                        Configure liveness, readine...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions">
+                        
+                        Pod Disruptions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases">
+                        
+                        Overview Study Cases: Pod a...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps">
+                        
+                        Study Cases: Monolith apps ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps">
+                        
+                        Study cases: Microservice a...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Workload resources">
+        <label class="acordion-item-label" for="content-Workload resources">
+            Workload resources
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources">
+                        
+                        Overview Kubernetes Workloa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload">
+                        
+                        What is Workload Resources?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment">
+                        
+                        Working with Deployment object
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking (service)">
+        <label class="acordion-item-label" for="content-Networking (service)">
+            Networking (service)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Store data using Volumes">
+        <label class="acordion-item-label" for="content-Store data using Volumes">
+            Store data using Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Client">
+        <label class="acordion-item-label" for="content-Kubernetes Client">
+            Kubernetes Client
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Security RBAC">
+        <label class="acordion-item-label" for="content-Security RBAC">
+            Security RBAC
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Package manager">
+        <label class="acordion-item-label" for="content-Kubernetes Package manager">
+            Kubernetes Package manager
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes cluster for Production grade">
+        <label class="acordion-item-label" for="content-Kubernetes cluster for Production grade">
+            Kubernetes cluster for Production grade
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Service mesh with istio">
+        <label class="acordion-item-label" for="content-Service mesh with istio">
+            Service mesh with istio
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes on Cloud provider">
+        <label class="acordion-item-label" for="content-Kubernetes on Cloud provider">
+            Kubernetes on Cloud provider
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas cara install minikube di Linux menggunakan Ubuntu. Diantaranya:</p>
+
+<ol>
+  <li>What you’ll need?</li>
+  <li>Installing Container or virtual machine as backend minikube</li>
+  <li>Installing minikube binary</li>
+  <li>Installing kubernetes client</li>
+  <li>Create cluster using Virtualbox driver</li>
+  <li>Create cluster using Docker driver (alternative)</li>
+</ol>
+
+<p>Ok langsung aja kita bahas ke materi yang pertama</p>
+
+<!--more-->
+
+<h2 id="what-youll-need">What you’ll need?</h2>
+
+<p>Untuk menginstall minikube di Linux kita membutuhkan:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">2 CPUs</code> or more</li>
+  <li><code class="language-plaintext highlighter-rouge">2GB</code> of free memory</li>
+  <li><code class="language-plaintext highlighter-rouge">20GB</code> of free disk space</li>
+  <li>Internet connection</li>
+  <li>Container or virtual machine manager, such as: <a href="https://www.docker.com/products/docker-desktop">Docker</a>, <a href="https://podman.io">Podman</a>, <a href="https://www.virtualbox.org">VirtualBox</a>, or <a href="https://www.vmware.com/products/workstation-player.html">VMware Player</a></li>
+</ol>
+
+<p>Klo saya sendiri disini menggunakan Thinkbook 14” dengan specification seperti berikut:</p>
+
+<p><img src="/resources/posts/kubernetes/02a-install-minikube-linux/01-system-info.png" alt="system-info" /></p>
+
+<h2 id="installing-container-or-virtual-machine-as-backend-minikube">Installing Container or virtual machine as backend minikube</h2>
+
+<p>Untuk pengguna linux kita bisa menggunakan beberapa driver yaitu</p>
+
+<ol>
+  <li>Docker / Podman</li>
+  <li>Virtualbox</li>
+  <li>VMware player</li>
+</ol>
+
+<p>Untuk proses installasi docker di Linux kita bisa lihat dari official dokumentasi docker</p>
+
+<ol>
+  <li><a href="https://docs.docker.com/engine/install/ubuntu/">Untuk Ubuntu</a></li>
+  <li><a href="https://docs.docker.com/engine/install/centos/">Untuk Centos/RedHat</a></li>
+</ol>
+
+<p>Untuk proses installasi Virtualbox di linux, kita bisa Download binary dari <a href="https://www.virtualbox.org/wiki/Linux_Downloads">official dokumentasi</a> Virtualbox kemudian kita install sesuai dengan platform. Karena saya menggunakan Ubuntu Desktop <code class="language-plaintext highlighter-rouge">21.04</code> maka kita bisa menggunakan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">dpkg <span class="nt">-i</span> virtualbox-xxx.xxx_Ubuntu_eoan_xxxx.deb</code></pre></figure>
+
+<p>Jika installasi success maka hasilnya seperti berikut:</p>
+
+<p><img src="/resources/posts/kubernetes/02a-install-minikube-linux/02-virtualbox.png" alt="virtualbox" /></p>
+
+<h2 id="installing-minikube-binary">Installing minikube binary</h2>
+
+<p>Untuk install minikube juga kita bisa menggunakan beberapa cara yaitu</p>
+
+<ol>
+  <li>binary download</li>
+  <li>package manager (deb/RPM)</li>
+</ol>
+
+<p>Klo saya lebih suka menggunakan package manager perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">curl <span class="nt">-LO</span> https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+<span class="nb">sudo </span>dpkg <span class="nt">-i</span> minikube_latest_amd64.deb</code></pre></figure>
+
+<p>Jika sudah success, coba check di terminal dengan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">minikube version</code></pre></figure>
+
+<p>Hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  minikube version
+minikube version: v1.24.0
+commit: 76b94fb3c4e8ac5062daf70d60cf03ddcc0a741b
+</code></pre></div></div>
+
+<h2 id="installing-kubernetes-client">Installing kubernetes client</h2>
+
+<p>Untuk install kubernetes client / kubectl kita bisa menggunakan beberapa cara yaitu</p>
+
+<ol>
+  <li>binary download via curl</li>
+  <li>Package manager (deb/RPM)</li>
+</ol>
+
+<p>Sama seperti sebelumnya kita bisa install menggunakan perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># Update the `apt` package index and install packages needed to use the Kubernetes apt repository:</span>
+<span class="nb">sudo </span>apt-get update 
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> apt-transport-https ca-certificates curl
+
+<span class="c"># Download the Google Cloud public signing key:</span>
+<span class="nb">sudo </span>curl <span class="nt">-fsSLo</span> /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+<span class="c"># Add the Kubernetes `apt` repository:</span>
+<span class="nb">echo</span> <span class="s2">"deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main"</span> | <span class="nb">sudo tee</span> /etc/apt/sources.list.d/kubernetes.list
+
+<span class="c"># Update `apt` package index with the new repository and install kubectl:</span>
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> kubectl</code></pre></figure>
+
+<p>jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  kubectl version <span class="nt">--client</span>
+Client Version: version.Info<span class="o">{</span>Major:<span class="s2">"1"</span>, Minor:<span class="s2">"23"</span>, GitVersion:<span class="s2">"v1.23.1"</span>, GitCommit:<span class="s2">"86ec240af8cbd1b60bcc4c03c20da9b98005b92e"</span>, GitTreeState:<span class="s2">"clean"</span>, BuildDate:<span class="s2">"2021-12-16T11:41:01Z"</span>, GoVersion:<span class="s2">"go1.17.5"</span>, Compiler:<span class="s2">"gc"</span>, Platform:<span class="s2">"linux/amd64"</span><span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="create-cluster-using-virtualbox-driver">Create cluster using Virtualbox driver</h2>
+
+<p>Setelah kita menginstall tools untuk belajar kubernetes seperti <code class="language-plaintext highlighter-rouge">virtualbox</code> atau <code class="language-plaintext highlighter-rouge">docker</code> sebagai kubernetes runtime serta <code class="language-plaintext highlighter-rouge">minikube</code> ,<code class="language-plaintext highlighter-rouge">kubectl</code> dan <code class="language-plaintext highlighter-rouge">kustomize</code>. Sekarang kita akan membuat single kubernetes cluster dengan minikube menggunakan driver virtualbox.</p>
+
+<p>Untuk membuat kita bisa menggunakan perintah <code class="language-plaintext highlighter-rouge">minikube start</code> untuk lebih jelasnya kita bisa lihat dokumentasinya seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">minikube start <span class="nt">-h</span></code></pre></figure>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  minikube start <span class="nt">-h</span>
+Starts a <span class="nb">local </span>Kubernetes cluster
+
+Options:
+      <span class="nt">--addons</span><span class="o">=[]</span>: Enable addons. see <span class="sb">`</span>minikube addons list<span class="sb">`</span> <span class="k">for </span>a list of valid addon names.
+      <span class="nt">--apiserver-ips</span><span class="o">=[]</span>: A <span class="nb">set </span>of apiserver IP Addresses which are used <span class="k">in </span>the generated
+certificate <span class="k">for </span>kubernetes.  This can be used <span class="k">if </span>you want to make the apiserver available from
+outside the machine
+      <span class="nt">--apiserver-name</span><span class="o">=</span><span class="s1">'minikubeCA'</span>: The authoritative apiserver <span class="nb">hostname </span><span class="k">for </span>apiserver certificates
+and connectivity. This can be used <span class="k">if </span>you want to make the apiserver available from outside the
+machine
+      <span class="nt">--apiserver-names</span><span class="o">=[]</span>: A <span class="nb">set </span>of apiserver names which are used <span class="k">in </span>the generated certificate <span class="k">for
+</span>kubernetes.  This can be used <span class="k">if </span>you want to make the apiserver available from outside the machine
+      <span class="nt">--apiserver-port</span><span class="o">=</span>8443: The apiserver listening port
+      <span class="nt">--auto-update-drivers</span><span class="o">=</span><span class="nb">true</span>: If <span class="nb">set</span>, automatically updates drivers to the latest version.
+Defaults to true.
+
+<span class="nt">--base-image</span><span class="o">=</span><span class="s1">'gcr.io/k8s-minikube/kicbase:v0.0.28@sha256:4780f1897569d2bf77aafb3d133a08d42b4fe61127f06fcfc90c2c5d902d893c'</span>:
+The base image to use <span class="k">for </span>docker/podman drivers. Intended <span class="k">for </span><span class="nb">local </span>development.
+      <span class="nt">--cache-images</span><span class="o">=</span><span class="nb">true</span>: If <span class="nb">true</span>, cache docker images <span class="k">for </span>the current bootstrapper and load them
+into the machine. Always <span class="nb">false </span>with <span class="nt">--driver</span><span class="o">=</span>none.
+      <span class="nt">--cert-expiration</span><span class="o">=</span>26280h0m0s: Duration <span class="k">until </span>minikube certificate expiration, defaults to
+three years <span class="o">(</span>26280h<span class="o">)</span><span class="nb">.</span>
+      <span class="nt">--cni</span><span class="o">=</span><span class="s1">''</span>: CNI plug-in to use. Valid options: auto, bridge, calico, cilium, flannel, kindnet,
+or path to a CNI manifest <span class="o">(</span>default: auto<span class="o">)</span>
+      <span class="nt">--container-runtime</span><span class="o">=</span><span class="s1">'docker'</span>: The container runtime to be used <span class="o">(</span>docker, cri-o, containerd<span class="o">)</span><span class="nb">.</span>
+      <span class="nt">--cpus</span><span class="o">=</span><span class="s1">'2'</span>: Number of CPUs allocated to Kubernetes. Use <span class="s2">"max"</span> to use the maximum number of
+CPUs.
+      <span class="nt">--cri-socket</span><span class="o">=</span><span class="s1">''</span>: The cri socket path to be used.
+      <span class="nt">--delete-on-failure</span><span class="o">=</span><span class="nb">false</span>: If <span class="nb">set</span>, delete the current cluster <span class="k">if </span>start fails and try again.
+Defaults to false.
+      <span class="nt">--disable-driver-mounts</span><span class="o">=</span><span class="nb">false</span>: Disables the filesystem mounts provided by the hypervisors
+      <span class="nt">--disk-size</span><span class="o">=</span><span class="s1">'20000mb'</span>: Disk size allocated to the minikube VM <span class="o">(</span>format: &lt;number&gt;[&lt;unit&gt;], where
+unit <span class="o">=</span> b, k, m or g<span class="o">)</span><span class="nb">.</span>
+      <span class="nt">--dns-domain</span><span class="o">=</span><span class="s1">'cluster.local'</span>: The cluster dns domain name used <span class="k">in </span>the Kubernetes cluster
+      <span class="nt">--dns-proxy</span><span class="o">=</span><span class="nb">false</span>: Enable proxy <span class="k">for </span>NAT DNS requests <span class="o">(</span>virtualbox driver only<span class="o">)</span>
+      <span class="nt">--docker-env</span><span class="o">=[]</span>: Environment variables to pass to the Docker daemon. <span class="o">(</span>format: <span class="nv">key</span><span class="o">=</span>value<span class="o">)</span>
+      <span class="nt">--docker-opt</span><span class="o">=[]</span>: Specify arbitrary flags to pass to the Docker daemon. <span class="o">(</span>format: <span class="nv">key</span><span class="o">=</span>value<span class="o">)</span>
+      <span class="nt">--download-only</span><span class="o">=</span><span class="nb">false</span>: If <span class="nb">true</span>, only download and cache files <span class="k">for </span>later use - don<span class="s1">''</span>t <span class="nb">install </span>or
+start anything.
+      <span class="nt">--driver</span><span class="o">=</span><span class="s1">''</span>: Driver is one of: virtualbox, vmwarefusion, hyperv, vmware, docker, podman
+<span class="o">(</span>experimental<span class="o">)</span>, ssh <span class="o">(</span>defaults to auto-detect<span class="o">)</span>
+      <span class="nt">--dry-run</span><span class="o">=</span><span class="nb">false</span>: dry-run mode. Validates configuration, but does not mutate system state
+      <span class="nt">--embed-certs</span><span class="o">=</span><span class="nb">false</span>: <span class="k">if </span><span class="nb">true</span>, will embed the certs <span class="k">in </span>kubeconfig.
+      <span class="nt">--enable-default-cni</span><span class="o">=</span><span class="nb">false</span>: DEPRECATED: Replaced by <span class="nt">--cni</span><span class="o">=</span>bridge
+      <span class="nt">--extra-config</span><span class="o">=</span>: A <span class="nb">set </span>of <span class="nv">key</span><span class="o">=</span>value pairs that describe configuration that may be passed to
+different components.
+                The key should be <span class="s1">'.'</span> separated, and the first part before the dot is the component to apply the
+configuration to.
+                Valid components are: kubelet, kubeadm, apiserver, controller-manager, etcd, proxy, scheduler
+                Valid kubeadm parameters: ignore-preflight-errors, dry-run, kubeconfig, kubeconfig-dir, node-name,
+cri-socket, experimental-upload-certs, certificate-key, rootfs, skip-phases, pod-network-cidr
+      <span class="nt">--extra-disks</span><span class="o">=</span>0: Number of extra disks created and attached to the minikube VM <span class="o">(</span>currently only
+implemented <span class="k">for </span>hyperkit and kvm2 drivers<span class="o">)</span>
+      <span class="nt">--feature-gates</span><span class="o">=</span><span class="s1">''</span>: A <span class="nb">set </span>of <span class="nv">key</span><span class="o">=</span>value pairs that describe feature gates <span class="k">for
+</span>alpha/experimental features.
+      <span class="nt">--force</span><span class="o">=</span><span class="nb">false</span>: Force minikube to perform possibly dangerous operations
+      <span class="nt">--force-systemd</span><span class="o">=</span><span class="nb">false</span>: If <span class="nb">set</span>, force the container runtime to use systemd as cgroup manager.
+Defaults to false.
+      <span class="nt">--host-dns-resolver</span><span class="o">=</span><span class="nb">true</span>: Enable host resolver <span class="k">for </span>NAT DNS requests <span class="o">(</span>virtualbox driver only<span class="o">)</span>
+      <span class="nt">--host-only-cidr</span><span class="o">=</span><span class="s1">'192.168.59.1/24'</span>: The CIDR to be used <span class="k">for </span>the minikube VM <span class="o">(</span>virtualbox driver
+only<span class="o">)</span>
+      <span class="nt">--host-only-nic-type</span><span class="o">=</span><span class="s1">'virtio'</span>: NIC Type used <span class="k">for </span>host only network. One of Am79C970A,
+Am79C973, 82540EM, 82543GC, 82545EM, or virtio <span class="o">(</span>virtualbox driver only<span class="o">)</span>
+      <span class="nt">--hyperkit-vpnkit-sock</span><span class="o">=</span><span class="s1">''</span>: Location of the VPNKit socket used <span class="k">for </span>networking. If empty,
+disables Hyperkit VPNKitSock, <span class="k">if</span> <span class="s1">'auto'</span> uses Docker <span class="k">for </span>Mac VPNKit connection, otherwise uses the
+specified VSock <span class="o">(</span>hyperkit driver only<span class="o">)</span>
+      <span class="nt">--hyperkit-vsock-ports</span><span class="o">=[]</span>: List of guest VSock ports that should be exposed as sockets on the
+host <span class="o">(</span>hyperkit driver only<span class="o">)</span>
+      <span class="nt">--hyperv-external-adapter</span><span class="o">=</span><span class="s1">''</span>: External Adapter on which external switch will be created <span class="k">if </span>no
+external switch is found. <span class="o">(</span>hyperv driver only<span class="o">)</span>
+      <span class="nt">--hyperv-use-external-switch</span><span class="o">=</span><span class="nb">false</span>: Whether to use external switch over Default Switch <span class="k">if
+</span>virtual switch not explicitly specified. <span class="o">(</span>hyperv driver only<span class="o">)</span>
+      <span class="nt">--hyperv-virtual-switch</span><span class="o">=</span><span class="s1">''</span>: The hyperv virtual switch name. Defaults to first found. <span class="o">(</span>hyperv
+driver only<span class="o">)</span>
+      <span class="nt">--image-mirror-country</span><span class="o">=</span><span class="s1">''</span>: Country code of the image mirror to be used. Leave empty to use the
+global one. For Chinese mainland <span class="nb">users</span>, <span class="nb">set </span>it to cn.
+      <span class="nt">--image-repository</span><span class="o">=</span><span class="s1">''</span>: Alternative image repository to pull docker images from. This can be
+used when you have limited access to gcr.io. Set it to <span class="s2">"auto"</span> to <span class="nb">let </span>minikube decide one <span class="k">for </span>you.
+For Chinese mainland <span class="nb">users</span>, you may use <span class="nb">local </span>gcr.io mirrors such as
+registry.cn-hangzhou.aliyuncs.com/google_containers
+      <span class="nt">--insecure-registry</span><span class="o">=[]</span>: Insecure Docker registries to pass to the Docker daemon.  The default
+service CIDR range will automatically be added.
+      <span class="nt">--install-addons</span><span class="o">=</span><span class="nb">true</span>: If <span class="nb">set</span>, <span class="nb">install </span>addons. Defaults to true.
+      <span class="nt">--interactive</span><span class="o">=</span><span class="nb">true</span>: Allow user prompts <span class="k">for </span>more information
+
+<span class="nt">--iso-url</span><span class="o">=[</span>https://storage.googleapis.com/minikube/iso/minikube-v1.24.0.iso, ...]:
+Locations to fetch the minikube ISO from.
+      <span class="nt">--keep-context</span><span class="o">=</span><span class="nb">false</span>: This will keep the existing kubectl context and will create a minikube
+context.
+      <span class="nt">--kubernetes-version</span><span class="o">=</span><span class="s1">''</span>: The Kubernetes version that the minikube VM will use <span class="o">(</span>ex: v1.2.3,
+<span class="s1">'stable'</span> <span class="k">for </span>v1.22.3, <span class="s1">'latest'</span> <span class="k">for </span>v1.22.4-rc.0<span class="o">)</span><span class="nb">.</span> Defaults to <span class="s1">'stable'</span><span class="nb">.</span>
+      <span class="nt">--kvm-gpu</span><span class="o">=</span><span class="nb">false</span>: Enable experimental NVIDIA GPU support <span class="k">in </span>minikube
+      <span class="nt">--kvm-hidden</span><span class="o">=</span><span class="nb">false</span>: Hide the hypervisor signature from the guest <span class="k">in </span>minikube <span class="o">(</span>kvm2 driver
+only<span class="o">)</span>
+      <span class="nt">--kvm-network</span><span class="o">=</span><span class="s1">'default'</span>: The KVM default network name. <span class="o">(</span>kvm2 driver only<span class="o">)</span>
+      <span class="nt">--kvm-numa-count</span><span class="o">=</span>1: Simulate numa node count <span class="k">in </span>minikube, supported numa node count range is
+1-8 <span class="o">(</span>kvm2 driver only<span class="o">)</span>
+      <span class="nt">--kvm-qemu-uri</span><span class="o">=</span><span class="s1">'qemu:///system'</span>: The KVM QEMU connection URI. <span class="o">(</span>kvm2 driver only<span class="o">)</span>
+      <span class="nt">--listen-address</span><span class="o">=</span><span class="s1">''</span>: IP Address to use to expose ports <span class="o">(</span>docker and podman driver only<span class="o">)</span>
+      <span class="nt">--memory</span><span class="o">=</span><span class="s1">''</span>: Amount of RAM to allocate to Kubernetes <span class="o">(</span>format: &lt;number&gt;[&lt;unit&gt;], where unit <span class="o">=</span>
+b, k, m or g<span class="o">)</span><span class="nb">.</span> Use <span class="s2">"max"</span> to use the maximum amount of memory.
+      <span class="nt">--mount</span><span class="o">=</span><span class="nb">false</span>: This will start the mount daemon and automatically mount files into minikube.
+      <span class="nt">--mount-string</span><span class="o">=</span><span class="s1">'C:\Users\dimasm93:/minikube-host'</span>: The argument to pass the minikube mount
+<span class="nb">command </span>on start.
+      <span class="nt">--namespace</span><span class="o">=</span><span class="s1">'default'</span>: The named space to activate after start
+      <span class="nt">--nat-nic-type</span><span class="o">=</span><span class="s1">'virtio'</span>: NIC Type used <span class="k">for </span>nat network. One of Am79C970A, Am79C973, 82540EM,
+82543GC, 82545EM, or virtio <span class="o">(</span>virtualbox driver only<span class="o">)</span>
+      <span class="nt">--native-ssh</span><span class="o">=</span><span class="nb">true</span>: Use native Golang SSH client <span class="o">(</span>default <span class="nb">true</span><span class="o">)</span><span class="nb">.</span> Set to <span class="s1">'false'</span> to use the
+<span class="nb">command </span>line <span class="s1">'ssh'</span> <span class="nb">command </span>when accessing the docker machine. Useful <span class="k">for </span>the machine drivers when
+they will not start with <span class="s1">'Waiting for SSH'</span><span class="nb">.</span>
+      <span class="nt">--network</span><span class="o">=</span><span class="s1">''</span>: network to run minikube with. Now it is used by docker/podman and KVM drivers.
+If left empty, minikube will create a new network.
+      <span class="nt">--network-plugin</span><span class="o">=</span><span class="s1">''</span>: Kubelet network plug-in to use <span class="o">(</span>default: auto<span class="o">)</span>
+      <span class="nt">--nfs-share</span><span class="o">=[]</span>: Local folders to share with Guest via NFS mounts <span class="o">(</span>hyperkit driver only<span class="o">)</span>
+      <span class="nt">--nfs-shares-root</span><span class="o">=</span><span class="s1">'/nfsshares'</span>: Where to root the NFS Shares, defaults to /nfsshares <span class="o">(</span>hyperkit
+driver only<span class="o">)</span>
+      <span class="nt">--no-kubernetes</span><span class="o">=</span><span class="nb">false</span>: If <span class="nb">set</span>, minikube VM/container will start without starting or
+configuring Kubernetes. <span class="o">(</span>only works on new clusters<span class="o">)</span>
+      <span class="nt">--no-vtx-check</span><span class="o">=</span><span class="nb">false</span>: Disable checking <span class="k">for </span>the availability of hardware virtualization before
+the vm is started <span class="o">(</span>virtualbox driver only<span class="o">)</span>
+  <span class="nt">-n</span>, <span class="nt">--nodes</span><span class="o">=</span>1: The number of nodes to spin up. Defaults to 1.
+  <span class="nt">-o</span>, <span class="nt">--output</span><span class="o">=</span><span class="s1">'text'</span>: Format to print stdout <span class="k">in</span><span class="nb">.</span> Options include: <span class="o">[</span>text,json]
+      <span class="nt">--ports</span><span class="o">=[]</span>: List of ports that should be exposed <span class="o">(</span>docker and podman driver only<span class="o">)</span>
+      <span class="nt">--preload</span><span class="o">=</span><span class="nb">true</span>: If <span class="nb">set</span>, download tarball of preloaded images <span class="k">if </span>available to improve start
+time. Defaults to true.
+      <span class="nt">--registry-mirror</span><span class="o">=[]</span>: Registry mirrors to pass to the Docker daemon
+      <span class="nt">--service-cluster-ip-range</span><span class="o">=</span><span class="s1">'10.96.0.0/12'</span>: The CIDR to be used <span class="k">for </span>service cluster IPs.
+      <span class="nt">--ssh-ip-address</span><span class="o">=</span><span class="s1">''</span>: IP address <span class="o">(</span>ssh driver only<span class="o">)</span>
+      <span class="nt">--ssh-key</span><span class="o">=</span><span class="s1">''</span>: SSH key <span class="o">(</span>ssh driver only<span class="o">)</span>
+      <span class="nt">--ssh-port</span><span class="o">=</span>22: SSH port <span class="o">(</span>ssh driver only<span class="o">)</span>
+      <span class="nt">--ssh-user</span><span class="o">=</span><span class="s1">'root'</span>: SSH user <span class="o">(</span>ssh driver only<span class="o">)</span>
+      <span class="nt">--trace</span><span class="o">=</span><span class="s1">''</span>: Send trace events. Options include: <span class="o">[</span>gcp]
+      <span class="nt">--uuid</span><span class="o">=</span><span class="s1">''</span>: Provide VM UUID to restore MAC address <span class="o">(</span>hyperkit driver only<span class="o">)</span>
+      <span class="nt">--vm</span><span class="o">=</span><span class="nb">false</span>: Filter to use only VM Drivers
+      <span class="nt">--vm-driver</span><span class="o">=</span><span class="s1">''</span>: DEPRECATED, use <span class="sb">`</span>driver<span class="sb">`</span> instead.
+      <span class="nt">--wait</span><span class="o">=[</span>apiserver,system_pods]: comma separated list of Kubernetes components to verify and
+<span class="nb">wait </span><span class="k">for </span>after starting a cluster. defaults to <span class="s2">"apiserver,system_pods"</span>, available options:
+<span class="s2">"apiserver,system_pods,default_sa,apps_running,node_ready,kubelet"</span> <span class="nb">.</span> other acceptable values are
+<span class="s1">'all'</span> or <span class="s1">'none'</span>, <span class="s1">'true'</span> and <span class="s1">'false'</span>
+      <span class="nt">--wait-timeout</span><span class="o">=</span>6m0s: max <span class="nb">time </span>to <span class="nb">wait </span>per Kubernetes or host to be healthy.
+
+Usage:
+  minikube start <span class="o">[</span>flags] <span class="o">[</span>options]
+
+Use <span class="s2">"minikube options"</span> <span class="k">for </span>a list of global command-line options <span class="o">(</span>applies to all commands<span class="o">)</span><span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Secara default jika kita membuat single cluster dengan minikube menggunakan Virtualbox biasanya kita akan dibuatkan VM dengan configurasi</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">2CPUs</code></li>
+  <li><code class="language-plaintext highlighter-rouge">2GB</code> memory</li>
+  <li><code class="language-plaintext highlighter-rouge">20GB</code> storage</li>
+  <li>Driver <code class="language-plaintext highlighter-rouge">virtualbox</code></li>
+</ul>
+
+<p>Nah saya mau override nilai tersebut untuk membuat clusternya dengan configurasi seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02a-start-vm-cluster-windows.ps1"> </script>
+
+<p>Jika dijalankan maka outputnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  ~ minikube start <span class="nt">--driver</span> virtualbox <span class="nt">--memory</span> 4g <span class="nt">--no-vtx-check</span>
+😄  minikube v1.24.0 on Ubuntu 21.10
+✨  Using the virtualbox driver based on user configuration
+👍  Starting control plane node minikube <span class="k">in </span>cluster minikube
+🔥  Creating virtualbox VM <span class="o">(</span><span class="nv">CPUs</span><span class="o">=</span>2, <span class="nv">Memory</span><span class="o">=</span>4096MB, <span class="nv">Disk</span><span class="o">=</span>20000MB<span class="o">)</span> ...
+🐳  Preparing Kubernetes v1.22.3 on Docker 20.10.8 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🔎  Verifying Kubernetes components...
+🌟  Enabled addons: storage-provisioner, default-storageclass
+🏄  Done! kubectl is now configured to use <span class="s2">"minikube"</span> cluster and <span class="s2">"default"</span> namespace by default
+</code></pre></div></div>
+
+<p>Dengan begitu kita sudah bisa menggunakan kubernetes clusternya, sekarang kita coba check dengan perintah seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02a-kubectl-cluster-info.bash"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  kubectl version
+Client Version: version.Info<span class="o">{</span>Major:<span class="s2">"1"</span>, Minor:<span class="s2">"23"</span>, GitVersion:<span class="s2">"v1.23.1"</span>, GitCommit:<span class="s2">"86ec240af8cbd1b60bcc4c03c20da9b98005b92e"</span>, GitTreeState:<span class="s2">"clean"</span>, BuildDate:<span class="s2">"2021-12-16T11:41:01Z"</span>, GoVersion:<span class="s2">"go1.17.5"</span>, Compiler:<span class="s2">"gc"</span>, Platform:<span class="s2">"linux/amd64"</span><span class="o">}</span>
+Server Version: version.Info<span class="o">{</span>Major:<span class="s2">"1"</span>, Minor:<span class="s2">"22"</span>, GitVersion:<span class="s2">"v1.22.3"</span>, GitCommit:<span class="s2">"c92036820499fedefec0f847e2054d824aea6cd1"</span>, GitTreeState:<span class="s2">"clean"</span>, BuildDate:<span class="s2">"2021-10-27T18:35:25Z"</span>, GoVersion:<span class="s2">"go1.16.9"</span>, Compiler:<span class="s2">"gc"</span>, Platform:<span class="s2">"linux/amd64"</span><span class="o">}</span>
+
+➜ ~  kubectl cluster-info
+Kubernetes control plane is running at https://192.168.59.104:8443
+CoreDNS is running at https://192.168.59.104:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+To further debug and diagnose cluster problems, use <span class="s1">'kubectl cluster-info dump'</span><span class="nb">.</span>
+
+➜ ~  kubectl get nodes
+NAME       STATUS   ROLES                  AGE    VERSION
+minikube   Ready    control-plane,master   2m5s   v1.22.3
+
+➜ ~  kubectl get pods <span class="nt">-A</span>
+NAMESPACE     NAME                               READY   STATUS    RESTARTS      AGE
+kube-system   coredns-78fcd69978-5frtc           1/1     Running   0             109s
+kube-system   etcd-minikube                      1/1     Running   0             2m2s
+kube-system   kube-apiserver-minikube            1/1     Running   0             2m3s
+kube-system   kube-controller-manager-minikube   1/1     Running   0             118s
+kube-system   kube-proxy-mj2cf                   1/1     Running   0             109s
+kube-system   kube-scheduler-minikube            1/1     Running   0             118s
+kube-system   storage-provisioner                1/1     Running   1 <span class="o">(</span>74s ago<span class="o">)</span>   115s
+
+➜ ~  kubectl get services <span class="nt">-A</span>
+NAMESPACE     NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>                  AGE
+default       kubernetes   ClusterIP   10.96.0.1    &lt;none&gt;        443/TCP                  2m23s
+kube-system   kube-dns     ClusterIP   10.96.0.10   &lt;none&gt;        53/UDP,53/TCP,9153/TCP   2m18s
+</code></pre></div></div>
+
+<p>Nah sekarang kita sudah bisa menggunakan kubernetes cluster tersebut untuk belajar atau sebagai learning environment kita.</p>
+
+<h2 id="create-cluster-using-docker-driver-alternative">Create cluster using Docker driver (alternative)</h2>
+
+<p>Selain menggunakan virtualbox kita juga bisa menggunakan Docker sebagai drivernya minikube.</p>
+
+<p>Nah sekarang kita buat clusternya dengan perintah seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02a-start-docker-cluster-mac.bash"> </script>
+
+<p>Jika sudah success, maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  ~ minikube start 
+😄  minikube v1.24.0 on Ubuntu 21.10
+✨  Automatically selected the docker driver. Other choices: virtualbox, ssh
+👍  Starting control plane node minikube <span class="k">in </span>cluster minikube
+🚜  Pulling base image ...
+🔥  Creating docker container <span class="o">(</span><span class="nv">CPUs</span><span class="o">=</span>2, <span class="nv">Memory</span><span class="o">=</span>3800MB<span class="o">)</span> ...
+❗  This container is having trouble accessing https://k8s.gcr.io
+💡  To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/
+🐳  Preparing Kubernetes v1.22.3 on Docker 20.10.8 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔎  Verifying Kubernetes components...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🌟  Enabled addons: default-storageclass, storage-provisioner
+🏄  Done! kubectl is now configured to use <span class="s2">"minikube"</span> cluster and <span class="s2">"default"</span> namespace by default
+</code></pre></div></div>
+
+<p>Nah sekarang jika kita lihat di docker list container, disinilah kubernetes engine berjalan.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  docker container <span class="nb">ls
+</span>CONTAINER ID   IMAGE                                 COMMAND                  CREATED              STATUS              PORTS                                                                                                                                  NAMES
+889dcc0689c0   gcr.io/k8s-minikube/kicbase:v0.0.28   <span class="s2">"/usr/local/bin/entr…"</span>   About a minute ago   Up About a minute   127.0.0.1:55692-&gt;22/tcp, 127.0.0.1:55693-&gt;2376/tcp, 127.0.0.1:55690-&gt;5000/tcp, 127.0.0.1:55691-&gt;8443/tcp, 127.0.0.1:55694-&gt;32443/tcp   minikube
+</code></pre></div></div>
+
+<p>Setelah itu kita bisa, menggunakan kubernetes clusternya untuk learning environtment.</p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/01-silabus"  class="" title="Silabus - DevOps Kubernetes: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows" class="" 
+        title="Install minikube for Windows 11/10 Users
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 14 to 36
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application" class="" 
+        title="Deploying an apps/services into Kubernetes
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"  class="" title="Working with Deployment object">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#kubernetes" class="page__taxonomy-item p-category" rel="tag">Kubernetes</a><span class="sep">, </span>
+    
+      <a href="/categories/#orchestration" class="page__taxonomy-item p-category" rel="tag">Orchestration</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-01-27T11:51:22+07:00">January 27, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Install+minikube+for+Linux+users%20%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02a-install-tools-for-linux" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02a-install-tools-for-linux" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02a-install-tools-for-linux" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

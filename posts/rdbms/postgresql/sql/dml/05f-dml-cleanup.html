@@ -1,0 +1,1396 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Cleanup Data from Table - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, Selain INSERT, UPDATE dan DELETE statement ada juga beberapa task seperti cleanup data/storage pada database PostgreSQL dengan menggunakan perintah TRUNCATE dan VACUUM.  Ok jadi langsung aja kita bahas materi yang pertama:">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Cleanup Data from Table">
+<meta property="og:url" content="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+
+
+  <meta property="og:description" content="Hai semuanya, Selain INSERT, UPDATE dan DELETE statement ada juga beberapa task seperti cleanup data/storage pada database PostgreSQL dengan menggunakan perintah TRUNCATE dan VACUUM.  Ok jadi langsung aja kita bahas materi yang pertama:">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-01-08T10:49:22+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#cleanup-data-of-tables-using-truncate">Cleanup data of tables using TRUNCATE</a></li><li><a href="#cleanup-storage-to-reclaims-occupied-by-dead-tuples">Cleanup storage to reclaims occupied by dead tuples</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Cleanup Data from Table">
+    <meta itemprop="description" content="Hai semuanya, Selain INSERT, UPDATE dan DELETE statement ada juga beberapa task seperti cleanup data/storage pada database PostgreSQL dengan menggunakan perintah TRUNCATE dan VACUUM.Ok jadi langsung aja kita bahas materi yang pertama:">
+    <meta itemprop="datePublished" content="2023-01-08T10:49:22+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup" class="u-url" itemprop="url">Cleanup Data from Table
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-01-08T10:49:22+07:00">January 8, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        4 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan PostgreSQL">
+        <label class="acordion-item-label" for="content-Pengenalan PostgreSQL">
+            Pengenalan PostgreSQL
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01-silabus-psql">
+                        
+                        Silabus - PostgreSQL: Pemul...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01a-what-is-postgresql">
+                        
+                        Overview of PostgreSQL Data...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01b-postgresql-architecture">
+                        
+                        Architecture of PostgreSQL ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01c-postgresql-database">
+                        
+                        Overview of Object Relation...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started">
+        <label class="acordion-item-label" for="content-Getting started">
+            Getting started
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02-overview-install-postgres">
+                        
+                        Overview Installing PostgreSQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows">
+                        
+                        Install PostgreSQL for Wind...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac">
+                        
+                        Install PostgreSQL for Mac ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu">
+                        
+                        Install PostgreSQL for Linu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker">
+                        
+                        Install PostgreSQL using Do...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02b-use-psql">
+                        
+                        Using psql as PostgreSQL ed...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02c-use-pgadmin">
+                        
+                        Using pgAdmin4 as PostgreSQ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+                        
+                        Using thirdparty Editor unt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select Statement">
+        <label class="acordion-item-label" for="content-SQL - Select Statement">
+            SQL - Select Statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03-overview-sql">
+                        
+                        Overview SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03a-basic-select-statement">
+                        
+                        Basic SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators">
+                        
+                        Build-in Operators
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions">
+                        
+                        Build-in Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+                        
+                        Filtering data with WHERE c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause">
+                        
+                        Sorting rows using ORDER BY...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause">
+                        
+                        Limit dan Offset rows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03g-quis-section-1">
+                        
+                        Time your practice (part 1)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements">
+                        
+                        Deep dive into Select State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+                        
+                        Single Row / Group functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+                        
+                        Joined Tables
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04c-subquery">
+                        
+                        Queries inside a query (sub...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+                        
+                        Conditional Expressions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04e-combining-queries">
+                        
+                        Combining Queries (UNION, I...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04f-with-queries">
+                        
+                        WITH Queries (Common Table ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04g-quis-section-2">
+                        
+                        Time your practice (part 2)
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data manipulation">
+        <label class="acordion-item-label" for="content-SQL - Data manipulation">
+            SQL - Data manipulation
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05-overview-dml">
+                        
+                        Overview of Data Manipulati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05a-cud-statement">
+                        
+                        Basic Create, Update, Delet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+                        
+                        Deep dive into INSERT State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05c-dml-update">
+                        
+                        Deep dive into UPDATE State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete">
+                        
+                        Deep dive into DELETE state...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement">
+                        
+                        Prepared Statement in SQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Cleanup Data from Table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1">
+                        
+                        Time your practice (part 3)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control">
+                        
+                        Overview of Concurrency Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl">
+                        
+                        Getting started with Transa...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data definition">
+        <label class="acordion-item-label" for="content-SQL - Data definition">
+            SQL - Data definition
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Database design (Mapping)">
+        <label class="acordion-item-label" for="content-Study Kasus: Database design (Mapping)">
+            Study Kasus: Database design (Mapping)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Indexes">
+        <label class="acordion-item-label" for="content-SQL - Indexes">
+            SQL - Indexes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Users Management">
+        <label class="acordion-item-label" for="content-SQL - Users Management">
+            SQL - Users Management
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Type Conversion">
+        <label class="acordion-item-label" for="content-Type Conversion">
+            Type Conversion
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, Selain <code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code> dan <code class="language-plaintext highlighter-rouge">DELETE</code> statement ada juga beberapa task seperti cleanup data/storage pada database PostgreSQL dengan menggunakan perintah <code class="language-plaintext highlighter-rouge">TRUNCATE</code> dan <code class="language-plaintext highlighter-rouge">VACUUM</code>.</p>
+
+<p>Ok jadi langsung aja kita bahas materi yang pertama:</p>
+
+<!--more-->
+
+<h2 id="cleanup-data-of-tables-using-truncate">Cleanup data of tables using <code class="language-plaintext highlighter-rouge">TRUNCATE</code></h2>
+
+<p><code class="language-plaintext highlighter-rouge">TRUNCATE</code> is a command to empty a table or set of tables. It has the same effect as an unqualified <code class="language-plaintext highlighter-rouge">DELETE</code> on each table, but since it does not actually scan the tables it is faster. Furthermore this is most useful on large tables. The syntax is:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">TRUNCATE</span> <span class="p">[</span> <span class="k">TABLE</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ONLY</span> <span class="p">]</span> <span class="n">name</span> <span class="p">[</span> <span class="o">*</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="k">RESTART</span> <span class="k">IDENTITY</span> <span class="o">|</span> <span class="k">CONTINUE</span> <span class="k">IDENTITY</span> <span class="p">]</span> <span class="p">[</span> <span class="k">CASCADE</span> <span class="o">|</span> <span class="k">RESTRICT</span> <span class="p">]</span></code></pre></figure>
+
+<p>Before you execute this command, You must have the <code class="language-plaintext highlighter-rouge">TRUNCATE</code> privilege on a table to truncate it.</p>
+
+<p><code class="language-plaintext highlighter-rouge">TRUNCATE</code> acquires an <code class="language-plaintext highlighter-rouge">ACCESS EXCLUSIVE</code> lock on each table it operates on, which blocks all other concurrent operations on the table. When <code class="language-plaintext highlighter-rouge">RESTART IDENTITY</code> is specified, any sequences that are to be restarted are likewise locked exclusively. If concurrent access to a table is required, then the <code class="language-plaintext highlighter-rouge">DELETE</code> command should be used instead.</p>
+
+<p><code class="language-plaintext highlighter-rouge">TRUNCATE</code> cannot be used on a table that has foreign-key references from other tables, unless all such tables are also truncated in the same command. Checking validity in such cases would require table scans, and the whole point is not to do one. The <code class="language-plaintext highlighter-rouge">CASCADE</code> option can be used to automatically include all dependent tables — but be very careful when using this option, or else you might lose data you did not intend to!</p>
+
+<p>When <code class="language-plaintext highlighter-rouge">RESTART IDENTITY</code> is specified, the implied <code class="language-plaintext highlighter-rouge">ALTER SEQUENCE RESTART</code> operations are also done transactionally; that is, they will be rolled back if the surrounding transaction does not commit. Be aware that if any additional sequence operations are done on the restarted sequences before the transaction rolls back, the effects of these operations on the sequences will be rolled back, but not their effects on <code class="language-plaintext highlighter-rouge">currval();</code> that is, after the transaction <code class="language-plaintext highlighter-rouge">currval()</code> will continue to reflect the last sequence value obtained inside the failed transaction, even though the sequence itself may no longer be consistent with that.</p>
+
+<p>Sebagai contoh, saya akan menghapus data table <code class="language-plaintext highlighter-rouge">job_history</code> seperti berikut perintahnya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05f-dml-cleanup-truncate.sql"> </script>
+
+<p>Jika dijalankan seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">truncate</span> <span class="n">job_history</span> <span class="k">RESTART</span> <span class="k">IDENTITY</span> <span class="k">CASCADE</span><span class="p">;</span>
+<span class="k">TRUNCATE</span> <span class="k">TABLE</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">from</span> <span class="n">job_history</span><span class="p">;</span>
+ <span class="k">count</span>
+<span class="c1">-------</span>
+     <span class="mi">0</span>
+<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="cleanup-storage-to-reclaims-occupied-by-dead-tuples">Cleanup storage to reclaims occupied by dead tuples</h2>
+
+<p>VACUUM reclaims storage occupied by dead tuples. In normal PostgreSQL operation, tuples that are deleted or obsoleted by an update are not physically removed from their table; they remain present until a VACUUM is done. Therefore it’s necessary to do VACUUM periodically, especially on frequently-updated tables.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">VACUUM</span> <span class="p">[</span> <span class="p">(</span> <span class="k">option</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span> <span class="p">[</span> <span class="n">table_and_columns</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
+<span class="k">VACUUM</span> <span class="p">[</span> <span class="k">FULL</span> <span class="p">]</span> <span class="p">[</span> <span class="k">FREEZE</span> <span class="p">]</span> <span class="p">[</span> <span class="k">VERBOSE</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ANALYZE</span> <span class="p">]</span> <span class="p">[</span> <span class="n">table_and_columns</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
+
+<span class="k">where</span> <span class="k">option</span> <span class="n">can</span> <span class="n">be</span> <span class="n">one</span> <span class="k">of</span><span class="p">:</span>
+
+    <span class="k">FULL</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
+    <span class="k">FREEZE</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
+    <span class="k">VERBOSE</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
+    <span class="k">ANALYZE</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
+    <span class="n">DISABLE_PAGE_SKIPPING</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
+    <span class="n">SKIP_LOCKED</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
+    <span class="n">INDEX_CLEANUP</span> <span class="p">{</span> <span class="n">AUTO</span> <span class="o">|</span> <span class="k">ON</span> <span class="o">|</span> <span class="k">OFF</span> <span class="p">}</span>
+    <span class="n">PROCESS_TOAST</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
+    <span class="k">TRUNCATE</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
+    <span class="n">PARALLEL</span> <span class="nb">integer</span>
+
+<span class="k">and</span> <span class="n">table_and_columns</span> <span class="k">is</span><span class="p">:</span>
+
+    <span class="k">table_name</span> <span class="p">[</span> <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span></code></pre></figure>
+
+<p>To vacuum a table, one must ordinarily be the table’s owner or a superuser. However, database owners are allowed to vacuum all tables in their databases, except shared catalogs. (The restriction for shared catalogs means that a true database-wide VACUUM can only be performed by a superuser.) VACUUM will skip over any tables that the calling user does not have permission to vacuum.</p>
+
+<p>VACUUM cannot be executed inside a transaction block.</p>
+
+<p>We recommend that active production databases be vacuumed frequently (at least nightly), in order to remove dead rows. After adding or deleting a large number of rows, it might be a good idea to issue a VACUUM ANALYZE command for the affected table. This will update the system catalogs with the results of all recent changes, and allow the PostgreSQL query planner to make better choices in planning queries.</p>
+
+<p>VACUUM causes a substantial increase in I/O traffic, which might cause poor performance for other active sessions. Therefore, it is sometimes advisable to use the cost-based vacuum delay feature. For parallel vacuum, each worker sleeps in proportion to the work done by that worker.</p>
+
+<p>PostgreSQL includes an “autovacuum” facility which can automate routine vacuum maintenance.</p>
+
+<p>To clean a single table <code class="language-plaintext highlighter-rouge">employees</code>, analyze it for the optimizer and print a detailed vacuum activity report:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05f-dml-cleanup-vacuum.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">VACUUM</span> <span class="p">(</span><span class="k">VERBOSE</span><span class="p">,</span> <span class="k">ANALYZE</span><span class="p">)</span> <span class="n">employees</span><span class="p">;</span>
+<span class="n">INFO</span><span class="p">:</span>  <span class="n">vacuuming</span> <span class="nv">"public.employees"</span>
+<span class="n">INFO</span><span class="p">:</span>  <span class="n">scanned</span> <span class="k">index</span> <span class="nv">"employees_pkey"</span> <span class="k">to</span> <span class="n">remove</span> <span class="mi">21</span> <span class="k">row</span> <span class="n">versions</span>
+<span class="n">DETAIL</span><span class="p">:</span>  <span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span>
+<span class="n">INFO</span><span class="p">:</span>  <span class="n">scanned</span> <span class="k">index</span> <span class="nv">"employees_email_key"</span> <span class="k">to</span> <span class="n">remove</span> <span class="mi">21</span> <span class="k">row</span> <span class="n">versions</span>
+<span class="n">DETAIL</span><span class="p">:</span>  <span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span>
+<span class="n">INFO</span><span class="p">:</span>  <span class="k">table</span> <span class="nv">"employees"</span><span class="p">:</span> <span class="n">removed</span> <span class="mi">21</span> <span class="n">dead</span> <span class="n">item</span> <span class="n">identifiers</span> <span class="k">in</span> <span class="mi">2</span> <span class="n">pages</span>
+<span class="n">DETAIL</span><span class="p">:</span>  <span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span>
+<span class="n">INFO</span><span class="p">:</span>  <span class="k">index</span> <span class="nv">"employees_pkey"</span> <span class="n">now</span> <span class="k">contains</span> <span class="mi">91</span> <span class="k">row</span> <span class="n">versions</span> <span class="k">in</span> <span class="mi">2</span> <span class="n">pages</span>
+<span class="n">DETAIL</span><span class="p">:</span>  <span class="mi">21</span> <span class="k">index</span> <span class="k">row</span> <span class="n">versions</span> <span class="n">were</span> <span class="n">removed</span><span class="p">.</span>
+<span class="mi">0</span> <span class="k">index</span> <span class="n">pages</span> <span class="n">were</span> <span class="n">newly</span> <span class="n">deleted</span><span class="p">.</span>
+<span class="mi">0</span> <span class="k">index</span> <span class="n">pages</span> <span class="k">are</span> <span class="n">currently</span> <span class="n">deleted</span><span class="p">,</span> <span class="k">of</span> <span class="n">which</span> <span class="mi">0</span> <span class="k">are</span> <span class="n">currently</span> <span class="n">reusable</span><span class="p">.</span>
+<span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">.</span>
+<span class="n">INFO</span><span class="p">:</span>  <span class="k">index</span> <span class="nv">"employees_email_key"</span> <span class="n">now</span> <span class="k">contains</span> <span class="mi">91</span> <span class="k">row</span> <span class="n">versions</span> <span class="k">in</span> <span class="mi">2</span> <span class="n">pages</span>
+<span class="n">DETAIL</span><span class="p">:</span>  <span class="mi">21</span> <span class="k">index</span> <span class="k">row</span> <span class="n">versions</span> <span class="n">were</span> <span class="n">removed</span><span class="p">.</span>
+<span class="mi">0</span> <span class="k">index</span> <span class="n">pages</span> <span class="n">were</span> <span class="n">newly</span> <span class="n">deleted</span><span class="p">.</span>
+<span class="mi">0</span> <span class="k">index</span> <span class="n">pages</span> <span class="k">are</span> <span class="n">currently</span> <span class="n">deleted</span><span class="p">,</span> <span class="k">of</span> <span class="n">which</span> <span class="mi">0</span> <span class="k">are</span> <span class="n">currently</span> <span class="n">reusable</span><span class="p">.</span>
+<span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">.</span>
+<span class="n">INFO</span><span class="p">:</span>  <span class="k">table</span> <span class="nv">"employees"</span><span class="p">:</span> <span class="k">found</span> <span class="mi">10</span> <span class="n">removable</span><span class="p">,</span> <span class="mi">91</span> <span class="n">nonremovable</span> <span class="k">row</span> <span class="n">versions</span> <span class="k">in</span> <span class="mi">2</span> <span class="k">out</span> <span class="k">of</span> <span class="mi">2</span> <span class="n">pages</span>
+<span class="n">DETAIL</span><span class="p">:</span>  <span class="mi">0</span> <span class="n">dead</span> <span class="k">row</span> <span class="n">versions</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">removed</span> <span class="n">yet</span><span class="p">,</span> <span class="n">oldest</span> <span class="n">xmin</span><span class="p">:</span> <span class="mi">762</span>
+<span class="n">Skipped</span> <span class="mi">0</span> <span class="n">pages</span> <span class="n">due</span> <span class="k">to</span> <span class="n">buffer</span> <span class="n">pins</span><span class="p">,</span> <span class="mi">0</span> <span class="n">frozen</span> <span class="n">pages</span><span class="p">.</span>
+<span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">.</span>
+<span class="n">INFO</span><span class="p">:</span>  <span class="n">analyzing</span> <span class="nv">"public.employees"</span>
+<span class="n">INFO</span><span class="p">:</span>  <span class="nv">"employees"</span><span class="p">:</span> <span class="n">scanned</span> <span class="mi">2</span> <span class="k">of</span> <span class="mi">2</span> <span class="n">pages</span><span class="p">,</span> <span class="n">containing</span> <span class="mi">91</span> <span class="n">live</span> <span class="k">rows</span> <span class="k">and</span> <span class="mi">0</span> <span class="n">dead</span> <span class="k">rows</span><span class="p">;</span> <span class="mi">91</span> <span class="k">rows</span> <span class="k">in</span> <span class="n">sample</span><span class="p">,</span> <span class="mi">91</span> <span class="n">estimated</span> <span class="n">total</span> <span class="k">rows</span>
+</code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/01-silabus-psql"  class="" title="Silabus - PostgreSQL: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement" class="" 
+        title="Prepared Statement in SQL
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 35 to 38
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1" class="" 
+        title="Time your practice (part 3)
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"  class="" title="Getting started with Transaction Control (TCL)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#dml" class="page__taxonomy-item p-category" rel="tag">DML</a><span class="sep">, </span>
+    
+      <a href="/categories/#postgresql" class="page__taxonomy-item p-category" rel="tag">PostgreSQL</a><span class="sep">, </span>
+    
+      <a href="/categories/#rdbms" class="page__taxonomy-item p-category" rel="tag">RDBMS</a><span class="sep">, </span>
+    
+      <a href="/categories/#sql" class="page__taxonomy-item p-category" rel="tag">SQL</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-01-08T10:49:22+07:00">January 8, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Cleanup+Data+from+Table%20%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fdml%2F05f-dml-cleanup" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fdml%2F05f-dml-cleanup" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fdml%2F05f-dml-cleanup" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

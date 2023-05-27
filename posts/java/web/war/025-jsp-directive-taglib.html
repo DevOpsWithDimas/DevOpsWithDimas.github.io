@@ -1,0 +1,1993 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>JSP Taglib Directive (JSTL) - DevOps with Dimas Maryanto</title>
+<meta name="description" content="JavaServet Page API mengijinkan untuk kita mendefinisikan custom JSP tag dengan format XML atau HTML, yang artinya kita bisa buat sendiri tag atau menggunakan lib yang sudah di define seperti JSTL atau JavaServer Pages Standard Tag Libaray.  Fitur utamanya teridiri dari:">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="JSP Taglib Directive (JSTL)">
+<meta property="og:url" content="/posts/java/web/war/025-jsp-directive-taglib">
+
+
+  <meta property="og:description" content="JavaServet Page API mengijinkan untuk kita mendefinisikan custom JSP tag dengan format XML atau HTML, yang artinya kita bisa buat sendiri tag atau menggunakan lib yang sudah di define seperti JSTL atau JavaServer Pages Standard Tag Libaray.  Fitur utamanya teridiri dari:">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2020-09-26T20:31:59+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/java/web/war/025-jsp-directive-taglib">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#core-tags">Core Tags</a></li><li><a href="#formating-tags">Formating Tags</a></li><li><a href="#sql-tags">SQL Tags</a></li><li><a href="#xml-tags">XML tags</a></li><li><a href="#function-tags">Function Tags</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="JSP Taglib Directive (JSTL)">
+    <meta itemprop="description" content="JavaServet Page API mengijinkan untuk kita mendefinisikan custom JSP tag dengan format XML atau HTML, yang artinya kita bisa buat sendiri tag atau menggunakan lib yang sudah di define seperti JSTL atau JavaServer Pages Standard Tag Libaray.Fitur utamanya teridiri dari:">
+    <meta itemprop="datePublished" content="2020-09-26T20:31:59+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/java/web/war/025-jsp-directive-taglib" class="u-url" itemprop="url">JSP Taglib Directive (JSTL)
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/java" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Bahasa Pemograman Java
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2020-09-26T20:31:59+07:00">September 26, 2020</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Java language">
+        <label class="acordion-item-label" for="content-Pengenalan Java language">
+            Pengenalan Java language
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/language/java/01-silabus">
+                        
+                        Silabus - Java: Pemula samp...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/01a-programming-language-overview">
+                        
+                        Overview of Programming Lan...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/01b-java-programming-overview">
+                        
+                        Overview of Java Programming
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Basic">
+        <label class="acordion-item-label" for="content-Basic">
+            Basic
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/language/java/basic/02-role-java">
+                        
+                        Standarisasi penulisan codi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/basic/02a-data-type-and-variables">
+                        
+                        Variabel dan Tipe Data
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/basic/02b-tipe-data-number">
+                        
+                        Tipe data yang bernilai Number
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/basic/02d-tipe-data-logika">
+                        
+                        Tipe data logika (true of f...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/basic/02c-tipe-data-string">
+                        
+                        Tipe data untuk bernilai Ka...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/basic/02e-tipe-data-tanggal">
+                        
+                        Tipe data untuk menyimpan T...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/basic/03-operator">
+                        
+                        Macam macam Operator di Java
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/basic/03a-conversi-tipe-data">
+                        
+                        Konversi tipe data otomatis...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/basic/04-quis-section-1">
+                        
+                        Time is your practice
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Control statement">
+        <label class="acordion-item-label" for="content-Control statement">
+            Control statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/language/java/control/05-control-flow">
+                        
+                        FLow control statement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/control/05a-if-statement">
+                        
+                        IF statement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/control/05b-swith-statement">
+                        
+                        SWITCH-CASE statement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/control/06-for-statement">
+                        
+                        For statement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/control/06a-for-statement-2">
+                        
+                        For statement #2
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/control/06b-while-statement">
+                        
+                        WHILE dan DO-WHILE statement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/control/06c-break-or-continue">
+                        
+                        Break dan Continue statement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/control/07-quis-section-2">
+                        
+                        Time is your for practice p...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Functions & Methods">
+        <label class="acordion-item-label" for="content-Functions & Methods">
+            Functions & Methods
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/language/java/function/08-function">
+                        
+                        Method atau Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/function/08a-params-at-method">
+                        
+                        Menerima data dari parament...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Class and Packages">
+        <label class="acordion-item-label" for="content-Class and Packages">
+            Class and Packages
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/language/java/classes/09-class-java">
+                        
+                        Grouping source code dengan...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/classes/09a-package-import">
+                        
+                        Organisasi class file denga...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/classes/10-quis-section-3">
+                        
+                        Time is your for practice p...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Array, Collections & Generics">
+        <label class="acordion-item-label" for="content-Array, Collections & Generics">
+            Array, Collections & Generics
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/language/java/arrays/14-array">
+                        
+                        Menyimpan multiple value da...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/arrays/14a-array-2-dimension">
+                        
+                        Array 2 dimensi
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/arrays/15-element-collections">
+                        
+                        Element Collection
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/arrays/16-foreach">
+                        
+                        Perulangan for untuk Array,...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/arrays/17-generics">
+                        
+                        Why Use Generics?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/arrays/18-quis-section-5">
+                        
+                        Time to your practice part 5
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Object Oriented Programming (OOP)">
+        <label class="acordion-item-label" for="content-Object Oriented Programming (OOP)">
+            Object Oriented Programming (OOP)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/language/java/oop/11-class-oop">
+                        
+                        Object oriented dengan Java...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/oop/11a-konsep-oop">
+                        
+                        Object Oriented Approach di...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/oop/11b-inheritance-java">
+                        
+                        Mengenal lebih jauh tentang...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/oop/11c-polymorpism-java">
+                        
+                        Mengenal lebih jauh tentang...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/oop/11d-keyword-super-this">
+                        
+                        Mengenal keyword super dan ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/oop/12-contructor-java">
+                        
+                        Contructor adalah method
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/oop/13-quis-section-4">
+                        
+                        Time is your practice part 4
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Exceptions Handling">
+        <label class="acordion-item-label" for="content-Exceptions Handling">
+            Exceptions Handling
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Lamda Expressions">
+        <label class="acordion-item-label" for="content-Lamda Expressions">
+            Lamda Expressions
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Aggregate Operations">
+        <label class="acordion-item-label" for="content-Aggregate Operations">
+            Aggregate Operations
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Thread and Concurrency">
+        <label class="acordion-item-label" for="content-Thread and Concurrency">
+            Thread and Concurrency
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Graphical User Interface - Swing">
+        <label class="acordion-item-label" for="content-Graphical User Interface - Swing">
+            Graphical User Interface - Swing
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Database Access (JDBC)">
+        <label class="acordion-item-label" for="content-Database Access (JDBC)">
+            Database Access (JDBC)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/01-what-is-jdbc">
+                        
+                        What is Java Database Conne...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/02-setup-project-maven">
+                        
+                        Setup Project JDBC dengan A...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/03-create-connection">
+                        
+                        Membuat connection ke Datab...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/04-using-flyway">
+                        
+                        Using Database Versioning w...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/05-statement">
+                        
+                        Mengenal class java.sql.Sta...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/06-prepared-statement">
+                        
+                        Mengenal class java.sql.Pre...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/07-execute-query-and-update">
+                        
+                        Perbedaan method executeQue...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/08-resultset">
+                        
+                        Mengenal class ResultSet
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/09-transactional">
+                        
+                        Mengenal Transactional deng...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/010-batch">
+                        
+                        Batch processing dengan JDBC
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/jdbc/011-quis-section-1">
+                        
+                        Time is your to practice
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Client / Server - JNDI">
+        <label class="acordion-item-label" for="content-Client / Server - JNDI">
+            Client / Server - JNDI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Client / Server - RMI">
+        <label class="acordion-item-label" for="content-Client / Server - RMI">
+            Client / Server - RMI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Membuat aplikasi">
+        <label class="acordion-item-label" for="content-Study Kasus: Membuat aplikasi">
+            Study Kasus: Membuat aplikasi
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Java Web (Servlet)">
+        <label class="acordion-item-label" for="content-Java Web (Servlet)">
+            Java Web (Servlet)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/language/java/web/war/002-pengenalan-java-web">
+                        
+                        Technology Java Enterprice ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/web/war/003-pengenalan-html">
+                        
+                        Pengenalan Scripting langua...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/language/java/web/war/004-pengenalan-css">
+                        
+                        Pengenalan Styling dengan CSS
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/005-pengenalan-js">
+                        
+                        Pengenalan Pemograman Clien...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/008-create-project-java-web">
+                        
+                        Membuat project Java Web de...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/009-structure-project-maven-archetype-webapp">
+                        
+                        Memahami Struktur Project d...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/010-memahami-konsep-http">
+                        
+                        Konsep Hypertext Transper P...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/011-pengenalan-servlet">
+                        
+                        Pengenalan Pemograman Servlet
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/012-servlet-dengan-annotation">
+                        
+                        Pemograman Servlet dengan A...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/013-submit-value-dengan-servlet-get-method">
+                        
+                        Submit value dengan Servlet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/014-submit-value-dengan-servlet-post-method">
+                        
+                        Submit value dengan Servlet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/015-submit-array-value-dengan-servlet">
+                        
+                        Submit Array value mengguna...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/016-submit-file-dengan-servlet">
+                        
+                        Submit file menggunakan Ser...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/017-logging-incomming-request-servlet-filter">
+                        
+                        Logging incomming request d...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/018-event-listener-using-servlet-context-level">
+                        
+                        Event Listeners using Servl...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/019-event-listener-using-session-level">
+                        
+                        Event Listeners using Sessi...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Java Server Pages (JSP)">
+        <label class="acordion-item-label" for="content-Java Server Pages (JSP)">
+            Java Server Pages (JSP)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/java/web/war/020-pengenalan-jsp">
+                        
+                        Pengenalan JavaServer Page ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/021-jsp-architecture">
+                        
+                        JSP Architecture
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/022-using-jsp">
+                        
+                        Using JSP and Element of JSP
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/023-jsp-scriptlet">
+                        
+                        JSP Scriptlet
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/024-jsp-directive">
+                        
+                        JSP Directive
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/025-jsp-directive-taglib">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        JSP Taglib Directive (JSTL)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/026-jsp-action-elements">
+                        
+                        JSP Action Element
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/027-jsp-implicit-object-elements">
+                        
+                        JSP Implicit Object
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/028-static-resources-with-webjar">
+                        
+                        Static Resources with WebJars
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/029-konsep-mvc-java-web">
+                        
+                        Konsep Model View Controlle...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/030-implementasi-mvc-java-web">
+                        
+                        Implementasi MVC menggunaka...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/031-instal-webserver-tomcat8">
+                        
+                        Persiapan untuk Deploy Java...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/032-deploy-java-webapp">
+                        
+                        Deployment Java Webapp deng...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/033-automated-deployer-gitlab-ci-cd-docker">
+                        
+                        Automated deploy with gitla...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/java/web/war/034-quis-section-01">
+                        
+                        Time is your to practice
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>JavaServet Page API mengijinkan untuk kita mendefinisikan custom JSP tag dengan format XML atau HTML, yang artinya kita bisa buat sendiri tag atau menggunakan lib yang sudah di define seperti JSTL atau JavaServer Pages Standard Tag Libaray.</p>
+
+<p>Fitur utamanya teridiri dari:</p>
+
+<!--more-->
+
+<ol>
+  <li>Core Tag</li>
+  <li>Formatting Tag</li>
+  <li>SQL Tag</li>
+  <li>XML Tag</li>
+  <li>JSTL Function</li>
+</ol>
+
+<p>Untuk menggunakan JSTL ini kita perlu menambahkan dependency di <code class="language-plaintext highlighter-rouge">pom.xml</code> seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre></td><td class="code"><pre><span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> 
+        <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+        <span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+    
+    <span class="c">&lt;!-- project settings --&gt;</span>
+
+    <span class="nt">&lt;dependencies&gt;</span>
+        <span class="c">&lt;!-- enabled jstl --&gt;</span>
+        <span class="nt">&lt;dependency&gt;</span>
+            <span class="nt">&lt;groupId&gt;</span>jstl<span class="nt">&lt;/groupId&gt;</span>
+            <span class="nt">&lt;artifactId&gt;</span>jstl<span class="nt">&lt;/artifactId&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.2<span class="nt">&lt;/version&gt;</span>
+        <span class="nt">&lt;/dependency&gt;</span>
+
+        <span class="c">&lt;!-- other dependencies --&gt;</span>
+    <span class="nt">&lt;/dependencies&gt;</span>
+    <span class="nt">&lt;build&gt;</span>
+        <span class="c">&lt;!-- build plugins --&gt;</span>
+    <span class="nt">&lt;/build&gt;</span>
+<span class="nt">&lt;/project&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="core-tags">Core Tags</h2>
+
+<p>Core tag itu taglib yang most commons you should know. Untuk penggunaanya kita harus import dalam file jsp seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nt">&lt;%@ taglib </span><span class="na">prefix = </span><span class="s">"c"</span><span class="na"> uri = </span><span class="s">"http://java.sun.com/jsp/jstl/core"</span> <span class="nt">%&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Tag yang tersedia diantaranya meliputi seperti berikut:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Tags</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;c:out&gt;</code></td>
+      <td style="text-align: left">Perintahnya sama seperti <code class="language-plaintext highlighter-rouge">&lt;%= ... %&gt;</code> dalam jsp tetapi untuk expresion</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;c:if&gt;</code></td>
+      <td style="text-align: left">Perintah sama seperti if statement hanya berbentuk xml</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;c:catch&gt;</code></td>
+      <td style="text-align: left">Perintah untuk menangkat throwable exception</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;c:choose&gt;</code></td>
+      <td style="text-align: left">Perintah conditional statement sama seperti <code class="language-plaintext highlighter-rouge">switch-case</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;c:forEach&gt;</code></td>
+      <td style="text-align: left">Perintah loop statement</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;c:url&gt;</code></td>
+      <td style="text-align: left">Perintah untuk menampilkan informasi URL, URI, servlet-context dll</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Tag tersebut tidak seluruhnya saya tulis di materi ini, tetapi ini hanya yang sering kita gunakan saja jika temen-temen mau lebih lengkap silahkan baca artikelnya <a href="https://www.oracle.com/java/technologies/jstl-documentation.html">disini</a></p>
+
+<p>Berikut adalah contoh penggunaannya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea.js?file=jstl-core.jsp"> </script>
+
+<h2 id="formating-tags">Formating Tags</h2>
+
+<p>Formating tags, yak ini sesuai dengan judulnya biasanya digunakan untuk melakukan transformasi data misalnya dari string ke tanggal atau sebaliknya. Untuk menggunakan formating kita perlu import taglib sebagai berikut:</p>
+
+<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nt">&lt;%@ taglib </span><span class="na">prefix = </span><span class="s">"formatter"</span><span class="na"> uri = </span><span class="s">"http://java.sun.com/jsp/jstl/fmt"</span> <span class="nt">%&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Tags</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;fomatter:formatNumber&gt;</code></td>
+      <td style="text-align: left">Untuk memformat number ke string dengan format misalnya currency, pecahan dan lain-lain</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;formatter:formatDate&gt;</code></td>
+      <td style="text-align: left">Untuk memformat date ke string dengan pattern tertentu</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;formatter:parseNumber&gt;</code></td>
+      <td style="text-align: left">Untuk memformat string ke number</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;formatter:parseDate&gt;</code></td>
+      <td style="text-align: left">Untuk memformat string ke date</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;formatter:message&gt;</code></td>
+      <td style="text-align: left">Untuk menampilkan i18n (Internationalization and localization)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Tag diatas tidak semua saya tulis, masih ada tag lainnya tentang formatting. berikut adalah contoh penggunaanya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea.js?file=jstl-format.jsp"> </script>
+
+<p>dan berikut adalah file <code class="language-plaintext highlighter-rouge">messages</code> (Resource Bundle) untuk i18n yang disimpan di folder <code class="language-plaintext highlighter-rouge">src/main/resources</code></p>
+
+<script src="https://gist.github.com/dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea.js?file=messages_en.properties"> </script>
+
+<script src="https://gist.github.com/dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea.js?file=messages_in_ID.properties"> </script>
+
+<h2 id="sql-tags">SQL Tags</h2>
+
+<p>Untuk tag sql ini saya akan skip karena fitur ini saya gak pernah gunakan supaya gak include sql di dalam jsp. Dengan tag ini kita bisa memanggil data dari database dengan menggunakan format xml.</p>
+
+<h2 id="xml-tags">XML tags</h2>
+
+<p>Untuk tag xml ini juga saya akan skip, karena fitur ini udah gak saya pake lagi tapi secara fungsi bisanya digunakan untuk memformat xml ke object class di java dan begitu pula sebaliknya.</p>
+
+<h2 id="function-tags">Function Tags</h2>
+
+<p>Untuk tag function ini ada beberapa function yang mungkin kita akan gunakan seperti untuk menge-check string mengandung karakter tertentu, atau menghintung jumlah kalimat tertentu dan lain-lain. Untuk menggunakan tag function kita harus import taglibnya seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-jsp" data-lang="jsp"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+</pre></td><td class="code"><pre><span class="nt">&lt;%@ taglib </span><span class="na">prefix = </span><span class="s">"fn"</span><span class="na"> uri = </span><span class="s">"http://java.sun.com/jsp/jstl/functions"</span> <span class="nt">%&gt;</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Tags</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;fn:contains&gt;</code></td>
+      <td style="text-align: left">Untuk menge-check string mengandung karakter tertentu</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;fn:containsIgnoreCase&gt;</code></td>
+      <td style="text-align: left">sama seperti containers tetapi tanpa case-sensitive</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;fn:indexOf&gt;</code></td>
+      <td style="text-align: left">Check posisi index pada sebuah array</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">&lt;fn:length&gt;</code></td>
+      <td style="text-align: left">Menghitung jumlah dari array</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Dan masih banyak lagi.</p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/language/java/basic/02-role-java"  class="" title="Standarisasi penulisan coding di Java">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/java/web/war/024-jsp-directive" class="" 
+        title="JSP Directive
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 68 to 80
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/java/web/war/026-jsp-action-elements" class="" 
+        title="JSP Action Element
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/language/java/01b-java-programming-overview"  class="" title="Overview of Java Programming">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#java" class="page__taxonomy-item p-category" rel="tag">java</a><span class="sep">, </span>
+    
+      <a href="/categories/#war" class="page__taxonomy-item p-category" rel="tag">war</a><span class="sep">, </span>
+    
+      <a href="/categories/#web" class="page__taxonomy-item p-category" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2020-09-26T20:31:59+07:00">September 26, 2020</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=JSP+Taglib+Directive+%28JSTL%29%20%2Fposts%2Fjava%2Fweb%2Fwar%2F025-jsp-directive-taglib" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fjava%2Fweb%2Fwar%2F025-jsp-directive-taglib" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fjava%2Fweb%2Fwar%2F025-jsp-directive-taglib" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1537 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Conditional Expressions - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Conditional Expression Seperti biasa karena materinya akan lumayan panjang jadi kita bagi jadi beberapa bagian diantaranya:     What is Conditional Expression?   CASE-WHEN expression   Using CASE-WHEN-ELSE expression   Using Nested CASE-WHEN expression   Using CASE-WHEN expression in WHERE clause   Ok langsung aja kita bahas materi yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Conditional Expressions">
+<meta property="og:url" content="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Conditional Expression Seperti biasa karena materinya akan lumayan panjang jadi kita bagi jadi beberapa bagian diantaranya:     What is Conditional Expression?   CASE-WHEN expression   Using CASE-WHEN-ELSE expression   Using Nested CASE-WHEN expression   Using CASE-WHEN expression in WHERE clause   Ok langsung aja kita bahas materi yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-06-12T11:16:21+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#what-is-conditional-expression">What is Conditional Expression?</a></li><li><a href="#using-case-when-expression">Using CASE-WHEN expression</a></li><li><a href="#using-case-when-else-expression">Using CASE-WHEN-ELSE expression</a></li><li><a href="#using-nested-case-when-expression">Using Nested CASE-WHEN expression</a></li><li><a href="#using-case-when-expression-in-where-clause">Using CASE-WHEN expression in WHERE clause</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Conditional Expressions">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Conditional Expression Seperti biasa karena materinya akan lumayan panjang jadi kita bagi jadi beberapa bagian diantaranya:  What is Conditional Expression?  CASE-WHEN expression  Using CASE-WHEN-ELSE expression  Using Nested CASE-WHEN expression  Using CASE-WHEN expression in WHERE clauseOk langsung aja kita bahas materi yang pertama">
+    <meta itemprop="datePublished" content="2022-06-12T11:16:21+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression" class="u-url" itemprop="url">Conditional Expressions
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-06-12T11:16:21+07:00">June 12, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        5 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan PostgreSQL">
+        <label class="acordion-item-label" for="content-Pengenalan PostgreSQL">
+            Pengenalan PostgreSQL
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01-silabus-psql">
+                        
+                        Silabus - PostgreSQL: Pemul...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01a-what-is-postgresql">
+                        
+                        Overview of PostgreSQL Data...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01b-postgresql-architecture">
+                        
+                        Architecture of PostgreSQL ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01c-postgresql-database">
+                        
+                        Overview of Object Relation...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started">
+        <label class="acordion-item-label" for="content-Getting started">
+            Getting started
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02-overview-install-postgres">
+                        
+                        Overview Installing PostgreSQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows">
+                        
+                        Install PostgreSQL for Wind...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac">
+                        
+                        Install PostgreSQL for Mac ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu">
+                        
+                        Install PostgreSQL for Linu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker">
+                        
+                        Install PostgreSQL using Do...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02b-use-psql">
+                        
+                        Using psql as PostgreSQL ed...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02c-use-pgadmin">
+                        
+                        Using pgAdmin4 as PostgreSQ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+                        
+                        Using thirdparty Editor unt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select Statement">
+        <label class="acordion-item-label" for="content-SQL - Select Statement">
+            SQL - Select Statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03-overview-sql">
+                        
+                        Overview SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03a-basic-select-statement">
+                        
+                        Basic SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators">
+                        
+                        Build-in Operators
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions">
+                        
+                        Build-in Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+                        
+                        Filtering data with WHERE c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause">
+                        
+                        Sorting rows using ORDER BY...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause">
+                        
+                        Limit dan Offset rows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03g-quis-section-1">
+                        
+                        Time your practice (part 1)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements">
+                        
+                        Deep dive into Select State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+                        
+                        Single Row / Group functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+                        
+                        Joined Tables
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04c-subquery">
+                        
+                        Queries inside a query (sub...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Conditional Expressions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04e-combining-queries">
+                        
+                        Combining Queries (UNION, I...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04f-with-queries">
+                        
+                        WITH Queries (Common Table ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04g-quis-section-2">
+                        
+                        Time your practice (part 2)
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data manipulation">
+        <label class="acordion-item-label" for="content-SQL - Data manipulation">
+            SQL - Data manipulation
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05-overview-dml">
+                        
+                        Overview of Data Manipulati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05a-cud-statement">
+                        
+                        Basic Create, Update, Delet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+                        
+                        Deep dive into INSERT State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05c-dml-update">
+                        
+                        Deep dive into UPDATE State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete">
+                        
+                        Deep dive into DELETE state...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement">
+                        
+                        Prepared Statement in SQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+                        
+                        Cleanup Data from Table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1">
+                        
+                        Time your practice (part 3)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control">
+                        
+                        Overview of Concurrency Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl">
+                        
+                        Getting started with Transa...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data definition">
+        <label class="acordion-item-label" for="content-SQL - Data definition">
+            SQL - Data definition
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Database design (Mapping)">
+        <label class="acordion-item-label" for="content-Study Kasus: Database design (Mapping)">
+            Study Kasus: Database design (Mapping)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Indexes">
+        <label class="acordion-item-label" for="content-SQL - Indexes">
+            SQL - Indexes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Users Management">
+        <label class="acordion-item-label" for="content-SQL - Users Management">
+            SQL - Users Management
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Type Conversion">
+        <label class="acordion-item-label" for="content-Type Conversion">
+            Type Conversion
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas tentang Conditional Expression Seperti biasa karena materinya akan lumayan panjang jadi kita bagi jadi beberapa bagian diantaranya:</p>
+
+<ol>
+  <li>What is Conditional Expression?</li>
+  <li><code class="language-plaintext highlighter-rouge">CASE-WHEN</code> expression</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">CASE-WHEN-ELSE</code> expression</li>
+  <li>Using Nested <code class="language-plaintext highlighter-rouge">CASE-WHEN</code> expression</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">CASE-WHEN</code> expression in <code class="language-plaintext highlighter-rouge">WHERE</code> clause</li>
+</ol>
+
+<p>Ok langsung aja kita bahas materi yang pertama</p>
+
+<!--more-->
+
+<h2 id="what-is-conditional-expression">What is Conditional Expression?</h2>
+
+<p>Conditional statements/Expression in the SQL help you to define different logics and actions for different conditions. It allows you to perform different actions based on conditions defined within the statement. In real life, you perform many actions dependent on the outcome of some other activity or situation.</p>
+
+<p>Some real-time examples of SQL case statement are:</p>
+
+<ol>
+  <li>If it rains tomorrow, I will plan on a road trip.</li>
+  <li>If flight tickets are less than $400 from my city, then I will go on vacation in Europe, else I will prefer some nearby tourist spot.</li>
+</ol>
+
+<p>Di PostgreSQL, kita bisa menggunakan Conditional Statement/Expression dengan beberapa cara</p>
+
+<ol>
+  <li>Case-When</li>
+  <li>Coalesce</li>
+  <li>NullIF</li>
+  <li>Greatest or Least</li>
+</ol>
+
+<p>Karena untuk function <code class="language-plaintext highlighter-rouge">Coalesce</code>, <code class="language-plaintext highlighter-rouge">NullIF</code> sudah pernah kita bahas di artikel sebelumnya jadi kita akan bahas lebih detail untuk <code class="language-plaintext highlighter-rouge">Case-When</code> expressionnya.</p>
+
+<h2 id="using-case-when-expression">Using <code class="language-plaintext highlighter-rouge">CASE-WHEN</code> expression</h2>
+
+<p>The SQL CASE expression is a generic conditional expression, similar to if/else statements in other programming languages:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">condition</span> <span class="k">THEN</span> <span class="k">result</span>
+     <span class="p">[</span><span class="k">WHEN</span> <span class="p">...]</span>
+     <span class="p">[</span><span class="k">ELSE</span> <span class="k">result</span><span class="p">]</span>
+<span class="k">END</span></code></pre></figure>
+
+<p>CASE clauses can be used wherever an expression is valid. Each <strong>condition</strong> is an expression that <strong>returns a boolean result</strong>. If the condition’s result is <code class="language-plaintext highlighter-rouge">true</code>, the value of the CASE expression is the result that follows the condition, and the remainder of the CASE expression is not processed. If the condition’s result is <code class="language-plaintext highlighter-rouge">not true</code>, any subsequent <code class="language-plaintext highlighter-rouge">WHEN</code> clauses are examined in the same manner. If no WHEN condition yields <code class="language-plaintext highlighter-rouge">true</code>, the value of the CASE expression is the result of the <code class="language-plaintext highlighter-rouge">ELSE</code> clause. If the <code class="language-plaintext highlighter-rouge">ELSE</code> clause is omitted and no condition is <code class="language-plaintext highlighter-rouge">true</code>, the result is <code class="language-plaintext highlighter-rouge">null</code>.</p>
+
+<p>Jika kita gambarkan secara diagram flowchart seperti berikut:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart LR
+    data --&gt; condition1{ Condition }
+    condition1 -- true --&gt; conditionOk[ return OK ]
+    condition1 -- false --&gt; End[ return null ]
+</div>
+
+<p>Berikut adalah contoh penggunaan dalam SQL:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04d-select-case-when.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="n">employee_id</span>    <span class="k">as</span> <span class="n">kode_karyawan</span><span class="p">,</span>
+       <span class="n">commission_pct</span> <span class="k">as</span> <span class="n">besar_komisi</span><span class="p">,</span>
+       <span class="k">case</span>
+           <span class="k">when</span> <span class="n">commission_pct</span> <span class="k">is</span> <span class="k">null</span>
+               <span class="k">then</span> <span class="s1">'Tidak memiliki komisi'</span>
+           <span class="k">end</span>
+<span class="k">from</span> <span class="n">employees</span><span class="p">;</span>
+ <span class="n">kode_karyawan</span> <span class="o">|</span> <span class="n">besar_komisi</span> <span class="o">|</span>         <span class="k">case</span>          
+<span class="c1">---------------+--------------+-----------------------</span>
+           <span class="mi">100</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">101</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">102</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">103</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">104</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">105</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">145</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">40</span> <span class="o">|</span> 
+           <span class="mi">146</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> 
+           <span class="mi">147</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> 
+           <span class="mi">148</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> 
+           <span class="mi">149</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">20</span> <span class="o">|</span> 
+           <span class="mi">150</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> 
+           <span class="mi">151</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">25</span> <span class="o">|</span> 
+           <span class="mi">152</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">25</span> <span class="o">|</span> 
+
+<span class="p">(</span><span class="mi">107</span> <span class="k">rows</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="using-case-when-else-expression">Using <code class="language-plaintext highlighter-rouge">CASE-WHEN-ELSE</code> expression</h2>
+
+<p>Selanjutnya kita akan membahas, <code class="language-plaintext highlighter-rouge">CASE-WHEN-ELSE</code> expression seperti berikut klo kita gambarkan secara diagram flowchart nya:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart LR
+    data --&gt; condition1{ Condition }
+    condition1 -- true --&gt; conditionOk[ return OK ]
+    condition1 -- false --&gt; condition2{ More Condition }
+    condition2 -- true --&gt; conditionOk[ return OK ]
+    condition2 -- else --&gt; End[ return Something ]
+</div>
+
+<p>Jadi disini kita memiliki lebih dari 2 kondisi, dimana ke dua kondisi tersebut memiliki nilai <code class="language-plaintext highlighter-rouge">return OK</code> sedangkan selain itu (<code class="language-plaintext highlighter-rouge">else</code>) <code class="language-plaintext highlighter-rouge">return something</code>. Berikut implementasi pada query sql:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04d-select-case-when-else.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="n">employee_id</span>    <span class="k">as</span> <span class="n">kode_karyawan</span><span class="p">,</span>
+<span class="n">hr</span><span class="o">-#</span>        <span class="n">commission_pct</span> <span class="k">as</span> <span class="n">besar_komisi</span><span class="p">,</span>
+<span class="n">hr</span><span class="o">-#</span>        <span class="k">case</span>
+<span class="n">hr</span><span class="o">-#</span>            <span class="k">when</span> <span class="n">commission_pct</span> <span class="k">is</span> <span class="k">null</span>
+<span class="n">hr</span><span class="o">-#</span>                <span class="k">then</span> <span class="s1">'Tidak memiliki komisi'</span>
+<span class="n">hr</span><span class="o">-#</span>            <span class="k">when</span> <span class="n">commission_pct</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">2</span>
+<span class="n">hr</span><span class="o">-#</span>                <span class="k">then</span> <span class="s1">'Memiki komisi lebih besar dari 20%'</span>
+<span class="n">hr</span><span class="o">-#</span>            <span class="k">else</span> <span class="s1">'Memiliki komisi lebih kecil dari 10%'</span>
+<span class="n">hr</span><span class="o">-#</span>            <span class="k">end</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">from</span> <span class="n">employees</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">limit</span> <span class="mi">50</span><span class="p">;</span>
+ <span class="n">kode_karyawan</span> <span class="o">|</span> <span class="n">besar_komisi</span> <span class="o">|</span>                <span class="k">case</span>                
+<span class="c1">---------------+--------------+------------------------------------</span>
+           <span class="mi">100</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">101</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">102</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">103</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">104</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">144</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">145</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">40</span> <span class="o">|</span> <span class="n">Memiki</span> <span class="n">komisi</span> <span class="n">lebih</span> <span class="n">besar</span> <span class="n">dari</span> <span class="mi">20</span><span class="o">%</span>
+           <span class="mi">146</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> <span class="n">Memiki</span> <span class="n">komisi</span> <span class="n">lebih</span> <span class="n">besar</span> <span class="n">dari</span> <span class="mi">20</span><span class="o">%</span>
+           <span class="mi">147</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> <span class="n">Memiki</span> <span class="n">komisi</span> <span class="n">lebih</span> <span class="n">besar</span> <span class="n">dari</span> <span class="mi">20</span><span class="o">%</span>
+           <span class="mi">148</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> <span class="n">Memiki</span> <span class="n">komisi</span> <span class="n">lebih</span> <span class="n">besar</span> <span class="n">dari</span> <span class="mi">20</span><span class="o">%</span>
+           <span class="mi">149</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">20</span> <span class="o">|</span> <span class="n">Memiki</span> <span class="n">komisi</span> <span class="n">lebih</span> <span class="n">besar</span> <span class="n">dari</span> <span class="mi">20</span><span class="o">%</span>
+<span class="p">(</span><span class="mi">50</span> <span class="k">rows</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="using-nested-case-when-expression">Using Nested <code class="language-plaintext highlighter-rouge">CASE-WHEN</code> expression</h2>
+
+<p>Selanjutnya kita akan membahas, Nested <code class="language-plaintext highlighter-rouge">CASE-WHEN</code> expression. Sama halnya seperti bahasa pemograman kita juga bisa menggunakan percabangan dalam percabangan atau istilah kerennya Nested Condition. Jika kita gambarkan flowchart-nya seperti berikut:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+flowchart LR
+    data --&gt; condition1{ Outer Condition }
+    condition1 -- true --&gt; condition2{ Inner Condition }
+    condition1 -- false --&gt; End[ return Null ]
+    condition2 -- true --&gt; conditionOk[ return OK ]
+    condition2 -- else --&gt; End[ return Something ]
+</div>
+
+<p>Berikut adalah contoh implementasi SQLnya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04d-select-nested-case-when-else.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="n">employee_id</span>    <span class="k">as</span> <span class="n">kode_karyawan</span><span class="p">,</span>
+<span class="n">hr</span><span class="o">-#</span>        <span class="n">commission_pct</span> <span class="k">as</span> <span class="n">besar_komisi</span><span class="p">,</span>
+<span class="n">hr</span><span class="o">-#</span>        <span class="k">case</span>
+<span class="n">hr</span><span class="o">-#</span>            <span class="k">when</span> <span class="n">commission_pct</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span>
+<span class="n">hr</span><span class="o">-#</span>                <span class="k">then</span>
+<span class="n">hr</span><span class="o">-#</span>                <span class="k">case</span>
+<span class="n">hr</span><span class="o">-#</span>                    <span class="k">when</span> <span class="n">commission_pct</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">1</span>
+<span class="n">hr</span><span class="o">-#</span>                        <span class="k">then</span> <span class="s1">'Komisi sebesar 10%'</span>
+<span class="n">hr</span><span class="o">-#</span>                    <span class="k">when</span> <span class="n">commission_pct</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">2</span>
+<span class="n">hr</span><span class="o">-#</span>                        <span class="k">then</span> <span class="s1">'Komisi sebesar 20%'</span>
+<span class="n">hr</span><span class="o">-#</span>                    <span class="k">when</span> <span class="n">commission_pct</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">.</span><span class="mi">3</span>
+<span class="n">hr</span><span class="o">-#</span>                        <span class="k">then</span> <span class="s1">'Komisi sebesar 30%'</span>
+<span class="n">hr</span><span class="o">-#</span>                    <span class="k">else</span> <span class="s1">'Komisi lebih besar dari 30%'</span>
+<span class="n">hr</span><span class="o">-#</span>                    <span class="k">end</span>
+<span class="n">hr</span><span class="o">-#</span>            <span class="k">else</span> <span class="s1">'Tidak memiliki komisi'</span>
+<span class="n">hr</span><span class="o">-#</span>            <span class="k">end</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">from</span> <span class="n">employees</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">limit</span> <span class="mi">60</span><span class="p">;</span>
+ <span class="n">kode_karyawan</span> <span class="o">|</span> <span class="n">besar_komisi</span> <span class="o">|</span>            <span class="k">case</span>             
+<span class="c1">---------------+--------------+-----------------------------</span>
+           <span class="mi">100</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">101</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">102</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">103</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">104</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">105</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">106</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">Tidak</span> <span class="n">memiliki</span> <span class="n">komisi</span>
+           <span class="mi">145</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">40</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">lebih</span> <span class="n">besar</span> <span class="n">dari</span> <span class="mi">30</span><span class="o">%</span>
+           <span class="mi">146</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">sebesar</span> <span class="mi">30</span><span class="o">%</span>
+           <span class="mi">147</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">sebesar</span> <span class="mi">30</span><span class="o">%</span>
+           <span class="mi">148</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">sebesar</span> <span class="mi">30</span><span class="o">%</span>
+           <span class="mi">153</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">20</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">sebesar</span> <span class="mi">20</span><span class="o">%</span>
+           <span class="mi">154</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">20</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">sebesar</span> <span class="mi">20</span><span class="o">%</span>
+           <span class="mi">155</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">15</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">sebesar</span> <span class="mi">20</span><span class="o">%</span>
+           <span class="mi">156</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">35</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">lebih</span> <span class="n">besar</span> <span class="n">dari</span> <span class="mi">30</span><span class="o">%</span>
+           <span class="mi">157</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">35</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">lebih</span> <span class="n">besar</span> <span class="n">dari</span> <span class="mi">30</span><span class="o">%</span>
+           <span class="mi">158</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">35</span> <span class="o">|</span> <span class="n">Komisi</span> <span class="n">lebih</span> <span class="n">besar</span> <span class="n">dari</span> <span class="mi">30</span><span class="o">%</span>
+<span class="p">(</span><span class="mi">60</span> <span class="k">rows</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="using-case-when-expression-in-where-clause">Using <code class="language-plaintext highlighter-rouge">CASE-WHEN</code> expression in <code class="language-plaintext highlighter-rouge">WHERE</code> clause</h2>
+
+<p>Selain pada select statement, <code class="language-plaintext highlighter-rouge">CASE-WHEN</code> Expression bisa juga di terapkan pada <code class="language-plaintext highlighter-rouge">where</code> clause dengan basic syntax seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="p">...</span>
+<span class="k">from</span> <span class="p">...</span>
+<span class="k">where</span> 
+    <span class="k">CASE</span> <span class="k">WHEN</span> <span class="n">condition</span> <span class="k">THEN</span> <span class="n">where_clause_exp</span>
+        <span class="p">[</span><span class="k">WHEN</span> <span class="p">...]</span>
+        <span class="p">[</span><span class="k">ELSE</span> <span class="n">where_clause_exp</span><span class="p">]</span>
+    <span class="k">END</span></code></pre></figure>
+
+<p>Jadi selain value kita juga bisa mengkondisikan suatu kondisi dari where clause contoh implementasi dari SQL seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04d-where-case-when-else.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="n">employee_id</span>    <span class="k">as</span> <span class="n">kode_karyawan</span><span class="p">,</span>
+<span class="n">hr</span><span class="o">-#</span>        <span class="n">commission_pct</span> <span class="k">as</span> <span class="n">besar_komisi</span><span class="p">,</span>
+<span class="n">hr</span><span class="o">-#</span>        <span class="n">salary</span>         <span class="k">as</span> <span class="n">gaji_sebulan</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">from</span> <span class="n">employees</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">where</span> <span class="k">case</span>
+<span class="n">hr</span><span class="o">-#</span>           <span class="k">when</span> <span class="n">commission_pct</span> <span class="k">is</span> <span class="k">null</span> <span class="k">and</span> <span class="n">salary</span> <span class="o">&lt;=</span> <span class="mi">2200</span>
+<span class="n">hr</span><span class="o">-#</span>               <span class="k">then</span> <span class="k">true</span>
+<span class="n">hr</span><span class="o">-#</span>           <span class="k">when</span> <span class="n">commission_pct</span> <span class="k">is</span> <span class="k">null</span>
+<span class="n">hr</span><span class="o">-#</span>               <span class="k">then</span> <span class="k">false</span>
+<span class="n">hr</span><span class="o">-#</span>           <span class="k">when</span> <span class="n">commission_pct</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span> <span class="k">and</span> <span class="n">salary</span> <span class="o">&lt;</span> <span class="mi">8000</span>
+<span class="n">hr</span><span class="o">-#</span>               <span class="k">then</span> <span class="n">salary</span> <span class="k">in</span> <span class="p">(</span><span class="mi">7500</span><span class="p">,</span> <span class="mi">7000</span><span class="p">,</span> <span class="mi">7200</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span>           <span class="k">when</span> <span class="n">commission_pct</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span> <span class="k">and</span> <span class="n">salary</span> <span class="o">&lt;</span> <span class="mi">12000</span>
+<span class="n">hr</span><span class="o">-#</span>               <span class="k">then</span> <span class="n">salary</span> <span class="o">=</span> <span class="mi">11000</span>
+<span class="n">hr</span><span class="o">-#</span>           <span class="k">end</span><span class="p">;</span>
+ <span class="n">kode_karyawan</span> <span class="o">|</span> <span class="n">besar_komisi</span> <span class="o">|</span> <span class="n">gaji_sebulan</span> 
+<span class="c1">---------------+--------------+--------------</span>
+           <span class="mi">128</span> <span class="o">|</span>              <span class="o">|</span>      <span class="mi">2200</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">132</span> <span class="o">|</span>              <span class="o">|</span>      <span class="mi">2100</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">136</span> <span class="o">|</span>              <span class="o">|</span>      <span class="mi">2200</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">148</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span>     <span class="mi">11000</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">154</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">20</span> <span class="o">|</span>      <span class="mi">7500</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">155</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">15</span> <span class="o">|</span>      <span class="mi">7000</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">160</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span>      <span class="mi">7500</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">161</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">25</span> <span class="o">|</span>      <span class="mi">7000</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">164</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">10</span> <span class="o">|</span>      <span class="mi">7200</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">174</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">30</span> <span class="o">|</span>     <span class="mi">11000</span><span class="p">.</span><span class="mi">00</span>
+           <span class="mi">178</span> <span class="o">|</span>         <span class="mi">0</span><span class="p">.</span><span class="mi">15</span> <span class="o">|</span>      <span class="mi">7000</span><span class="p">.</span><span class="mi">00</span>
+<span class="p">(</span><span class="mi">11</span> <span class="k">rows</span><span class="p">)</span>
+</code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/01-silabus-psql"  class="" title="Silabus - PostgreSQL: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/04c-subquery" class="" 
+        title="Queries inside a query (subquery)
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 25 to 38
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/04e-combining-queries" class="" 
+        title="Combining Queries (UNION, INTERSECT, EXCEPT)
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"  class="" title="Getting started with Transaction Control (TCL)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#postgresql" class="page__taxonomy-item p-category" rel="tag">PostgreSQL</a><span class="sep">, </span>
+    
+      <a href="/categories/#rdbms" class="page__taxonomy-item p-category" rel="tag">RDBMS</a><span class="sep">, </span>
+    
+      <a href="/categories/#select" class="page__taxonomy-item p-category" rel="tag">select</a><span class="sep">, </span>
+    
+      <a href="/categories/#sql" class="page__taxonomy-item p-category" rel="tag">sql</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-06-12T11:16:21+07:00">June 12, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Conditional+Expressions%20%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04d-conditional-expression" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04d-conditional-expression" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04d-conditional-expression" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

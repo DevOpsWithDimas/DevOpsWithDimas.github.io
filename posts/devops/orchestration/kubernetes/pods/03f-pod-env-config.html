@@ -1,0 +1,2078 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Configure env (Environment Variables) in a Pods - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas lebih detail tentang Environment Variables pada Pod Specification, diantaranya:     Basic Usage env-values   What is ConfigMap?   Using ConfigMap as Ref for envFrom   Using ConfigMap as Ref for valueFrom   What is Secret?   Using Secret as Ref for envFrom   Using Secret as Ref for valueFrom   Ok langsung aja kita bahas materi yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Configure env (Environment Variables) in a Pods">
+<meta property="og:url" content="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas lebih detail tentang Environment Variables pada Pod Specification, diantaranya:     Basic Usage env-values   What is ConfigMap?   Using ConfigMap as Ref for envFrom   Using ConfigMap as Ref for valueFrom   What is Secret?   Using Secret as Ref for envFrom   Using Secret as Ref for valueFrom   Ok langsung aja kita bahas materi yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-05-26T15:49:31+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#basic-usage-env-values">Basic Usage env-values</a></li><li><a href="#what-is-configmap">What is ConfigMap?</a></li><li><a href="#using-configmap-as-ref-envfrom">Using ConfigMap as Ref envFrom</a></li><li><a href="#using-configmap-as-ref-for-valuefrom">Using ConfigMap as Ref for valueFrom</a></li><li><a href="#what-is-secret">What is Secret?</a></li><li><a href="#using-secret-as-ref-for-envfrom">Using Secret as Ref for envFrom</a></li><li><a href="#using-secret-as-ref-for-valuefrom">Using Secret as Ref for valueFrom</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Configure env (Environment Variables) in a Pods">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas lebih detail tentang Environment Variables pada Pod Specification, diantaranya:  Basic Usage env-values  What is ConfigMap?  Using ConfigMap as Ref for envFrom  Using ConfigMap as Ref for valueFrom  What is Secret?  Using Secret as Ref for envFrom  Using Secret as Ref for valueFromOk langsung aja kita bahas materi yang pertama">
+    <meta itemprop="datePublished" content="2022-05-26T15:49:31+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config" class="u-url" itemprop="url">Configure env (Environment Variables) in a Pods
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-05-26T15:49:31+07:00">May 26, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        13 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Kubernetes">
+        <label class="acordion-item-label" for="content-Pengenalan Kubernetes">
+            Pengenalan Kubernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01-silabus">
+                        
+                        Silabus - DevOps Kubernetes...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes">
+                        
+                        What is Kubernetes (k8s) ?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01b-k8s-components">
+                        
+                        Kubernetes Components
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01c-k8s-api">
+                        
+                        The Kubernetes API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01d-k8s-objects">
+                        
+                        What is Kubernetes Objects?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01e-k8s-object-management">
+                        
+                        Managing Kubernetes Object
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids">
+                        
+                        Kubernetes Object Names and...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01g-k8s-namespaces">
+                        
+                        What is Kubernetes Namespaces?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments">
+                        
+                        Kubernetes cluster environt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started with minikube">
+        <label class="acordion-item-label" for="content-Getting started with minikube">
+            Getting started with minikube
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02-overview-learn-env">
+                        
+                        Overview learning environme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos">
+                        
+                        Install minikube on Mac (In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon">
+                        
+                        Install minikube on Mac (Ap...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows">
+                        
+                        Install minikube for Window...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+                        
+                        Install minikube for Linux ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+                        
+                        Deploying an apps/services ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02c-minikube-basic-control">
+                        
+                        Minikube basic control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images">
+                        
+                        Using your own image into M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+                        
+                        Minikube addons features
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+                        
+                        Access your apps/service in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02h-minikube-mount">
+                        
+                        Mounting filesystems to min...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pods and Containers">
+        <label class="acordion-item-label" for="content-Pods and Containers">
+            Pods and Containers
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers">
+                        
+                        Overview Pod and Container ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03a-workload-pods">
+                        
+                        Kubernetes Workloads with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+                        
+                        Working with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config">
+                        
+                        Basic Pods and Containers C...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+                        
+                        Pod & Container Lifecycle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers">
+                        
+                        Initialization of Containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Configure env (Environment ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit">
+                        
+                        Configure Request and Limit...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+                        
+                        Configure liveness, readine...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions">
+                        
+                        Pod Disruptions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases">
+                        
+                        Overview Study Cases: Pod a...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps">
+                        
+                        Study Cases: Monolith apps ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps">
+                        
+                        Study cases: Microservice a...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Workload resources">
+        <label class="acordion-item-label" for="content-Workload resources">
+            Workload resources
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources">
+                        
+                        Overview Kubernetes Workloa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload">
+                        
+                        What is Workload Resources?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment">
+                        
+                        Working with Deployment object
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking (service)">
+        <label class="acordion-item-label" for="content-Networking (service)">
+            Networking (service)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Store data using Volumes">
+        <label class="acordion-item-label" for="content-Store data using Volumes">
+            Store data using Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Client">
+        <label class="acordion-item-label" for="content-Kubernetes Client">
+            Kubernetes Client
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Security RBAC">
+        <label class="acordion-item-label" for="content-Security RBAC">
+            Security RBAC
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Package manager">
+        <label class="acordion-item-label" for="content-Kubernetes Package manager">
+            Kubernetes Package manager
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes cluster for Production grade">
+        <label class="acordion-item-label" for="content-Kubernetes cluster for Production grade">
+            Kubernetes cluster for Production grade
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Service mesh with istio">
+        <label class="acordion-item-label" for="content-Service mesh with istio">
+            Service mesh with istio
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes on Cloud provider">
+        <label class="acordion-item-label" for="content-Kubernetes on Cloud provider">
+            Kubernetes on Cloud provider
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas lebih detail tentang Environment Variables pada Pod Specification, diantaranya:</p>
+
+<ol>
+  <li>Basic Usage env-values</li>
+  <li>What is ConfigMap?</li>
+  <li>Using ConfigMap as Ref for <code class="language-plaintext highlighter-rouge">envFrom</code></li>
+  <li>Using ConfigMap as Ref for <code class="language-plaintext highlighter-rouge">valueFrom</code></li>
+  <li>What is Secret?</li>
+  <li>Using Secret as Ref for <code class="language-plaintext highlighter-rouge">envFrom</code></li>
+  <li>Using Secret as Ref for <code class="language-plaintext highlighter-rouge">valueFrom</code></li>
+</ol>
+
+<p>Ok langsung aja kita bahas materi yang pertama</p>
+
+<!--more-->
+
+<h2 id="basic-usage-env-values">Basic Usage env-values</h2>
+
+<p>Seperti yang temen-temen ketahui suatu Environtment Variable ini biasanya digunakan untuk meng-inject data kedalam Container bertujuan untuk merubah behavior atau prilaku dari command yang di eksekusi oleh container runtime.</p>
+
+<p>Pada meteri sebelumnya tentang Basic Pod and Container spesification pada section Environment Variable, kita mendefinikan env <code class="language-plaintext highlighter-rouge">POSTGRES_PASSWORD</code> ke Container image <code class="language-plaintext highlighter-rouge">postgres</code> bertujuan meng-override default password pada user <code class="language-plaintext highlighter-rouge">postgres</code> dalam database.</p>
+
+<p>Sometime, penggunaan <code class="language-plaintext highlighter-rouge">env</code> pada containerSpec tidak hanya itu saja. Suatu environment variables bisa di gunakan bersamaan (suatu value dari env me-refer ke object yang berbeda) contohnya ketika membuat aplikasi bisnis (CRUD) yang terdiri dari web-server dan database saling berinteraksi kita bisa menggunan env yang sama seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03f-pod-env-multiple.yaml"> </script>
+
+<p>Nah terlihat pada podSpec diatas, ada beberapa value dari env yang sebetulnya kita bisa generalisasi karena menggunakan value yang sama yaitu (<code class="language-plaintext highlighter-rouge">DB_NAME == POSTGRES_DB</code>, <code class="language-plaintext highlighter-rouge">POSTGRES_USER == DB_USERNAME</code> dan <code class="language-plaintext highlighter-rouge">POSTGRES_PASSWORD == DB_PASSWORD</code>). Disinilah kita bisa menggunakan salah satu object dari kubernetes untuk me-maintanance data tersebut yaitu <code class="language-plaintext highlighter-rouge">ConfigMap</code> dan <code class="language-plaintext highlighter-rouge">Secret</code></p>
+
+<h2 id="what-is-configmap">What is ConfigMap?</h2>
+
+<p>A ConfigMap is an API object used to store non-confidential data in key-value pairs. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.</p>
+
+<p>Many applications rely on configuration which is used during either application initialization or runtime. Most of the times there is a requirement to adjust values assigned to configuration parameters.</p>
+
+<p>ConfigMaps allow you to decouple configuration artifacts from image content to keep containerized applications portable.</p>
+
+<p>You can use either <code class="language-plaintext highlighter-rouge">kubectl create configmap</code> or a ConfigMap generator in <code class="language-plaintext highlighter-rouge">kustomization.yaml</code> to create a ConfigMap.</p>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">kubectl create configmap</code> command to create ConfigMaps from <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-configmaps-from-directories">directories</a>, <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-configmaps-from-files">files</a>, or <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/#create-configmaps-from-literal-values">literal values</a>:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kubectl create configmap &lt;map-name&gt; &lt;data-source&gt;</code></pre></figure>
+
+<p>where <code class="language-plaintext highlighter-rouge">&lt;map-name&gt;</code> is the name you want to assign to the ConfigMap and <code class="language-plaintext highlighter-rouge">&lt;data-source&gt;</code> is the directory, file, or literal value to draw the data from. The name of a ConfigMap object must be a valid <a href="https://kubernetes.io/docs/concepts/overview/working-with-objects/names#dns-subdomain-names">DNS subdomain name</a>.</p>
+
+<p>When you are creating a ConfigMap based on a file, the key in the <code class="language-plaintext highlighter-rouge">&lt;data-source&gt;</code> defaults to the basename of the file, and the value defaults to the file content.</p>
+
+<p>You can use <code class="language-plaintext highlighter-rouge">kubectl describe</code> or <code class="language-plaintext highlighter-rouge">kubectl get</code> to retrieve information about a ConfigMap.</p>
+
+<p>For Example, you can create ConfigMap using this command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kubectl create configmap db-config <span class="se">\</span>
+<span class="nt">--from-literal</span><span class="o">=</span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>crud_apps <span class="se">\</span>
+<span class="nt">--from-literal</span><span class="o">=</span><span class="nv">POSGRES_USER</span><span class="o">=</span>crud_apps <span class="se">\</span>
+<span class="nt">--from-literal</span><span class="o">=</span><span class="nv">POSGRES_DB</span><span class="o">=</span>crud_apps</code></pre></figure>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">configmap</span><span class="w"> </span><span class="nx">db-config</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">--from-literal</span><span class="o">=</span><span class="n">POSTGRES_PASSWORD</span><span class="o">=</span><span class="n">crud_app</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">--from-literal</span><span class="o">=</span><span class="n">POSTGRES_USER</span><span class="o">=</span><span class="n">crud_app</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">--from-literal</span><span class="o">=</span><span class="n">POSTGRES_DB</span><span class="o">=</span><span class="n">crud_app</span><span class="w">
+</span><span class="nx">configmap/db-config</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">configmap</span><span class="w">
+</span><span class="n">NAME</span><span class="w">               </span><span class="nx">DATA</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">db-config</span><span class="w">          </span><span class="nx">3</span><span class="w">      </span><span class="nx">27s</span><span class="w">
+</span><span class="n">kube-root-ca.crt</span><span class="w">   </span><span class="nx">1</span><span class="w">      </span><span class="nx">4d</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">configmap</span><span class="w"> </span><span class="nx">db-config</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">db-config</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Labels:</span><span class="w">       </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="kr">Data</span><span class="w">
+</span><span class="o">====</span><span class="w">
+</span><span class="n">POSTGRES_DB:</span><span class="w">
+</span><span class="o">----</span><span class="w">
+</span><span class="n">crud_app</span><span class="w">
+</span><span class="nx">POSTGRES_PASSWORD:</span><span class="w">
+</span><span class="o">----</span><span class="w">
+</span><span class="n">crud_app</span><span class="w">
+</span><span class="nx">POSTGRES_USER:</span><span class="w">
+</span><span class="o">----</span><span class="w">
+</span><span class="n">crud_app</span><span class="w">
+
+</span><span class="n">BinaryData</span><span class="w">
+</span><span class="o">====</span><span class="w">
+
+</span><span class="n">Events:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Setelah ini kita bisa terapkan pada suatu container untuk digunakan menggunakan <code class="language-plaintext highlighter-rouge">envFrom</code> ataupun <code class="language-plaintext highlighter-rouge">valueFrom</code></p>
+
+<h2 id="using-configmap-as-ref-envfrom">Using ConfigMap as Ref <code class="language-plaintext highlighter-rouge">envFrom</code></h2>
+
+<p>When you have a ConfigMap in your cluster, you can include all Environment Variables into your container using <code class="language-plaintext highlighter-rouge">envFrom</code> like this:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pod-env-envfrom</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">postgres</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">database</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+      <span class="na">imagePullPolicy</span><span class="pi">:</span> <span class="s">IfNotPresent</span>
+      <span class="na">envFrom</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">configMapRef</span><span class="pi">:</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s">db-config</span>
+            <span class="na">optional</span><span class="pi">:</span> <span class="kc">false</span>
+      <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">5432</span>
+  <span class="na">restartPolicy</span><span class="pi">:</span> <span class="s">Always</span></code></pre></figure>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">configmap</span><span class="w">
+</span><span class="n">NAME</span><span class="w">               </span><span class="nx">DATA</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">db-config</span><span class="w">          </span><span class="nx">3</span><span class="w">      </span><span class="nx">19m</span><span class="w">
+</span><span class="n">kube-root-ca.crt</span><span class="w">   </span><span class="nx">1</span><span class="w">      </span><span class="nx">4d</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\02-workloads\01-pod\pod-envfrom.yaml</span><span class="w">
+</span><span class="n">pod/pod-env-envfrom</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">              </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">pod-env-envfrom</span><span class="w">   </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">13s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">pod-env-envfrom</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">pod-env-envfrom</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube-m03/192.168.49.4</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">11:12:43</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">postgres</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">10.244.2.3</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">10.244.2.3</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">database:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">postgres</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">5432/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">11:12:44</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment</span><span class="w"> </span><span class="nx">Variables</span><span class="w"> </span><span class="nx">from:</span><span class="w">
+      </span><span class="n">db-config</span><span class="w">   </span><span class="nx">ConfigMap</span><span class="w">  </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-qzg9d</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">True</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">True</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">   </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">  </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">33s</span><span class="w">   </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/pod-env-envfrom</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube-m03</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">33s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"postgres"</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">33s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">33s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">pod-env-envfrom</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">printenv</span><span class="w">
+</span><span class="n">PATH</span><span class="o">=</span><span class="n">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/14/bin</span><span class="w">
+</span><span class="nx">HOSTNAME</span><span class="o">=</span><span class="n">pod-env-envfrom</span><span class="w">
+</span><span class="nx">POSTGRES_USER</span><span class="o">=</span><span class="n">crud_app</span><span class="w">
+</span><span class="nx">POSTGRES_DB</span><span class="o">=</span><span class="n">crud_app</span><span class="w">
+</span><span class="nx">POSTGRES_PASSWORD</span><span class="o">=</span><span class="n">crud_app</span><span class="w">
+</span><span class="nx">GOSU_VERSION</span><span class="o">=</span><span class="mf">1.14</span><span class="w">
+</span><span class="n">LANG</span><span class="o">=</span><span class="n">en_US.utf8</span><span class="w">
+</span><span class="nx">PG_MAJOR</span><span class="o">=</span><span class="mi">14</span><span class="w">
+</span><span class="n">PG_VERSION</span><span class="o">=</span><span class="mf">14.3</span><span class="nt">-1</span><span class="o">.</span><span class="nf">pgdg110</span><span class="o">+</span><span class="mi">1</span><span class="w">
+</span><span class="n">PGDATA</span><span class="o">=</span><span class="n">/var/lib/postgresql/data</span><span class="w">
+</span><span class="nx">HOME</span><span class="o">=</span><span class="n">/root</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Or you can define configmap in file too, like this:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03f-pod-env-configmap.yaml"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\02-workloads\01-pod\pod-env-configmap.yaml</span><span class="w">
+</span><span class="n">configmap/config-db2</span><span class="w"> </span><span class="nx">created</span><span class="w">
+</span><span class="n">pod/pod-envfrom-configmap</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                    </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">pod-env-envfrom</span><span class="w">         </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">8m40s</span><span class="w">
+</span><span class="n">pod-envfrom-configmap</span><span class="w">   </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">13s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">pod-envfrom-configmap</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">pod-envfrom-configmap</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube-m03/192.168.49.4</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">11:21:10</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">postgres</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">10.244.2.4</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">10.244.2.4</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">database:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">postgres</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">5432/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">11:21:11</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment</span><span class="w"> </span><span class="nx">Variables</span><span class="w"> </span><span class="nx">from:</span><span class="w">
+      </span><span class="n">db-config2</span><span class="w">   </span><span class="nx">ConfigMap</span><span class="w">  </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">True</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">True</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">QoS</span><span class="w"> </span><span class="nx">Class:</span><span class="w">                   </span><span class="nx">BestEffort</span><span class="w">
+</span><span class="n">Node-Selectors:</span><span class="w">              </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Tolerations:</span><span class="w">                 </span><span class="nx">node.kubernetes.io/not-ready:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+                             </span><span class="n">node.kubernetes.io/unreachable:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">   </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">  </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">39s</span><span class="w">   </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/pod-envfrom-configmap</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube-m03</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">38s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"postgres"</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">38s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">38s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="using-configmap-as-ref-for-valuefrom">Using ConfigMap as Ref for <code class="language-plaintext highlighter-rouge">valueFrom</code></h2>
+
+<p>Selain menggunakan <code class="language-plaintext highlighter-rouge">envFrom</code> yang meng-include semua environment variable dalam object ConfigMap, kita juga bisa gunakan sebagian data dari object ConfigMap tersebut menggunakan <code class="language-plaintext highlighter-rouge">valueFrom</code> dalam <code class="language-plaintext highlighter-rouge">env</code>.</p>
+
+<p>Hal ini berguna, untuk me-reused environment variable tersebut ke beberapa container atau pod atau workload resource lainnya. Contohnya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03f-pod-env-valuefrom-configmap.yaml"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="err">✗</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\02-workloads\01-pod\pod-env-valuefrom-configmap.yaml</span><span class="w">
+</span><span class="n">configmap/config-db3</span><span class="w"> </span><span class="nx">created</span><span class="w">
+</span><span class="n">pod/pod-envfrom-configmap</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                    </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">pod-envfrom-configmap</span><span class="w">   </span><span class="nx">2/2</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">11s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">pod-envfrom-configmap</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">pod-envfrom-configmap</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube-m03/192.168.49.4</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">12:16:49</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">postgres</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">10.244.2.5</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">10.244.2.5</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">database:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">postgres</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">5432/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">12:16:50</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">
+      </span><span class="nx">POSTGRES_PASSWORD:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'DB_PASSWORD'</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="s1">'config-db3'</span><span class="err">&gt;</span><span class="w">  </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">POSTGRES_USER:</span><span class="w">      </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'DB_USER'</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="s1">'config-db3'</span><span class="err">&gt;</span><span class="w">      </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">POSTGRES_DB:</span><span class="w">        </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'DB_NAME'</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="s1">'config-db3'</span><span class="err">&gt;</span><span class="w">      </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-2p4b8</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+  </span><span class="n">webapps:</span><span class="w">
+    </span><span class="nx">Image:</span><span class="w">          </span><span class="nx">nginx</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">80/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">12:16:53</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">
+      </span><span class="nx">DATABASE_PASSWORD:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'DB_PASSWORD'</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="s1">'config-db3'</span><span class="err">&gt;</span><span class="w">  </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">DATABASE_USER:</span><span class="w">      </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'DB_USER'</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="s1">'config-db3'</span><span class="err">&gt;</span><span class="w">      </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">DATABASE_NAME:</span><span class="w">      </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'DB_NAME'</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="s1">'config-db3'</span><span class="err">&gt;</span><span class="w">      </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">DATABASE_HOST:</span><span class="w">      </span><span class="nx">localhost</span><span class="w">
+      </span><span class="n">DATABASE_PORT:</span><span class="w">      </span><span class="nx">5432</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-2p4b8</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">True</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">True</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">QoS</span><span class="w"> </span><span class="nx">Class:</span><span class="w">                   </span><span class="nx">BestEffort</span><span class="w">
+</span><span class="n">Node-Selectors:</span><span class="w">              </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Tolerations:</span><span class="w">                 </span><span class="nx">node.kubernetes.io/not-ready:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+                             </span><span class="n">node.kubernetes.io/unreachable:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">   </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">  </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">28s</span><span class="w">   </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/pod-envfrom-configmap</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube-m03</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">28s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"postgres"</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">28s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">28s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulling</span><span class="w">    </span><span class="nx">28s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Pulling</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx"</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">25s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">pulled</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx"</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">3.4689305s</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">25s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapps</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">25s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapps</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="err">✗</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">pod-envfrom-configmap</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">database</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">printenv</span><span class="w">
+</span><span class="n">PATH</span><span class="o">=</span><span class="n">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/14/bin</span><span class="w">
+</span><span class="nx">HOSTNAME</span><span class="o">=</span><span class="n">pod-envfrom-configmap</span><span class="w">
+</span><span class="nx">POSTGRES_DB</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">POSTGRES_PASSWORD</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">POSTGRES_USER</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">GOSU_VERSION</span><span class="o">=</span><span class="mf">1.14</span><span class="w">
+</span><span class="n">LANG</span><span class="o">=</span><span class="n">en_US.utf8</span><span class="w">
+</span><span class="nx">PG_MAJOR</span><span class="o">=</span><span class="mi">14</span><span class="w">
+</span><span class="n">PG_VERSION</span><span class="o">=</span><span class="mf">14.3</span><span class="nt">-1</span><span class="o">.</span><span class="nf">pgdg110</span><span class="o">+</span><span class="mi">1</span><span class="w">
+</span><span class="n">PGDATA</span><span class="o">=</span><span class="n">/var/lib/postgresql/data</span><span class="w">
+</span><span class="nx">HOME</span><span class="o">=</span><span class="n">/root</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="err">✗</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">pod-envfrom-configmap</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">webapps</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">printenv</span><span class="w">
+</span><span class="n">PATH</span><span class="o">=</span><span class="n">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><span class="w">
+</span><span class="nx">HOSTNAME</span><span class="o">=</span><span class="n">pod-envfrom-configmap</span><span class="w">
+</span><span class="nx">DATABASE_USER</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">DATABASE_NAME</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">DATABASE_HOST</span><span class="o">=</span><span class="n">localhost</span><span class="w">
+</span><span class="nx">DATABASE_PORT</span><span class="o">=</span><span class="mi">5432</span><span class="w">
+</span><span class="n">DATABASE_PASSWORD</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">NGINX_VERSION</span><span class="o">=</span><span class="mf">1.21</span><span class="o">.</span><span class="nf">6</span><span class="w">
+</span><span class="n">NJS_VERSION</span><span class="o">=</span><span class="mf">0.7</span><span class="o">.</span><span class="nf">3</span><span class="w">
+</span><span class="n">PKG_RELEASE</span><span class="o">=</span><span class="mi">1</span><span class="n">~bullseye</span><span class="w">
+</span><span class="nx">HOME</span><span class="o">=</span><span class="n">/root</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="what-is-secret">What is Secret?</h2>
+
+<p>A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key. Such information might otherwise be put in a Pod specification or in a container image. Using a Secret means that you don’t need to include confidential data in your application code.</p>
+
+<p>Because Secrets can be created independently of the Pods that use them, there is less risk of the Secret (and its data) being exposed during the workflow of creating, viewing, and editing Pods. Kubernetes, and applications that run in your cluster, can also take additional precautions with Secrets, such as avoiding writing secret data to nonvolatile storage.</p>
+
+<p>Secrets are similar to ConfigMaps but are specifically intended to hold confidential data.</p>
+
+<p>There are three main ways for a Pod to use a Secret:</p>
+
+<ol>
+  <li>As files in a volume mounted on one or more of its containers.</li>
+  <li>As container environment variable.</li>
+  <li>By the kubelet when pulling images for the Pod.</li>
+</ol>
+
+<p>There are several options to create a Secret:</p>
+
+<ol>
+  <li>create Secret using <code class="language-plaintext highlighter-rouge">kubectl create secret</code> command</li>
+  <li>create Secret from config file</li>
+  <li>create Secret using kustomize</li>
+</ol>
+
+<p>The values for all keys in the data field have to be base64-encoded strings. If the conversion to base64 string is not desirable, you can choose to specify the stringData field instead, which accepts arbitrary strings as values.</p>
+
+<p>If you want to skip the Base64 encoding step, you can create the same Secret using the <code class="language-plaintext highlighter-rouge">kubectl create secret</code> command. For example:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kubectl create secret generic db-credential <span class="se">\</span>
+<span class="nt">--from-literal</span><span class="o">=</span><span class="s1">'POSTGRES_PASSWORD=crud_apps'</span> <span class="se">\</span>
+<span class="nt">--from-literal</span><span class="o">=</span><span class="s1">'POSTGRES_USER=crud_apps'</span></code></pre></figure>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nx">secret</span><span class="w"> </span><span class="nx">generic</span><span class="w"> </span><span class="nx">db-credential</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">--from-literal</span><span class="o">=</span><span class="s1">'POSTGRES_PASSWORD=crud_apps'</span><span class="w"> </span><span class="se">`</span><span class="w">
+</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">--from-literal</span><span class="o">=</span><span class="s1">'POSTGRES_USER=crud_apps'</span><span class="w">
+</span><span class="n">secret/db-credential</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">secret</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                  </span><span class="nx">TYPE</span><span class="w">                                  </span><span class="nx">DATA</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">db-credential</span><span class="w">         </span><span class="nx">Opaque</span><span class="w">                                </span><span class="nx">2</span><span class="w">      </span><span class="nx">10s</span><span class="w">
+</span><span class="n">default-token-5z46t</span><span class="w">   </span><span class="nx">kubernetes.io/service-account-token</span><span class="w">   </span><span class="nx">3</span><span class="w">      </span><span class="nx">4d3h</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">secret</span><span class="w"> </span><span class="nx">db-credential</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">db-credential</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Labels:</span><span class="w">       </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="kr">Type</span><span class="p">:</span><span class="w">  </span><span class="n">Opaque</span><span class="w">
+
+</span><span class="kr">Data</span><span class="w">
+</span><span class="o">====</span><span class="w">
+</span><span class="n">POSTGRES_PASSWORD:</span><span class="w">  </span><span class="nx">9</span><span class="w"> </span><span class="nx">bytes</span><span class="w">
+</span><span class="n">POSTGRES_USER:</span><span class="w">      </span><span class="nx">9</span><span class="w"> </span><span class="nx">bytes</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="using-secret-as-ref-for-envfrom">Using Secret as Ref for <code class="language-plaintext highlighter-rouge">envFrom</code></h2>
+
+<p>When you have a Secret in your cluster, you can include all Secret data into your container using <code class="language-plaintext highlighter-rouge">envFrom</code> like this:</p>
+
+<figure class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
+<span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
+<span class="na">metadata</span><span class="pi">:</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">pod-env-envfrom-secret</span>
+  <span class="na">labels</span><span class="pi">:</span>
+    <span class="na">app</span><span class="pi">:</span> <span class="s">postgres</span>
+<span class="na">spec</span><span class="pi">:</span>
+  <span class="na">containers</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">database</span>
+      <span class="na">image</span><span class="pi">:</span> <span class="s">postgres</span>
+      <span class="na">imagePullPolicy</span><span class="pi">:</span> <span class="s">IfNotPresent</span>
+      <span class="na">env</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">POSTGRES_DB</span>
+          <span class="na">value</span><span class="pi">:</span> <span class="s">crud_apps</span>
+      <span class="na">envFrom</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">secretRef</span><span class="pi">:</span>
+            <span class="na">name</span><span class="pi">:</span> <span class="s">db-credential</span>
+            <span class="na">optional</span><span class="pi">:</span> <span class="kc">false</span>
+      <span class="na">ports</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">5432</span>
+  <span class="na">restartPolicy</span><span class="pi">:</span> <span class="s">Always</span></code></pre></figure>
+
+<p>Jika dijalankan seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\02-workloads\01-pod\pod-env-envfrom-secret.yaml</span><span class="w">
+</span><span class="n">pod/pod-env-envfrom-secret</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                     </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">pod-env-envfrom-secret</span><span class="w">   </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">11s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">pod-env-envfrom-secret</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">pod-env-envfrom-secret</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube-m03/192.168.49.4</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">15:16:51</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">postgres</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">10.244.2.3</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">10.244.2.3</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">database:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">postgres</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">5432/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">15:16:52</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment</span><span class="w"> </span><span class="nx">Variables</span><span class="w"> </span><span class="nx">from:</span><span class="w">
+      </span><span class="n">db-credential</span><span class="w">  </span><span class="nx">Secret</span><span class="w">  </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">
+      </span><span class="nx">POSTGRES_DB:</span><span class="w">  </span><span class="nx">crud_apps</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">True</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">True</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">QoS</span><span class="w"> </span><span class="nx">Class:</span><span class="w">                   </span><span class="nx">BestEffort</span><span class="w">
+</span><span class="n">Node-Selectors:</span><span class="w">              </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Tolerations:</span><span class="w">                 </span><span class="nx">node.kubernetes.io/not-ready:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+                             </span><span class="n">node.kubernetes.io/unreachable:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">   </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">  </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">33s</span><span class="w">   </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/pod-env-envfrom-secret</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube-m03</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">33s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"postgres"</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">33s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">33s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">pod-env-envfrom-secret</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">printenv</span><span class="w">
+</span><span class="n">PATH</span><span class="o">=</span><span class="n">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/lib/postgresql/14/bin</span><span class="w">
+</span><span class="nx">HOSTNAME</span><span class="o">=</span><span class="n">pod-env-envfrom-secret</span><span class="w">
+</span><span class="nx">POSTGRES_USER</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">POSTGRES_DB</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">POSTGRES_PASSWORD</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">GOSU_VERSION</span><span class="o">=</span><span class="mf">1.14</span><span class="w">
+</span><span class="n">LANG</span><span class="o">=</span><span class="n">en_US.utf8</span><span class="w">
+</span><span class="nx">PG_MAJOR</span><span class="o">=</span><span class="mi">14</span><span class="w">
+</span><span class="n">PG_VERSION</span><span class="o">=</span><span class="mf">14.3</span><span class="nt">-1</span><span class="o">.</span><span class="nf">pgdg110</span><span class="o">+</span><span class="mi">1</span><span class="w">
+</span><span class="n">PGDATA</span><span class="o">=</span><span class="n">/var/lib/postgresql/data</span><span class="w">
+</span><span class="nx">HOME</span><span class="o">=</span><span class="n">/root</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Or you can define Secret in file too, like this:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03f-pod-env-envfrom-secret.yaml"> </script>
+
+<p>Jika dijalankan seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\02-workloads\01-pod\pod-env-envfrom-secret.yaml</span><span class="w">
+</span><span class="n">secret/db-cred</span><span class="w"> </span><span class="nx">created</span><span class="w">
+</span><span class="n">pod/pod-env-envfrom-secret</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">secret</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                  </span><span class="nx">TYPE</span><span class="w">                                  </span><span class="nx">DATA</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">db-cred</span><span class="w">               </span><span class="nx">Opaque</span><span class="w">                                </span><span class="nx">2</span><span class="w">      </span><span class="nx">11s</span><span class="w">
+</span><span class="n">default-token-plxx7</span><span class="w">   </span><span class="nx">kubernetes.io/service-account-token</span><span class="w">   </span><span class="nx">3</span><span class="w">      </span><span class="nx">74s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">secret</span><span class="w"> </span><span class="nx">db-cred</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">db-cred</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Labels:</span><span class="w">       </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="kr">Type</span><span class="p">:</span><span class="w">  </span><span class="n">Opaque</span><span class="w">
+
+</span><span class="kr">Data</span><span class="w">
+</span><span class="o">====</span><span class="w">
+</span><span class="n">POSTGRES_PASSWORD:</span><span class="w">  </span><span class="nx">18</span><span class="w"> </span><span class="nx">bytes</span><span class="w">
+</span><span class="n">POSTGRES_USER:</span><span class="w">      </span><span class="nx">9</span><span class="w"> </span><span class="nx">bytes</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                     </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">pod-env-envfrom-secret</span><span class="w">   </span><span class="nx">1/1</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">40s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">pod-env-envfrom-secret</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">pod-env-envfrom-secret</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube-m03/192.168.49.4</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">15:23:18</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">postgres</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">10.244.2.4</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">10.244.2.4</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">database:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">postgres</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">5432/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">15:23:18</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment</span><span class="w"> </span><span class="nx">Variables</span><span class="w"> </span><span class="nx">from:</span><span class="w">
+      </span><span class="n">db-cred</span><span class="w">  </span><span class="nx">Secret</span><span class="w">  </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">
+      </span><span class="nx">POSTGRES_DB:</span><span class="w">  </span><span class="nx">crud_apps</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-gkxpf</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">True</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">True</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">QoS</span><span class="w"> </span><span class="nx">Class:</span><span class="w">                   </span><span class="nx">BestEffort</span><span class="w">
+</span><span class="n">Node-Selectors:</span><span class="w">              </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Tolerations:</span><span class="w">                 </span><span class="nx">node.kubernetes.io/not-ready:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+                             </span><span class="n">node.kubernetes.io/unreachable:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">   </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">  </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">59s</span><span class="w">   </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/pod-env-envfrom-secret</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube-m03</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">59s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"postgres"</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">59s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">59s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="using-secret-as-ref-for-valuefrom">Using Secret as Ref for <code class="language-plaintext highlighter-rouge">valueFrom</code></h2>
+
+<p>Selain menggunakan <code class="language-plaintext highlighter-rouge">envFrom</code> yang meng-include semua data dalam object Secret, kita juga bisa gunakan sebagian data dari object Secret tersebut menggunakan <code class="language-plaintext highlighter-rouge">valueFrom</code> dalam <code class="language-plaintext highlighter-rouge">env</code>.</p>
+
+<p>Hal ini berguna, untuk me-reused environment variable tersebut ke beberapa container atau pod atau workload resource lainnya. Contohnya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03f-pod-env-valuefrom-secret.yaml"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\02-workloads\01-pod\pod-env-valuefrom-secret.yaml</span><span class="w">
+</span><span class="n">secret/db-cred</span><span class="w"> </span><span class="nx">created</span><span class="w">
+</span><span class="n">configmap/db-config</span><span class="w"> </span><span class="nx">created</span><span class="w">
+</span><span class="n">pod/pod-env-valuefrom-secret</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">secret</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                  </span><span class="nx">TYPE</span><span class="w">                                  </span><span class="nx">DATA</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">db-cred</span><span class="w">               </span><span class="nx">Opaque</span><span class="w">                                </span><span class="nx">2</span><span class="w">      </span><span class="nx">10s</span><span class="w">
+</span><span class="n">default-token-zx6bv</span><span class="w">   </span><span class="nx">kubernetes.io/service-account-token</span><span class="w">   </span><span class="nx">3</span><span class="w">      </span><span class="nx">32s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">secret</span><span class="w"> </span><span class="nx">db-cred</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">db-cred</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Labels:</span><span class="w">       </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="kr">Type</span><span class="p">:</span><span class="w">  </span><span class="n">Opaque</span><span class="w">
+
+</span><span class="kr">Data</span><span class="w">
+</span><span class="o">====</span><span class="w">
+</span><span class="n">PASSWORD:</span><span class="w">  </span><span class="nx">18</span><span class="w"> </span><span class="nx">bytes</span><span class="w">
+</span><span class="n">USER:</span><span class="w">      </span><span class="nx">9</span><span class="w"> </span><span class="nx">bytes</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">configmap</span><span class="w">
+</span><span class="n">NAME</span><span class="w">               </span><span class="nx">DATA</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">db-config</span><span class="w">          </span><span class="nx">1</span><span class="w">      </span><span class="nx">28s</span><span class="w">
+</span><span class="n">kube-root-ca.crt</span><span class="w">   </span><span class="nx">1</span><span class="w">      </span><span class="nx">33s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">configmap</span><span class="w"> </span><span class="nx">db-config</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">db-config</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Labels:</span><span class="w">       </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="kr">Data</span><span class="w">
+</span><span class="o">====</span><span class="w">
+</span><span class="n">DB_NAME:</span><span class="w">
+</span><span class="o">----</span><span class="w">
+</span><span class="n">crud_apps</span><span class="w">
+
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pod</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                       </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">    </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">pod-env-valuefrom-secret</span><span class="w">   </span><span class="nx">2/2</span><span class="w">     </span><span class="nx">Running</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">64s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">pod-env-valuefrom-secret</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">pod-env-valuefrom-secret</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube-m03/192.168.49.4</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">15:35:18</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">postgres</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Running</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">10.244.2.6</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">  </span><span class="nx">10.244.2.6</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">database:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">postgres</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">5432/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">15:35:18</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">
+      </span><span class="nx">POSTGRES_PASSWORD:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'PASSWORD'</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">secret</span><span class="w"> </span><span class="s1">'db-cred'</span><span class="err">&gt;</span><span class="w">       </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">POSTGRES_USER:</span><span class="w">      </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'USER'</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">secret</span><span class="w"> </span><span class="s1">'db-cred'</span><span class="err">&gt;</span><span class="w">           </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">POSTGRES_DB:</span><span class="w">        </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'DB_NAME'</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="s1">'db-config'</span><span class="err">&gt;</span><span class="w">  </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-hw7gz</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+  </span><span class="n">webapps:</span><span class="w">
+    </span><span class="nx">Image:</span><span class="w">          </span><span class="nx">nginx</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="nx">80/TCP</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="nx">0/TCP</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Running</span><span class="w">
+      </span><span class="n">Started:</span><span class="w">      </span><span class="nx">Thu</span><span class="p">,</span><span class="w"> </span><span class="nx">26</span><span class="w"> </span><span class="nx">May</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">15:35:22</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">True</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">
+      </span><span class="nx">DATABASE_PASSWORD:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'PASSWORD'</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">secret</span><span class="w"> </span><span class="s1">'db-cred'</span><span class="err">&gt;</span><span class="w">       </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">DATABASE_USER:</span><span class="w">      </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'USER'</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">secret</span><span class="w"> </span><span class="s1">'db-cred'</span><span class="err">&gt;</span><span class="w">           </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">DATABASE_NAME:</span><span class="w">      </span><span class="err">&lt;</span><span class="nx">set</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">key</span><span class="w"> </span><span class="s1">'DB_NAME'</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">map</span><span class="w"> </span><span class="s1">'db-config'</span><span class="err">&gt;</span><span class="w">  </span><span class="nx">Optional:</span><span class="w"> </span><span class="nx">false</span><span class="w">
+      </span><span class="n">DATABASE_HOST:</span><span class="w">      </span><span class="nx">localhost</span><span class="w">
+      </span><span class="n">DATABASE_PORT:</span><span class="w">      </span><span class="nx">5432</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-hw7gz</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">True</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">True</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">QoS</span><span class="w"> </span><span class="nx">Class:</span><span class="w">                   </span><span class="nx">BestEffort</span><span class="w">
+</span><span class="n">Node-Selectors:</span><span class="w">              </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Tolerations:</span><span class="w">                 </span><span class="nx">node.kubernetes.io/not-ready:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+                             </span><span class="n">node.kubernetes.io/unreachable:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">   </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">  </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">76s</span><span class="w">   </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/pod-env-valuefrom-secret</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube-m03</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">76s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Container</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"postgres"</span><span class="w"> </span><span class="nx">already</span><span class="w"> </span><span class="nx">present</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">76s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">76s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">database</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulling</span><span class="w">    </span><span class="nx">76s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Pulling</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx"</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Pulled</span><span class="w">     </span><span class="nx">72s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">pulled</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx"</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">3.7097657s</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Created</span><span class="w">    </span><span class="nx">72s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Created</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapps</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Started</span><span class="w">    </span><span class="nx">72s</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Started</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">webapps</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">pod-env-valuefrom-secret</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">database</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">printenv</span><span class="w">
+</span><span class="n">HOSTNAME</span><span class="o">=</span><span class="n">pod-env-valuefrom-secret</span><span class="w">
+</span><span class="nx">POSTGRES_PASSWORD</span><span class="o">=</span><span class="n">crud_apps_password</span><span class="w">
+</span><span class="nx">POSTGRES_USER</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">POSTGRES_DB</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">GOSU_VERSION</span><span class="o">=</span><span class="mf">1.14</span><span class="w">
+</span><span class="n">LANG</span><span class="o">=</span><span class="n">en_US.utf8</span><span class="w">
+</span><span class="nx">PG_MAJOR</span><span class="o">=</span><span class="mi">14</span><span class="w">
+</span><span class="n">PG_VERSION</span><span class="o">=</span><span class="mf">14.3</span><span class="nt">-1</span><span class="o">.</span><span class="nf">pgdg110</span><span class="o">+</span><span class="mi">1</span><span class="w">
+</span><span class="n">PGDATA</span><span class="o">=</span><span class="n">/var/lib/postgresql/data</span><span class="w">
+</span><span class="nx">HOME</span><span class="o">=</span><span class="n">/root</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">main</span><span class="p">)</span><span class="w"> </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">exec</span><span class="w"> </span><span class="nx">pod-env-valuefrom-secret</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">webapps</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nx">printenv</span><span class="w">
+</span><span class="n">PATH</span><span class="o">=</span><span class="n">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span><span class="w">
+</span><span class="nx">HOSTNAME</span><span class="o">=</span><span class="n">pod-env-valuefrom-secret</span><span class="w">
+</span><span class="nx">DATABASE_PASSWORD</span><span class="o">=</span><span class="n">crud_apps_password</span><span class="w">
+</span><span class="nx">DATABASE_USER</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">DATABASE_NAME</span><span class="o">=</span><span class="n">crud_apps</span><span class="w">
+</span><span class="nx">DATABASE_HOST</span><span class="o">=</span><span class="n">localhost</span><span class="w">
+</span><span class="nx">DATABASE_PORT</span><span class="o">=</span><span class="mi">5432</span><span class="w">
+</span><span class="n">NGINX_VERSION</span><span class="o">=</span><span class="mf">1.21</span><span class="o">.</span><span class="nf">6</span><span class="w">
+</span><span class="n">NJS_VERSION</span><span class="o">=</span><span class="mf">0.7</span><span class="o">.</span><span class="nf">3</span><span class="w">
+</span><span class="n">PKG_RELEASE</span><span class="o">=</span><span class="mi">1</span><span class="n">~bullseye</span><span class="w">
+</span><span class="nx">HOME</span><span class="o">=</span><span class="n">/root</span><span class="w">
+</span></code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/01-silabus"  class="" title="Silabus - DevOps Kubernetes: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers" class="" 
+        title="Initialization of Containers
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 27 to 36
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit" class="" 
+        title="Configure Request and Limit of Resources (CPUs &amp; Memory)
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"  class="" title="Working with Deployment object">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#kubernetes" class="page__taxonomy-item p-category" rel="tag">Kubernetes</a><span class="sep">, </span>
+    
+      <a href="/categories/#orchestration" class="page__taxonomy-item p-category" rel="tag">Orchestration</a><span class="sep">, </span>
+    
+      <a href="/categories/#pods" class="page__taxonomy-item p-category" rel="tag">Pods</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-05-26T15:49:31+07:00">May 26, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Configure+env+%28Environment+Variables%29+in+a+Pods%20%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03f-pod-env-config" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03f-pod-env-config" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03f-pod-env-config" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

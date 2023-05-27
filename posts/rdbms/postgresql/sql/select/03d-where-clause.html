@@ -1,0 +1,1690 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Filtering data with WHERE clause - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang mem-Filter data dengan menggunakan WHERE clause di PostgreSQL. By default jika kita menggunakan perintah select itu akan menampilkan semua data pada suatu atau berberapa table. Dengan menggunakan clause WHERE kita bisa memfilter atau memilih data yang akan kita tampilkan.  Perintah dasar untuk WHERE clause seperti berikut:  select * | column_list ... from a_table where search_condition  Dimana search_condition adalah any value expression (functions, operators and predicates ) yang mengembalikan nilai boolean. Sebagai gambaran berikut ilustrasinya:    Ilustrasi tersebut menggambarkan, suatu predicate atau search_condition yaitu menggunakan operator equal pada column status dengan nilai active maka database akan mencari nilainya active saja pada kolom status. Untuk search_condition tersebut biasanya di sebut dengan predicate. Ada banyak sekali predicate yang kita bisa gunakan tapi disini kita bahasnya paling dasar dulu ya yaitu:     Relational predicate   Like predicates   Between predicates   Null predicate   Logical predicate   Regular Expression (Regex) predicate   Row and Array Comparisons   Ok kita bahas satu-per-satu ya, mulai dari relational predicate">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Filtering data with WHERE clause">
+<meta property="og:url" content="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas tentang mem-Filter data dengan menggunakan WHERE clause di PostgreSQL. By default jika kita menggunakan perintah select itu akan menampilkan semua data pada suatu atau berberapa table. Dengan menggunakan clause WHERE kita bisa memfilter atau memilih data yang akan kita tampilkan.  Perintah dasar untuk WHERE clause seperti berikut:  select * | column_list ... from a_table where search_condition  Dimana search_condition adalah any value expression (functions, operators and predicates ) yang mengembalikan nilai boolean. Sebagai gambaran berikut ilustrasinya:    Ilustrasi tersebut menggambarkan, suatu predicate atau search_condition yaitu menggunakan operator equal pada column status dengan nilai active maka database akan mencari nilainya active saja pada kolom status. Untuk search_condition tersebut biasanya di sebut dengan predicate. Ada banyak sekali predicate yang kita bisa gunakan tapi disini kita bahasnya paling dasar dulu ya yaitu:     Relational predicate   Like predicates   Between predicates   Null predicate   Logical predicate   Regular Expression (Regex) predicate   Row and Array Comparisons   Ok kita bahas satu-per-satu ya, mulai dari relational predicate">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-03-08T20:28:05+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#relational-predicate">Relational predicate</a></li><li><a href="#like-predicates">Like predicates</a></li><li><a href="#between-predicates">Between predicates</a></li><li><a href="#null-predicate">Null predicate</a></li><li><a href="#logical-predicate">Logical predicate</a></li><li><a href="#regular-expression-regex-predicate">Regular Expression (Regex) predicate</a></li><li><a href="#row-and-array-comparisons">Row and Array Comparisons</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Filtering data with WHERE clause">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang mem-Filter data dengan menggunakan WHERE clause di PostgreSQL. By default jika kita menggunakan perintah select itu akan menampilkan semua data pada suatu atau berberapa table. Dengan menggunakan clause WHERE kita bisa memfilter atau memilih data yang akan kita tampilkan.Perintah dasar untuk WHERE clause seperti berikut:select * | column_list ...from a_tablewhere search_conditionDimana search_condition adalah any value expression (functions, operators and predicates ) yang mengembalikan nilai boolean. Sebagai gambaran berikut ilustrasinya:Ilustrasi tersebut menggambarkan, suatu predicate atau search_condition yaitu menggunakan operator equal pada column status dengan nilai active maka database akan mencari nilainya active saja pada kolom status. Untuk search_condition tersebut biasanya di sebut dengan predicate. Ada banyak sekali predicate yang kita bisa gunakan tapi disini kita bahasnya paling dasar dulu ya yaitu:  Relational predicate  Like predicates  Between predicates  Null predicate  Logical predicate  Regular Expression (Regex) predicate  Row and Array ComparisonsOk kita bahas satu-per-satu ya, mulai dari relational predicate">
+    <meta itemprop="datePublished" content="2022-03-08T20:28:05+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause" class="u-url" itemprop="url">Filtering data with WHERE clause
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-03-08T20:28:05+07:00">March 8, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        10 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan PostgreSQL">
+        <label class="acordion-item-label" for="content-Pengenalan PostgreSQL">
+            Pengenalan PostgreSQL
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01-silabus-psql">
+                        
+                        Silabus - PostgreSQL: Pemul...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01a-what-is-postgresql">
+                        
+                        Overview of PostgreSQL Data...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01b-postgresql-architecture">
+                        
+                        Architecture of PostgreSQL ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01c-postgresql-database">
+                        
+                        Overview of Object Relation...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started">
+        <label class="acordion-item-label" for="content-Getting started">
+            Getting started
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02-overview-install-postgres">
+                        
+                        Overview Installing PostgreSQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows">
+                        
+                        Install PostgreSQL for Wind...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac">
+                        
+                        Install PostgreSQL for Mac ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu">
+                        
+                        Install PostgreSQL for Linu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker">
+                        
+                        Install PostgreSQL using Do...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02b-use-psql">
+                        
+                        Using psql as PostgreSQL ed...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02c-use-pgadmin">
+                        
+                        Using pgAdmin4 as PostgreSQ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+                        
+                        Using thirdparty Editor unt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select Statement">
+        <label class="acordion-item-label" for="content-SQL - Select Statement">
+            SQL - Select Statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03-overview-sql">
+                        
+                        Overview SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03a-basic-select-statement">
+                        
+                        Basic SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators">
+                        
+                        Build-in Operators
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions">
+                        
+                        Build-in Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Filtering data with WHERE c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause">
+                        
+                        Sorting rows using ORDER BY...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause">
+                        
+                        Limit dan Offset rows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03g-quis-section-1">
+                        
+                        Time your practice (part 1)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements">
+                        
+                        Deep dive into Select State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+                        
+                        Single Row / Group functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+                        
+                        Joined Tables
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04c-subquery">
+                        
+                        Queries inside a query (sub...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+                        
+                        Conditional Expressions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04e-combining-queries">
+                        
+                        Combining Queries (UNION, I...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04f-with-queries">
+                        
+                        WITH Queries (Common Table ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04g-quis-section-2">
+                        
+                        Time your practice (part 2)
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data manipulation">
+        <label class="acordion-item-label" for="content-SQL - Data manipulation">
+            SQL - Data manipulation
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05-overview-dml">
+                        
+                        Overview of Data Manipulati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05a-cud-statement">
+                        
+                        Basic Create, Update, Delet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+                        
+                        Deep dive into INSERT State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05c-dml-update">
+                        
+                        Deep dive into UPDATE State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete">
+                        
+                        Deep dive into DELETE state...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement">
+                        
+                        Prepared Statement in SQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+                        
+                        Cleanup Data from Table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1">
+                        
+                        Time your practice (part 3)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control">
+                        
+                        Overview of Concurrency Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl">
+                        
+                        Getting started with Transa...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data definition">
+        <label class="acordion-item-label" for="content-SQL - Data definition">
+            SQL - Data definition
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Database design (Mapping)">
+        <label class="acordion-item-label" for="content-Study Kasus: Database design (Mapping)">
+            Study Kasus: Database design (Mapping)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Indexes">
+        <label class="acordion-item-label" for="content-SQL - Indexes">
+            SQL - Indexes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Users Management">
+        <label class="acordion-item-label" for="content-SQL - Users Management">
+            SQL - Users Management
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Type Conversion">
+        <label class="acordion-item-label" for="content-Type Conversion">
+            Type Conversion
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas tentang mem-Filter data dengan menggunakan <code class="language-plaintext highlighter-rouge">WHERE</code> clause di PostgreSQL. By default jika kita menggunakan perintah <code class="language-plaintext highlighter-rouge">select</code> itu akan menampilkan semua data pada suatu atau berberapa table. Dengan menggunakan clause WHERE kita bisa memfilter atau memilih data yang akan kita tampilkan.</p>
+
+<p>Perintah dasar untuk <code class="language-plaintext highlighter-rouge">WHERE</code> clause seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="o">|</span> <span class="n">column_list</span> <span class="p">...</span>
+<span class="k">from</span> <span class="n">a_table</span>
+<span class="k">where</span> <span class="n">search_condition</span></code></pre></figure>
+
+<p>Dimana <code class="language-plaintext highlighter-rouge">search_condition</code> adalah any value expression (<code class="language-plaintext highlighter-rouge">functions</code>, <code class="language-plaintext highlighter-rouge">operators</code> and <code class="language-plaintext highlighter-rouge">predicates</code> ) yang mengembalikan nilai boolean. Sebagai gambaran berikut ilustrasinya:</p>
+
+<p><img src="/resources/posts/postgresql/03d-where-clause/01-consept-where-cluase.png" alt="filter-data" /></p>
+
+<p>Ilustrasi tersebut menggambarkan, suatu predicate atau <code class="language-plaintext highlighter-rouge">search_condition</code> yaitu menggunakan operator equal pada column <code class="language-plaintext highlighter-rouge">status</code> dengan nilai <code class="language-plaintext highlighter-rouge">active</code> maka database akan mencari nilainya <code class="language-plaintext highlighter-rouge">active</code> saja pada kolom <code class="language-plaintext highlighter-rouge">status</code>. Untuk <code class="language-plaintext highlighter-rouge">search_condition</code> tersebut biasanya di sebut dengan predicate. Ada banyak sekali predicate yang kita bisa gunakan tapi disini kita bahasnya paling dasar dulu ya yaitu:</p>
+
+<ol>
+  <li>Relational predicate</li>
+  <li>Like predicates</li>
+  <li>Between predicates</li>
+  <li>Null predicate</li>
+  <li>Logical predicate</li>
+  <li>Regular Expression (Regex) predicate</li>
+  <li>Row and Array Comparisons</li>
+</ol>
+
+<p>Ok kita bahas satu-per-satu ya, mulai dari relational predicate</p>
+
+<!--more-->
+
+<h2 id="relational-predicate">Relational predicate</h2>
+
+<p>Relational predicates pada dasarnya adalah <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators#comparation-operators">comparison operators</a> yaitu</p>
+
+<ol>
+  <li>Equal (<code class="language-plaintext highlighter-rouge">=</code>)</li>
+  <li>Not Equals (<code class="language-plaintext highlighter-rouge">!=</code> or <code class="language-plaintext highlighter-rouge">&lt;&gt;</code>)</li>
+  <li>Less than or equal to (<code class="language-plaintext highlighter-rouge">&lt;</code> or <code class="language-plaintext highlighter-rouge">&lt;=</code>)</li>
+  <li>Greater then or equal to (<code class="language-plaintext highlighter-rouge">&gt;</code> or <code class="language-plaintext highlighter-rouge">&gt;=</code>)</li>
+</ol>
+
+<p>Contoh penggunaannya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-relation-eq.sql"> </script>
+
+<p>Contoh lainnya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-relation-greater-than.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, last_name, email, phone_number, job_id, salary</span>
+hr-# from employees
+hr-# where salary <span class="o">&gt;=</span> 20000<span class="p">;</span>
+ employee_id | first_name | last_name | email | phone_number | job_id  |  salary
+<span class="nt">-------------</span>+------------+-----------+-------+--------------+---------+----------
+         100 | Steven     | King      | SKING | 515.123.4567 | AD_PRES | 24000.00
+<span class="o">(</span>1 row<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Nah jadi kita kita perhatikan dari hasil query tersebut, kita memfilter menggunakan operator <code class="language-plaintext highlighter-rouge">&gt;=</code> atau lebih besar sama dengan hasilnya tidak ada yang salarnya lebih kecil dari kita definisikan yaitu <code class="language-plaintext highlighter-rouge">20_000</code>.</p>
+
+<h2 id="like-predicates">Like predicates</h2>
+
+<p>Operator <code class="language-plaintext highlighter-rouge">like</code> biasanya digunakan untuk tipe data <code class="language-plaintext highlighter-rouge">string</code> (<code class="language-plaintext highlighter-rouge">varchar</code>, <code class="language-plaintext highlighter-rouge">text</code>), ada 2 expresion yang kita bisa gunakan di operator ini yaitu</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">_</code> atau underscore, digunakan untuk mewakili expresion satu karakter.</li>
+  <li><code class="language-plaintext highlighter-rouge">%</code> atau persent, digunakan untuk mewakili expresion beberapa karakter.</li>
+</ol>
+
+<p>Contoh kasus untuk expresion <code class="language-plaintext highlighter-rouge">%</code>, saya ingin mencari nama depan karyawan yang diawali oleh huruf <code class="language-plaintext highlighter-rouge">A</code>. Berikut querynya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-like-percent.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, last_name, email, phone_number, job_id, salary</span>
+hr-# from employees
+hr-# where last_name like <span class="s1">'A%'</span><span class="p">;</span>
+ employee_id | first_name | last_name |  email   |    phone_number    |  job_id  |  salary
+<span class="nt">-------------</span>+------------+-----------+----------+--------------------+----------+----------
+         105 | David      | Austin    | DAUSTIN  | 590.423.4569       | IT_PROG  |  4800.00
+         130 | Mozhe      | Atkinson  | MATKINSO | 650.124.6234       | ST_CLERK |  2800.00
+         166 | Sundar     | Ande      | SANDE    | 011.44.1346.629268 | SA_REP   |  6400.00
+         174 | Ellen      | Abel      | EABEL    | 011.44.1644.429267 | SA_REP   | 11000.00
+<span class="o">(</span>4 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Sedangkan untuk contoh expresion <code class="language-plaintext highlighter-rouge">_</code>, saya ingin mencari huruf ke 2 dari kolom <code class="language-plaintext highlighter-rouge">job_id</code> di tabel <code class="language-plaintext highlighter-rouge">jobs</code> mengadung <code class="language-plaintext highlighter-rouge">t</code>. Berikut querynya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-like-underscore.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, last_name, email, phone_number, job_id, salary</span>
+hr-# from employees
+hr-# where last_name like <span class="s1">'_t%'</span><span class="p">;</span>
+ employee_id | first_name | last_name |  email   | phone_number |  job_id  | salary
+<span class="nt">-------------</span>+------------+-----------+----------+--------------+----------+---------
+         130 | Mozhe      | Atkinson  | MATKINSO | 650.124.6234 | ST_CLERK | 2800.00
+         138 | Stephen    | Stiles    | SSTILES  | 650.121.2034 | ST_CLERK | 3200.00
+<span class="o">(</span>2 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="between-predicates">Between predicates</h2>
+
+<p>Operator <code class="language-plaintext highlighter-rouge">BETWEEN</code> digunakan untuk memfilter dengan interval/rentang tertentu diantar nilai terkecil dan terbesar biasanya digunakan untuk tipe data seperti <code class="language-plaintext highlighter-rouge">number</code>, <code class="language-plaintext highlighter-rouge">date</code>, <code class="language-plaintext highlighter-rouge">time</code>, <code class="language-plaintext highlighter-rouge">datetime</code> serta <code class="language-plaintext highlighter-rouge">char</code>.</p>
+
+<p>Contoh kasusnya, Saya mau menampilkan data yang karywan yang memiliki gaji dari <code class="language-plaintext highlighter-rouge">4000</code> s/d <code class="language-plaintext highlighter-rouge">6000</code>. Berikut querynya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-between-number.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, last_name, email, phone_number, job_id, salary</span>
+hr-# from employees
+hr-# where salary between 17000 and 20000<span class="p">;</span>
+ employee_id | first_name | last_name |  email   | phone_number | job_id |  salary
+<span class="nt">-------------</span>+------------+-----------+----------+--------------+--------+----------
+         101 | Neena      | Kochhar   | NKOCHHAR | 515.123.4568 | AD_VP  | 17000.00
+         102 | Lex        | De Haan   | LDEHAAN  | 515.123.4569 | AD_VP  | 17000.00
+<span class="o">(</span>2 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Atau berikut contoh lainnya, saya mau mengambil <code class="language-plaintext highlighter-rouge">first_name</code> yang mengandung huruf <code class="language-plaintext highlighter-rouge">h</code> sampai <code class="language-plaintext highlighter-rouge">j</code> pada character ke 2. maka querynya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-between-char.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, last_name</span>
+hr-# from employees
+hr-# where substring<span class="o">(</span>first_name from 2 <span class="k">for </span>1<span class="o">)</span> between <span class="s1">'h'</span> and <span class="s1">'j'</span><span class="p">;</span>
+ employee_id | first_name  | last_name
+<span class="nt">-------------</span>+-------------+-----------
+         107 | Diana       | Lorentz
+         116 | Shelli      | Baida
+         117 | Sigal       | Tobias
+         205 | Shelley     | Higgins
+         206 | William     | Gietz
+<span class="o">(</span>18 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="null-predicate">Null predicate</h2>
+
+<p>Operator <code class="language-plaintext highlighter-rouge">IS NULL</code> digunakan untuk memfiter data yang bernilai <code class="language-plaintext highlighter-rouge">null</code>.</p>
+
+<p>Contoh kasusnya, saya mau menampilkan data karywan yang tidak memiliki manager. Berikut querynya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-isnull.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, last_name, job_id, manager_id</span>
+hr-# from employees
+hr-# where manager_id is null<span class="p">;</span>
+ employee_id | first_name | last_name | job_id  | manager_id
+<span class="nt">-------------</span>+------------+-----------+---------+------------
+         100 | Steven     | King      | AD_PRES |
+<span class="o">(</span>1 row<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="logical-predicate">Logical predicate</h2>
+
+<p>Logical predicate pada dasarnya sama seperti <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators#logic-operators">logical operators</a> yaitu</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">and</code> operators</li>
+  <li><code class="language-plaintext highlighter-rouge">or</code> operators</li>
+  <li><code class="language-plaintext highlighter-rouge">not</code> operators</li>
+</ol>
+
+<p>Kasusnya saya mau mencari data karyawan yang berkerja di <code class="language-plaintext highlighter-rouge">department_id = 90</code> dan yang <code class="language-plaintext highlighter-rouge">manager_id = 100</code> berarti kita bisa menggunakan operator <code class="language-plaintext highlighter-rouge">and</code>, berikut querynya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-logic-and.sql"> </script>
+
+<p>Jika kita jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, last_name, department_id, manager_id</span>
+hr-# from employees
+hr-# where department_id <span class="o">=</span> 90 and manager_id <span class="o">=</span> 100<span class="p">;</span>
+ employee_id | first_name | last_name | department_id | manager_id
+<span class="nt">-------------</span>+------------+-----------+---------------+------------
+         101 | Neena      | Kochhar   |            90 |        100
+         102 | Lex        | De Haan   |            90 |        100
+<span class="o">(</span>2 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Dan sedangkan untuk operator <code class="language-plaintext highlighter-rouge">or</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-logic-or.sql"> </script>
+
+<p>Jika kita jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, last_name, department_id, manager_id</span>
+hr-# from employees
+hr-# where department_id <span class="o">=</span> 90 or manager_id <span class="o">=</span> 100<span class="p">;</span>
+ employee_id | first_name | last_name | department_id | manager_id
+<span class="nt">-------------</span>+------------+-----------+---------------+------------
+         100 | Steven     | King      |            90 |
+         101 | Neena      | Kochhar   |            90 |        100
+         102 | Lex        | De Haan   |            90 |        100
+         114 | Den        | Raphaely  |            30 |        100
+         120 | Matthew    | Weiss     |            50 |        100
+         121 | Adam       | Fripp     |            50 |        100
+         122 | Payam      | Kaufling  |            50 |        100
+         123 | Shanta     | Vollman   |            50 |        100
+         124 | Kevin      | Mourgos   |            50 |        100
+         145 | John       | Russell   |            80 |        100
+         146 | Karen      | Partners  |            80 |        100
+         147 | Alberto    | Errazuriz |            80 |        100
+         148 | Gerald     | Cambrault |            80 |        100
+         149 | Eleni      | Zlotkey   |            80 |        100
+         201 | Michael    | Hartstein |            20 |        100
+<span class="o">(</span>15 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Dan yang terakhir kita juga bisa menggunakan <code class="language-plaintext highlighter-rouge">not</code> operator seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-logic-not.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya sebagai berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, last_name, job_id, manager_id, salary</span>
+hr-# from employees
+hr-# where salary not between 3000 and 20000<span class="p">;</span>
+ employee_id | first_name |  last_name  |  job_id  | manager_id |  salary
+<span class="nt">-------------</span>+------------+-------------+----------+------------+----------
+         100 | Steven     | King        | AD_PRES  |            | 24000.00
+         116 | Shelli     | Baida       | PU_CLERK |        114 |  2900.00
+         117 | Sigal      | Tobias      | PU_CLERK |        114 |  2800.00
+         118 | Guy        | Himuro      | PU_CLERK |        114 |  2600.00
+         119 | Karen      | Colmenares  | PU_CLERK |        114 |  2500.00
+         126 | Irene      | Mikkilineni | ST_CLERK |        120 |  2700.00
+         127 | James      | Landry      | ST_CLERK |        120 |  2400.00
+         128 | Steven     | Markle      | ST_CLERK |        120 |  2200.00
+<span class="o">(</span>25 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="regular-expression-regex-predicate">Regular Expression (Regex) predicate</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">SIMILAR TO</code> operator returns <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code> depending on whether its pattern matches the given string. It is similar to <code class="language-plaintext highlighter-rouge">LIKE</code>, except that it interprets the pattern using the SQL standard’s definition of a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">regular expression</a>.</p>
+
+<p>In addition to these facilities borrowed from <code class="language-plaintext highlighter-rouge">LIKE</code>, <code class="language-plaintext highlighter-rouge">SIMILAR TO</code> supports these pattern-matching metacharacters borrowed from <code class="language-plaintext highlighter-rouge">POSIX</code> regular expressions:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">|</code> denotes alternation (either of two alternatives).</li>
+  <li><code class="language-plaintext highlighter-rouge">*</code> denotes repetition of the previous item zero or more times.</li>
+  <li><code class="language-plaintext highlighter-rouge">+</code> denotes repetition of the previous item one or more times.</li>
+  <li><code class="language-plaintext highlighter-rouge">?</code> denotes repetition of the previous item zero or one time.</li>
+  <li><code class="language-plaintext highlighter-rouge">{m}</code> denotes repetition of the previous item exactly m times.</li>
+  <li><code class="language-plaintext highlighter-rouge">{m,}</code> denotes repetition of the previous item m or more times.</li>
+  <li><code class="language-plaintext highlighter-rouge">{m,n}</code> denotes repetition of the previous item at least m and not more than n times.</li>
+  <li><code class="language-plaintext highlighter-rouge">()</code> can be used to group items into a single logical item.</li>
+  <li><code class="language-plaintext highlighter-rouge">[...]</code> specifies a character class, just as in POSIX regular expressions.</li>
+</ol>
+
+<p>Some examples:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="s1">'abc'</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="s1">'abc'</span>          <span class="k">true</span>
+<span class="s1">'abc'</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="s1">'a'</span>            <span class="k">false</span>
+<span class="s1">'abc'</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="s1">'%(b|d)%'</span>      <span class="k">true</span>
+<span class="s1">'abc'</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="s1">'(b|c)%'</span>       <span class="k">false</span>
+<span class="s1">'-abc-'</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="s1">'%</span><span class="se">\m</span><span class="s1">abc</span><span class="se">\M</span><span class="s1">%'</span>  <span class="k">true</span>
+<span class="s1">'xabcy'</span> <span class="k">SIMILAR</span> <span class="k">TO</span> <span class="s1">'%</span><span class="se">\m</span><span class="s1">abc</span><span class="se">\M</span><span class="s1">%'</span>  <span class="k">false</span></code></pre></figure>
+
+<p>Salah satu penggunaanya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-similar-to.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, phone_number, job_id</span>
+hr-# from employees
+hr-# where first_name similar to <span class="s1">'Ste(v|ph)en'</span><span class="p">;</span>
+ employee_id | first_name | phone_number |  job_id
+<span class="nt">-------------</span>+------------+--------------+----------
+         100 | Steven     | 515.123.4567 | AD_PRES
+         128 | Steven     | 650.124.1434 | ST_CLERK
+         138 | Stephen    | 650.121.2034 | ST_CLERK
+<span class="o">(</span>3 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Selain menggunakan <code class="language-plaintext highlighter-rouge">SIMILAR TO</code> Operators kita juga bisa menggunakan <code class="language-plaintext highlighter-rouge">POSIX</code> regular expression yang lebih powerfull dibadingkan <code class="language-plaintext highlighter-rouge">LIKE</code> dan <code class="language-plaintext highlighter-rouge">SIMILAR TO</code>. Many Unix tools such as <code class="language-plaintext highlighter-rouge">egrep</code>, <code class="language-plaintext highlighter-rouge">sed</code>, or <code class="language-plaintext highlighter-rouge">awk</code> use a pattern matching language that is similar to the one described here.</p>
+
+<p>Some examples:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="s1">'abcd'</span> <span class="o">~</span> <span class="s1">'bc'</span>     <span class="k">true</span>
+<span class="s1">'abcd'</span> <span class="o">~</span> <span class="s1">'a.c'</span>    <span class="k">true</span> <span class="c1">-- dot matches any character</span>
+<span class="s1">'abcd'</span> <span class="o">~</span> <span class="s1">'a.*d'</span>   <span class="k">true</span> <span class="c1">-- * repeats the preceding pattern item</span>
+<span class="s1">'abcd'</span> <span class="o">~</span> <span class="s1">'(b|x)'</span>  <span class="k">true</span> <span class="c1">-- | means OR, parentheses group</span>
+<span class="s1">'abcd'</span> <span class="o">~</span> <span class="s1">'^a'</span>     <span class="k">true</span> <span class="c1">-- ^ anchors to start of string</span>
+<span class="s1">'abcd'</span> <span class="o">~</span> <span class="s1">'^(b|c)'</span> <span class="k">false</span> <span class="c1">-- would match except for anchoring</span></code></pre></figure>
+
+<p>Salah satu penggunaanya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-posix.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, phone_number, job_id</span>
+hr-# from employees
+hr-# where first_name ~ <span class="s1">'^S.*(a|v|ph)'</span><span class="p">;</span>
+ employee_id | first_name |    phone_number    |  job_id
+<span class="nt">-------------</span>+------------+--------------------+----------
+         100 | Steven     | 515.123.4567       | AD_PRES
+         117 | Sigal      | 515.127.4564       | PU_CLERK
+         123 | Shanta     | 650.123.4234       | ST_MAN
+         128 | Steven     | 650.124.1434       | ST_CLERK
+         138 | Stephen    | 650.121.2034       | ST_CLERK
+         161 | Sarath     | 011.44.1345.529268 | SA_REP
+         166 | Sundar     | 011.44.1346.629268 | SA_REP
+         173 | Sundita    | 011.44.1343.329268 | SA_REP
+         192 | Sarah      | 650.501.1876       | SH_CLERK
+         194 | Samuel     | 650.501.3876       | SH_CLERK
+         203 | Susan      | 515.123.7777       | HR_REP
+<span class="o">(</span>11 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="row-and-array-comparisons">Row and Array Comparisons</h2>
+
+<p>This section describes several specialized constructs for making multiple comparisons between groups of values. These forms are syntactically related to the subquery forms but this time we do not involve subqueries. The forms involving array subexpressions are PostgreSQL extensions; the rest are SQL-compliant. All of the expression forms documented in this section return Boolean (true/false) results.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">IN</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ANY</code> / <code class="language-plaintext highlighter-rouge">SOME</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ALL</code></li>
+</ol>
+
+<p>Pertama kita bahas yang paling basic dulu yaitu <code class="language-plaintext highlighter-rouge">IN</code> operator,</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">expression</span> <span class="k">IN</span> <span class="p">(</span><span class="n">value</span> <span class="p">[,</span> <span class="p">...])</span></code></pre></figure>
+
+<p>The right-hand side is a parenthesized list of scalar expressions. This is a shorthand notation for</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">expression</span> <span class="o">=</span> <span class="n">value1</span> <span class="k">OR</span>
+<span class="n">expression</span> <span class="o">=</span> <span class="n">value2</span> <span class="k">OR</span>
+<span class="n">expression</span> <span class="o">=</span> <span class="n">value3</span> <span class="k">OR</span>
+<span class="p">...</span></code></pre></figure>
+
+<p>Salah satu penggunaanya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-in.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, phone_number, job_id</span>
+hr-# from employees
+hr-# where job_id <span class="k">in</span> <span class="o">(</span><span class="s1">'IT_PROG'</span>, <span class="s1">'SA_MAN'</span>, <span class="s1">'MK_MAN'</span><span class="o">)</span><span class="p">;</span>
+ employee_id | first_name |    phone_number    | job_id
+<span class="nt">-------------</span>+------------+--------------------+---------
+         103 | Alexander  | 590.423.4567       | IT_PROG
+         104 | Bruce      | 590.423.4568       | IT_PROG
+         105 | David      | 590.423.4569       | IT_PROG
+         106 | Valli      | 590.423.4560       | IT_PROG
+         107 | Diana      | 590.423.5567       | IT_PROG
+         145 | John       | 011.44.1344.429268 | SA_MAN
+         146 | Karen      | 011.44.1344.467268 | SA_MAN
+         147 | Alberto    | 011.44.1344.429278 | SA_MAN
+         148 | Gerald     | 011.44.1344.619268 | SA_MAN
+         149 | Eleni      | 011.44.1344.429018 | SA_MAN
+         201 | Michael    | 515.123.5555       | MK_MAN
+<span class="o">(</span>11 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Kemudian kita bahas untuk <code class="language-plaintext highlighter-rouge">SOME</code> dan <code class="language-plaintext highlighter-rouge">ANY</code>,</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">expression</span> <span class="k">operator</span> <span class="k">ANY</span> <span class="p">(</span><span class="n">array</span> <span class="n">expression</span><span class="p">)</span>
+<span class="n">expression</span> <span class="k">operator</span> <span class="k">SOME</span> <span class="p">(</span><span class="n">array</span> <span class="n">expression</span><span class="p">)</span></code></pre></figure>
+
+<p>The right-hand side is a parenthesized expression, which must yield an array value. The left-hand expression is evaluated and compared to each element of the array using the given operator, which must yield a Boolean result.</p>
+
+<p>The simple example is <code class="language-plaintext highlighter-rouge">= ANY</code> look like this:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=03d-select-where-eq-any-some.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, phone_number, job_id</span>
+hr-# from employees
+hr-# where job_id <span class="o">=</span> any <span class="o">(</span>ARRAY[<span class="s1">'IT_PROG'</span>, <span class="s1">'SA_MAN'</span>, <span class="s1">'MK_MAN'</span><span class="o">])</span><span class="p">;</span>
+ employee_id | first_name |    phone_number    | job_id
+<span class="nt">-------------</span>+------------+--------------------+---------
+         103 | Alexander  | 590.423.4567       | IT_PROG
+         104 | Bruce      | 590.423.4568       | IT_PROG
+         105 | David      | 590.423.4569       | IT_PROG
+         106 | Valli      | 590.423.4560       | IT_PROG
+         107 | Diana      | 590.423.5567       | IT_PROG
+         145 | John       | 011.44.1344.429268 | SA_MAN
+         146 | Karen      | 011.44.1344.467268 | SA_MAN
+         147 | Alberto    | 011.44.1344.429278 | SA_MAN
+         148 | Gerald     | 011.44.1344.619268 | SA_MAN
+         149 | Eleni      | 011.44.1344.429018 | SA_MAN
+         201 | Michael    | 515.123.5555       | MK_MAN
+<span class="o">(</span>11 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Untuk operator <code class="language-plaintext highlighter-rouge">ALL</code> dan lain-lainnya nanti kita bahas selanjutnya di Subquery ya.</p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/01-silabus-psql"  class="" title="Silabus - PostgreSQL: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions" class="" 
+        title="Build-in Functions
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 17 to 38
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause" class="" 
+        title="Sorting rows using ORDER BY clause
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"  class="" title="Getting started with Transaction Control (TCL)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#postgresql" class="page__taxonomy-item p-category" rel="tag">PostgreSQL</a><span class="sep">, </span>
+    
+      <a href="/categories/#rdbms" class="page__taxonomy-item p-category" rel="tag">RDBMS</a><span class="sep">, </span>
+    
+      <a href="/categories/#select" class="page__taxonomy-item p-category" rel="tag">select</a><span class="sep">, </span>
+    
+      <a href="/categories/#sql" class="page__taxonomy-item p-category" rel="tag">sql</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-03-08T20:28:05+07:00">March 8, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Filtering+data+with+WHERE+clause%20%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F03d-where-clause" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F03d-where-clause" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F03d-where-clause" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

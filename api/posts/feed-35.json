@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Insert, Update dan Delete Statement dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/04b-hql-insert-update-delete-statement"
+    }
+    ,
+    {
+      "title": "Select Statement dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/04a-hql-select-statement"
+    }
+    ,
+    {
+      "title": "Hibernate Query Language (HQL-JPQL)",
+      "link": "/posts/java/orm/hibernate/postgresql/04-hibernate-queries"
+    }
+    ,
+    {
+      "title": "Time is your Practice",
+      "link": "/posts/java/orm/hibernate/postgresql/03j-quis-2"
+    }
+    ,
+    {
+      "title": "Collections Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03i-collections-mapping"
+    }
+    ,
+    {
+      "title": "Parent-Child Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03h-parent-child-mapping"
+    }
+    ,
+    {
+      "title": "Inherintance Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03g-inherintance-mapping"
+    }
+    ,
+    {
+      "title": "ManyToMany Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03f-mapping-many-to-many"
+    }
+    ,
+    {
+      "title": "ManyToOne Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03e-mapping-many-to-one"
+    }
+    ,
+    {
+      "title": "OneToMany Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03d-mapping-one-to-many"
+    }
+  ]
+}

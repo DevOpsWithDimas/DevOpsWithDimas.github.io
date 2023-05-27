@@ -1,0 +1,1659 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Deploying an apps/services into Kubernetes - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas Basic of Kubernetes untuk Container orchestration system menggunakan minikube (Learning environment). Diantaranya yang akan kita bahas     Deploy a containerized application on a cluster.   Viewing Pods and Nodes.   Expose Your App Publicly.   Scale the deployment.   Update the containerized application with a new software version.   Debug the containerized application.">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Deploying an apps/services into Kubernetes">
+<meta property="og:url" content="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas Basic of Kubernetes untuk Container orchestration system menggunakan minikube (Learning environment). Diantaranya yang akan kita bahas     Deploy a containerized application on a cluster.   Viewing Pods and Nodes.   Expose Your App Publicly.   Scale the deployment.   Update the containerized application with a new software version.   Debug the containerized application.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-01-27T11:59:08+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#deploy-a-containerized-application-on-a-cluster">Deploy a containerized application on a cluster</a></li><li><a href="#viewing-pods-and-nodes">Viewing Pods and Nodes</a></li><li><a href="#expose-your-app-publicly">Expose Your App Publicly</a></li><li><a href="#scale-the-deployment">Scale the deployment</a></li><li><a href="#update-the-containerized-application-with-a-new-software-version">Update the containerized application with a new software version.</a></li><li><a href="#debug-the-containerized-application">Debug the containerized application.</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Deploying an apps/services into Kubernetes">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas Basic of Kubernetes untuk Container orchestration system menggunakan minikube (Learning environment). Diantaranya yang akan kita bahas  Deploy a containerized application on a cluster.  Viewing Pods and Nodes.  Expose Your App Publicly.  Scale the deployment.  Update the containerized application with a new software version.  Debug the containerized application.">
+    <meta itemprop="datePublished" content="2022-01-27T11:59:08+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application" class="u-url" itemprop="url">Deploying an apps/services into Kubernetes
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-01-27T11:59:08+07:00">January 27, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        8 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Kubernetes">
+        <label class="acordion-item-label" for="content-Pengenalan Kubernetes">
+            Pengenalan Kubernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01-silabus">
+                        
+                        Silabus - DevOps Kubernetes...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes">
+                        
+                        What is Kubernetes (k8s) ?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01b-k8s-components">
+                        
+                        Kubernetes Components
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01c-k8s-api">
+                        
+                        The Kubernetes API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01d-k8s-objects">
+                        
+                        What is Kubernetes Objects?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01e-k8s-object-management">
+                        
+                        Managing Kubernetes Object
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids">
+                        
+                        Kubernetes Object Names and...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01g-k8s-namespaces">
+                        
+                        What is Kubernetes Namespaces?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments">
+                        
+                        Kubernetes cluster environt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started with minikube">
+        <label class="acordion-item-label" for="content-Getting started with minikube">
+            Getting started with minikube
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02-overview-learn-env">
+                        
+                        Overview learning environme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos">
+                        
+                        Install minikube on Mac (In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon">
+                        
+                        Install minikube on Mac (Ap...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows">
+                        
+                        Install minikube for Window...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+                        
+                        Install minikube for Linux ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Deploying an apps/services ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02c-minikube-basic-control">
+                        
+                        Minikube basic control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images">
+                        
+                        Using your own image into M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+                        
+                        Minikube addons features
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+                        
+                        Access your apps/service in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02h-minikube-mount">
+                        
+                        Mounting filesystems to min...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pods and Containers">
+        <label class="acordion-item-label" for="content-Pods and Containers">
+            Pods and Containers
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers">
+                        
+                        Overview Pod and Container ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03a-workload-pods">
+                        
+                        Kubernetes Workloads with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+                        
+                        Working with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config">
+                        
+                        Basic Pods and Containers C...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+                        
+                        Pod & Container Lifecycle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers">
+                        
+                        Initialization of Containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+                        
+                        Configure env (Environment ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit">
+                        
+                        Configure Request and Limit...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+                        
+                        Configure liveness, readine...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions">
+                        
+                        Pod Disruptions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases">
+                        
+                        Overview Study Cases: Pod a...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps">
+                        
+                        Study Cases: Monolith apps ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps">
+                        
+                        Study cases: Microservice a...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Workload resources">
+        <label class="acordion-item-label" for="content-Workload resources">
+            Workload resources
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources">
+                        
+                        Overview Kubernetes Workloa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload">
+                        
+                        What is Workload Resources?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment">
+                        
+                        Working with Deployment object
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking (service)">
+        <label class="acordion-item-label" for="content-Networking (service)">
+            Networking (service)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Store data using Volumes">
+        <label class="acordion-item-label" for="content-Store data using Volumes">
+            Store data using Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Client">
+        <label class="acordion-item-label" for="content-Kubernetes Client">
+            Kubernetes Client
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Security RBAC">
+        <label class="acordion-item-label" for="content-Security RBAC">
+            Security RBAC
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Package manager">
+        <label class="acordion-item-label" for="content-Kubernetes Package manager">
+            Kubernetes Package manager
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes cluster for Production grade">
+        <label class="acordion-item-label" for="content-Kubernetes cluster for Production grade">
+            Kubernetes cluster for Production grade
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Service mesh with istio">
+        <label class="acordion-item-label" for="content-Service mesh with istio">
+            Service mesh with istio
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes on Cloud provider">
+        <label class="acordion-item-label" for="content-Kubernetes on Cloud provider">
+            Kubernetes on Cloud provider
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas Basic of Kubernetes untuk Container orchestration system menggunakan minikube (Learning environment). Diantaranya yang akan kita bahas</p>
+
+<ol>
+  <li>Deploy a containerized application on a cluster.</li>
+  <li>Viewing Pods and Nodes.</li>
+  <li>Expose Your App Publicly.</li>
+  <li>Scale the deployment.</li>
+  <li>Update the containerized application with a new software version.</li>
+  <li>Debug the containerized application.</li>
+</ol>
+
+<!--more-->
+
+<h2 id="deploy-a-containerized-application-on-a-cluster">Deploy a containerized application on a cluster</h2>
+
+<p>Once you have a running Kubernetes cluster, you can deploy your containerized applications on top of it. To do so, you create a Kubernetes Deployment configuration.</p>
+
+<p>Let’s deploy nginx application on Kubernetes with command <code class="language-plaintext highlighter-rouge">kubectl create deployment</code> command. We need to provide the deployment name and image location (Docker/Podman image from <a href="https://hub.docker.com/">Docker Hub</a> or insecure-registry)</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-create-deploy-command.bash"> </script>
+
+<p>Great! you just deployed your first application by creating a deployment. This performed a few thing for you:</p>
+
+<ol>
+  <li>Searched for suitable node where an instance of application could be run</li>
+  <li>Schedule the application to run on that node</li>
+  <li>Configured the cluster to reschedule the instance on a new Node when need</li>
+</ol>
+
+<p>To check list of your deployment use <code class="language-plaintext highlighter-rouge">get deploy</code> or <code class="language-plaintext highlighter-rouge">get deployment</code> command.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  kubectl get deploy
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+nginx-deploy   1/1     1            1           40s
+
+➜ ~  kubectl describe deploy nginx-deploy
+Name:                   nginx-deploy
+Namespace:              default
+CreationTimestamp:      Sun, 23 Jan 2022 18:53:09 +0700
+Labels:                 <span class="nv">app</span><span class="o">=</span>nginx-deploy
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               <span class="nv">app</span><span class="o">=</span>nginx-deploy
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  <span class="nv">app</span><span class="o">=</span>nginx-deploy
+  Containers:
+   nginx:
+    Image:        nginx
+    Port:         &lt;none&gt;
+    Host Port:    &lt;none&gt;
+    Environment:  &lt;none&gt;
+    Mounts:       &lt;none&gt;
+  Volumes:        &lt;none&gt;
+Conditions:
+  Type           Status  Reason
+  <span class="nt">----</span>           <span class="nt">------</span>  <span class="nt">------</span>
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  &lt;none&gt;
+NewReplicaSet:   nginx-deploy-6c758c8d46 <span class="o">(</span>1/1 replicas created<span class="o">)</span>
+Events:
+  Type    Reason             Age   From                   Message
+  <span class="nt">----</span>    <span class="nt">------</span>             <span class="nt">----</span>  <span class="nt">----</span>                   <span class="nt">-------</span>
+  Normal  ScalingReplicaSet  59s   deployment-controller  Scaled up replica <span class="nb">set </span>nginx-deploy-6c758c8d46 to 1
+</code></pre></div></div>
+
+<h2 id="viewing-pods-and-nodes">Viewing Pods and Nodes</h2>
+
+<p>When you created a Deployment, Kubernetes created a <strong>Pod</strong> to host your application instance. A Pod is a Kubernetes abstraction that represents a group of one or more application containers (such as Docker), and some shared resources for those containers. Those resources include:</p>
+
+<ol>
+  <li>Shared storage, as Volumes</li>
+  <li>Networking, as a unique cluster IP address</li>
+  <li>Information about how to run each container, such as the container image version or specific ports to use</li>
+</ol>
+
+<p><img src="/resources/posts/kubernetes/02b-deploy-application/03-pods.png" alt="pod-overview" /></p>
+
+<p>A Pod always runs on a <strong>Node</strong>. A Node is a worker machine in Kubernetes and may be either a virtual or a physical machine, depending on the cluster.</p>
+
+<p><img src="/resources/posts/kubernetes/02b-deploy-application/04-nodes.png" alt="node-overview" /></p>
+
+<p>To view list of pods currently running in your cluster use <code class="language-plaintext highlighter-rouge">get pods</code>:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-get-pods.bash"> </script>
+
+<p>To view list of nodes use <code class="language-plaintext highlighter-rouge">get node</code> :</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-get-node.bash"> </script>
+
+<p>To view list of pods with where instances are running you can use <code class="language-plaintext highlighter-rouge">get pods -o wide</code></p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-get-pod-out-wide.bash"> </script>
+
+<p>Ketika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  kubectl get pods
+NAME                            READY   STATUS    RESTARTS   AGE
+nginx-deploy-6c758c8d46-s8nrj   1/1     Running   0          22m
+
+➜ ~  kubectl get node
+NAME       STATUS   ROLES                  AGE   VERSION
+minikube   Ready    control-plane,master   31m   v1.23.1
+
+➜ ~  kubectl get pods <span class="nt">-o</span> wide
+NAME                            READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+nginx-deploy-6c758c8d46-s8nrj   1/1     Running   0          22m   172.17.0.3   minikube   &lt;none&gt;           &lt;none&gt;
+</code></pre></div></div>
+
+<h2 id="expose-your-app-publicly">Expose Your App Publicly</h2>
+
+<p>When you created a Deployment, by default you can’t access that service directly. to Expose your container you need a Kubernetes Service. A Service in Kubernetes is an abstraction which defines a logical set of Pods and a policy by which to access them. Services enable a loose coupling between dependent Pods.</p>
+
+<p>Although each Pod has a unique IP address, those IPs are not exposed outside the cluster without a Service. Services can be exposed in different ways by specifying a type in the ServiceSpec:</p>
+
+<ol>
+  <li><strong>ClusterIP</strong> (default) - Exposes the Service on an internal IP in the cluster. This type makes the Service only reachable from within the cluster.</li>
+  <li><strong>NodePort</strong> - Exposes the Service on the same port of each selected Node in the cluster using NAT. Makes a Service accessible from outside the cluster using <code class="language-plaintext highlighter-rouge">&lt;NodeIP&gt;:&lt;NodePort&gt;</code>. Superset of ClusterIP.</li>
+  <li><strong>LoadBalancer</strong> - Creates an external load balancer in the current cloud (if supported) and assigns a fixed, external IP to the Service. Superset of NodePort.</li>
+  <li><strong>ExternalName</strong> - Maps the Service to the contents of the externalName field (e.g. <code class="language-plaintext highlighter-rouge">foo.bar.example.com</code>), by returning a CNAME record with its value. No proxying of any kind is set up. This type requires v1.7 or higher of kube-dns, or CoreDNS version 0.0.8 or higher.</li>
+</ol>
+
+<p>First take a look list of services using <code class="language-plaintext highlighter-rouge">get services</code> command:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-get-service.bash"> </script>
+
+<p>By default we have a services called <code class="language-plaintext highlighter-rouge">kubernetes</code> created when kubernetes cluster started. To create a new service and expose to external traffic we’ll use <code class="language-plaintext highlighter-rouge">expose</code> command with type <code class="language-plaintext highlighter-rouge">NodePort</code> as parameter.</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-create-service-node-port.bash"> </script>
+
+<p>Ok cool!, let’s run again <code class="language-plaintext highlighter-rouge">get service</code> command, to view list of services created.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  kubectl get service
+NAME           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT<span class="o">(</span>S<span class="o">)</span>        AGE
+kubernetes     ClusterIP   10.96.0.1      &lt;none&gt;        443/TCP        49m
+nginx-deploy   NodePort    10.102.0.219   &lt;none&gt;        80:30733/TCP   68s
+</code></pre></div></div>
+
+<p>You will see, <code class="language-plaintext highlighter-rouge">nginx-deploy</code> service. kita bisa check portnya di kolom <code class="language-plaintext highlighter-rouge">PORT(S)</code> yaitu <code class="language-plaintext highlighter-rouge">80:30733/TCP</code></p>
+
+<ul>
+  <li>Port <code class="language-plaintext highlighter-rouge">80</code> adalah port container</li>
+  <li>Port <code class="language-plaintext highlighter-rouge">30733</code> adalah port exposed</li>
+</ul>
+
+<p>Jadi kita bisa mengkasesnya dengan port <code class="language-plaintext highlighter-rouge">30733</code>. Karena kita menjalankan menggunakan minikube dengan driver virtualbox jadi kita bisa ambil ip nya menggunakan <code class="language-plaintext highlighter-rouge">minikube ip</code> seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  minikube ip minikube
+192.168.59.105
+</code></pre></div></div>
+
+<p>Maka kita bisa akes dari browser dengan alamat <code class="language-plaintext highlighter-rouge">http://192.168.59.105:30733</code> hasilnya seperti berikut:</p>
+
+<p><img src="/resources/posts/kubernetes/02b-deploy-application/02-nginx-exposed.png" alt="nginx-deploy" /></p>
+
+<h2 id="scale-the-deployment">Scale the deployment</h2>
+
+<p>In the previous modules we created a Deployment, and then exposed it publicly via a Service. The Deployment created only one Pod for running our application. When traffic increases, we will need to scale the application to keep up with user demand.</p>
+
+<p><img src="/resources/posts/kubernetes/02b-deploy-application/05-services.png" alt="scaling-application" /></p>
+
+<p>Scaling out a Deployment will ensure new Pods are created and scheduled to Nodes with available resources. Scaling will increase the number of Pods to the new desired state.</p>
+
+<p>Running multiple instances of an application will require a way to distribute the traffic to all of them. Services have an integrated load-balancer that will distribute network traffic to all Pods of an exposed Deployment.</p>
+
+<p>Next, let’s scale the Deployment to 4 replicas. We’ll use the <code class="language-plaintext highlighter-rouge">kubectl scale</code> command, followed by deployment type, name and disired number of instances:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-deploy-scale.bash"> </script>
+
+<p>To list your deployment state use <code class="language-plaintext highlighter-rouge">get deploy</code>:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-get-deploy.bash"> </script>
+
+<p>The change was applied and we have 4 instance of application available. Next, let’s check if number of Pods changed:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-get-pod-out-wide.bash"> </script>
+
+<p>There are 4 pods now, with different IP address. The change was registered in the Deployment event logs. To check that, use <code class="language-plaintext highlighter-rouge">kubectl describe</code> command:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-describe-deploy.bash"> </script>
+
+<p>You can also view in the output of this command that there are 4 replicas now.</p>
+
+<h2 id="update-the-containerized-application-with-a-new-software-version">Update the containerized application with a new software version.</h2>
+
+<p>Users expect applications to be available all the time and developers are expected to deploy new versions of them several times a day. In Kubernetes this is done with rolling updates. <strong>Rolling updates</strong> allow Deployments’ update to take place with zero downtime by incrementally updating Pods instances with new ones. The new Pods will be scheduled on Nodes with available resources.</p>
+
+<p>Similar to application Scaling, if a Deployment is exposed publicly, the Service will load-balance the traffic only to available Pods during the update. Rolling updates allow the following actions:</p>
+
+<ol>
+  <li>Promote an application from one environment to another (via container image updates)</li>
+  <li>Rollback to previous versions</li>
+  <li>Continuous Integration and Continuous Delivery of applications with zero downtime</li>
+</ol>
+
+<p>To update the image of application to next version, use the <code class="language-plaintext highlighter-rouge">set image</code> command, followed by deployment name, container name and the new image version:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-set-new-image.bash"> </script>
+
+<p>The command notified the Deployment to use a different image from your app and initiated a rolling update. To check the status of new Pods and view the old one terminate with the <code class="language-plaintext highlighter-rouge">get pods</code></p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-get-pods.bash"> </script>
+
+<h2 id="debug-the-containerized-application">Debug the containerized application.</h2>
+
+<p>Setelah kita memcoba meng-operasikan kubernetes dengan <code class="language-plaintext highlighter-rouge">kubectl</code> command, sekarang kita akan membahas bagaimana cara melakukan debug pada Pod yang sedang berjalan (running) atau yang failed (crashing) pada Node. Untuk melakukan debug kita bisa menggunakan beberapa cara yaitu</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">logs</code> command</li>
+  <li><code class="language-plaintext highlighter-rouge">describe</code> command</li>
+  <li><code class="language-plaintext highlighter-rouge">exec</code> command</li>
+</ol>
+
+<p>Examining pod logs. First, look at the logs of the affected container:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kubectl logs <span class="k">${</span><span class="nv">POD_NAME</span><span class="k">}</span> <span class="k">${</span><span class="nv">CONTAINER_NAME</span><span class="k">}</span></code></pre></figure>
+
+<p>Example:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-logs-pod.bash"> </script>
+
+<p>Jika kita jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">pods</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                            </span><span class="nx">READY</span><span class="w">   </span><span class="nx">STATUS</span><span class="w">         </span><span class="nx">RESTARTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">nginx-deploy-7ffddfc8f8-66mbk</span><span class="w">   </span><span class="nx">0/1</span><span class="w">     </span><span class="nx">ErrImagePull</span><span class="w">   </span><span class="nx">0</span><span class="w">          </span><span class="nx">31s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">logs</span><span class="w"> </span><span class="nx">nginx-deploy-7ffddfc8f8-66mbk</span><span class="w">
+</span><span class="n">Error</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="p">(</span><span class="n">BadRequest</span><span class="p">):</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="s2">"nginx"</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="s2">"nginx-deploy-7ffddfc8f8-66mbk"</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">waiting</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">start:</span><span class="w"> </span><span class="nx">trying</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">failing</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">pull</span><span class="w"> </span><span class="nx">image</span><span class="w">
+</span></code></pre></div></div>
+
+<p>If you want more detail, use <code class="language-plaintext highlighter-rouge">describe</code> command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kubectl describe pod <span class="k">${</span><span class="nv">POD_NAME</span><span class="k">}</span></code></pre></figure>
+
+<p>Example:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-pod-describe.bash"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">pod</span><span class="w"> </span><span class="nx">nginx-deploy</span><span class="w">
+</span><span class="n">Name:</span><span class="w">         </span><span class="nx">nginx-deploy-7ffddfc8f8-66mbk</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">    </span><span class="n">default</span><span class="w">
+</span><span class="nx">Priority:</span><span class="w">     </span><span class="nx">0</span><span class="w">
+</span><span class="n">Node:</span><span class="w">         </span><span class="nx">minikube/192.168.49.2</span><span class="w">
+</span><span class="n">Start</span><span class="w"> </span><span class="nx">Time:</span><span class="w">   </span><span class="nx">Tue</span><span class="p">,</span><span class="w"> </span><span class="nx">25</span><span class="w"> </span><span class="nx">Jan</span><span class="w"> </span><span class="nx">2022</span><span class="w"> </span><span class="nx">05:21:45</span><span class="w"> </span><span class="o">+</span><span class="nx">0700</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">       </span><span class="nx">app</span><span class="o">=</span><span class="n">nginx-deploy</span><span class="w">
+              </span><span class="nx">pod-template-hash</span><span class="o">=</span><span class="mi">7</span><span class="n">ffddfc8f8</span><span class="w">
+</span><span class="nx">Annotations:</span><span class="w">  </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Status:</span><span class="w">       </span><span class="nx">Pending</span><span class="w">
+</span><span class="n">IP:</span><span class="w">           </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">IPs:</span><span class="w">
+  </span><span class="nx">IP:</span><span class="w">           </span><span class="nx">172.17.0.3</span><span class="w">
+</span><span class="n">Controlled</span><span class="w"> </span><span class="nx">By:</span><span class="w">  </span><span class="nx">ReplicaSet/nginx-deploy-7ffddfc8f8</span><span class="w">
+</span><span class="n">Containers:</span><span class="w">
+  </span><span class="nx">nginx:</span><span class="w">
+    </span><span class="n">Container</span><span class="w"> </span><span class="nx">ID:</span><span class="w">
+    </span><span class="n">Image:</span><span class="w">          </span><span class="nx">nginx:0.0.0</span><span class="w">
+    </span><span class="n">Image</span><span class="w"> </span><span class="nx">ID:</span><span class="w">
+    </span><span class="n">Port:</span><span class="w">           </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">Host</span><span class="w"> </span><span class="nx">Port:</span><span class="w">      </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">State:</span><span class="w">          </span><span class="nx">Waiting</span><span class="w">
+      </span><span class="n">Reason:</span><span class="w">       </span><span class="nx">ImagePullBackOff</span><span class="w">
+    </span><span class="n">Ready:</span><span class="w">          </span><span class="nx">False</span><span class="w">
+    </span><span class="n">Restart</span><span class="w"> </span><span class="nx">Count:</span><span class="w">  </span><span class="nx">0</span><span class="w">
+    </span><span class="n">Environment:</span><span class="w">    </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">Mounts:</span><span class="w">
+      </span><span class="nx">/var/run/secrets/kubernetes.io/serviceaccount</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">kube-api-access-72dhn</span><span class="w"> </span><span class="p">(</span><span class="n">ro</span><span class="p">)</span><span class="w">
+</span><span class="n">Conditions:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">              </span><span class="nx">Status</span><span class="w">
+  </span><span class="n">Initialized</span><span class="w">       </span><span class="nx">True</span><span class="w">
+  </span><span class="n">Ready</span><span class="w">             </span><span class="nx">False</span><span class="w">
+  </span><span class="n">ContainersReady</span><span class="w">   </span><span class="nx">False</span><span class="w">
+  </span><span class="n">PodScheduled</span><span class="w">      </span><span class="nx">True</span><span class="w">
+</span><span class="n">Volumes:</span><span class="w">
+  </span><span class="nx">kube-api-access-72dhn:</span><span class="w">
+    </span><span class="kr">Type</span><span class="p">:</span><span class="w">                    </span><span class="n">Projected</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="nx">volume</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">contains</span><span class="w"> </span><span class="nx">injected</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">multiple</span><span class="w"> </span><span class="nx">sources</span><span class="p">)</span><span class="w">
+    </span><span class="n">TokenExpirationSeconds:</span><span class="w">  </span><span class="nx">3607</span><span class="w">
+    </span><span class="n">ConfigMapName:</span><span class="w">           </span><span class="nx">kube-root-ca.crt</span><span class="w">
+    </span><span class="n">ConfigMapOptional:</span><span class="w">       </span><span class="err">&lt;</span><span class="nx">nil</span><span class="err">&gt;</span><span class="w">
+    </span><span class="n">DownwardAPI:</span><span class="w">             </span><span class="nx">true</span><span class="w">
+</span><span class="n">QoS</span><span class="w"> </span><span class="nx">Class:</span><span class="w">                   </span><span class="nx">BestEffort</span><span class="w">
+</span><span class="n">Node-Selectors:</span><span class="w">              </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Tolerations:</span><span class="w">                 </span><span class="nx">node.kubernetes.io/not-ready:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+                             </span><span class="n">node.kubernetes.io/unreachable:NoExecute</span><span class="w"> </span><span class="nx">op</span><span class="o">=</span><span class="n">Exists</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">300s</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">     </span><span class="nx">Reason</span><span class="w">     </span><span class="nx">Age</span><span class="w">                </span><span class="nx">From</span><span class="w">               </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">     </span><span class="o">------</span><span class="w">     </span><span class="o">----</span><span class="w">               </span><span class="o">----</span><span class="w">               </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Scheduled</span><span class="w">  </span><span class="nx">94s</span><span class="w">                </span><span class="nx">default-scheduler</span><span class="w">  </span><span class="nx">Successfully</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">default/nginx-deploy-7ffddfc8f8-66mbk</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">minikube</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">Pulling</span><span class="w">    </span><span class="nx">30s</span><span class="w"> </span><span class="p">(</span><span class="n">x3</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">94s</span><span class="p">)</span><span class="w">  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Pulling</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:0.0.0"</span><span class="w">
+  </span><span class="n">Warning</span><span class="w">  </span><span class="nx">Failed</span><span class="w">     </span><span class="nx">25s</span><span class="w"> </span><span class="p">(</span><span class="n">x3</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">77s</span><span class="p">)</span><span class="w">  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Failed</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">pull</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:0.0.0"</span><span class="p">:</span><span class="w"> </span><span class="nx">rpc</span><span class="w"> </span><span class="nx">error:</span><span class="w"> </span><span class="nx">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Unknown</span><span class="w"> </span><span class="nx">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Error</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">daemon:</span><span class="w"> </span><span class="nx">manifest</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">nginx:0.0.0</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">found:</span><span class="w"> </span><span class="nx">manifest</span><span class="w"> </span><span class="nx">unknown:</span><span class="w"> </span><span class="nx">manifest</span><span class="w"> </span><span class="nx">unknown</span><span class="w">
+  </span><span class="n">Warning</span><span class="w">  </span><span class="nx">Failed</span><span class="w">     </span><span class="nx">25s</span><span class="w"> </span><span class="p">(</span><span class="n">x3</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">77s</span><span class="p">)</span><span class="w">  </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Error:</span><span class="w"> </span><span class="nx">ErrImagePull</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">   </span><span class="nx">BackOff</span><span class="w">    </span><span class="nx">0s</span><span class="w"> </span><span class="p">(</span><span class="n">x4</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">76s</span><span class="p">)</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Back-off</span><span class="w"> </span><span class="nx">pulling</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="s2">"nginx:0.0.0"</span><span class="w">
+  </span><span class="n">Warning</span><span class="w">  </span><span class="nx">Failed</span><span class="w">     </span><span class="nx">0s</span><span class="w"> </span><span class="p">(</span><span class="n">x4</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">76s</span><span class="p">)</span><span class="w">   </span><span class="nx">kubelet</span><span class="w">            </span><span class="nx">Error:</span><span class="w"> </span><span class="nx">ImagePullBackOff</span><span class="w">
+</span></code></pre></div></div>
+
+<p>You can see at the Events has message: <code class="language-plaintext highlighter-rouge">Back-off pulling image "nginx:0.0.0"</code> it’s mean docker image <code class="language-plaintext highlighter-rouge">nginx</code> version <code class="language-plaintext highlighter-rouge">0.0.0</code> not valid or not available on registries.</p>
+
+<p>Or somethime error logs trigger at runtime and produce using file not on stdout by default. use <code class="language-plaintext highlighter-rouge">exec</code> command to interact inside container</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kubectl <span class="nb">exec</span> <span class="nt">-it</span> deploy/<span class="k">${</span><span class="nv">DEPLOYMENT_NAME</span><span class="k">}</span> <span class="nt">-c</span> <span class="k">${</span><span class="nv">CONTAINER_NAME</span><span class="k">}</span> <span class="nt">--</span> <span class="k">${</span><span class="nv">APPS</span><span class="k">}</span> <span class="k">${</span><span class="nv">ARGS1</span><span class="p"> ...</span><span class="k">}</span></code></pre></figure>
+
+<p>Example:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02b-exec-container.bash"> </script>
+
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/01-silabus"  class="" title="Silabus - DevOps Kubernetes: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux" class="" 
+        title="Install minikube for Linux users
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 15 to 36
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/02c-minikube-basic-control" class="" 
+        title="Minikube basic control
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"  class="" title="Working with Deployment object">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#kubernetes" class="page__taxonomy-item p-category" rel="tag">Kubernetes</a><span class="sep">, </span>
+    
+      <a href="/categories/#orchestration" class="page__taxonomy-item p-category" rel="tag">Orchestration</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-01-27T11:59:08+07:00">January 27, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Deploying+an+apps%2Fservices+into+Kubernetes%20%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02b-deploy-application" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02b-deploy-application" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02b-deploy-application" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

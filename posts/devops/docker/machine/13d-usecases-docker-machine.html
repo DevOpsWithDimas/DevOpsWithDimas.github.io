@@ -1,0 +1,2171 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Example Use Cases of docker-machine - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas salah satu contoh penggunaannya untuk Docker Machine. Diantaranya     Multiple Docker Host by Projects   DRC (Disaster Revovery Center) system.   Ok langsung aja kita bahas materi yang pertama:">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Example Use Cases of docker-machine">
+<meta property="og:url" content="/posts/devops/docker/machine/13d-usecases-docker-machine">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas salah satu contoh penggunaannya untuk Docker Machine. Diantaranya     Multiple Docker Host by Projects   DRC (Disaster Revovery Center) system.   Ok langsung aja kita bahas materi yang pertama:">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-04-10T17:22:46+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/docker/machine/13d-usecases-docker-machine">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#multiple-docker-host-by-projects">Multiple Docker Host by projects</a></li><li><a href="#drc-disaster-recovery-center-system-simulation">DRC (Disaster Recovery Center) system simulation.</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Example Use Cases of docker-machine">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas salah satu contoh penggunaannya untuk Docker Machine. Diantaranya  Multiple Docker Host by Projects  DRC (Disaster Revovery Center) system.Ok langsung aja kita bahas materi yang pertama:">
+    <meta itemprop="datePublished" content="2022-04-10T17:22:46+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/docker/machine/13d-usecases-docker-machine" class="u-url" itemprop="url">Example Use Cases of docker-machine
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Docker for DevOps engineer
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-04-10T17:22:46+07:00">April 10, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        5 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Docker">
+        <label class="acordion-item-label" for="content-Pengenalan Docker">
+            Pengenalan Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/01-silabus">
+                        
+                        Silabus Belajar Docker: Pem...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01a-docker-overview">
+                        
+                        Docker Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01b-container-overview">
+                        
+                        What is Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02-system-requirement">
+                        
+                        What to know before you ins...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02a-install-on-windows10-wls">
+                        
+                        How to install Docker on Wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02b-install-on-linux-centos">
+                        
+                        How to install Docker on Li...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02c-install-on-mac">
+                        
+                        How to install Docker on Ma...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/03-getting-started">
+                        
+                        Getting Started with Docker
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Registry">
+        <label class="acordion-item-label" for="content-Docker Registry">
+            Docker Registry
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03a-docker-registry">
+                        
+                        Docker Registry (Docker HUB)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
+                        
+                        Insecure Registry
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03c-install-nexus-oss">
+                        
+                        Installing Nexus OSS
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Container CLI">
+        <label class="acordion-item-label" for="content-Docker Container CLI">
+            Docker Container CLI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04-docker-cli">
+                        
+                        Docker CLI (Command Line In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04a-docker-container-command">
+                        
+                        Management Docker Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04b-docker-image-command">
+                        
+                        Management Docker Images
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04c-docker-exec-command">
+                        
+                        Run a command in a running ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04d-expose-service-outside">
+                        
+                        Expose services to outside ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04e-docker-copy">
+                        
+                        Copying files/content betwe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04f-logging-inspect-stats-container">
+                        
+                        Logging, Inspect, & Resourc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04g-docker-run-env-file">
+                        
+                        Run a Container using Envir...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Networks">
+        <label class="acordion-item-label" for="content-Docker Networks">
+            Docker Networks
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05-docker-network">
+                        
+                        Networking overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05a-connect-to-other-container-use-link">
+                        
+                        Legacy feature of Docker Ne...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05b-docker-bridge-network">
+                        
+                        Use default bridge networks
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05c-docker-user-defined-briged-network">
+                        
+                        Use user-defined bridge net...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05d-docker-advance-user-defined-bridge-network">
+                        
+                        Advanced user-defined bridg...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05e-docker-host-network">
+                        
+                        Use host networking
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05g-docker-none-network">
+                        
+                        Disable networking for a co...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Volumes">
+        <label class="acordion-item-label" for="content-Docker Volumes">
+            Docker Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06-docker-volume">
+                        
+                        Docker Volume Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06a-management-volume">
+                        
+                        Management Volume
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06b-use-binding-volume-flag">
+                        
+                        Use Bind Mounts
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06c-share-data-among-containers">
+                        
+                        Share data among containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06e-share-data-among-machines">
+                        
+                        Share data among machines
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Dockerfile">
+        <label class="acordion-item-label" for="content-Dockerfile">
+            Dockerfile
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07-dockerfile">
+                        
+                        Build Docker Image Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07a-usage-docker-build">
+                        
+                        Usage docker build
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction">
+                        
+                        FROM Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07c-dockerfile-env">
+                        
+                        Environtment Replacement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07d-dockerfile-copy">
+                        
+                        Copying Resources
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07e-dockerfile-ignore">
+                        
+                        Excluding files/directories
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07f-dockerfile-label">
+                        
+                        Label Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07g-dockerfile-exec">
+                        
+                        Execution Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07h-dockerfile-cmd-vs-entrypoint">
+                        
+                        CMD vs ENTRYPOINT?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07i-dockerfile-expose">
+                        
+                        Exposing Ports
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07j-dockerfile-user-workdir">
+                        
+                        User, Volumes and Working D...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck">
+                        
+                        Health Check Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages">
+                        
+                        Multiple Stage Builds
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07m-best-practice-dockerfile">
+                        
+                        Best practices for writing ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07n-docker-image-scan">
+                        
+                        Best practices for scanning...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Build docker image">
+        <label class="acordion-item-label" for="content-Study Kasus: Build docker image">
+            Study Kasus: Build docker image
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage">
+                        
+                        Build specific docker image...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat">
+                        
+                        Build Docker Image for Java...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08b-using-maven-docker-plugin">
+                        
+                        Build Java Web using maven-...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08c-build-springboot">
+                        
+                        Build docker image for spri...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env">
+                        
+                        Springboot - using Environt...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file">
+                        
+                        Springboot - where data suc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db">
+                        
+                        Springboot - Using Database
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08g-build-angular-project">
+                        
+                        Build docker image for Angu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api">
+                        
+                        Angular - Access Rest API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend">
+                        
+                        Angular - Proxy to backend
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08j-build-php">
+                        
+                        Build docker image for PHP
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08k-build-laravel-apps">
+                        
+                        Build Docker image for Lara...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08l-build-laravel-webapp-and-restapi">
+                        
+                        Laravel - Using Frontend & ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db">
+                        
+                        Laravel - Using Database
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Compose">
+        <label class="acordion-item-label" for="content-Docker Compose">
+            Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09-docker-compose-overview">
+                        
+                        Overview of Docker Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09a-compose-getting-started">
+                        
+                        Get started with Docker Com...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09b-compose-cli">
+                        
+                        Overview of docker-compose CLI
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09c-syntax-compose-file">
+                        
+                        Compose file specification ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/environtment/09d-compose-using-env-variables">
+                        
+                        Environment variables in Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09e-compose-volume">
+                        
+                        Volume in Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09f-compose-share-data-between-containers">
+                        
+                        Share data between Containe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09g-share-data-using-sshfs-in-compose">
+                        
+                        Using sshfs for share data ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09h-share-data-using-nfs-in-compose">
+                        
+                        Using NFS for share data in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09i-compose-network-overview">
+                        
+                        Networking Overview in Comp...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09j-compose-network-link">
+                        
+                        Network links in Compose file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09k-compose-network-specify-custom">
+                        
+                        Specify custom networks in ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/dependency/09l-compose-depend-on">
+                        
+                        Dependency between services...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/build/09m-compose-build-image">
+                        
+                        Build docker image using Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09n-compose-using-profile">
+                        
+                        Using profiles with Compose...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09o-multiple-compose-add-override-attr">
+                        
+                        Multiple Compose files to A...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases">
+                        
+                        Example use case of multipl...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/scale/09q-compose-scale-services">
+                        
+                        Scale services using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflow/09r-compose-in-production">
+                        
+                        Use Compose in production
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Compose">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Compose">
+            Study Kasus: Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10-overview-compose-study-case">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10a-compose-php-study-case">
+                        
+                        PHP deployment using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case">
+                        
+                        Laravel deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case">
+                        
+                        Springboot deployment using...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case">
+                        
+                        Angular deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker">
+                        
+                        Deploy httpd with ssl/https...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects">
+                        
+                        Compose file for multiple g...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Context">
+        <label class="acordion-item-label" for="content-Docker Context">
+            Docker Context
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11-overview-docker-engine">
+                        
+                        Overview of Docker Context
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11a-docker-context">
+                        
+                        Usage & Managing Docker Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11b-docker-compose-remote-access">
+                        
+                        Remote deployment using doc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11c-dind">
+                        
+                        Docker Inside Docker (DinD)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11d-docker-desktop">
+                        
+                        Dashboard using Docker Desktop
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11e-docker-jetbraint">
+                        
+                        Using Docker on Jetbraint IDE
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11f-docker-portainer">
+                        
+                        Using docker on portainer.io
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11g-deprecated-features">
+                        
+                        Deprecated Engine Features
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker for CI">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker for CI">
+            Study Kasus: Docker for CI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12-overview-docker-for-ci">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12a-setup-gitlab-ci">
+                        
+                        Setup environment for CI us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12b-syntax-gitlab-ci-yml">
+                        
+                        The `.gitlab-ci.yml` file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12c-pipeline-php-gitlab-ci">
+                        
+                        Pipeline: PHP deployment us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12d-pipeline-javaweb-gitlab-ci">
+                        
+                        Pipeline: Java Web deployme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12e-pipeline-spring-boot-gitlab-ci">
+                        
+                        Pipeline: spring-boot deplo...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12f-pipeline-angular-gitlab-ci">
+                        
+                        Pipeline: Angular deploy wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12g-pipeline-laravel-gitlab-ci">
+                        
+                        Pipeline: Laravel deploy wi...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Machine">
+        <label class="acordion-item-label" for="content-Docker Machine">
+            Docker Machine
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13-docker-machine-overview">
+                        
+                        Overview of Docker machines
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-windows">
+                        
+                        Install docker-machine on W...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-linux">
+                        
+                        Install docker-machine on L...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-mac">
+                        
+                        Install docker-machine on M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13b-getting-started">
+                        
+                        Getting started with docker...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13c-managed-machines">
+                        
+                        Managing a machines in dock...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13d-usecases-docker-machine">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Example Use Cases of docker...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Ansible for Docker">
+        <label class="acordion-item-label" for="content-Study Kasus: Ansible for Docker">
+            Study Kasus: Ansible for Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker">
+                        
+                        Overview Study cases: IT Au...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14a-it-automation-platform">
+                        
+                        IT Automation Platform for ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment">
+                        
+                        Setup Ansible Control and M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14c-ansible-for-docker-operations">
+                        
+                        Getting started with Ansibl...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Swarm">
+        <label class="acordion-item-label" for="content-Docker Swarm">
+            Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Swarm">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Swarm">
+            Study Kasus: Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas salah satu contoh penggunaannya untuk Docker Machine. Diantaranya</p>
+
+<ol>
+  <li>Multiple Docker Host by Projects</li>
+  <li>DRC (Disaster Revovery Center) system.</li>
+</ol>
+
+<p>Ok langsung aja kita bahas materi yang pertama:</p>
+
+<!--more-->
+
+<h2 id="multiple-docker-host-by-projects">Multiple Docker Host by projects</h2>
+
+<p>Salah satu implementasi docker-machine adalah menggunakan multiple Docker Host by project. Magsudnya jika kita punya 3 project setiap project punya specifikasi containernya yang berbeda seperti berikut:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">prejects</span><span class="pi">:</span>
+    <span class="na">projectA</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">mysql'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">laravel'</span><span class="pi">]</span>
+    <span class="na">projectB</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">postgresql'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">springboot'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">angular'</span><span class="pi">]</span>
+    <span class="na">projectC</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">oracle'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">java-web'</span><span class="pi">]</span> 
+</code></pre></div></div>
+
+<p>Nah klo kita deploy dalam 1 docker host, maka semua container tersebut akan tercampur atau istilahnya (shared host). Ada kalanya kita ingin jalankan setiap project tersebut dalam environtment terpisah atau isolate (dedicated host) nah disini kita bisa manfaatkan docker-machine untuk membuat Docker Host masing-masing project dengan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-machine create <span class="nt">-d</span> virtualbox project-a<span class="p">;</span>
+<span class="nb">eval</span> <span class="si">$(</span>docker-machine <span class="nb">env </span>project-a<span class="si">)</span><span class="p">;</span>
+<span class="c">## deploy your container for projectA</span>
+
+docker-machine create <span class="nt">-d</span> virtualbox project-b<span class="p">;</span>
+<span class="nb">eval</span> <span class="si">$(</span>docker-machine <span class="nb">env </span>project-b<span class="si">)</span><span class="p">;</span>
+<span class="c">## deploy your container for projectB</span>
+
+docker-machine create <span class="nt">-d</span> virtualbox project-c<span class="p">;</span>
+<span class="nb">eval</span> <span class="si">$(</span>docker-machine <span class="nb">env </span>project-c<span class="si">)</span><span class="p">;</span>
+<span class="c">## deploy your container for projectC</span></code></pre></figure>
+
+<p>Jika kita jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker-machine</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">virtualbox</span><span class="w"> </span><span class="nt">--virtualbox-no-vtx-check</span><span class="w"> </span><span class="nx">project-a</span><span class="w">
+</span><span class="n">Running</span><span class="w"> </span><span class="nx">pre-create</span><span class="w"> </span><span class="nx">checks...</span><span class="w">
+</span><span class="n">Docker</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">running</span><span class="o">!</span><span class="w">
+</span><span class="n">To</span><span class="w"> </span><span class="nx">see</span><span class="w"> </span><span class="nx">how</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">connect</span><span class="w"> </span><span class="nx">your</span><span class="w"> </span><span class="nx">Docker</span><span class="w"> </span><span class="nx">Client</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Docker</span><span class="w"> </span><span class="nx">Engine</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">virtual</span><span class="w"> </span><span class="nx">machine</span><span class="p">,</span><span class="w"> </span><span class="nx">run:</span><span class="w"> </span><span class="nx">C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe</span><span class="w"> </span><span class="nx">env</span><span class="w"> </span><span class="nx">project-a</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker-machine</span><span class="w"> </span><span class="nx">env</span><span class="w"> </span><span class="nx">project-a</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_TLS_VERIFY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_HOST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tcp://192.168.99.103:2376"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_CERT_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:\Users\dimasm93\.docker\machine\machines\project-a"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_MACHINE_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"project-a"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">COMPOSE_CONVERT_WINDOWS_PATHS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">"C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe"</span><span class="w"> </span><span class="nx">env</span><span class="w"> </span><span class="nx">project-a</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Invoke-Expression</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">80:80</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">nginx</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">ls</span><span class="w">
+</span><span class="n">CONTAINER</span><span class="w"> </span><span class="nx">ID</span><span class="w">   </span><span class="nx">IMAGE</span><span class="w">     </span><span class="nx">COMMAND</span><span class="w">                  </span><span class="nx">CREATED</span><span class="w">          </span><span class="nx">STATUS</span><span class="w">          </span><span class="nx">PORTS</span><span class="w">                </span><span class="nx">NAMES</span><span class="w">
+</span><span class="mi">903498</span><span class="n">c8d16c</span><span class="w">   </span><span class="nx">nginx</span><span class="w">     </span><span class="s2">"/docker-entrypoint.…"</span><span class="w">   </span><span class="nx">25</span><span class="w"> </span><span class="nx">seconds</span><span class="w"> </span><span class="nx">ago</span><span class="w">   </span><span class="nx">Up</span><span class="w"> </span><span class="nx">24</span><span class="w"> </span><span class="nx">seconds</span><span class="w">   </span><span class="nx">0.0.0.0:80-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="w">   </span><span class="nx">exciting_mirzakhani</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">curl</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="nx">project-a</span><span class="p">)</span><span class="w">
+</span><span class="n">StatusCode</span><span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="nx">200</span><span class="w">
+</span><span class="n">StatusDescription</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">OK</span><span class="w">
+</span><span class="n">Content</span><span class="w">           </span><span class="p">:</span><span class="w"> </span><span class="err">&lt;</span><span class="o">!</span><span class="nx">DOCTYPE</span><span class="w"> </span><span class="nx">html</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">html</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">head</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">title</span><span class="err">&gt;</span><span class="nx">Welcome</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">nginx</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/title</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">style</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="n">html</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color-scheme:</span><span class="w"> </span><span class="nx">light</span><span class="w"> </span><span class="nx">dark</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+                    </span><span class="n">body</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width:</span><span class="w"> </span><span class="nx">35em</span><span class="p">;</span><span class="w"> </span><span class="n">margin:</span><span class="w"> </span><span class="nx">0</span><span class="w"> </span><span class="nx">auto</span><span class="p">;</span><span class="w">
+                    </span><span class="n">font-family:</span><span class="w"> </span><span class="nx">Tahoma</span><span class="p">,</span><span class="w"> </span><span class="nx">Verdana</span><span class="p">,</span><span class="w"> </span><span class="nx">Arial</span><span class="p">,</span><span class="w"> </span><span class="nx">sans-serif</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">/style...</span><span class="w">
+</span><span class="nx">RawContent</span><span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="nx">HTTP/1.1</span><span class="w"> </span><span class="nx">200</span><span class="w"> </span><span class="nx">OK</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker-machine</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">virtualbox</span><span class="w"> </span><span class="nt">--virtualbox-no-vtx-check</span><span class="w"> </span><span class="nx">project-b</span><span class="w">
+</span><span class="n">Running</span><span class="w"> </span><span class="nx">pre-create</span><span class="w"> </span><span class="nx">checks...</span><span class="w">
+</span><span class="n">Creating</span><span class="w"> </span><span class="nx">machine...</span><span class="w">
+</span><span class="n">Docker</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">running</span><span class="o">!</span><span class="w">
+</span><span class="n">To</span><span class="w"> </span><span class="nx">see</span><span class="w"> </span><span class="nx">how</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">connect</span><span class="w"> </span><span class="nx">your</span><span class="w"> </span><span class="nx">Docker</span><span class="w"> </span><span class="nx">Client</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Docker</span><span class="w"> </span><span class="nx">Engine</span><span class="w"> </span><span class="nx">running</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">virtual</span><span class="w"> </span><span class="nx">machine</span><span class="p">,</span><span class="w"> </span><span class="nx">run:</span><span class="w"> </span><span class="nx">C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe</span><span class="w"> </span><span class="nx">env</span><span class="w"> </span><span class="nx">project-b</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker-machine</span><span class="w"> </span><span class="nx">env</span><span class="w"> </span><span class="nx">project-b</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_TLS_VERIFY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_HOST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tcp://192.168.99.104:2376"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_CERT_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:\Users\dimasm93\.docker\machine\machines\project-b"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_MACHINE_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"project-b"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">COMPOSE_CONVERT_WINDOWS_PATHS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">"C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe"</span><span class="w"> </span><span class="nx">env</span><span class="w"> </span><span class="nx">project-b</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Invoke-Expression</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">80:80</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">httpd</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">ls</span><span class="w">
+</span><span class="n">CONTAINER</span><span class="w"> </span><span class="nx">ID</span><span class="w">   </span><span class="nx">IMAGE</span><span class="w">     </span><span class="nx">COMMAND</span><span class="w">              </span><span class="nx">CREATED</span><span class="w">          </span><span class="nx">STATUS</span><span class="w">          </span><span class="nx">PORTS</span><span class="w">
+</span><span class="n">NAMES</span><span class="w">
+</span><span class="nx">cf215cc32b4a</span><span class="w">   </span><span class="nx">httpd</span><span class="w">     </span><span class="s2">"httpd-foreground"</span><span class="w">   </span><span class="nx">11</span><span class="w"> </span><span class="nx">seconds</span><span class="w"> </span><span class="nx">ago</span><span class="w">   </span><span class="nx">Up</span><span class="w"> </span><span class="nx">10</span><span class="w"> </span><span class="nx">seconds</span><span class="w">   </span><span class="nx">0.0.0.0:80-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="w">   </span><span class="nx">focused_dewdney</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">curl</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="nx">project-b</span><span class="p">)</span><span class="w">                                                            
+</span><span class="n">StatusCode</span><span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="nx">200</span><span class="w">
+</span><span class="n">StatusDescription</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">OK</span><span class="w">
+</span><span class="n">Content</span><span class="w">           </span><span class="p">:</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">html</span><span class="err">&gt;&lt;</span><span class="nx">body</span><span class="err">&gt;&lt;</span><span class="nx">h1</span><span class="err">&gt;</span><span class="nx">It</span><span class="w"> </span><span class="nx">works</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/h1</span><span class="err">&gt;&lt;</span><span class="nx">/body</span><span class="err">&gt;&lt;</span><span class="nx">/html</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">RawContent</span><span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="nx">HTTP/1.1</span><span class="w"> </span><span class="nx">200</span><span class="w"> </span><span class="nx">OK</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">docker-machine</span><span class="w"> </span><span class="nx">ls</span><span class="w">
+</span><span class="n">NAME</span><span class="w">        </span><span class="nx">ACTIVE</span><span class="w">   </span><span class="nx">DRIVER</span><span class="w">       </span><span class="nx">STATE</span><span class="w">     </span><span class="nx">URL</span><span class="w">                         </span><span class="nx">SWARM</span><span class="w">   </span><span class="nx">DOCKER</span><span class="w">      </span><span class="nx">ERRORS</span><span class="w">
+</span><span class="n">default</span><span class="w">     </span><span class="o">-</span><span class="w">        </span><span class="nx">virtualbox</span><span class="w">   </span><span class="nx">Stopped</span><span class="w">                                       </span><span class="nx">Unknown</span><span class="w">
+</span><span class="n">project-a</span><span class="w">   </span><span class="o">-</span><span class="w">        </span><span class="nx">virtualbox</span><span class="w">   </span><span class="nx">Running</span><span class="w">   </span><span class="nx">tcp://192.168.99.103:2376</span><span class="w">           </span><span class="nx">v19.03.12</span><span class="w">
+</span><span class="n">project-b</span><span class="w">   </span><span class="o">*</span><span class="w">        </span><span class="nx">virtualbox</span><span class="w">   </span><span class="nx">Running</span><span class="w">   </span><span class="nx">tcp://192.168.99.104:2376</span><span class="w">           </span><span class="nx">v19.03.12</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="drc-disaster-recovery-center-system-simulation">DRC (Disaster Recovery Center) system simulation.</h2>
+
+<p>Dan selain untuk multiple project docker-machine juga bisa kita gunakan untuk meng-simulasi DRC (Disaster Recovery Center) system. Disaster Recovery System ini biasanya digunakan pada perusahan berscala menengah hinga besar, pemerintahan, dan beberapa startup karena untuk melindungi aplikasi, service, data agar tetap running jika terjadi bencana alam, hardware failure, network down dan lain-lain.</p>
+
+<p>Dalam best practice suatu Disaster Recovery Center biasanya di tentukan berdasarkan jarak lokasi penentuan Data Center dan replicasinya memiliki radius 60KM (Kilometer). secara Topology kalo kita gambarkan maka seperti berikut:</p>
+
+<p><img src="/resources/posts/docker/13d-usecase-docker-machine/01-topology-drc.png" alt="topology-drc" /></p>
+
+<p>Jadi pada gambar tersebut, kita lihat ada 4 region dan 1 routing yaitu</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">dc1</code> (Data Center utama)</li>
+  <li><code class="language-plaintext highlighter-rouge">drc1</code> (Replication)</li>
+  <li><code class="language-plaintext highlighter-rouge">drc2</code> (Replication)</li>
+  <li><code class="language-plaintext highlighter-rouge">drc3</code> (Replication)</li>
+</ol>
+
+<p>Setiap <code class="language-plaintext highlighter-rouge">dc</code> dan <code class="language-plaintext highlighter-rouge">drc</code> biasanya kita akan kita installkan aplikasi, service, database dan lain-lain. Nah sekarang kita coba implement dengan docker-machine ya berikut perintahnya:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-machine create <span class="nt">-d</span> virtualbox dc1<span class="p">;</span>
+docker-machine create <span class="nt">-d</span> virtualbox drc1<span class="p">;</span>
+docker-machine create <span class="nt">-d</span> virtualbox drc2<span class="p">;</span></code></pre></figure>
+
+<p>Nah Untuk routing sendiri biasanya adalah hardware tersediri ada banyak sekali implementasinya bisa pake <a href="https://www.f5.com/">f5</a>, <a href="https://www.cisco.com/c/en/us/index.html">cisco</a>, microtic dan lain-lain. Tetapi karena disini kita menggunakan di local semua kita bisa manfaat loadbalancer/proxy seperti</p>
+
+<ol>
+  <li><a href="https://traefik.io/traefik/">Traefik proxy</a></li>
+  <li><a href="https://nginx.org/en/docs/http/load_balancing.html">nginx load balancer</a></li>
+  <li><a href="https://etcd.io/docs/v3.5/quickstart/">etcd</a></li>
+  <li>dan lain-lain.</li>
+</ol>
+
+<p>Ok sekarang kita coba implement untuk routingnya juga, dengan menggunakan docker-machine seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-machine create <span class="nt">-d</span> virtualbox routing<span class="p">;</span></code></pre></figure>
+
+<p>Sebagai contoh kita akan menggunakan nginx loadbalancer menggunakan method least-connected. Berikut configurasinya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=13d-nginx-lb-leash-connected.template.conf"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">ls</span><span class="w">
+</span><span class="n">NAME</span><span class="w">              </span><span class="nx">ACTIVE</span><span class="w">   </span><span class="nx">DRIVER</span><span class="w">       </span><span class="nx">STATE</span><span class="w">     </span><span class="nx">URL</span><span class="w">                         </span><span class="nx">SWARM</span><span class="w">   </span><span class="nx">DOCKER</span><span class="w">      </span><span class="nx">ERRORS</span><span class="w">
+</span><span class="n">machine-dc1</span><span class="w">       </span><span class="o">-</span><span class="w">        </span><span class="nx">virtualbox</span><span class="w">   </span><span class="nx">Running</span><span class="w">   </span><span class="nx">tcp://192.168.99.105:2376</span><span class="w">           </span><span class="nx">v19.03.12</span><span class="w">
+</span><span class="n">machine-drc1</span><span class="w">      </span><span class="o">-</span><span class="w">        </span><span class="nx">virtualbox</span><span class="w">   </span><span class="nx">Running</span><span class="w">   </span><span class="nx">tcp://192.168.99.106:2376</span><span class="w">           </span><span class="nx">v19.03.12</span><span class="w">
+</span><span class="n">machine-routing</span><span class="w">   </span><span class="o">-</span><span class="w">        </span><span class="nx">virtualbox</span><span class="w">   </span><span class="nx">Running</span><span class="w">   </span><span class="nx">tcp://192.168.99.107:2376</span><span class="w">           </span><span class="nx">v19.03.12</span><span class="w">
+
+</span><span class="c">## connect to machine dc1</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">env</span><span class="w"> </span><span class="nx">machine-dc1</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_TLS_VERIFY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_HOST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tcp://192.168.99.105:2376"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_CERT_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:\Users\dimasm93\.docker\machine\machines\machine-dc1"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_MACHINE_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"machine-dc1"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">COMPOSE_CONVERT_WINDOWS_PATHS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">"C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe"</span><span class="w"> </span><span class="n">env</span><span class="w"> </span><span class="nx">machine-dc1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Invoke-Expression</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">80:80</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">--restart</span><span class="w"> </span><span class="nx">always</span><span class="w"> </span><span class="nx">httpd</span><span class="w">
+
+</span><span class="c">## connect to machine drc1</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">env</span><span class="w"> </span><span class="nx">machine-drc1</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_TLS_VERIFY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_HOST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tcp://192.168.99.106:2376"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_CERT_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:\Users\dimasm93\.docker\machine\machines\machine-drc1"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_MACHINE_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"machine-drc1"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">COMPOSE_CONVERT_WINDOWS_PATHS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">"C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe"</span><span class="w"> </span><span class="n">env</span><span class="w"> </span><span class="nx">machine-drc1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Invoke-Expression</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">80:80</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">--restart</span><span class="w"> </span><span class="nx">always</span><span class="w"> </span><span class="nx">httpd</span><span class="w">
+
+</span><span class="c">## connect to machine routing</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">env</span><span class="w"> </span><span class="nx">machine-routing</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_TLS_VERIFY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_HOST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"tcp://192.168.99.107:2376"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_CERT_PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:\Users\dimasm93\.docker\machine\machines\machine-routing"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">DOCKER_MACHINE_NAME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"machine-routing"</span><span class="w">
+</span><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">COMPOSE_CONVERT_WINDOWS_PATHS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"true"</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="s2">"C:\ProgramData\chocolatey\lib\docker-machine\bin\docker-machine.exe"</span><span class="w"> </span><span class="n">env</span><span class="w"> </span><span class="nx">machine-routing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Invoke-Expression</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">80:80</span><span class="w"> </span><span class="nt">-v</span><span class="w"> </span><span class="nx">nginx.least-connect.template.conf:/etc/nginx/templates/default.conf.template</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">nginx</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">container</span><span class="w"> </span><span class="nx">ls</span><span class="w">
+</span><span class="n">CONTAINER</span><span class="w"> </span><span class="nx">ID</span><span class="w">   </span><span class="nx">IMAGE</span><span class="w">     </span><span class="nx">COMMAND</span><span class="w">                  </span><span class="nx">CREATED</span><span class="w">          </span><span class="nx">STATUS</span><span class="w">          </span><span class="nx">PORTS</span><span class="w">                </span><span class="nx">NAMES</span><span class="w">
+</span><span class="n">d8d1aa0410a7</span><span class="w">   </span><span class="nx">nginx</span><span class="w">     </span><span class="s2">"/docker-entrypoint.…"</span><span class="w">   </span><span class="nx">10</span><span class="w"> </span><span class="nx">seconds</span><span class="w"> </span><span class="nx">ago</span><span class="w">   </span><span class="nx">Up</span><span class="w"> </span><span class="nx">10</span><span class="w"> </span><span class="nx">seconds</span><span class="w">   </span><span class="nx">0.0.0.0:80-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="w">   </span><span class="nx">mystifying_dubinsky</span><span class="w">
+
+</span><span class="c">## Test all up</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">curl</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="nx">machine-routing</span><span class="p">)</span><span class="w">
+</span><span class="n">StatusCode</span><span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="nx">200</span><span class="w">
+</span><span class="n">StatusDescription</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">OK</span><span class="w">
+</span><span class="n">Content</span><span class="w">           </span><span class="p">:</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">html</span><span class="err">&gt;&lt;</span><span class="nx">body</span><span class="err">&gt;&lt;</span><span class="nx">h1</span><span class="err">&gt;</span><span class="nx">It</span><span class="w"> </span><span class="nx">works</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/h1</span><span class="err">&gt;&lt;</span><span class="nx">/body</span><span class="err">&gt;&lt;</span><span class="nx">/html</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="c">## Test down dc1</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">stop</span><span class="w"> </span><span class="nx">machine-dc1</span><span class="w">
+</span><span class="n">Stopping</span><span class="w"> </span><span class="s2">"machine-dc1"</span><span class="o">...</span><span class="w">
+</span><span class="n">Machine</span><span class="w"> </span><span class="s2">"machine-dc1"</span><span class="w"> </span><span class="nx">was</span><span class="w"> </span><span class="nx">stopped.</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">curl</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="nx">machine-routing</span><span class="p">)</span><span class="w">
+</span><span class="n">StatusCode</span><span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="nx">200</span><span class="w">
+</span><span class="n">StatusDescription</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">OK</span><span class="w">
+</span><span class="n">Content</span><span class="w">           </span><span class="p">:</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">html</span><span class="err">&gt;&lt;</span><span class="nx">body</span><span class="err">&gt;&lt;</span><span class="nx">h1</span><span class="err">&gt;</span><span class="nx">It</span><span class="w"> </span><span class="nx">works</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/h1</span><span class="err">&gt;&lt;</span><span class="nx">/body</span><span class="err">&gt;&lt;</span><span class="nx">/html</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="c">## Test down dc1 &amp; drc1</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">curl</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="nx">machine-routing</span><span class="p">)</span><span class="w">
+</span><span class="n">curl</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">502</span><span class="w"> </span><span class="nx">Bad</span><span class="w"> </span><span class="nx">Gateway</span><span class="w">
+</span><span class="n">nginx/1.21.6</span><span class="w">
+
+</span><span class="c">## Test drc1 up again</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="nx">machine-drc1</span><span class="w">
+</span><span class="n">Starting</span><span class="w"> </span><span class="s2">"machine-drc1"</span><span class="o">...</span><span class="w">
+</span><span class="n">Started</span><span class="w"> </span><span class="nx">machines</span><span class="w"> </span><span class="nx">may</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">IP</span><span class="w"> </span><span class="nx">addresses.</span><span class="w"> </span><span class="nx">You</span><span class="w"> </span><span class="nx">may</span><span class="w"> </span><span class="nx">need</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">re-run</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="se">`d</span><span class="nx">ocker-machine</span><span class="w"> </span><span class="nx">env</span><span class="se">` </span><span class="nx">command.</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">ls</span><span class="w">
+</span><span class="n">NAME</span><span class="w">              </span><span class="nx">ACTIVE</span><span class="w">   </span><span class="nx">DRIVER</span><span class="w">       </span><span class="nx">STATE</span><span class="w">     </span><span class="nx">URL</span><span class="w">                         </span><span class="nx">SWARM</span><span class="w">   </span><span class="nx">DOCKER</span><span class="w">      </span><span class="nx">ERRORS</span><span class="w">
+</span><span class="n">machine-dc1</span><span class="w">       </span><span class="o">-</span><span class="w">        </span><span class="nx">virtualbox</span><span class="w">   </span><span class="nx">Stopped</span><span class="w">                                       </span><span class="nx">Unknown</span><span class="w">
+</span><span class="n">machine-drc1</span><span class="w">      </span><span class="o">*</span><span class="w">        </span><span class="nx">virtualbox</span><span class="w">   </span><span class="nx">Running</span><span class="w">   </span><span class="nx">tcp://192.168.99.106:2376</span><span class="w">           </span><span class="nx">v19.03.12</span><span class="w">
+</span><span class="n">machine-routing</span><span class="w">   </span><span class="o">-</span><span class="w">        </span><span class="nx">virtualbox</span><span class="w">   </span><span class="nx">Running</span><span class="w">   </span><span class="nx">tcp://192.168.99.107:2376</span><span class="w">           </span><span class="nx">v19.03.12</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">curl</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">docker-machine</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="nx">machine-routing</span><span class="p">)</span><span class="w">
+</span><span class="n">StatusCode</span><span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="nx">200</span><span class="w">
+</span><span class="n">StatusDescription</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">OK</span><span class="w">
+</span><span class="n">Content</span><span class="w">           </span><span class="p">:</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">html</span><span class="err">&gt;&lt;</span><span class="nx">body</span><span class="err">&gt;&lt;</span><span class="nx">h1</span><span class="err">&gt;</span><span class="nx">It</span><span class="w"> </span><span class="nx">works</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/h1</span><span class="err">&gt;&lt;</span><span class="nx">/body</span><span class="err">&gt;&lt;</span><span class="nx">/html</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/docker/01-silabus"  class="" title="Silabus Belajar Docker: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/docker/machine/13c-managed-machines" class="" 
+        title="Managing a machines in docker-machine
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 109 to 113
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker" class="" 
+        title="Overview Study cases: IT Automation Platform for Docker Operations
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/docker/14c-ansible-for-docker-operations"  class="" title="Getting started with Ansible role, tasks for docker">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#docker" class="page__taxonomy-item p-category" rel="tag">Docker</a><span class="sep">, </span>
+    
+      <a href="/categories/#machine" class="page__taxonomy-item p-category" rel="tag">Machine</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-04-10T17:22:46+07:00">April 10, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Example+Use+Cases+of+docker-machine%20%2Fposts%2Fdevops%2Fdocker%2Fmachine%2F13d-usecases-docker-machine" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Fdocker%2Fmachine%2F13d-usecases-docker-machine" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Fdocker%2Fmachine%2F13d-usecases-docker-machine" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

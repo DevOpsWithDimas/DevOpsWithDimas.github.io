@@ -1,0 +1,1972 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Minikube addons features - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Minikube Addons for added functionality features of Kubernetes. Diantaranya yang akan kita bahas adalah     Basic usage addons command   Enable Dashboard &amp; metrics-server   Enable Registry-Creds for Private Registry   Enable Registry-Creds for Insecure Docker Registry   Enable Load balancer service   Enable Ingress service   Ok langsung aja kita ke pembahasan yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Minikube addons features">
+<meta property="og:url" content="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Minikube Addons for added functionality features of Kubernetes. Diantaranya yang akan kita bahas adalah     Basic usage addons command   Enable Dashboard &amp; metrics-server   Enable Registry-Creds for Private Registry   Enable Registry-Creds for Insecure Docker Registry   Enable Load balancer service   Enable Ingress service   Ok langsung aja kita ke pembahasan yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-02-18T22:19:57+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#basic-usage-addons-command">Basic usage addons command</a></li><li><a href="#enable-dashboard--metrics-server">Enable Dashboard &amp; metrics-server</a></li><li><a href="#enable-registry-creds-for-private-registry">Enable Registry-Creds for Private Registry</a></li><li><a href="#enable-registry-creds-for-insecure-docker-registry">Enable Registry-Creds for Insecure Docker Registry</a></li><li><a href="#enable-load-balancer-service">Enable Load balancer service</a></li><li><a href="#enable-ingress-service">Enable Ingress service</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Minikube addons features">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Minikube Addons for added functionality features of Kubernetes. Diantaranya yang akan kita bahas adalah  Basic usage addons command  Enable Dashboard &amp; metrics-server  Enable Registry-Creds for Private Registry  Enable Registry-Creds for Insecure Docker Registry  Enable Load balancer service  Enable Ingress serviceOk langsung aja kita ke pembahasan yang pertama">
+    <meta itemprop="datePublished" content="2022-02-18T22:19:57+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons" class="u-url" itemprop="url">Minikube addons features
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-02-18T22:19:57+07:00">February 18, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        12 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Kubernetes">
+        <label class="acordion-item-label" for="content-Pengenalan Kubernetes">
+            Pengenalan Kubernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01-silabus">
+                        
+                        Silabus - DevOps Kubernetes...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes">
+                        
+                        What is Kubernetes (k8s) ?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01b-k8s-components">
+                        
+                        Kubernetes Components
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01c-k8s-api">
+                        
+                        The Kubernetes API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01d-k8s-objects">
+                        
+                        What is Kubernetes Objects?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01e-k8s-object-management">
+                        
+                        Managing Kubernetes Object
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids">
+                        
+                        Kubernetes Object Names and...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01g-k8s-namespaces">
+                        
+                        What is Kubernetes Namespaces?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments">
+                        
+                        Kubernetes cluster environt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started with minikube">
+        <label class="acordion-item-label" for="content-Getting started with minikube">
+            Getting started with minikube
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02-overview-learn-env">
+                        
+                        Overview learning environme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos">
+                        
+                        Install minikube on Mac (In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon">
+                        
+                        Install minikube on Mac (Ap...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows">
+                        
+                        Install minikube for Window...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+                        
+                        Install minikube for Linux ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+                        
+                        Deploying an apps/services ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02c-minikube-basic-control">
+                        
+                        Minikube basic control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images">
+                        
+                        Using your own image into M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Minikube addons features
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+                        
+                        Access your apps/service in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02h-minikube-mount">
+                        
+                        Mounting filesystems to min...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pods and Containers">
+        <label class="acordion-item-label" for="content-Pods and Containers">
+            Pods and Containers
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers">
+                        
+                        Overview Pod and Container ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03a-workload-pods">
+                        
+                        Kubernetes Workloads with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+                        
+                        Working with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config">
+                        
+                        Basic Pods and Containers C...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+                        
+                        Pod & Container Lifecycle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers">
+                        
+                        Initialization of Containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+                        
+                        Configure env (Environment ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit">
+                        
+                        Configure Request and Limit...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+                        
+                        Configure liveness, readine...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions">
+                        
+                        Pod Disruptions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases">
+                        
+                        Overview Study Cases: Pod a...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps">
+                        
+                        Study Cases: Monolith apps ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps">
+                        
+                        Study cases: Microservice a...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Workload resources">
+        <label class="acordion-item-label" for="content-Workload resources">
+            Workload resources
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources">
+                        
+                        Overview Kubernetes Workloa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload">
+                        
+                        What is Workload Resources?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment">
+                        
+                        Working with Deployment object
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking (service)">
+        <label class="acordion-item-label" for="content-Networking (service)">
+            Networking (service)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Store data using Volumes">
+        <label class="acordion-item-label" for="content-Store data using Volumes">
+            Store data using Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Client">
+        <label class="acordion-item-label" for="content-Kubernetes Client">
+            Kubernetes Client
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Security RBAC">
+        <label class="acordion-item-label" for="content-Security RBAC">
+            Security RBAC
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Package manager">
+        <label class="acordion-item-label" for="content-Kubernetes Package manager">
+            Kubernetes Package manager
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes cluster for Production grade">
+        <label class="acordion-item-label" for="content-Kubernetes cluster for Production grade">
+            Kubernetes cluster for Production grade
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Service mesh with istio">
+        <label class="acordion-item-label" for="content-Service mesh with istio">
+            Service mesh with istio
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes on Cloud provider">
+        <label class="acordion-item-label" for="content-Kubernetes on Cloud provider">
+            Kubernetes on Cloud provider
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas tentang Minikube Addons for added functionality features of Kubernetes. Diantaranya yang akan kita bahas adalah</p>
+
+<ol>
+  <li>Basic usage <code class="language-plaintext highlighter-rouge">addons</code> command</li>
+  <li>Enable Dashboard &amp; metrics-server</li>
+  <li>Enable Registry-Creds for Private Registry</li>
+  <li>Enable Registry-Creds for Insecure Docker Registry</li>
+  <li>Enable Load balancer service</li>
+  <li>Enable Ingress service</li>
+</ol>
+
+<p>Ok langsung aja kita ke pembahasan yang pertama</p>
+
+<!--more-->
+
+<h2 id="basic-usage-addons-command">Basic usage <code class="language-plaintext highlighter-rouge">addons</code> command</h2>
+
+<p>Minikube has a built-in list of applications and services that may be easily deployed, such as Istio or Ingress. Untuk lebih detail temen-temen bisa lihat dokumentasinya menggunakan perintah</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">minikube addons <span class="nt">--help</span></code></pre></figure>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  minikube addons <span class="nt">--help</span>
+addons modifies minikube addons files using subcommands like <span class="sb">`</span>minikube addons <span class="nb">enable </span>dashboard<span class="sb">`</span>
+
+Available Commands:
+  configure   Configures the addon w/ADDON_NAME within minikube <span class="o">(</span>example: <span class="sb">`</span>minikube addons configure registry-creds<span class="sb">`</span><span class="o">)</span><span class="nb">.</span> For a list of available addons use: minikube addons list
+  disable     Disables the addon w/ADDON_NAME within minikube <span class="o">(</span>example: <span class="sb">`</span>minikube addons disable dashboard<span class="sb">`</span><span class="o">)</span><span class="nb">.</span> For a list of available addons use: minikube addons list
+  <span class="nb">enable      </span>Enables the addon w/ADDON_NAME within minikube. For a list of available addons use: <span class="sb">`</span>minikube addons list<span class="sb">`</span>
+  images      List image names the addon w/ADDON_NAME used. For a list of available addons use: <span class="sb">`</span>minikube addons list<span class="sb">`</span>
+  list        Lists all available minikube addons as well as their current statuses <span class="o">(</span>enabled/disabled<span class="o">)</span>
+  open        Opens the addon w/ADDON_NAME within minikube <span class="o">(</span>example: <span class="sb">`</span>minikube addons open dashboard<span class="sb">`</span><span class="o">)</span><span class="nb">.</span> For a list of available addons use: minikube addons list
+
+Usage:
+  minikube addons SUBCOMMAND <span class="o">[</span>flags] <span class="o">[</span>options]
+
+Use <span class="s2">"minikube &lt;command&gt; --help"</span> <span class="k">for </span>more information about a given command.
+Use <span class="s2">"minikube options"</span> <span class="k">for </span>a list of global command-line options <span class="o">(</span>applies to all commands<span class="o">)</span><span class="nb">.</span>
+</code></pre></div></div>
+
+<p>To list the available addons for your version of minikube:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">minikube addons list</code></pre></figure>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  minikube addons list
+|-----------------------------|--------------------------------|
+|         ADDON NAME          |           MAINTAINER           |
+|-----------------------------|--------------------------------|
+| ambassador                  | third-party <span class="o">(</span>ambassador<span class="o">)</span>       |
+| auto-pause                  | google                         |
+| csi-hostpath-driver         | kubernetes                     |
+| dashboard                   | kubernetes                     |
+| default-storageclass        | kubernetes                     |
+| efk                         | third-party <span class="o">(</span>elastic<span class="o">)</span>          |
+| freshpod                    | google                         |
+| gcp-auth                    | google                         |
+| gvisor                      | google                         |
+| helm-tiller                 | third-party <span class="o">(</span>helm<span class="o">)</span>             |
+| ingress                     | unknown <span class="o">(</span>third-party<span class="o">)</span>          |
+| ingress-dns                 | google                         |
+| istio                       | third-party <span class="o">(</span>istio<span class="o">)</span>            |
+| istio-provisioner           | third-party <span class="o">(</span>istio<span class="o">)</span>            |
+| kubevirt                    | third-party <span class="o">(</span>kubevirt<span class="o">)</span>         |
+| logviewer                   | unknown <span class="o">(</span>third-party<span class="o">)</span>          |
+| metallb                     | third-party <span class="o">(</span>metallb<span class="o">)</span>          |
+| metrics-server              | kubernetes                     |
+| nvidia-driver-installer     | google                         |
+| nvidia-gpu-device-plugin    | third-party <span class="o">(</span>nvidia<span class="o">)</span>           |
+| olm                         | third-party <span class="o">(</span>operator          |
+|                             | framework<span class="o">)</span>                     |
+| pod-security-policy         | unknown <span class="o">(</span>third-party<span class="o">)</span>          |
+| portainer                   | portainer.io                   |
+| registry                    | google                         |
+| registry-aliases            | unknown <span class="o">(</span>third-party<span class="o">)</span>          |
+| registry-creds              | third-party <span class="o">(</span>upmc enterprises<span class="o">)</span> |
+| storage-provisioner         | google                         |
+| storage-provisioner-gluster | unknown <span class="o">(</span>third-party<span class="o">)</span>          |
+| volumesnapshots             | kubernetes                     |
+|-----------------------------|--------------------------------|
+</code></pre></div></div>
+
+<p>To enable an add-on, see:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">minikube addons <span class="nb">enable</span> &lt;name&gt;</code></pre></figure>
+
+<p>To enable an addon at start-up, where <code class="language-plaintext highlighter-rouge">–-addons</code> option can be specified multiple times:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">minikube start <span class="nt">--addons</span> &lt;name&gt; <span class="nt">--addons</span> &lt;name2&gt;</code></pre></figure>
+
+<p>For addons that expose a browser endpoint, you can quickly open them with:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">minikube addons open &lt;name&gt;</code></pre></figure>
+
+<p>To disable an addon:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">minikube addons disable &lt;name&gt;</code></pre></figure>
+
+<h2 id="enable-dashboard--metrics-server">Enable Dashboard &amp; metrics-server</h2>
+
+<p>minikube has integrated support for the <a href="https://github.com/kubernetes/dashboard">Kubernetes Dashboard UI</a>.</p>
+
+<p>The Dashboard is a web-based Kubernetes user interface. You can use it to:</p>
+
+<ol>
+  <li>deploy containerized applications to a Kubernetes cluster</li>
+  <li>troubleshoot your containerized application</li>
+  <li>manage the cluster resources</li>
+  <li>get an overview of applications running on your cluster</li>
+  <li>creating or modifying individual Kubernetes resources (such as <code class="language-plaintext highlighter-rouge">Deployments</code>, <code class="language-plaintext highlighter-rouge">Jobs</code>, <code class="language-plaintext highlighter-rouge">DaemonSets</code>, etc)</li>
+</ol>
+
+<p>To access the dashboard:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02f-minikube-dashboard.bash"> </script>
+
+<p>This will enable the dashboard add-on, and open the proxy in the default web browser. seperti berikut:</p>
+
+<p><img src="/resources/posts/kubernetes/02f-minikube-addons/01-minikube-dashboard.png" alt="minikube-dashboard" /></p>
+
+<h2 id="enable-registry-creds-for-private-registry">Enable Registry-Creds for Private Registry</h2>
+
+<p>Dengan menggunakan minikube kita juga bisa menggunakan Private registry seperti</p>
+
+<ol>
+  <li>Google Container Registry (GCR),</li>
+  <li>Amazon’s EC2 Container Registry (ECR)</li>
+  <li>Azure Container Registry (ACR)</li>
+  <li>Private Docker registries</li>
+</ol>
+
+<p>You will need to run <code class="language-plaintext highlighter-rouge">addons configure registry-creds</code> and <code class="language-plaintext highlighter-rouge">addons enable registry-creds</code> to get up and running. Tapi sebelum itu kita akan coba push dulu image yang telah kita build ke private registry. Contohnya disini kita akan menggunakan <a href="https://hub.docker.com">Docker Hub</a></p>
+
+<p>Sekarang kita coba push imagenya, dan kita buat visiblitynya menjadi private</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker login
+
+docker push dimmaryanto93/kubernetes-cource:1.0</code></pre></figure>
+
+<p>Seperti berikut hasilnya:</p>
+
+<p><img src="/resources/posts/kubernetes/02f-minikube-addons/01-private-registry-docker.png" alt="docker-private-registry" /></p>
+
+<p>minikube cluster membutuhkan credential untuk account dari Docker HUB kita bisa menggunakan perintah berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02d-minikube-config-registry-creds.bash"> </script>
+
+<p>Dan setelah kita configure, kita gunakan perintah berikut untuk menaktifkan registry credentialnya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02d-minikube-enable-registry-creds.bash"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  ~ minikube addons configure registry-creds
+
+Do you want to <span class="nb">enable </span>AWS Elastic Container Registry? <span class="o">[</span>y/n]: n
+Do you want to <span class="nb">enable </span>Google Container Registry? <span class="o">[</span>y/n]: n
+Do you want to <span class="nb">enable </span>Docker Registry? <span class="o">[</span>y/n]: y
+<span class="nt">--</span> Enter docker registry server url: https://index.docker.io/v1/
+<span class="nt">--</span> Enter docker registry username: dimmaryanto93
+<span class="nt">--</span> Enter docker registry password:
+Do you want to <span class="nb">enable </span>Azure Container Registry? <span class="o">[</span>y/n]: n
+✅  registry-creds was successfully configured
+
+➜  ~ minikube addons <span class="nb">enable </span>registry-creds
+    ▪ Using image upmcenterprises/registry-creds:1.10
+🌟  The <span class="s1">'registry-creds'</span> addon is enabled
+
+<span class="c">## credential store in secret as below</span>
+➜  ~ kubectl get secrets <span class="nt">-n</span> kube-system
+NAME                                             TYPE                                  DATA   AGE
+registry-creds-acr                               Opaque                                3      52s
+registry-creds-dpr                               Opaque                                3      52s
+registry-creds-ecr                               Opaque                                6      52s
+registry-creds-gcr                               Opaque                                2      52s
+
+➜  ~ kubectl run nginx-private-app <span class="nt">--image</span> dimmaryanto93/kubernetes-cource:1.0
+pod/nginx-private-app created
+
+➜  ~ kubectl get pod
+NAME                READY   STATUS    RESTARTS   AGE
+nginx-private-app   1/1     Running   0          71s
+
+➜  ~ kubectl describe pod/nginx-private-app
+Name:         nginx-private-app
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.59.116
+Start Time:   Tue, 01 Feb 2022 22:00:28 +0700
+Labels:       <span class="nv">run</span><span class="o">=</span>nginx-private-app
+Annotations:  &lt;none&gt;
+Status:       Running
+IP:           172.17.0.3
+IPs:
+  IP:  172.17.0.3
+Containers:
+  nginx-private-app:
+    Container ID:   docker://7d7c24228450ec909bdff802bf7c3cfba856f95985b882f70f6f7f1e28424d44
+    Image:          dimmaryanto93/kubernetes-cource:1.0
+    Image ID:       docker-pullable://dimmaryanto93/kubernetes-cource@sha256:bce870a1cfc768aa9cb6affe71e18ac7dc3c6997ad016d3ce44af0e8ecae50c9
+    Port:           &lt;none&gt;
+    Host Port:      &lt;none&gt;
+    State:          Running
+      Started:      Tue, 01 Feb 2022 22:01:09 +0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    &lt;none&gt;
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-7zv7k <span class="o">(</span>ro<span class="o">)</span>
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-7zv7k:
+    Type:                    Projected <span class="o">(</span>a volume that contains injected data from multiple sources<span class="o">)</span>
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       &lt;nil&gt;
+    DownwardAPI:             <span class="nb">true
+</span>QoS Class:                   BestEffort
+Node-Selectors:              &lt;none&gt;
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute <span class="nv">op</span><span class="o">=</span>Exists <span class="k">for </span>300s
+                             node.kubernetes.io/unreachable:NoExecute <span class="nv">op</span><span class="o">=</span>Exists <span class="k">for </span>300s
+Events:
+  Type    Reason     Age   From               Message
+  <span class="nt">----</span>    <span class="nt">------</span>     <span class="nt">----</span>  <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal  Scheduled  95s   default-scheduler  Successfully assigned default/nginx-private-app to minikube
+  Normal  Pulling    94s   kubelet            Pulling image <span class="s2">"dimmaryanto93/kubernetes-cource:1.0"</span>
+  Normal  Pulled     54s   kubelet            Successfully pulled image <span class="s2">"dimmaryanto93/kubernetes-cource:1.0"</span> <span class="k">in </span>39.727921156s
+  Normal  Created    54s   kubelet            Created container nginx-private-app
+  Normal  Started    54s   kubelet            Started container nginx-private-app
+</code></pre></div></div>
+
+<h2 id="enable-registry-creds-for-insecure-docker-registry">Enable Registry-Creds for Insecure Docker Registry</h2>
+
+<p>minikube allows users to configure the docker engine’s <code class="language-plaintext highlighter-rouge">--insecure-registry</code> flag.</p>
+
+<p>You can use the <code class="language-plaintext highlighter-rouge">--insecure-registry</code> flag on the <code class="language-plaintext highlighter-rouge">minikube start</code> command to enable insecure communication between the docker engine and registries listening to requests from the CIDR range.</p>
+
+<p>Insecure Registry ini adalah alternative jika container image mau di simpan di on-premis, Ada beberapa container registry yang kita bisa gunakan seperti</p>
+
+<ol>
+  <li><a href="https://www.sonatype.com/products/repository-oss">Nexus OSS</a></li>
+  <li><a href="https://jfrog.com/artifactory/">JFrog Artifactory</a></li>
+  <li><a href="https://docs.gitlab.com/ee/administration/packages/container_registry.html">Gitlab Container Registry</a></li>
+  <li>dan masih banyak lagi.</li>
+</ol>
+
+<p>Disini saya sudah install insecure-registry menggunakan Nexus dan untuk cara installnya saya sudah pernah bahas di <a href="/posts/devops/docker/registry/03c-install-nexus-oss">artikel berikut</a> untuk registry urlnya seperti berikut:</p>
+
+<ol>
+  <li>Hosted registry: <code class="language-plaintext highlighter-rouge">192.168.88.50:8087</code></li>
+  <li>Group registry: <code class="language-plaintext highlighter-rouge">192.168.88.50:8086</code></li>
+</ol>
+
+<p>Jadi jika kita mau menggunakan insecure registry tersebut kita bisa menggunakan perintah berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02d-minikube-start-with-insecure-registry.bash"> </script>
+
+<p>Sebelum kita coba, kita coba push dulu ke registry tersebut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker tag dimmaryanto93/kubernetes-cource:1.0 192.168.88.50:8087/udemy/kubernetes/nginx-app:1.0
+
+docker push 192.168.88.50:8087/udemy/kubernetes/nginx-app:1.0</code></pre></figure>
+
+<p>Maka hasilnya seperti berikut:</p>
+
+<p><img src="/resources/posts/kubernetes/02f-minikube-addons/02-insecure-registry-docker.png" alt="image-insecure-registry" /></p>
+
+<p>Sekarang kita coba jalankan:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  ~ minikube start <span class="nt">--memory</span> 4g <span class="nt">--driver</span> virtualbox <span class="se">\</span>
+<span class="o">&gt;</span> <span class="nt">--insecure-registry</span><span class="o">=</span><span class="s2">"192.168.88.50:8087,192.168.88.50:8086"</span> <span class="se">\</span>
+<span class="o">&gt;</span> <span class="nt">-p</span> insecure-registry
+😄  <span class="o">[</span>insecure-registry] minikube v1.25.1 on Darwin 12.2
+✨  Using the virtualbox driver based on user configuration
+👍  Starting control plane node insecure-registry <span class="k">in </span>cluster insecure-registry
+🔥  Creating virtualbox VM <span class="o">(</span><span class="nv">CPUs</span><span class="o">=</span>2, <span class="nv">Memory</span><span class="o">=</span>4096MB, <span class="nv">Disk</span><span class="o">=</span>20000MB<span class="o">)</span> ...
+🐳  Preparing Kubernetes v1.23.1 on Docker 20.10.12 ...
+    ▪ kubelet.housekeeping-interval<span class="o">=</span>5m
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🔎  Verifying Kubernetes components...
+🌟  Enabled addons: storage-provisioner, default-storageclass
+🏄  Done! kubectl is now configured to use <span class="s2">"insecure-registry"</span> cluster and <span class="s2">"default"</span> namespace by default
+
+➜  ~ minikube profile insecure-registry
+✅  minikube profile was successfully <span class="nb">set </span>to insecure-registry
+
+➜  ~ minikube ssh
+                         _             _
+            _         _ <span class="o">(</span> <span class="o">)</span>           <span class="o">(</span> <span class="o">)</span>
+  ___ ___  <span class="o">(</span>_<span class="o">)</span>  ___  <span class="o">(</span>_<span class="o">)</span>| |/ <span class="o">)</span>  _   _ | |_      __
+/  _   _  <span class="se">\|</span> |/  _  <span class="se">\|</span> <span class="o">||</span> , &lt;  <span class="o">(</span> <span class="o">)</span> <span class="o">(</span> <span class="o">)</span>|  _ <span class="se">\ </span> / __ <span class="se">\</span>
+| <span class="o">(</span> <span class="o">)</span> <span class="o">(</span> <span class="o">)</span> <span class="o">||</span> <span class="o">||</span> <span class="o">(</span> <span class="o">)</span> <span class="o">||</span> <span class="o">||</span> |<span class="se">\ \ </span>| <span class="o">(</span>_<span class="o">)</span> <span class="o">||</span> |_<span class="o">)</span> <span class="o">)(</span>  ___/
+<span class="o">(</span>_<span class="o">)</span> <span class="o">(</span>_<span class="o">)</span> <span class="o">(</span>_<span class="o">)(</span>_<span class="o">)(</span>_<span class="o">)</span> <span class="o">(</span>_<span class="o">)(</span>_<span class="o">)(</span>_<span class="o">)</span> <span class="o">(</span>_<span class="o">)</span> <span class="se">\_</span>__/ <span class="o">(</span>_,__/  <span class="se">\_</span>___<span class="o">)</span>
+
+<span class="nv">$ </span>docker info
+Client:
+ Context:    default
+ Debug Mode: <span class="nb">false
+
+</span>Server:
+ Containers: 14
+  Running: 14
+  Paused: 0
+  Stopped: 0
+ Images: 10
+ Server Version: 20.10.12
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: <span class="nb">true
+  </span>Native Overlay Diff: <span class="nb">true
+  </span>userxattr: <span class="nb">false
+ </span>Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 1
+ Plugins:
+  Volume: <span class="nb">local
+  </span>Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file <span class="nb">local </span>logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 7b11cfaabd73bb80907dd23182b9347b4245eb5d
+ runc version: 52b36a2dd837e8462de8e01458bf02cf9eea47dd
+ init version: de40ad0
+ Security Options:
+  seccomp
+   Profile: default
+ Kernel Version: 4.19.202
+ Operating System: Buildroot 2021.02.4
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 3.847GiB
+ Name: insecure-registry
+ ID: PY6R:ATXB:YQKK:QLMW:PNBD:UV2I:YJ4Q:2XVC:K4BF:WMYX:PB6J:GLRZ
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: <span class="nb">false
+ </span>Registry: https://index.docker.io/v1/
+ Labels:
+  <span class="nv">provider</span><span class="o">=</span>virtualbox
+ Experimental: <span class="nb">false
+ </span>Insecure Registries:
+  192.168.88.50:8086
+  192.168.88.50:8087
+  10.96.0.0/12
+  127.0.0.0/8
+ Live Restore Enabled: <span class="nb">false
+ </span>Product License: Community Engine
+</code></pre></div></div>
+
+<p>Nah sekarang jika kita lihat, pada container runtime sudah terkonfigurasi Insecure Registry. Sekarang kita bisa lakukan registry-creds menggunakan <code class="language-plaintext highlighter-rouge">addons configure registry-creds</code> atau menggunakan cara manual yaitu <code class="language-plaintext highlighter-rouge">imagePullSecret</code> object pada podSpec atau deploySpec (Recommended).</p>
+
+<p>Karena supaya simple kita akan bahas dulu pake <code class="language-plaintext highlighter-rouge">minikube addons configure registry-creds</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02d-minikube-config-registry-creds.bash"> </script>
+
+<p>Dan setelah kita configure, kita gunakan perintah berikut untuk menaktifkan registry credentialnya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02d-minikube-enable-registry-creds.bash"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜  ~ minikube addons configure registry-creds
+
+Do you want to <span class="nb">enable </span>AWS Elastic Container Registry? <span class="o">[</span>y/n]: n
+Do you want to <span class="nb">enable </span>Google Container Registry? <span class="o">[</span>y/n]: n
+Do you want to <span class="nb">enable </span>Docker Registry? <span class="o">[</span>y/n]: y
+<span class="nt">--</span> Enter docker registry server url: 192.168.88.50:8087
+<span class="nt">--</span> Enter docker registry username: admin
+<span class="nt">--</span> Enter docker registry password:
+Do you want to <span class="nb">enable </span>Azure Container Registry? <span class="o">[</span>y/n]: n
+✅  registry-creds was successfully configured
+
+➜  ~ minikube addons <span class="nb">enable </span>registry-creds
+    ▪ Using image upmcenterprises/registry-creds:1.10
+🌟  The <span class="s1">'registry-creds'</span> addon is enabled
+
+➜  ~ kubectl get secrets <span class="nt">-n</span> kube-system
+NAME                                             TYPE                                  DATA   AGE
+registry-creds-acr                               Opaque                                3      75s
+registry-creds-dpr                               Opaque                                3      75s
+registry-creds-ecr                               Opaque                                6      75s
+registry-creds-gcr                               Opaque                                2      75s
+
+➜  ~ kubectl run nginx-insecure-app <span class="nt">--image</span> 192.168.88.50:8087/udemy/kubernetes/nginx-app:1.0
+pod/nginx-insecure-app created
+
+➜  ~ kubectl get pods
+NAME                 READY   STATUS    RESTARTS   AGE
+nginx-insecure-app   1/1     Running   0          13s
+
+➜  ~ kubectl describe pods nginx-insecure-app
+Name:         nginx-insecure-app
+Namespace:    default
+Priority:     0
+Node:         insecure-registry/192.168.59.117
+Start Time:   Tue, 01 Feb 2022 23:07:49 +0700
+Labels:       <span class="nv">run</span><span class="o">=</span>nginx-insecure-app
+Annotations:  &lt;none&gt;
+Status:       Running
+IP:           172.17.0.4
+IPs:
+  IP:  172.17.0.4
+Containers:
+  nginx-insecure-app:
+    Container ID:   docker://fce02061f60ffda073afd25df53e06d4312931f5dc7be79f872f7582af0458d8
+    Image:          192.168.88.50:8087/udemy/kubernetes/nginx-app:1.0
+    Image ID:       docker-pullable://192.168.88.50:8087/udemy/kubernetes/nginx-app@sha256:bce870a1cfc768aa9cb6affe71e18ac7dc3c6997ad016d3ce44af0e8ecae50c9
+    Port:           &lt;none&gt;
+    Host Port:      &lt;none&gt;
+    State:          Running
+      Started:      Tue, 01 Feb 2022 23:07:57 +0700
+    Ready:          True
+    Restart Count:  0
+    Environment:    &lt;none&gt;
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-n9ww5 <span class="o">(</span>ro<span class="o">)</span>
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  kube-api-access-n9ww5:
+    Type:                    Projected <span class="o">(</span>a volume that contains injected data from multiple sources<span class="o">)</span>
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       &lt;nil&gt;
+    DownwardAPI:             <span class="nb">true
+</span>QoS Class:                   BestEffort
+Node-Selectors:              &lt;none&gt;
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute <span class="nv">op</span><span class="o">=</span>Exists <span class="k">for </span>300s
+                             node.kubernetes.io/unreachable:NoExecute <span class="nv">op</span><span class="o">=</span>Exists <span class="k">for </span>300s
+Events:
+  Type    Reason     Age   From               Message
+  <span class="nt">----</span>    <span class="nt">------</span>     <span class="nt">----</span>  <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal  Scheduled  33s   default-scheduler  Successfully assigned default/nginx-insecure-app to insecure-registry
+  Normal  Pulling    32s   kubelet            Pulling image <span class="s2">"192.168.88.50:8087/udemy/kubernetes/nginx-app:1.0"</span>
+  Normal  Pulled     26s   kubelet            Successfully pulled image <span class="s2">"192.168.88.50:8087/udemy/kubernetes/nginx-app:1.0"</span> <span class="k">in </span>6.294481617s
+  Normal  Created    25s   kubelet            Created container nginx-insecure-app
+  Normal  Started    25s   kubelet            Started container nginx-insecure-app
+</code></pre></div></div>
+
+<h2 id="enable-load-balancer-service">Enable Load balancer service</h2>
+
+<p>A LoadBalancer service is the standard way to expose a service to the internet. With this method, each service gets its own IP address.</p>
+
+<p>Services of type <code class="language-plaintext highlighter-rouge">LoadBalancer</code> can be exposed via the <code class="language-plaintext highlighter-rouge">minikube tunnel</code> command. It must be run in a separate terminal window to keep the <code class="language-plaintext highlighter-rouge">LoadBalancer</code> running. But first you need enable LoadBalencer it self using</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02f-minikube-enable-loadbalancer.bash"> </script>
+
+<p>Jika di jalankan seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  minikube addons <span class="nb">enable </span>metallb
+    ▪ Using image metallb/speaker:v0.9.6
+    ▪ Using image metallb/controller:v0.9.6
+🌟  The <span class="s1">'metallb'</span> addon is enabled
+
+<span class="c">## you should know range ip minikube using this command</span>
+➜ ~  minikube node list
+minikube        192.168.59.102
+
+➜ ~  minikube addons configure metallb
+<span class="nt">--</span> Enter Load Balancer Start IP: 192.168.59.100
+<span class="nt">--</span> Enter Load Balancer End IP: 192.168.59.110
+    ▪ Using image metallb/speaker:v0.9.6
+    ▪ Using image metallb/controller:v0.9.6
+✅  metallb was successfully configured
+</code></pre></div></div>
+
+<p>Setelah kita kita coba deploy aplikasinya dan expose menggunakan LoadBalancer service seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  kubectl run nginx-app <span class="nt">--image</span> nginx:mainline <span class="nt">--port</span> 80
+pod/nginx-app created
+
+➜ ~  kubectl expose pod nginx-app <span class="nt">--type</span><span class="o">=</span>LoadBalancer <span class="nt">--port</span> 80
+service/nginx-app exposed
+
+➜ ~  kubectl get service
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP      PORT<span class="o">(</span>S<span class="o">)</span>        AGE
+kubernetes   ClusterIP      10.96.0.1       &lt;none&gt;           443/TCP        4m58s
+nginx-app    LoadBalancer   10.108.206.69   192.168.59.100   80:31341/TCP   10s
+
+➜ ~  curl 192.168.59.100
+StatusCode        : 200
+StatusDescription : OK
+Content           : &lt;<span class="o">!</span>DOCTYPE html&gt;
+                    &lt;html&gt;
+                    &lt;<span class="nb">head</span><span class="o">&gt;</span>
+                    &lt;title&gt;Welcome to nginx!&lt;/title&gt;
+                    &lt;style&gt;
+                    html <span class="o">{</span> color-scheme: light dark<span class="p">;</span> <span class="o">}</span>
+                    body <span class="o">{</span> width: 35em<span class="p">;</span> margin: 0 auto<span class="p">;</span>
+                    font-family: Tahoma, Verdana, Arial, sans-serif<span class="p">;</span> <span class="o">}</span>
+                    &lt;/style...
+Headers           : <span class="o">{[</span>Connection, keep-alive], <span class="o">[</span>Accept-Ranges, bytes], <span class="o">[</span>Content-Length, 615],
+                    <span class="o">[</span>Content-Type, text/html]...<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="enable-ingress-service">Enable Ingress service</h2>
+
+<p>Selain menggunakan LoadBalancer, kita juga bisa menggunakan Ingress Controller salah satu implementasinya adalah ingress-nginx. Di minikube tersedia juga addons untuk <code class="language-plaintext highlighter-rouge">ingress</code> dengan menggunakan perintah seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02f-minikube-ingress.bash"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  minikube addons <span class="nb">enable </span>ingress
+💡  After the addon is enabled, please run <span class="s2">"minikube tunnel"</span> and your ingress resources would be available at <span class="s2">"127.0.0.1"</span>
+    ▪ Using image k8s.gcr.io/ingress-nginx/controller:v1.1.0
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+    ▪ Using image k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
+🔎  Verifying ingress addon...
+🌟  The <span class="s1">'ingress'</span> addon is enabled
+
+➜ ~  minikube service <span class="nt">--url</span> ingress-nginx-controller <span class="nt">-n</span> ingress-nginx
+🏃  Starting tunnel <span class="k">for </span>service ingress-nginx-controller.
+|---------------|--------------------------|-------------|-------------------------|
+|   NAMESPACE   |           NAME           | TARGET PORT |          URL            |
+|---------------|--------------------------|-------------|-------------------------|
+| ingress-nginx | ingress-nginx-controller |             | http://127.0.0.1:54424  |
+|               |                          |             | https://127.0.0.1:54425 |
+|---------------|--------------------------|-------------|-------------------------|
+http://127.0.0.1:54424
+https://127.0.0.1:54425
+❗  Because you are using a Docker driver on windows, the terminal needs to be open to run it.
+
+<span class="c">## check ingress run</span>
+➜ ~  curl http://127.0.0.1:54424
+curl : 404 Not Found
+nginx
+At line:1 char:1
+</code></pre></div></div>
+
+<p>Jika sudah sekarang kita coba deploy 2 container misalnya menggunakan <code class="language-plaintext highlighter-rouge">nginx</code> yang nantinya akan di mapping menjadi <code class="language-plaintext highlighter-rouge">/web1</code> dan <code class="language-plaintext highlighter-rouge">/web2</code> Seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=02f-minikube-ingress.yaml"> </script>
+
+<p>Sekarang kita coba jalankan dengan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kubectl apply <span class="nt">-f</span> ingress-nginx-controller.yaml</code></pre></figure>
+
+<p>Maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">kubernetes</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">apply</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\01-getting-started\ingress-controller.yaml</span><span class="w">
+</span><span class="n">deployment.apps/nginx-app1</span><span class="w"> </span><span class="nx">created</span><span class="w">
+</span><span class="n">service/nginx-app1</span><span class="w"> </span><span class="nx">created</span><span class="w">
+</span><span class="n">deployment.apps/nginx-app2</span><span class="w"> </span><span class="nx">created</span><span class="w">
+</span><span class="n">service/nginx-app2</span><span class="w"> </span><span class="nx">created</span><span class="w">
+</span><span class="n">ingress.networking.k8s.io/webapp-ingress</span><span class="w"> </span><span class="nx">created</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">ing</span><span class="w">
+</span><span class="n">NAME</span><span class="w">             </span><span class="nx">CLASS</span><span class="w">    </span><span class="nx">HOSTS</span><span class="w">                </span><span class="nx">ADDRESS</span><span class="w">     </span><span class="nx">PORTS</span><span class="w">   </span><span class="nx">AGE</span><span class="w">
+</span><span class="n">webapp-ingress</span><span class="w">   </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">   </span><span class="nx">nginx.example.info</span><span class="w">   </span><span class="nx">localhost</span><span class="w">   </span><span class="nx">80</span><span class="w">      </span><span class="nx">2m49s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">kubectl</span><span class="w"> </span><span class="nx">describe</span><span class="w"> </span><span class="nx">ing</span><span class="w">
+</span><span class="n">Name:</span><span class="w">             </span><span class="nx">webapp-ingress</span><span class="w">
+</span><span class="n">Labels:</span><span class="w">           </span><span class="err">&lt;</span><span class="nx">none</span><span class="err">&gt;</span><span class="w">
+</span><span class="kr">Namespace</span><span class="p">:</span><span class="w">        </span><span class="n">default</span><span class="w">
+</span><span class="nx">Address:</span><span class="w">          </span><span class="nx">localhost</span><span class="w">
+</span><span class="n">Default</span><span class="w"> </span><span class="nx">backend:</span><span class="w">  </span><span class="nx">default-http-backend:80</span><span class="w"> </span><span class="p">(</span><span class="err">&lt;</span><span class="n">error:</span><span class="w"> </span><span class="nx">endpoints</span><span class="w"> </span><span class="s2">"default-http-backend"</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">found</span><span class="err">&gt;</span><span class="p">)</span><span class="w">
+</span><span class="n">Rules:</span><span class="w">
+  </span><span class="nx">Host</span><span class="w">                </span><span class="nx">Path</span><span class="w">  </span><span class="nx">Backends</span><span class="w">
+  </span><span class="o">----</span><span class="w">                </span><span class="o">----</span><span class="w">  </span><span class="o">--------</span><span class="w">
+  </span><span class="n">nginx.example.info</span><span class="w">
+                      </span><span class="nx">/web1</span><span class="p">(</span><span class="n">/</span><span class="o">|</span><span class="err">$</span><span class="p">)(</span><span class="o">.*</span><span class="p">)</span><span class="w">   </span><span class="n">nginx-app1:80</span><span class="w"> </span><span class="p">(</span><span class="mf">172.17</span><span class="o">.</span><span class="nf">0</span><span class="o">.</span><span class="nf">7</span><span class="p">:</span><span class="mi">80</span><span class="p">)</span><span class="w">
+                      </span><span class="n">/web2</span><span class="p">(</span><span class="n">/</span><span class="o">|</span><span class="err">$</span><span class="p">)(</span><span class="o">.*</span><span class="p">)</span><span class="w">   </span><span class="n">nginx-app2:80</span><span class="w"> </span><span class="p">(</span><span class="mf">172.17</span><span class="o">.</span><span class="nf">0</span><span class="o">.</span><span class="nf">8</span><span class="p">:</span><span class="mi">80</span><span class="p">)</span><span class="w">
+</span><span class="n">Annotations:</span><span class="w">          </span><span class="nx">kubernetes.io/ingress.class:</span><span class="w"> </span><span class="nx">nginx</span><span class="w">
+                      </span><span class="n">nginx.ingress.kubernetes.io/rewrite-target:</span><span class="w"> </span><span class="nx">/</span><span class="nv">$2</span><span class="w">
+</span><span class="n">Events:</span><span class="w">
+  </span><span class="nx">Type</span><span class="w">    </span><span class="nx">Reason</span><span class="w">  </span><span class="nx">Age</span><span class="w">                   </span><span class="nx">From</span><span class="w">                      </span><span class="nx">Message</span><span class="w">
+  </span><span class="o">----</span><span class="w">    </span><span class="o">------</span><span class="w">  </span><span class="o">----</span><span class="w">                  </span><span class="o">----</span><span class="w">                      </span><span class="o">-------</span><span class="w">
+  </span><span class="n">Normal</span><span class="w">  </span><span class="nx">Sync</span><span class="w">    </span><span class="nx">2m55s</span><span class="w"> </span><span class="p">(</span><span class="n">x2</span><span class="w"> </span><span class="nx">over</span><span class="w"> </span><span class="nx">3m9s</span><span class="p">)</span><span class="w">  </span><span class="nx">nginx-ingress-controller</span><span class="w">  </span><span class="nx">Scheduled</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">sync</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Jika sudah sekarang coba edit file <code class="language-plaintext highlighter-rouge">/etc/hosts</code> jika di windows lokasinya <code class="language-plaintext highlighter-rouge">C:\Windows\System32\drivers\etc\hosts</code> seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="si">$(</span>minikube ip<span class="si">)</span> nginx.example.info</code></pre></figure>
+
+<p>Kalau udah sekarang kita bisa coba check dengan perintah curl seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">curl</span><span class="w"> </span><span class="nx">http://nginx.example.info:54424/web1</span><span class="w">
+</span><span class="n">StatusCode</span><span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="nx">200</span><span class="w">
+</span><span class="n">StatusDescription</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">OK</span><span class="w">
+</span><span class="n">Content</span><span class="w">           </span><span class="p">:</span><span class="w"> </span><span class="err">&lt;</span><span class="o">!</span><span class="nx">DOCTYPE</span><span class="w"> </span><span class="nx">html</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">html</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">head</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">title</span><span class="err">&gt;</span><span class="nx">Welcome</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">nginx</span><span class="o">!</span><span class="err">&lt;</span><span class="nx">/title</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">style</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="n">html</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color-scheme:</span><span class="w"> </span><span class="nx">light</span><span class="w"> </span><span class="nx">dark</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+                    </span><span class="n">body</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width:</span><span class="w"> </span><span class="nx">35em</span><span class="p">;</span><span class="w"> </span><span class="n">margin:</span><span class="w"> </span><span class="nx">0</span><span class="w"> </span><span class="nx">auto</span><span class="p">;</span><span class="w">
+                    </span><span class="n">font-family:</span><span class="w"> </span><span class="nx">Tahoma</span><span class="p">,</span><span class="w"> </span><span class="nx">Verdana</span><span class="p">,</span><span class="w"> </span><span class="nx">Arial</span><span class="p">,</span><span class="w"> </span><span class="nx">sans-serif</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">/style...</span><span class="w">
+</span><span class="nx">Headers</span><span class="w">           </span><span class="p">:</span><span class="w"> </span><span class="p">{[</span><span class="n">Connection</span><span class="p">,</span><span class="w"> </span><span class="n">keep</span><span class="nt">-alive</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Accept</span><span class="nt">-Ranges</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Content</span><span class="nt">-Length</span><span class="p">,</span><span class="w"> </span><span class="mi">615</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="n">Content</span><span class="nt">-Type</span><span class="p">,</span><span class="w"> </span><span class="n">text/html</span><span class="p">]</span><span class="o">...</span><span class="p">}</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">~</span><span class="w">  </span><span class="nx">curl</span><span class="w"> </span><span class="nx">http://nginx.example.info:54424/web2</span><span class="w">
+</span><span class="n">StatusCode</span><span class="w">        </span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="w">
+</span><span class="n">StatusDescription</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">OK</span><span class="w">
+</span><span class="n">Content</span><span class="w">           </span><span class="p">:</span><span class="w"> </span><span class="err">&lt;</span><span class="o">!</span><span class="n">DOCTYPE</span><span class="w"> </span><span class="n">html</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">html</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">head</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">title</span><span class="err">&gt;</span><span class="n">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">nginx</span><span class="o">!</span><span class="err">&lt;</span><span class="n">/title</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">style</span><span class="err">&gt;</span><span class="w">
+                    </span><span class="n">html</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">color-scheme:</span><span class="w"> </span><span class="nx">light</span><span class="w"> </span><span class="nx">dark</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+                    </span><span class="n">body</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">width:</span><span class="w"> </span><span class="nx">35em</span><span class="p">;</span><span class="w"> </span><span class="n">margin:</span><span class="w"> </span><span class="nx">0</span><span class="w"> </span><span class="nx">auto</span><span class="p">;</span><span class="w">
+                    </span><span class="n">font-family:</span><span class="w"> </span><span class="nx">Tahoma</span><span class="p">,</span><span class="w"> </span><span class="nx">Verdana</span><span class="p">,</span><span class="w"> </span><span class="nx">Arial</span><span class="p">,</span><span class="w"> </span><span class="nx">sans-serif</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">
+                    </span><span class="err">&lt;</span><span class="n">/style...</span><span class="w">
+</span><span class="nx">Headers</span><span class="w">           </span><span class="p">:</span><span class="w"> </span><span class="p">{[</span><span class="n">Connection</span><span class="p">,</span><span class="w"> </span><span class="n">keep</span><span class="nt">-alive</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Accept</span><span class="nt">-Ranges</span><span class="p">,</span><span class="w"> </span><span class="n">bytes</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">Content</span><span class="nt">-Length</span><span class="p">,</span><span class="w"> </span><span class="mi">615</span><span class="p">],</span><span class="w">
+                    </span><span class="p">[</span><span class="n">Content</span><span class="nt">-Type</span><span class="p">,</span><span class="w"> </span><span class="n">text/html</span><span class="p">]</span><span class="o">...</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/01-silabus"  class="" title="Silabus - DevOps Kubernetes: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images" class="" 
+        title="Using your own image into Minikube cluster
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 18 to 36
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps" class="" 
+        title="Access your apps/service in minikube
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"  class="" title="Working with Deployment object">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#kubernetes" class="page__taxonomy-item p-category" rel="tag">Kubernetes</a><span class="sep">, </span>
+    
+      <a href="/categories/#orchestration" class="page__taxonomy-item p-category" rel="tag">Orchestration</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-02-18T22:19:57+07:00">February 18, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Minikube+addons+features%20%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02f-minikube-addons" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02f-minikube-addons" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2F02f-minikube-addons" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

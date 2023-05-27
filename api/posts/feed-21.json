@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Docker Overview",
+      "link": "/posts/devops/docker/01a-docker-overview"
+    }
+    ,
+    {
+      "title": "JSON Data in Oracle Database",
+      "link": "/posts/rdbms/oracle18c/019g-json-data"
+    }
+    ,
+    {
+      "title": "Partitioning Table (Very Large Databases)",
+      "link": "/posts/rdbms/oracle18c/019f-partitioning-table"
+    }
+    ,
+    {
+      "title": "Silabus Belajar Docker: Pemula sampai Mahir",
+      "link": "/posts/devops/docker/01-silabus"
+    }
+    ,
+    {
+      "title": "Inherintance Mapping (OODMBS)",
+      "link": "/posts/rdbms/oracle18c/019e-mapping-inherintance"
+    }
+    ,
+    {
+      "title": "Parent Childs Relationship",
+      "link": "/posts/rdbms/oracle18c/019d-mapping-parent-child"
+    }
+    ,
+    {
+      "title": "Many To Many Relationship Tables",
+      "link": "/posts/rdbms/oracle18c/019c-mapping-many-to-many"
+    }
+    ,
+    {
+      "title": "One To Many Relationship Tables",
+      "link": "/posts/rdbms/oracle18c/019b-mapping-one-to-many"
+    }
+    ,
+    {
+      "title": "One To One Relationship Tables",
+      "link": "/posts/rdbms/oracle18c/019a-mapping-one-to-one"
+    }
+    ,
+    {
+      "title": "Perancangan / Design Table (Relationship)",
+      "link": "/posts/rdbms/oracle18c/019-schema-design-relationship"
+    }
+  ]
+}

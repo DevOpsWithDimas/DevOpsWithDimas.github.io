@@ -1,0 +1,1460 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Using thirdparty Editor untuk PostgreSQL Server - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, Di materi kali ini kita akan membahas Third Party Editor yang bisa digunakan untuk berkomunikasi dengan PostgreSQL Server. Sepertinya kita ketahui ya PostgreSQL Server menggunakan TCP/IP dan Unix socket untuk berkomunikasi antara client dan server. Selain menggunakan aplikasi client bawaan, kita juga bisa menggunakan Aplikasi 3rd Party seperti     Navicate   Jetbraint DataGrip   DBeaver   HeidiSQL   Dan masih banyak sekali editor lainnya   Nah jadi temen-temen bisa pilih salah satu dari 3rd party editor tersebut kalau mau pakai. Untuk saya sendiri biasanya menggunakan Editor IntelliJ IDEA buatnnya Jetbraint yang Ultimate.  Jadi di cource ini, kita akan menggunakan IntelliJ IDEA ya. Adapun pembahasannya kali ini kita akan setup environmentnya dulu mulai:     Connection to PostgreSQL Server   Database Tools   Run a Query   Manage database object   Export/Import   Diagrams ERD   Ok langsung aja kita ke pembahasan yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Using thirdparty Editor untuk PostgreSQL Server">
+<meta property="og:url" content="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+
+
+  <meta property="og:description" content="Hai semuanya, Di materi kali ini kita akan membahas Third Party Editor yang bisa digunakan untuk berkomunikasi dengan PostgreSQL Server. Sepertinya kita ketahui ya PostgreSQL Server menggunakan TCP/IP dan Unix socket untuk berkomunikasi antara client dan server. Selain menggunakan aplikasi client bawaan, kita juga bisa menggunakan Aplikasi 3rd Party seperti     Navicate   Jetbraint DataGrip   DBeaver   HeidiSQL   Dan masih banyak sekali editor lainnya   Nah jadi temen-temen bisa pilih salah satu dari 3rd party editor tersebut kalau mau pakai. Untuk saya sendiri biasanya menggunakan Editor IntelliJ IDEA buatnnya Jetbraint yang Ultimate.  Jadi di cource ini, kita akan menggunakan IntelliJ IDEA ya. Adapun pembahasannya kali ini kita akan setup environmentnya dulu mulai:     Connection to PostgreSQL Server   Database Tools   Run a Query   Manage database object   Export/Import   Diagrams ERD   Ok langsung aja kita ke pembahasan yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-02-13T15:03:10+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#connection-to-postgresql-server">Connection to PostgreSQL Server</a></li><li><a href="#database-tools">Database Tools</a></li><li><a href="#run-a-query">Run a Query</a></li><li><a href="#manage-database-objects">Manage database objects</a></li><li><a href="#exportimport-schema">Export/Import schema</a></li><li><a href="#erd-diagram-tools">ERD Diagram tools</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Using thirdparty Editor untuk PostgreSQL Server">
+    <meta itemprop="description" content="Hai semuanya, Di materi kali ini kita akan membahas Third Party Editor yang bisa digunakan untuk berkomunikasi dengan PostgreSQL Server. Sepertinya kita ketahui ya PostgreSQL Server menggunakan TCP/IP dan Unix socket untuk berkomunikasi antara client dan server. Selain menggunakan aplikasi client bawaan, kita juga bisa menggunakan Aplikasi 3rd Party seperti  Navicate  Jetbraint DataGrip  DBeaver  HeidiSQL  Dan masih banyak sekali editor lainnyaNah jadi temen-temen bisa pilih salah satu dari 3rd party editor tersebut kalau mau pakai. Untuk saya sendiri biasanya menggunakan Editor IntelliJ IDEA buatnnya Jetbraint yang Ultimate.Jadi di cource ini, kita akan menggunakan IntelliJ IDEA ya. Adapun pembahasannya kali ini kita akan setup environmentnya dulu mulai:  Connection to PostgreSQL Server  Database Tools  Run a Query  Manage database object  Export/Import  Diagrams ERDOk langsung aja kita ke pembahasan yang pertama">
+    <meta itemprop="datePublished" content="2022-02-13T15:03:10+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors" class="u-url" itemprop="url">Using thirdparty Editor untuk PostgreSQL Server
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-02-13T15:03:10+07:00">February 13, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        5 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan PostgreSQL">
+        <label class="acordion-item-label" for="content-Pengenalan PostgreSQL">
+            Pengenalan PostgreSQL
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01-silabus-psql">
+                        
+                        Silabus - PostgreSQL: Pemul...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01a-what-is-postgresql">
+                        
+                        Overview of PostgreSQL Data...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01b-postgresql-architecture">
+                        
+                        Architecture of PostgreSQL ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01c-postgresql-database">
+                        
+                        Overview of Object Relation...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started">
+        <label class="acordion-item-label" for="content-Getting started">
+            Getting started
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02-overview-install-postgres">
+                        
+                        Overview Installing PostgreSQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows">
+                        
+                        Install PostgreSQL for Wind...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac">
+                        
+                        Install PostgreSQL for Mac ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu">
+                        
+                        Install PostgreSQL for Linu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker">
+                        
+                        Install PostgreSQL using Do...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02b-use-psql">
+                        
+                        Using psql as PostgreSQL ed...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02c-use-pgadmin">
+                        
+                        Using pgAdmin4 as PostgreSQ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Using thirdparty Editor unt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select Statement">
+        <label class="acordion-item-label" for="content-SQL - Select Statement">
+            SQL - Select Statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03-overview-sql">
+                        
+                        Overview SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03a-basic-select-statement">
+                        
+                        Basic SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators">
+                        
+                        Build-in Operators
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions">
+                        
+                        Build-in Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+                        
+                        Filtering data with WHERE c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause">
+                        
+                        Sorting rows using ORDER BY...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause">
+                        
+                        Limit dan Offset rows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03g-quis-section-1">
+                        
+                        Time your practice (part 1)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements">
+                        
+                        Deep dive into Select State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+                        
+                        Single Row / Group functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+                        
+                        Joined Tables
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04c-subquery">
+                        
+                        Queries inside a query (sub...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+                        
+                        Conditional Expressions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04e-combining-queries">
+                        
+                        Combining Queries (UNION, I...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04f-with-queries">
+                        
+                        WITH Queries (Common Table ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04g-quis-section-2">
+                        
+                        Time your practice (part 2)
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data manipulation">
+        <label class="acordion-item-label" for="content-SQL - Data manipulation">
+            SQL - Data manipulation
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05-overview-dml">
+                        
+                        Overview of Data Manipulati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05a-cud-statement">
+                        
+                        Basic Create, Update, Delet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+                        
+                        Deep dive into INSERT State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05c-dml-update">
+                        
+                        Deep dive into UPDATE State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete">
+                        
+                        Deep dive into DELETE state...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement">
+                        
+                        Prepared Statement in SQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+                        
+                        Cleanup Data from Table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1">
+                        
+                        Time your practice (part 3)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control">
+                        
+                        Overview of Concurrency Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl">
+                        
+                        Getting started with Transa...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data definition">
+        <label class="acordion-item-label" for="content-SQL - Data definition">
+            SQL - Data definition
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Database design (Mapping)">
+        <label class="acordion-item-label" for="content-Study Kasus: Database design (Mapping)">
+            Study Kasus: Database design (Mapping)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Indexes">
+        <label class="acordion-item-label" for="content-SQL - Indexes">
+            SQL - Indexes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Users Management">
+        <label class="acordion-item-label" for="content-SQL - Users Management">
+            SQL - Users Management
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Type Conversion">
+        <label class="acordion-item-label" for="content-Type Conversion">
+            Type Conversion
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, Di materi kali ini kita akan membahas Third Party Editor yang bisa digunakan untuk berkomunikasi dengan PostgreSQL Server. Sepertinya kita ketahui ya PostgreSQL Server menggunakan TCP/IP dan Unix socket untuk berkomunikasi antara client dan server. Selain menggunakan aplikasi client bawaan, kita juga bisa menggunakan Aplikasi 3rd Party seperti</p>
+
+<ol>
+  <li><a href="https://www.navicat.com/en/products/navicat-for-postgresql">Navicate</a></li>
+  <li><a href="https://www.jetbrains.com/datagrip/">Jetbraint DataGrip</a></li>
+  <li><a href="https://dbeaver.io">DBeaver</a></li>
+  <li><a href="https://www.heidisql.com">HeidiSQL</a></li>
+  <li>Dan masih banyak sekali editor lainnya</li>
+</ol>
+
+<p>Nah jadi temen-temen bisa pilih salah satu dari 3rd party editor tersebut kalau mau pakai. Untuk saya sendiri biasanya menggunakan Editor <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a> buatnnya Jetbraint yang Ultimate.</p>
+
+<p>Jadi di cource ini, kita akan menggunakan IntelliJ IDEA ya. Adapun pembahasannya kali ini kita akan setup environmentnya dulu mulai:</p>
+
+<ol>
+  <li>Connection to PostgreSQL Server</li>
+  <li>Database Tools</li>
+  <li>Run a Query</li>
+  <li>Manage database object</li>
+  <li>Export/Import</li>
+  <li>Diagrams ERD</li>
+</ol>
+
+<p>Ok langsung aja kita ke pembahasan yang pertama</p>
+
+<!--more-->
+
+<h2 id="connection-to-postgresql-server">Connection to PostgreSQL Server</h2>
+
+<p>To issue a query to a database, you must create a data source connection. Data source is the location of your data and can be a server or a DDL file. The data source includes a name and connection settings that are dependent on the data source type.</p>
+
+<ol>
+  <li>
+    <p>In the Database tool window <strong>View</strong> &gt; <strong>Tool Windows</strong> &gt; <strong>Database</strong>, click the Data Source Properties icon The Data Source Properties icon.</p>
+  </li>
+  <li>
+    <p>On the Data Sources tab in the Data Sources and Drivers dialog, click the Add <code class="language-plaintext highlighter-rouge">+</code> (The Add icon) and select PostgreSQL.</p>
+  </li>
+  <li>
+    <p>At the bottom of the data source settings area, click the Download missing driver files link. As you click this link, IntelliJ IDEA downloads drivers that are required to interact with a database. The IDE does not include bundled drivers in order to have a smaller size of the installation package and to keep driver versions up-to-date for each IDE version.</p>
+  </li>
+  <li>From the Authentication list, select an authentication method.
+    <ol>
+      <li><strong>pgpass</strong>: by using the PGPASS file. You can store this file in the user’s home directory (for example, <code class="language-plaintext highlighter-rouge">/Users/jetbrains/.pgpass</code>). You can read more about the password file in <a href="https://www.postgresql.org/docs/9.4/libpq-pgpass.html">The Password File at postgresql.org</a>.</li>
+      <li><strong>User &amp; Password</strong>: by using your login and password.</li>
+    </ol>
+  </li>
+  <li>
+    <p>Specify database connection details. Alternatively, paste the JDBC URL in the URL field.</p>
+  </li>
+  <li>To ensure that the connection to the data source is successful, click the Test Connection link.</li>
+</ol>
+
+<p>Berikut tampilannya:</p>
+
+<p><img src="/resources/posts/postgresql/02d-use-jetbraint/01-idea-connection.png" alt="idea-connect-postgres" /></p>
+
+<p>Jika sudah kita bisa navigasi ke object databasenya seperti berikut:</p>
+
+<p><img src="/resources/posts/postgresql/02d-use-jetbraint/02-idea-navigation.png" alt="idea-db-navigation" /></p>
+
+<h2 id="database-tools">Database Tools</h2>
+
+<p>The database management functionality in IntelliJ IDEA is supported by the <strong>Database tools and SQL</strong> plugin. The <strong>Database tools and SQL</strong> plugin provides support of all the features that are available in DataGrip, the standalone database management environment for developers. With the plugin, you can query, create and manage databases.</p>
+
+<p>Databases can work locally, on a server, or in the cloud. The plugin supports MySQL, PostgreSQL, Microsoft SQL Server, SQLite, MariaDB, Oracle, Apache Cassandra, and others.</p>
+
+<p>Banyak sekali feature yang di tawarkan oleh Database Tools plugin ini diantaranya</p>
+
+<ol>
+  <li>Query results
+    <ol>
+      <li>View two result sets in the editor</li>
+      <li>Edit values in the result set</li>
+      <li>Export to a file</li>
+      <li>Export to a clipboard</li>
+      <li>Sort data</li>
+      <li>Filter data</li>
+    </ol>
+  </li>
+  <li>Write your code
+    <ol>
+      <li>Code completion</li>
+      <li>Generating code</li>
+    </ol>
+  </li>
+  <li>Manage database object
+    <ol>
+      <li>Database</li>
+      <li>User/Role</li>
+      <li>Tables</li>
+      <li>View</li>
+      <li>etc</li>
+    </ol>
+  </li>
+  <li>Database diagrams
+    <ol>
+      <li><strong>Explain Plan</strong>: the result is shown in a mixed tree and table format on a dedicated Plan tab. You can click the Show Visualization icon (the Show Visualization icon) to create a diagram that visualizes the query execution.</li>
+      <li><strong>Explain Plan (Raw)</strong>: the result is shown in a table format.</li>
+      <li>Generate a diagram for a database object</li>
+      <li>Save diagrams in the UML format</li>
+      <li>Save diagrams in the PNG format</li>
+    </ol>
+  </li>
+</ol>
+
+<h2 id="run-a-query">Run a Query</h2>
+
+<p>Query or database consoles are SQL files in which you can compose and execute SQL statements. Unlike scratch files, consoles are attached to a data source. You can use a query console in the same way as you use a terminal. Just type and run your code.</p>
+
+<p>When you create a data source, a query console is created automatically. If necessary, you can create additional consoles. Each console creates a new connection. If you do not want to create new connections, enable single session mode.</p>
+
+<p>To create a console, use one of the following actions in the Database tool window <strong>View</strong> &gt; <strong>Tool Windows</strong> &gt; <strong>Database</strong>.</p>
+
+<ol>
+  <li>Click a data source and select <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Query Console</strong>.</li>
+  <li>Right-click a data source and select <strong>New</strong> &gt; <strong>Query Console</strong>.</li>
+  <li>Click a data source, press <code class="language-plaintext highlighter-rouge">Alt+Insert</code>, and select <strong>Query Console</strong>.</li>
+  <li>Click a data source, press <code class="language-plaintext highlighter-rouge">Ctrl+Shift+F10</code>, and select <strong>New Query Console</strong>.</li>
+</ol>
+
+<p><img src="/resources/posts/postgresql/02d-use-jetbraint/03-query-console.png" alt="idea-query-console" /></p>
+
+<p>Selain itu juga kita bisa membuat file <code class="language-plaintext highlighter-rouge">.sql</code> dengan cara Click menu <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>File</strong></p>
+
+<p>Kemudian kita bisa pilih <strong>Change dialect</strong> &gt; <strong>Project dialog &amp; SQL Dialect</strong> &gt; <strong>PostgreSQL</strong> seperti berikut:</p>
+
+<p><img src="/resources/posts/postgresql/02d-use-jetbraint/04-dialect-postgres.png" alt="idea-dialect" /></p>
+
+<p>Kemudian kita bisa jalankan Querynya dengan clik Play button warna hijau atau shortcutnya <code class="language-plaintext highlighter-rouge">Ctrl + Enter</code> untuk windows/linux seperti berikut:</p>
+
+<p><img src="/resources/posts/postgresql/02d-use-jetbraint/05-file-run-query.png" alt="idea-file-run-query" /></p>
+
+<p>Nah klo perbedaanya menggunakan Query Console dan juga file adalah jika Query Console jika projectnya kita hapus maka akan hilang sedangkan menggunakan file, filenya akan tetap tersimpan jadi kita bisa jalankan di kemudian hari.</p>
+
+<h2 id="manage-database-objects">Manage database objects</h2>
+
+<p>The IDE provides a unified UI for adding or editing database object such as table, view, sequance, user/role, etc.</p>
+
+<p><img src="/resources/posts/postgresql/02d-use-jetbraint/06-create-table.png" alt="idea-create-table" /></p>
+
+<h2 id="exportimport-schema">Export/Import schema</h2>
+
+<p>Being able to import and export data is useful when you move data between databases that are used for different purposes but need to share some data. For example, between development and production databases.</p>
+
+<p>IntelliJ IDEA has an engine to export and import data in various formats. You can select a predefined format or create your own.</p>
+
+<ol>
+  <li><strong>Export</strong>: see how to generate DDL for objects and export data in different formats.</li>
+  <li><strong>Import</strong>: import CSV, TSV, or any other text files that contain delimiter-separated values. Also, learn how to restore the dump file by using <code class="language-plaintext highlighter-rouge">mysql</code>, <code class="language-plaintext highlighter-rouge">pg_restore</code>, or <code class="language-plaintext highlighter-rouge">psql</code>.</li>
+  <li><strong>Run migrations</strong>: learn how to use migration tools in IntelliJ IDEA.</li>
+  <li><strong>Data extractors</strong>: learn about default extractors and creating custom extractors.</li>
+</ol>
+
+<p>Berikut contohnya, jika kita mau backup/export</p>
+
+<p><img src="/resources/posts/postgresql/02d-use-jetbraint/07-export-schema.png" alt="idea-backup" /></p>
+
+<p>Dan untuk import / restore seperti berikut:</p>
+
+<p><img src="/resources/posts/postgresql/02d-use-jetbraint/08-restore-schema.png" alt="idea-restore" /></p>
+
+<h2 id="erd-diagram-tools">ERD Diagram tools</h2>
+
+<p>Database diagrams graphically show the structure of the database and relations between database objects. You can generate a diagram for a data source, a schema, or a table. To create relations between database objects, consider using primary and foreign keys.</p>
+
+<p>You can save the generated diagrams in two formats: UML and PNG. The UML format is an internal format developed specifically for IntelliJ IDEA. It is not supported by other products. If you want to share the created diagram, consider using PNG.</p>
+
+<p><img src="/resources/posts/postgresql/02d-use-jetbraint/09-erd-diagram.png" alt="idea-erd-diagram" /></p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/01-silabus-psql"  class="" title="Silabus - PostgreSQL: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/getting-started/02c-use-pgadmin" class="" 
+        title="Using pgAdmin4 as PostgreSQL editor
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 12 to 38
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/03-overview-sql" class="" 
+        title="Overview SQL Select statements
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"  class="" title="Getting started with Transaction Control (TCL)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#getting-started" class="page__taxonomy-item p-category" rel="tag">getting-started</a><span class="sep">, </span>
+    
+      <a href="/categories/#postgresql" class="page__taxonomy-item p-category" rel="tag">PostgreSQL</a><span class="sep">, </span>
+    
+      <a href="/categories/#rdbms" class="page__taxonomy-item p-category" rel="tag">RDBMS</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-02-13T15:03:10+07:00">February 13, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Using+thirdparty+Editor+untuk+PostgreSQL+Server%20%2Fposts%2Frdbms%2Fpostgresql%2Fgetting-started%2F02d-use-third-party-editors" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Frdbms%2Fpostgresql%2Fgetting-started%2F02d-use-third-party-editors" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Frdbms%2Fpostgresql%2Fgetting-started%2F02d-use-third-party-editors" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

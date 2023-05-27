@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Overview learning environment with Minikube",
+      "link": "/posts/devops/orchestration/kubernetes/02-overview-learn-env"
+    }
+    ,
+    {
+      "title": "Kubernetes cluster environtments",
+      "link": "/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments"
+    }
+    ,
+    {
+      "title": "What is Kubernetes Namespaces?",
+      "link": "/posts/devops/orchestration/kubernetes/01g-k8s-namespaces"
+    }
+    ,
+    {
+      "title": "Kubernetes Object Names and IDs",
+      "link": "/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids"
+    }
+    ,
+    {
+      "title": "Managing Kubernetes Object",
+      "link": "/posts/devops/orchestration/kubernetes/01e-k8s-object-management"
+    }
+    ,
+    {
+      "title": "What is Kubernetes Objects?",
+      "link": "/posts/devops/orchestration/kubernetes/01d-k8s-objects"
+    }
+    ,
+    {
+      "title": "The Kubernetes API",
+      "link": "/posts/devops/orchestration/kubernetes/01c-k8s-api"
+    }
+    ,
+    {
+      "title": "Kubernetes Components",
+      "link": "/posts/devops/orchestration/kubernetes/01b-k8s-components"
+    }
+    ,
+    {
+      "title": "What is Kubernetes (k8s) ?",
+      "link": "/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes"
+    }
+    ,
+    {
+      "title": "Silabus - DevOps Kubernetes: Pemula sampai Mahir",
+      "link": "/posts/devops/orchestration/kubernetes/01-silabus"
+    }
+  ]
+}

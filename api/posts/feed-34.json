@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Nullness Predicate dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/05b-hql-predicate-nullness"
+    }
+    ,
+    {
+      "title": "Relational Comparison Predicate dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/05a-hql-predicate-relational-comparison"
+    }
+    ,
+    {
+      "title": "Predicates / Conditional Expressions dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/05-hql-predicates"
+    }
+    ,
+    {
+      "title": "Coalesce & NullIF menggunakan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/04i-hql-nullif-coalesce"
+    }
+    ,
+    {
+      "title": "Case When dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/04h-hql-case-when-expresion"
+    }
+    ,
+    {
+      "title": "Aggregation Function dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/04g-hql-aggregate-function"
+    }
+    ,
+    {
+      "title": "Concatnation dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/04f-hql-concatenation"
+    }
+    ,
+    {
+      "title": "Aritmatic dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/04e-hql-aritmetic"
+    }
+    ,
+    {
+      "title": "Distinct dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/04d-hql-distinct"
+    }
+    ,
+    {
+      "title": "Join Entity dengan Hibernate Query Language (HQL)",
+      "link": "/posts/java/orm/hibernate/postgresql/04c-hql-joins"
+    }
+  ]
+}

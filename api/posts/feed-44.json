@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Mengenal keyword super dan this",
+      "link": "/posts/language/java/oop/11d-keyword-super-this"
+    }
+    ,
+    {
+      "title": "Mengenal lebih jauh tentang polymorpism",
+      "link": "/posts/language/java/oop/11c-polymorpism-java"
+    }
+    ,
+    {
+      "title": "Mengenal lebih jauh tentang inheritance",
+      "link": "/posts/language/java/oop/11b-inheritance-java"
+    }
+    ,
+    {
+      "title": "Object Oriented Approach di Java8",
+      "link": "/posts/language/java/oop/11a-konsep-oop"
+    }
+    ,
+    {
+      "title": "Object oriented dengan Java class",
+      "link": "/posts/language/java/oop/11-class-oop"
+    }
+    ,
+    {
+      "title": "Time is your for practice part 3",
+      "link": "/posts/language/java/classes/10-quis-section-3"
+    }
+    ,
+    {
+      "title": "Organisasi class file dengan package",
+      "link": "/posts/language/java/classes/09a-package-import"
+    }
+    ,
+    {
+      "title": "Grouping source code dengan class",
+      "link": "/posts/language/java/classes/09-class-java"
+    }
+    ,
+    {
+      "title": "Menerima data dari paramenter ke dalam Function",
+      "link": "/posts/language/java/function/08a-params-at-method"
+    }
+    ,
+    {
+      "title": "Method atau Functions",
+      "link": "/posts/language/java/function/08-function"
+    }
+  ]
+}

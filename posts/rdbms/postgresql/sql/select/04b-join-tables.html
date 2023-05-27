@@ -1,0 +1,1799 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Joined Tables - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas Join Tables di PostgreSQL, Seperti biasa materinya karena akan lumayan panjang jadi kita bagi menjadi beberapa section ya diantaranya:     What is join tables?   Natural Join   Cross join   Qualified join            Inner Joins       Left or Right Outer Joins       Full Outer Joins       Self Joins           join_condition expressions   Ok langsung aja yuk kita bahas materi yang pertama:">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Joined Tables">
+<meta property="og:url" content="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas Join Tables di PostgreSQL, Seperti biasa materinya karena akan lumayan panjang jadi kita bagi menjadi beberapa section ya diantaranya:     What is join tables?   Natural Join   Cross join   Qualified join            Inner Joins       Left or Right Outer Joins       Full Outer Joins       Self Joins           join_condition expressions   Ok langsung aja yuk kita bahas materi yang pertama:">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-04-03T20:18:30+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#what-is-join-tables">What is join tables?</a></li><li><a href="#natural-join">Natural Join</a></li><li><a href="#cross-join">Cross join</a></li><li><a href="#qualified-join">Qualified Join</a></li><li><a href="#qualified-using-inner-join">Qualified using INNER JOIN</a></li><li><a href="#qualified-using-left-or-right-outer-join">Qualified using Left or Right OUTER JOIN</a></li><li><a href="#qualified-using-full-outer-join">Qualified using FULL OUTER JOIN</a></li><li><a href="#qualified-for-self-join">Qualified for Self JOIN</a></li><li><a href="#join_condition-expressions">join_condition expressions</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Joined Tables">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas Join Tables di PostgreSQL, Seperti biasa materinya karena akan lumayan panjang jadi kita bagi menjadi beberapa section ya diantaranya:  What is join tables?  Natural Join  Cross join  Qualified join          Inner Joins      Left or Right Outer Joins      Full Outer Joins      Self Joins        join_condition expressionsOk langsung aja yuk kita bahas materi yang pertama:">
+    <meta itemprop="datePublished" content="2022-04-03T20:18:30+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables" class="u-url" itemprop="url">Joined Tables
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-04-03T20:18:30+07:00">April 3, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        13 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan PostgreSQL">
+        <label class="acordion-item-label" for="content-Pengenalan PostgreSQL">
+            Pengenalan PostgreSQL
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01-silabus-psql">
+                        
+                        Silabus - PostgreSQL: Pemul...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01a-what-is-postgresql">
+                        
+                        Overview of PostgreSQL Data...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01b-postgresql-architecture">
+                        
+                        Architecture of PostgreSQL ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01c-postgresql-database">
+                        
+                        Overview of Object Relation...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started">
+        <label class="acordion-item-label" for="content-Getting started">
+            Getting started
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02-overview-install-postgres">
+                        
+                        Overview Installing PostgreSQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows">
+                        
+                        Install PostgreSQL for Wind...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac">
+                        
+                        Install PostgreSQL for Mac ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu">
+                        
+                        Install PostgreSQL for Linu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker">
+                        
+                        Install PostgreSQL using Do...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02b-use-psql">
+                        
+                        Using psql as PostgreSQL ed...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02c-use-pgadmin">
+                        
+                        Using pgAdmin4 as PostgreSQ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+                        
+                        Using thirdparty Editor unt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select Statement">
+        <label class="acordion-item-label" for="content-SQL - Select Statement">
+            SQL - Select Statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03-overview-sql">
+                        
+                        Overview SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03a-basic-select-statement">
+                        
+                        Basic SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators">
+                        
+                        Build-in Operators
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions">
+                        
+                        Build-in Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+                        
+                        Filtering data with WHERE c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause">
+                        
+                        Sorting rows using ORDER BY...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause">
+                        
+                        Limit dan Offset rows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03g-quis-section-1">
+                        
+                        Time your practice (part 1)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements">
+                        
+                        Deep dive into Select State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+                        
+                        Single Row / Group functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Joined Tables
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04c-subquery">
+                        
+                        Queries inside a query (sub...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+                        
+                        Conditional Expressions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04e-combining-queries">
+                        
+                        Combining Queries (UNION, I...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04f-with-queries">
+                        
+                        WITH Queries (Common Table ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04g-quis-section-2">
+                        
+                        Time your practice (part 2)
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data manipulation">
+        <label class="acordion-item-label" for="content-SQL - Data manipulation">
+            SQL - Data manipulation
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05-overview-dml">
+                        
+                        Overview of Data Manipulati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05a-cud-statement">
+                        
+                        Basic Create, Update, Delet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+                        
+                        Deep dive into INSERT State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05c-dml-update">
+                        
+                        Deep dive into UPDATE State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete">
+                        
+                        Deep dive into DELETE state...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement">
+                        
+                        Prepared Statement in SQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+                        
+                        Cleanup Data from Table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1">
+                        
+                        Time your practice (part 3)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control">
+                        
+                        Overview of Concurrency Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl">
+                        
+                        Getting started with Transa...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data definition">
+        <label class="acordion-item-label" for="content-SQL - Data definition">
+            SQL - Data definition
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Database design (Mapping)">
+        <label class="acordion-item-label" for="content-Study Kasus: Database design (Mapping)">
+            Study Kasus: Database design (Mapping)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Indexes">
+        <label class="acordion-item-label" for="content-SQL - Indexes">
+            SQL - Indexes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Users Management">
+        <label class="acordion-item-label" for="content-SQL - Users Management">
+            SQL - Users Management
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Type Conversion">
+        <label class="acordion-item-label" for="content-Type Conversion">
+            Type Conversion
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas Join Tables di PostgreSQL, Seperti biasa materinya karena akan lumayan panjang jadi kita bagi menjadi beberapa section ya diantaranya:</p>
+
+<ol>
+  <li>What is join tables?</li>
+  <li>Natural Join</li>
+  <li>Cross join</li>
+  <li>Qualified join
+    <ol>
+      <li>Inner Joins</li>
+      <li>Left or Right Outer Joins</li>
+      <li>Full Outer Joins</li>
+      <li>Self Joins</li>
+    </ol>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">join_condition</code> expressions</li>
+</ol>
+
+<p>Ok langsung aja yuk kita bahas materi yang pertama:</p>
+
+<!--more-->
+
+<h2 id="what-is-join-tables">What is join tables?</h2>
+
+<p>A joined table is a table derived from two other (real or derived) tables according to the rules of the particular join type. Inner, outer, and cross-joins are available.</p>
+
+<p>The general syntax of a joined table is</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">select_list_expression</span>
+<span class="k">FROM</span> <span class="n">T1</span> <span class="n">join_type</span> <span class="n">T2</span> <span class="p">[</span> <span class="n">join_condition</span> <span class="p">]</span></code></pre></figure>
+
+<p>Joins of all types can be chained together, or nested: either or both <code class="language-plaintext highlighter-rouge">T1</code> and <code class="language-plaintext highlighter-rouge">T2</code> can be joined tables.</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+erDiagram
+    jobs ||--o| employees : job_id
+    jobs {
+        int     job_id          PK  "identifier of jobs"
+        string  job_title           "Job Name"
+    }
+    locations ||--o| employees : location_id
+    locations {
+        int     location_id     PK  "indentifier of location"
+        string  street_address  
+        string  city
+        string  state
+    }
+    employees
+    employees {
+        int         employee_id     PK "identifier of employees"
+        string      first_name
+        string      last_name
+        int         job_id          FK "assigned to job"
+        int         location_id     FK "employee residence address"
+    }
+</div>
+
+<p>For example if you have table design look like above, join query:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span> 
+<span class="k">FROM</span> <span class="n">employees</span> <span class="k">natural</span> <span class="k">join</span> <span class="n">jobs</span><span class="p">;</span></code></pre></figure>
+
+<h2 id="natural-join">Natural Join</h2>
+
+<p>A natural join is a join that creates an implicit join based on the same column names in the joined tables.</p>
+
+<p>The general syntax of a natural joined table is</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">select_list_expression</span>
+<span class="k">FROM</span> <span class="n">T1</span> <span class="k">NATURAL</span> <span class="p">[</span><span class="k">INNER</span><span class="p">,</span> <span class="k">LEFT</span><span class="p">,</span> <span class="k">RIGHT</span><span class="p">]</span> <span class="n">T2</span><span class="p">;</span></code></pre></figure>
+
+<p>Join statement can be more than once, and Parentheses can be used around <code class="language-plaintext highlighter-rouge">JOIN</code> clauses to control the join order. In the absence of parentheses, <code class="language-plaintext highlighter-rouge">JOIN</code> clauses nest left-to-right.</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-basic-join-tables.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT emp.job_id, job.job_title, emp.employee_id, emp.first_name, loc.street_address</span>
+hr-# FROM employees emp
+hr-#         natural <span class="nb">join jobs </span>job
+hr-#         natural <span class="nb">join </span>locations loc
+hr-# limit 10<span class="p">;</span>
+   job_id   |           job_title           | employee_id | first_name |    street_address
+<span class="nt">------------</span>+-------------------------------+-------------+------------+----------------------
+ AD_PRES    | President                     |         100 | Steven     | 1297 Via Cola di Rie
+ AD_VP      | Administration Vice President |         101 | Neena      | 1297 Via Cola di Rie
+ AD_VP      | Administration Vice President |         102 | Lex        | 1297 Via Cola di Rie
+ IT_PROG    | Programmer                    |         103 | Alexander  | 1297 Via Cola di Rie
+ IT_PROG    | Programmer                    |         104 | Bruce      | 1297 Via Cola di Rie
+ IT_PROG    | Programmer                    |         105 | David      | 1297 Via Cola di Rie
+ IT_PROG    | Programmer                    |         106 | Valli      | 1297 Via Cola di Rie
+ IT_PROG    | Programmer                    |         107 | Diana      | 1297 Via Cola di Rie
+ FI_MGR     | Finance Manager               |         108 | Nancy      | 1297 Via Cola di Rie
+ FI_ACCOUNT | Accountant                    |         109 | Daniel     | 1297 Via Cola di Rie
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>If you use the asterisk (<code class="language-plaintext highlighter-rouge">*</code>) in the <code class="language-plaintext highlighter-rouge">select_list</code>, the result will contain the following columns:</p>
+
+<ol>
+  <li>All the common columns, which are the columns from both tables that have the same name.</li>
+  <li>Every column from both tables, which is not a common column.</li>
+</ol>
+
+<p>However, you should avoid using the <strong>NATURAL JOIN</strong> whenever possible because sometimes it may cause an unexpected result.</p>
+
+<p>For example, See the following <code class="language-plaintext highlighter-rouge">customers</code> and <code class="language-plaintext highlighter-rouge">transactions</code> tables from the sample database:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+erDiagram
+    customers ||--o| transactions : cust_id
+    customers {
+        int         cust_id          PK
+        string      cust_name
+        datetime    last_updated
+    }
+    transactions
+    transactions {
+        int         pay_id          PK
+        string      cust_id         FK
+        datetime    last_updated
+    }
+</div>
+
+<p>Both tables have the same <code class="language-plaintext highlighter-rouge">cust_id</code> column so you can use the NATURAL JOIN to join these tables as follows:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">customers</span> <span class="k">NATURAL</span> <span class="k">JOIN</span> <span class="n">transactions</span><span class="p">;</span></code></pre></figure>
+
+<p>But both tables also have another common column called <code class="language-plaintext highlighter-rouge">last_update</code>, which cannot be used for the join (ambiguous).</p>
+
+<h2 id="cross-join">Cross join</h2>
+
+<p>Cross join is For every possible combination of rows from <code class="language-plaintext highlighter-rouge">T1</code> and <code class="language-plaintext highlighter-rouge">T2</code> (i.e., a Cartesian product), the joined table will contain a row consisting of all columns in <code class="language-plaintext highlighter-rouge">T1</code> followed by all columns in <code class="language-plaintext highlighter-rouge">T2</code>. If the tables have <code class="language-plaintext highlighter-rouge">N</code> and <code class="language-plaintext highlighter-rouge">M</code> rows respectively, the joined table will have <code class="language-plaintext highlighter-rouge">N * M</code> rows.</p>
+
+<p><code class="language-plaintext highlighter-rouge">FROM T1 CROSS JOIN T2</code> is equivalent to <code class="language-plaintext highlighter-rouge">FROM T1 INNER JOIN T2 ON TRUE</code></p>
+
+<p>For example:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-cross-join.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select count(*) from departments;</span>
+ count
+<span class="nt">-------</span>
+    28
+<span class="o">(</span>1 row<span class="o">)</span>
+
+<span class="nv">hr</span><span class="o">=</span><span class="c"># select count(*) from jobs;</span>
+ count
+<span class="nt">-------</span>
+    19
+<span class="o">(</span>1 row<span class="o">)</span>
+
+<span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT dep.department_id, dep.department_name, job.job_id, job.job_title</span>
+hr-# FROM departments dep
+hr-#      CROSS JOIN <span class="nb">jobs </span>job<span class="p">;</span>
+ department_id |   department_name    |   job_id   |            job_title
+<span class="nt">---------------</span>+----------------------+------------+---------------------------------
+           300 | System Analis        | AD_PRES    | President
+           300 | System Analis        | AD_VP      | Administration Vice President
+           300 | System Analis        | AD_ASST    | Administration Assistant
+           300 | System Analis        | FI_MGR     | Finance Manager
+           300 | System Analis        | FI_ACCOUNT | Accountant
+           300 | System Analis        | IT_PROG    | Programmer
+           300 | System Analis        | MK_MAN     | Marketing Manager
+           300 | System Analis        | MK_REP     | Marketing Representative
+           300 | System Analis        | HR_REP     | Human Resources Representative
+           300 | System Analis        | PR_REP     | Public Relations Representative
+            10 | Administration       | AD_PRES    | President
+            10 | Administration       | AD_VP      | Administration Vice President
+            10 | Administration       | AD_ASST    | Administration Assistant
+            10 | Administration       | FI_MGR     | Finance Manager
+            10 | Administration       | FI_ACCOUNT | Accountant
+            10 | Administration       | AC_MGR     | Accounting Manager
+            10 | Administration       | AC_ACCOUNT | Public Accountant
+            10 | Administration       | SA_MAN     | Sales Manager
+<span class="o">(</span>532 rows<span class="o">)</span>
+
+<span class="nv">hr</span><span class="o">=</span><span class="c"># select count(*) from departments cross join jobs;</span>
+ count
+<span class="nt">-------</span>
+   532
+<span class="o">(</span>1 row<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="qualified-join">Qualified Join</h2>
+
+<p>Qualified Join ini adalah sesuai artinya join yang memiliki criteria atau condition (<code class="language-plaintext highlighter-rouge">join_condition</code>) tertentu.</p>
+
+<p>Basicly the <code class="language-plaintext highlighter-rouge">join_condition</code> is specified in the <code class="language-plaintext highlighter-rouge">ON</code> or <code class="language-plaintext highlighter-rouge">USING</code> or <code class="language-plaintext highlighter-rouge">WHERE</code> clause, or implicitly by the word <code class="language-plaintext highlighter-rouge">NATURAL</code>. The join condition determines which rows from the two source tables are considered to “match”, as explained in detail below.</p>
+
+<p>Qualified join terdiri dari</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">INNER JOIN</code>. For each row <code class="language-plaintext highlighter-rouge">R1</code> of <code class="language-plaintext highlighter-rouge">T1</code>, the joined table has a row for each row in <code class="language-plaintext highlighter-rouge">T2</code> that satisfies the join condition with <code class="language-plaintext highlighter-rouge">R1</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">LEFT OUTER JOIN</code>. First, an inner join is performed. Then, for each row in <code class="language-plaintext highlighter-rouge">T1</code> that does not satisfy the join condition with any row in <code class="language-plaintext highlighter-rouge">T2</code>, a joined row is added with <code class="language-plaintext highlighter-rouge">null</code> values in columns of <code class="language-plaintext highlighter-rouge">T2</code>. Thus, the joined table always has at least one row for each row in <code class="language-plaintext highlighter-rouge">T1</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">RIGHT OUTER JOIN</code>. First, an inner join is performed. Then, for each row in <code class="language-plaintext highlighter-rouge">T2</code> that does not satisfy the join condition with any row in <code class="language-plaintext highlighter-rouge">T1</code>, a joined row is added with <code class="language-plaintext highlighter-rouge">null</code> values in columns of <code class="language-plaintext highlighter-rouge">T1</code>. This is the converse of a left join: the result table will always have a row for each row in <code class="language-plaintext highlighter-rouge">T2</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">FULL OUTER JOIN</code>. First, an inner join is performed. Then, for each row in <code class="language-plaintext highlighter-rouge">T1</code> that does not satisfy the join condition with any row in <code class="language-plaintext highlighter-rouge">T2</code>, a joined row is added with <code class="language-plaintext highlighter-rouge">null</code> values in columns of <code class="language-plaintext highlighter-rouge">T2</code>. Also, for each row of <code class="language-plaintext highlighter-rouge">T2</code> that does not satisfy the join condition with any row in <code class="language-plaintext highlighter-rouge">T1</code>, a joined row with null values in the columns of <code class="language-plaintext highlighter-rouge">T1</code> is added.</li>
+</ol>
+
+<p>The general syntax of a qualifier join table is</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">T1</span> <span class="p">{</span> <span class="p">[</span><span class="k">INNER</span><span class="p">]</span> <span class="o">|</span> <span class="p">{</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="p">}</span> <span class="p">[</span><span class="k">OUTER</span><span class="p">]</span> <span class="p">}</span> <span class="k">JOIN</span> <span class="n">T2</span> <span class="k">ON</span> <span class="n">boolean_expression</span>
+<span class="n">T1</span> <span class="p">{</span> <span class="p">[</span><span class="k">INNER</span><span class="p">]</span> <span class="o">|</span> <span class="p">{</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="p">}</span> <span class="p">[</span><span class="k">OUTER</span><span class="p">]</span> <span class="p">}</span> <span class="k">JOIN</span> <span class="n">T2</span> <span class="k">USING</span> <span class="p">(</span> <span class="k">join</span> <span class="k">column</span> <span class="n">list</span> <span class="p">)</span>
+<span class="n">T1</span> <span class="k">NATURAL</span> <span class="p">{</span> <span class="p">[</span><span class="k">INNER</span><span class="p">]</span> <span class="o">|</span> <span class="p">{</span> <span class="k">LEFT</span> <span class="o">|</span> <span class="k">RIGHT</span> <span class="o">|</span> <span class="k">FULL</span> <span class="p">}</span> <span class="p">[</span><span class="k">OUTER</span><span class="p">]</span> <span class="p">}</span> <span class="k">JOIN</span> <span class="n">T2</span></code></pre></figure>
+
+<h2 id="qualified-using-inner-join">Qualified using <code class="language-plaintext highlighter-rouge">INNER JOIN</code></h2>
+
+<p>Inner Join adalah Join table yang paling commons di gunakan untuk menggabungkan antara ke 2 tabel atau lebih. Secara konsep matematika <code class="language-plaintext highlighter-rouge">INNER JOIN</code> akan menggunakan condition yang jika T1 dan T2 bernilai sama seperti ilustrasi berikut:</p>
+
+<p><img src="/resources/posts/postgresql/04b-join-tables/01-inner-join.png" alt="inner-join" /></p>
+
+<p>Contohnya saya punya perancangan table seperti berikut</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+erDiagram
+    jobs ||--o| employees : job_id
+    jobs {
+        int     job_id          PK  "identifier of jobs"
+        string  job_title           "Job Name"
+    }
+    employees
+    employees {
+        int         employee_id     PK "identifier of employees"
+        string      first_name
+        string      last_name
+        int         job_id          FK "assigned to job"
+    }
+</div>
+
+<p>Maka querynya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-join.sql"> </script>
+
+<p>Atau jiga kita bisa menggunakan lebih specify yaitu <code class="language-plaintext highlighter-rouge">INNER JOIN</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-inner-join.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT emp.employee_id, emp.last_name, job.job_id, job.job_title</span>
+hr-# FROM employees emp
+hr-#       inner <span class="nb">join jobs </span>job on <span class="o">(</span>emp.job_id <span class="o">=</span> job.job_id<span class="o">)</span>
+hr-# LIMIT 10<span class="p">;</span>
+ employee_id | last_name |   job_id   |           job_title
+<span class="nt">-------------</span>+-----------+------------+-------------------------------
+         100 | King      | AD_PRES    | President
+         101 | Kochhar   | AD_VP      | Administration Vice President
+         102 | De Haan   | AD_VP      | Administration Vice President
+         103 | Hunold    | IT_PROG    | Programmer
+         104 | Ernst     | IT_PROG    | Programmer
+         105 | Austin    | IT_PROG    | Programmer
+         106 | Pataballa | IT_PROG    | Programmer
+         107 | Lorentz   | IT_PROG    | Programmer
+         108 | Greenberg | FI_MGR     | Finance Manager
+         109 | Faviet    | FI_ACCOUNT | Accountant
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="qualified-using-left-or-right-outer-join">Qualified using Left or Right <code class="language-plaintext highlighter-rouge">OUTER JOIN</code></h2>
+
+<p>Selain <code class="language-plaintext highlighter-rouge">INNER JOIN</code> terdapat <code class="language-plaintext highlighter-rouge">OUTER JOIN</code>. <code class="language-plaintext highlighter-rouge">OUTER JOIN</code> terdiri dari 2 kombinasi yaitu</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">LEFT OUTER JOIN</code></li>
+  <li><code class="language-plaintext highlighter-rouge">RIGHT OUTER JOIN</code></li>
+</ol>
+
+<p>Secara konsep matematika <code class="language-plaintext highlighter-rouge">OUTER JOIN</code> jika kita ilustrasi dengan diagram venn seperti berikut:</p>
+
+<p><img src="/resources/posts/postgresql/04b-join-tables/02-outer-join.png" alt="outer-join" /></p>
+
+<p>Jadi position dari table pada saat join query menentukan datanya akan di tampilkan atau tidak. Misalnya disini saya punya design tabel seperti berikut:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+erDiagram
+    departments 
+    departments {
+        int     department_id   PK  "identifier of jobs"
+        string  department_name
+        int     manager_id      FK  "reff to employee"
+    }
+    employees ||--o| departments : manager_id
+    employees {
+        int         employee_id     PK "identifier of employees"
+        string      first_name
+        string      last_name
+    }
+</div>
+
+<p>Berikut adalah contoh implementasi <code class="language-plaintext highlighter-rouge">LEFT OUTER JOIN</code></p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-left-outer-join.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT dep.department_id, dep.department_name, emp.employee_id, emp.last_name</span>
+hr-# FROM departments dep
+hr-#       LEFT OUTER JOIN employees emp on dep.manager_id <span class="o">=</span> emp.employee_id<span class="p">;</span>
+ department_id |   department_name    | employee_id | last_name
+<span class="nt">---------------</span>+----------------------+-------------+-----------
+           300 | System Analis        |             |
+            10 | Administration       |         200 | Whalen
+            20 | Marketing            |         201 | Hartstein
+            30 | Purchasing           |         114 | Raphaely
+            40 | Human Resources      |         203 | Mavris
+            50 | Shipping             |         121 | Fripp
+            60 | IT                   |         103 | Hunold
+            70 | Public Relations     |         204 | Baer
+            80 | Sales                |         145 | Russell
+            90 | Executive            |         100 | King
+           100 | Finance              |         108 | Greenberg
+           110 | Accounting           |         205 | Higgins
+           120 | Treasury             |             |
+           130 | Corporate Tax        |             |
+           140 | Control And Credit   |             |
+           150 | Shareholder Services |             |
+           250 | Retail Sales         |             |
+           260 | Recruiting           |             |
+           270 | Payroll              |             |
+<span class="o">(</span>28 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Sedangkan berikut adalah implementasi <code class="language-plaintext highlighter-rouge">RIGHT OUTER JOIN</code> dengan query yang sama seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-right-outer-join.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT dep.department_id, dep.department_name, emp.employee_id, emp.last_name</span>
+hr-# FROM departments dep
+hr-#       RIGHT OUTER JOIN employees emp on dep.manager_id <span class="o">=</span> emp.employee_id<span class="p">;</span>
+ department_id | department_name  | employee_id |  last_name
+<span class="nt">---------------</span>+------------------+-------------+-------------
+            10 | Administration   |         200 | Whalen
+            20 | Marketing        |         201 | Hartstein
+            30 | Purchasing       |         114 | Raphaely
+            40 | Human Resources  |         203 | Mavris
+            50 | Shipping         |         121 | Fripp
+            60 | IT               |         103 | Hunold
+            70 | Public Relations |         204 | Baer
+            80 | Sales            |         145 | Russell
+            90 | Executive        |         100 | King
+           100 | Finance          |         108 | Greenberg
+           110 | Accounting       |         205 | Higgins
+               |                  |         106 | Pataballa
+               |                  |         120 | Weiss
+               |                  |         151 | Bernstein
+               |                  |         119 | Colmenares
+               |                  |         101 | Kochhar
+               |                  |         137 | Ladwig
+               |                  |         118 | Himuro
+               |                  |         130 | Atkinson
+               |                  |         144 | Vargas
+<span class="o">(</span>107 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="qualified-using-full-outer-join">Qualified using <code class="language-plaintext highlighter-rouge">FULL OUTER JOIN</code></h2>
+
+<p>Pada <code class="language-plaintext highlighter-rouge">OUTER JOIN</code> juga terdapat <code class="language-plaintext highlighter-rouge">FULL OUTER JOIN</code> yang secara arti akan mengambil data secara keseluruhan. Secara konsep matematika <code class="language-plaintext highlighter-rouge">FULL OUTER JOIN</code> jika kita ilustrasi dengan diagram venn seperti berikut:</p>
+
+<p><img src="/resources/posts/postgresql/04b-join-tables/03-full-outer-join.png" alt="full-outer-join" /></p>
+
+<p>Maka imlementasi query seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-full-outer-join.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT dep.department_id, dep.department_name, emp.employee_id, emp.last_name</span>
+hr-# FROM departments dep
+hr-#       FULL OUTER JOIN employees emp on dep.manager_id <span class="o">=</span> emp.employee_id<span class="p">;</span>
+ department_id |   department_name    | employee_id |  last_name
+<span class="nt">---------------</span>+----------------------+-------------+-------------
+           300 | System Analis        |             |
+            10 | Administration       |         200 | Whalen
+            20 | Marketing            |         201 | Hartstein
+            80 | Sales                |         145 | Russell
+            90 | Executive            |         100 | King
+           100 | Finance              |         108 | Greenberg
+           110 | Accounting           |         205 | Higgins
+           120 | Treasury             |             |
+           130 | Corporate Tax        |             |
+           140 | Control And Credit   |             |
+           220 | NOC                  |             |
+           230 | IT Helpdesk          |             |
+           240 | Government Sales     |             |
+           250 | Retail Sales         |             |
+           260 | Recruiting           |             |
+           270 | Payroll              |             |
+               |                      |         106 | Pataballa
+               |                      |         120 | Weiss
+               |                      |         151 | Bernstein
+               |                      |         183 | Geoni
+               |                      |         118 | Himuro
+               |                      |         130 | Atkinson
+               |                      |         144 | Vargas
+<span class="o">(</span>124 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="qualified-for-self-join">Qualified for Self <code class="language-plaintext highlighter-rouge">JOIN</code></h2>
+
+<p>Self JOIN pada dasarnya Join Table seperti layaknya <code class="language-plaintext highlighter-rouge">INNER JOIN</code> dan <code class="language-plaintext highlighter-rouge">OUTER JOIN</code> hanya saja menggabungkan antara 2 tabel atau lebih yang ke referensi yang sama.</p>
+
+<p>Jika kita gambarkan Entity Relational Diagramnya seperti berikut:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+erDiagram
+    employees ||--o| employees : manager_id
+    employees {
+        int         employee_id     PK "identifier of employees"
+        string      first_name
+        string      last_name
+        int         manager_id      FK "manager of employee"
+    }
+</div>
+
+<p>Contoh kasusnya, tampilkan data karyawan berserta managernya maka querynya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-self-join.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT  emp.employee_id "employee id",</span>
+hr-#         emp.last_name as <span class="s2">"employee name"</span>,
+hr-#         man.employee_id <span class="s2">"manager id"</span>,
+hr-#         man.last_name <span class="s2">"manager name"</span>
+hr-# FROM employees emp
+hr-#   LEFT OUTER JOIN employees man on emp.manager_id <span class="o">=</span> man.employee_id
+hr-# LIMIT 10<span class="p">;</span>
+ employee <span class="nb">id</span> | employee name | manager <span class="nb">id</span> | manager name
+<span class="nt">-------------</span>+---------------+------------+--------------
+         100 | King          |            |
+         101 | Kochhar       |        100 | King
+         102 | De Haan       |        100 | King
+         103 | Hunold        |        102 | De Haan
+         104 | Ernst         |        103 | Hunold
+         105 | Austin        |        103 | Hunold
+         106 | Pataballa     |        103 | Hunold
+         107 | Lorentz       |        103 | Hunold
+         108 | Greenberg     |        101 | Kochhar
+         109 | Faviet        |        108 | Greenberg
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="join_condition-expressions"><code class="language-plaintext highlighter-rouge">join_condition</code> expressions</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">ON</code> clause is the most general kind of join condition: it takes a Boolean value expression of the same kind as is used in a <code class="language-plaintext highlighter-rouge">WHERE</code> clause. A pair of rows from <code class="language-plaintext highlighter-rouge">T1</code> and <code class="language-plaintext highlighter-rouge">T2</code> match if the <code class="language-plaintext highlighter-rouge">ON</code> expression evaluates to <code class="language-plaintext highlighter-rouge">true</code>.</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-on-join-conditions.sql"> </script>
+
+<p>The <code class="language-plaintext highlighter-rouge">USING</code> clause is a shorthand that allows you to take advantage of the specific situation where both sides of the join use the same name for the joining column(s). It takes a comma-separated list of the shared column names and forms a join condition that includes an equality comparison for each one. For example, joining <code class="language-plaintext highlighter-rouge">T1</code> and <code class="language-plaintext highlighter-rouge">T2</code> with <code class="language-plaintext highlighter-rouge">USING (a, b)</code> produces the join condition <code class="language-plaintext highlighter-rouge">ON T1.a = T2.a AND T1.b = T2.b</code>.</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-using-join-conditions.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT emp.employee_id, emp.last_name, job.job_id, job.job_title</span>
+hr-# FROM employees emp
+hr-#       <span class="nb">join jobs </span>job using <span class="o">(</span>job_id<span class="o">)</span>
+hr-# LIMIT 10<span class="p">;</span>
+ employee_id | last_name |   job_id   |           job_title
+<span class="nt">-------------</span>+-----------+------------+-------------------------------
+         100 | King      | AD_PRES    | President
+         101 | Kochhar   | AD_VP      | Administration Vice President
+         102 | De Haan   | AD_VP      | Administration Vice President
+         103 | Hunold    | IT_PROG    | Programmer
+         104 | Ernst     | IT_PROG    | Programmer
+         105 | Austin    | IT_PROG    | Programmer
+         106 | Pataballa | IT_PROG    | Programmer
+         107 | Lorentz   | IT_PROG    | Programmer
+         108 | Greenberg | FI_MGR     | Finance Manager
+         109 | Faviet    | FI_ACCOUNT | Accountant
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Selain itu juga kita bisa menggunakan <code class="language-plaintext highlighter-rouge">WHERE</code> clause, seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04b-where-join-conditions.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT emp.employee_id, emp.last_name, job.job_id, job.job_title</span>
+hr-# FROM employees emp, <span class="nb">jobs </span>job
+hr-# WHERE emp.job_id <span class="o">=</span> job.job_id
+hr-# LIMIT 10<span class="p">;</span>
+ employee_id | last_name |   job_id   |           job_title
+<span class="nt">-------------</span>+-----------+------------+-------------------------------
+         100 | King      | AD_PRES    | President
+         101 | Kochhar   | AD_VP      | Administration Vice President
+         102 | De Haan   | AD_VP      | Administration Vice President
+         103 | Hunold    | IT_PROG    | Programmer
+         104 | Ernst     | IT_PROG    | Programmer
+         105 | Austin    | IT_PROG    | Programmer
+         106 | Pataballa | IT_PROG    | Programmer
+         107 | Lorentz   | IT_PROG    | Programmer
+         108 | Greenberg | FI_MGR     | Finance Manager
+         109 | Faviet    | FI_ACCOUNT | Accountant
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/01-silabus-psql"  class="" title="Silabus - PostgreSQL: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function" class="" 
+        title="Single Row / Group functions
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 23 to 38
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/04c-subquery" class="" 
+        title="Queries inside a query (subquery)
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"  class="" title="Getting started with Transaction Control (TCL)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#postgresql" class="page__taxonomy-item p-category" rel="tag">PostgreSQL</a><span class="sep">, </span>
+    
+      <a href="/categories/#rdbms" class="page__taxonomy-item p-category" rel="tag">RDBMS</a><span class="sep">, </span>
+    
+      <a href="/categories/#select" class="page__taxonomy-item p-category" rel="tag">select</a><span class="sep">, </span>
+    
+      <a href="/categories/#sql" class="page__taxonomy-item p-category" rel="tag">sql</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-04-03T20:18:30+07:00">April 3, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Joined+Tables%20%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04b-join-tables" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04b-join-tables" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04b-join-tables" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

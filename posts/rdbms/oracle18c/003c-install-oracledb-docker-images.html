@@ -1,0 +1,2109 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Install Oracle 18c XE dengan Docker - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Preparation  Sekarang kita download docker image buildenya disini kemudian buka Command Promnt atau Terminal kemudian arahkan ke folder OracleDatabase/SingleInstance/dockerfiles.">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Install Oracle 18c XE dengan Docker">
+<meta property="og:url" content="/posts/rdbms/oracle18c/003c-install-oracledb-docker-images">
+
+
+  <meta property="og:description" content="Preparation  Sekarang kita download docker image buildenya disini kemudian buka Command Promnt atau Terminal kemudian arahkan ke folder OracleDatabase/SingleInstance/dockerfiles.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-02-10T15:08:43+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/rdbms/oracle18c/003c-install-oracledb-docker-images">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#preparation">Preparation</a></li><li><a href="#build-oracle-image-docker">Build Oracle Image Docker</a></li><li><a href="#running-docker-container-oracle-18c-xe">Running Docker container Oracle 18c XE</a></li><li><a href="#test-connection-dengan-sqlplus">Test connection dengan sql/plus</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Install Oracle 18c XE dengan Docker">
+    <meta itemprop="description" content="PreparationSekarang kita download docker image buildenya disini kemudian buka Command Promnt atau Terminal kemudian arahkan ke folder OracleDatabase/SingleInstance/dockerfiles.">
+    <meta itemprop="datePublished" content="2021-02-10T15:08:43+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/rdbms/oracle18c/003c-install-oracledb-docker-images" class="u-url" itemprop="url">Install Oracle 18c XE dengan Docker
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/oracle-db-oca" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Oracle Database Certified Associate (OCA)
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-02-10T15:08:43+07:00">February 10, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        4 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Oracle Database">
+        <label class="acordion-item-label" for="content-Pengenalan Oracle Database">
+            Pengenalan Oracle Database
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/001-silabus-oracle-18c">
+                        
+                        Silabus Belajar RDBMS Oracl...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/002-pengenalan-oracledb">
+                        
+                        Pengenalan Oracle Database 18c
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/002a-consept-user-schema">
+                        
+                        Konsep User dan Schema di O...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/002b-interface-for-oracle-database">
+                        
+                        Interface untuk Oracle Data...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/002c-interaction-oracle-database-sql">
+                        
+                        Database Interaction dengan...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/003-pre-install-oracledb">
+                        
+                        Persiapan install Oracle Da...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/003a-install-oracledb-win">
+                        
+                        Install Oracle 18c XE untuk...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/003b-install-oracledb-linux-rpm">
+                        
+                        Install Oracle 18c XE untuk...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/003c-install-oracledb-docker-images">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Install Oracle 18c XE denga...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/003d-install-database-editor">
+                        
+                        Install Database Editor unt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select Statement">
+        <label class="acordion-item-label" for="content-SQL - Select Statement">
+            SQL - Select Statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/004-preparation-before-start">
+                        
+                        Persiapan Sebelum mulai bel...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/004a-aturan-pada-oracle-database">
+                        
+                        Aturan Penulisan SQL pada O...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/004b-tipe-data">
+                        
+                        Data Types di Oracle Database
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/005-select-statement">
+                        
+                        Select Statement dalam SQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/005a-select-alias-column-table">
+                        
+                        Pemberian alias pada column...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/005b-select-arithmetic">
+                        
+                        Operation Arithmetic di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/005c-select-concatnation">
+                        
+                        Menggabungkan column dengan...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/005d-handle-null-value">
+                        
+                        Handle Null value dengan Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/005e-select-distinct">
+                        
+                        Menghilangkan nilai redunda...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select with where clause">
+        <label class="acordion-item-label" for="content-SQL - Select with where clause">
+            SQL - Select with where clause
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/006-where-clause">
+                        
+                        Klausa where untuk filter d...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/006a-relational-comparison">
+                        
+                        Comparison Predicate pada k...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/006b-like-predicate">
+                        
+                        Like Predicate pada klausa ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/006c-between-predicate">
+                        
+                        Between Predicate pada klau...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/006d-null-predicate">
+                        
+                        Null Conditions pada klausa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/006e-in-predicate">
+                        
+                        In Predicates pada klausa w...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/006f-exist-condition">
+                        
+                        Exists Condition pada klaus...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/006g-not-predicate">
+                        
+                        Not Predicate pada klausa w...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/006h-combine-logical">
+                        
+                        Combine Logical pada klausa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/007-order-by">
+                        
+                        Mengurutkan data dengan kla...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Functions">
+        <label class="acordion-item-label" for="content-SQL - Functions">
+            SQL - Functions
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/008-single-row-function">
+                        
+                        Single Row Function di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/008a-character-function">
+                        
+                        Character Single Row Functi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/008b-number-function">
+                        
+                        Number Single Row Function ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/008c-date-function">
+                        
+                        Date & Time Single Row Func...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/008d-conversion-function">
+                        
+                        Conversion Single Row Funct...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/008e-casting-buildin-data-type">
+                        
+                        Casting Build-In Data Type ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/008f-null-related-function">
+                        
+                        Null-Related Single Row Fun...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/009-aggregate-function">
+                        
+                        Aggregate Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/009a-group-by">
+                        
+                        Klausa Group By di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/009b-group-by-where">
+                        
+                        Where clause dengan Group B...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/009c-group-by-having">
+                        
+                        Having clause dengan Group ...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Join Tables">
+        <label class="acordion-item-label" for="content-SQL - Join Tables">
+            SQL - Join Tables
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/010-join-tables">
+                        
+                        Join clause di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/010a-natural-join">
+                        
+                        Natural Join di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/010b-cartesian-product-join">
+                        
+                        Please be carefull using na...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/010c-inner-join">
+                        
+                        Inner Join di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/010d-outer-join">
+                        
+                        Outer Join di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/010e-self-join">
+                        
+                        Self Join di Oracle
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Sub Queries">
+        <label class="acordion-item-label" for="content-SQL - Sub Queries">
+            SQL - Sub Queries
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011-subquery">
+                        
+                        Sub Query di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011a-subquery-single-row-where-operator">
+                        
+                        Sub Query single row result...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011b-subquery-multi-row-where-operator">
+                        
+                        Handle Sub Query Multiple r...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011c-subquery-multi-row-where-in-operator">
+                        
+                        In Predicates dengan Sub Qu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011d-subquery-multi-row-where-any-operator">
+                        
+                        ANY & SOME dengan Sub Query...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011e-subquery-multi-row-where-all-operator">
+                        
+                        ALL Operator dengan Sub Que...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011f-subquery-correlate">
+                        
+                        Sub Query Correlate di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011g-subquery-exists-predicate">
+                        
+                        Sub Query EXIST Predicates ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011h-subquery-multi-columns">
+                        
+                        Pairwise Sub Query di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011i-subquery-inline-view">
+                        
+                        Sub Query Inline View di Or...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/011j-subquery-paginate">
+                        
+                        Paginate dengan Sub Query d...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/013-fetch-and-offset">
+                        
+                        Pagination dengan fetch dan...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Expressions">
+        <label class="acordion-item-label" for="content-SQL - Expressions">
+            SQL - Expressions
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/012-expressions">
+                        
+                        Expressions di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/012a-case-when-expressions">
+                        
+                        Conditional Expression deng...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data Manipulation Language">
+        <label class="acordion-item-label" for="content-SQL - Data Manipulation Language">
+            SQL - Data Manipulation Language
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/014-dml">
+                        
+                        Data Manipulation Language ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/014a-dml-insert">
+                        
+                        DML - Insert Statement di O...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/014b-dml-update">
+                        
+                        DML - Update Statement di O...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/014c-dml-delete">
+                        
+                        DML - Delete Statement di O...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/014d-dml-merge">
+                        
+                        DML - Merge Statement di Or...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/015-tcl">
+                        
+                        Transaction Control Languag...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/015a-tcl-commit">
+                        
+                        TCL - Commit Transaction di...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/015b-tcl-rollback">
+                        
+                        TCL - Rollback Transaction ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/015c-tcl-savepoint">
+                        
+                        TCL - Savepoint di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/015d-tcl-concurrent">
+                        
+                        TCL - Concurrent Transaction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/015e-tcl-locking">
+                        
+                        TCL - Locking Transaction d...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data Definition Language">
+        <label class="acordion-item-label" for="content-SQL - Data Definition Language">
+            SQL - Data Definition Language
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016-ddl">
+                        
+                        Data Definition Language (D...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016a-dictionary-table">
+                        
+                        DDL - Static Data Dictionar...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016b-ddl-create-table">
+                        
+                        DDL - Membuat Tabel di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016c-ddl-alter-table">
+                        
+                        DDL - Merubah struktur table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016d-ddl-drop-table">
+                        
+                        DDL - Menghapus table denga...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016e-ddl-truncate-table">
+                        
+                        DDL - Truncate Table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016f-ddl-purge-table">
+                        
+                        DDL - Purge Table & Recyclebin
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016g-ddl-contraints-table">
+                        
+                        DDL - Macam-macam Constrain...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016h-constraint-not-null">
+                        
+                        DDL - Not Null Constraint
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016i-constraint-unique">
+                        
+                        DDL - Unqiue Constraint
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016j-constraint-check">
+                        
+                        DDL - Check Constraint
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016k-constraint-primary-key">
+                        
+                        DDL - Primary Key Constraint
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016l-constraint-foreign-key">
+                        
+                        DDL - Foreign Key Constraint
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016m-constraint-foreign-key-cascade-options">
+                        
+                        DDL - Foreign Key Constrain...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016n-management-constraints">
+                        
+                        DDL - Enabled, Disabled & D...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016o-constraint-deferrable">
+                        
+                        DDL - Deferring Constraint ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016p-views">
+                        
+                        DDL - View di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016q-sequences">
+                        
+                        DDL - Sequences di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/016r-default-value-pk">
+                        
+                        Default value untuk Primary...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Indexing">
+        <label class="acordion-item-label" for="content-Indexing">
+            Indexing
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/017-ddl-indexes">
+                        
+                        Pengenalan Index di Oracle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/017a-normal-index">
+                        
+                        Index - Balanced Tree (B-Tree)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/017b-bitmap-index">
+                        
+                        Index - Bitmap
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/017c-function-based-index">
+                        
+                        Index - Function-Based
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/017d-drop-index">
+                        
+                        DDL - Menghapus Index
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-DDL - User Management">
+        <label class="acordion-item-label" for="content-DDL - User Management">
+            DDL - User Management
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018-managing-users-resources">
+                        
+                        Managing Users and Resource...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018a-ddl-create-users">
+                        
+                        DDL - Create User Account
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018b-alter-user">
+                        
+                        DDL - Altering User Accounts
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018c-drop-user">
+                        
+                        DDL - Dropping User Account
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018d-ddl-system-privileges">
+                        
+                        DDL - System Privileges
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018e-ddl-object-privileges">
+                        
+                        DDL - Object Privileges
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018f-ddl-roles">
+                        
+                        DDL - Grouping Privileges d...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018g-ddl-profiles">
+                        
+                        DDL - Managing Resource & P...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Monitor database activity">
+        <label class="acordion-item-label" for="content-Monitor database activity">
+            Monitor database activity
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018h-auditing">
+                        
+                        Monitoring Database Activit...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018i-audit-general-activity-policy">
+                        
+                        Auditing Activities with Un...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018j-audit-predefined-unified-policy">
+                        
+                        Predefined Unified Audit Po...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018k-managing-audit-trail">
+                        
+                        Administering the Audit Trail
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/018l-audit-fine-grained">
+                        
+                        Auditing Specific Activitie...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Database Design">
+        <label class="acordion-item-label" for="content-Database Design">
+            Database Design
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/019-schema-design-relationship">
+                        
+                        Perancangan / Design Table ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/019a-mapping-one-to-one">
+                        
+                        One To One Relationship Tables
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/019b-mapping-one-to-many">
+                        
+                        One To Many Relationship Ta...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/019c-mapping-many-to-many">
+                        
+                        Many To Many Relationship T...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/019d-mapping-parent-child">
+                        
+                        Parent Childs Relationship
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/019e-mapping-inherintance">
+                        
+                        Inherintance Mapping (OODMBS)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/019f-partitioning-table">
+                        
+                        Partitioning Table (Very La...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/oracle18c/019g-json-data">
+                        
+                        JSON Data in Oracle Database
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <h2 id="preparation">Preparation</h2>
+
+<p>Sekarang kita download docker image buildenya <a href="https://github.com/oracle/docker-images/archive/main.zip">disini</a> kemudian buka Command Promnt atau Terminal kemudian arahkan ke folder <code class="language-plaintext highlighter-rouge">OracleDatabase/SingleInstance/dockerfiles</code>.</p>
+
+<!--more-->
+
+<p>Kemudian masukin installer <code class="language-plaintext highlighter-rouge">oracle-database-xe-18c.x.x.rpm</code> ke folder <code class="language-plaintext highlighter-rouge">18.4.0</code> seperti berikut:</p>
+
+<p><img src="/resources/posts/oracle12c/003c-install-docker/installer-oracle.png" alt="installer" /></p>
+
+<p>Kemudian kita build, image dockernya.</p>
+
+<h2 id="build-oracle-image-docker">Build Oracle Image Docker</h2>
+
+<p>coba jalankan perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">./buildContainerImage.sh <span class="nt">-v</span> 18.4.0 <span class="nt">-x</span> <span class="nt">-i</span></code></pre></figure>
+
+<p>berikut outputnya:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building image <span class="s1">'oracle/database:18.4.0-xe'</span> ...
+<span class="c">#2 [internal] load .dockerignore</span>
+<span class="c">#2 sha256:82c746726f1c3ea1b1f2e1582360b55313692a0bc3b3b749ad8e9fadf198036f</span>
+<span class="c">#2 transferring context: 2B done</span>
+<span class="c">#2 DONE 0.1s</span>
+
+<span class="c">#1 [internal] load build definition from Dockerfile.xe</span>
+<span class="c">#1 sha256:97f13e81257f4107ada6ffc127c5c0519cf403dddb4f578d12129d4a82018bc8</span>
+<span class="c">#1 transferring dockerfile: 3.16kB 0.0s done</span>
+<span class="c">#1 DONE 0.1s</span>
+
+<span class="c">#3 [internal] load metadata for docker.io/library/oraclelinux:7-slim</span>
+<span class="c">#3 sha256:87ecd7bcbbc3ba1f1518cb46893e8d1a9cd73f72ecadc1fda045f513522c16a6</span>
+<span class="c">#3 ...</span>
+
+<span class="c">#4 [auth] library/oraclelinux:pull token for registry-1.docker.io</span>
+<span class="c">#4 sha256:b97bed7dd9338edaee0fa2fa232d9d2acabe1e5eb0165838fcc89586908b18f0</span>
+<span class="c">#4 DONE 0.0s</span>
+
+<span class="c">#6 [internal] load build context</span>
+<span class="c">#6 sha256:d6ad5790856ea2704309b6a60611a585ac4862bec70bae379918ccf696a15850</span>
+<span class="c">#6 transferring context: 9.51kB 0.0s done</span>
+<span class="c">#6 DONE 0.0s</span>
+
+<span class="c">#5 [1/3] FROM docker.io/library/oraclelinux:7-slim@sha256:e90d869670d820efcc73570ddda8bb038f6942758bf691f289a91cb6bf975108</span>
+<span class="c">#5 DONE 16.5s</span>
+
+<span class="c">#7 [2/3] COPY checkSpace.sh runOracle.sh setPassword.sh checkDBStatus.sh oracle-xe-18c.conf /install/</span>
+<span class="c">#7 sha256:bc6b273f62fac5d4c10c0eeaff4d78dd4b9d5cc1ef67df7ca95dedbdc0d65e08</span>
+<span class="c">#7 DONE 0.4s</span>
+
+<span class="c">#8 [3/3] RUN chmod ug+x /install/*.sh &amp;&amp;     sync &amp;&amp;     /install/checkSpace.sh &amp;&amp;     cd /install &amp;&amp;     yum -y install openssl oracle-database-preinstall-18c &amp;&amp;     sed -i -e 's/\(oracle\s\+hard\s\+nofile\)/# \1/' /etc/security/limits.d/oracle-database-preinstall-18c.conf &amp;&amp;     yum -y localinstall https://download.oracle.com/otn-pub/otn_software/db-express/oracle-database-xe-18c-1.0-1.x86_64.rpm &amp;&amp;     rm -rf /var/cache/yum &amp;&amp;     rm -rf /var/tmp/yum-* &amp;&amp;     mkdir -p /opt/oracle/scripts/setup &amp;&amp;     mkdir /opt/oracle/scripts/startup &amp;&amp;     ln -s /opt/oracle/scripts /docker-entrypoint-initdb.d &amp;&amp;     mkdir -p /opt/oracle/oradata /home/oracle &amp;&amp;     chown -R oracle:oinstall /opt/oracle /home/oracle &amp;&amp;     mv /install/runOracle.sh /opt/oracle/ &amp;&amp;     mv /install/setPassword.sh /opt/oracle/ &amp;&amp;     mv /install/checkDBStatus.sh /opt/oracle/ &amp;&amp;     mv /install/oracle-xe-18c.conf /etc/sysconfig/ &amp;&amp;     ln -s /opt/oracle/setPassword.sh / &amp;&amp;     cd $HOME &amp;&amp;     rm -rf /install &amp;&amp;     chmod ug+x /opt/oracle/*.sh</span>
+<span class="c">#8 sha256:f7a79590a8560b519d96fcebcf075095035959a0cca37cdd076ec92a62f898da</span>
+<span class="c">#8 0.324 Loaded plugins: ovl</span>
+
+<span class="c">#8 17.74 Dependencies Resolved</span>
+<span class="c">#8 17.76</span>
+<span class="c">#8 17.76 ================================================================================</span>
+<span class="c">#8 17.76  Package                 Arch   Version                        Repository  Size</span>
+<span class="c">#8 17.76 ================================================================================</span>
+<span class="c">#8 17.76 Installing:</span>
+<span class="c">#8 17.76  openssl                 x86_64 1:1.0.2k-21.el7_9              ol7_latest 493 k</span>
+<span class="c">#8 17.76  oracle-database-preinstall-18c</span>
+<span class="c">#8 17.76                          x86_64 1.0-1.el7                      ol7_latest  18 k</span>
+<span class="c">#8 17.76</span>
+<span class="c">#8 17.76 Transaction Summary</span>
+<span class="c">#8 17.76 ================================================================================</span>
+<span class="c">#8 17.76 Install  2 Packages (+114 Dependent packages)</span>
+<span class="c">#8 17.76 Upgrade             (   5 Dependent packages)</span>
+
+<span class="c">#8 974.0 Dependencies Resolved</span>
+<span class="c">#8 974.0</span>
+<span class="c">#8 974.0 ================================================================================</span>
+<span class="c">#8 974.0  Package          Arch   Version     Repository                            Size</span>
+<span class="c">#8 974.0 ================================================================================</span>
+<span class="c">#8 974.0 Installing:</span>
+<span class="c">#8 974.0  oracle-database-xe-18c</span>
+<span class="c">#8 974.0                   x86_64 1.0-1       /oracle-database-xe-18c-1.0-1.x86_64 5.2 G</span>
+<span class="c">#8 974.0 Installing for dependencies:</span>
+<span class="c">#8 974.0  file             x86_64 5.11-37.el7 ol7_latest                            56 k</span>
+<span class="c">#8 974.0</span>
+<span class="c">#8 974.0 Transaction Summary</span>
+<span class="c">#8 974.0 ================================================================================</span>
+<span class="c">#8 974.0 Install  1 Package (+1 Dependent package)</span>
+
+<span class="c">#8 1135.8 Complete!</span>
+<span class="c">#8 DONE 1137.1s</span>
+
+<span class="c">#9 exporting to image</span>
+<span class="c">#9 sha256:e8c613e07b0b7ff33893b694f7759a10d42e180f2b4dc349fb57dc6b71dcab00</span>
+<span class="c">#9 exporting layers</span>
+<span class="c">#9 exporting layers 19.7s done</span>
+<span class="c">#9 writing image sha256:cbc35939ffbe7c89ee17a86463372e1c89a3fa57a2e8e16179fc2b28cff00dcc done</span>
+<span class="c">#9 naming to docker.io/oracle/database:18.4.0-xe done</span>
+<span class="c">#9 DONE 19.7s</span>
+
+
+  Oracle Database container image <span class="k">for</span> <span class="s1">'xe'</span> version 18.4.0 is ready to be extended:
+
+    <span class="nt">--</span><span class="o">&gt;</span> oracle/database:18.4.0-xe
+
+  Build completed <span class="k">in </span>1181 seconds.
+</code></pre></div></div>
+
+<p>Setelah itu coba check image docker menggunakan perintah</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker images</code></pre></figure>
+
+<p>maka hasilnya seperti berikut:</p>
+
+<div class="language-docker highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REPOSITORY                                    TAG         IMAGE ID       CREATED              SIZE
+oracle/database                               18.4.0-xe   cbc35939ffbe   About a minute ago   6.03GB
+</code></pre></div></div>
+
+<h2 id="running-docker-container-oracle-18c-xe">Running Docker container Oracle 18c XE</h2>
+
+<p>Setelah itu kita bisa jalankan containernya dengan menggunakan <code class="language-plaintext highlighter-rouge">docker-compose</code>, buat file <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0.js?file=docker-compose.yaml"> </script>
+
+<p>Kemudian coba jalankan perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">-p</span> bootcamp-oracle up <span class="nt">-d</span></code></pre></figure>
+
+<p>outputnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Creating network <span class="s2">"bootcamp-oracle_oracle-network"</span> with the default driver
+Creating volume <span class="s2">"bootcamp-oracle_oracle-data"</span> with default driver
+Creating bootcamp-oracle_oracle_1 ... <span class="k">done</span>
+</code></pre></div></div>
+
+<p>Untuk meriksa lognya, jalankan perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">-p</span> bootcamp-oracle logs <span class="nt">--follow</span> oracle</code></pre></figure>
+
+<p>Berikut adalah lognya kita sukses:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>oracle_1  | ORACLE PASSWORD FOR SYS AND SYSTEM: passwordnyaOracle18c
+oracle_1  | Specify a password to be used <span class="k">for </span>database accounts. Oracle recommends that the password entered should be at least 8 characters <span class="k">in </span>length, contain at least 1 uppercase character, 1 lower <span class="k">case</span> character and 1 digit <span class="o">[</span>0-9]. Note that the same password will be used <span class="k">for </span>SYS, SYSTEM and PDBADMIN accounts:
+oracle_1  <span class="p">|</span> Confirm the password:
+oracle_1  <span class="p">|</span> Configuring Oracle Listener.
+oracle_1  <span class="p">|</span> Listener configuration succeeded.
+oracle_1  <span class="p">|</span> Configuring Oracle Database XE.
+oracle_1  <span class="p">|</span> Enter SYS user password:
+oracle_1  <span class="p">|</span><span class="k">**********************</span>
+oracle_1  <span class="p">|</span> Enter SYSTEM user password:
+oracle_1  <span class="p">|</span><span class="k">***********************</span>
+oracle_1  <span class="p">|</span> Enter PDBADMIN User Password:
+oracle_1  <span class="p">|</span> <span class="k">*********************</span>
+oracle_1  <span class="p">|</span> Prepare <span class="k">for </span>db operation
+oracle_1  <span class="p">|</span> Copying database files
+oracle_1  <span class="p">|</span> Creating and starting Oracle instance
+oracle_1  <span class="p">|</span> Completing Database Creation
+oracle_1  <span class="p">|</span> Creating Pluggable Databases
+oracle_1  <span class="p">|</span> Executing Post Configuration Actions
+oracle_1  <span class="p">|</span> Running Custom Scripts
+oracle_1  <span class="p">|</span> 100% <span class="nb">complete
+</span>oracle_1  <span class="p">|</span> Database creation complete. For details check the logfiles at:
+oracle_1  <span class="p">|</span>  /opt/oracle/cfgtoollogs/dbca/XE.
+oracle_1  <span class="p">|</span> Database Information:
+oracle_1  <span class="p">|</span> Global Database Name:XE
+oracle_1  <span class="p">|</span> System Identifier<span class="o">(</span>SID<span class="p">)</span>:XE
+oracle_1  | Look at the log file <span class="s2">"/opt/oracle/cfgtoollogs/dbca/XE/XE.log"</span> <span class="k">for </span>further details.
+oracle_1  |
+oracle_1  | Connect to Oracle Database using one of the connect strings:
+oracle_1  |      Pluggable database: ff7991c715f3/XEPDB1
+oracle_1  |      Multitenant container database: ff7991c715f3
+oracle_1  | Use https://localhost:5500/em to access Oracle Enterprise Manager <span class="k">for </span>Oracle Database XE
+oracle_1  | The Oracle base remains unchanged with value /opt/oracle
+oracle_1  | <span class="c">#########################</span>
+oracle_1  | DATABASE IS READY TO USE!
+oracle_1  | <span class="c">#########################</span>
+oracle_1  | The following output is now a <span class="nb">tail </span>of the alert.log:
+oracle_1  | 2021-02-10T07:45:09.996180+00:00
+oracle_1  | XEPDB1<span class="o">(</span>3<span class="o">)</span>:Resize operation completed <span class="k">for </span>file# 10, old size 358400K, new size 368640K
+oracle_1  | 2021-02-10T07:45:11.808457+00:00
+oracle_1  | XEPDB1<span class="o">(</span>3<span class="o">)</span>:CREATE SMALLFILE TABLESPACE <span class="s2">"USERS"</span> LOGGING  DATAFILE  <span class="s1">'/opt/oracle/oradata/XE/XEPDB1/users01.dbf'</span> SIZE 5M REUSE AUTOEXTEND ON NEXT  1280K MAXSIZE UNLIMITED  EXTENT MANAGEMENT LOCAL  SEGMENT SPACE MANAGEMENT  AUTO
+oracle_1  | XEPDB1<span class="o">(</span>3<span class="o">)</span>:Completed: CREATE SMALLFILE TABLESPACE <span class="s2">"USERS"</span> LOGGING  DATAFILE  <span class="s1">'/opt/oracle/oradata/XE/XEPDB1/users01.dbf'</span> SIZE 5M REUSE AUTOEXTEND ON NEXT  1280K MAXSIZE UNLIMITED  EXTENT MANAGEMENT LOCAL  SEGMENT SPACE MANAGEMENT  AUTO
+oracle_1  | XEPDB1<span class="o">(</span>3<span class="o">)</span>:ALTER DATABASE DEFAULT TABLESPACE <span class="s2">"USERS"</span>
+oracle_1  | XEPDB1<span class="o">(</span>3<span class="o">)</span>:Completed: ALTER DATABASE DEFAULT TABLESPACE <span class="s2">"USERS"</span>
+oracle_1  | 2021-02-10T07:45:12.886261+00:00
+oracle_1  | ALTER PLUGGABLE DATABASE XEPDB1 SAVE STATE
+oracle_1  | Completed: ALTER PLUGGABLE DATABASE XEPDB1 SAVE STATE
+</code></pre></div></div>
+
+<h2 id="test-connection-dengan-sqlplus">Test connection dengan sql/plus</h2>
+
+<p>Untuk menggunakan sql/plus kita bisa menggunakan perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">-p</span> bootcamp-oracle <span class="nb">exec </span>sqlplus system@XE</code></pre></figure>
+
+<p>input passwordnya: <code class="language-plaintext highlighter-rouge">passwordnyaOracle18c</code></p>
+
+<p>maka outputnya seperti berikut:</p>
+
+<p><img src="/resources/posts/oracle12c/003c-install-docker/sqlplus-connected.png" alt="connected" /></p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/rdbms/oracle18c/001-silabus-oracle-18c"  class="" title="Silabus Belajar RDBMS Oracle 18c">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/rdbms/oracle18c/003b-install-oracledb-linux-rpm" class="" 
+        title="Install Oracle 18c XE untuk Linux
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 9 to 116
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/rdbms/oracle18c/003d-install-database-editor" class="" 
+        title="Install Database Editor untuk Oracle 18c
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/rdbms/oracle18c/019g-json-data"  class="" title="JSON Data in Oracle Database">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#oracle18c" class="page__taxonomy-item p-category" rel="tag">Oracle18c</a><span class="sep">, </span>
+    
+      <a href="/categories/#rdbms" class="page__taxonomy-item p-category" rel="tag">RDBMS</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-02-10T15:08:43+07:00">February 10, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Install+Oracle+18c+XE+dengan+Docker%20%2Fposts%2Frdbms%2Foracle18c%2F003c-install-oracledb-docker-images" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Frdbms%2Foracle18c%2F003c-install-oracledb-docker-images" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Frdbms%2Foracle18c%2F003c-install-oracledb-docker-images" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Install minikube for Windows 11/10 Users",
+      "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows"
+    }
+    ,
+    {
+      "title": "Install PostgreSQL for Windows users",
+      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows"
+    }
+    ,
+    {
+      "title": "Install minikube on Mac (Apple silicon Chip)",
+      "link": "/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon"
+    }
+    ,
+    {
+      "title": "Install minikube on Mac (Intel Chip)",
+      "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos"
+    }
+    ,
+    {
+      "title": "Overview Installing PostgreSQL",
+      "link": "/posts/rdbms/postgresql/getting-started/02-overview-install-postgres"
+    }
+    ,
+    {
+      "title": "Accessing a Database",
+      "link": "/posts/rdbms/postgresql/01d-accessing-database"
+    }
+    ,
+    {
+      "title": "Overview of Object Relational Database Management System (ORDBMS)",
+      "link": "/posts/rdbms/postgresql/01c-postgresql-database"
+    }
+    ,
+    {
+      "title": "Architecture of PostgreSQL Database",
+      "link": "/posts/rdbms/postgresql/01b-postgresql-architecture"
+    }
+    ,
+    {
+      "title": "Overview of PostgreSQL Database",
+      "link": "/posts/rdbms/postgresql/01a-what-is-postgresql"
+    }
+    ,
+    {
+      "title": "Silabus - PostgreSQL: Pemula sampai Mahir",
+      "link": "/posts/rdbms/postgresql/01-silabus-psql"
+    }
+  ]
+}

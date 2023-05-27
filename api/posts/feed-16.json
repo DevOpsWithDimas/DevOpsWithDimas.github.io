@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Springboot - where data such as files/images we stored?",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file"
+    }
+    ,
+    {
+      "title": "Springboot - using Environtment",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env"
+    }
+    ,
+    {
+      "title": "Build docker image for spring-boot",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08c-build-springboot"
+    }
+    ,
+    {
+      "title": "Build Java Web using maven-docker-plugin",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08b-using-maven-docker-plugin"
+    }
+    ,
+    {
+      "title": "Build Docker Image for Java Webapp",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat"
+    }
+    ,
+    {
+      "title": "Build specific docker image by programming languages",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage"
+    }
+    ,
+    {
+      "title": "Best practices for scanning images",
+      "link": "/posts/devops/docker/dockerfile/07n-docker-image-scan"
+    }
+    ,
+    {
+      "title": "Best practices for writing Dockerfiles",
+      "link": "/posts/devops/docker/dockerfile/07m-best-practice-dockerfile"
+    }
+    ,
+    {
+      "title": "Multiple Stage Builds",
+      "link": "/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages"
+    }
+    ,
+    {
+      "title": "Health Check Instruction",
+      "link": "/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck"
+    }
+  ]
+}

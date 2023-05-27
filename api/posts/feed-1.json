@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Working with Deployment object",
+      "link": "/posts/devops/orchestration/kubernetes/workloads/05b-deployment"
+    }
+    ,
+    {
+      "title": "Study cases: Microservice apps (Springboot Rest API)",
+      "link": "/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps"
+    }
+    ,
+    {
+      "title": "Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)",
+      "link": "/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class"
+    }
+    ,
+    {
+      "title": "Silabus SRE - Nutanix AHV: Pemula sampai Mahir",
+      "link": "/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv"
+    }
+    ,
+    {
+      "title": "What is Workload Resources?",
+      "link": "/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload"
+    }
+    ,
+    {
+      "title": "Overview Kubernetes Workloads resources",
+      "link": "/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources"
+    }
+    ,
+    {
+      "title": "Getting started with Transaction Control (TCL)",
+      "link": "/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"
+    }
+    ,
+    {
+      "title": "Overview of Concurrency Control",
+      "link": "/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control"
+    }
+    ,
+    {
+      "title": "Time your practice (part 3)",
+      "link": "/posts/rdbms/postgresql/sql/dml/05g-quis-section-1"
+    }
+    ,
+    {
+      "title": "Cleanup Data from Table",
+      "link": "/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup"
+    }
+  ]
+}

@@ -1,0 +1,2086 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Queries inside a query (subquery) - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, setelah kita membahas tentang Joined tables tahap selanjutnya kita akan membahas tentang Queries inside a query atau lebih di kenal dengan SubQuery. Seperti biasa karena pembahasannya akan lumayan panjang jadi kita akan bagi-bagi menjadi beberapa bagian ya diantaranya:     What is SubQuery?   Using SubQuery specified in column_list   Correlate SubQuery   Using SubQuery inline view   Lateral Subqueries   SubQuery as predicate in where clause   OK langsung aja kita ke pembahasan yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Queries inside a query (subquery)">
+<meta property="og:url" content="/posts/rdbms/postgresql/sql/select/04c-subquery">
+
+
+  <meta property="og:description" content="Hai semuanya, setelah kita membahas tentang Joined tables tahap selanjutnya kita akan membahas tentang Queries inside a query atau lebih di kenal dengan SubQuery. Seperti biasa karena pembahasannya akan lumayan panjang jadi kita akan bagi-bagi menjadi beberapa bagian ya diantaranya:     What is SubQuery?   Using SubQuery specified in column_list   Correlate SubQuery   Using SubQuery inline view   Lateral Subqueries   SubQuery as predicate in where clause   OK langsung aja kita ke pembahasan yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-05-06T16:03:42+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/rdbms/postgresql/sql/select/04c-subquery">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#what-is-subquery">What is SubQuery?</a></li><li><a href="#using-subquery-specified-in-select_column_list">Using SubQuery specified in select_column_list</a></li><li><a href="#correlate-subquery">Correlate SubQuery</a></li><li><a href="#using-subquery-inline-view">Using SubQuery inline view</a></li><li><a href="#lateral-subqueries">Lateral SubQueries</a></li><li><a href="#subquery-as-predicate-in-where-clause">SubQuery as predicate in where clause</a></li><li><a href="#using-subquery-for-single-row-comparison">Using SubQuery for Single-Row Comparison</a></li><li><a href="#using-exists-operator">Using EXISTS operator</a></li><li><a href="#using-in-predicate-to-handle-multiple-values">Using IN predicate to handle multiple values</a></li><li><a href="#using-any--some-predicate-to-handle-multiple-values">Using ANY &amp; SOME predicate to handle multiple values</a></li><li><a href="#using-all-predicate-to-handler-multiple-values">Using ALL predicate to handler multiple values</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Queries inside a query (subquery)">
+    <meta itemprop="description" content="Hai semuanya, setelah kita membahas tentang Joined tables tahap selanjutnya kita akan membahas tentang Queries inside a query atau lebih di kenal dengan SubQuery. Seperti biasa karena pembahasannya akan lumayan panjang jadi kita akan bagi-bagi menjadi beberapa bagian ya diantaranya:  What is SubQuery?  Using SubQuery specified in column_list  Correlate SubQuery  Using SubQuery inline view  Lateral Subqueries  SubQuery as predicate in where clauseOK langsung aja kita ke pembahasan yang pertama">
+    <meta itemprop="datePublished" content="2022-05-06T16:03:42+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/rdbms/postgresql/sql/select/04c-subquery" class="u-url" itemprop="url">Queries inside a query (subquery)
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-05-06T16:03:42+07:00">May 6, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        18 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan PostgreSQL">
+        <label class="acordion-item-label" for="content-Pengenalan PostgreSQL">
+            Pengenalan PostgreSQL
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01-silabus-psql">
+                        
+                        Silabus - PostgreSQL: Pemul...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01a-what-is-postgresql">
+                        
+                        Overview of PostgreSQL Data...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01b-postgresql-architecture">
+                        
+                        Architecture of PostgreSQL ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01c-postgresql-database">
+                        
+                        Overview of Object Relation...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started">
+        <label class="acordion-item-label" for="content-Getting started">
+            Getting started
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02-overview-install-postgres">
+                        
+                        Overview Installing PostgreSQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows">
+                        
+                        Install PostgreSQL for Wind...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac">
+                        
+                        Install PostgreSQL for Mac ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu">
+                        
+                        Install PostgreSQL for Linu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker">
+                        
+                        Install PostgreSQL using Do...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02b-use-psql">
+                        
+                        Using psql as PostgreSQL ed...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02c-use-pgadmin">
+                        
+                        Using pgAdmin4 as PostgreSQ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+                        
+                        Using thirdparty Editor unt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select Statement">
+        <label class="acordion-item-label" for="content-SQL - Select Statement">
+            SQL - Select Statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03-overview-sql">
+                        
+                        Overview SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03a-basic-select-statement">
+                        
+                        Basic SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators">
+                        
+                        Build-in Operators
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions">
+                        
+                        Build-in Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+                        
+                        Filtering data with WHERE c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause">
+                        
+                        Sorting rows using ORDER BY...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause">
+                        
+                        Limit dan Offset rows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03g-quis-section-1">
+                        
+                        Time your practice (part 1)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements">
+                        
+                        Deep dive into Select State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+                        
+                        Single Row / Group functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+                        
+                        Joined Tables
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04c-subquery">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Queries inside a query (sub...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+                        
+                        Conditional Expressions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04e-combining-queries">
+                        
+                        Combining Queries (UNION, I...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04f-with-queries">
+                        
+                        WITH Queries (Common Table ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04g-quis-section-2">
+                        
+                        Time your practice (part 2)
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data manipulation">
+        <label class="acordion-item-label" for="content-SQL - Data manipulation">
+            SQL - Data manipulation
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05-overview-dml">
+                        
+                        Overview of Data Manipulati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05a-cud-statement">
+                        
+                        Basic Create, Update, Delet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+                        
+                        Deep dive into INSERT State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05c-dml-update">
+                        
+                        Deep dive into UPDATE State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete">
+                        
+                        Deep dive into DELETE state...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement">
+                        
+                        Prepared Statement in SQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+                        
+                        Cleanup Data from Table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1">
+                        
+                        Time your practice (part 3)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control">
+                        
+                        Overview of Concurrency Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl">
+                        
+                        Getting started with Transa...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data definition">
+        <label class="acordion-item-label" for="content-SQL - Data definition">
+            SQL - Data definition
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Database design (Mapping)">
+        <label class="acordion-item-label" for="content-Study Kasus: Database design (Mapping)">
+            Study Kasus: Database design (Mapping)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Indexes">
+        <label class="acordion-item-label" for="content-SQL - Indexes">
+            SQL - Indexes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Users Management">
+        <label class="acordion-item-label" for="content-SQL - Users Management">
+            SQL - Users Management
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Type Conversion">
+        <label class="acordion-item-label" for="content-Type Conversion">
+            Type Conversion
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, setelah kita membahas tentang Joined tables tahap selanjutnya kita akan membahas tentang Queries inside a query atau lebih di kenal dengan SubQuery. Seperti biasa karena pembahasannya akan lumayan panjang jadi kita akan bagi-bagi menjadi beberapa bagian ya diantaranya:</p>
+
+<ol>
+  <li>What is SubQuery?</li>
+  <li>Using SubQuery specified in column_list</li>
+  <li>Correlate SubQuery</li>
+  <li>Using SubQuery inline view</li>
+  <li>Lateral Subqueries</li>
+  <li>SubQuery as predicate in where clause</li>
+</ol>
+
+<p>OK langsung aja kita ke pembahasan yang pertama</p>
+
+<!--more-->
+
+<h2 id="what-is-subquery">What is SubQuery?</h2>
+
+<p>A subquery is a query nested inside another query such as <code class="language-plaintext highlighter-rouge">SELECT</code>, <code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">DELETE</code> and <code class="language-plaintext highlighter-rouge">UPDATE</code>. In this article, we are focusing on the <code class="language-plaintext highlighter-rouge">SELECT</code> statement only.</p>
+
+<p>Subquery in select statement can appear into <code class="language-plaintext highlighter-rouge">select</code>, <code class="language-plaintext highlighter-rouge">from</code> and <code class="language-plaintext highlighter-rouge">where</code> clause, The basic syntax of subquery look like:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">select_column_list</span><span class="p">,</span> <span class="p">(</span><span class="n">single_row_subquery_expression</span><span class="p">)</span>
+<span class="k">from</span> <span class="n">from_tables</span> <span class="p">[,</span> <span class="p">(</span><span class="n">multi_columns_subquery_expression</span><span class="p">)]</span>
+<span class="k">where</span> <span class="k">column_name</span> <span class="k">operator</span> <span class="p">(</span><span class="n">single_column_subquery_expression</span><span class="p">)</span></code></pre></figure>
+
+<p>Dimana <code class="language-plaintext highlighter-rouge">single_row_subquery_expression</code> adalah suatu query yang biasanya menghasilkan data 1 row dan 1 column contohnya:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span>
+<span class="k">from</span> <span class="n">employees</span><span class="p">;</span></code></pre></figure>
+
+<p>Kemudian untuk <code class="language-plaintext highlighter-rouge">multiple_columns_subquery_expression</code> adalah suatu query yang bisa menghasilkan banyak data dan banyak column contohnya:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span>
+<span class="k">from</span> <span class="n">employees</span><span class="p">;</span></code></pre></figure>
+
+<p>dan yang terakhir untuk <code class="language-plaintext highlighter-rouge">single_column_subquery_expression</code> adalah suatu query yang bisa menghasilkan banyak data dan hanya 1 column saja contohnya:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">salary</span>
+<span class="k">from</span> <span class="n">employees</span><span class="p">;</span></code></pre></figure>
+
+<p>PostgreSQL executes the query that contains a subquery in the following sequence:</p>
+
+<ol>
+  <li>executes the subquery.</li>
+  <li>gets the result and passes it to the outer query.</li>
+  <li>executes the outer query.</li>
+</ol>
+
+<p>Untuk lebih detailnya seperti ilustrasi seperti berikut:</p>
+
+<p><img src="/resources/posts/postgresql/04c-subquery/01-subquery-structure.png" alt="subquery-execution-process" /></p>
+
+<h2 id="using-subquery-specified-in-select_column_list">Using SubQuery specified in <code class="language-plaintext highlighter-rouge">select_column_list</code></h2>
+
+<p>SubQuery yang paling umum pada Select statement, di letakan pada column_list dan where clause. Kali ini kita bahas dulu untuk SubQuery pada column_list. The basic query form is</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">select_column_list</span><span class="p">,</span> <span class="p">[(</span><span class="n">single_row_subquery_expression</span><span class="p">),</span> <span class="p">...]</span>
+<span class="k">from</span> <span class="n">from_tables</span>
+<span class="p">[</span><span class="k">where</span> <span class="p">...]</span></code></pre></figure>
+
+<p>For example</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-select-column-list.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT j.job_title,</span>
+hr-#        <span class="o">(</span>SELECT min<span class="o">(</span>h.start_date<span class="o">)</span>::date FROM job_history h<span class="o">)</span> as start_join
+hr-# FROM <span class="nb">jobs </span>j<span class="p">;</span>
+            job_title            | start_join
+<span class="nt">---------------------------------</span>+------------
+ President                       | 1987-09-17
+ Administration Vice President   | 1987-09-17
+ Administration Assistant        | 1987-09-17
+ Finance Manager                 | 1987-09-17
+ Accountant                      | 1987-09-17
+ Accounting Manager              | 1987-09-17
+ Public Accountant               | 1987-09-17
+ Sales Manager                   | 1987-09-17
+ Sales Representative            | 1987-09-17
+ Purchasing Manager              | 1987-09-17
+ Purchasing Clerk                | 1987-09-17
+ Stock Manager                   | 1987-09-17
+ Stock Clerk                     | 1987-09-17
+ Shipping Clerk                  | 1987-09-17
+ Programmer                      | 1987-09-17
+ Marketing Manager               | 1987-09-17
+ Marketing Representative        | 1987-09-17
+ Human Resources Representative  | 1987-09-17
+ Public Relations Representative | 1987-09-17
+<span class="o">(</span>19 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Khusus untuk SubQuery pada select column_list, tidak bisa menggunakan subquery yang menghasilkan data lebih dari 1 baris, contohnya seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">job_title</span><span class="p">,</span>
+       <span class="p">(</span><span class="k">select</span> <span class="n">h</span><span class="p">.</span><span class="n">start_date</span> <span class="k">from</span> <span class="n">job_history</span> <span class="n">h</span><span class="p">)</span>
+<span class="k">from</span> <span class="n">jobs</span> <span class="n">j</span><span class="p">;</span></code></pre></figure>
+
+<p>Maka jika di jalankan hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=</span><span class="c"># select j.job_title,</span><span class="w">
+</span><span class="n">hr-</span><span class="c">#        (select h.start_date from job_history h)</span><span class="w">
+</span><span class="n">hr-</span><span class="c"># from jobs j;</span><span class="w">
+</span><span class="n">ERROR:</span><span class="w">  </span><span class="nx">more</span><span class="w"> </span><span class="nx">than</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="nx">row</span><span class="w"> </span><span class="nx">returned</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">subquery</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">expression</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Dan juga tidak bisa menggunakan subquery yang mehasilkan lebih dari 1 kolom, contohnya seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">job_title</span><span class="p">,</span>
+       <span class="p">(</span><span class="k">select</span> <span class="n">h</span><span class="p">.</span><span class="n">start_date</span><span class="p">,</span> <span class="n">h</span><span class="p">.</span><span class="n">start_date</span> <span class="k">from</span> <span class="n">job_history</span> <span class="n">h</span> <span class="k">limit</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">from</span> <span class="n">jobs</span> <span class="n">j</span><span class="p">;</span></code></pre></figure>
+
+<p>Jika di jalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select j.job_title,</span>
+hr-#        <span class="o">(</span><span class="k">select </span>h.start_date, h.start_date from job_history h limit 1<span class="o">)</span>
+hr-# from <span class="nb">jobs </span>j<span class="p">;</span>
+ERROR:  subquery must <span class="k">return </span>only one column
+LINE 2:        <span class="o">(</span><span class="k">select </span>h.start_date, h.start_date from job_history h...
+               ^
+</code></pre></div></div>
+
+<p>Maka dari itu, kita harus memastikan data yang dikembalikan oleh subquery 1 row dan 1 column.</p>
+
+<h2 id="correlate-subquery">Correlate SubQuery</h2>
+
+<p>Correlated subqueries are used for row-by-row processing. Each subquery is executed once for every row of the outer query.</p>
+
+<p>PostgreSQL executes the query that contains a subquery in the following sequence:</p>
+
+<ol>
+  <li>Get a candiate row from outer query</li>
+  <li>executes the inner query using candidate row value</li>
+  <li>use value from inner query to quality or disqulity candidate row</li>
+</ol>
+
+<p>Basic statement is:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="p">....</span>
+<span class="k">FROM</span> <span class="n">table1</span> <span class="k">outer</span>
+<span class="k">WHERE</span> <span class="n">column1</span> <span class="k">operator</span>
+                    <span class="p">(</span><span class="k">SELECT</span> <span class="n">column3</span>
+                     <span class="k">FROM</span> <span class="n">table2</span> <span class="k">inner</span>
+                     <span class="k">WHERE</span> <span class="k">inner</span><span class="p">.</span><span class="n">column1</span> <span class="o">=</span> <span class="k">outer</span><span class="p">.</span><span class="n">column1</span><span class="p">);</span></code></pre></figure>
+
+<p>For example</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-simple-correlate.sql"> </script>
+
+<p>Jika kita jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select emp.employee_id,</span>
+hr-#        emp.first_name                           employee_name,
+hr-#        <span class="o">(</span><span class="k">select </span>man.first_name
+hr<span class="o">(</span><span class="c">#         from employees man</span>
+hr<span class="o">(</span><span class="c">#         where emp.manager_id = man.employee_id) manager_name</span>
+hr-# from employees emp
+hr-# where emp.manager_id is not null
+hr-# limit 10<span class="p">;</span>
+ employee_id | employee_name | manager_name
+<span class="nt">-------------</span>+---------------+--------------
+         101 | Neena         | Steven
+         102 | Lex           | Steven
+         103 | Alexander     | Lex
+         104 | Bruce         | Alexander
+         105 | David         | Alexander
+         106 | Valli         | Alexander
+         107 | Diana         | Alexander
+         108 | Nancy         | Neena
+         109 | Daniel        | Nancy
+         110 | John          | Nancy
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Jika temen-temen perhatikan pada subquery dengan where clause <code class="language-plaintext highlighter-rouge">emp.manager_id = man.employee_id</code> kita menggunakan column <code class="language-plaintext highlighter-rouge">manager_id</code> pada outer query. Dan jika kita mau ngambil data ke dua dari subquery, kita harus mendefinisikan column baru seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-more-correlate.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select emp.employee_id,</span>
+hr-#        emp.first_name                           employee_name,
+hr-#        emp.salary                               employee_salary,
+hr-#        <span class="o">(</span><span class="k">select </span>man.first_name
+hr<span class="o">(</span><span class="c">#         from employees man</span>
+hr<span class="o">(</span><span class="c">#         where emp.manager_id = man.employee_id) manager_name,</span>
+hr-#        <span class="o">(</span><span class="k">select </span>man.salary
+hr<span class="o">(</span><span class="c">#         from employees man</span>
+hr<span class="o">(</span><span class="c">#         where emp.manager_id = man.employee_id) manager_salary</span>
+hr-# from employees emp
+hr-# where emp.manager_id is not null
+hr-# limit 10<span class="p">;</span>
+ employee_id | employee_name | employee_salary | manager_name | manager_salary
+<span class="nt">-------------</span>+---------------+-----------------+--------------+----------------
+         101 | Neena         |        17000.00 | Steven       |       24000.00
+         102 | Lex           |        17000.00 | Steven       |       24000.00
+         103 | Alexander     |         9000.00 | Lex          |       17000.00
+         104 | Bruce         |         6000.00 | Alexander    |        9000.00
+         105 | David         |         4800.00 | Alexander    |        9000.00
+         106 | Valli         |         4800.00 | Alexander    |        9000.00
+         107 | Diana         |         4200.00 | Alexander    |        9000.00
+         108 | Nancy         |        12000.00 | Neena        |       17000.00
+         109 | Daniel        |         9000.00 | Nancy        |       12000.00
+         110 | John          |         8200.00 | Nancy        |       12000.00
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="using-subquery-inline-view">Using SubQuery inline view</h2>
+
+<p>The subquery specified in the <code class="language-plaintext highlighter-rouge">FROM</code> clause of a query is called an inline view. Because an inline view can replace a table in a query, it is also called a derived table. Sometimes, you may hear the term subselect, which is the same meaning as the inline view.</p>
+
+<p>An inline view is not a real view but a subquery in the <code class="language-plaintext highlighter-rouge">FROM</code> clause of a <code class="language-plaintext highlighter-rouge">SELECT</code> statement. The basic syntax:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="p">....</span>
+<span class="k">FROM</span> <span class="n">table1</span> <span class="k">outer</span><span class="p">,</span> <span class="p">(</span> <span class="n">subquery_expression</span> <span class="p">)</span> <span class="k">as</span> <span class="n">subquery_alias</span><span class="p">,</span> <span class="p">...</span></code></pre></figure>
+
+<p>For example:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-basic-inline-view.sql"> </script>
+
+<p>Jika kita jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select emp.employee_id, emp.first_name, emp.salary, func.rata2, func.minimun, func.maximum</span>
+hr-# from employees emp,
+hr-#      <span class="o">(</span><span class="k">select </span>round<span class="o">(</span>avg<span class="o">(</span>job.max_salary<span class="o">)</span>, 0<span class="o">)</span> rata2,
+hr<span class="o">(</span><span class="c">#              min(job.max_salary)           minimun,</span>
+hr<span class="o">(</span><span class="c">#              max(job.max_salary)           maximum</span>
+hr<span class="o">(</span><span class="c">#       from jobs job) as func</span>
+hr-# where emp.salary <span class="o">&gt;=</span> func.rata2<span class="p">;</span>
+ employee_id | first_name |  salary  | rata2 | minimun | maximum
+<span class="nt">-------------</span>+------------+----------+-------+---------+---------
+         100 | Steven     | 24000.00 | 13211 |    5000 |   40000
+         101 | Neena      | 17000.00 | 13211 |    5000 |   40000
+         102 | Lex        | 17000.00 | 13211 |    5000 |   40000
+         145 | John       | 14000.00 | 13211 |    5000 |   40000
+         146 | Karen      | 13500.00 | 13211 |    5000 |   40000
+</code></pre></div></div>
+
+<h2 id="lateral-subqueries">Lateral SubQueries</h2>
+
+<p>Subqueries appearing in <code class="language-plaintext highlighter-rouge">FROM</code> can be preceded by the key word <code class="language-plaintext highlighter-rouge">LATERAL</code>. This allows them to reference columns provided by preceding FROM items. (Without <code class="language-plaintext highlighter-rouge">LATERAL</code>, each subquery is evaluated independently and so cannot cross-reference any other FROM item.) For example:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">emp</span><span class="p">.</span><span class="n">employee_id</span><span class="p">,</span>
+       <span class="n">emp</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span>
+       <span class="n">history</span><span class="p">.</span><span class="n">job_id</span><span class="p">,</span>
+       <span class="n">history</span><span class="p">.</span><span class="n">start_date</span>
+<span class="k">from</span> <span class="n">employees</span> <span class="n">emp</span><span class="p">,</span>
+     <span class="p">(</span><span class="k">select</span> <span class="n">job</span><span class="p">.</span><span class="n">job_id</span><span class="p">,</span> <span class="n">job</span><span class="p">.</span><span class="n">start_date</span>
+      <span class="k">from</span> <span class="n">job_history</span> <span class="n">job</span>
+      <span class="k">where</span> <span class="n">emp</span><span class="p">.</span><span class="n">employee_id</span> <span class="o">=</span> <span class="n">job</span><span class="p">.</span><span class="n">employee_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">history</span></code></pre></figure>
+
+<p>Jika kita execute maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select emp.employee_id,</span>
+hr-#        emp.first_name,
+hr-#        history.job_id,
+hr-#        history.start_date
+hr-# from employees emp,
+hr-#      <span class="o">(</span><span class="k">select </span>job.job_id, job.start_date
+hr<span class="o">(</span><span class="c">#       from job_history job</span>
+hr<span class="o">(</span><span class="c">#       where emp.employee_id = job.employee_id) as history;</span>
+ERROR:  invalid reference to FROM-clause entry <span class="k">for </span>table <span class="s2">"emp"</span>
+LINE 8:       where emp.employee_id <span class="o">=</span> job.employee_id<span class="o">)</span> as <span class="nb">history</span><span class="p">;</span>
+                    ^
+HINT:  There is an entry <span class="k">for </span>table <span class="s2">"emp"</span>, but it cannot be referenced from this part of the query.
+</code></pre></div></div>
+
+<p>A LATERAL item can appear at top level in the <code class="language-plaintext highlighter-rouge">FROM</code> list, or within a <code class="language-plaintext highlighter-rouge">JOIN</code> tree. In the latter case it can also refer to any items that are on the left-hand side of a <code class="language-plaintext highlighter-rouge">JOIN</code> that it is on the right-hand side of.</p>
+
+<p>The basic syntax is:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">column1</span><span class="p">,</span> <span class="n">column2</span><span class="p">,</span> <span class="p">....</span>
+<span class="k">FROM</span> <span class="n">table1</span> <span class="k">outer</span><span class="p">,</span> <span class="k">LATERAL</span> <span class="p">(</span> <span class="n">subquery_expression</span> <span class="p">)</span> <span class="k">as</span> <span class="n">subquery_alias</span><span class="p">,</span> <span class="p">...</span></code></pre></figure>
+
+<p>When a <code class="language-plaintext highlighter-rouge">FROM</code> item contains <code class="language-plaintext highlighter-rouge">LATERAL</code> cross-references, evaluation proceeds as follows: for each row of the <code class="language-plaintext highlighter-rouge">FROM</code> item providing the cross-referenced column(s), or set of rows of multiple <code class="language-plaintext highlighter-rouge">FROM</code> items providing the columns, the <code class="language-plaintext highlighter-rouge">LATERAL</code> item is evaluated using that row or row set’s values of the columns. The resulting row(s) are joined as usual with the rows they were computed from. This is repeated for each row or set of rows from the column source table(s).</p>
+
+<p>For example:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-lateral-corellate.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select emp.employee_id,</span>
+hr-#        emp.first_name,
+hr-#        history.job_id,
+hr-#        history.start_date
+hr-# from employees emp,
+hr-#      lateral <span class="o">(</span><span class="k">select </span>job.job_id, job.start_date
+hr<span class="o">(</span><span class="c">#               from job_history job</span>
+hr<span class="o">(</span><span class="c">#               where emp.employee_id = job.employee_id) as history</span>
+hr-# order by employee_id, job_id
+hr-# <span class="p">;</span>
+ employee_id | first_name |   job_id   | start_date
+<span class="nt">-------------</span>+------------+------------+------------
+         101 | Neena      | AC_ACCOUNT | 1989-09-21
+         101 | Neena      | AC_MGR     | 1993-10-28
+         102 | Lex        | IT_PROG    | 1993-01-13
+         114 | Den        | ST_CLERK   | 1998-03-24
+         122 | Payam      | ST_CLERK   | 1999-01-01
+         176 | Jonathon   | SA_MAN     | 1999-01-01
+         176 | Jonathon   | SA_REP     | 1998-03-24
+         200 | Jennifer   | AC_ACCOUNT | 1994-07-01
+         200 | Jennifer   | AD_ASST    | 1987-09-17
+         201 | Michael    | MK_REP     | 1996-02-17
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Query tersebut akan sama jika kita menggunakan join seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">emp</span><span class="p">.</span><span class="n">employee_id</span><span class="p">,</span>
+       <span class="n">emp</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span>
+       <span class="n">history</span><span class="p">.</span><span class="n">job_id</span><span class="p">,</span>
+       <span class="n">history</span><span class="p">.</span><span class="n">start_date</span>
+<span class="k">from</span> <span class="n">employees</span> <span class="n">emp</span>
+         <span class="k">join</span> <span class="n">job_history</span> <span class="n">history</span> <span class="k">on</span> <span class="p">(</span><span class="n">emp</span><span class="p">.</span><span class="n">employee_id</span> <span class="o">=</span> <span class="n">history</span><span class="p">.</span><span class="n">employee_id</span><span class="p">)</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">job_id</span><span class="p">;</span></code></pre></figure>
+
+<h2 id="subquery-as-predicate-in-where-clause">SubQuery as predicate in where clause</h2>
+
+<p>Selanjutnya kita bahas SubQuery Expression atau SubQuery yang diletakan pada <code class="language-plaintext highlighter-rouge">WHERE</code> clause dengan beberapa operators atau predicates. Basic form of SubQuery:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">column_list</span><span class="p">,</span> <span class="p">...</span>
+<span class="k">from</span> <span class="n">table1</span><span class="p">,</span> <span class="p">...</span>
+<span class="k">where</span> <span class="n">column_expression</span> <span class="k">operator</span> <span class="p">(</span><span class="n">subquery_expression</span><span class="p">)</span></code></pre></figure>
+
+<p>For example usage is:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-pairwaise-basic.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary, commission_pct</span>
+hr-# from employees
+hr-# where salary <span class="o">&gt;=</span> <span class="o">(</span>
+hr<span class="o">(</span><span class="c">#     select min(max_salary)</span>
+hr<span class="o">(</span><span class="c">#     from jobs</span>
+hr<span class="o">(</span><span class="c">#     where job_id = 'IT_PROG'</span>
+hr<span class="o">(</span><span class="c"># )</span>
+hr-# limit 10<span class="p">;</span>
+ employee_id | first_name |  salary  | commission_pct
+<span class="nt">-------------</span>+------------+----------+----------------
+         100 | Steven     | 24000.00 |
+         101 | Neena      | 17000.00 |
+         102 | Lex        | 17000.00 |
+         108 | Nancy      | 12000.00 |
+         114 | Den        | 11000.00 |
+         145 | John       | 14000.00 |           0.40
+         146 | Karen      | 13500.00 |           0.30
+         147 | Alberto    | 12000.00 |           0.30
+         148 | Gerald     | 11000.00 |           0.30
+         149 | Eleni      | 10500.00 |           0.20
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Selain itu juga kita bisa gunakan correlate SubQuery pada <code class="language-plaintext highlighter-rouge">WHERE</code> clause seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-pairwise-correlate.sql"> </script>
+
+<p>Jika di jalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary, commission_pct, job_id</span>
+hr-# from employees emp
+hr-# where emp.salary <span class="o">=</span> <span class="o">(</span>
+hr<span class="o">(</span><span class="c">#     select avg(min_salary)</span>
+hr<span class="o">(</span><span class="c">#     from jobs job</span>
+hr<span class="o">(</span><span class="c">#     where emp.job_id = job.job_id</span>
+hr<span class="o">(</span><span class="c"># );</span>
+ employee_id | first_name | salary  | commission_pct |  job_id
+<span class="nt">-------------</span>+------------+---------+----------------+----------
+         119 | Karen      | 2500.00 |                | PU_CLERK
+         182 | Martha     | 2500.00 |                | SH_CLERK
+         191 | Randall    | 2500.00 |                | SH_CLERK
+<span class="o">(</span>3 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Kemudian, untuk operator yang kita bisa gunakan dalam SubQuery as Predicate terdiri dari behavior suatu subquery resultset (Single / Multiple Rows). Diantaranya</p>
+
+<ol>
+  <li>Using Single-Row Comparison</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">EXISTS</code> operator</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">IN</code> predicate to handle multiple values</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">ANY</code> &amp; <code class="language-plaintext highlighter-rouge">SOME</code> predicate to handle multiple values</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">ALL</code> predicate to handler multiple values</li>
+</ol>
+
+<p>Ok sekarang kita bahas satu-per-satu ya function tersebut.</p>
+
+<h2 id="using-subquery-for-single-row-comparison">Using SubQuery for Single-Row Comparison</h2>
+
+<p>SubQuery dengan <code class="language-plaintext highlighter-rouge">WHERE</code> clause pada Single Row Comparison pada dasarnya udah kita bahas di materi <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause">sebelumnya</a> kita bisa menggunakan beberapa operator seperti</p>
+
+<ol>
+  <li>Relational predicate</li>
+  <li>Like predicates</li>
+  <li>Between predicates</li>
+  <li>Null predicate</li>
+  <li>Logical predicate</li>
+  <li>Regular Expression (Regex) predicate</li>
+</ol>
+
+<p>The basic form:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">column_list</span><span class="p">,</span> <span class="p">...</span>
+<span class="k">from</span> <span class="n">table1</span><span class="p">,</span> <span class="p">...</span>
+<span class="k">where</span> <span class="n">column_expression</span> <span class="p">[</span><span class="o">|</span> <span class="p">(</span><span class="n">columns_expression</span><span class="p">)]</span> <span class="k">operator</span> <span class="p">(</span> <span class="n">subquery_expression</span> <span class="p">)</span></code></pre></figure>
+
+<p>Contohnya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-basic-single-row-comparison.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary</span>
+hr-# from employees emp
+hr-# where emp.salary <span class="o">&gt;=</span> <span class="o">(</span><span class="k">select </span>avg<span class="o">(</span>max_salary<span class="o">)</span> from <span class="nb">jobs</span><span class="o">)</span>
+hr-# order by salary<span class="p">;</span>
+ employee_id | first_name |  salary
+<span class="nt">-------------</span>+------------+----------
+         146 | Karen      | 13500.00
+         145 | John       | 14000.00
+         101 | Neena      | 17000.00
+         102 | Lex        | 17000.00
+         100 | Steven     | 24000.00
+<span class="o">(</span>5 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Selain itu juga kita bisa menggunakan multiple columns, contohnya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-multi-columns-single-row-comparison.sql"> </script>
+
+<p>Jika di jalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary, coalesce(commission_pct, 0), job_id</span>
+hr-# from employees emp
+hr-# where <span class="o">(</span>emp.salary, emp.salary, emp.job_id<span class="o">)</span> <span class="o">&gt;=</span> <span class="o">(</span>
+hr<span class="o">(</span><span class="c">#     select round(stddev(max_salary), 0), round(max(min_salary)), 'IT_PROG'</span>
+hr<span class="o">(</span><span class="c">#     from jobs</span>
+hr<span class="o">(</span><span class="c"># )</span>
+hr-# order by salary
+hr-# limit 10<span class="p">;</span>
+ employee_id | first_name |  salary  | coalesce |   job_id
+<span class="nt">-------------</span>+------------+----------+----------+------------
+         158 | Allan      |  9000.00 |     0.35 | SA_REP
+         109 | Daniel     |  9000.00 |        0 | FI_ACCOUNT
+         152 | Peter      |  9000.00 |     0.25 | SA_REP
+         103 | Alexander  |  9000.00 |        0 | IT_PROG
+         163 | Danielle   |  9500.00 |     0.15 | SA_REP
+         151 | David      |  9500.00 |     0.25 | SA_REP
+         157 | Patrick    |  9500.00 |     0.35 | SA_REP
+         170 | Tayler     |  9600.00 |     0.20 | SA_REP
+         150 | Peter      | 10000.00 |     0.30 | SA_REP
+         156 | Janette    | 10000.00 |     0.35 | SA_REP
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Pada query tersebut, jika kita menggunakan logical operator seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">where</span> <span class="n">salary</span> <span class="o">&gt;=</span> <span class="mi">8876</span> <span class="k">or</span> <span class="n">salary</span> <span class="o">&gt;=</span> <span class="mi">20000</span> <span class="k">or</span> <span class="n">job_id</span> <span class="o">=</span> <span class="n">IT_PROG</span></code></pre></figure>
+
+<h2 id="using-exists-operator">Using <code class="language-plaintext highlighter-rouge">EXISTS</code> operator</h2>
+
+<p>The argument of <code class="language-plaintext highlighter-rouge">EXISTS</code> is an arbitrary <code class="language-plaintext highlighter-rouge">SELECT</code> statement, or subquery. The subquery is evaluated to determine whether it returns any rows. If it returns at least one row, the result of <code class="language-plaintext highlighter-rouge">EXISTS</code> is “true”; if the subquery returns no rows, the result of EXISTS is “false”.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">EXISTS</span> <span class="p">(</span><span class="n">subquery</span><span class="p">)</span></code></pre></figure>
+
+<p>For example</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-exists-predicate.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, job_id, salary</span>
+hr-# from employees out
+hr-# where exists<span class="o">(</span>
+hr<span class="o">(</span><span class="c">#         select 1</span>
+hr<span class="o">(</span><span class="c">#         from job_history</span>
+hr<span class="o">(</span><span class="c">#         where employee_id = out.employee_id);</span>
+ employee_id | first_name | job_id  |  salary
+<span class="nt">-------------</span>+------------+---------+----------
+         176 | Jonathon   | SA_REP  |  8600.00
+         101 | Neena      | AD_VP   | 17000.00
+         114 | Den        | PU_MAN  | 11000.00
+         200 | Jennifer   | AD_ASST |  4400.00
+         201 | Michael    | MK_MAN  | 13000.00
+         102 | Lex        | AD_VP   | 17000.00
+         122 | Payam      | ST_MAN  |  7900.00
+<span class="o">(</span>7 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="using-in-predicate-to-handle-multiple-values">Using <code class="language-plaintext highlighter-rouge">IN</code> predicate to handle multiple values</h2>
+
+<p>Untuk menghandle resultset multiple rows yang di kembalikan oleh SubQuery salah satu method yang paling commons adalah menggunakan <code class="language-plaintext highlighter-rouge">IN</code> predicate. Secara syntax seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">expression</span> <span class="k">IN</span> <span class="p">(</span><span class="n">subquery</span><span class="p">)</span></code></pre></figure>
+
+<p>The right-hand side is a parenthesized subquery, which must return exactly one column. The left-hand expression is evaluated and compared to each row of the subquery result. The result of <code class="language-plaintext highlighter-rouge">IN</code> is “true” if any equal subquery row is found. The result is “false” if no equal row is found (including the case where the subquery returns no rows).</p>
+
+<p>Contoh penggunaanya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-in-predicate.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary, job_id</span>
+hr-# from employees out
+hr-# where job_id <span class="k">in</span> <span class="o">(</span>
+hr<span class="o">(</span><span class="c">#     select distinct job_id</span>
+hr<span class="o">(</span><span class="c">#     from employees inq</span>
+hr<span class="o">(</span><span class="c">#     where inq.department_id = 80)</span>
+hr-# limit 10<span class="p">;</span>
+ employee_id | first_name  |  salary  | job_id
+<span class="nt">-------------</span>+-------------+----------+--------
+         145 | John        | 14000.00 | SA_MAN
+         146 | Karen       | 13500.00 | SA_MAN
+         147 | Alberto     | 12000.00 | SA_MAN
+         148 | Gerald      | 11000.00 | SA_MAN
+         149 | Eleni       | 10500.00 | SA_MAN
+         150 | Peter       | 10000.00 | SA_REP
+         151 | David       |  9500.00 | SA_REP
+         152 | Peter       |  9000.00 | SA_REP
+         153 | Christopher |  8000.00 | SA_REP
+         154 | Nanette     |  7500.00 | SA_REP
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Sama halnya seperti sebelumnya, pada <code class="language-plaintext highlighter-rouge">IN</code> predicate juga bisa menggunakan multiple column seperti berikut contohnya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-in-predicate-multi-columns.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary, job_id</span>
+hr-# from employees out
+hr-# where <span class="o">(</span>job_id, salary<span class="o">)</span> <span class="k">in</span> <span class="o">(</span>
+hr<span class="o">(</span><span class="c">#     select distinct job_id, (select max(min_salary) from jobs where inq.job_id = job_id)</span>
+hr<span class="o">(</span><span class="c">#     from employees inq</span>
+hr<span class="o">(</span><span class="c"># )</span>
+hr-# limit 10<span class="p">;</span>
+ employee_id | first_name | salary  |  job_id
+<span class="nt">-------------</span>+------------+---------+----------
+         119 | Karen      | 2500.00 | PU_CLERK
+         182 | Martha     | 2500.00 | SH_CLERK
+         191 | Randall    | 2500.00 | SH_CLERK
+</code></pre></div></div>
+
+<p>Untuk query tersebut jika kita menggunakan logical operator maka querynya seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">where</span> <span class="n">job_id</span> <span class="o">=</span> <span class="s1">'PU_CLERK'</span> <span class="k">and</span> <span class="n">job_id</span> <span class="o">=</span> <span class="s1">'SH_CLERK'</span> <span class="k">and</span> <span class="n">salary</span> <span class="o">=</span> <span class="mi">2500</span> <span class="k">and</span> <span class="p">...</span></code></pre></figure>
+
+<h2 id="using-any--some-predicate-to-handle-multiple-values">Using <code class="language-plaintext highlighter-rouge">ANY</code> &amp; <code class="language-plaintext highlighter-rouge">SOME</code> predicate to handle multiple values</h2>
+
+<p>Sama halnya dengan <code class="language-plaintext highlighter-rouge">IN</code> predicates, <code class="language-plaintext highlighter-rouge">ANY</code> atau <code class="language-plaintext highlighter-rouge">SOME</code> bisa digunakan untuk menghandle subquery untuk multiple rows. Berikut syntax dasarnya:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">expression</span> <span class="k">operator</span> <span class="k">ANY</span> <span class="p">(</span><span class="n">subquery</span><span class="p">)</span>
+<span class="n">expression</span> <span class="k">operator</span> <span class="k">SOME</span> <span class="p">(</span><span class="n">subquery</span><span class="p">)</span></code></pre></figure>
+
+<p>The right-hand side is a parenthesized subquery, which must return exactly one column. The left-hand expression is evaluated and compared to each row of the subquery result using the given operator, which must yield a Boolean result. The result of <code class="language-plaintext highlighter-rouge">ANY</code> is “true” if any <code class="language-plaintext highlighter-rouge">true</code> result is obtained. The result is “false” if no true result is found (including the case where the subquery returns no rows).</p>
+
+<p><code class="language-plaintext highlighter-rouge">SOME</code> is a synonym for <code class="language-plaintext highlighter-rouge">ANY</code>. <code class="language-plaintext highlighter-rouge">IN</code> is equivalent to <code class="language-plaintext highlighter-rouge">= ANY</code>. As with <code class="language-plaintext highlighter-rouge">EXISTS</code>, it’s unwise to assume that the subquery will be evaluated completely.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">row_constructor</span> <span class="k">operator</span> <span class="k">ANY</span> <span class="p">(</span><span class="n">subquery</span><span class="p">)</span>
+<span class="n">row_constructor</span> <span class="k">operator</span> <span class="k">SOME</span> <span class="p">(</span><span class="n">subquery</span><span class="p">)</span></code></pre></figure>
+
+<p>For example</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-any-eq.sql"> </script>
+
+<p>Selain itu juga kita bisa menggunakan <code class="language-plaintext highlighter-rouge">&gt; ANY</code> atau <code class="language-plaintext highlighter-rouge">&lt; ANY</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-any-higher.sql"> </script>
+
+<p>Jika di jalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select max(salary) max_salary</span>
+hr-#     from employees
+hr-#     group by job_id
+hr-#     order by max_salary<span class="p">;</span>
+ max_salary
+<span class="nt">------------</span>
+    3100.00
+    3600.00
+    4200.00
+    4400.00
+    6000.00
+    6500.00
+    8200.00
+    8300.00
+    9000.00
+    9000.00
+   10000.00
+   11000.00
+   11500.00
+   12000.00
+   12000.00
+   13000.00
+   14000.00
+   17000.00
+   24000.00
+<span class="o">(</span>19 rows<span class="o">)</span>
+
+<span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary, job_id</span>
+hr-# from employees out
+hr-# where salary <span class="o">=</span> any <span class="o">(</span>
+hr<span class="o">(</span><span class="c">#     select max(salary) max_salary</span>
+hr<span class="o">(</span><span class="c">#     from employees</span>
+hr<span class="o">(</span><span class="c">#     group by job_id</span>
+hr<span class="o">(</span><span class="c">#     order by max_salary</span>
+hr<span class="o">(</span><span class="c"># )</span>
+hr-# limit 10<span class="p">;</span>
+ employee_id | first_name |  salary  |   job_id
+<span class="nt">-------------</span>+------------+----------+------------
+         100 | Steven     | 24000.00 | AD_PRES
+         101 | Neena      | 17000.00 | AD_VP
+         102 | Lex        | 17000.00 | AD_VP
+         103 | Alexander  |  9000.00 | IT_PROG
+         104 | Bruce      |  6000.00 | IT_PROG
+         107 | Diana      |  4200.00 | IT_PROG
+         108 | Nancy      | 12000.00 | FI_MGR
+         109 | Daniel     |  9000.00 | FI_ACCOUNT
+         110 | John       |  8200.00 | FI_ACCOUNT
+         114 | Den        | 11000.00 | PU_MAN
+<span class="o">(</span>10 rows<span class="o">)</span>
+
+<span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary, job_id</span>
+hr-# from employees out
+hr-# where salary <span class="o">&gt;</span> any <span class="o">(</span>
+hr<span class="o">(</span><span class="c">#     select max(salary) max_salary</span>
+hr<span class="o">(</span><span class="c">#     from employees</span>
+hr<span class="o">(</span><span class="c">#     group by job_id</span>
+hr<span class="o">(</span><span class="c">#     order by max_salary</span>
+hr<span class="o">(</span><span class="c"># )</span>
+hr-# limit 10<span class="p">;</span>
+ employee_id | first_name |  salary  |   job_id
+<span class="nt">-------------</span>+------------+----------+------------
+         100 | Steven     | 24000.00 | AD_PRES
+         101 | Neena      | 17000.00 | AD_VP
+         102 | Lex        | 17000.00 | AD_VP
+         103 | Alexander  |  9000.00 | IT_PROG
+         104 | Bruce      |  6000.00 | IT_PROG
+         105 | David      |  4800.00 | IT_PROG
+         106 | Valli      |  4800.00 | IT_PROG
+         107 | Diana      |  4200.00 | IT_PROG
+         108 | Nancy      | 12000.00 | FI_MGR
+         109 | Daniel     |  9000.00 | FI_ACCOUNT
+</code></pre></div></div>
+
+<h2 id="using-all-predicate-to-handler-multiple-values">Using <code class="language-plaintext highlighter-rouge">ALL</code> predicate to handler multiple values</h2>
+
+<p>Dan yang terakhir, untuk menghandle multiple row pada predicate subquery yaitu <code class="language-plaintext highlighter-rouge">ALL</code>. Basic syntaxnya:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">expression</span> <span class="k">operator</span> <span class="k">ALL</span> <span class="p">(</span><span class="n">subquery</span><span class="p">)</span></code></pre></figure>
+
+<p>The right-hand side is a parenthesized subquery, which must return exactly one column. The left-hand expression is evaluated and compared to each row of the subquery result using the given operator, which must yield a Boolean result. The result of <code class="language-plaintext highlighter-rouge">ALL</code> is “true” if all rows yield true (including the case where the subquery returns no rows). The result is “false” if any false result is found. The result is <code class="language-plaintext highlighter-rouge">NULL</code> if no comparison with a subquery row returns false, and at least one comparison returns <code class="language-plaintext highlighter-rouge">NULL</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">NOT IN</code> is equivalent to <code class="language-plaintext highlighter-rouge">&lt;&gt; ALL</code>. As with <code class="language-plaintext highlighter-rouge">EXISTS</code>, it’s unwise to assume that the subquery will be evaluated completely.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">row_constructor</span> <span class="k">operator</span> <span class="k">ALL</span> <span class="p">(</span><span class="n">subquery</span><span class="p">)</span></code></pre></figure>
+
+<p>For example:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-all-not-eq.sql"> </script>
+
+<p>Jika di jalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select min(salary) min_salary</span>
+hr-#     from employees
+hr-#     group by job_id
+hr-#     order by min_salary<span class="p">;</span>
+ min_salary
+<span class="nt">------------</span>
+    2100.00
+    2500.00
+    2500.00
+    4200.00
+    4400.00
+    5800.00
+    6000.00
+    6100.00
+    6500.00
+    6900.00
+    8300.00
+   10000.00
+   10500.00
+   11000.00
+   12000.00
+   12000.00
+   13000.00
+   17000.00
+   24000.00
+<span class="o">(</span>19 rows<span class="o">)</span>
+
+<span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary, job_id</span>
+hr-# from employees out
+hr-# where salary &lt;<span class="o">&gt;</span> ALL <span class="o">(</span>
+hr<span class="o">(</span><span class="c">#     select min(salary) min_salary</span>
+hr<span class="o">(</span><span class="c">#     from employees</span>
+hr<span class="o">(</span><span class="c">#     group by job_id</span>
+hr<span class="o">(</span><span class="c">#     order by min_salary</span>
+hr<span class="o">(</span><span class="c"># );</span>
+ employee_id | first_name  |  salary  |   job_id
+<span class="nt">-------------</span>+-------------+----------+------------
+         103 | Alexander   |  9000.00 | IT_PROG
+         105 | David       |  4800.00 | IT_PROG
+         106 | Valli       |  4800.00 | IT_PROG
+         109 | Daniel      |  9000.00 | FI_ACCOUNT
+         110 | John        |  8200.00 | FI_ACCOUNT
+         111 | Ismael      |  7700.00 | FI_ACCOUNT
+         112 | Jose Manuel |  7800.00 | FI_ACCOUNT
+         115 | Alexander   |  3100.00 | PU_CLERK
+         116 | Shelli      |  2900.00 | PU_CLERK
+         117 | Sigal       |  2800.00 | PU_CLERK
+         118 | Guy         |  2600.00 | PU_CLERK
+         120 | Matthew     |  8000.00 | ST_MAN
+         121 | Adam        |  8200.00 | ST_MAN
+         122 | Payam       |  7900.00 | ST_MAN
+         125 | Julia       |  3200.00 | ST_CLERK
+         126 | Irene       |  2700.00 | ST_CLERK
+         127 | James       |  2400.00 | ST_CLERK
+<span class="o">(</span>73 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Selain itu juga kita bisa menggunakan <code class="language-plaintext highlighter-rouge">&gt; ALL</code> atau <code class="language-plaintext highlighter-rouge">&lt; ALL</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04c-subquery-all-lower.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># select max(salary) max_salary</span>
+hr-#     from employees
+hr-#     group by job_id
+hr-#     order by max_salary<span class="p">;</span>
+ max_salary
+<span class="nt">------------</span>
+    3100.00
+    3600.00
+    4200.00
+    4400.00
+    6000.00
+    6500.00
+    8200.00
+    8300.00
+    9000.00
+    9000.00
+   10000.00
+   11000.00
+   11500.00
+   12000.00
+   12000.00
+   13000.00
+   14000.00
+   17000.00
+   24000.00
+<span class="o">(</span>19 rows<span class="o">)</span>
+
+<span class="nv">hr</span><span class="o">=</span><span class="c"># select employee_id, first_name, salary, job_id</span>
+hr-# from employees out
+hr-# where salary &lt; ALL <span class="o">(</span>
+hr<span class="o">(</span><span class="c">#     select max(salary) max_salary</span>
+hr<span class="o">(</span><span class="c">#     from employees</span>
+hr<span class="o">(</span><span class="c">#     group by job_id</span>
+hr<span class="o">(</span><span class="c">#     order by max_salary</span>
+hr<span class="o">(</span><span class="c"># );</span>
+ employee_id | first_name | salary  |  job_id
+<span class="nt">-------------</span>+------------+---------+----------
+         116 | Shelli     | 2900.00 | PU_CLERK
+         117 | Sigal      | 2800.00 | PU_CLERK
+         118 | Guy        | 2600.00 | PU_CLERK
+         119 | Karen      | 2500.00 | PU_CLERK
+         126 | Irene      | 2700.00 | ST_CLERK
+         127 | James      | 2400.00 | ST_CLERK
+         128 | Steven     | 2200.00 | ST_CLERK
+         130 | Mozhe      | 2800.00 | ST_CLERK
+         131 | James      | 2500.00 | ST_CLERK
+         132 | TJ         | 2100.00 | ST_CLERK
+         134 | Michael    | 2900.00 | ST_CLERK
+         135 | Ki         | 2400.00 | ST_CLERK
+         136 | Hazel      | 2200.00 | ST_CLERK
+         139 | John       | 2700.00 | ST_CLERK
+         140 | Joshua     | 2500.00 | ST_CLERK
+         143 | Randall    | 2600.00 | ST_CLERK
+         144 | Peter      | 2500.00 | ST_CLERK
+         182 | Martha     | 2500.00 | SH_CLERK
+         183 | Girard     | 2800.00 | SH_CLERK
+         187 | Anthony    | 3000.00 | SH_CLERK
+         190 | Timothy    | 2900.00 | SH_CLERK
+         191 | Randall    | 2500.00 | SH_CLERK
+         195 | Vance      | 2800.00 | SH_CLERK
+         197 | Kevin      | 3000.00 | SH_CLERK
+         198 | Donald     | 2600.00 | SH_CLERK
+         199 | Douglas    | 2600.00 | SH_CLERK
+<span class="o">(</span>26 rows<span class="o">)</span>
+</code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/01-silabus-psql"  class="" title="Silabus - PostgreSQL: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables" class="" 
+        title="Joined Tables
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 24 to 38
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression" class="" 
+        title="Conditional Expressions
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"  class="" title="Getting started with Transaction Control (TCL)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#postgresql" class="page__taxonomy-item p-category" rel="tag">PostgreSQL</a><span class="sep">, </span>
+    
+      <a href="/categories/#rdbms" class="page__taxonomy-item p-category" rel="tag">RDBMS</a><span class="sep">, </span>
+    
+      <a href="/categories/#select" class="page__taxonomy-item p-category" rel="tag">select</a><span class="sep">, </span>
+    
+      <a href="/categories/#sql" class="page__taxonomy-item p-category" rel="tag">sql</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-05-06T16:03:42+07:00">May 6, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Queries+inside+a+query+%28subquery%29%20%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04c-subquery" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04c-subquery" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04c-subquery" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

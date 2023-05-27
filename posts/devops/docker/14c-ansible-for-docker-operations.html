@@ -1,0 +1,2485 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Getting started with Ansible role, tasks for docker - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, setelah sebelumnya kita menyiapkan environment seperti Ansible Controller node dan Managed node dengan Virtual Machine sekarang kita akan membahas beberapa IT Automation dengan meggunakan Ansible khususnya terkait dengan Docker operation yaitu     Install Docker engine with ansible role dimmaryanto93.docker   Manage docker image using ansible docker_image module   Running a container using ansible docker_container module   Execute a container using ansible docker_container_exec module   Manage multi-container Docker applications with Docker Compose using ansible docker_compose module   Ok tanpa berlama-lama yuk lansung aja kita bahas materi yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Getting started with Ansible role, tasks for docker">
+<meta property="og:url" content="/posts/devops/docker/14c-ansible-for-docker-operations">
+
+
+  <meta property="og:description" content="Hai semuanya, setelah sebelumnya kita menyiapkan environment seperti Ansible Controller node dan Managed node dengan Virtual Machine sekarang kita akan membahas beberapa IT Automation dengan meggunakan Ansible khususnya terkait dengan Docker operation yaitu     Install Docker engine with ansible role dimmaryanto93.docker   Manage docker image using ansible docker_image module   Running a container using ansible docker_container module   Execute a container using ansible docker_container_exec module   Manage multi-container Docker applications with Docker Compose using ansible docker_compose module   Ok tanpa berlama-lama yuk lansung aja kita bahas materi yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-09-11T20:26:35+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/docker/14c-ansible-for-docker-operations">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#install-docker-engine-with-ansible-role">Install Docker engine with ansible role</a></li><li><a href="#manage-docker-image-using-ansible-docker_image-module">Manage docker image using ansible docker_image module</a></li><li><a href="#manage-a-container-using-ansible-docker_container-module">Manage a container using ansible docker_container module</a></li><li><a href="#execute-a-container-using-ansible-docker_container_exec-module">Execute a container using ansible docker_container_exec module</a></li><li><a href="#manage-multi-container-using-ansible-docker_compose-module">Manage multi-container using ansible docker_compose module</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Getting started with Ansible role, tasks for docker">
+    <meta itemprop="description" content="Hai semuanya, setelah sebelumnya kita menyiapkan environment seperti Ansible Controller node dan Managed node dengan Virtual Machine sekarang kita akan membahas beberapa IT Automation dengan meggunakan Ansible khususnya terkait dengan Docker operation yaitu  Install Docker engine with ansible role dimmaryanto93.docker  Manage docker image using ansible docker_image module  Running a container using ansible docker_container module  Execute a container using ansible docker_container_exec module  Manage multi-container Docker applications with Docker Compose using ansible docker_compose moduleOk tanpa berlama-lama yuk lansung aja kita bahas materi yang pertama">
+    <meta itemprop="datePublished" content="2022-09-11T20:26:35+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/docker/14c-ansible-for-docker-operations" class="u-url" itemprop="url">Getting started with Ansible role, tasks for docker
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Docker for DevOps engineer
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-09-11T20:26:35+07:00">September 11, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        9 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Docker">
+        <label class="acordion-item-label" for="content-Pengenalan Docker">
+            Pengenalan Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/01-silabus">
+                        
+                        Silabus Belajar Docker: Pem...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01a-docker-overview">
+                        
+                        Docker Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01b-container-overview">
+                        
+                        What is Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02-system-requirement">
+                        
+                        What to know before you ins...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02a-install-on-windows10-wls">
+                        
+                        How to install Docker on Wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02b-install-on-linux-centos">
+                        
+                        How to install Docker on Li...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02c-install-on-mac">
+                        
+                        How to install Docker on Ma...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/03-getting-started">
+                        
+                        Getting Started with Docker
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Registry">
+        <label class="acordion-item-label" for="content-Docker Registry">
+            Docker Registry
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03a-docker-registry">
+                        
+                        Docker Registry (Docker HUB)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
+                        
+                        Insecure Registry
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03c-install-nexus-oss">
+                        
+                        Installing Nexus OSS
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Container CLI">
+        <label class="acordion-item-label" for="content-Docker Container CLI">
+            Docker Container CLI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04-docker-cli">
+                        
+                        Docker CLI (Command Line In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04a-docker-container-command">
+                        
+                        Management Docker Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04b-docker-image-command">
+                        
+                        Management Docker Images
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04c-docker-exec-command">
+                        
+                        Run a command in a running ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04d-expose-service-outside">
+                        
+                        Expose services to outside ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04e-docker-copy">
+                        
+                        Copying files/content betwe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04f-logging-inspect-stats-container">
+                        
+                        Logging, Inspect, & Resourc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04g-docker-run-env-file">
+                        
+                        Run a Container using Envir...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Networks">
+        <label class="acordion-item-label" for="content-Docker Networks">
+            Docker Networks
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05-docker-network">
+                        
+                        Networking overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05a-connect-to-other-container-use-link">
+                        
+                        Legacy feature of Docker Ne...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05b-docker-bridge-network">
+                        
+                        Use default bridge networks
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05c-docker-user-defined-briged-network">
+                        
+                        Use user-defined bridge net...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05d-docker-advance-user-defined-bridge-network">
+                        
+                        Advanced user-defined bridg...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05e-docker-host-network">
+                        
+                        Use host networking
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05g-docker-none-network">
+                        
+                        Disable networking for a co...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Volumes">
+        <label class="acordion-item-label" for="content-Docker Volumes">
+            Docker Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06-docker-volume">
+                        
+                        Docker Volume Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06a-management-volume">
+                        
+                        Management Volume
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06b-use-binding-volume-flag">
+                        
+                        Use Bind Mounts
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06c-share-data-among-containers">
+                        
+                        Share data among containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06e-share-data-among-machines">
+                        
+                        Share data among machines
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Dockerfile">
+        <label class="acordion-item-label" for="content-Dockerfile">
+            Dockerfile
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07-dockerfile">
+                        
+                        Build Docker Image Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07a-usage-docker-build">
+                        
+                        Usage docker build
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction">
+                        
+                        FROM Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07c-dockerfile-env">
+                        
+                        Environtment Replacement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07d-dockerfile-copy">
+                        
+                        Copying Resources
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07e-dockerfile-ignore">
+                        
+                        Excluding files/directories
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07f-dockerfile-label">
+                        
+                        Label Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07g-dockerfile-exec">
+                        
+                        Execution Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07h-dockerfile-cmd-vs-entrypoint">
+                        
+                        CMD vs ENTRYPOINT?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07i-dockerfile-expose">
+                        
+                        Exposing Ports
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07j-dockerfile-user-workdir">
+                        
+                        User, Volumes and Working D...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck">
+                        
+                        Health Check Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages">
+                        
+                        Multiple Stage Builds
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07m-best-practice-dockerfile">
+                        
+                        Best practices for writing ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07n-docker-image-scan">
+                        
+                        Best practices for scanning...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Build docker image">
+        <label class="acordion-item-label" for="content-Study Kasus: Build docker image">
+            Study Kasus: Build docker image
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage">
+                        
+                        Build specific docker image...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat">
+                        
+                        Build Docker Image for Java...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08b-using-maven-docker-plugin">
+                        
+                        Build Java Web using maven-...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08c-build-springboot">
+                        
+                        Build docker image for spri...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env">
+                        
+                        Springboot - using Environt...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file">
+                        
+                        Springboot - where data suc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db">
+                        
+                        Springboot - Using Database
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08g-build-angular-project">
+                        
+                        Build docker image for Angu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api">
+                        
+                        Angular - Access Rest API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend">
+                        
+                        Angular - Proxy to backend
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08j-build-php">
+                        
+                        Build docker image for PHP
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08k-build-laravel-apps">
+                        
+                        Build Docker image for Lara...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08l-build-laravel-webapp-and-restapi">
+                        
+                        Laravel - Using Frontend & ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db">
+                        
+                        Laravel - Using Database
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Compose">
+        <label class="acordion-item-label" for="content-Docker Compose">
+            Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09-docker-compose-overview">
+                        
+                        Overview of Docker Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09a-compose-getting-started">
+                        
+                        Get started with Docker Com...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09b-compose-cli">
+                        
+                        Overview of docker-compose CLI
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09c-syntax-compose-file">
+                        
+                        Compose file specification ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/environtment/09d-compose-using-env-variables">
+                        
+                        Environment variables in Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09e-compose-volume">
+                        
+                        Volume in Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09f-compose-share-data-between-containers">
+                        
+                        Share data between Containe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09g-share-data-using-sshfs-in-compose">
+                        
+                        Using sshfs for share data ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09h-share-data-using-nfs-in-compose">
+                        
+                        Using NFS for share data in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09i-compose-network-overview">
+                        
+                        Networking Overview in Comp...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09j-compose-network-link">
+                        
+                        Network links in Compose file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09k-compose-network-specify-custom">
+                        
+                        Specify custom networks in ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/dependency/09l-compose-depend-on">
+                        
+                        Dependency between services...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/build/09m-compose-build-image">
+                        
+                        Build docker image using Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09n-compose-using-profile">
+                        
+                        Using profiles with Compose...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09o-multiple-compose-add-override-attr">
+                        
+                        Multiple Compose files to A...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases">
+                        
+                        Example use case of multipl...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/scale/09q-compose-scale-services">
+                        
+                        Scale services using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflow/09r-compose-in-production">
+                        
+                        Use Compose in production
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Compose">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Compose">
+            Study Kasus: Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10-overview-compose-study-case">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10a-compose-php-study-case">
+                        
+                        PHP deployment using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case">
+                        
+                        Laravel deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case">
+                        
+                        Springboot deployment using...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case">
+                        
+                        Angular deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker">
+                        
+                        Deploy httpd with ssl/https...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects">
+                        
+                        Compose file for multiple g...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Context">
+        <label class="acordion-item-label" for="content-Docker Context">
+            Docker Context
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11-overview-docker-engine">
+                        
+                        Overview of Docker Context
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11a-docker-context">
+                        
+                        Usage & Managing Docker Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11b-docker-compose-remote-access">
+                        
+                        Remote deployment using doc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11c-dind">
+                        
+                        Docker Inside Docker (DinD)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11d-docker-desktop">
+                        
+                        Dashboard using Docker Desktop
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11e-docker-jetbraint">
+                        
+                        Using Docker on Jetbraint IDE
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11f-docker-portainer">
+                        
+                        Using docker on portainer.io
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11g-deprecated-features">
+                        
+                        Deprecated Engine Features
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker for CI">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker for CI">
+            Study Kasus: Docker for CI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12-overview-docker-for-ci">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12a-setup-gitlab-ci">
+                        
+                        Setup environment for CI us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12b-syntax-gitlab-ci-yml">
+                        
+                        The `.gitlab-ci.yml` file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12c-pipeline-php-gitlab-ci">
+                        
+                        Pipeline: PHP deployment us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12d-pipeline-javaweb-gitlab-ci">
+                        
+                        Pipeline: Java Web deployme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12e-pipeline-spring-boot-gitlab-ci">
+                        
+                        Pipeline: spring-boot deplo...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12f-pipeline-angular-gitlab-ci">
+                        
+                        Pipeline: Angular deploy wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12g-pipeline-laravel-gitlab-ci">
+                        
+                        Pipeline: Laravel deploy wi...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Machine">
+        <label class="acordion-item-label" for="content-Docker Machine">
+            Docker Machine
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13-docker-machine-overview">
+                        
+                        Overview of Docker machines
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-windows">
+                        
+                        Install docker-machine on W...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-linux">
+                        
+                        Install docker-machine on L...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-mac">
+                        
+                        Install docker-machine on M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13b-getting-started">
+                        
+                        Getting started with docker...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13c-managed-machines">
+                        
+                        Managing a machines in dock...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13d-usecases-docker-machine">
+                        
+                        Example Use Cases of docker...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Ansible for Docker">
+        <label class="acordion-item-label" for="content-Study Kasus: Ansible for Docker">
+            Study Kasus: Ansible for Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker">
+                        
+                        Overview Study cases: IT Au...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14a-it-automation-platform">
+                        
+                        IT Automation Platform for ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment">
+                        
+                        Setup Ansible Control and M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14c-ansible-for-docker-operations">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Getting started with Ansibl...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Swarm">
+        <label class="acordion-item-label" for="content-Docker Swarm">
+            Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Swarm">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Swarm">
+            Study Kasus: Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, setelah sebelumnya kita menyiapkan environment seperti Ansible Controller node dan Managed node dengan Virtual Machine sekarang kita akan membahas beberapa IT Automation dengan meggunakan Ansible khususnya terkait dengan Docker operation yaitu</p>
+
+<ol>
+  <li>Install Docker engine with ansible role <a href="https://galaxy.ansible.com/dimmaryanto93/docker">dimmaryanto93.docker</a></li>
+  <li>Manage docker image using ansible <a href="https://docs.ansible.com/ansible/latest/collections/community/docker/docker_image_module.html#ansible-collections-community-docker-docker-image-module">docker_image</a> module</li>
+  <li>Running a container using ansible <a href="https://docs.ansible.com/ansible/latest/collections/community/docker/docker_container_module.html#ansible-collections-community-docker-docker-container-module">docker_container</a> module</li>
+  <li>Execute a container using ansible <a href="https://docs.ansible.com/ansible/latest/collections/community/docker/docker_container_exec_module.html#ansible-collections-community-docker-docker-container-exec-module">docker_container_exec</a> module</li>
+  <li>Manage multi-container Docker applications with Docker Compose using ansible <a href="https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_module.html#ansible-collections-community-docker-docker-compose-module">docker_compose</a> module</li>
+</ol>
+
+<p>Ok tanpa berlama-lama yuk lansung aja kita bahas materi yang pertama</p>
+
+<!--more-->
+
+<h2 id="install-docker-engine-with-ansible-role">Install Docker engine with ansible role</h2>
+
+<p>Setelah kita Setup Ansible Control dan Managed Nodes, sekarang kita akan meng-install docker engine pada Managed Node menggunakan ansible role yang telah saya buat dan publish di Ansible Galaxy repository berikut <a href="https://galaxy.ansible.com/dimmaryanto93/docker">dimmaryanto93.docker</a></p>
+
+<p>Ok yang perlu di siapkan adalah Ansible playbook script seperti berikut:</p>
+
+<ol>
+  <li>
+    <p>Create file <code class="language-plaintext highlighter-rouge">requirement.yaml</code> pada Control Node, seperti berikut</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">collections</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">ansible.posix</span>
+     <span class="pi">-</span> <span class="s">community.docker</span>
+ <span class="na">roles</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">dimmaryanto93.docker</span>
+     <span class="pi">-</span> <span class="s">dimmaryanto93.docker_compose</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Install dependency / ansible collections pada Control Node, seperti berikut</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ansible-galaxy collection <span class="nb">install</span> <span class="nt">-r</span> requirement.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Install package / ansible role pada Control Node, seperti berikut</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ansible-galaxy role <span class="nb">install</span> <span class="nt">-r</span> requirement.yaml
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Create file ansible playbook script dengan nama <code class="language-plaintext highlighter-rouge">site-docker.yaml</code> seperti berikut</p>
+
+    <script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=14c-site-docker.yaml"> </script>
+  </li>
+  <li>
+    <p>Kemudian jalankan ansible playbook script tersebut dengan perintah seperti berikut:</p>
+
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ansible-playbook <span class="nt">-i</span> &lt;path-to-inventory&gt;/inventory &lt;path-to-playbook-script&gt;/site-docker.yaml
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>devops/docker <span class="o">[</span>master●] » ansible-galaxy collection <span class="nb">install</span> <span class="nt">-r</span> 11-ansible-docker/requirement.yaml
+Starting galaxy collection <span class="nb">install </span>process
+Nothing to <span class="k">do</span><span class="nb">.</span> All requested collections are already installed. If you want to reinstall them, consider using <span class="sb">`</span><span class="nt">--force</span><span class="sb">`</span><span class="nb">.</span>
+
+devops/docker <span class="o">[</span>master●] » ansible-galaxy role <span class="nb">install</span> <span class="nt">-r</span> 11-ansible-docker/requirement.yaml
+Starting galaxy role <span class="nb">install </span>process
+<span class="o">[</span>WARNING]: - dimmaryanto93.docker <span class="o">(</span>master<span class="o">)</span> is already installed - use <span class="nt">--force</span>
+to change version to unspecified
+<span class="o">[</span>WARNING]: - dimmaryanto93.docker_compose <span class="o">(</span>master<span class="o">)</span> is already installed - use
+<span class="nt">--force</span> to change version to unspecified
+
+devops/docker <span class="o">[</span>master●] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker.yaml <span class="nt">--list-tasks</span> <span class="nt">--list-hosts</span>
+playbook: 11-ansible-docker/site-docker.yaml
+
+  play <span class="c">#1 (dockerd): dockerd	TAGS: []</span>
+    pattern: <span class="o">[</span><span class="s1">'dockerd'</span><span class="o">]</span>
+    hosts <span class="o">(</span>1<span class="o">)</span>:
+      192.168.88.201
+    tasks:
+      dimmaryanto93.docker : Install Dependencies <span class="k">for </span>Ubuntu	TAGS: <span class="o">[]</span>
+      dimmaryanto93.docker : Import python docker module	TAGS: <span class="o">[]</span>
+      dimmaryanto93.docker : Add apt repository docker-ce <span class="k">for </span>Ubuntu	TAGS: <span class="o">[]</span>
+      dimmaryanto93.docker : Install dockerd	TAGS: <span class="o">[]</span>
+      dimmaryanto93.docker : Start docker daemon	TAGS: <span class="o">[]</span>
+      dimmaryanto93.docker : Post-Install docker, executeable non-root	TAGS: <span class="o">[]</span>
+      dimmaryanto93.docker : Post-Install docker, config daemon.json	TAGS: <span class="o">[]</span>
+      dimmaryanto93.docker_compose : Download docker-compose <span class="k">for </span>linux	TAGS: <span class="o">[]</span>
+      dimmaryanto93.docker_compose : Executeable on root user <span class="k">for </span>docker-compose binary	TAGS: <span class="o">[]</span>
+
+devops/docker <span class="o">[</span>master●] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker.yaml
+PLAY <span class="o">[</span>dockerd] <span class="k">*****************************************************************</span>
+
+TASK <span class="o">[</span>Gathering Facts] <span class="k">*********************************************************</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Install Dependencies <span class="k">for </span>Ubuntu] <span class="k">******************</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>apt-transport-https<span class="o">)</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>ca-certificates<span class="o">)</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>software-properties-common<span class="o">)</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>python3-pip<span class="o">)</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>virtualenv<span class="o">)</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>python3-setuptools<span class="o">)</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>gnupg<span class="o">)</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>lsb-release<span class="o">)</span>
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Import python docker module] <span class="k">**********************</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Add apt repository docker-ce <span class="k">for </span>Ubuntu] <span class="k">**********</span>
+included: /Users/dimasm93/.ansible/roles/dimmaryanto93.docker/tasks/package/debian/docker-ubuntu.yaml <span class="k">for </span>192.168.88.201
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Add Docker GPG apt Key] <span class="k">***************************</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Add Docker Repository <span class="k">for </span>Ubuntu] <span class="k">*****************</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Install dockerd] <span class="k">**********************************</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>docker-ce<span class="o">)</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>docker-ce-cli<span class="o">)</span>
+ok: <span class="o">[</span>192.168.88.201] <span class="o">=&gt;</span> <span class="o">(</span><span class="nv">item</span><span class="o">=</span>containerd.io<span class="o">)</span>
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Start docker daemon] <span class="k">******************************</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Post-Install docker, executeable non-root] <span class="k">********</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Post-Install docker, config daemon.json] <span class="k">**********</span>
+included: /Users/dimasm93/.ansible/roles/dimmaryanto93.docker/tasks/config/docker-daemon-conf.yaml <span class="k">for </span>192.168.88.201
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Create Directory /etc/docker] <span class="k">*********************</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Set docker daemon] <span class="k">********************************</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Restart docker] <span class="k">***********************************</span>
+changed: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker : Log into private registry and force re-authorization] <span class="k">***</span>
+
+TASK <span class="o">[</span>dimmaryanto93.docker_compose : Download docker-compose <span class="k">for </span>linux] <span class="k">********</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+TASK <span class="o">[</span>dimmaryanto93.docker_compose : Executeable on root user <span class="k">for </span>docker-compose binary] <span class="k">***</span>
+ok: <span class="o">[</span>192.168.88.201]
+
+PLAY RECAP <span class="k">*********************************************************************</span>
+192.168.88.201             : <span class="nv">ok</span><span class="o">=</span>15   <span class="nv">changed</span><span class="o">=</span>1    <span class="nv">unreachable</span><span class="o">=</span>0    <span class="nv">failed</span><span class="o">=</span>0    <span class="nv">skipped</span><span class="o">=</span>5    <span class="nv">rescued</span><span class="o">=</span>0    <span class="nv">ignored</span><span class="o">=</span>0
+</code></pre></div></div>
+
+<p>Nah jika sudah selesai dengan output seperti diatas, maka docker sudah ter-install pada Managed Node. Sekarang temen-temen bisa check dengan login ke host lalu coba check dengan perintah berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>devops/docker <span class="o">[</span>master●] » ssh root@192.168.88.201
+Welcome to Ubuntu 22.04.1 LTS <span class="o">(</span>GNU/Linux 5.15.0-43-generic x86_64<span class="o">)</span>
+
+8 updates can be applied immediately.
+8 of these updates are standard security updates.
+To see these additional updates run: apt list <span class="nt">--upgradable</span>
+
+
+Last login: Sun Sep 11 09:06:38 2022 from 192.168.88.208
+root@ansible-docker:~# docker info
+Client:
+ Context:    default
+ Debug Mode: <span class="nb">false
+ </span>Plugins:
+  app: Docker App <span class="o">(</span>Docker Inc., v0.9.1-beta3<span class="o">)</span>
+  buildx: Docker Buildx <span class="o">(</span>Docker Inc., v0.9.1-docker<span class="o">)</span>
+  scan: Docker Scan <span class="o">(</span>Docker Inc., v0.17.0<span class="o">)</span>
+
+Server:
+ Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
+ Images: 0
+ Server Version: 20.10.18
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: <span class="nb">true
+  </span>Native Overlay Diff: <span class="nb">true
+  </span>userxattr: <span class="nb">false
+ </span>Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: <span class="nb">local
+  </span>Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file <span class="nb">local </span>logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 9cd3357b7fd7218e4aec3eae239db1f68a5a6ec6
+ runc version: v1.1.4-0-g5fd4c4d
+ init version: de40ad0
+ Security Options:
+  apparmor
+  seccomp
+   Profile: default
+  cgroupns
+ Kernel Version: 5.15.0-43-generic
+ Operating System: Ubuntu 22.04.1 LTS
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 3.834GiB
+ Name: ansible-docker
+ ID: BLEB:CR2H:MNLX:A2SK:ZU2U:6P5V:NWUM:HEEM:MPVH:N64L:ZZHM:MKHD
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: <span class="nb">false
+ </span>Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: <span class="nb">false
+ </span>Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: <span class="nb">false</span>
+</code></pre></div></div>
+
+<p>Nah jadi seperti itu ya untuk Install Docker Engine pada Linux menggunakan Ansible. Jadi nanti jika temen-temen ada server lagi yang ingin kita install Docker kita hanya perlu tambahkan host/ip address servernya pada <code class="language-plaintext highlighter-rouge">inventory</code> dan execute kembali script <code class="language-plaintext highlighter-rouge">ansible-playbook</code></p>
+
+<h2 id="manage-docker-image-using-ansible-docker_image-module">Manage docker image using ansible <code class="language-plaintext highlighter-rouge">docker_image</code> module</h2>
+
+<p>Setelah kita meng-install Docker engine pada Managed Host dengan menggunakan Ansible role, kita juga bisa menggunakan docker <code class="language-plaintext highlighter-rouge">module</code> yang di sediakan oleh community ansible khususnya pada <a href="https://docs.ansible.com/ansible/latest/collections/community/docker/docker_image_module.html#ansible-collections-community-docker-docker-image-module">docker_image</a> module yang biasanya digunakan untuk:</p>
+
+<p>Manage docker images seperti</p>
+<ol>
+  <li>Build docker image</li>
+  <li>Load or Pull an image</li>
+  <li>Tagging an image</li>
+  <li>Pushing an image to a registry</li>
+  <li>Archiving an image to a <code class="language-plaintext highlighter-rouge">.tar</code> file</li>
+</ol>
+
+<p>Sebagai contoh misalnya saya mau pull docker image <code class="language-plaintext highlighter-rouge">nginx:mainline</code> di Managed node, kita bisa menggunakan <code class="language-plaintext highlighter-rouge">docker_image</code> module ini dengan script berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=14c-docker-image-module.yaml"> </script>
+
+<p>Kemudian coba jalankan perintah <code class="language-plaintext highlighter-rouge">ansible-playbook</code> berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ansible-playbook <span class="nt">-i</span> &lt;path-to-inventory&gt;/inventory &lt;path-to-playbook&gt;/site-docker-image-module.yaml</code></pre></figure>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ » ssh root@192.168.88.203
+Welcome to Ubuntu 22.04.1 LTS <span class="o">(</span>GNU/Linux 5.15.0-43-generic x86_64<span class="o">)</span>
+Last login: Sun Sep 11 11:42:26 2022 from 192.168.88.207
+
+root@ansible-docker:~# docker images
+REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
+
+root@ansible-docker:~# <span class="nb">logout
+</span>Connection to 192.168.88.203 closed.
+
+~ » <span class="nb">cd </span>Developer/dimas-maryanto.com/youtube/_projects/devops/docker
+devops/docker <span class="o">[</span>master●] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker-image-module.yaml <span class="nt">--list-tasks</span>
+
+playbook: 11-ansible-docker/site-docker-image-module.yaml
+
+  play <span class="c">#1 (dockerd): dockerd	TAGS: []</span>
+    tasks:
+      Pull nginx image	TAGS: <span class="o">[]</span>
+
+devops/docker <span class="o">[</span>master●] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker-image-module.yaml
+
+PLAY <span class="o">[</span>dockerd] <span class="k">*****************************************************************</span>
+
+TASK <span class="o">[</span>Pull nginx image] <span class="k">********************************************************</span>
+changed: <span class="o">[</span>192.168.88.203]
+
+PLAY RECAP <span class="k">*********************************************************************</span>
+192.168.88.203             : <span class="nv">ok</span><span class="o">=</span>2    <span class="nv">changed</span><span class="o">=</span>1    <span class="nv">unreachable</span><span class="o">=</span>0    <span class="nv">failed</span><span class="o">=</span>0    <span class="nv">skipped</span><span class="o">=</span>0    <span class="nv">rescued</span><span class="o">=</span>0    <span class="nv">ignored</span><span class="o">=</span>0
+</code></pre></div></div>
+
+<p>Jika sudah sekarang kita bisa check ke host tersebut apakah sudah ada docker image <code class="language-plaintext highlighter-rouge">nginx:mainline</code> seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>devops/docker <span class="o">[</span>master●] » ssh root@192.168.88.203
+Welcome to Ubuntu 22.04.1 LTS <span class="o">(</span>GNU/Linux 5.15.0-43-generic x86_64<span class="o">)</span>
+Last login: Sun Sep 11 11:48:05 2022 from 192.168.88.207
+root@ansible-docker:~# docker images
+REPOSITORY   TAG        IMAGE ID       CREATED       SIZE
+nginx        mainline   2b7d6430f78d   2 weeks ago   142MB
+</code></pre></div></div>
+
+<p>Selain itu juga klo kita mau hapus, bisa update property <code class="language-plaintext highlighter-rouge">state=present</code> menjadi <code class="language-plaintext highlighter-rouge">state: absent</code> kemudian coba execute kembali <code class="language-plaintext highlighter-rouge">ansible-playbook</code> maka image <code class="language-plaintext highlighter-rouge">nginx:mainline</code> akan di hapus dari list docker image.</p>
+
+<h2 id="manage-a-container-using-ansible-docker_container-module">Manage a container using ansible <code class="language-plaintext highlighter-rouge">docker_container</code> module</h2>
+
+<p>Selain kita bisa me-manage image dengan ansible module <code class="language-plaintext highlighter-rouge">docker_image</code> kita juga bisa me-manage containers dengan menggunakan ansible module <code class="language-plaintext highlighter-rouge">docker_container</code> seperti berikut:</p>
+
+<ol>
+  <li>Create a container</li>
+  <li>Running a container</li>
+  <li>Remove a container</li>
+  <li>Start/Restart a container</li>
+  <li>Stop a running container</li>
+</ol>
+
+<p>Contohnya jika saya mau me-running container <code class="language-plaintext highlighter-rouge">nginx:mainline</code> dengan meng-expose port <code class="language-plaintext highlighter-rouge">80</code> serta restart container jika failed maka scriptnya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=14c-docker-container-module.yaml"> </script>
+
+<p>Kemudian coba jalankan perintah <code class="language-plaintext highlighter-rouge">ansible-playbook</code> berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ansible-playbook <span class="nt">-i</span> &lt;path-to-inventory&gt;/inventory &lt;path-to-playbook&gt;/site-docker-container-module.yaml</code></pre></figure>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>devops/docker <span class="o">[</span>master] » curl 192.168.88.203
+curl: <span class="o">(</span>7<span class="o">)</span> Failed to connect to 192.168.88.203 port 80 after 32 ms: Connection refused
+
+devops/docker <span class="o">[</span>master] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker-container-module.yaml <span class="nt">--list-tasks</span>
+
+playbook: 11-ansible-docker/site-docker-container-module.yaml
+
+  play <span class="c">#1 (dockerd): dockerd	TAGS: []</span>
+    tasks:
+      Run nginx image	TAGS: <span class="o">[]</span>
+
+devops/docker <span class="o">[</span>master] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker-container-module.yaml
+
+PLAY <span class="o">[</span>dockerd] <span class="k">*****************************************************************</span>
+
+TASK <span class="o">[</span>Run nginx image] <span class="k">*********************************************************</span>
+changed: <span class="o">[</span>192.168.88.203]
+
+PLAY RECAP <span class="k">*********************************************************************</span>
+192.168.88.203             : <span class="nv">ok</span><span class="o">=</span>2    <span class="nv">changed</span><span class="o">=</span>1    <span class="nv">unreachable</span><span class="o">=</span>0    <span class="nv">failed</span><span class="o">=</span>0    <span class="nv">skipped</span><span class="o">=</span>0    <span class="nv">rescued</span><span class="o">=</span>0    <span class="nv">ignored</span><span class="o">=</span>0
+
+devops/docker <span class="o">[</span>master] » curl 192.168.88.203 <span class="nt">-v</span>
+<span class="k">*</span>   Trying 192.168.88.203:80...
+<span class="k">*</span> Connected to 192.168.88.203 <span class="o">(</span>192.168.88.203<span class="o">)</span> port 80 <span class="o">(</span><span class="c">#0)</span>
+<span class="o">&gt;</span> GET / HTTP/1.1
+<span class="o">&gt;</span> Host: 192.168.88.203
+<span class="o">&gt;</span> User-Agent: curl/7.79.1
+<span class="o">&gt;</span> Accept: <span class="k">*</span>/<span class="k">*</span>
+<span class="o">&gt;</span>
+<span class="k">*</span> Mark bundle as not supporting multiuse
+&lt; HTTP/1.1 200 OK
+&lt; Server: nginx/1.23.1
+&lt; Date: Sun, 11 Sep 2022 12:08:12 GMT
+&lt; Content-Type: text/html
+&lt; Content-Length: 615
+&lt; Last-Modified: Tue, 19 Jul 2022 14:05:27 GMT
+&lt; Connection: keep-alive
+&lt; ETag: <span class="s2">"62d6ba27-267"</span>
+&lt; Accept-Ranges: bytes
+&lt;
+&lt;<span class="o">!</span>DOCTYPE html&gt;
+&lt;html&gt;
+&lt;<span class="nb">head</span><span class="o">&gt;</span>
+&lt;title&gt;Welcome to nginx!&lt;/title&gt;
+&lt;style&gt;
+html <span class="o">{</span> color-scheme: light dark<span class="p">;</span> <span class="o">}</span>
+body <span class="o">{</span> width: 35em<span class="p">;</span> margin: 0 auto<span class="p">;</span>
+font-family: Tahoma, Verdana, Arial, sans-serif<span class="p">;</span> <span class="o">}</span>
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.&lt;/p&gt;
+
+&lt;p&gt;For online documentation and support please refer to
+&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">"http://nginx.org/"</span><span class="o">&gt;</span>nginx.org&lt;/a&gt;.&lt;br/&gt;
+Commercial support is available at
+&lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">"http://nginx.com/"</span><span class="o">&gt;</span>nginx.com&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Thank you <span class="k">for </span>using nginx.&lt;/em&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+<span class="k">*</span> Connection <span class="c">#0 to host 192.168.88.203 left intact</span>
+</code></pre></div></div>
+
+<h2 id="execute-a-container-using-ansible-docker_container_exec-module">Execute a container using ansible <code class="language-plaintext highlighter-rouge">docker_container_exec</code> module</h2>
+
+<p>Selanjutnya selain me-manage container kita juga menggunakan execute command dalam container menggunakan ansible module <code class="language-plaintext highlighter-rouge">docker_container_exec</code> seperti berikut:</p>
+
+<p>Masih dalam file sebelumnya yaitu <code class="language-plaintext highlighter-rouge">site-docker-container-module.yaml</code> coba tambahkan tasks berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=14c-docker-container-exec.yaml"> </script>
+
+<p>Kemudian coba jalankan perintah <code class="language-plaintext highlighter-rouge">ansible-playbook</code> berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ansible-playbook <span class="nt">-i</span> &lt;path-to-inventory&gt;/inventory &lt;path-to-playbook&gt;/site-docker-container-module.yaml</code></pre></figure>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>devops/docker <span class="o">[</span>master●] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker-container-module.yaml <span class="nt">--list-tasks</span>
+playbook: 11-ansible-docker/site-docker-container-module.yaml
+
+  play <span class="c">#1 (dockerd): dockerd	TAGS: []</span>
+    tasks:
+      Run nginx image	TAGS: <span class="o">[]</span>
+      Getting index.html	TAGS: <span class="o">[]</span>
+      print	TAGS: <span class="o">[]</span>
+
+devops/docker <span class="o">[</span>master●] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker-container-module.yaml
+PLAY <span class="o">[</span>dockerd] <span class="k">*****************************************************************</span>
+
+TASK <span class="o">[</span>Run nginx image] <span class="k">*********************************************************</span>
+ok: <span class="o">[</span>192.168.88.203]
+
+TASK <span class="o">[</span>Getting index.html] <span class="k">******************************************************</span>
+changed: <span class="o">[</span>192.168.88.203]
+
+TASK <span class="o">[</span>print] <span class="k">*******************************************************************</span>
+ok: <span class="o">[</span>192.168.88.203] <span class="o">=&gt;</span> <span class="o">{</span>
+    <span class="s2">"index_html.stdout"</span>: <span class="s2">"&lt;!DOCTYPE html&gt;</span><span class="se">\n</span><span class="s2">&lt;html&gt;</span><span class="se">\n</span><span class="s2">&lt;head&gt;</span><span class="se">\n</span><span class="s2">&lt;title&gt;Welcome to nginx!&lt;/title&gt;</span><span class="se">\n</span><span class="s2">&lt;style&gt;</span><span class="se">\n</span><span class="s2">html { color-scheme: light dark; }
+    </span><span class="se">\n</span><span class="s2">body { width: 35em; margin: 0 auto;</span><span class="se">\n</span><span class="s2">font-family: Tahoma, Verdana, Arial, sans-serif; }
+    </span><span class="se">\n</span><span class="s2">&lt;/style&gt;</span><span class="se">\n</span><span class="s2">&lt;/head&gt;
+    </span><span class="se">\n</span><span class="s2">&lt;body&gt;</span><span class="se">\n</span><span class="s2">&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;
+    </span><span class="se">\n</span><span class="s2">&lt;p&gt;If you see this page, the nginx web server is successfully installed and
+    </span><span class="se">\n</span><span class="s2">working. Further configuration is required.&lt;/p&gt;
+    </span><span class="se">\n\n</span><span class="s2">&lt;p&gt;For online documentation and support please refer to</span><span class="se">\n</span><span class="s2">&lt;a href=</span><span class="se">\"</span><span class="s2">http://nginx.org/</span><span class="se">\"</span><span class="s2">&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;
+    </span><span class="se">\n</span><span class="s2">Commercial support is available at
+    </span><span class="se">\n</span><span class="s2">&lt;a href=</span><span class="se">\"</span><span class="s2">http://nginx.com/</span><span class="se">\"</span><span class="s2">&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;
+    </span><span class="se">\n\n</span><span class="s2">&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;</span><span class="se">\n</span><span class="s2">&lt;/body&gt;
+    </span><span class="se">\n</span><span class="s2">&lt;/html&gt;"</span>
+<span class="o">}</span>
+
+PLAY RECAP <span class="k">*********************************************************************</span>
+192.168.88.203             : <span class="nv">ok</span><span class="o">=</span>4    <span class="nv">changed</span><span class="o">=</span>1    <span class="nv">unreachable</span><span class="o">=</span>0    <span class="nv">failed</span><span class="o">=</span>0    <span class="nv">skipped</span><span class="o">=</span>0    <span class="nv">rescued</span><span class="o">=</span>0    <span class="nv">ignored</span><span class="o">=</span>0
+</code></pre></div></div>
+
+<h2 id="manage-multi-container-using-ansible-docker_compose-module">Manage multi-container using ansible <code class="language-plaintext highlighter-rouge">docker_compose</code> module</h2>
+
+<p>Selain me-manage container, menjalankan command dalam container, kita juga me-manage multi-container docker application dengan Docker compose di ansible module dengan <code class="language-plaintext highlighter-rouge">docker_compose</code> module diantaranya:</p>
+
+<ol>
+  <li>Uses Docker Compose to start, shutdown and scale services. This module requires <code class="language-plaintext highlighter-rouge">docker-compose &lt; 2.0.0</code>.</li>
+  <li>Configuration can be read from a <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> or <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> file or inline using the definition option.</li>
+  <li>Supports check mode.</li>
+</ol>
+
+<p>Sebagai contoh, saya mau menjalankan container db dengan image postgres dan web server dengan image http menggunakan docker-compose.yaml file maka jika terjemahkan ke <code class="language-plaintext highlighter-rouge">ansible-playbook</code> script seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=14c-docker-compose-module.yaml"> </script>
+
+<p>Kemudian coba jalankan perintah <code class="language-plaintext highlighter-rouge">ansible-playbook</code> berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ansible-playbook <span class="nt">-i</span> &lt;path-to-inventory&gt;/inventory &lt;path-to-playbook&gt;/site-docker-compose-module.yaml</code></pre></figure>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>devops/docker <span class="o">[</span>master●] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker-compose-module.yaml <span class="nt">--list-tasks</span>
+playbook: 11-ansible-docker/site-docker-compose-module.yaml
+
+  play <span class="c">#1 (dockerd): dockerd	TAGS: []</span>
+    tasks:
+      Run docker-compose.yaml	TAGS: <span class="o">[]</span>
+      Debug	TAGS: <span class="o">[]</span>
+
+devops/docker <span class="o">[</span>master●] » ansible-playbook <span class="nt">-i</span> 11-ansible-docker/inventory 11-ansible-docker/site-docker-compose-module.yaml
+PLAY <span class="o">[</span>dockerd] <span class="k">*****************************************************************</span>
+
+TASK <span class="o">[</span>Run docker-compose.yaml] <span class="k">*************************************************</span>
+changed: <span class="o">[</span>192.168.88.203]
+
+TASK <span class="o">[</span>Debug] <span class="k">*******************************************************************</span>
+ok: <span class="o">[</span>192.168.88.203] <span class="o">=&gt;</span> <span class="o">{</span>
+    <span class="s2">"docker_compose_run"</span>: <span class="o">{</span>
+        <span class="s2">"changed"</span>: <span class="nb">true</span>,
+        <span class="s2">"failed"</span>: <span class="nb">false</span>,
+        <span class="s2">"services"</span>: <span class="o">{</span>
+            <span class="s2">"db"</span>: <span class="o">{</span>
+                <span class="s2">"bootcamp_db_1"</span>: <span class="o">{</span>
+                    <span class="s2">"cmd"</span>: <span class="o">[</span>
+                        <span class="s2">"postgres"</span>
+                    <span class="o">]</span>,
+                    <span class="s2">"image"</span>: <span class="s2">"postgres:14.2"</span>,
+                    <span class="s2">"labels"</span>: <span class="o">{</span>
+                        <span class="s2">"com.docker.compose.config-hash"</span>: <span class="s2">"c472a78f7830908d61026f5972fe750722f48fb6ea0cb545c560ce5bb93b5ec2"</span>,
+                        <span class="s2">"com.docker.compose.container-number"</span>: <span class="s2">"1"</span>,
+                        <span class="s2">"com.docker.compose.oneoff"</span>: <span class="s2">"False"</span>,
+                        <span class="s2">"com.docker.compose.project"</span>: <span class="s2">"bootcamp"</span>,
+                        <span class="s2">"com.docker.compose.project.config_files"</span>: <span class="s2">"/tmp/ansiblepjrryury/docker-compose.yml"</span>,
+                        <span class="s2">"com.docker.compose.project.working_dir"</span>: <span class="s2">"/tmp/ansiblepjrryury"</span>,
+                        <span class="s2">"com.docker.compose.service"</span>: <span class="s2">"db"</span>,
+                        <span class="s2">"com.docker.compose.version"</span>: <span class="s2">"1.29.2"</span>
+                    <span class="o">}</span>,
+                    <span class="s2">"networks"</span>: <span class="o">{</span>
+                        <span class="s2">"bootcamp_default"</span>: <span class="o">{</span>
+                            <span class="s2">"IPAddress"</span>: <span class="s2">"172.18.0.3"</span>,
+                            <span class="s2">"IPPrefixLen"</span>: 16,
+                            <span class="s2">"aliases"</span>: <span class="o">[</span>
+                                <span class="s2">"e54e1866f11d"</span>,
+                                <span class="s2">"db"</span>
+                            <span class="o">]</span>,
+                            <span class="s2">"globalIPv6"</span>: <span class="s2">""</span>,
+                            <span class="s2">"globalIPv6PrefixLen"</span>: 0,
+                            <span class="s2">"links"</span>: null,
+                            <span class="s2">"macAddress"</span>: <span class="s2">"02:42:ac:12:00:03"</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>,
+                    <span class="s2">"state"</span>: <span class="o">{</span>
+                        <span class="s2">"running"</span>: <span class="nb">true</span>,
+                        <span class="s2">"status"</span>: <span class="s2">"running"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>,
+            <span class="s2">"webapp"</span>: <span class="o">{</span>
+                <span class="s2">"bootcamp_webapp_1"</span>: <span class="o">{</span>
+                    <span class="s2">"cmd"</span>: <span class="o">[</span>
+                        <span class="s2">"httpd-foreground"</span>
+                    <span class="o">]</span>,
+                    <span class="s2">"image"</span>: <span class="s2">"httpd"</span>,
+                    <span class="s2">"labels"</span>: <span class="o">{</span>
+                        <span class="s2">"com.docker.compose.config-hash"</span>: <span class="s2">"770f5e93d0f67fc701b65f4c5bc1b3071a748a02b40bfaf887319488dcdfb418"</span>,
+                        <span class="s2">"com.docker.compose.container-number"</span>: <span class="s2">"1"</span>,
+                        <span class="s2">"com.docker.compose.oneoff"</span>: <span class="s2">"False"</span>,
+                        <span class="s2">"com.docker.compose.project"</span>: <span class="s2">"bootcamp"</span>,
+                        <span class="s2">"com.docker.compose.project.config_files"</span>: <span class="s2">"/tmp/ansiblepjrryury/docker-compose.yml"</span>,
+                        <span class="s2">"com.docker.compose.project.working_dir"</span>: <span class="s2">"/tmp/ansiblepjrryury"</span>,
+                        <span class="s2">"com.docker.compose.service"</span>: <span class="s2">"webapp"</span>,
+                        <span class="s2">"com.docker.compose.version"</span>: <span class="s2">"1.29.2"</span>
+                    <span class="o">}</span>,
+                    <span class="s2">"networks"</span>: <span class="o">{</span>
+                        <span class="s2">"bootcamp_default"</span>: <span class="o">{</span>
+                            <span class="s2">"IPAddress"</span>: <span class="s2">"172.18.0.2"</span>,
+                            <span class="s2">"IPPrefixLen"</span>: 16,
+                            <span class="s2">"aliases"</span>: <span class="o">[</span>
+                                <span class="s2">"19b95e1f431b"</span>,
+                                <span class="s2">"webapp"</span>
+                            <span class="o">]</span>,
+                            <span class="s2">"globalIPv6"</span>: <span class="s2">""</span>,
+                            <span class="s2">"globalIPv6PrefixLen"</span>: 0,
+                            <span class="s2">"links"</span>: null,
+                            <span class="s2">"macAddress"</span>: <span class="s2">"02:42:ac:12:00:02"</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>,
+                    <span class="s2">"state"</span>: <span class="o">{</span>
+                        <span class="s2">"running"</span>: <span class="nb">true</span>,
+                        <span class="s2">"status"</span>: <span class="s2">"running"</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+PLAY RECAP <span class="k">*********************************************************************</span>
+192.168.88.203             : <span class="nv">ok</span><span class="o">=</span>3    <span class="nv">changed</span><span class="o">=</span>1    <span class="nv">unreachable</span><span class="o">=</span>0    <span class="nv">failed</span><span class="o">=</span>0    <span class="nv">skipped</span><span class="o">=</span>0    <span class="nv">rescued</span><span class="o">=</span>0    <span class="nv">ignored</span><span class="o">=</span>0
+</code></pre></div></div>
+
+<p>Ok nah jadi dengan menggunakan ansible module docker ini, kita bisa secara repeated execute untuk me-manage container yang dijalankan.</p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/docker/01-silabus"  class="" title="Silabus Belajar Docker: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment" class="" 
+        title="Setup Ansible Control and Managed Nodes
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 113 to 113
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="#" class=" disabled">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="#" class=" disabled">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#docker" class="page__taxonomy-item p-category" rel="tag">Docker</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-09-11T20:26:35+07:00">September 11, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Getting+started+with+Ansible+role%2C+tasks+for+docker%20%2Fposts%2Fdevops%2Fdocker%2F14c-ansible-for-docker-operations" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Fdocker%2F14c-ansible-for-docker-operations" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Fdocker%2F14c-ansible-for-docker-operations" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

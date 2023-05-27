@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Laravel deployment using compose file",
+      "link": "/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case"
+    }
+    ,
+    {
+      "title": "PHP deployment using compose file",
+      "link": "/posts/devops/docker/compose/study-cases/10a-compose-php-study-case"
+    }
+    ,
+    {
+      "title": "Overview of Study Cases using Docker Compose",
+      "link": "/posts/devops/docker/compose/study-cases/10-overview-compose-study-case"
+    }
+    ,
+    {
+      "title": "Use Compose in production",
+      "link": "/posts/devops/docker/compose/workflow/09r-compose-in-production"
+    }
+    ,
+    {
+      "title": "Scale services using compose command",
+      "link": "/posts/devops/docker/compose/scale/09q-compose-scale-services"
+    }
+    ,
+    {
+      "title": "Example use case of multiple compose files",
+      "link": "/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases"
+    }
+    ,
+    {
+      "title": "Multiple Compose files to Add & Override attribute",
+      "link": "/posts/devops/docker/compose/workflows/09o-multiple-compose-add-override-attr"
+    }
+    ,
+    {
+      "title": "Using profiles with Compose file",
+      "link": "/posts/devops/docker/compose/workflows/09n-compose-using-profile"
+    }
+    ,
+    {
+      "title": "Build docker image using Compose file",
+      "link": "/posts/devops/docker/compose/build/09m-compose-build-image"
+    }
+    ,
+    {
+      "title": "Dependency between services in Compose file",
+      "link": "/posts/devops/docker/compose/dependency/09l-compose-depend-on"
+    }
+  ]
+}

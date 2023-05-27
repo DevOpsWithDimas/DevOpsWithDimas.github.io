@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Pemograman Typescript (ts)",
+      "link": "/pages/cources/typescript"
+    }
+    ,
+    {
+      "title": "Springboot",
+      "link": "/pages/cources/springboot"
+    }
+    ,
+    {
+      "title": "Spring Framework",
+      "link": "/pages/cources/spring-core"
+    }
+    ,
+    {
+      "title": "PostgreSQL",
+      "link": "/pages/cources/postgres-query"
+    }
+    ,
+    {
+      "title": "ORM Hibernate",
+      "link": "/pages/cources/orm-hibernate"
+    }
+    ,
+    {
+      "title": "Oracle Database (OCA)",
+      "link": "/pages/cources/oracle-db-oca"
+    }
+    ,
+    {
+      "title": "Nutanix Cloud Native",
+      "link": "/pages/cources/nutanix-cloudnative"
+    }
+    ,
+    {
+      "title": "Nutanix AHV",
+      "link": "/pages/cources/nutanix-ahv"
+    }
+    ,
+    {
+      "title": "Kubernetes (k8s)",
+      "link": "/pages/cources/kubernetes"
+    }
+    ,
+    {
+      "title": "Pemograman JavaScript",
+      "link": "/pages/cources/js"
+    }
+  ]
+}

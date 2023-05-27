@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "OneToOne Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03c-mapping-one-to-one"
+    }
+    ,
+    {
+      "title": "Embbeded Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03b-mapping-embedded"
+    }
+    ,
+    {
+      "title": "Mapping Enum Ordinal & String",
+      "link": "/posts/java/orm/hibernate/postgresql/03a-mapping-enumeration"
+    }
+    ,
+    {
+      "title": "Hibernate ORM Relationship Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03-hibernate-mapping"
+    }
+    ,
+    {
+      "title": "Time is your practice",
+      "link": "/posts/java/orm/hibernate/postgresql/02i-quis-1"
+    }
+    ,
+    {
+      "title": "Silabus Belajar JasperReport",
+      "link": "/posts/java/jasperreport/001-silabus"
+    }
+    ,
+    {
+      "title": "Composite Primary Key",
+      "link": "/posts/java/orm/hibernate/postgresql/02h-composite-primary-key"
+    }
+    ,
+    {
+      "title": "Macam Macam Generator Value di Hibernate",
+      "link": "/posts/java/orm/hibernate/postgresql/02g-generator-value"
+    }
+    ,
+    {
+      "title": "Macam-Macam Constraint di Hibernate",
+      "link": "/posts/java/orm/hibernate/postgresql/02f-constraints"
+    }
+    ,
+    {
+      "title": "Time is your to practice",
+      "link": "/posts/java/web/war/034-quis-section-01"
+    }
+  ]
+}

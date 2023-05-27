@@ -1,0 +1,1628 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Single Row / Group functions - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Jenis dari Functions yaitu Single Row Function dan Group Functions. Karena materinya akan lumayan panjang seperti biasa kita akan bagi menjadi beberapa bagian diantaranya:     Using single row functions   Using Group / Aggregate functions   Using GROUP BY clause   Using HAVING clause   Different between WHERE and HAVING clause?   Using GROUPING SET clause   Ok langsung aja kita bahas materi yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Single Row / Group functions">
+<meta property="og:url" content="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Jenis dari Functions yaitu Single Row Function dan Group Functions. Karena materinya akan lumayan panjang seperti biasa kita akan bagi menjadi beberapa bagian diantaranya:     Using single row functions   Using Group / Aggregate functions   Using GROUP BY clause   Using HAVING clause   Different between WHERE and HAVING clause?   Using GROUPING SET clause   Ok langsung aja kita bahas materi yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-03-13T15:51:40+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#using-single-row-functions">Using single row functions</a></li><li><a href="#using-group--aggregate-functions">Using Group / Aggregate functions</a></li><li><a href="#using-group-by-clause">Using GROUP BY clause</a></li><li><a href="#using-having-clause">Using HAVING clause</a></li><li><a href="#different-between-where-and-having-clause">Different between WHERE and HAVING clause?</a></li><li><a href="#using-grouping-set-clause">Using GROUPING SET clause</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Single Row / Group functions">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Jenis dari Functions yaitu Single Row Function dan Group Functions. Karena materinya akan lumayan panjang seperti biasa kita akan bagi menjadi beberapa bagian diantaranya:  Using single row functions  Using Group / Aggregate functions  Using GROUP BY clause  Using HAVING clause  Different between WHERE and HAVING clause?  Using GROUPING SET clauseOk langsung aja kita bahas materi yang pertama">
+    <meta itemprop="datePublished" content="2022-03-13T15:51:40+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function" class="u-url" itemprop="url">Single Row / Group functions
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-03-13T15:51:40+07:00">March 13, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        6 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan PostgreSQL">
+        <label class="acordion-item-label" for="content-Pengenalan PostgreSQL">
+            Pengenalan PostgreSQL
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01-silabus-psql">
+                        
+                        Silabus - PostgreSQL: Pemul...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01a-what-is-postgresql">
+                        
+                        Overview of PostgreSQL Data...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01b-postgresql-architecture">
+                        
+                        Architecture of PostgreSQL ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01c-postgresql-database">
+                        
+                        Overview of Object Relation...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started">
+        <label class="acordion-item-label" for="content-Getting started">
+            Getting started
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02-overview-install-postgres">
+                        
+                        Overview Installing PostgreSQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows">
+                        
+                        Install PostgreSQL for Wind...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac">
+                        
+                        Install PostgreSQL for Mac ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu">
+                        
+                        Install PostgreSQL for Linu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker">
+                        
+                        Install PostgreSQL using Do...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02b-use-psql">
+                        
+                        Using psql as PostgreSQL ed...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02c-use-pgadmin">
+                        
+                        Using pgAdmin4 as PostgreSQ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+                        
+                        Using thirdparty Editor unt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select Statement">
+        <label class="acordion-item-label" for="content-SQL - Select Statement">
+            SQL - Select Statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03-overview-sql">
+                        
+                        Overview SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03a-basic-select-statement">
+                        
+                        Basic SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators">
+                        
+                        Build-in Operators
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions">
+                        
+                        Build-in Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+                        
+                        Filtering data with WHERE c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause">
+                        
+                        Sorting rows using ORDER BY...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause">
+                        
+                        Limit dan Offset rows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03g-quis-section-1">
+                        
+                        Time your practice (part 1)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements">
+                        
+                        Deep dive into Select State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Single Row / Group functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+                        
+                        Joined Tables
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04c-subquery">
+                        
+                        Queries inside a query (sub...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+                        
+                        Conditional Expressions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04e-combining-queries">
+                        
+                        Combining Queries (UNION, I...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04f-with-queries">
+                        
+                        WITH Queries (Common Table ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04g-quis-section-2">
+                        
+                        Time your practice (part 2)
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data manipulation">
+        <label class="acordion-item-label" for="content-SQL - Data manipulation">
+            SQL - Data manipulation
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05-overview-dml">
+                        
+                        Overview of Data Manipulati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05a-cud-statement">
+                        
+                        Basic Create, Update, Delet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+                        
+                        Deep dive into INSERT State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05c-dml-update">
+                        
+                        Deep dive into UPDATE State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete">
+                        
+                        Deep dive into DELETE state...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement">
+                        
+                        Prepared Statement in SQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+                        
+                        Cleanup Data from Table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1">
+                        
+                        Time your practice (part 3)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control">
+                        
+                        Overview of Concurrency Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl">
+                        
+                        Getting started with Transa...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data definition">
+        <label class="acordion-item-label" for="content-SQL - Data definition">
+            SQL - Data definition
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Database design (Mapping)">
+        <label class="acordion-item-label" for="content-Study Kasus: Database design (Mapping)">
+            Study Kasus: Database design (Mapping)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Indexes">
+        <label class="acordion-item-label" for="content-SQL - Indexes">
+            SQL - Indexes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Users Management">
+        <label class="acordion-item-label" for="content-SQL - Users Management">
+            SQL - Users Management
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Type Conversion">
+        <label class="acordion-item-label" for="content-Type Conversion">
+            Type Conversion
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas tentang Jenis dari Functions yaitu Single Row Function dan Group Functions. Karena materinya akan lumayan panjang seperti biasa kita akan bagi menjadi beberapa bagian diantaranya:</p>
+
+<ol>
+  <li>Using single row functions</li>
+  <li>Using Group / Aggregate functions</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">GROUP BY</code> clause</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">HAVING</code> clause</li>
+  <li>Different between <code class="language-plaintext highlighter-rouge">WHERE</code> and <code class="language-plaintext highlighter-rouge">HAVING</code> clause?</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">GROUPING SET</code> clause</li>
+</ol>
+
+<p>Ok langsung aja kita bahas materi yang pertama</p>
+
+<!--more-->
+
+<h2 id="using-single-row-functions">Using single row functions</h2>
+
+<p>Single row function is Functions return a single result row for every row of a queried table or view.</p>
+
+<p><img src="/resources/posts/postgresql/04a-single-group-function/01-ilustration-single-row-func.png" alt="ilustration-single-row-func" /></p>
+
+<p>Single row function yang kita bisa gunakan, ada banyak sekali sesuai dengan apa yang telah kita bahas di <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions">artikel sebelumnya</a> ataupun kita juga bisa menggunakan function yang kita buat sendiri. These functions can appear in select lists, WHERE clauses, With Queries and more.</p>
+
+<p>Contoh penggunaannya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04a-select-single-row-func.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT  UPPER(last_name) nama,</span>
+hr-#         to_char<span class="o">(</span>salary, <span class="s1">'$L999,999.00'</span><span class="o">)</span> gaji_sebulan,
+hr-#         concat<span class="o">(</span>first_name, <span class="s1">' '</span>, last_name<span class="o">)</span> as nama_lengkap
+hr-# FROM employees
+hr-# LIMIT 10<span class="p">;</span>
+   nama    | gaji_sebulan  |   nama_lengkap
+<span class="nt">-----------</span>+---------------+------------------
+ KING      | <span class="nv">$ </span>  24,000.00 | Steven King
+ KOCHHAR   | <span class="nv">$ </span>  17,000.00 | Neena Kochhar
+ DE HAAN   | <span class="nv">$ </span>  17,000.00 | Lex De Haan
+ HUNOLD    | <span class="nv">$ </span>   9,000.00 | Alexander Hunold
+ ERNST     | <span class="nv">$ </span>   6,000.00 | Bruce Ernst
+ AUSTIN    | <span class="nv">$ </span>   4,800.00 | David Austin
+ PATABALLA | <span class="nv">$ </span>   4,800.00 | Valli Pataballa
+ LORENTZ   | <span class="nv">$ </span>   4,200.00 | Diana Lorentz
+ GREENBERG | <span class="nv">$ </span>  12,000.00 | Nancy Greenberg
+ FAVIET    | <span class="nv">$ </span>   9,000.00 | Daniel Faviet
+<span class="o">(</span>10 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="using-group--aggregate-functions">Using Group / Aggregate functions</h2>
+
+<p>Aggregate functions compute a single result from a set of input values. Jika kita gambarkan ilustrasinya seperti berikut:</p>
+
+<p><img src="/resources/posts/postgresql/04a-single-group-function/02-ilustration-aggregate-func.png" alt="ilustration-aggregate-function" /></p>
+
+<p>Group atau Aggregate function di bagi menjadi beberapa diantaranya:</p>
+
+<ol>
+  <li>General-Purpose Aggregate Functions</li>
+  <li>Aggregate Functions for Statistics</li>
+  <li>Ordered-Set Aggregate Functions</li>
+  <li>Hypothetical-Set Aggregate Functions</li>
+  <li>Grouping Operations</li>
+</ol>
+
+<p>Untuk general purpose aggregate function berikut adalah beberapa function yang paling umum di gunakan:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Functions</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">avg ( numeric ) → numeric</code></td>
+      <td style="text-align: left">Computes the average (arithmetic mean) of all the non-null input values.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">bool_and ( boolean ) → boolean</code></td>
+      <td style="text-align: left">Returns true if all non-null input values are true, otherwise false.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">bool_or ( boolean ) → boolean</code></td>
+      <td style="text-align: left">Returns true if any non-null input value is true, otherwise false.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">count ( "any" ) → bigint</code></td>
+      <td style="text-align: left">Computes the number of input rows in which the input value is not null.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">max ( any ) → same as input type</code></td>
+      <td style="text-align: left">Computes the maximum of the non-null input values. Available for any <code class="language-plaintext highlighter-rouge">numeric</code>, <code class="language-plaintext highlighter-rouge">string</code>, <code class="language-plaintext highlighter-rouge">date/time</code>, or <code class="language-plaintext highlighter-rouge">enum</code> type, as well as <code class="language-plaintext highlighter-rouge">inet</code>, <code class="language-plaintext highlighter-rouge">interval</code>, <code class="language-plaintext highlighter-rouge">money</code>, <code class="language-plaintext highlighter-rouge">oid</code>, <code class="language-plaintext highlighter-rouge">pg_lsn</code>, <code class="language-plaintext highlighter-rouge">tid</code>, and <code class="language-plaintext highlighter-rouge">arrays</code> of any of these types.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">min ( any ) → same as input type</code></td>
+      <td style="text-align: left">Computes the minimum of the non-null input values. Available for any <code class="language-plaintext highlighter-rouge">numeric</code>, <code class="language-plaintext highlighter-rouge">string</code>, <code class="language-plaintext highlighter-rouge">date/time</code>, or <code class="language-plaintext highlighter-rouge">enum</code> type, as well as <code class="language-plaintext highlighter-rouge">inet</code>, <code class="language-plaintext highlighter-rouge">interval</code>, <code class="language-plaintext highlighter-rouge">money</code>, <code class="language-plaintext highlighter-rouge">oid</code>, <code class="language-plaintext highlighter-rouge">pg_lsn</code>, <code class="language-plaintext highlighter-rouge">tid</code>, and <code class="language-plaintext highlighter-rouge">arrays</code> of any of these types.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">sum ( number ) → same as input type</code></td>
+      <td style="text-align: left">Computes the sum of the non-null input values.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Sedangkan untuk Statistic purpose berikut adalah beberapa function yang paling umum di gunakan:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">Functions</th>
+      <th style="text-align: left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">corr ( Y double , X double ) → double</code></td>
+      <td style="text-align: left">Computes the correlation coefficient.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">stddev ( numeric_type ) → double</code></td>
+      <td style="text-align: left">This is a historical alias for stddev_samp.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">variance ( numeric_type ) → double</code></td>
+      <td style="text-align: left">This is a historical alias for var_samp.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Dan masih banyak lagi, Berikut adalah contoh penggunaanya di SQL:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04a-select-aggregate-func.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT  max(salary) max_salary,</span>
+hr-#         min<span class="o">(</span>salary<span class="o">)</span> min_salary,
+hr-#         avg<span class="o">(</span>salary<span class="o">)</span> avg_salary,
+hr-#         count<span class="o">(</span><span class="k">*</span><span class="o">)</span> count_employees
+hr-# FROM employees<span class="p">;</span>
+ max_salary | min_salary |      avg_salary       | count_employees
+<span class="nt">------------</span>+------------+-----------------------+-----------------
+   24000.00 |    2100.00 | 6461.6822429906542056 |             107
+<span class="o">(</span>1 row<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="using-group-by-clause">Using GROUP BY clause</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">GROUP BY</code> clause is used to group together those rows in a table that have the same values in all the columns listed. Jika di gambarkan berikut ilustrasinya</p>
+
+<p><img src="/resources/posts/postgresql/04a-single-group-function/03-ilustration-group-by.png" alt="ilustration-group-by" /></p>
+
+<p>Untuk basic usage seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">select_list</span>
+<span class="k">FROM</span> <span class="p">...</span>
+<span class="p">[</span><span class="k">WHERE</span> <span class="p">...]</span>
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="n">grouping_column_reference</span> <span class="p">[,</span> <span class="n">grouping_column_reference</span><span class="p">]...</span></code></pre></figure>
+
+<p>The effect is to combine each set of rows having common values into one group row that represents all rows in the group. Berikut adalah contoh penggunaanya di SQL:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04a-select-group-by.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT  job_id</span>
+hr-# FROM employees
+hr-# GROUP BY job_id<span class="p">;</span>
+   job_id
+<span class="nt">------------</span>
+ SH_CLERK
+ AD_VP
+ SA_MAN
+ PR_REP
+ MK_REP
+ AD_PRES
+ FI_ACCOUNT
+ AC_ACCOUNT
+<span class="o">(</span>19 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>NOTE: Grouping without aggregate expressions effectively calculates the set of distinct values in a column.</p>
+
+<p>In general, if a table is grouped, columns that are not listed in GROUP BY cannot be referenced except in aggregate expressions. An example with aggregate expressions is:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04a-select-group-by-with-aggregate.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT  job_id,</span>
+hr-#         count<span class="o">(</span><span class="k">*</span><span class="o">)</span> count_employees_by_job,
+hr-#         <span class="nb">sum</span><span class="o">(</span>salary<span class="o">)</span> salary_group_by_job
+hr-# FROM employees
+hr-# GROUP BY job_id<span class="p">;</span>
+   job_id   | count_employees_by_job | salary_group_by_job
+<span class="nt">------------</span>+------------------------+---------------------
+ SH_CLERK   |                     20 |            64300.00
+ AD_VP      |                      2 |            34000.00
+ SA_MAN     |                      5 |            61000.00
+ PU_MAN     |                      1 |            11000.00
+ IT_PROG    |                      5 |            28800.00
+ ST_CLERK   |                     20 |            55700.00
+ MK_REP     |                      1 |             6000.00
+ AD_PRES    |                      1 |            24000.00
+ FI_ACCOUNT |                      5 |            39600.00
+ AC_ACCOUNT |                      1 |             8300.00
+<span class="o">(</span>19 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="using-having-clause">Using HAVING clause</h2>
+
+<p>If a table has been grouped using <code class="language-plaintext highlighter-rouge">GROUP BY</code>, but only certain groups are of interest, the <code class="language-plaintext highlighter-rouge">HAVING</code> clause can be used, much like a <code class="language-plaintext highlighter-rouge">WHERE</code> clause, to eliminate groups from the result.</p>
+
+<p>The syntax is:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">SELECT</span> <span class="n">select_list</span> 
+<span class="k">FROM</span> <span class="p">...</span> 
+<span class="p">[</span><span class="k">WHERE</span> <span class="p">...]</span> 
+<span class="k">GROUP</span> <span class="k">BY</span> <span class="p">...</span> 
+<span class="k">HAVING</span> <span class="n">boolean_expression</span></code></pre></figure>
+
+<p>Expressions in the <code class="language-plaintext highlighter-rouge">HAVING</code> clause can refer both to grouped expressions and to ungrouped expressions (which necessarily involve an aggregate function). Berikut adalah contoh penggunaanya di SQL:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04a-select-group-by-with-having.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT  job_id,</span>
+hr-#         count<span class="o">(</span><span class="k">*</span><span class="o">)</span> count_employees_by_job,
+hr-#         <span class="nb">sum</span><span class="o">(</span>salary<span class="o">)</span> salary_group_by_job
+hr-# FROM employees
+hr-# GROUP BY job_id
+hr-# HAVING count<span class="o">(</span><span class="k">*</span><span class="o">)</span> <span class="o">&gt;=</span> 5<span class="p">;</span>
+   job_id   | count_employees_by_job | salary_group_by_job
+<span class="nt">------------</span>+------------------------+---------------------
+ SH_CLERK   |                     20 |            64300.00
+ SA_MAN     |                      5 |            61000.00
+ IT_PROG    |                      5 |            28800.00
+ ST_CLERK   |                     20 |            55700.00
+ PU_CLERK   |                      5 |            13900.00
+ ST_MAN     |                      5 |            36400.00
+ SA_REP     |                     30 |           250500.00
+ FI_ACCOUNT |                      5 |            39600.00
+<span class="o">(</span>8 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="different-between-where-and-having-clause">Different between WHERE and HAVING clause?</h2>
+
+<p>Mungkin dari temen-temen ada yang bertanya? jika menggunakan <code class="language-plaintext highlighter-rouge">HAVING</code> clause apa bedanya dengan <code class="language-plaintext highlighter-rouge">WHERE</code> clause?</p>
+
+<p>Untuk mengetahui jawabanya kita kita perhatikan ilustrasi berikut:</p>
+
+<p><img src="/resources/posts/postgresql/04a-single-group-function/04-ilustrasi-where-and-having-clause.png" alt="ilustration-where-having-clause" /></p>
+
+<p>Jadi klausa dengan <code class="language-plaintext highlighter-rouge">WHERE</code> dia prosesnya akan melakukan filter terlebih dahulu sebelum dilakukan proses <code class="language-plaintext highlighter-rouge">GROUP BY</code> sedangkan untuk <code class="language-plaintext highlighter-rouge">HAVING</code> dia akan memfilter datanya setelah dikelompokan / grouping. Berikut adalah contoh penggunaanya di SQL:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04a-select-group-by-with-where-and-having.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT  job_id,</span>
+hr-#         count<span class="o">(</span><span class="k">*</span><span class="o">)</span> count_employees_by_job,
+hr-#         <span class="nb">sum</span><span class="o">(</span>salary<span class="o">)</span> salary_group_by_job
+hr-# FROM employees
+hr-# WHERE job_id <span class="k">in</span> <span class="o">(</span><span class="s1">'FI_ACCOUNT'</span>, <span class="s1">'SA_MAN'</span>, <span class="s1">'IT_PROG'</span>, <span class="s1">'HR_REP'</span>, <span class="s1">'MK_MAN'</span><span class="o">)</span>
+hr-# GROUP BY job_id
+hr-# HAVING <span class="nb">sum</span><span class="o">(</span>salary<span class="o">)</span> <span class="o">&gt;=</span> 20000<span class="p">;</span>
+   job_id   | count_employees_by_job | salary_group_by_job
+<span class="nt">------------</span>+------------------------+---------------------
+ SA_MAN     |                      5 |            61000.00
+ IT_PROG    |                      5 |            28800.00
+ FI_ACCOUNT |                      5 |            39600.00
+<span class="o">(</span>3 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="using-grouping-set-clause">Using GROUPING SET clause</h2>
+
+<p>More complex grouping operations than those described above are possible using the concept of <code class="language-plaintext highlighter-rouge">grouping sets</code>.</p>
+
+<p>The data selected by the <code class="language-plaintext highlighter-rouge">FROM</code> and <code class="language-plaintext highlighter-rouge">WHERE</code> clauses is grouped separately by each specified grouping set, aggregates computed for each group just as for simple <code class="language-plaintext highlighter-rouge">GROUP BY</code> clauses, and then the results returned. Berikut adalah contoh penggunaanya di SQL:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=04a-select-group-by-grouping-set.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">hr</span><span class="o">=</span><span class="c"># SELECT manager_id, department_id, count(*), sum(salary)</span>
+hr-# FROM employees
+hr-# GROUP BY GROUPING SETS <span class="o">((</span>manager_id<span class="o">)</span>, <span class="o">(</span>department_id<span class="o">))</span><span class="p">;</span>
+ manager_id | department_id | count |    <span class="nb">sum</span>
+<span class="nt">------------</span>+---------------+-------+-----------
+        103 |               |     4 |  19800.00
+            |               |     1 |  24000.00
+        101 |               |     5 |  44900.00
+        122 |               |     8 |  23600.00
+        121 |               |     8 |  25400.00
+        114 |               |     5 |  13900.00
+        102 |               |     1 |   9000.00
+        205 |               |     1 |   8300.00
+        146 |               |     6 |  51000.00
+        108 |               |     5 |  39600.00
+        147 |               |     6 |  46600.00
+        201 |               |     1 |   6000.00
+        120 |               |     8 |  22100.00
+        100 |               |    14 | 155400.00
+        124 |               |     8 |  23000.00
+        145 |               |     6 |  51000.00
+        123 |               |     8 |  25900.00
+        148 |               |     6 |  51900.00
+        149 |               |     6 |  50000.00
+            |            70 |     1 |  10000.00
+            |            80 |    34 | 304500.00
+            |            20 |     2 |  19000.00
+            |            10 |     1 |   4400.00
+            |               |     1 |   7000.00
+            |            90 |     3 |  58000.00
+            |           100 |     6 |  51600.00
+            |           110 |     2 |  20300.00
+            |            30 |     6 |  24900.00
+            |            50 |    45 | 156400.00
+            |            40 |     1 |   6500.00
+            |            60 |     5 |  28800.00
+<span class="o">(</span>31 rows<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Jika kita perhatikan query tersebut sama jika kita menjalankan 2 query tetapi hasilnya digabungkan menjadi 1 result sets, seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="n">manager_id</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">sum</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span>
+<span class="k">from</span> <span class="n">employees</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">manager_id</span><span class="p">;</span>
+
+<span class="k">select</span> <span class="n">department_id</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">),</span> <span class="k">sum</span><span class="p">(</span><span class="n">salary</span><span class="p">)</span>
+<span class="k">from</span> <span class="n">employees</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">department_id</span><span class="p">;</span></code></pre></figure>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/01-silabus-psql"  class="" title="Silabus - PostgreSQL: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements" class="" 
+        title="Deep dive into Select Statements
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 22 to 38
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables" class="" 
+        title="Joined Tables
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"  class="" title="Getting started with Transaction Control (TCL)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#postgresql" class="page__taxonomy-item p-category" rel="tag">PostgreSQL</a><span class="sep">, </span>
+    
+      <a href="/categories/#rdbms" class="page__taxonomy-item p-category" rel="tag">RDBMS</a><span class="sep">, </span>
+    
+      <a href="/categories/#select" class="page__taxonomy-item p-category" rel="tag">select</a><span class="sep">, </span>
+    
+      <a href="/categories/#sql" class="page__taxonomy-item p-category" rel="tag">sql</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-03-13T15:51:40+07:00">March 13, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Single+Row+%2F+Group+functions%20%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04a-single-group-function" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04a-single-group-function" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fselect%2F04a-single-group-function" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

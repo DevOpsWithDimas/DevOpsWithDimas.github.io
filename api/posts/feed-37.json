@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Automated deploy with gitlab CI/CD",
+      "link": "/posts/java/web/war/033-automated-deployer-gitlab-ci-cd-docker"
+    }
+    ,
+    {
+      "title": "Deployment Java Webapp dengan Tomcat Web Server",
+      "link": "/posts/java/web/war/032-deploy-java-webapp"
+    }
+    ,
+    {
+      "title": "Persiapan untuk Deploy Java Webapp",
+      "link": "/posts/java/web/war/031-instal-webserver-tomcat8"
+    }
+    ,
+    {
+      "title": "CRUD menggunakan Hibernate",
+      "link": "/posts/java/orm/hibernate/postgresql/02e-crud-jpa-hibernate"
+    }
+    ,
+    {
+      "title": "Basic Annotation pada Hibernate",
+      "link": "/posts/java/orm/hibernate/postgresql/02d-hibernate-annotation-basic"
+    }
+    ,
+    {
+      "title": "Membuat Simple Entity di Hibernate",
+      "link": "/posts/java/orm/hibernate/postgresql/02c-membuat-simple-entity"
+    }
+    ,
+    {
+      "title": "Memahami fungsi hibernate.cfg.xml",
+      "link": "/posts/java/orm/hibernate/postgresql/02b-memahami-hibernate-cfg"
+    }
+    ,
+    {
+      "title": "Build Hibernate Session Factory",
+      "link": "/posts/java/orm/hibernate/postgresql/02a-create-connection"
+    }
+    ,
+    {
+      "title": "Membuat project Hibernate ORM dengan Apache Maven",
+      "link": "/posts/java/orm/hibernate/postgresql/02-create-project-java-maven"
+    }
+    ,
+    {
+      "title": "Setup Development Environment",
+      "link": "/posts/java/orm/hibernate/postgresql/01b-setup-dev-env"
+    }
+  ]
+}

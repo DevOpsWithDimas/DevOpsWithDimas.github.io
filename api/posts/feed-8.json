@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Using thirdparty Editor untuk PostgreSQL Server",
+      "link": "/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors"
+    }
+    ,
+    {
+      "title": "Using pgAdmin4 as PostgreSQL editor",
+      "link": "/posts/rdbms/postgresql/getting-started/02c-use-pgadmin"
+    }
+    ,
+    {
+      "title": "Using psql as PostgreSQL editor",
+      "link": "/posts/rdbms/postgresql/getting-started/02b-use-psql"
+    }
+    ,
+    {
+      "title": "Install PostgreSQL using Docker",
+      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker"
+    }
+    ,
+    {
+      "title": "Install PostgreSQL for Linux Ubuntu users",
+      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu"
+    }
+    ,
+    {
+      "title": "Install PostgreSQL for Mac users",
+      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac"
+    }
+    ,
+    {
+      "title": "Using your own image into Minikube cluster",
+      "link": "/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images"
+    }
+    ,
+    {
+      "title": "Minikube basic control",
+      "link": "/posts/devops/orchestration/kubernetes/02c-minikube-basic-control"
+    }
+    ,
+    {
+      "title": "Deploying an apps/services into Kubernetes",
+      "link": "/posts/devops/orchestration/kubernetes/02b-deploy-application"
+    }
+    ,
+    {
+      "title": "Install minikube for Linux users",
+      "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux"
+    }
+  ]
+}

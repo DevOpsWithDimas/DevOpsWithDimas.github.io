@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Klausa Group By di Oracle",
+      "link": "/posts/rdbms/oracle18c/009a-group-by"
+    }
+    ,
+    {
+      "title": "Aggregate Functions",
+      "link": "/posts/rdbms/oracle18c/009-aggregate-function"
+    }
+    ,
+    {
+      "title": "Null-Related Single Row Function",
+      "link": "/posts/rdbms/oracle18c/008f-null-related-function"
+    }
+    ,
+    {
+      "title": "Casting Build-In Data Type di Oracle",
+      "link": "/posts/rdbms/oracle18c/008e-casting-buildin-data-type"
+    }
+    ,
+    {
+      "title": "Conversion Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008d-conversion-function"
+    }
+    ,
+    {
+      "title": "Date & Time Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008c-date-function"
+    }
+    ,
+    {
+      "title": "Number Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008b-number-function"
+    }
+    ,
+    {
+      "title": "Character Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008a-character-function"
+    }
+    ,
+    {
+      "title": "Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008-single-row-function"
+    }
+    ,
+    {
+      "title": "Mengurutkan data dengan klausa ORDER BY di Oracle",
+      "link": "/posts/rdbms/oracle18c/007-order-by"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Study Cases: Monolith apps (Laravel Web MVC)",
+      "link": "/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps"
+    }
+    ,
+    {
+      "title": "Overview Study Cases: Pod and Containers",
+      "link": "/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases"
+    }
+    ,
+    {
+      "title": "Pod Disruptions",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03i-distruptions"
+    }
+    ,
+    {
+      "title": "Prepared Statement in SQL",
+      "link": "/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement"
+    }
+    ,
+    {
+      "title": "Deep dive into DELETE statement",
+      "link": "/posts/rdbms/postgresql/sql/dml/05d-dml-delete"
+    }
+    ,
+    {
+      "title": "Deep dive into UPDATE Statement",
+      "link": "/posts/rdbms/postgresql/sql/dml/05c-dml-update"
+    }
+    ,
+    {
+      "title": "Getting started with Ansible role, tasks for docker",
+      "link": "/posts/devops/docker/14c-ansible-for-docker-operations"
+    }
+    ,
+    {
+      "title": "Setup Ansible Control and Managed Nodes",
+      "link": "/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment"
+    }
+    ,
+    {
+      "title": "IT Automation Platform for Docker Operations",
+      "link": "/posts/devops/docker/14a-it-automation-platform"
+    }
+    ,
+    {
+      "title": "Overview Study cases: IT Automation Platform for Docker Operations",
+      "link": "/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker"
+    }
+  ]
+}

@@ -1,0 +1,1746 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Deep dive into INSERT Statement - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, pada materi sebelumnya kita sudah membahas sedikit tentang Data Manipulation language atau di singkat DML. Nah sekarang kita akan bahas lebih detail khususnya untuk perintah INSERT yang telah kita pelajari di materi sebelumnya hanyalah simple sebetulnya secara syntax perintahnya seperti berikut:  [ WITH [ RECURSIVE ] with_query [, ...] ] INSERT INTO table_name [ AS alias ] [ ( column_name [, ...] ) ]     [ OVERRIDING { SYSTEM | USER } VALUE ]     { DEFAULT VALUES | VALUES ( { expression | DEFAULT } [, ...] ) [, ...] | query }     [ ON CONFLICT [ conflict_target ] conflict_action ]     [ RETURNING * | output_expression [ [ AS ] output_name ] [, ...] ]  where conflict_target can be one of:      ( { index_column_name | ( index_expression ) } [ COLLATE collation ] [ opclass ] [, ...] ) [ WHERE index_predicate ]     ON CONSTRAINT constraint_name  and conflict_action is one of:      DO NOTHING     DO UPDATE SET { column_name = { expression | DEFAULT } |                     ( column_name [, ...] ) = [ ROW ] ( { expression | DEFAULT } [, ...] ) |                     ( column_name [, ...] ) = ( sub-SELECT )                   } [, ...]               [ WHERE condition ]  Nah jadi jika kita perhatikan ada beberapa clause yang kita bisa gunakan diantaranya:     Insert with specific columns and data type   Insert with DEFAULT VALUE   Insert single and multiple rows   Insert with ON CONFLICT   Insert with OVERRIDING keyword   Using with query in INSERT statement   Error message on insert statement   Nah lumayan banyak dan panjang juga ya ternyata untuk perintah insert yang kita bisa gunakan, jadi kita akan coba break-down aja ya masing-masing feature:">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Deep dive into INSERT Statement">
+<meta property="og:url" content="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+
+
+  <meta property="og:description" content="Hai semuanya, pada materi sebelumnya kita sudah membahas sedikit tentang Data Manipulation language atau di singkat DML. Nah sekarang kita akan bahas lebih detail khususnya untuk perintah INSERT yang telah kita pelajari di materi sebelumnya hanyalah simple sebetulnya secara syntax perintahnya seperti berikut:  [ WITH [ RECURSIVE ] with_query [, ...] ] INSERT INTO table_name [ AS alias ] [ ( column_name [, ...] ) ]     [ OVERRIDING { SYSTEM | USER } VALUE ]     { DEFAULT VALUES | VALUES ( { expression | DEFAULT } [, ...] ) [, ...] | query }     [ ON CONFLICT [ conflict_target ] conflict_action ]     [ RETURNING * | output_expression [ [ AS ] output_name ] [, ...] ]  where conflict_target can be one of:      ( { index_column_name | ( index_expression ) } [ COLLATE collation ] [ opclass ] [, ...] ) [ WHERE index_predicate ]     ON CONSTRAINT constraint_name  and conflict_action is one of:      DO NOTHING     DO UPDATE SET { column_name = { expression | DEFAULT } |                     ( column_name [, ...] ) = [ ROW ] ( { expression | DEFAULT } [, ...] ) |                     ( column_name [, ...] ) = ( sub-SELECT )                   } [, ...]               [ WHERE condition ]  Nah jadi jika kita perhatikan ada beberapa clause yang kita bisa gunakan diantaranya:     Insert with specific columns and data type   Insert with DEFAULT VALUE   Insert single and multiple rows   Insert with ON CONFLICT   Insert with OVERRIDING keyword   Using with query in INSERT statement   Error message on insert statement   Nah lumayan banyak dan panjang juga ya ternyata untuk perintah insert yang kita bisa gunakan, jadi kita akan coba break-down aja ya masing-masing feature:">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-09-04T11:38:35+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#insert-with-specific-columns-and-data-type">Insert with specific columns and data type</a></li><li><a href="#insert-with-default-value">Insert with DEFAULT VALUE</a></li><li><a href="#insert-single-and-multiple-rows">Insert single and multiple rows</a></li><li><a href="#insert-with-on-conflict">Insert with ON CONFLICT</a></li><li><a href="#insert-with-overriding-keyword">Insert with OVERRIDING keyword</a></li><li><a href="#using-with-query-in-insert-statement">Using with query in INSERT statement</a></li><li><a href="#error-message-on-insert-statement">Error message on insert statement</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Deep dive into INSERT Statement">
+    <meta itemprop="description" content="Hai semuanya, pada materi sebelumnya kita sudah membahas sedikit tentang Data Manipulation language atau di singkat DML. Nah sekarang kita akan bahas lebih detail khususnya untuk perintah INSERT yang telah kita pelajari di materi sebelumnya hanyalah simple sebetulnya secara syntax perintahnya seperti berikut:[ WITH [ RECURSIVE ] with_query [, ...] ]INSERT INTO table_name [ AS alias ] [ ( column_name [, ...] ) ]    [ OVERRIDING { SYSTEM | USER } VALUE ]    { DEFAULT VALUES | VALUES ( { expression | DEFAULT } [, ...] ) [, ...] | query }    [ ON CONFLICT [ conflict_target ] conflict_action ]    [ RETURNING * | output_expression [ [ AS ] output_name ] [, ...] ]where conflict_target can be one of:    ( { index_column_name | ( index_expression ) } [ COLLATE collation ] [ opclass ] [, ...] ) [ WHERE index_predicate ]    ON CONSTRAINT constraint_nameand conflict_action is one of:    DO NOTHING    DO UPDATE SET { column_name = { expression | DEFAULT } |                    ( column_name [, ...] ) = [ ROW ] ( { expression | DEFAULT } [, ...] ) |                    ( column_name [, ...] ) = ( sub-SELECT )                  } [, ...]              [ WHERE condition ]Nah jadi jika kita perhatikan ada beberapa clause yang kita bisa gunakan diantaranya:  Insert with specific columns and data type  Insert with DEFAULT VALUE  Insert single and multiple rows  Insert with ON CONFLICT  Insert with OVERRIDING keyword  Using with query in INSERT statement  Error message on insert statementNah lumayan banyak dan panjang juga ya ternyata untuk perintah insert yang kita bisa gunakan, jadi kita akan coba break-down aja ya masing-masing feature:">
+    <meta itemprop="datePublished" content="2022-09-04T11:38:35+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert" class="u-url" itemprop="url">Deep dive into INSERT Statement
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-09-04T11:38:35+07:00">September 4, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        13 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan PostgreSQL">
+        <label class="acordion-item-label" for="content-Pengenalan PostgreSQL">
+            Pengenalan PostgreSQL
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01-silabus-psql">
+                        
+                        Silabus - PostgreSQL: Pemul...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01a-what-is-postgresql">
+                        
+                        Overview of PostgreSQL Data...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01b-postgresql-architecture">
+                        
+                        Architecture of PostgreSQL ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/01c-postgresql-database">
+                        
+                        Overview of Object Relation...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started">
+        <label class="acordion-item-label" for="content-Getting started">
+            Getting started
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02-overview-install-postgres">
+                        
+                        Overview Installing PostgreSQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows">
+                        
+                        Install PostgreSQL for Wind...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac">
+                        
+                        Install PostgreSQL for Mac ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu">
+                        
+                        Install PostgreSQL for Linu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker">
+                        
+                        Install PostgreSQL using Do...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02b-use-psql">
+                        
+                        Using psql as PostgreSQL ed...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02c-use-pgadmin">
+                        
+                        Using pgAdmin4 as PostgreSQ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors">
+                        
+                        Using thirdparty Editor unt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Select Statement">
+        <label class="acordion-item-label" for="content-SQL - Select Statement">
+            SQL - Select Statement
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03-overview-sql">
+                        
+                        Overview SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03a-basic-select-statement">
+                        
+                        Basic SQL Select statements
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03b-sql-operators">
+                        
+                        Build-in Operators
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03c-sql-functions">
+                        
+                        Build-in Functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03d-where-clause">
+                        
+                        Filtering data with WHERE c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause">
+                        
+                        Sorting rows using ORDER BY...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause">
+                        
+                        Limit dan Offset rows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/03g-quis-section-1">
+                        
+                        Time your practice (part 1)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements">
+                        
+                        Deep dive into Select State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04a-single-group-function">
+                        
+                        Single Row / Group functions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04b-join-tables">
+                        
+                        Joined Tables
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04c-subquery">
+                        
+                        Queries inside a query (sub...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04d-conditional-expression">
+                        
+                        Conditional Expressions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04e-combining-queries">
+                        
+                        Combining Queries (UNION, I...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04f-with-queries">
+                        
+                        WITH Queries (Common Table ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/select/04g-quis-section-2">
+                        
+                        Time your practice (part 2)
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data manipulation">
+        <label class="acordion-item-label" for="content-SQL - Data manipulation">
+            SQL - Data manipulation
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05-overview-dml">
+                        
+                        Overview of Data Manipulati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05a-cud-statement">
+                        
+                        Basic Create, Update, Delet...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Deep dive into INSERT State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05c-dml-update">
+                        
+                        Deep dive into UPDATE State...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete">
+                        
+                        Deep dive into DELETE state...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement">
+                        
+                        Prepared Statement in SQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup">
+                        
+                        Cleanup Data from Table
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1">
+                        
+                        Time your practice (part 3)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control">
+                        
+                        Overview of Concurrency Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl">
+                        
+                        Getting started with Transa...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Data definition">
+        <label class="acordion-item-label" for="content-SQL - Data definition">
+            SQL - Data definition
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Database design (Mapping)">
+        <label class="acordion-item-label" for="content-Study Kasus: Database design (Mapping)">
+            Study Kasus: Database design (Mapping)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Indexes">
+        <label class="acordion-item-label" for="content-SQL - Indexes">
+            SQL - Indexes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-SQL - Users Management">
+        <label class="acordion-item-label" for="content-SQL - Users Management">
+            SQL - Users Management
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Type Conversion">
+        <label class="acordion-item-label" for="content-Type Conversion">
+            Type Conversion
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, pada materi sebelumnya kita sudah membahas sedikit tentang Data Manipulation language atau di singkat DML. Nah sekarang kita akan bahas lebih detail khususnya untuk perintah <code class="language-plaintext highlighter-rouge">INSERT</code> yang telah kita pelajari di materi sebelumnya hanyalah simple sebetulnya secara syntax perintahnya seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">[</span> <span class="k">WITH</span> <span class="p">[</span> <span class="k">RECURSIVE</span> <span class="p">]</span> <span class="n">with_query</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">table_name</span> <span class="p">[</span> <span class="k">AS</span> <span class="k">alias</span> <span class="p">]</span> <span class="p">[</span> <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="k">OVERRIDING</span> <span class="p">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">USER</span> <span class="p">}</span> <span class="n">VALUE</span> <span class="p">]</span>
+    <span class="p">{</span> <span class="k">DEFAULT</span> <span class="k">VALUES</span> <span class="o">|</span> <span class="k">VALUES</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[,</span> <span class="p">...]</span> <span class="o">|</span> <span class="n">query</span> <span class="p">}</span>
+    <span class="p">[</span> <span class="k">ON</span> <span class="n">CONFLICT</span> <span class="p">[</span> <span class="n">conflict_target</span> <span class="p">]</span> <span class="n">conflict_action</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">RETURNING</span> <span class="o">*</span> <span class="o">|</span> <span class="n">output_expression</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="n">output_name</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
+
+<span class="k">where</span> <span class="n">conflict_target</span> <span class="n">can</span> <span class="n">be</span> <span class="n">one</span> <span class="k">of</span><span class="p">:</span>
+
+    <span class="p">(</span> <span class="p">{</span> <span class="n">index_column_name</span> <span class="o">|</span> <span class="p">(</span> <span class="n">index_expression</span> <span class="p">)</span> <span class="p">}</span> <span class="p">[</span> <span class="k">COLLATE</span> <span class="k">collation</span> <span class="p">]</span> <span class="p">[</span> <span class="n">opclass</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[</span> <span class="k">WHERE</span> <span class="n">index_predicate</span> <span class="p">]</span>
+    <span class="k">ON</span> <span class="k">CONSTRAINT</span> <span class="k">constraint_name</span>
+
+<span class="k">and</span> <span class="n">conflict_action</span> <span class="k">is</span> <span class="n">one</span> <span class="k">of</span><span class="p">:</span>
+
+    <span class="k">DO</span> <span class="k">NOTHING</span>
+    <span class="k">DO</span> <span class="k">UPDATE</span> <span class="k">SET</span> <span class="p">{</span> <span class="k">column_name</span> <span class="o">=</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="o">|</span>
+                    <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">[</span> <span class="k">ROW</span> <span class="p">]</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">|</span>
+                    <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">sub</span><span class="o">-</span><span class="k">SELECT</span> <span class="p">)</span>
+                  <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span>
+              <span class="p">[</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="p">]</span></code></pre></figure>
+
+<p>Nah jadi jika kita perhatikan ada beberapa clause yang kita bisa gunakan diantaranya:</p>
+
+<ol>
+  <li>Insert with specific columns and data type</li>
+  <li>Insert with <code class="language-plaintext highlighter-rouge">DEFAULT VALUE</code></li>
+  <li>Insert single and multiple rows</li>
+  <li>Insert with <code class="language-plaintext highlighter-rouge">ON CONFLICT</code></li>
+  <li>Insert with <code class="language-plaintext highlighter-rouge">OVERRIDING</code> keyword</li>
+  <li>Using with query in INSERT statement</li>
+  <li>Error message on insert statement</li>
+</ol>
+
+<p>Nah lumayan banyak dan panjang juga ya ternyata untuk perintah insert yang kita bisa gunakan, jadi kita akan coba break-down aja ya masing-masing feature:</p>
+
+<!--more-->
+
+<h2 id="insert-with-specific-columns-and-data-type">Insert with specific columns and data type</h2>
+
+<p>The target column names can be listed in any order. If no list of column names is given at all, the default is all the columns of the table in their declared order; or the first <code class="language-plaintext highlighter-rouge">N</code> column names, if there are only <code class="language-plaintext highlighter-rouge">N</code> columns supplied by the VALUES clause or query. The values supplied by the <code class="language-plaintext highlighter-rouge">VALUES</code> clause or query are associated with the explicit or implicit column list left-to-right.</p>
+
+<p>If the expression for any column is not of the correct data type, automatic type conversion will be attempted.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">INSERT</span> <span class="k">INTO</span> <span class="o">&lt;</span><span class="k">table_name</span><span class="o">&gt;</span> <span class="p">[</span> <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span>
+    <span class="p">{</span> <span class="k">VALUES</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">}</span></code></pre></figure>
+
+<p>Sebagai contoh, saya ingin menambahkan data pada table <code class="language-plaintext highlighter-rouge">employees</code> dengan struktur table seperti berikut</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="err">\</span><span class="n">d</span> <span class="n">employees</span>
+                                            <span class="k">Table</span> <span class="nv">"public.employees"</span>
+     <span class="k">Column</span>     <span class="o">|</span>         <span class="k">Type</span>          <span class="o">|</span> <span class="k">Collation</span> <span class="o">|</span> <span class="k">Nullable</span> <span class="o">|</span>                    <span class="k">Default</span>                     
+<span class="c1">----------------+-----------------------+-----------+----------+------------------------------------------------</span>
+ <span class="n">employee_id</span>    <span class="o">|</span> <span class="nb">integer</span>               <span class="o">|</span>           <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="o">|</span> <span class="n">nextval</span><span class="p">(</span><span class="s1">'employees_employee_id_seq'</span><span class="p">::</span><span class="n">regclass</span><span class="p">)</span>
+ <span class="n">first_name</span>     <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">last_name</span>      <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="o">|</span> 
+ <span class="n">email</span>          <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="o">|</span> 
+ <span class="n">phone_number</span>   <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">job_id</span>         <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">salary</span>         <span class="o">|</span> <span class="nb">numeric</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>          <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">commission_pct</span> <span class="o">|</span> <span class="nb">numeric</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>          <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">manager_id</span>     <span class="o">|</span> <span class="nb">integer</span>               <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">department_id</span>  <span class="o">|</span> <span class="nb">integer</span>               <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+</code></pre></div></div>
+
+<p>Data yang saya inputkan ke table <code class="language-plaintext highlighter-rouge">employees</code> tersebut adalah seperti berikut</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">first_name</th>
+      <th style="text-align: left">last_name</th>
+      <th style="text-align: left">email</th>
+      <th style="text-align: left">job_id</th>
+      <th style="text-align: left">salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Dimas</td>
+      <td style="text-align: left">Maryanto</td>
+      <td style="text-align: left">DIMAS</td>
+      <td style="text-align: left">IT_PROG</td>
+      <td style="text-align: left">15000</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Berikut adalah querynya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05b-dml-insert-specific-columns.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">employees</span> <span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">salary</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">values</span> <span class="p">(</span><span class="s1">'DIMAS'</span><span class="p">,</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'dimas'</span><span class="p">),</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'maryanto'</span><span class="p">),</span> <span class="k">upper</span><span class="p">(</span><span class="s1">'it_prog'</span><span class="p">),</span> <span class="mi">15000</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">employees</span> <span class="k">where</span> <span class="n">email</span> <span class="o">=</span> <span class="s1">'DIMAS'</span><span class="p">;</span>
+ <span class="n">employee_id</span> <span class="o">|</span> <span class="n">first_name</span> <span class="o">|</span> <span class="n">last_name</span> <span class="o">|</span> <span class="n">email</span> <span class="o">|</span> <span class="n">phone_number</span> <span class="o">|</span> <span class="n">job_id</span>  <span class="o">|</span>  <span class="n">salary</span>  <span class="o">|</span> <span class="n">commission_pct</span> <span class="o">|</span> <span class="n">manager_id</span> <span class="o">|</span> <span class="n">department_id</span> 
+<span class="c1">-------------+------------+-----------+-------+--------------+---------+----------+----------------+------------+---------------</span>
+           <span class="mi">2</span> <span class="o">|</span> <span class="n">Dimas</span>      <span class="o">|</span> <span class="n">Maryanto</span>  <span class="o">|</span> <span class="n">DIMAS</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">IT_PROG</span> <span class="o">|</span> <span class="mi">15000</span><span class="p">.</span><span class="mi">00</span> <span class="o">|</span>                <span class="o">|</span>            <span class="o">|</span>              
+<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Selain itu juga klo kita mau menyimpan data dengan tipe data date/timestamp misalnya pada table <code class="language-plaintext highlighter-rouge">job_history</code> seperti berikut struktur tablenya:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="err">\</span><span class="n">d</span> <span class="n">job_history</span>
+                          <span class="k">Table</span> <span class="nv">"public.job_history"</span>
+    <span class="k">Column</span>     <span class="o">|</span>            <span class="k">Type</span>             <span class="o">|</span> <span class="k">Collation</span> <span class="o">|</span> <span class="k">Nullable</span> <span class="o">|</span> <span class="k">Default</span> 
+<span class="c1">---------------+-----------------------------+-----------+----------+---------</span>
+ <span class="n">employee_id</span>   <span class="o">|</span> <span class="nb">integer</span>                     <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">start_date</span>    <span class="o">|</span> <span class="nb">timestamp</span> <span class="k">without</span> <span class="nb">time</span> <span class="k">zone</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">end_date</span>      <span class="o">|</span> <span class="nb">timestamp</span> <span class="k">without</span> <span class="nb">time</span> <span class="k">zone</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">job_id</span>        <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>       <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">department_id</span> <span class="o">|</span> <span class="nb">integer</span>                     <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+</code></pre></div></div>
+
+<p>Maka querynya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05b-dml-insert-specific-datatype.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">job_history</span> <span class="p">(</span><span class="n">employee_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">job_id</span><span class="p">)</span> 
+<span class="n">hr</span><span class="o">-#</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'2016-07-15'</span><span class="p">,</span> <span class="s1">'IT_PROG'</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job_history</span> <span class="k">where</span> <span class="n">employee_id</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+ <span class="n">employee_id</span> <span class="o">|</span>     <span class="n">start_date</span>      <span class="o">|</span> <span class="n">end_date</span> <span class="o">|</span> <span class="n">job_id</span>  <span class="o">|</span> <span class="n">department_id</span> 
+<span class="c1">-------------+---------------------+----------+---------+---------------</span>
+           <span class="mi">2</span> <span class="o">|</span> <span class="mi">2016</span><span class="o">-</span><span class="mi">07</span><span class="o">-</span><span class="mi">15</span> <span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span> <span class="o">|</span>          <span class="o">|</span> <span class="n">IT_PROG</span> <span class="o">|</span>              
+<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="insert-with-default-value">Insert with <code class="language-plaintext highlighter-rouge">DEFAULT VALUE</code></h2>
+
+<p>All columns will be filled with their default values, as if <code class="language-plaintext highlighter-rouge">DEFAULT</code> were explicitly specified for each column. (An <code class="language-plaintext highlighter-rouge">OVERRIDING</code> clause is not permitted in this form.)</p>
+
+<p>Each column not present in the explicit or implicit column list will be filled with a default value, either its declared default value or <code class="language-plaintext highlighter-rouge">null</code> if there is none.</p>
+
+<p>Sebagai contoh kita akan edit struktur table <code class="language-plaintext highlighter-rouge">employees</code> pada columnn <code class="language-plaintext highlighter-rouge">salary</code> dengan menambahkan default value dengan query seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">alter</span> <span class="k">table</span> <span class="n">employees</span>
+<span class="k">alter</span> <span class="k">column</span> <span class="n">salary</span> <span class="k">SET</span> <span class="k">default</span> <span class="mi">0</span><span class="p">;</span></code></pre></figure>
+
+<p>Nah sekarang kita lihat struktur tablenya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="err">\</span><span class="n">d</span> <span class="n">employees</span>
+                                            <span class="k">Table</span> <span class="nv">"public.employees"</span>
+     <span class="k">Column</span>     <span class="o">|</span>         <span class="k">Type</span>          <span class="o">|</span> <span class="k">Collation</span> <span class="o">|</span> <span class="k">Nullable</span> <span class="o">|</span>                    <span class="k">Default</span>                     
+<span class="c1">----------------+-----------------------+-----------+----------+------------------------------------------------</span>
+ <span class="n">employee_id</span>    <span class="o">|</span> <span class="nb">integer</span>               <span class="o">|</span>           <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="o">|</span> <span class="n">nextval</span><span class="p">(</span><span class="s1">'employees_employee_id_seq'</span><span class="p">::</span><span class="n">regclass</span><span class="p">)</span>
+ <span class="n">first_name</span>     <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">last_name</span>      <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="o">|</span> 
+ <span class="n">email</span>          <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="o">|</span> 
+ <span class="n">phone_number</span>   <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">job_id</span>         <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">salary</span>         <span class="o">|</span> <span class="nb">numeric</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>          <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> <span class="mi">0</span>
+ <span class="n">commission_pct</span> <span class="o">|</span> <span class="nb">numeric</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>          <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">manager_id</span>     <span class="o">|</span> <span class="nb">integer</span>               <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+ <span class="n">department_id</span>  <span class="o">|</span> <span class="nb">integer</span>               <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span> 
+</code></pre></div></div>
+
+<p>Kemudian jika kita lakukan insert data dengan query seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05b-dml-insert-no-specify-salary-column.sql"> </script>
+
+<p>Jika di jalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">employees</span> <span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">job_id</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">values</span> <span class="p">(</span><span class="s1">'YUSUF'</span><span class="p">,</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'Muhamad'</span><span class="p">),</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'yusuf'</span><span class="p">),</span> <span class="k">upper</span><span class="p">(</span><span class="s1">'it_prog'</span><span class="p">));</span>
+<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">employees</span> <span class="k">where</span> <span class="n">email</span> <span class="o">=</span> <span class="s1">'YUSUF'</span><span class="p">;</span>
+ <span class="n">employee_id</span> <span class="o">|</span> <span class="n">first_name</span> <span class="o">|</span> <span class="n">last_name</span> <span class="o">|</span> <span class="n">email</span> <span class="o">|</span> <span class="n">phone_number</span> <span class="o">|</span> <span class="n">job_id</span>  <span class="o">|</span> <span class="n">salary</span> <span class="o">|</span> <span class="n">commission_pct</span> <span class="o">|</span> <span class="n">manager_id</span> <span class="o">|</span> <span class="n">department_id</span> 
+<span class="c1">-------------+------------+-----------+-------+--------------+---------+--------+----------------+------------+---------------</span>
+           <span class="mi">3</span> <span class="o">|</span> <span class="n">Muhamad</span>    <span class="o">|</span> <span class="n">Yusuf</span>     <span class="o">|</span> <span class="n">YUSUF</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">IT_PROG</span> <span class="o">|</span>   <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="o">|</span>                <span class="o">|</span>            <span class="o">|</span>              
+<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Kemudian jika kita specify column <code class="language-plaintext highlighter-rouge">salary</code> tetapi jika kita kasih nilai <code class="language-plaintext highlighter-rouge">null</code> dengan query seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05b-dml-insert-null-value-salary.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">employees</span> <span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">salary</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">values</span> <span class="p">(</span><span class="s1">'PURWADI'</span><span class="p">,</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'muhamad'</span><span class="p">),</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'purwadi'</span><span class="p">),</span> <span class="k">upper</span><span class="p">(</span><span class="s1">'it_prog'</span><span class="p">),</span> <span class="k">null</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">employees</span> <span class="k">where</span> <span class="n">email</span> <span class="o">=</span> <span class="s1">'PURWADI'</span><span class="p">;</span>
+ <span class="n">employee_id</span> <span class="o">|</span> <span class="n">first_name</span> <span class="o">|</span> <span class="n">last_name</span> <span class="o">|</span>  <span class="n">email</span>  <span class="o">|</span> <span class="n">phone_number</span> <span class="o">|</span> <span class="n">job_id</span>  <span class="o">|</span> <span class="n">salary</span> <span class="o">|</span> <span class="n">commission_pct</span> <span class="o">|</span> <span class="n">manager_id</span> <span class="o">|</span> <span class="n">department_id</span> 
+<span class="c1">-------------+------------+-----------+---------+--------------+---------+--------+----------------+------------+---------------</span>
+           <span class="mi">4</span> <span class="o">|</span> <span class="n">Muhamad</span>    <span class="o">|</span> <span class="n">Purwadi</span>   <span class="o">|</span> <span class="n">PURWADI</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">IT_PROG</span> <span class="o">|</span>        <span class="o">|</span>                <span class="o">|</span>            <span class="o">|</span>              
+<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Kemudian bagaimana jika kita mau menggunakan nilai defaultnya jika kita specify column tersebut, kita bisa gunakan keyword <code class="language-plaintext highlighter-rouge">DEFAULT</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05b-dml-insert-using-default-value.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">employees</span> <span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">salary</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">values</span> <span class="p">(</span><span class="s1">'JUNAEDI'</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'junaedi'</span><span class="p">),</span> <span class="k">upper</span><span class="p">(</span><span class="s1">'it_prog'</span><span class="p">),</span> <span class="k">DEFAULT</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">employees</span> <span class="k">where</span> <span class="n">email</span>  <span class="o">=</span> <span class="s1">'JUNAEDI'</span><span class="p">;</span>
+ <span class="n">employee_id</span> <span class="o">|</span> <span class="n">first_name</span> <span class="o">|</span> <span class="n">last_name</span> <span class="o">|</span>  <span class="n">email</span>  <span class="o">|</span> <span class="n">phone_number</span> <span class="o">|</span> <span class="n">job_id</span>  <span class="o">|</span> <span class="n">salary</span> <span class="o">|</span> <span class="n">commission_pct</span> <span class="o">|</span> <span class="n">manager_id</span> <span class="o">|</span> <span class="n">department_id</span> 
+<span class="c1">-------------+------------+-----------+---------+--------------+---------+--------+----------------+------------+---------------</span>
+           <span class="mi">5</span> <span class="o">|</span>            <span class="o">|</span> <span class="n">Junaedi</span>   <span class="o">|</span> <span class="n">JUNAEDI</span> <span class="o">|</span>              <span class="o">|</span> <span class="n">IT_PROG</span> <span class="o">|</span>   <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="o">|</span>                <span class="o">|</span>            <span class="o">|</span>              
+<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Jadi kesimpulannya jika kita mau menggunakan default value kita bisa menggunakan 2 cara yaitu tidak men-specify kolom yang kita input dan juga menggunakan expression atau keyword <code class="language-plaintext highlighter-rouge">DEFAULT</code> pada values form.</p>
+
+<h2 id="insert-single-and-multiple-rows">Insert single and multiple rows</h2>
+
+<p><code class="language-plaintext highlighter-rouge">INSERT</code> statement is inserts new rows into a table. One can insert one or more rows specified by value expressions, or zero or more rows resulting from a query. Berikut syntax dasarnya:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">table_name</span> <span class="p">[</span> <span class="k">AS</span> <span class="k">alias</span> <span class="p">]</span> <span class="p">[</span> <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span>
+    <span class="k">VALUES</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[,</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">,</span> <span class="p">...</span> <span class="p">)]</span> </code></pre></figure>
+
+<p>Implementasi pada querynya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05b-dml-insert-multiple-rows.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">countries</span> <span class="p">(</span><span class="n">country_id</span><span class="p">,</span> <span class="n">country_name</span><span class="p">,</span> <span class="n">region_id</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">values</span> <span class="p">(</span><span class="s1">'ID'</span><span class="p">,</span> <span class="s1">'Indonesia'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="n">hr</span><span class="o">-#</span>        <span class="p">(</span><span class="s1">'SI'</span><span class="p">,</span> <span class="s1">'Singapore'</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="n">hr</span><span class="o">-#</span>        <span class="p">(</span><span class="s1">'TH'</span><span class="p">,</span> <span class="s1">'Thailand'</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">3</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">countries</span> <span class="k">where</span> <span class="n">country_id</span> <span class="k">in</span> <span class="p">(</span><span class="s1">'ID'</span><span class="p">,</span> <span class="s1">'SI'</span><span class="p">,</span> <span class="s1">'TH'</span><span class="p">);</span>
+ <span class="n">country_id</span> <span class="o">|</span> <span class="n">country_name</span> <span class="o">|</span> <span class="n">region_id</span> 
+<span class="c1">------------+--------------+-----------</span>
+ <span class="n">ID</span>         <span class="o">|</span> <span class="n">Indonesia</span>    <span class="o">|</span>         <span class="mi">3</span>
+ <span class="n">SI</span>         <span class="o">|</span> <span class="n">Singapore</span>    <span class="o">|</span>         <span class="mi">3</span>
+ <span class="n">TH</span>         <span class="o">|</span> <span class="n">Thailand</span>     <span class="o">|</span>         <span class="mi">3</span>
+<span class="p">(</span><span class="mi">3</span> <span class="k">rows</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Meskipun kita bisa mengirimkan data lebih dari satu bahkan bisa ribuan data tpi temen-temen juga perlu pertimbahkan kerkait performa databasenya. Karena semakin banyak data yang dikirimkan dalam satu query biasanya akan menghambat proses lainnya.</p>
+
+<p>Jadi biasanya jika misalnya saya akan mengimput jutaan data biasanya akan saya bagi-bagi menjadi beberapa bulk misalnya query pertama berisi 1000 baris, kemudian query kedua kita kirimkan lagi 1000 baris selanjutnya dan begitu pula selanjutnya sampai semua data selesai.</p>
+
+<h2 id="insert-with-on-conflict">Insert with <code class="language-plaintext highlighter-rouge">ON CONFLICT</code></h2>
+
+<p>The optional <code class="language-plaintext highlighter-rouge">ON CONFLICT</code> clause specifies an alternative action to raising a unique violation or exclusion constraint violation error. For each individual row proposed for insertion, either the insertion proceeds, or, if an arbiter constraint or index specified by <code class="language-plaintext highlighter-rouge">conflict_target</code> is violated, the alternative conflict_action is taken. <code class="language-plaintext highlighter-rouge">ON CONFLICT DO NOTHING</code> simply avoids inserting a row as its alternative action. <code class="language-plaintext highlighter-rouge">ON CONFLICT DO UPDATE</code> updates the existing row that conflicts with the row proposed for insertion as its alternative action.</p>
+
+<p>Pastikan jika temen-temen mau menggunakan feature ini harus menggunakan PostgreSQL Server versi minimum 9.5 atau lebih tinggi.</p>
+
+<p>Berikut syntax dasarnya:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">table_name</span> <span class="p">[</span> <span class="k">AS</span> <span class="k">alias</span> <span class="p">]</span> <span class="p">[</span> <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span>
+    <span class="p">{</span> <span class="k">DEFAULT</span> <span class="k">VALUES</span> <span class="o">|</span> <span class="k">VALUES</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[,</span> <span class="p">...]</span> <span class="o">|</span> <span class="n">query</span> <span class="p">}</span>
+    <span class="p">[</span> <span class="k">ON</span> <span class="n">CONFLICT</span> <span class="p">[</span> <span class="n">conflict_target</span> <span class="p">]</span> <span class="n">conflict_action</span> <span class="p">]</span>
+
+<span class="k">where</span> <span class="n">conflict_target</span> <span class="n">can</span> <span class="n">be</span> <span class="n">one</span> <span class="k">of</span><span class="p">:</span>
+
+    <span class="p">(</span> <span class="p">{</span> <span class="n">index_column_name</span> <span class="o">|</span> <span class="p">(</span> <span class="n">index_expression</span> <span class="p">)</span> <span class="p">}</span> <span class="p">[</span> <span class="k">COLLATE</span> <span class="k">collation</span> <span class="p">]</span> <span class="p">[</span> <span class="n">opclass</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[</span> <span class="k">WHERE</span> <span class="n">index_predicate</span> <span class="p">]</span>
+    <span class="k">ON</span> <span class="k">CONSTRAINT</span> <span class="k">constraint_name</span>
+
+<span class="k">and</span> <span class="n">conflict_action</span> <span class="k">is</span> <span class="n">one</span> <span class="k">of</span><span class="p">:</span>
+
+    <span class="k">DO</span> <span class="k">NOTHING</span>
+    <span class="k">DO</span> <span class="k">UPDATE</span> <span class="k">SET</span> <span class="p">{</span> <span class="k">column_name</span> <span class="o">=</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="o">|</span>
+                    <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">[</span> <span class="k">ROW</span> <span class="p">]</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">|</span>
+                    <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">sub</span><span class="o">-</span><span class="k">SELECT</span> <span class="p">)</span>
+                  <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span>
+              <span class="p">[</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="p">]</span></code></pre></figure>
+
+<p>Contoh yang paling umum adalah seperti berikut, misalnya saya mau insert data jika key sudah ada maka update value tersebut dengan perintah seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05b-dml-insert-on-conflict-update.sql"> </script>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">countries</span> <span class="k">as</span> <span class="n">newValue</span> <span class="p">(</span><span class="n">country_id</span><span class="p">,</span> <span class="n">country_name</span><span class="p">,</span> <span class="n">region_id</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">values</span> <span class="p">(</span><span class="s1">'ID'</span><span class="p">,</span> <span class="s1">'Republic Indonesia'</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">on</span> <span class="n">conflict</span> <span class="p">(</span><span class="n">country_id</span><span class="p">)</span> <span class="k">do</span> <span class="k">update</span> <span class="k">SET</span> <span class="n">country_name</span> <span class="o">=</span> <span class="n">excluded</span><span class="p">.</span><span class="n">country_name</span><span class="p">,</span>
+<span class="n">hr</span><span class="o">-#</span>                                       <span class="n">region_id</span>    <span class="o">=</span> <span class="n">excluded</span><span class="p">.</span><span class="n">region_id</span><span class="p">;</span>
+<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">countries</span> <span class="k">where</span> <span class="n">country_id</span> <span class="o">=</span> <span class="s1">'ID'</span><span class="p">;</span>
+ <span class="n">country_id</span> <span class="o">|</span>    <span class="n">country_name</span>    <span class="o">|</span> <span class="n">region_id</span> 
+<span class="c1">------------+--------------------+-----------</span>
+ <span class="n">ID</span>         <span class="o">|</span> <span class="n">Republic</span> <span class="n">Indonesia</span> <span class="o">|</span>         <span class="mi">3</span>
+<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Selain itu juga, misalnya ketika mau insert data jika key sudah ada maka jangan di update/insert dengan menggunakan perintah berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05b-dml-insert-on-conflict-nothing.sql"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">countries</span> <span class="k">as</span> <span class="n">newValue</span> <span class="p">(</span><span class="n">country_id</span><span class="p">,</span> <span class="n">country_name</span><span class="p">,</span> <span class="n">region_id</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">values</span> <span class="p">(</span><span class="s1">'ID'</span><span class="p">,</span> <span class="s1">'Indonesia'</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">on</span> <span class="n">conflict</span> <span class="p">(</span><span class="n">country_id</span><span class="p">)</span> <span class="k">do</span> <span class="k">nothing</span><span class="p">;</span>
+<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">0</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">countries</span> <span class="k">where</span> <span class="n">country_id</span> <span class="o">=</span> <span class="s1">'ID'</span><span class="p">;</span>
+ <span class="n">country_id</span> <span class="o">|</span>    <span class="n">country_name</span>    <span class="o">|</span> <span class="n">region_id</span> 
+<span class="c1">------------+--------------------+-----------</span>
+ <span class="n">ID</span>         <span class="o">|</span> <span class="n">Republic</span> <span class="n">Indonesia</span> <span class="o">|</span>         <span class="mi">3</span>
+<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="insert-with-overriding-keyword">Insert with <code class="language-plaintext highlighter-rouge">OVERRIDING</code> keyword</h2>
+
+<p>The optional <code class="language-plaintext highlighter-rouge">OVERRIDING</code> clause specifies an alternative action to replace default or initialize value defined on Data Definition (DML). Berikut adalah contoh syntaxnya:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">table_name</span> <span class="p">[</span> <span class="k">AS</span> <span class="k">alias</span> <span class="p">]</span> <span class="p">[</span> <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="k">OVERRIDING</span> <span class="p">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">USER</span> <span class="p">}</span> <span class="n">VALUE</span> <span class="p">]</span>
+    <span class="p">{</span> <span class="k">DEFAULT</span> <span class="k">VALUES</span> <span class="o">|</span> <span class="k">VALUES</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[,</span> <span class="p">...]</span> <span class="o">|</span> <span class="n">query</span> <span class="p">}</span></code></pre></figure>
+
+<p>Ada 2 clause pada <code class="language-plaintext highlighter-rouge">OVERRIDING</code> yaitu</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">OVERRIDING SYSTEM VALUE</code>, If this clause is specified, then any values supplied for identity columns will override the default sequence-generated values.</li>
+  <li><code class="language-plaintext highlighter-rouge">OVERRIDING USER VALUE</code>, If this clause is specified, then any values supplied for identity columns are ignored and the default sequence-generated values are applied.</li>
+</ol>
+
+<p>Karena disini kita belum punya workloadnya atau belum memiliki tabel dengan structure identity, jadi kita belum bisa praktekan tapi most commons <code class="language-plaintext highlighter-rouge">OVERRIDING</code> query digunakan untuk mengcopy data dari 1 tabel ke tabel lainnya dengan meng-replace value dari column yang menjadi primary key.</p>
+
+<p>Mungkin nanti kita akan praktekan di section selanjutnya yaitu Data Definition Language (DDL).</p>
+
+<h2 id="using-with-query-in-insert-statement">Using with query in INSERT statement</h2>
+
+<p>The WITH clause allows you to specify one or more subqueries that can be referenced by name in the INSERT query.</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">[</span> <span class="k">WITH</span> <span class="p">[</span> <span class="k">RECURSIVE</span> <span class="p">]</span> <span class="n">with_query</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
+    <span class="p">(</span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">from</span> <span class="p">...)</span>
+<span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">table_name</span> <span class="p">[</span> <span class="k">AS</span> <span class="k">alias</span> <span class="p">]</span> <span class="p">[</span> <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span>
+    <span class="p">{</span> <span class="k">DEFAULT</span> <span class="k">VALUES</span> <span class="o">|</span> <span class="k">VALUES</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[,</span> <span class="p">...]</span> <span class="o">|</span> <span class="n">query</span> <span class="p">}</span>
+    <span class="p">[</span> <span class="n">RETURNING</span> <span class="o">*</span> <span class="o">|</span> <span class="n">output_expression</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="n">output_name</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span></code></pre></figure>
+
+<p>It is possible for the query (<code class="language-plaintext highlighter-rouge">SELECT</code> statement) to also contain a WITH clause. In such a case both sets of <strong>with_query</strong> can be referenced within the query, but the second one takes precedence since it is more closely nested.</p>
+
+<p>Sebagai contoh misalnnya saya mau insert ke tabel <code class="language-plaintext highlighter-rouge">employees</code> beserta <code class="language-plaintext highlighter-rouge">job_history</code> sekaligus dengan structur table seperti berikut:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="err">\</span><span class="n">d</span> <span class="n">employees</span>
+                                            <span class="k">Table</span> <span class="nv">"public.employees"</span>
+     <span class="k">Column</span>     <span class="o">|</span>         <span class="k">Type</span>          <span class="o">|</span> <span class="k">Collation</span> <span class="o">|</span> <span class="k">Nullable</span> <span class="o">|</span>                    <span class="k">Default</span>
+<span class="c1">----------------+-----------------------+-----------+----------+------------------------------------------------</span>
+ <span class="n">employee_id</span>    <span class="o">|</span> <span class="nb">integer</span>               <span class="o">|</span>           <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="o">|</span> <span class="n">nextval</span><span class="p">(</span><span class="s1">'employees_employee_id_seq'</span><span class="p">::</span><span class="n">regclass</span><span class="p">)</span>
+ <span class="n">first_name</span>     <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">last_name</span>      <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="o">|</span>
+ <span class="n">email</span>          <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span> <span class="k">not</span> <span class="k">null</span> <span class="o">|</span>
+ <span class="n">phone_number</span>   <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">job_id</span>         <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">salary</span>         <span class="o">|</span> <span class="nb">numeric</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>          <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">commission_pct</span> <span class="o">|</span> <span class="nb">numeric</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>          <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">manager_id</span>     <span class="o">|</span> <span class="nb">integer</span>               <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">department_id</span>  <span class="o">|</span> <span class="nb">integer</span>               <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+<span class="n">Indexes</span><span class="p">:</span>
+    <span class="nv">"employees_pkey"</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span> <span class="n">btree</span> <span class="p">(</span><span class="n">employee_id</span><span class="p">)</span>
+<span class="n">Referenced</span> <span class="k">by</span><span class="p">:</span>
+    <span class="k">TABLE</span> <span class="nv">"departments"</span> <span class="k">CONSTRAINT</span> <span class="nv">"fk_departments_manager_id"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">manager_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">employees</span><span class="p">(</span><span class="n">employee_id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CASCADE</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span>
+    <span class="k">TABLE</span> <span class="nv">"employees"</span> <span class="k">CONSTRAINT</span> <span class="nv">"fk_employees_manager_id"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">manager_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">employees</span><span class="p">(</span><span class="n">employee_id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CASCADE</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="err">\</span><span class="n">d</span> <span class="n">job_history</span>
+                          <span class="k">Table</span> <span class="nv">"public.job_history"</span>
+    <span class="k">Column</span>     <span class="o">|</span>            <span class="k">Type</span>             <span class="o">|</span> <span class="k">Collation</span> <span class="o">|</span> <span class="k">Nullable</span> <span class="o">|</span> <span class="k">Default</span>
+<span class="c1">---------------+-----------------------------+-----------+----------+---------</span>
+ <span class="n">employee_id</span>   <span class="o">|</span> <span class="nb">integer</span>                     <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">start_date</span>    <span class="o">|</span> <span class="nb">timestamp</span> <span class="k">without</span> <span class="nb">time</span> <span class="k">zone</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">end_date</span>      <span class="o">|</span> <span class="nb">timestamp</span> <span class="k">without</span> <span class="nb">time</span> <span class="k">zone</span> <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">job_id</span>        <span class="o">|</span> <span class="nb">character</span> <span class="nb">varying</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>       <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+ <span class="n">department_id</span> <span class="o">|</span> <span class="nb">integer</span>                     <span class="o">|</span>           <span class="o">|</span>          <span class="o">|</span>
+<span class="k">Foreign</span><span class="o">-</span><span class="k">key</span> <span class="k">constraints</span><span class="p">:</span>
+    <span class="nv">"fk_job_history_department_id"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">department_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">departments</span><span class="p">(</span><span class="n">department_id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CASCADE</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span>
+    <span class="nv">"fk_job_history_job_id"</span> <span class="k">FOREIGN</span> <span class="k">KEY</span> <span class="p">(</span><span class="n">job_id</span><span class="p">)</span> <span class="k">REFERENCES</span> <span class="n">jobs</span><span class="p">(</span><span class="n">job_id</span><span class="p">)</span> <span class="k">ON</span> <span class="k">UPDATE</span> <span class="k">CASCADE</span> <span class="k">ON</span> <span class="k">DELETE</span> <span class="k">CASCADE</span>
+</code></pre></div></div>
+
+<p>Karena <code class="language-plaintext highlighter-rouge">employee_id</code> by default digenerate oleh object sequance jadi kita perlu ambil dulu sequancenya kemudian kita masukan value hasil generate tersebut ke column <code class="language-plaintext highlighter-rouge">employee_id</code> pada tabel <code class="language-plaintext highlighter-rouge">job_history</code> berikut adalah implementasi querynya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05b-nested-insert-with-query.sql"> </script>
+
+<p>Maka jika dijalankan hasilnya seperti berikut</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">with</span> <span class="n">insert_emp</span> <span class="k">as</span> <span class="p">(</span>
+<span class="n">hr</span><span class="p">(</span><span class="o">#</span>     <span class="k">insert</span> <span class="k">into</span> <span class="n">employees</span> <span class="p">(</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">email</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">salary</span><span class="p">,</span> <span class="n">manager_id</span><span class="p">,</span> <span class="n">department_id</span><span class="p">)</span>
+<span class="n">hr</span><span class="p">(</span><span class="o">#</span>         <span class="k">VALUES</span> <span class="p">(</span><span class="n">initcap</span><span class="p">(</span><span class="s1">'Dimas'</span><span class="p">),</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'Maryanto'</span><span class="p">),</span> <span class="k">upper</span><span class="p">(</span><span class="s1">'dimas'</span><span class="p">),</span> <span class="s1">'IT_PROG'</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+<span class="n">hr</span><span class="p">(</span><span class="o">#</span>         <span class="n">RETURNING</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">department_id</span>
+<span class="n">hr</span><span class="p">(</span><span class="o">#</span> <span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">job_history</span> <span class="p">(</span><span class="n">employee_id</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">department_id</span><span class="p">)</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">select</span> <span class="n">employee_id</span><span class="p">,</span> <span class="n">now</span><span class="p">(),</span> <span class="n">job_id</span><span class="p">,</span> <span class="n">department_id</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">from</span> <span class="n">insert_emp</span><span class="p">;</span>
+<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="n">emp</span><span class="p">.</span><span class="n">employee_id</span><span class="p">,</span> <span class="n">emp</span><span class="p">.</span><span class="n">first_name</span><span class="p">,</span> <span class="n">emp</span><span class="p">.</span><span class="n">salary</span><span class="p">,</span> <span class="n">h</span><span class="p">.</span><span class="n">start_date</span><span class="p">,</span> <span class="n">h</span><span class="p">.</span><span class="n">department_id</span><span class="p">,</span> <span class="n">h</span><span class="p">.</span><span class="n">job_id</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">from</span> <span class="n">employees</span> <span class="n">emp</span>
+<span class="n">hr</span><span class="o">-#</span>          <span class="k">join</span> <span class="n">job_history</span> <span class="n">h</span> <span class="k">on</span> <span class="n">emp</span><span class="p">.</span><span class="n">employee_id</span> <span class="o">=</span> <span class="n">h</span><span class="p">.</span><span class="n">employee_id</span>
+<span class="n">hr</span><span class="o">-#</span> <span class="k">where</span> <span class="n">email</span> <span class="o">=</span> <span class="k">upper</span><span class="p">(</span><span class="s1">'dimas'</span><span class="p">);</span>
+ <span class="n">employee_id</span> <span class="o">|</span> <span class="n">first_name</span> <span class="o">|</span> <span class="n">salary</span>  <span class="o">|</span>         <span class="n">start_date</span>         <span class="o">|</span> <span class="n">department_id</span> <span class="o">|</span> <span class="n">job_id</span>
+<span class="c1">-------------+------------+---------+----------------------------+---------------+---------</span>
+           <span class="mi">2</span> <span class="o">|</span> <span class="n">Dimas</span>      <span class="o">|</span> <span class="mi">5000</span><span class="p">.</span><span class="mi">00</span> <span class="o">|</span> <span class="mi">2022</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">04</span> <span class="mi">03</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">42</span><span class="p">.</span><span class="mi">894234</span> <span class="o">|</span>            <span class="mi">90</span> <span class="o">|</span> <span class="n">IT_PROG</span>
+</code></pre></div></div>
+
+<h2 id="error-message-on-insert-statement">Error message on insert statement</h2>
+
+<p>Jika temen-temen praktekan materi sebelumnya it’s just works, but tidak selamanya pasti berhasil kadangkala kita akan menghadapi error yang sebetulnya di bagi jadi 3 yaitu syntax, semantic, dan logic tapi kita kali ini tidak akan membahas secara detail terkait itu tetapi kita memfokuskan beberapa kesalahan yang sering terjadi pada saat kita menggunakan Insert statement.</p>
+
+<p>Beberapa kesalahan yang sering terjadi bagi temen-temen yang masih pemula yaitu biasanya adalah typo, invalid syntax dan missing keyword. Terlepas dari itu ada juga kesalah yang secara syntax sudah betul tetapi begitu di execute erorr ini bisanya kita sebut runtime exception/error seperti</p>
+
+<ol>
+  <li>
+    <p>Duplicate constraint/key, contohnya duplicate primary key seperti berikut</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">hr</span><span class="o">=#</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">regions</span><span class="p">(</span><span class="n">region_id</span><span class="p">,</span> <span class="n">region_name</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Other'</span><span class="p">);</span>
+ <span class="n">ERROR</span><span class="p">:</span>  <span class="n">duplicate</span> <span class="k">key</span> <span class="n">value</span> <span class="n">violates</span> <span class="k">unique</span> <span class="k">constraint</span> <span class="nv">"regions_pkey"</span>
+ <span class="n">DETAIL</span><span class="p">:</span>  <span class="k">Key</span> <span class="p">(</span><span class="n">region_id</span><span class="p">)</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">already</span> <span class="k">exists</span><span class="p">.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Error validation, contohnya pada struktur table tidak boleh null tpi kita input null seperti berikut:</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">hr</span><span class="o">=#</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">employees</span> <span class="p">(</span><span class="n">first_name</span><span class="p">)</span> <span class="k">values</span> <span class="p">(</span><span class="s1">'Dimas Maryanto'</span><span class="p">);</span>
+ <span class="n">ERROR</span><span class="p">:</span>  <span class="k">null</span> <span class="n">value</span> <span class="k">in</span> <span class="k">column</span> <span class="nv">"last_name"</span> <span class="k">of</span> <span class="n">relation</span> <span class="nv">"employees"</span> <span class="n">violates</span> <span class="k">not</span><span class="o">-</span><span class="k">null</span> <span class="k">constraint</span>
+ <span class="n">DETAIL</span><span class="p">:</span>  <span class="n">Failing</span> <span class="k">row</span> <span class="k">contains</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Dimas</span> <span class="n">Maryanto</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">,</span> <span class="k">null</span><span class="p">).</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Refference value does’t match with foreign-key, contohnya kita ke tabel <code class="language-plaintext highlighter-rouge">employees</code> pada column <code class="language-plaintext highlighter-rouge">job_id</code> yang nilainya belum di definisikan pada table <code class="language-plaintext highlighter-rouge">jobs</code> seperti berikut:</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">hr</span><span class="o">=#</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">employees</span> <span class="p">(</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">job_id</span><span class="p">)</span>
+ <span class="n">hr</span><span class="o">-#</span> <span class="k">values</span> <span class="p">(</span><span class="s1">'YUSUF'</span><span class="p">,</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'Muhamad'</span><span class="p">),</span> <span class="n">initcap</span><span class="p">(</span><span class="s1">'yusuf'</span><span class="p">),</span> <span class="s1">'IT'</span><span class="p">);</span>
+ <span class="n">ERROR</span><span class="p">:</span>  <span class="k">insert</span> <span class="k">or</span> <span class="k">update</span> <span class="k">on</span> <span class="k">table</span> <span class="nv">"employees"</span> <span class="n">violates</span> <span class="k">foreign</span> <span class="k">key</span> <span class="k">constraint</span> <span class="nv">"fk_employees_job_id"</span>
+ <span class="n">DETAIL</span><span class="p">:</span>  <span class="k">Key</span> <span class="p">(</span><span class="n">job_id</span><span class="p">)</span><span class="o">=</span><span class="p">(</span><span class="n">IT</span><span class="p">)</span> <span class="k">is</span> <span class="k">not</span> <span class="n">present</span> <span class="k">in</span> <span class="k">table</span> <span class="nv">"jobs"</span><span class="p">.</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>Invalid data type, contohnya column spec menggunakan date tetapi yang kita input tidak sesuai seperti berikut:</p>
+
+    <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">ERROR</span><span class="p">:</span>  <span class="nb">date</span><span class="o">/</span><span class="nb">time</span> <span class="n">field</span> <span class="n">value</span> <span class="k">out</span> <span class="k">of</span> <span class="k">range</span><span class="p">:</span> <span class="nv">"2020/28/10"</span>
+ <span class="n">LINE</span> <span class="mi">2</span><span class="p">:</span> <span class="k">values</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="s1">'2020/28/10'</span><span class="p">,</span> <span class="s1">'IT_PROG'</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+                     <span class="o">^</span>
+ <span class="n">HINT</span><span class="p">:</span>  <span class="n">Perhaps</span> <span class="n">you</span> <span class="n">need</span> <span class="n">a</span> <span class="n">different</span> <span class="nv">"datestyle"</span> <span class="n">setting</span><span class="p">.</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Selain itu juga masih ada beberapa failure yang terjadi karena factor external seperti service postgresql mati, server mati, network unreachable dan lain-lain.</p>
+
+<p>Ok begitulah kurang lebih ya beberapa kesalahan/error/failure yang mengebabkan data yang kita input tidak dapat di simpan pada Database PostgreSQL yang perlu temen-temen perhatikan adalah bagaimana cara troubleshoot dan handling error tersebut menggunakan beberapa strategi.</p>
+
+<p>Untuk strategi tersebut nanti kita akan bahas di materi server administration.</p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/01-silabus-psql"  class="" title="Silabus - PostgreSQL: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/dml/05a-cud-statement" class="" 
+        title="Basic Create, Update, Delete statement
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 31 to 38
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/dml/05c-dml-update" class="" 
+        title="Deep dive into UPDATE Statement
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"  class="" title="Getting started with Transaction Control (TCL)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#dml" class="page__taxonomy-item p-category" rel="tag">DML</a><span class="sep">, </span>
+    
+      <a href="/categories/#postgresql" class="page__taxonomy-item p-category" rel="tag">PostgreSQL</a><span class="sep">, </span>
+    
+      <a href="/categories/#rdbms" class="page__taxonomy-item p-category" rel="tag">RDBMS</a><span class="sep">, </span>
+    
+      <a href="/categories/#sql" class="page__taxonomy-item p-category" rel="tag">SQL</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-09-04T11:38:35+07:00">September 4, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Deep+dive+into+INSERT+Statement%20%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fdml%2F05b-dml-insert" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fdml%2F05b-dml-insert" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Frdbms%2Fpostgresql%2Fsql%2Fdml%2F05b-dml-insert" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

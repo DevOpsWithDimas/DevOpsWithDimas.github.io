@@ -1,0 +1,1678 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Configure liveness, readiness, and startup probes - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas lebih detail tentang Container probe diantaranya Liveness, Readiness and Startup Probes dalam suatu Pod Specification. Diantaranya:     What the different between liveness, readiness and startup probe?   When should you use container probe?   Container probes of fields   Configure liveness probe in a Pod   Configure readiness probe in a Pod   Configure startup probe in a Pod   Ok langsung aja kita bahas materi yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Configure liveness, readiness, and startup probes">
+<meta property="og:url" content="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas lebih detail tentang Container probe diantaranya Liveness, Readiness and Startup Probes dalam suatu Pod Specification. Diantaranya:     What the different between liveness, readiness and startup probe?   When should you use container probe?   Container probes of fields   Configure liveness probe in a Pod   Configure readiness probe in a Pod   Configure startup probe in a Pod   Ok langsung aja kita bahas materi yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2022-06-19T16:26:26+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#what-the-different-between-liveness-readiness-and-startup-probe">What the different between liveness, readiness and startup probe?</a></li><li><a href="#when-should-you-use-container-probe">When should you use container probe?</a></li><li><a href="#container-probes-of-fields">Container probes of fields</a></li><li><a href="#configure-liveness-command-in-a-pod">Configure liveness command in a Pod</a></li><li><a href="#configure-liveness-http-in-a-pod">Configure liveness HTTP in a Pod</a></li><li><a href="#configure-tcp-liveness-in-a-pod">Configure TCP liveness in a Pod</a></li><li><a href="#configure-grpc-liveness-in-a-pod">Configure grpc liveness in a Pod</a></li><li><a href="#configure-readiness-probes">Configure readiness probes</a></li><li><a href="#protect-slow-starting-container-with-startup-probe">Protect slow starting container with startup probe</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Configure liveness, readiness, and startup probes">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas lebih detail tentang Container probe diantaranya Liveness, Readiness and Startup Probes dalam suatu Pod Specification. Diantaranya:  What the different between liveness, readiness and startup probe?  When should you use container probe?  Container probes of fields  Configure liveness probe in a Pod  Configure readiness probe in a Pod  Configure startup probe in a PodOk langsung aja kita bahas materi yang pertama">
+    <meta itemprop="datePublished" content="2022-06-19T16:26:26+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config" class="u-url" itemprop="url">Configure liveness, readiness, and startup probes
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-06-19T16:26:26+07:00">June 19, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        14 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Kubernetes">
+        <label class="acordion-item-label" for="content-Pengenalan Kubernetes">
+            Pengenalan Kubernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01-silabus">
+                        
+                        Silabus - DevOps Kubernetes...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes">
+                        
+                        What is Kubernetes (k8s) ?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01b-k8s-components">
+                        
+                        Kubernetes Components
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01c-k8s-api">
+                        
+                        The Kubernetes API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01d-k8s-objects">
+                        
+                        What is Kubernetes Objects?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01e-k8s-object-management">
+                        
+                        Managing Kubernetes Object
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids">
+                        
+                        Kubernetes Object Names and...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01g-k8s-namespaces">
+                        
+                        What is Kubernetes Namespaces?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments">
+                        
+                        Kubernetes cluster environt...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Getting started with minikube">
+        <label class="acordion-item-label" for="content-Getting started with minikube">
+            Getting started with minikube
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02-overview-learn-env">
+                        
+                        Overview learning environme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos">
+                        
+                        Install minikube on Mac (In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon">
+                        
+                        Install minikube on Mac (Ap...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows">
+                        
+                        Install minikube for Window...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux">
+                        
+                        Install minikube for Linux ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02b-deploy-application">
+                        
+                        Deploying an apps/services ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02c-minikube-basic-control">
+                        
+                        Minikube basic control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images">
+                        
+                        Using your own image into M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02f-minikube-addons">
+                        
+                        Minikube addons features
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps">
+                        
+                        Access your apps/service in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/02h-minikube-mount">
+                        
+                        Mounting filesystems to min...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pods and Containers">
+        <label class="acordion-item-label" for="content-Pods and Containers">
+            Pods and Containers
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers">
+                        
+                        Overview Pod and Container ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03a-workload-pods">
+                        
+                        Kubernetes Workloads with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods">
+                        
+                        Working with Pods
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config">
+                        
+                        Basic Pods and Containers C...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle">
+                        
+                        Pod & Container Lifecycle
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers">
+                        
+                        Initialization of Containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config">
+                        
+                        Configure env (Environment ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit">
+                        
+                        Configure Request and Limit...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Configure liveness, readine...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions">
+                        
+                        Pod Disruptions
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases">
+                        
+                        Overview Study Cases: Pod a...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps">
+                        
+                        Study Cases: Monolith apps ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps">
+                        
+                        Study cases: Microservice a...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Workload resources">
+        <label class="acordion-item-label" for="content-Workload resources">
+            Workload resources
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources">
+                        
+                        Overview Kubernetes Workloa...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload">
+                        
+                        What is Workload Resources?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment">
+                        
+                        Working with Deployment object
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking (service)">
+        <label class="acordion-item-label" for="content-Networking (service)">
+            Networking (service)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Store data using Volumes">
+        <label class="acordion-item-label" for="content-Store data using Volumes">
+            Store data using Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Client">
+        <label class="acordion-item-label" for="content-Kubernetes Client">
+            Kubernetes Client
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Security RBAC">
+        <label class="acordion-item-label" for="content-Security RBAC">
+            Security RBAC
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes Package manager">
+        <label class="acordion-item-label" for="content-Kubernetes Package manager">
+            Kubernetes Package manager
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes cluster for Production grade">
+        <label class="acordion-item-label" for="content-Kubernetes cluster for Production grade">
+            Kubernetes cluster for Production grade
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Service mesh with istio">
+        <label class="acordion-item-label" for="content-Service mesh with istio">
+            Service mesh with istio
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Kubernetes on Cloud provider">
+        <label class="acordion-item-label" for="content-Kubernetes on Cloud provider">
+            Kubernetes on Cloud provider
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas lebih detail tentang Container probe diantaranya Liveness, Readiness and Startup Probes dalam suatu Pod Specification. Diantaranya:</p>
+
+<ol>
+  <li>What the different between liveness, readiness and startup probe?</li>
+  <li>When should you use container probe?</li>
+  <li>Container probes of fields</li>
+  <li>Configure liveness probe in a Pod</li>
+  <li>Configure readiness probe in a Pod</li>
+  <li>Configure startup probe in a Pod</li>
+</ol>
+
+<p>Ok langsung aja kita bahas materi yang pertama</p>
+
+<!--more-->
+
+<h2 id="what-the-different-between-liveness-readiness-and-startup-probe">What the different between liveness, readiness and startup probe?</h2>
+
+<p>Sebelum kita menggunakan atau men-configure container probe untuk liveness, readiness dan startup kita bahas dulu perbedaannya ya. Ok kita mulai bahas satu-per-satu mulai dari yang paling umum digunakan yaitu liveness probe.</p>
+
+<p>The kubelet uses liveness probes to know when to restart a container. For example, liveness probes could catch a deadlock, where an application is running, but unable to make progress. Restarting a container in such a state can help to make the application more available despite bugs.</p>
+
+<p>The kubelet uses readiness probes to know when a container is ready to start accepting traffic. A Pod is considered ready when all of its containers are ready. One use of this signal is to control which Pods are used as backends for Services. When a Pod is not ready, it is removed from Service load balancers.</p>
+
+<p>The kubelet uses startup probes to know when a container application has started. If such a probe is configured, it disables liveness and readiness checks until it succeeds, making sure those probes don’t interfere with the application startup. This can be used to adopt liveness checks on slow starting containers, avoiding them getting killed by the kubelet before they are up and running.</p>
+
+<p>Untuk lebih memahami berikut adalah diagram timeline state managementnya:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+gantt
+    title Container Probe state managements
+    dateFormat HH:mm
+    axisFormat %H:%m
+    section Startup Probe
+    Container creating          :active,    containerCreate,    12:00,                      1s
+    Container starting          :           containerStart,     after containerCreate,      2s
+    Startup probe               :           startupTry1,        after containerStart,       10s
+    Container started           :done,      containerStarted,   after startupTry1,          3s
+    section Readiness Probe
+    Check container is ready?   :           checkReady,         after containerStarted,     2s
+    Container Ready             :done,      containerReady,     after checkReady,           10s
+    section Liveness Probe
+    Check container is live?    :           checkLive,          after containerReady,       2s
+    Container Running           :           containerRun,       after checkLive,            10s
+    Container Healty            :done,      containerHealty,    after containerRun,         2s
+</div>
+
+<h2 id="when-should-you-use-container-probe">When should you use container probe?</h2>
+
+<p>Nah ini juga bagian penting dari section sebelumnya, kapansih kita harus menggunakan container probes khususnya untuk Liveness, Readiness dan Startup Probe. Yukk kita bahas satu-per-satu, mulai dari <strong>Liveness Probe</strong>:</p>
+
+<p>If the process in your container is able to crash on its own whenever it encounters an issue or becomes unhealthy, you do not necessarily need a liveness probe; the kubelet will automatically perform the correct action in accordance with the Pod’s <code class="language-plaintext highlighter-rouge">restartPolicy</code>.</p>
+
+<p>If you’d like your container to be killed and restarted if a probe fails, then specify a liveness probe, and specify a <code class="language-plaintext highlighter-rouge">restartPolicy</code> of <code class="language-plaintext highlighter-rouge">Always</code> or <code class="language-plaintext highlighter-rouge">OnFailure</code>.</p>
+
+<p>Kemudian kita bahas <strong>Readiness Probe</strong>:</p>
+
+<p>If you’d like to start sending traffic to a Pod only when a probe succeeds, specify a readiness probe. In this case, the readiness probe might be the same as the liveness probe, but the existence of the readiness probe in the spec means that the Pod will start without receiving any traffic and only start receiving traffic after the probe starts succeeding.</p>
+
+<p>If you want your container to be able to take itself down for maintenance, you can specify a readiness probe that checks an endpoint specific to readiness that is different from the liveness probe.</p>
+
+<p>If your app has a strict dependency on back-end services, you can implement both a liveness and a readiness probe. The liveness probe passes when the app itself is healthy, but the readiness probe additionally checks that each required back-end service is available. This helps you avoid directing traffic to Pods that can only respond with error messages.</p>
+
+<p>Dan finally yang terakhir yaitu <strong>Startup Probe</strong>:</p>
+
+<p>Startup probes are useful for Pods that have containers that take a long time to come into service. Rather than set a long liveness interval, you can configure a separate configuration for probing the container as it starts up, allowing a time longer than the liveness interval would allow.</p>
+
+<p>If your container usually starts in more than <code class="language-plaintext highlighter-rouge">initialDelaySeconds + failureThreshold × periodSeconds</code>, you should specify a startup probe that checks the same endpoint as the liveness probe. The default for <code class="language-plaintext highlighter-rouge">periodSeconds</code> is <code class="language-plaintext highlighter-rouge">10s</code>. You should then set its <code class="language-plaintext highlighter-rouge">failureThreshold</code> high enough to allow the container to start, without changing the default values of the liveness probe. This helps to protect against deadlocks.</p>
+
+<h2 id="container-probes-of-fields">Container probes of fields</h2>
+
+<p><strong>Probes</strong> have a number of fields that you can use to more precisely control the behavior of liveness and readiness checks:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">initialDelaySeconds</code>: Number of seconds after the container has started before liveness or readiness probes are initiated. Defaults to <code class="language-plaintext highlighter-rouge">0 seconds</code>. Minimum value is <code class="language-plaintext highlighter-rouge">0</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">periodSeconds</code>: How often (in seconds) to perform the probe. Default to <code class="language-plaintext highlighter-rouge">10 seconds</code>. Minimum value is <code class="language-plaintext highlighter-rouge">1</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">timeoutSeconds</code>: Number of seconds after which the probe times out. Defaults to <code class="language-plaintext highlighter-rouge">1 second</code>. Minimum value is <code class="language-plaintext highlighter-rouge">1</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">successThreshold</code>: Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to <code class="language-plaintext highlighter-rouge">1</code>. Must be <code class="language-plaintext highlighter-rouge">1</code> for liveness and startup Probes. Minimum value is <code class="language-plaintext highlighter-rouge">1</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">failureThreshold</code>: When a probe fails, Kubernetes will try failureThreshold times before giving up. Giving up in case of liveness probe means restarting the container. In case of readiness probe the Pod will be marked Unready. Defaults to <code class="language-plaintext highlighter-rouge">3</code>. Minimum value is <code class="language-plaintext highlighter-rouge">1</code>.</li>
+</ol>
+
+<p><strong>HTTP probes</strong> have additional fields that can be set on <code class="language-plaintext highlighter-rouge">httpGet</code>:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">host</code>: Host name to connect to, defaults to the pod IP. You probably want to set “Host” in httpHeaders instead.</li>
+  <li><code class="language-plaintext highlighter-rouge">scheme</code>: Scheme to use for connecting to the host (HTTP or HTTPS). Defaults to HTTP.</li>
+  <li><code class="language-plaintext highlighter-rouge">path</code>: Path to access on the HTTP server. Defaults to <code class="language-plaintext highlighter-rouge">/</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">httpHeaders</code>: Custom headers to set in the request. HTTP allows repeated headers.</li>
+  <li><code class="language-plaintext highlighter-rouge">port</code>: Name or number of the port to access on the container. Number must be in the range <code class="language-plaintext highlighter-rouge">1 to 65535</code>.</li>
+</ol>
+
+<p>For a <strong>TCP probe</strong>, the kubelet makes the probe connection at the node, not in the pod, which means that you can not use a service name in the host parameter since the kubelet is unable to resolve it.</p>
+
+<h2 id="configure-liveness-command-in-a-pod">Configure liveness command in a Pod</h2>
+
+<p>Many applications running for long periods of time eventually transition to broken states, and cannot recover except by being restarted. Kubernetes provides liveness probes to detect and remedy such situations.</p>
+
+<p>Contoh sederhannya seperti, misalnya kita menjalankan program yang sifatnya running di background / service. Untuk mendeteksi program tersebut tetap berjalan kita bisa check menggunakan output yang di keluarkan oleh program tersebut seperti log file dan lain-lain. Jadi klo kita coba buat configurasinya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03h-pod-probe-liveness-command.yaml"> </script>
+
+<p>In the configuration file, you can see that the Pod has a single Container. The <code class="language-plaintext highlighter-rouge">periodSeconds</code> field specifies that the kubelet should perform a liveness probe every <code class="language-plaintext highlighter-rouge">5 seconds</code>. The <code class="language-plaintext highlighter-rouge">initialDelaySeconds</code> field tells the kubelet that it should wait <code class="language-plaintext highlighter-rouge">5 seconds</code> before performing the first probe. To perform a probe, the kubelet executes the command cat <code class="language-plaintext highlighter-rouge">/tmp/healthy</code> in the target container. If the command succeeds, it <code class="language-plaintext highlighter-rouge">returns 0</code>, and the kubelet considers the container to be alive and healthy. If the command returns a <code class="language-plaintext highlighter-rouge">non-zero value</code>, the kubelet kills the container and restarts it.</p>
+
+<p>When the container starts, it executes this command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/bin/sh <span class="nt">-c</span> <span class="s2">"touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600"</span></code></pre></figure>
+
+<p>Jika di jalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>» kubectl apply <span class="nt">-f</span> 02-workloads/01-pod/pod-probe-liveness-command.yaml 
+pod/pod-probe-liveness-command created
+
+» kubectl get pod
+NAME                         READY   STATUS    RESTARTS   AGE
+pod-probe-liveness-command   1/1     Running   0          19s
+
+» kubectl describe pod pod-probe-liveness-command                     
+Events:
+  Type    Reason     Age   From               Message
+  <span class="nt">----</span>    <span class="nt">------</span>     <span class="nt">----</span>  <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal  Scheduled  12s   default-scheduler  Successfully assigned default/pod-probe-liveness-command to latihan
+  Normal  Pulling    12s   kubelet            Pulling image <span class="s2">"k8s.gcr.io/busybox"</span>
+  Normal  Pulled     11s   kubelet            Successfully pulled image <span class="s2">"k8s.gcr.io/busybox"</span> <span class="k">in </span>986.394876ms
+  Normal  Created    10s   kubelet            Created container pod-probe-liveness-command
+  Normal  Started    10s   kubelet            Started container pod-probe-liveness-command
+
+<span class="c">## wait 30s then exeucute again, then see the container restated because failed container probe</span>
+» kubectl describe pod pod-probe-liveness-command
+Events:
+  Type     Reason     Age                From               Message
+  <span class="nt">----</span>     <span class="nt">------</span>     <span class="nt">----</span>               <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal   Scheduled  74s                default-scheduler  Successfully assigned default/pod-probe-liveness-command to latihan
+  Normal   Pulling    74s                kubelet            Pulling image <span class="s2">"k8s.gcr.io/busybox"</span>
+  Normal   Pulled     73s                kubelet            Successfully pulled image <span class="s2">"k8s.gcr.io/busybox"</span> <span class="k">in </span>986.394876ms
+  Normal   Created    72s                kubelet            Created container pod-probe-liveness-command
+  Normal   Started    72s                kubelet            Started container pod-probe-liveness-command
+  Warning  Unhealthy  29s <span class="o">(</span>x3 over 39s<span class="o">)</span>  kubelet            Liveness probe failed: <span class="nb">cat</span>: cant open <span class="s1">'/tmp/healthy'</span>: No such file or directory
+  Normal   Killing    29s                kubelet            Container pod-probe-liveness-command failed liveness probe, will be restarted
+
+» kubectl get pod
+NAME                         READY   STATUS    RESTARTS   AGE
+pod-probe-liveness-command   1/1     Running   1          30s
+</code></pre></div></div>
+
+<h2 id="configure-liveness-http-in-a-pod">Configure liveness HTTP in a Pod</h2>
+
+<p>Another kind of liveness probe uses an HTTP GET request. Untuk menggunakan liveness probe HTTP GET request ini bisa menggunakan 2 cara yaitu number of port and named port. Karena pembahasan menggunakan number of port sudah kita bahas di materi sebelumnya jadi kita bahas menggunakan Named Port ya. Berikut adalah sample configurationnya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03h-pod-probe-liveness-http-named-port.yaml"> </script>
+
+<p>In the configuration file, you can see that the Pod has a single container. The <code class="language-plaintext highlighter-rouge">periodSeconds</code> field specifies that the kubelet should perform a liveness probe every <code class="language-plaintext highlighter-rouge">5 seconds</code>. The <code class="language-plaintext highlighter-rouge">initialDelaySeconds</code> field tells the kubelet that it should wait <code class="language-plaintext highlighter-rouge">5 seconds</code> before performing the first probe. To perform a probe, the kubelet sends an HTTP GET request to the server that is running in the container and listening on <code class="language-plaintext highlighter-rouge">port 80</code>. If the handler for the server’s <code class="language-plaintext highlighter-rouge">/status</code> path returns a success code, the kubelet considers the container to be alive and healthy. If the handler returns a failure code, the kubelet kills the container and restarts it.</p>
+
+<p>Any code greater than or equal to <code class="language-plaintext highlighter-rouge">200</code> and less than <code class="language-plaintext highlighter-rouge">400</code> indicates success. Any other code indicates failure.</p>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>» kubectl apply <span class="nt">-f</span> 02-workloads/01-pod/pod-probe-liveness-http-named-port.yaml 
+pod/pod-probe-liveness-http-named-port created
+
+» kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+pod-probe-liveness-http-named-port   1/1     Running   0          6s
+
+» kubectl describe pod pod-probe-liveness-http-named-port
+Events:
+  Type     Reason     Age               From               Message
+  <span class="nt">----</span>     <span class="nt">------</span>     <span class="nt">----</span>              <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal   Scheduled  22s               default-scheduler  Successfully assigned default/pod-probe-liveness-http-named-port to latihan
+  Normal   Pulled     17s               kubelet            Successfully pulled image <span class="s2">"nginx"</span> <span class="k">in </span>3.177382341s
+  Normal   Created    17s               kubelet            Created container pod-probe-liveness-http-named-port
+  Normal   Started    17s               kubelet            Started container pod-probe-liveness-http-named-port
+  Normal   Pulling    2s <span class="o">(</span>x2 over 21s<span class="o">)</span>  kubelet            Pulling image <span class="s2">"nginx"</span>
+  Warning  Unhealthy  2s <span class="o">(</span>x3 over 12s<span class="o">)</span>  kubelet            Liveness probe failed: HTTP probe failed with statuscode: 404
+  Normal   Killing    2s                kubelet            Container pod-probe-liveness-http-named-port failed liveness probe, will be restarted
+
+» kubectl get pod
+NAME                                 READY   STATUS    RESTARTS   AGE
+pod-probe-liveness-http-named-port   1/1     Running   1          25s
+</code></pre></div></div>
+
+<h2 id="configure-tcp-liveness-in-a-pod">Configure TCP liveness in a Pod</h2>
+
+<p>A third type of liveness probe uses a TCP socket. With this configuration, the kubelet will attempt to open a socket to your container on the specified port. If it can establish a connection, the container is considered healthy, if it can’t it is considered a failure.</p>
+
+<p>Berikut adalah sample configurationnya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03h-pod-probe-liveness-tcp.yaml"> </script>
+
+<p>As you can see, configuration for a TCP check is quite similar to an HTTP check. The kubelet will send the first readiness probe <code class="language-plaintext highlighter-rouge">5 seconds</code> after the container starts. This will attempt to connect to the nginx container on port <code class="language-plaintext highlighter-rouge">8080</code>. If the probe succeeds, the Pod will be marked as ready. The kubelet will continue to run this check every <code class="language-plaintext highlighter-rouge">10 seconds</code>.</p>
+
+<p>Jika kita coba jalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>» kubectl apply <span class="nt">-f</span> 02-workloads/01-pod/pod-probe-liveness-tcp.yaml 
+pod/pod-probe-liveness-tcp created
+
+» kubectl get pod
+NAME                     READY   STATUS    RESTARTS   AGE
+pod-probe-liveness-tcp   1/1     Running   0          7s
+
+» kubectl describe pod pod pod-probe-liveness-tcp
+Events:
+  Type     Reason     Age   From               Message
+  <span class="nt">----</span>     <span class="nt">------</span>     <span class="nt">----</span>  <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal   Scheduled  22s   default-scheduler  Successfully assigned default/pod-probe-liveness-tcp to latihan
+  Normal   Pulling    21s   kubelet            Pulling image <span class="s2">"nginx"</span>
+  Normal   Pulled     17s   kubelet            Successfully pulled image <span class="s2">"nginx"</span> <span class="k">in </span>3.868622684s
+  Normal   Created    17s   kubelet            Created container pod-probe-liveness-tcp
+  Normal   Started    17s   kubelet            Started container pod-probe-liveness-tcp
+  Warning  Unhealthy  2s    kubelet            Liveness probe failed: dial tcp 172.17.0.3:8080: connect: connection refused
+Error from server <span class="o">(</span>NotFound<span class="o">)</span>: pods <span class="s2">"pod"</span> not found
+
+» kubectl get pod
+NAME                     READY   STATUS    RESTARTS      AGE
+pod-probe-liveness-tcp   1/1     Running   1 <span class="o">(</span>40s ago<span class="o">)</span>   80s
+</code></pre></div></div>
+
+<h2 id="configure-grpc-liveness-in-a-pod">Configure grpc liveness in a Pod</h2>
+
+<p>If your application implements <a href="https://github.com/grpc/grpc/blob/master/doc/health-checking.md">gRPC Health Checking Protocol</a>, kubelet can be configured to use it for application liveness checks. You must enable the <code class="language-plaintext highlighter-rouge">GRPCContainerProbe</code> <a href="https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/">feature gate</a> in order to configure checks that rely on gRPC.</p>
+
+<p>Karena kami belum punya workload untuk menggunakan gRPC ini, jika menggunakan temen-temen boleh checkout di <a href="https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-a-grpc-liveness-probe">dokumentasi resminya</a> ya</p>
+
+<p>Jadi kita skip aja ya untuk liveness menggunakan gRPC ini.</p>
+
+<h2 id="configure-readiness-probes">Configure readiness probes</h2>
+
+<p>Sometimes, applications are temporarily unable to serve traffic. For example, an application might need to load large data or configuration files during startup, or depend on external services after startup. In such cases, you don’t want to kill the application, but you don’t want to send it requests either. Kubernetes provides readiness probes to detect and mitigate these situations. A pod with containers reporting that they are not ready does not receive traffic through Kubernetes Services.</p>
+
+<p>Readiness probes are configured similarly to liveness probes. The only difference is that you use the <code class="language-plaintext highlighter-rouge">readinessProbe</code> field instead of the <code class="language-plaintext highlighter-rouge">livenessProbe</code> field.</p>
+
+<p><strong>Caution:</strong> Liveness probes do not wait for readiness probes to succeed. If you want to wait before executing a liveness probe you should use <code class="language-plaintext highlighter-rouge">initialDelaySeconds</code> or a <code class="language-plaintext highlighter-rouge">startupProbe</code>.</p>
+
+<p>Berikut contoh implementasinya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03h-pod-probe-readiness-http.yaml"> </script>
+
+<p>This example uses both readiness and liveness probes. The kubelet will send the first readiness probe <code class="language-plaintext highlighter-rouge">5 seconds</code> after the container starts. This will attempt to connect to the nginx container on port 80. If the probe succeeds, the Pod will be marked as ready. The kubelet will continue to run this check every <code class="language-plaintext highlighter-rouge">10 seconds</code>.</p>
+
+<p>Readiness and liveness probes can be used in parallel for the same container. Using both can ensure that traffic does not reach a container that is not ready for it, and that containers are restarted when they fail.</p>
+
+<p>Jika kita jalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>» kubectl apply <span class="nt">-f</span> 02-workloads/01-pod/pod-probe-readiness-http.yaml  
+pod/pod-probe-readiness-http created
+
+» kubectl get pod
+NAME                       READY   STATUS    RESTARTS   AGE
+pod-probe-readiness-http   0/1     Running   0          6s
+
+» kubectl describe pod pod-probe-readiness-http
+Events:
+  Type     Reason     Age   From               Message
+  <span class="nt">----</span>     <span class="nt">------</span>     <span class="nt">----</span>  <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal   Scheduled  17s   default-scheduler  Successfully assigned default/pod-probe-readiness-http to latihan
+  Normal   Pulling    16s   kubelet            Pulling image <span class="s2">"nginx"</span>
+  Normal   Pulled     12s   kubelet            Successfully pulled image <span class="s2">"nginx"</span> <span class="k">in </span>3.272050844s
+  Normal   Created    12s   kubelet            Created container pod-probe-readiness-http
+  Normal   Started    12s   kubelet            Started container pod-probe-readiness-http
+  Warning  Unhealthy  2s    kubelet            Liveness probe failed: HTTP probe failed with statuscode: 404
+
+<span class="c"># wait 15s, then execute again</span>
+» kubectl describe pod pod-probe-readiness-http
+Events:
+  Type     Reason     Age               From               Message
+  <span class="nt">----</span>     <span class="nt">------</span>     <span class="nt">----</span>              <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal   Scheduled  99s               default-scheduler  Successfully assigned default/pod-probe-readiness-http to latihan
+  Normal   Pulled     94s               kubelet            Successfully pulled image <span class="s2">"nginx"</span> <span class="k">in </span>3.272050844s
+  Normal   Pulled     50s               kubelet            Successfully pulled image <span class="s2">"nginx"</span> <span class="k">in </span>3.156701616s
+  Warning  Unhealthy  9s <span class="o">(</span>x6 over 84s<span class="o">)</span>  kubelet            Liveness probe failed: HTTP probe failed with statuscode: 404
+  Normal   Killing    9s <span class="o">(</span>x2 over 54s<span class="o">)</span>  kubelet            Container pod-probe-readiness-http failed liveness probe, will be restarted
+  Normal   Pulling    9s <span class="o">(</span>x3 over 98s<span class="o">)</span>  kubelet            Pulling image <span class="s2">"nginx"</span>
+  Normal   Created    5s <span class="o">(</span>x3 over 94s<span class="o">)</span>  kubelet            Created container pod-probe-readiness-http
+  Normal   Started    5s <span class="o">(</span>x3 over 94s<span class="o">)</span>  kubelet            Started container pod-probe-readiness-http
+  Normal   Pulled     5s                kubelet            Successfully pulled image <span class="s2">"nginx"</span> <span class="k">in </span>3.490931597s
+
+» kubectl get pod
+NAME                       READY   STATUS    RESTARTS      AGE
+pod-probe-readiness-http   1/1     Running   1 <span class="o">(</span>31s ago<span class="o">)</span>   2m1s
+</code></pre></div></div>
+
+<h2 id="protect-slow-starting-container-with-startup-probe">Protect slow starting container with startup probe</h2>
+
+<p>Sometimes, you have to deal with legacy applications that might require an additional startup time on their first initialization. In such cases, it can be tricky to set up liveness probe parameters without compromising the fast response to deadlocks that motivated such a probe. The trick is to set up a startup probe with the same command, HTTP or TCP check, with a <code class="language-plaintext highlighter-rouge">failureThreshold * periodSeconds</code> long enough to cover the worse case startup time.</p>
+
+<p>So, the example would become:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/a3a01b83910cf07914935a25a62d30ce.js?file=03h-pod-probe-startup-http.yaml"> </script>
+
+<p>Thanks to the startup probe, the application will have a maximum of 5 minutes (<code class="language-plaintext highlighter-rouge">30 * 10 = 300s</code>) to finish its startup. Once the startup probe has succeeded once, the liveness probe takes over to provide a fast response to container deadlocks. If the startup probe never succeeds, the container is killed after <code class="language-plaintext highlighter-rouge">300s</code> and subject to the pod’s <code class="language-plaintext highlighter-rouge">restartPolicy</code>.</p>
+
+<p>Jika dijalankan hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>» kubectl apply <span class="nt">-f</span> 02-workloads/01-pod/pod-probe-startup-http.yaml 
+pod/pod-probe-startup-http created
+
+» kubectl get pod
+NAME                     READY   STATUS    RESTARTS   AGE
+pod-probe-startup-http   0/1     Running   0          7s
+
+» kubectl describe pod pod-probe-startup-http
+Events:
+  Type    Reason     Age   From               Message
+  <span class="nt">----</span>    <span class="nt">------</span>     <span class="nt">----</span>  <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal  Scheduled  22s   default-scheduler  Successfully assigned default/pod-probe-startup-http to latihan
+  Normal  Pulling    21s   kubelet            Pulling image <span class="s2">"nginx"</span>
+  Normal  Pulled     18s   kubelet            Successfully pulled image <span class="s2">"nginx"</span> <span class="k">in </span>3.397200655s
+  Normal  Created    18s   kubelet            Created container pod-probe-startup-http
+  Normal  Started    18s   kubelet            Started container pod-probe-startup-http
+
+<span class="c">## wait 30s, then execute again and see the result</span>
+» kubectl describe pod pod-probe-startup-http
+Events:
+  Type     Reason     Age                 From               Message
+  <span class="nt">----</span>     <span class="nt">------</span>     <span class="nt">----</span>                <span class="nt">----</span>               <span class="nt">-------</span>
+  Normal   Scheduled  113s                default-scheduler  Successfully assigned default/pod-probe-startup-http to latihan
+  Normal   Pulled     109s                kubelet            Successfully pulled image <span class="s2">"nginx"</span> <span class="k">in </span>3.397200655s
+  Normal   Pulling    53s <span class="o">(</span>x2 over 112s<span class="o">)</span>  kubelet            Pulling image <span class="s2">"nginx"</span>
+  Normal   Killing    53s                 kubelet            Container pod-probe-startup-http failed liveness probe, will be restarted
+  Normal   Created    50s <span class="o">(</span>x2 over 109s<span class="o">)</span>  kubelet            Created container pod-probe-startup-http
+  Normal   Pulled     50s                 kubelet            Successfully pulled image <span class="s2">"nginx"</span> <span class="k">in </span>3.373582023s
+  Normal   Started    49s <span class="o">(</span>x2 over 109s<span class="o">)</span>  kubelet            Started container pod-probe-startup-http
+  Warning  Unhealthy  8s <span class="o">(</span>x5 over 83s<span class="o">)</span>    kubelet            Liveness probe failed: HTTP probe failed with statuscode: 404
+
+» kubectl get pod
+NAME                     READY   STATUS    RESTARTS      AGE
+pod-probe-startup-http   1/1     Running   2 <span class="o">(</span>23s ago<span class="o">)</span>   2m23s
+</code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/01-silabus"  class="" title="Silabus - DevOps Kubernetes: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit" class="" 
+        title="Configure Request and Limit of Resources (CPUs &amp; Memory)
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 29 to 36
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions" class="" 
+        title="Pod Disruptions
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"  class="" title="Working with Deployment object">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#kubernetes" class="page__taxonomy-item p-category" rel="tag">Kubernetes</a><span class="sep">, </span>
+    
+      <a href="/categories/#orchestration" class="page__taxonomy-item p-category" rel="tag">Orchestration</a><span class="sep">, </span>
+    
+      <a href="/categories/#pods" class="page__taxonomy-item p-category" rel="tag">Pods</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2022-06-19T16:26:26+07:00">June 19, 2022</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Configure+liveness%2C+readiness%2C+and+startup+probes%20%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03h-pod-container-probe-config" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03h-pod-container-probe-config" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Forchestration%2Fkubernetes%2Fpods%2F03h-pod-container-probe-config" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

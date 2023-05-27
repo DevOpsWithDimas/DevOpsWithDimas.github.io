@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "DDL - Altering User Accounts",
+      "link": "/posts/rdbms/oracle18c/018b-alter-user"
+    }
+    ,
+    {
+      "title": "DDL - Create User Account",
+      "link": "/posts/rdbms/oracle18c/018a-ddl-create-users"
+    }
+    ,
+    {
+      "title": "Managing Users and Resource di Oracle",
+      "link": "/posts/rdbms/oracle18c/018-managing-users-resources"
+    }
+    ,
+    {
+      "title": "DDL - Menghapus Index",
+      "link": "/posts/rdbms/oracle18c/017d-drop-index"
+    }
+    ,
+    {
+      "title": "Index - Function-Based",
+      "link": "/posts/rdbms/oracle18c/017c-function-based-index"
+    }
+    ,
+    {
+      "title": "Index - Bitmap",
+      "link": "/posts/rdbms/oracle18c/017b-bitmap-index"
+    }
+    ,
+    {
+      "title": "Index - Balanced Tree (B-Tree)",
+      "link": "/posts/rdbms/oracle18c/017a-normal-index"
+    }
+    ,
+    {
+      "title": "Pengenalan Index di Oracle",
+      "link": "/posts/rdbms/oracle18c/017-ddl-indexes"
+    }
+    ,
+    {
+      "title": "Default value untuk Primary Key di Oracle",
+      "link": "/posts/rdbms/oracle18c/016r-default-value-pk"
+    }
+    ,
+    {
+      "title": "DDL - Sequences di Oracle",
+      "link": "/posts/rdbms/oracle18c/016q-sequences"
+    }
+  ]
+}

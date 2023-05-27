@@ -1,0 +1,2216 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Compose file for multiple git projects - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, pada materi study kasus kali ini kita akan membahas tentang Multiple git project dalam menggunakan docker compose. Diantaranya kita akan bahas     Introduction   Solution 1 (Using separate compose file per project)   Solution 2 (Include all compose files)   Solution 3 (Centralize compose file)   Ok langsung aja kita ke pembahasan yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Compose file for multiple git projects">
+<meta property="og:url" content="/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects">
+
+
+  <meta property="og:description" content="Hai semuanya, pada materi study kasus kali ini kita akan membahas tentang Multiple git project dalam menggunakan docker compose. Diantaranya kita akan bahas     Introduction   Solution 1 (Using separate compose file per project)   Solution 2 (Include all compose files)   Solution 3 (Centralize compose file)   Ok langsung aja kita ke pembahasan yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-09-28T14:44:07+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#introduction">Introduction</a></li><li><a href="#solusi-1-using-separate-compose-file-per-project">Solusi 1 (Using separate compose file per project)</a></li><li><a href="#solution-2-include-all-compose-files">Solution 2 (Include all compose files)</a></li><li><a href="#solution-3-centralize-compose-file">Solution 3 (Centralize compose file)</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Compose file for multiple git projects">
+    <meta itemprop="description" content="Hai semuanya, pada materi study kasus kali ini kita akan membahas tentang Multiple git project dalam menggunakan docker compose. Diantaranya kita akan bahas  Introduction  Solution 1 (Using separate compose file per project)  Solution 2 (Include all compose files)  Solution 3 (Centralize compose file)Ok langsung aja kita ke pembahasan yang pertama">
+    <meta itemprop="datePublished" content="2021-09-28T14:44:07+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects" class="u-url" itemprop="url">Compose file for multiple git projects
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Docker for DevOps engineer
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-09-28T14:44:07+07:00">September 28, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        5 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Docker">
+        <label class="acordion-item-label" for="content-Pengenalan Docker">
+            Pengenalan Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/01-silabus">
+                        
+                        Silabus Belajar Docker: Pem...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01a-docker-overview">
+                        
+                        Docker Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01b-container-overview">
+                        
+                        What is Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02-system-requirement">
+                        
+                        What to know before you ins...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02a-install-on-windows10-wls">
+                        
+                        How to install Docker on Wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02b-install-on-linux-centos">
+                        
+                        How to install Docker on Li...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02c-install-on-mac">
+                        
+                        How to install Docker on Ma...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/03-getting-started">
+                        
+                        Getting Started with Docker
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Registry">
+        <label class="acordion-item-label" for="content-Docker Registry">
+            Docker Registry
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03a-docker-registry">
+                        
+                        Docker Registry (Docker HUB)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
+                        
+                        Insecure Registry
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03c-install-nexus-oss">
+                        
+                        Installing Nexus OSS
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Container CLI">
+        <label class="acordion-item-label" for="content-Docker Container CLI">
+            Docker Container CLI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04-docker-cli">
+                        
+                        Docker CLI (Command Line In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04a-docker-container-command">
+                        
+                        Management Docker Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04b-docker-image-command">
+                        
+                        Management Docker Images
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04c-docker-exec-command">
+                        
+                        Run a command in a running ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04d-expose-service-outside">
+                        
+                        Expose services to outside ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04e-docker-copy">
+                        
+                        Copying files/content betwe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04f-logging-inspect-stats-container">
+                        
+                        Logging, Inspect, & Resourc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04g-docker-run-env-file">
+                        
+                        Run a Container using Envir...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Networks">
+        <label class="acordion-item-label" for="content-Docker Networks">
+            Docker Networks
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05-docker-network">
+                        
+                        Networking overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05a-connect-to-other-container-use-link">
+                        
+                        Legacy feature of Docker Ne...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05b-docker-bridge-network">
+                        
+                        Use default bridge networks
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05c-docker-user-defined-briged-network">
+                        
+                        Use user-defined bridge net...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05d-docker-advance-user-defined-bridge-network">
+                        
+                        Advanced user-defined bridg...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05e-docker-host-network">
+                        
+                        Use host networking
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05g-docker-none-network">
+                        
+                        Disable networking for a co...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Volumes">
+        <label class="acordion-item-label" for="content-Docker Volumes">
+            Docker Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06-docker-volume">
+                        
+                        Docker Volume Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06a-management-volume">
+                        
+                        Management Volume
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06b-use-binding-volume-flag">
+                        
+                        Use Bind Mounts
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06c-share-data-among-containers">
+                        
+                        Share data among containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06e-share-data-among-machines">
+                        
+                        Share data among machines
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Dockerfile">
+        <label class="acordion-item-label" for="content-Dockerfile">
+            Dockerfile
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07-dockerfile">
+                        
+                        Build Docker Image Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07a-usage-docker-build">
+                        
+                        Usage docker build
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction">
+                        
+                        FROM Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07c-dockerfile-env">
+                        
+                        Environtment Replacement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07d-dockerfile-copy">
+                        
+                        Copying Resources
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07e-dockerfile-ignore">
+                        
+                        Excluding files/directories
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07f-dockerfile-label">
+                        
+                        Label Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07g-dockerfile-exec">
+                        
+                        Execution Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07h-dockerfile-cmd-vs-entrypoint">
+                        
+                        CMD vs ENTRYPOINT?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07i-dockerfile-expose">
+                        
+                        Exposing Ports
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07j-dockerfile-user-workdir">
+                        
+                        User, Volumes and Working D...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck">
+                        
+                        Health Check Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages">
+                        
+                        Multiple Stage Builds
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07m-best-practice-dockerfile">
+                        
+                        Best practices for writing ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07n-docker-image-scan">
+                        
+                        Best practices for scanning...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Build docker image">
+        <label class="acordion-item-label" for="content-Study Kasus: Build docker image">
+            Study Kasus: Build docker image
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage">
+                        
+                        Build specific docker image...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat">
+                        
+                        Build Docker Image for Java...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08b-using-maven-docker-plugin">
+                        
+                        Build Java Web using maven-...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08c-build-springboot">
+                        
+                        Build docker image for spri...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env">
+                        
+                        Springboot - using Environt...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file">
+                        
+                        Springboot - where data suc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db">
+                        
+                        Springboot - Using Database
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08g-build-angular-project">
+                        
+                        Build docker image for Angu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api">
+                        
+                        Angular - Access Rest API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend">
+                        
+                        Angular - Proxy to backend
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08j-build-php">
+                        
+                        Build docker image for PHP
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08k-build-laravel-apps">
+                        
+                        Build Docker image for Lara...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08l-build-laravel-webapp-and-restapi">
+                        
+                        Laravel - Using Frontend & ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db">
+                        
+                        Laravel - Using Database
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Compose">
+        <label class="acordion-item-label" for="content-Docker Compose">
+            Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09-docker-compose-overview">
+                        
+                        Overview of Docker Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09a-compose-getting-started">
+                        
+                        Get started with Docker Com...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09b-compose-cli">
+                        
+                        Overview of docker-compose CLI
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09c-syntax-compose-file">
+                        
+                        Compose file specification ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/environtment/09d-compose-using-env-variables">
+                        
+                        Environment variables in Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09e-compose-volume">
+                        
+                        Volume in Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09f-compose-share-data-between-containers">
+                        
+                        Share data between Containe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09g-share-data-using-sshfs-in-compose">
+                        
+                        Using sshfs for share data ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09h-share-data-using-nfs-in-compose">
+                        
+                        Using NFS for share data in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09i-compose-network-overview">
+                        
+                        Networking Overview in Comp...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09j-compose-network-link">
+                        
+                        Network links in Compose file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09k-compose-network-specify-custom">
+                        
+                        Specify custom networks in ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/dependency/09l-compose-depend-on">
+                        
+                        Dependency between services...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/build/09m-compose-build-image">
+                        
+                        Build docker image using Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09n-compose-using-profile">
+                        
+                        Using profiles with Compose...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09o-multiple-compose-add-override-attr">
+                        
+                        Multiple Compose files to A...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases">
+                        
+                        Example use case of multipl...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/scale/09q-compose-scale-services">
+                        
+                        Scale services using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflow/09r-compose-in-production">
+                        
+                        Use Compose in production
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Compose">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Compose">
+            Study Kasus: Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10-overview-compose-study-case">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10a-compose-php-study-case">
+                        
+                        PHP deployment using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case">
+                        
+                        Laravel deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case">
+                        
+                        Springboot deployment using...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case">
+                        
+                        Angular deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker">
+                        
+                        Deploy httpd with ssl/https...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Compose file for multiple g...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Context">
+        <label class="acordion-item-label" for="content-Docker Context">
+            Docker Context
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11-overview-docker-engine">
+                        
+                        Overview of Docker Context
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11a-docker-context">
+                        
+                        Usage & Managing Docker Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11b-docker-compose-remote-access">
+                        
+                        Remote deployment using doc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11c-dind">
+                        
+                        Docker Inside Docker (DinD)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11d-docker-desktop">
+                        
+                        Dashboard using Docker Desktop
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11e-docker-jetbraint">
+                        
+                        Using Docker on Jetbraint IDE
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11f-docker-portainer">
+                        
+                        Using docker on portainer.io
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11g-deprecated-features">
+                        
+                        Deprecated Engine Features
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker for CI">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker for CI">
+            Study Kasus: Docker for CI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12-overview-docker-for-ci">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12a-setup-gitlab-ci">
+                        
+                        Setup environment for CI us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12b-syntax-gitlab-ci-yml">
+                        
+                        The `.gitlab-ci.yml` file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12c-pipeline-php-gitlab-ci">
+                        
+                        Pipeline: PHP deployment us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12d-pipeline-javaweb-gitlab-ci">
+                        
+                        Pipeline: Java Web deployme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12e-pipeline-spring-boot-gitlab-ci">
+                        
+                        Pipeline: spring-boot deplo...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12f-pipeline-angular-gitlab-ci">
+                        
+                        Pipeline: Angular deploy wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12g-pipeline-laravel-gitlab-ci">
+                        
+                        Pipeline: Laravel deploy wi...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Machine">
+        <label class="acordion-item-label" for="content-Docker Machine">
+            Docker Machine
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13-docker-machine-overview">
+                        
+                        Overview of Docker machines
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-windows">
+                        
+                        Install docker-machine on W...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-linux">
+                        
+                        Install docker-machine on L...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-mac">
+                        
+                        Install docker-machine on M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13b-getting-started">
+                        
+                        Getting started with docker...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13c-managed-machines">
+                        
+                        Managing a machines in dock...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13d-usecases-docker-machine">
+                        
+                        Example Use Cases of docker...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Ansible for Docker">
+        <label class="acordion-item-label" for="content-Study Kasus: Ansible for Docker">
+            Study Kasus: Ansible for Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker">
+                        
+                        Overview Study cases: IT Au...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14a-it-automation-platform">
+                        
+                        IT Automation Platform for ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment">
+                        
+                        Setup Ansible Control and M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14c-ansible-for-docker-operations">
+                        
+                        Getting started with Ansibl...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Swarm">
+        <label class="acordion-item-label" for="content-Docker Swarm">
+            Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Swarm">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Swarm">
+            Study Kasus: Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, pada materi study kasus kali ini kita akan membahas tentang Multiple git project dalam menggunakan docker compose. Diantaranya kita akan bahas</p>
+
+<ol>
+  <li>Introduction</li>
+  <li>Solution 1 (Using separate compose file per project)</li>
+  <li>Solution 2 (Include all compose files)</li>
+  <li>Solution 3 (Centralize compose file)</li>
+</ol>
+
+<p>Ok langsung aja kita ke pembahasan yang pertama</p>
+
+<!--more-->
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Jaman sekarang itu hampir semua aplikasi menggunakan arsitektur micro-services, artinya semua service di pecah-pecah menjadi beberapa module. Dengan begitu biasanya setiap module akan di buatkan project gitnya seperti</p>
+
+<ol>
+  <li>backend
+    <ol>
+      <li>backend-1</li>
+      <li>backend-2</li>
+      <li>backend-n</li>
+    </ol>
+  </li>
+  <li>api-gateway</li>
+  <li>frontend</li>
+</ol>
+
+<p>Yang jadi pertanyaan sebagai seorang DevOps bagaimana kita deploy jika kita menggunakan compose file?</p>
+
+<p>Nah buat temen-temen mau meng-deploy microservices dengan arsitketurnya seperti study kasus sebelumnya yaitu</p>
+
+<ol>
+  <li><a href="/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case">spring-boot (backend)</a></li>
+  <li><a href="/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case">Angular (frontend)</a></li>
+</ol>
+
+<p>Tapi sebelum itu saya mau import dulu project <code class="language-plaintext highlighter-rouge">angular</code> dan <code class="language-plaintext highlighter-rouge">spring-boot</code> menggunakan <code class="language-plaintext highlighter-rouge">git submodule</code> dengan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">git submodule add <span class="nt">--force</span> <span class="nt">--name</span> frontend <span class="se">\</span>
+<span class="nt">-b</span> compose/angular <span class="se">\</span>
+git@repository.dimas-maryanto.com:youtube/devops/docker.git frontend<span class="p">;</span>
+
+git submodule add <span class="nt">--force</span> <span class="nt">--name</span> backend <span class="se">\</span>
+<span class="nt">-b</span> compose/spring-boot <span class="se">\</span>
+git@repository.dimas-maryanto.com:youtube/devops/docker.git backend<span class="p">;</span></code></pre></figure>
+
+<p>Maka sekarang kita punya struktur directory seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\USERS\DIMASM93\WORKSPACES\UDEMY\DOCKER</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="nx">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/multiple-projects</span><span class="p">)</span><span class="w"> </span><span class="nx">tree</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="n">Folder</span><span class="w"> </span><span class="nx">PATH</span><span class="w"> </span><span class="nx">listing</span><span class="w">
+
+</span><span class="n">C:\USERS\DIMASM93\WORKSPACES\UDEMY\DOCKER</span><span class="w">
+</span><span class="err">├───</span><span class="o">.</span><span class="nf">idea</span><span class="w">
+</span><span class="err">├───</span><span class="nx">backend/</span><span class="w">
+</span><span class="err">└───</span><span class="n">frontend/</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="solusi-1-using-separate-compose-file-per-project">Solusi 1 (Using separate compose file per project)</h2>
+
+<p>Nah kita bisa jalankan masing-masing servicenya per compose file (<code class="language-plaintext highlighter-rouge">1</code> service/project <code class="language-plaintext highlighter-rouge">1</code> compose file), klo saya gambarkan structur filenya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/run-per-project</span><span class="p">)</span><span class="w"> </span><span class="nx">tree</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="n">Folder</span><span class="w"> </span><span class="nx">PATH</span><span class="w"> </span><span class="nx">listing</span><span class="w">
+
+</span><span class="n">C:\USERS\DIMASM93\WORKSPACES\UDEMY\DOCKER</span><span class="w">
+</span><span class="err">├───</span><span class="nx">backend/</span><span class="w"> </span><span class="p">(</span><span class="n">spring-boot</span><span class="p">)</span><span class="w">
+</span><span class="err">│</span><span class="w">   </span><span class="err">├───</span><span class="n">docker-compose.yaml</span><span class="w">
+</span><span class="err">│</span><span class="w">   </span><span class="err">└───</span><span class="nx">docker-compose.production.yaml</span><span class="w">
+</span><span class="err">└───</span><span class="n">frontend/</span><span class="w"> </span><span class="p">(</span><span class="n">angular</span><span class="p">)</span><span class="w">
+    </span><span class="err">├───</span><span class="n">docker-compose.yaml</span><span class="w">
+    </span><span class="err">└───</span><span class="nx">docker-compose.production.yaml</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Sekarang kita buat saja compose file baru dengan nama <code class="language-plaintext highlighter-rouge">docker-compose.per-project.yaml</code> untuk backend (spring-boot) seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10f-spring-boot.docker-compose.per-project.yaml"> </script>
+
+<p>Dan setelah itu kita juga buat compose file baru untuk frontend (angular) seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10f-angular.docker-compose.per-project.yaml"> </script>
+
+<p>Jadi disini karena service <code class="language-plaintext highlighter-rouge">angular</code> membutuhkan service <code class="language-plaintext highlighter-rouge">spring-boot</code> tetapi kita tidak mendefined secara bersaama (berbeda path compose file). jadi solusinya adalah menggunakan network binding host yaitu ip-address host dan ini tidak <strong>bisa menggunakan</strong> <code class="language-plaintext highlighter-rouge">localhost</code> atau <code class="language-plaintext highlighter-rouge">127.0.0.1</code>. Sebagai contoh disini ip address yang saya terpakan adalah</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/run-per-project</span><span class="p">)</span><span class="w">  </span><span class="nx">ipconfig.exe</span><span class="w">
+
+</span><span class="n">Ethernet</span><span class="w"> </span><span class="nx">adapter</span><span class="w"> </span><span class="nx">Ethernet:</span><span class="w">
+
+   </span><span class="n">Connection-specific</span><span class="w"> </span><span class="nx">DNS</span><span class="w"> </span><span class="nx">Suffix</span><span class="w">  </span><span class="o">.</span><span class="w"> </span><span class="p">:</span><span class="w">
+   </span><span class="n">Link-local</span><span class="w"> </span><span class="nx">IPv6</span><span class="w"> </span><span class="nx">Address</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">fe80::cc00:7233:e9c8:356c</span><span class="o">%</span><span class="nx">21</span><span class="w">
+   </span><span class="n">IPv4</span><span class="w"> </span><span class="nx">Address.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">192.168.88.252</span><span class="w">
+   </span><span class="n">Subnet</span><span class="w"> </span><span class="nx">Mask</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">255.255.255.0</span><span class="w">
+   </span><span class="n">Default</span><span class="w"> </span><span class="nx">Gateway</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">192.168.88.1</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Jadi kita perlu rubah untuk environment variable <code class="language-plaintext highlighter-rouge">BACKEND_HOST=&lt;your-network-ip&gt;</code> menjadi <code class="language-plaintext highlighter-rouge">BACKEND_HOST=192.168.88.252</code>. Sekarang klo kita coba jalankan menggunakan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">--project-directory</span> backend <span class="se">\</span>
+<span class="nt">-f</span> backend/docker-compose.yaml <span class="se">\</span>
+<span class="nt">-f</span> backend/docker-compose.per-project.yaml up <span class="nt">-d</span> build-jar <span class="o">&amp;&amp;</span> <span class="se">\</span>
+docker-compose <span class="nt">--project-directory</span> backend <span class="se">\</span>
+<span class="nt">-f</span> backend/docker-compose.yaml <span class="se">\</span>
+<span class="nt">-f</span> backend/docker-compose.per-project.yaml up <span class="nt">-d</span> <span class="nt">--build</span> <span class="o">&amp;&amp;</span> <span class="se">\</span>
+docker-compose <span class="nt">--project-directory</span> frontend <span class="se">\</span>
+<span class="nt">-f</span> frontend/docker-compose.per-project.yaml up <span class="nt">-d</span> <span class="nt">--build</span></code></pre></figure>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/run-per-project</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--project-directory</span><span class="w"> </span><span class="nx">backend</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">backend\docker-compose.yaml</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">backend\docker-compose.per-project.yaml</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">build-jar</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Running</span><span class="w"> </span><span class="nx">2/2</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Network</span><span class="w"> </span><span class="nx">backend_default</span><span class="w">        </span><span class="nx">Created</span><span class="w">                                   </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">backend-build-jar-1</span><span class="w">  </span><span class="nx">Starte...</span><span class="w">                                 </span><span class="nx">1.4s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/run-per-project</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--project-directory</span><span class="w"> </span><span class="nx">backend</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">backend\docker-compose.yaml</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">backend\docker-compose.per-project.yaml</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">--build</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Running</span><span class="w"> </span><span class="nx">2/2</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">backend-postgres-1</span><span class="w">     </span><span class="nx">Runni...</span><span class="w">                                </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">backend-spring-boot-1</span><span class="w">  </span><span class="nx">Ru...</span><span class="w">                                   </span><span class="nx">0.0s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/run-per-project</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--project-directory</span><span class="w"> </span><span class="nx">backend</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">backend\docker-compose.yaml</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">backend\docker-compose.per-project.yaml</span><span class="w"> </span><span class="nx">ps</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                    </span><span class="nx">COMMAND</span><span class="w">                  </span><span class="nx">SERVICE</span><span class="w">             </span><span class="nx">STATUS</span><span class="w">              </span><span class="nx">PORTS</span><span class="w">
+</span><span class="n">backend-build-jar-1</span><span class="w">     </span><span class="s2">"/usr/local/bin/mvn-…"</span><span class="w">   </span><span class="nx">build-jar</span><span class="w">           </span><span class="nx">exited</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">  
+</span><span class="n">backend-postgres-1</span><span class="w">      </span><span class="s2">"docker-entrypoint.s…"</span><span class="w">   </span><span class="nx">postgres</span><span class="w">            </span><span class="nx">running</span><span class="w">             </span><span class="nx">0.0.0.0:55432-</span><span class="err">&gt;</span><span class="nx">5432/tcp</span><span class="w">
+</span><span class="n">backend-spring-boot-1</span><span class="w">   </span><span class="s2">"java -jar -Djava.se…"</span><span class="w">   </span><span class="nx">spring-boot</span><span class="w">         </span><span class="nx">running</span><span class="w"> </span><span class="p">(</span><span class="n">healthy</span><span class="p">)</span><span class="w">   </span><span class="nx">0.0.0.0:8080-</span><span class="err">&gt;</span><span class="nx">8080/tcp</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/run-per-project</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--project-directory</span><span class="w"> </span><span class="nx">frontend</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">frontend\docker-compose.per-project.yaml</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nt">-d</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Running</span><span class="w"> </span><span class="nx">1/0</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">frontend-angular-1</span><span class="w">  </span><span class="nx">Running</span><span class="w">                                    </span><span class="nx">0.0s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/run-per-project</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--project-directory</span><span class="w"> </span><span class="nx">frontend</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">frontend\docker-compose.per-project.yaml</span><span class="w"> </span><span class="nx">ps</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                 </span><span class="nx">COMMAND</span><span class="w">                  </span><span class="nx">SERVICE</span><span class="w">             </span><span class="nx">STATUS</span><span class="w">              </span><span class="nx">PORTS</span><span class="w">
+</span><span class="n">frontend-angular-1</span><span class="w">   </span><span class="s2">"/docker-entrypoint.…"</span><span class="w">   </span><span class="nx">angular</span><span class="w">             </span><span class="nx">running</span><span class="w"> </span><span class="p">(</span><span class="n">healthy</span><span class="p">)</span><span class="w">   </span><span class="nx">0.0.0.0:80-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="solution-2-include-all-compose-files">Solution 2 (Include all compose files)</h2>
+
+<p>Selanjutnya kita akan mencoba menjalankan dengan cara include semua compose file, untuk struktur directory masih sama seperti sebelumnya yaitu seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/run-per-project</span><span class="p">)</span><span class="w"> </span><span class="nx">tree</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="n">Folder</span><span class="w"> </span><span class="nx">PATH</span><span class="w"> </span><span class="nx">listing</span><span class="w">
+
+</span><span class="n">C:\USERS\DIMASM93\WORKSPACES\UDEMY\DOCKER</span><span class="w">
+</span><span class="err">├───</span><span class="nx">backend/</span><span class="w"> </span><span class="p">(</span><span class="n">spring-boot</span><span class="p">)</span><span class="w">
+</span><span class="err">│</span><span class="w">   </span><span class="err">├───</span><span class="n">docker-compose.yaml</span><span class="w">
+</span><span class="err">│</span><span class="w">   </span><span class="err">└───</span><span class="nx">docker-compose.production.yaml</span><span class="w">
+</span><span class="err">└───</span><span class="n">frontend/</span><span class="w"> </span><span class="p">(</span><span class="n">angular</span><span class="p">)</span><span class="w">
+    </span><span class="err">├───</span><span class="n">docker-compose.yaml</span><span class="w">
+    </span><span class="err">└───</span><span class="nx">docker-compose.production.yaml</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Ok pertama kita buat compose file baru ya supaya tidak menggangu compose file yang sudah dibuat, sekarang kita buat untuk <code class="language-plaintext highlighter-rouge">backend</code> module dengan nama <code class="language-plaintext highlighter-rouge">docker-compose.include-all.yaml</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10f-springboot.docker-compose.include-all.yaml"> </script>
+
+<p>Dan satu lagi, kita buat compose file baru dengan nama <code class="language-plaintext highlighter-rouge">docker-compose.include-all.yaml</code> untuk module <code class="language-plaintext highlighter-rouge">frontend</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10f-angular.docker-compose.include-all.yaml"> </script>
+
+<p>Jadi jika temen-temen perhatikan kita mengganti beberapa value untuk property</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">&lt;services&gt;.build.context</code> di tujukan ke folder tertentu berdasarkan modulenya masing-masing</li>
+  <li><code class="language-plaintext highlighter-rouge">build-jar.volumes["./backend:/var/lib/spring-boot"]</code>, kita mengganti foldernya untuk localtion source-code backend</li>
+  <li><code class="language-plaintext highlighter-rouge">backend.networks["frontend"]</code>, menambahkan network frondend supaya bisa connect dengan service <code class="language-plaintext highlighter-rouge">angular</code></li>
+  <li><code class="language-plaintext highlighter-rouge">angular.env["BACKEND_HOST=spring-boot"]</code>, mengganti host dari service tidak menggunakan ip lagi, tetapi dns docker</li>
+  <li><code class="language-plaintext highlighter-rouge">angular.depends_on</code>, menggunakan dependency dengan service name <code class="language-plaintext highlighter-rouge">spring-boot</code></li>
+</ol>
+
+<p>Ok sekarang kita bisa execute menggunakan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">--project-directory</span> ./ <span class="se">\</span>
+<span class="nt">-f</span> backend/docker-compose.yaml <span class="nt">-f</span> backend/docker-compose.include-all.yaml <span class="se">\</span>
+<span class="nt">-f</span> frontend/docker-compose.include-all.yaml <span class="se">\</span>
+up <span class="nt">-d</span> build-jar <span class="o">&amp;&amp;</span> <span class="se">\</span>
+docker-compose <span class="nt">--project-directory</span> ./ <span class="se">\</span>
+<span class="nt">-f</span> backend/docker-compose.yaml <span class="nt">-f</span> backend/docker-compose.include-all.yaml <span class="se">\</span>
+<span class="nt">-f</span> frontend/docker-compose.include-all.yaml <span class="se">\</span>
+up <span class="nt">-d</span> <span class="nt">--build</span></code></pre></figure>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/multiple-projects</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--project-directory</span><span class="w"> </span><span class="o">.</span><span class="nx">/</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\backend\docker-compose.yaml</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\backend\docker-compose.include-all.yaml</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\frontend\docker-compose.include-all.yaml</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">build-jar</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Running</span><span class="w"> </span><span class="nx">1/1</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">docker-build-jar-1</span><span class="w">  </span><span class="nx">Started</span><span class="w">                                     </span><span class="nx">1.2s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/multiple-projects</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--project-directory</span><span class="w"> </span><span class="o">.</span><span class="nx">/</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\backend\docker-compose.yaml</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\backend\docker-compose.include-all.yaml</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\frontend\docker-compose.include-all.yaml</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nt">-d</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Running</span><span class="w"> </span><span class="nx">3/3</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">docker-postgres-1</span><span class="w">     </span><span class="nx">Running</span><span class="w">                                   </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">docker-spring-boot-1</span><span class="w">  </span><span class="nx">Runni...</span><span class="w">                                  </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">docker-angular-1</span><span class="w">      </span><span class="nx">Running</span><span class="w">                                   </span><span class="nx">0.0s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/multiple-projects</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--project-directory</span><span class="w"> </span><span class="o">.</span><span class="nx">/</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\backend\docker-compose.yaml</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\backend\docker-compose.include-all.yaml</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">.</span><span class="nx">\frontend\docker-compose.include-all.yaml</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nx">ps</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                   </span><span class="nx">COMMAND</span><span class="w">                  </span><span class="nx">SERVICE</span><span class="w">             </span><span class="nx">STATUS</span><span class="w">               </span><span class="nx">PORTS</span><span class="w">
+</span><span class="n">docker-angular-1</span><span class="w">       </span><span class="s2">"/docker-entrypoint.…"</span><span class="w">   </span><span class="nx">angular</span><span class="w">             </span><span class="nx">running</span><span class="w"> </span><span class="p">(</span><span class="n">starting</span><span class="p">)</span><span class="w">   </span><span class="nx">0.0.0.0:80-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="w">
+</span><span class="n">docker-build-jar-1</span><span class="w">     </span><span class="s2">"/usr/local/bin/mvn-…"</span><span class="w">   </span><span class="nx">build-jar</span><span class="w">           </span><span class="nx">exited</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">    
+</span><span class="n">docker-postgres-1</span><span class="w">      </span><span class="s2">"docker-entrypoint.s…"</span><span class="w">   </span><span class="nx">postgres</span><span class="w">            </span><span class="nx">running</span><span class="w">              </span><span class="nx">0.0.0.0:55432-</span><span class="err">&gt;</span><span class="nx">5432/tcp</span><span class="w">
+</span><span class="n">docker-spring-boot-1</span><span class="w">   </span><span class="s2">"java -jar -Djava.se…"</span><span class="w">   </span><span class="nx">spring-boot</span><span class="w">         </span><span class="nx">running</span><span class="w"> </span><span class="p">(</span><span class="n">starting</span><span class="p">)</span><span class="w">   </span><span class="nx">80/tcp</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="solution-3-centralize-compose-file">Solution 3 (Centralize compose file)</h2>
+
+<p>Selanjutnya kita akan mencoba menjalankan dengan cara centralize compose file (system terpusat), untuk struktur directory sekarang seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/run-per-project</span><span class="p">)</span><span class="w"> </span><span class="nx">tree</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="n">Folder</span><span class="w"> </span><span class="nx">PATH</span><span class="w"> </span><span class="nx">listing</span><span class="w">
+
+</span><span class="n">C:\USERS\DIMASM93\WORKSPACES\UDEMY\DOCKER</span><span class="w">
+</span><span class="err">├───</span><span class="o">.</span><span class="nf">env</span><span class="w">
+</span><span class="err">├───</span><span class="nx">docker-compose.yaml</span><span class="w">
+</span><span class="err">├───</span><span class="n">docker-compose.override.yaml</span><span class="w">
+</span><span class="err">├───</span><span class="nx">docker-compose.production.yaml</span><span class="w">
+</span><span class="err">├───</span><span class="n">backend/</span><span class="w"> </span><span class="p">(</span><span class="n">spring-boot</span><span class="p">)</span><span class="w">
+</span><span class="err">└───</span><span class="n">frontend/</span><span class="w"> </span><span class="p">(</span><span class="n">angular</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Ok pertama kita buat compose file dengan nama <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10f-central.docker-compose.yaml"> </script>
+
+<p>Setelah itu buat juga untuk <code class="language-plaintext highlighter-rouge">docker-compose.override.yaml</code> untuk melakukan build docker imagenya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10f-central.docker-compose.override.yaml"> </script>
+
+<p>Kemudian untuk running di server, kita tidak perlu build lagi cukup pull saja dari docker image yang udah kita build sebelumnya yaitu dengan buat compose file baru namanya <code class="language-plaintext highlighter-rouge">docker-compose.production.yaml</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10f-central.docker-compose.production.yaml"> </script>
+
+<p>Dan yang terakhir jangan lupa juga untuk menambahkan file <code class="language-plaintext highlighter-rouge">.env</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=10f-central.env"> </script>
+
+<p>Ok sekarang jika sudah, kita bisa jalankan dengan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker-compose <span class="nt">--env-file</span> .env up build-jar <span class="o">&amp;&amp;</span> <span class="se">\</span>
+docker-compose <span class="nt">--env-file</span> .env up <span class="nt">-d</span> <span class="nt">--build</span></code></pre></figure>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/multiple-projects</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nf">env</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">build-jar</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Running</span><span class="w"> </span><span class="nx">4/4</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Network</span><span class="w"> </span><span class="nx">docker_default</span><span class="w">        </span><span class="nx">Created</span><span class="w">                                     </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Volume</span><span class="w"> </span><span class="s2">"docker_pg_data"</span><span class="w">       </span><span class="nx">Created</span><span class="w">                                     </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Volume</span><span class="w"> </span><span class="s2">"docker_spring_data"</span><span class="w">   </span><span class="nx">Created</span><span class="w">                                     </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">docker-build-jar-1</span><span class="w">  </span><span class="nx">Started</span><span class="w">                                     </span><span class="nx">1.3s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/multiple-projects</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nf">env</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">--build</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Building</span><span class="w"> </span><span class="nx">3.9s</span><span class="w"> </span><span class="p">(</span><span class="mi">28</span><span class="n">/28</span><span class="p">)</span><span class="w"> </span><span class="nx">FINISHED</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Running</span><span class="w"> </span><span class="nx">3/3</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">docker-postgres-1</span><span class="w">     </span><span class="nx">Started</span><span class="w">                                   </span><span class="nx">0.5s</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">docker-spring-boot-1</span><span class="w">  </span><span class="nx">Start...</span><span class="w">                                  </span><span class="nx">1.3s</span><span class="w">
+ </span><span class="o">-</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="nx">docker-angular-1</span><span class="w">      </span><span class="nx">Started</span><span class="w">                                   </span><span class="nx">2.2s</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="nx">git:</span><span class="p">(</span><span class="n">compose/multiple-projects</span><span class="p">)</span><span class="w"> </span><span class="nx">docker-compose</span><span class="w"> </span><span class="nt">--env-file</span><span class="w"> </span><span class="o">.</span><span class="nf">env</span><span class="w"> </span><span class="nx">ps</span><span class="w">
+</span><span class="n">NAME</span><span class="w">                   </span><span class="nx">COMMAND</span><span class="w">                  </span><span class="nx">SERVICE</span><span class="w">             </span><span class="nx">STATUS</span><span class="w">               </span><span class="nx">PORTS</span><span class="w">
+</span><span class="n">docker-angular-1</span><span class="w">       </span><span class="s2">"/docker-entrypoint.…"</span><span class="w">   </span><span class="nx">angular</span><span class="w">             </span><span class="nx">running</span><span class="w"> </span><span class="p">(</span><span class="n">starting</span><span class="p">)</span><span class="w">   </span><span class="nx">0.0.0.0:80-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="w">
+</span><span class="n">docker-build-jar-1</span><span class="w">     </span><span class="s2">"/usr/local/bin/mvn-…"</span><span class="w">   </span><span class="nx">build-jar</span><span class="w">           </span><span class="nx">exited</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w">
+
+</span><span class="n">docker-postgres-1</span><span class="w">      </span><span class="s2">"docker-entrypoint.s…"</span><span class="w">   </span><span class="nx">postgres</span><span class="w">            </span><span class="nx">running</span><span class="w">              </span><span class="nx">0.0.0.0:5432-</span><span class="err">&gt;</span><span class="nx">5432/tcp</span><span class="w">
+</span><span class="n">docker-spring-boot-1</span><span class="w">   </span><span class="s2">"java -jar -Djava.se…"</span><span class="w">   </span><span class="nx">spring-boot</span><span class="w">         </span><span class="nx">running</span><span class="w"> </span><span class="p">(</span><span class="n">starting</span><span class="p">)</span><span class="w">   </span><span class="nx">0.0.0.0:8080-</span><span class="err">&gt;</span><span class="nx">8080/tcp</span><span class="w">
+</span></code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/docker/01-silabus"  class="" title="Silabus Belajar Docker: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker" class="" 
+        title="Deploy httpd with ssl/https on docker
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 86 to 113
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/docker/context/11-overview-docker-engine" class="" 
+        title="Overview of Docker Context
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/docker/14c-ansible-for-docker-operations"  class="" title="Getting started with Ansible role, tasks for docker">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#compose" class="page__taxonomy-item p-category" rel="tag">Compose</a><span class="sep">, </span>
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#docker" class="page__taxonomy-item p-category" rel="tag">Docker</a><span class="sep">, </span>
+    
+      <a href="/categories/#git" class="page__taxonomy-item p-category" rel="tag">Git</a><span class="sep">, </span>
+    
+      <a href="/categories/#study-cases" class="page__taxonomy-item p-category" rel="tag">Study-Cases</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-09-28T14:44:07+07:00">September 28, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Compose+file+for+multiple+git+projects%20%2Fposts%2Fdevops%2Fdocker%2Fcompose%2Fstudy-cases%2Fgit%2F10f-compose-using-multiple-git-projects" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Fdocker%2Fcompose%2Fstudy-cases%2Fgit%2F10f-compose-using-multiple-git-projects" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Fdocker%2Fcompose%2Fstudy-cases%2Fgit%2F10f-compose-using-multiple-git-projects" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

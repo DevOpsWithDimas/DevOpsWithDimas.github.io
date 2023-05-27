@@ -1,0 +1,2175 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Angular - Proxy to backend - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini akan membahas tentang Proxy To Backend dan Reverse Proxy pada nginx. Diantaranya adalah     Setup proxy for local development   Setup reverse proxy pada nginx   Run reverse proxy from container   Cleanup   Ok langsung ja kita bahas yang pertama">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Angular - Proxy to backend">
+<meta property="og:url" content="/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini akan membahas tentang Proxy To Backend dan Reverse Proxy pada nginx. Diantaranya adalah     Setup proxy for local development   Setup reverse proxy pada nginx   Run reverse proxy from container   Cleanup   Ok langsung ja kita bahas yang pertama">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-07-11T21:10:26+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#setup-proxy-for-local-development">Setup proxy for local development</a></li><li><a href="#setup-reverse-proxy-pada-nginx">Setup reverse proxy pada nginx</a></li><li><a href="#run-reverse-proxy-from-container">Run reverse proxy from container</a></li><li><a href="#cleanup">Cleanup</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Angular - Proxy to backend">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini akan membahas tentang Proxy To Backend dan Reverse Proxy pada nginx. Diantaranya adalah  Setup proxy for local development  Setup reverse proxy pada nginx  Run reverse proxy from container  CleanupOk langsung ja kita bahas yang pertama">
+    <meta itemprop="datePublished" content="2021-07-11T21:10:26+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend" class="u-url" itemprop="url">Angular - Proxy to backend
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Docker for DevOps engineer
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-07-11T21:10:26+07:00">July 11, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        4 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Docker">
+        <label class="acordion-item-label" for="content-Pengenalan Docker">
+            Pengenalan Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/01-silabus">
+                        
+                        Silabus Belajar Docker: Pem...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01a-docker-overview">
+                        
+                        Docker Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/01b-container-overview">
+                        
+                        What is Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02-system-requirement">
+                        
+                        What to know before you ins...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02a-install-on-windows10-wls">
+                        
+                        How to install Docker on Wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02b-install-on-linux-centos">
+                        
+                        How to install Docker on Li...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/02c-install-on-mac">
+                        
+                        How to install Docker on Ma...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/03-getting-started">
+                        
+                        Getting Started with Docker
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Registry">
+        <label class="acordion-item-label" for="content-Docker Registry">
+            Docker Registry
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03a-docker-registry">
+                        
+                        Docker Registry (Docker HUB)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
+                        
+                        Insecure Registry
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03c-install-nexus-oss">
+                        
+                        Installing Nexus OSS
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Container CLI">
+        <label class="acordion-item-label" for="content-Docker Container CLI">
+            Docker Container CLI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04-docker-cli">
+                        
+                        Docker CLI (Command Line In...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04a-docker-container-command">
+                        
+                        Management Docker Container
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04b-docker-image-command">
+                        
+                        Management Docker Images
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04c-docker-exec-command">
+                        
+                        Run a command in a running ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04d-expose-service-outside">
+                        
+                        Expose services to outside ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04e-docker-copy">
+                        
+                        Copying files/content betwe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04f-logging-inspect-stats-container">
+                        
+                        Logging, Inspect, & Resourc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/container/04g-docker-run-env-file">
+                        
+                        Run a Container using Envir...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Networks">
+        <label class="acordion-item-label" for="content-Docker Networks">
+            Docker Networks
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05-docker-network">
+                        
+                        Networking overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05a-connect-to-other-container-use-link">
+                        
+                        Legacy feature of Docker Ne...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05b-docker-bridge-network">
+                        
+                        Use default bridge networks
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05c-docker-user-defined-briged-network">
+                        
+                        Use user-defined bridge net...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05d-docker-advance-user-defined-bridge-network">
+                        
+                        Advanced user-defined bridg...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05e-docker-host-network">
+                        
+                        Use host networking
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/network/05g-docker-none-network">
+                        
+                        Disable networking for a co...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Volumes">
+        <label class="acordion-item-label" for="content-Docker Volumes">
+            Docker Volumes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06-docker-volume">
+                        
+                        Docker Volume Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06a-management-volume">
+                        
+                        Management Volume
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06b-use-binding-volume-flag">
+                        
+                        Use Bind Mounts
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06c-share-data-among-containers">
+                        
+                        Share data among containers
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/volume/06e-share-data-among-machines">
+                        
+                        Share data among machines
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Dockerfile">
+        <label class="acordion-item-label" for="content-Dockerfile">
+            Dockerfile
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07-dockerfile">
+                        
+                        Build Docker Image Overview
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07a-usage-docker-build">
+                        
+                        Usage docker build
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction">
+                        
+                        FROM Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07c-dockerfile-env">
+                        
+                        Environtment Replacement
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07d-dockerfile-copy">
+                        
+                        Copying Resources
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07e-dockerfile-ignore">
+                        
+                        Excluding files/directories
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07f-dockerfile-label">
+                        
+                        Label Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07g-dockerfile-exec">
+                        
+                        Execution Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07h-dockerfile-cmd-vs-entrypoint">
+                        
+                        CMD vs ENTRYPOINT?
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07i-dockerfile-expose">
+                        
+                        Exposing Ports
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07j-dockerfile-user-workdir">
+                        
+                        User, Volumes and Working D...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck">
+                        
+                        Health Check Instruction
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages">
+                        
+                        Multiple Stage Builds
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07m-best-practice-dockerfile">
+                        
+                        Best practices for writing ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/07n-docker-image-scan">
+                        
+                        Best practices for scanning...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Build docker image">
+        <label class="acordion-item-label" for="content-Study Kasus: Build docker image">
+            Study Kasus: Build docker image
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage">
+                        
+                        Build specific docker image...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat">
+                        
+                        Build Docker Image for Java...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08b-using-maven-docker-plugin">
+                        
+                        Build Java Web using maven-...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08c-build-springboot">
+                        
+                        Build docker image for spri...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env">
+                        
+                        Springboot - using Environt...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file">
+                        
+                        Springboot - where data suc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db">
+                        
+                        Springboot - Using Database
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08g-build-angular-project">
+                        
+                        Build docker image for Angu...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api">
+                        
+                        Angular - Access Rest API
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Angular - Proxy to backend
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08j-build-php">
+                        
+                        Build docker image for PHP
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08k-build-laravel-apps">
+                        
+                        Build Docker image for Lara...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08l-build-laravel-webapp-and-restapi">
+                        
+                        Laravel - Using Frontend & ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db">
+                        
+                        Laravel - Using Database
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Compose">
+        <label class="acordion-item-label" for="content-Docker Compose">
+            Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09-docker-compose-overview">
+                        
+                        Overview of Docker Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09a-compose-getting-started">
+                        
+                        Get started with Docker Com...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09b-compose-cli">
+                        
+                        Overview of docker-compose CLI
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/09c-syntax-compose-file">
+                        
+                        Compose file specification ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/environtment/09d-compose-using-env-variables">
+                        
+                        Environment variables in Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09e-compose-volume">
+                        
+                        Volume in Compose
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09f-compose-share-data-between-containers">
+                        
+                        Share data between Containe...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09g-share-data-using-sshfs-in-compose">
+                        
+                        Using sshfs for share data ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/volume/09h-share-data-using-nfs-in-compose">
+                        
+                        Using NFS for share data in...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09i-compose-network-overview">
+                        
+                        Networking Overview in Comp...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09j-compose-network-link">
+                        
+                        Network links in Compose file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/network/09k-compose-network-specify-custom">
+                        
+                        Specify custom networks in ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/dependency/09l-compose-depend-on">
+                        
+                        Dependency between services...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/build/09m-compose-build-image">
+                        
+                        Build docker image using Co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09n-compose-using-profile">
+                        
+                        Using profiles with Compose...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09o-multiple-compose-add-override-attr">
+                        
+                        Multiple Compose files to A...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases">
+                        
+                        Example use case of multipl...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/scale/09q-compose-scale-services">
+                        
+                        Scale services using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/workflow/09r-compose-in-production">
+                        
+                        Use Compose in production
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Compose">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Compose">
+            Study Kasus: Docker Compose
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10-overview-compose-study-case">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10a-compose-php-study-case">
+                        
+                        PHP deployment using compos...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case">
+                        
+                        Laravel deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case">
+                        
+                        Springboot deployment using...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case">
+                        
+                        Angular deployment using co...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker">
+                        
+                        Deploy httpd with ssl/https...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects">
+                        
+                        Compose file for multiple g...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Context">
+        <label class="acordion-item-label" for="content-Docker Context">
+            Docker Context
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11-overview-docker-engine">
+                        
+                        Overview of Docker Context
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11a-docker-context">
+                        
+                        Usage & Managing Docker Con...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11b-docker-compose-remote-access">
+                        
+                        Remote deployment using doc...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11c-dind">
+                        
+                        Docker Inside Docker (DinD)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11d-docker-desktop">
+                        
+                        Dashboard using Docker Desktop
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11e-docker-jetbraint">
+                        
+                        Using Docker on Jetbraint IDE
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/dashboard/11f-docker-portainer">
+                        
+                        Using docker on portainer.io
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/context/11g-deprecated-features">
+                        
+                        Deprecated Engine Features
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker for CI">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker for CI">
+            Study Kasus: Docker for CI
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12-overview-docker-for-ci">
+                        
+                        Overview of Study Cases usi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12a-setup-gitlab-ci">
+                        
+                        Setup environment for CI us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12b-syntax-gitlab-ci-yml">
+                        
+                        The `.gitlab-ci.yml` file
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12c-pipeline-php-gitlab-ci">
+                        
+                        Pipeline: PHP deployment us...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12d-pipeline-javaweb-gitlab-ci">
+                        
+                        Pipeline: Java Web deployme...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12e-pipeline-spring-boot-gitlab-ci">
+                        
+                        Pipeline: spring-boot deplo...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12f-pipeline-angular-gitlab-ci">
+                        
+                        Pipeline: Angular deploy wi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ci/study-cases/gitlab-ci/12g-pipeline-laravel-gitlab-ci">
+                        
+                        Pipeline: Laravel deploy wi...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Machine">
+        <label class="acordion-item-label" for="content-Docker Machine">
+            Docker Machine
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13-docker-machine-overview">
+                        
+                        Overview of Docker machines
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-windows">
+                        
+                        Install docker-machine on W...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-linux">
+                        
+                        Install docker-machine on L...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13a-install-docker-machine-for-mac">
+                        
+                        Install docker-machine on M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13b-getting-started">
+                        
+                        Getting started with docker...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13c-managed-machines">
+                        
+                        Managing a machines in dock...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/machine/13d-usecases-docker-machine">
+                        
+                        Example Use Cases of docker...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Ansible for Docker">
+        <label class="acordion-item-label" for="content-Study Kasus: Ansible for Docker">
+            Study Kasus: Ansible for Docker
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker">
+                        
+                        Overview Study cases: IT Au...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14a-it-automation-platform">
+                        
+                        IT Automation Platform for ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment">
+                        
+                        Setup Ansible Control and M...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/14c-ansible-for-docker-operations">
+                        
+                        Getting started with Ansibl...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Swarm">
+        <label class="acordion-item-label" for="content-Docker Swarm">
+            Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Study Kasus: Docker Swarm">
+        <label class="acordion-item-label" for="content-Study Kasus: Docker Swarm">
+            Study Kasus: Docker Swarm
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini akan membahas tentang Proxy To Backend dan Reverse Proxy pada nginx. Diantaranya adalah</p>
+
+<ol>
+  <li>Setup proxy for local development</li>
+  <li>Setup reverse proxy pada nginx</li>
+  <li>Run reverse proxy from container</li>
+  <li>Cleanup</li>
+</ol>
+
+<p>Ok langsung ja kita bahas yang pertama</p>
+
+<!--more-->
+
+<h2 id="setup-proxy-for-local-development">Setup proxy for local development</h2>
+
+<p>Pada materi <a href="/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api">sebelumnya</a> kita telah membuat Angular project ini meng-consume Rest API dengan cara set Env host dan port. sebetulnya saya gak suka cara tersebut! saya lebih sering menggunakan Reverse proxy atau proxy to backend sesuai dengan rekomendasi dari article <a href="https://angular.io/guide/build#proxying-to-a-backend-server">angular ini</a>. ya let’s do create proxy to backend:</p>
+
+<ol>
+  <li>Buat file <code class="language-plaintext highlighter-rouge">proxy.conf.json</code>, seperti berikut:
+ <script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08i-proxy-conf.json"> </script></li>
+  <li>Kita edit file <code class="language-plaintext highlighter-rouge">angular.json</code> dengan menambahkan config proxy tersebut pada <code class="language-plaintext highlighter-rouge">projects.architect.serve.configurations.development</code> seperti berikut:
+ <script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08i-proxy-angular.json"> </script></li>
+  <li>Tambahkan env variable <code class="language-plaintext highlighter-rouge">apiProxyPath: '/spring-boot'</code> pada <code class="language-plaintext highlighter-rouge">environments/environment.ts</code>, <code class="language-plaintext highlighter-rouge">environments/environment.prod.ts</code> dan <code class="language-plaintext highlighter-rouge">environments/environment.docker.ts</code> seperti berikut contohnya:
+ <script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08i-proxy-environment.ts"> </script></li>
+  <li>Update service <code class="language-plaintext highlighter-rouge">service/mahasiswa.service.ts</code> seperti berikut:
+ <script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08i-proxy-mahasiswa-service.ts"> </script></li>
+</ol>
+
+<p>Sebelum kita me-running kita jalankan service spring-boot terlebih dahulu seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08f-dotenv"> </script>
+
+<p>For Bash script:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08f-docker-run.bash"> </script>
+
+<p>For Powershell script:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08f-docker-run.ps1"> </script>
+
+<p>Setelah itu coba jalankan dengan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ng serve <span class="nt">--disable-host-check</span></code></pre></figure>
+
+<p>Maka hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker-angular</span><span class="w">  </span><span class="nx">ng</span><span class="w"> </span><span class="nx">serve</span><span class="w"> </span><span class="nt">--disable-host-check</span><span class="w">
+</span><span class="n">Warning:</span><span class="w"> </span><span class="nx">Running</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nt">--disable-host-check</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">security</span><span class="w"> </span><span class="nx">risk.</span><span class="w"> </span><span class="nx">See</span><span class="w"> </span><span class="nx">https://medium.com/webpack/webpack-d</span><span class="w">
+</span><span class="n">ev-server-middleware-security-issues-1489d950874a</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">information.</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="n">Generating</span><span class="w"> </span><span class="nx">browser</span><span class="w"> </span><span class="nx">application</span><span class="w"> </span><span class="nx">bundles</span><span class="w"> </span><span class="p">(</span><span class="n">phase:</span><span class="w"> </span><span class="nx">setup</span><span class="p">)</span><span class="o">...</span><span class="p">[</span><span class="n">HPM</span><span class="p">]</span><span class="w"> </span><span class="nx">Proxy</span><span class="w"> </span><span class="nx">created:</span><span class="w"> </span><span class="nx">/spring-boot</span><span class="w">  </span><span class="o">-</span><span class="err">&gt;</span><span class="w">  </span><span class="nx">http://localhos</span><span class="w">
+</span><span class="n">t:8080</span><span class="w">
+</span><span class="p">[</span><span class="n">HPM</span><span class="p">]</span><span class="w"> </span><span class="nx">Proxy</span><span class="w"> </span><span class="nx">rewrite</span><span class="w"> </span><span class="nx">rule</span><span class="w"> </span><span class="nx">created:</span><span class="w"> </span><span class="s2">"^/spring-boot"</span><span class="w"> </span><span class="nx">~</span><span class="err">&gt;</span><span class="w"> </span><span class="s2">""</span><span class="w">
+</span><span class="p">[</span><span class="n">HPM</span><span class="p">]</span><span class="w"> </span><span class="n">Subscribed</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">http-proxy</span><span class="w"> </span><span class="nx">events:</span><span class="w">  </span><span class="p">[</span><span class="w"> </span><span class="s1">'error'</span><span class="p">,</span><span class="w"> </span><span class="s1">'close'</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="err">√</span><span class="w"> </span><span class="n">Browser</span><span class="w"> </span><span class="nx">application</span><span class="w"> </span><span class="nx">bundle</span><span class="w"> </span><span class="nx">generation</span><span class="w"> </span><span class="nx">complete.</span><span class="w">
+
+</span><span class="n">Initial</span><span class="w"> </span><span class="nx">Chunk</span><span class="w"> </span><span class="nx">Files</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">Names</span><span class="w">         </span><span class="o">|</span><span class="w">      </span><span class="n">Size</span><span class="w">
+</span><span class="nx">vendor.js</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">vendor</span><span class="w">        </span><span class="o">|</span><span class="w">   </span><span class="mf">2.78</span><span class="w"> </span><span class="n">MB</span><span class="w">
+</span><span class="nx">polyfills.js</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">polyfills</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="mf">508.82</span><span class="w"> </span><span class="n">kB</span><span class="w">
+</span><span class="nx">styles.css</span><span class="p">,</span><span class="w"> </span><span class="nx">styles.js</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">styles</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mf">381.01</span><span class="w"> </span><span class="n">kB</span><span class="w">
+</span><span class="nx">main.js</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="n">main</span><span class="w">          </span><span class="o">|</span><span class="w">  </span><span class="mf">23.81</span><span class="w"> </span><span class="n">kB</span><span class="w">
+</span><span class="nx">runtime.js</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">runtime</span><span class="w">       </span><span class="o">|</span><span class="w">   </span><span class="mf">6.58</span><span class="w"> </span><span class="n">kB</span><span class="w">
+
+                      </span><span class="o">|</span><span class="w"> </span><span class="n">Initial</span><span class="w"> </span><span class="nx">Total</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="mf">3.68</span><span class="w"> </span><span class="n">MB</span><span class="w">
+
+</span><span class="n">Build</span><span class="w"> </span><span class="nx">at:</span><span class="w"> </span><span class="nx">2021-07-11T12:32:47.989Z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">Hash:</span><span class="w"> </span><span class="nx">d36451f7e7ab28b70847</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">Time:</span><span class="w"> </span><span class="nx">5046ms</span><span class="w">
+
+</span><span class="o">**</span><span class="w"> </span><span class="n">Angular</span><span class="w"> </span><span class="nx">Live</span><span class="w"> </span><span class="nx">Development</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">listening</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">localhost:4200</span><span class="p">,</span><span class="w"> </span><span class="nx">open</span><span class="w"> </span><span class="nx">your</span><span class="w"> </span><span class="nx">browser</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">http://localhost:4200/</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span><span class="o">*</span><span class="w">
+
+
+</span><span class="err">√</span><span class="w"> </span><span class="n">Compiled</span><span class="w"> </span><span class="nx">successfully.</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Sekarang kita bisa coba, dari browser dengan mengakses <a href="http://localhost:4200">http://localhost:4200</a> seperti berikut:</p>
+
+<p><img src="/resources/posts/docker/08i-angular-proxy/01-proxy-to-backend.png" alt="angular-proxy-to-backend" /></p>
+
+<h2 id="setup-reverse-proxy-pada-nginx">Setup reverse proxy pada nginx</h2>
+
+<p>Untuk deployment ke nginx, pertama kita perlu build ulang sourcenya dan copy sourcenya ke root folder dari nginx tersebut, dengan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">ng build <span class="nt">--stats-json</span> <span class="nt">--source-map</span> <span class="nt">--optimization</span> <span class="nt">--common-chunk</span> <span class="nt">--build-optimizer</span> <span class="nt">--aot</span></code></pre></figure>
+
+<p>Seperti berikut outputnya:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker-angular</span><span class="w">  </span><span class="nx">ng</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nt">--stats-json</span><span class="w"> </span><span class="nt">--source-map</span><span class="w"> </span><span class="nt">--optimization</span><span class="w"> </span><span class="nt">--common-chunk</span><span class="w"> </span><span class="nt">--build-optimizer</span><span class="w"> </span><span class="nt">--aot</span><span class="w">
+</span><span class="err">√</span><span class="w"> </span><span class="n">Browser</span><span class="w"> </span><span class="nx">application</span><span class="w"> </span><span class="nx">bundle</span><span class="w"> </span><span class="nx">generation</span><span class="w"> </span><span class="nx">complete.</span><span class="w">
+</span><span class="err">√</span><span class="w"> </span><span class="n">Copying</span><span class="w"> </span><span class="nx">assets</span><span class="w"> </span><span class="nx">complete.</span><span class="w">
+</span><span class="err">√</span><span class="w"> </span><span class="n">Index</span><span class="w"> </span><span class="nx">html</span><span class="w"> </span><span class="nx">generation</span><span class="w"> </span><span class="nx">complete.</span><span class="w">
+
+</span><span class="n">Initial</span><span class="w"> </span><span class="nx">Chunk</span><span class="w"> </span><span class="nx">Files</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="n">Names</span><span class="w">         </span><span class="o">|</span><span class="w">      </span><span class="n">Size</span><span class="w">
+</span><span class="nx">main.abd551167fb9b2ff3fbc.js</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">main</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="mf">243.38</span><span class="w"> </span><span class="n">kB</span><span class="w">
+</span><span class="nx">polyfills.66a6ee27a5b4801e3d29.js</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polyfills</span><span class="w">     </span><span class="o">|</span><span class="w">  </span><span class="mf">36.03</span><span class="w"> </span><span class="n">kB</span><span class="w">
+</span><span class="nx">runtime.5694b417c6f4c412fb7a.js</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">runtime</span><span class="w">       </span><span class="o">|</span><span class="w">   </span><span class="mf">1.07</span><span class="w"> </span><span class="n">kB</span><span class="w">
+</span><span class="nx">styles.31d6cfe0d16ae931b73c.css</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">styles</span><span class="w">        </span><span class="o">|</span><span class="w">   </span><span class="mi">0</span><span class="w"> </span><span class="n">bytes</span><span class="w">
+
+                                  </span><span class="o">|</span><span class="w"> </span><span class="n">Initial</span><span class="w"> </span><span class="nx">Total</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mf">280.48</span><span class="w"> </span><span class="n">kB</span><span class="w">
+
+</span><span class="n">Build</span><span class="w"> </span><span class="nx">at:</span><span class="w"> </span><span class="nx">2021-07-11T12:51:09.367Z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">Hash:</span><span class="w"> </span><span class="nx">d6ee461f7275c011e9a8</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">Time:</span><span class="w"> </span><span class="nx">19014ms</span><span class="w">
+
+</span><span class="c">## remove old build</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker-angular</span><span class="w">  </span><span class="nx">rm</span><span class="w"> </span><span class="nt">-Force</span><span class="w"> </span><span class="nx">C:\tools\nginx-1.20.1\html\</span><span class="o">*</span><span class="w">
+
+</span><span class="c">## deploy new application</span><span class="w">
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker-angular</span><span class="w">  </span><span class="nx">cp</span><span class="w"> </span><span class="nt">-Recurse</span><span class="w"> </span><span class="o">.</span><span class="nx">\dist\docker-angular\</span><span class="o">*</span><span class="w"> </span><span class="nx">C:\tools\nginx-1.20.1\html\</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Kalau kita jalankan, nginxnya ini tidak akan melakukan proxy to backend pada saat menggunakan development mode <code class="language-plaintext highlighter-rouge">ng serve</code>. Kita perlu setting reverse proxy pada <code class="language-plaintext highlighter-rouge">nginx.conf</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08i-nginx-reverse-proxy.conf"> </script>
+
+<p>Sekarang kita coba test dulu dengan perintah</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">nginx <span class="nt">-t</span></code></pre></figure>
+
+<p>Hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">nginx-1.20.1</span><span class="w">  </span><span class="o">.</span><span class="nx">\nginx.exe</span><span class="w"> </span><span class="nt">-t</span><span class="w">
+</span><span class="n">nginx:</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">C:\tools\nginx-1.20.1/conf/nginx.conf</span><span class="w"> </span><span class="nx">syntax</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">ok</span><span class="w">
+</span><span class="n">nginx:</span><span class="w"> </span><span class="nx">configuration</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">C:\tools\nginx-1.20.1/conf/nginx.conf</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">successful</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Setelah itu kita coba jalankan service nginx, dengan menggunakan perintah</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">## stop service if running</span>
+nginx <span class="nt">-s</span> stop
+
+<span class="c">## then start</span>
+nginx</code></pre></figure>
+
+<p>Sekarang klo kita coba akses service, harusnya udah jalan proxynya seperti berikut:</p>
+
+<p><img src="/resources/posts/docker/08i-angular-proxy/02-nginx-reverse-proxy.png" alt="angular-nginx-proxy" /></p>
+
+<h2 id="run-reverse-proxy-from-container">Run reverse proxy from container</h2>
+
+<p>Setelah kita mencoba manual developmentnya, sekarang kita coba build menggunakan docker. Yang perlu kita siapkan adalah <code class="language-plaintext highlighter-rouge">default.conf</code> untuk melakukan proxy ke backend. Tetapi disini saya gak mau hard-code endpointnya seperti pada config sebelumnya yaitu menggunakan <code class="language-plaintext highlighter-rouge">proxy_pass http://localhost:8080/;</code> tapi disini kita mau menggunakan Environtment dalam nginxnya. Sebetulnya udah ada yang pernah bahas juga <a href="https://github.com/docker-library/docs/tree/master/nginx#using-environment-variables-in-nginx-configuration-new-in-119">disini</a></p>
+
+<p>Sekarang kita buat template conf nya dulu seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08i-nginx-template.conf"> </script>
+
+<p>Setelah itu kita modif / edit file <code class="language-plaintext highlighter-rouge">Dockerfile</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08i-dockerfile"> </script>
+
+<p>Setelah itu kita build docker image, dengan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">docker build <span class="nt">-t</span> dimmaryanto93/docker-angular:0.0.1-SNAPSHOT .</code></pre></figure>
+
+<p>Jika di jalankan hasilnya seperti berikut:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="n">docker-angular</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nt">-t</span><span class="w"> </span><span class="nx">dimmaryanto93/docker-angular:0.0.1-SNAPSHOT</span><span class="w"> </span><span class="o">.</span><span class="w">
+</span><span class="p">[</span><span class="o">+</span><span class="p">]</span><span class="w"> </span><span class="n">Building</span><span class="w"> </span><span class="nx">107.4s</span><span class="w"> </span><span class="p">(</span><span class="mi">16</span><span class="n">/16</span><span class="p">)</span><span class="w"> </span><span class="nx">FINISHED</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nx">definition</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">Dockerfile</span><span class="w">                                                       </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">transferring</span><span class="w"> </span><span class="nx">dockerfile:</span><span class="w"> </span><span class="nx">1.28kB</span><span class="w">                                                                     </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="o">.</span><span class="nf">dockerignore</span><span class="w">                                                                          </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">transferring</span><span class="w"> </span><span class="nx">context:</span><span class="w"> </span><span class="nx">34B</span><span class="w">                                                                           </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="nx">metadata</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">docker.io/library/node:14.15-alpine</span><span class="w">                                       </span><span class="nx">4.8s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="nx">metadata</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">docker.io/library/nginx:latest</span><span class="w">                                            </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">auth</span><span class="p">]</span><span class="w"> </span><span class="n">library/node:pull</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">registry-1.docker.io</span><span class="w">                                                </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">npm_install</span><span class="w"> </span><span class="mi">1</span><span class="n">/5</span><span class="p">]</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">docker.io/library/node:14.15-alpine</span><span class="err">@</span><span class="nx">sha256:5edad160011cc8cfb69d990e9ae1cb2681c</span><span class="w">  </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">internal</span><span class="p">]</span><span class="w"> </span><span class="n">load</span><span class="w"> </span><span class="n">build</span><span class="w"> </span><span class="n">context</span><span class="w">                                                                          </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">transferring</span><span class="w"> </span><span class="n">context</span><span class="p">:</span><span class="w"> </span><span class="mf">4.20</span><span class="n">kB</span><span class="w">                                                                        </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">CACHED</span><span class="w"> </span><span class="p">[</span><span class="n">stage</span><span class="nt">-1</span><span class="w"> </span><span class="mi">1</span><span class="n">/4</span><span class="p">]</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">docker.io/library/nginx:latest</span><span class="w">                                               </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">stage</span><span class="nt">-1</span><span class="w"> </span><span class="mi">2</span><span class="n">/4</span><span class="p">]</span><span class="w"> </span><span class="n">WORKDIR</span><span class="w"> </span><span class="n">/var/www/html</span><span class="w">                                                                    </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">CACHED</span><span class="w"> </span><span class="p">[</span><span class="n">npm_install</span><span class="w"> </span><span class="mi">2</span><span class="n">/5</span><span class="p">]</span><span class="w"> </span><span class="n">WORKDIR</span><span class="w"> </span><span class="n">/var/www</span><span class="w">                                                              </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">npm_install</span><span class="w"> </span><span class="mi">3</span><span class="n">/5</span><span class="p">]</span><span class="w"> </span><span class="n">COPY</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="w">                                                                             </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">npm_install</span><span class="w"> </span><span class="mi">4</span><span class="n">/5</span><span class="p">]</span><span class="w"> </span><span class="n">RUN</span><span class="w"> </span><span class="n">npm</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="nt">--prod</span><span class="w"> </span><span class="nt">--silent</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">npm</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="err">@</span><span class="n">angular</span><span class="nt">-devkit</span><span class="n">/build-angular</span><span class="w"> </span><span class="nt">--sil</span><span class="w">  </span><span class="nx">72.7s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">npm_install</span><span class="w"> </span><span class="mi">5</span><span class="n">/5</span><span class="p">]</span><span class="w"> </span><span class="n">RUN</span><span class="w"> </span><span class="o">.</span><span class="n">/node_modules/</span><span class="err">@</span><span class="nx">angular/cli/bin/ng</span><span class="w"> </span><span class="nx">build</span><span class="w"> </span><span class="nt">--aot</span><span class="w"> </span><span class="nt">--build-optimizer</span><span class="w"> </span><span class="nt">--configurati</span><span class="w">  </span><span class="nx">29.4s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">stage</span><span class="nt">-1</span><span class="w"> </span><span class="mi">3</span><span class="n">/4</span><span class="p">]</span><span class="w"> </span><span class="n">COPY</span><span class="w"> </span><span class="nt">--from</span><span class="o">=</span><span class="n">npm_install</span><span class="w"> </span><span class="n">/var/www/dist/docker-angular</span><span class="w"> </span><span class="o">.</span><span class="w">                                   </span><span class="nx">0.1s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="p">[</span><span class="n">stage</span><span class="nt">-1</span><span class="w"> </span><span class="mi">4</span><span class="n">/4</span><span class="p">]</span><span class="w"> </span><span class="n">COPY</span><span class="w"> </span><span class="o">.</span><span class="nf">nginx</span><span class="n">/default.template.conf</span><span class="w"> </span><span class="nx">/etc/nginx/templates/default.conf.template</span><span class="w">             </span><span class="nx">0.0s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">exporting</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">image</span><span class="w">                                                                                     </span><span class="mf">0.1</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">exporting</span><span class="w"> </span><span class="n">layers</span><span class="w">                                                                                    </span><span class="mf">0.1</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">writing</span><span class="w"> </span><span class="n">image</span><span class="w"> </span><span class="n">sha256</span><span class="p">:</span><span class="mi">8</span><span class="n">cb61351f167b0f002842f25ebf7d3d1290a4075a0e80cf18a78c66d1881609f</span><span class="w">               </span><span class="mf">0.0</span><span class="n">s</span><span class="w">
+ </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="err">&gt;</span><span class="w"> </span><span class="n">naming</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">docker.io/dimmaryanto93/docker-angular:0.0.1-SNAPSHOT</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="nt">-angular</span><span class="w">  </span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="nt">--name</span><span class="w"> </span><span class="n">angular</span><span class="nt">-nginx-proxy</span><span class="w"> </span><span class="se">`</span><span class="w">
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="mi">80</span><span class="p">:</span><span class="mi">80</span><span class="w"> </span><span class="se">`</span><span class="w">
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-e</span><span class="w"> </span><span class="n">BACKEND_HOST</span><span class="o">=</span><span class="n">spring</span><span class="nt">-db</span><span class="w"> </span><span class="se">`</span><span class="w">
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-e</span><span class="w"> </span><span class="n">BACKEND_PORT</span><span class="o">=</span><span class="mi">80</span><span class="w"> </span><span class="se">`</span><span class="w">
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-e</span><span class="w"> </span><span class="n">BACKEND_CONTEXT_PATH</span><span class="o">=</span><span class="n">/</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">--network</span><span class="w"> </span><span class="nx">backend</span><span class="w"> </span><span class="se">`
+</span><span class="err">&gt;&gt;</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">dimmaryanto93/docker-angular:0.0.1-SNAPSHOT</span><span class="w">
+</span><span class="mi">1160</span><span class="n">ae87ea485d95c9f89b0134cd6623ffe558adb65e211cb19cdf9d1d3f2dc8</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="nt">-angular</span><span class="w">  </span><span class="n">docker</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="n">ls</span><span class="w">
+</span><span class="n">CONTAINER</span><span class="w"> </span><span class="n">ID</span><span class="w">   </span><span class="n">IMAGE</span><span class="w">                                                         </span><span class="n">COMMAND</span><span class="w">                  </span><span class="n">CREATED</span><span class="w">
+       </span><span class="n">STATUS</span><span class="w">                             </span><span class="n">PORTS</span><span class="w">                                   </span><span class="n">NAMES</span><span class="w">
+</span><span class="mi">1160</span><span class="n">ae87ea48</span><span class="w">   </span><span class="n">dimmaryanto93/docker-angular:0.0.1-SNAPSHOT</span><span class="w">                   </span><span class="s2">"/docker-entrypoint.…"</span><span class="w">   </span><span class="nx">13</span><span class="w"> </span><span class="nx">seconds</span><span class="w">
+ </span><span class="n">ago</span><span class="w">   </span><span class="n">Up</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="p">(</span><span class="n">health</span><span class="p">:</span><span class="w"> </span><span class="n">starting</span><span class="p">)</span><span class="w">   </span><span class="mf">0.0</span><span class="o">.</span><span class="nf">0</span><span class="o">.</span><span class="nf">0</span><span class="p">:</span><span class="mi">80</span><span class="o">-</span><span class="err">&gt;</span><span class="mi">80</span><span class="n">/tcp</span><span class="p">,</span><span class="w"> </span><span class="p">:::</span><span class="nx">80-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="w">       </span><span class="nx">angular-nginx-proxy</span><span class="w">
+</span><span class="mi">22835</span><span class="n">ba3d9f9</span><span class="w">   </span><span class="n">dimmaryanto93/udemy-springboot-docker:2021.07.05.00-release</span><span class="w">   </span><span class="s2">"java -Djava.securit…"</span><span class="w">   </span><span class="nx">5</span><span class="w"> </span><span class="nx">minutes</span><span class="w">
+</span><span class="n">ago</span><span class="w">    </span><span class="n">Up</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="n">minutes</span><span class="w"> </span><span class="p">(</span><span class="n">healthy</span><span class="p">)</span><span class="w">             </span><span class="mf">0.0</span><span class="o">.</span><span class="nf">0</span><span class="o">.</span><span class="nf">0</span><span class="p">:</span><span class="mi">8080</span><span class="o">-</span><span class="err">&gt;</span><span class="mi">80</span><span class="n">/tcp</span><span class="p">,</span><span class="w"> </span><span class="p">:::</span><span class="nx">8080-</span><span class="err">&gt;</span><span class="nx">80/tcp</span><span class="w">   </span><span class="nx">spring-db</span><span class="w">
+</span><span class="mi">4</span><span class="n">ffaa6d947ff</span><span class="w">   </span><span class="n">postgres</span><span class="p">:</span><span class="mf">12.6</span><span class="w">                                                 </span><span class="s2">"docker-entrypoint.s…"</span><span class="w">   </span><span class="mi">5</span><span class="w"> </span><span class="n">minutes</span><span class="w">
+</span><span class="n">ago</span><span class="w">    </span><span class="n">Up</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="n">minutes</span><span class="w">                       </span><span class="mi">5432</span><span class="n">/tcp</span><span class="w">                                </span><span class="nx">postgresdb</span><span class="w">
+
+</span><span class="err">➜</span><span class="w"> </span><span class="n">docker</span><span class="nt">-angular</span><span class="w">  </span><span class="n">docker</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="n">angular</span><span class="nt">-nginx-proxy</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="n">/etc/nginx/conf.d/default.conf</span><span class="w">
+</span><span class="nx">server</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="n">listen</span><span class="w">       </span><span class="mi">80</span><span class="p">;</span><span class="w">
+    </span><span class="n">server_name</span><span class="w">  </span><span class="n">localhost</span><span class="p">;</span><span class="w">
+
+    </span><span class="n">location</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">root</span><span class="w">   </span><span class="n">/var/www/html</span><span class="p">;</span><span class="w">
+      </span><span class="n">index</span><span class="w">  </span><span class="n">index.html</span><span class="p">;</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+    </span><span class="n">location</span><span class="w"> </span><span class="n">/spring-boot/</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="n">proxy_pass</span><span class="w">                      </span><span class="n">http</span><span class="p">:</span><span class="n">//spring-db:80/</span><span class="p">;</span><span class="w">
+      </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">Host</span><span class="w">           </span><span class="nv">$host</span><span class="p">;</span><span class="w">
+      </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="n">X-Real-IP</span><span class="w">      </span><span class="nv">$remote_addr</span><span class="p">;</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Sekarang kalo kita coba access dari browser, menggunakan alamat <a href="http://localhost:80">http://localhost</a> hasilnya akan sama seperti pada deploy di nginx. seperti berikut:</p>
+
+<p><img src="/resources/posts/docker/08i-angular-proxy/02-nginx-reverse-proxy.png" alt="angular-nginx-proxy" /></p>
+
+<h2 id="cleanup">Cleanup</h2>
+
+<p>Seperti biasa setelah kita mencoba schenario studi kasus tersebut. sekarang kita bersih-bersih dulu ya berikut perintahnya:</p>
+
+<p>For Bash script:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08i-cleanup.bash"> </script>
+
+<p>For Powershell script:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/ff00f4fbaf9d03de33b9a9a1bd159f6a.js?file=08i-cleanup.ps1"> </script>
+
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/devops/docker/01-silabus"  class="" title="Silabus Belajar Docker: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api" class="" 
+        title="Angular - Access Rest API
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 56 to 113
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/devops/docker/dockerfile/study-cases/08j-build-php" class="" 
+        title="Build docker image for PHP
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/devops/docker/14c-ansible-for-docker-operations"  class="" title="Getting started with Ansible role, tasks for docker">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
+    
+      <a href="/categories/#docker" class="page__taxonomy-item p-category" rel="tag">Docker</a><span class="sep">, </span>
+    
+      <a href="/categories/#dockerfile" class="page__taxonomy-item p-category" rel="tag">Dockerfile</a><span class="sep">, </span>
+    
+      <a href="/categories/#study-cases" class="page__taxonomy-item p-category" rel="tag">Study-Cases</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-07-11T21:10:26+07:00">July 11, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Angular+-+Proxy+to+backend%20%2Fposts%2Fdevops%2Fdocker%2Fdockerfile%2Fstudy-cases%2F08i-build-angular-proxy-to-backend" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Fdocker%2Fdockerfile%2Fstudy-cases%2F08i-build-angular-proxy-to-backend" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Fdocker%2Fdockerfile%2Fstudy-cases%2F08i-build-angular-proxy-to-backend" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

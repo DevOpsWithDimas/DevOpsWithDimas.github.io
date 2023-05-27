@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "Nested Object in Javascript",
+      "link": "/posts/web/js/13-nexted-object-js"
+    }
+    ,
+    {
+      "title": "Object Oriented Programming dengan Javascript",
+      "link": "/posts/web/js/12-object-js"
+    }
+    ,
+    {
+      "title": "Array di JavaScript",
+      "link": "/posts/web/js/10-array-js"
+    }
+    ,
+    {
+      "title": "Function di JavaScript",
+      "link": "/posts/web/js/09-function-js"
+    }
+    ,
+    {
+      "title": "Perulangan atau Looping dengan JavaScript",
+      "link": "/posts/web/js/08-loop-js"
+    }
+    ,
+    {
+      "title": "Percabagan atau Selection di JavaScript",
+      "link": "/posts/web/js/07-selection-js"
+    }
+    ,
+    {
+      "title": "Operator Matematika di JavaScript",
+      "link": "/posts/web/js/06-math-operation-js"
+    }
+    ,
+    {
+      "title": "Variable di JavaScript",
+      "link": "/posts/web/js/05-variables-js"
+    }
+    ,
+    {
+      "title": "Data Type di JavaScript",
+      "link": "/posts/web/js/04-data-type-js"
+    }
+    ,
+    {
+      "title": "Setup Develoment environment untuk Javascript",
+      "link": "/posts/web/js/03-setup-env-development"
+    }
+  ]
+}

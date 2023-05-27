@@ -1,0 +1,507 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Linux CentOS - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya selamat datang di kelas Docker untuk pemula s/d mahir, jadi kali ini kita akan membahas teknology container yaitu menggunakan Docker.">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Linux CentOS">
+<meta property="og:url" content="/pages/cources/linux-centos">
+
+
+  <meta property="og:description" content="Hai semuanya selamat datang di kelas Docker untuk pemula s/d mahir, jadi kali ini kita akan membahas teknology container yaitu menggunakan Docker.">
+
+
+
+  <meta property="og:image" content="/assets/images/cources/linux-centos.png">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-05-27T12:26:05+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/pages/cources/linux-centos">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/cources/linux-centos.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Linux CentOS
+
+        
+      </h1>
+      
+        <p class="page__lead">xxx
+</p>
+      
+      
+<p class="page__meta">
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-05-27T12:26:05+07:00">May 27, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+      
+      
+        <p>
+        
+          
+          <a href="/posts/server/linux/centos" class="btn btn--light-outline btn--large">
+            Learn more
+          </a>
+          
+        
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">Tutorial &amp; Dokumentasi: Programming, DevOps, GitOps, Database, &amp; Servers
+</span>
+  
+</div>
+
+
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+  
+
+  
+
+  
+    
+      
+      <h3>Role</h3>
+      <p>DevOps Engineer, Developer &amp; Programmer</p>
+
+      
+    
+      
+      <h3>Responsibilities</h3>
+      <p>Temen-teman akan belajar Linux untuk Server dengan CentOS untuk Pemula sampai Mahir.</p>
+
+      
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#what-youll-learn">What you’ll learn?</a></li><li><a href="#requirement">Requirement</a></li><li><a href="#what-youll-get-from-this-cource">What you’ll get from this cource?</a></li><li><a href="#description">Description</a></li><li><a href="#who-this-course-is-for">Who this course is for?</a></li><li><a href="#after-taking-this-course-youll-be-able-to">After taking this course, you’ll be able to?</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Linux CentOS">
+    <meta itemprop="description" content="Hai semuanya selamat datang di kelas Docker untuk pemula s/d mahir, jadi kali ini kita akan membahas teknology container yaitu menggunakan Docker.">
+    <meta itemprop="datePublished" content="2023-05-27T12:26:05+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <p>Hai semuanya selamat datang di kelas <strong>Docker untuk pemula s/d mahir</strong>, jadi kali ini kita akan membahas teknology container yaitu menggunakan <a href="https://www.docker.com/">Docker</a>.</p>
+
+<!--more-->
+
+<h2 id="what-youll-learn">What you’ll learn?</h2>
+
+<p>Secara garis besar apa saja sih yang akan temen-temen pelajari:</p>
+
+<ol>
+  <li>Bagaimana menggunakan Docker, &amp; Compose pada PC/Laptop kamu supaya bisa membantu task dalam Development maupun Deployment.</li>
+  <li>Hand’s-on terkait best practices untuk menggunakan Docker, membuat Dockerfile and Compose files like a Pro!</li>
+  <li>Membuat custom Container Image kemudian di-build serta di-publish ke public/private container registry di environment kamu</li>
+  <li>Disertai dengan berbagai macam workload, bahasa pemograman seperti PHP, Java Web, Springboot, Angular dan lain-lain</li>
+  <li>Me-running / deploy Container image ke environment server kamu</li>
+  <li>Membuat mini project (sederhana) sebagai final project sebagai tolak ukur, temen-temen telah mengelesaikan kelas ini.</li>
+</ol>
+
+<h2 id="requirement">Requirement</h2>
+
+<p>Untuk mengikuti kelas ini, disarankan temen-temen sudah memenuhi beberapa syarat berikut:</p>
+
+<ul>
+  <li>Memiliki PC / Laptop / Virtual Machine dengan memenuhi standard minimum menjalankan Docker engine atau Docker Desktop</li>
+  <li>Memahami sedikit basic tentang commandline / terminal command</li>
+  <li>Memiliki account <a href="https://github.com/">github</a> and <a href="https://hub.docker.com/">Docker Hub</a></li>
+  <li>Memahami perintah <code class="language-plaintext highlighter-rouge">git</code> dasar, seperti <code class="language-plaintext highlighter-rouge">clone</code>, <code class="language-plaintext highlighter-rouge">pull</code>, <code class="language-plaintext highlighter-rouge">checkout</code>, dan <code class="language-plaintext highlighter-rouge">push</code></li>
+  <li>Memahami basic networking, seperti bagaimana setiap node/server berkomunikasi.</li>
+  <li>Memahami basic web server dan database, seperti bagaimana mereka saling berkomunikasi melalui protocol TCP/IP</li>
+</ul>
+
+<h2 id="what-youll-get-from-this-cource">What you’ll get from this cource?</h2>
+
+<p>Beberapa benefit jika temen-temen mengikuti kelas ini, diantaranya:</p>
+
+<ul>
+  <li>Materi berbentuk website/blog post, persentation file dan beberapa file pendukung lainnya.</li>
+  <li>Materi yang disampakan akan terus bertambah dan di-update seiring dengan bertambahnya waktu</li>
+  <li>Materi yang disampaikan disertai dengan Latihan baik pilihan ganda (knowlagebase) maupun hand’s on  (praktek)</li>
+  <li>Temen-temen bisa bertanya ke group/community baik melalu channel Udemy maupun Discord untuk premium members</li>
+  <li>Materi lebih dari 30jam tayang, serta dapat diakses selamanya</li>
+  <li>Temen-temen bisa konsultasi secara langsung dengan saya (instruktur) melalui off/online meet jika dibutuhkan. (Contact Me!)</li>
+  <li>Mendapatkan Certificate of completion</li>
+</ul>
+
+<h2 id="description">Description</h2>
+
+<p>Kelas <code class="language-plaintext highlighter-rouge">DevOps dengan Docker untuk Pemula s/d Mahir</code> dirancang buat temen-temen untuk yang masih awam karena materi disampkan di buat sejelas dan selengkap mungkin. Selain itu juga yang akan diajarkan tidak hanya sebatas teori melainkan hampir <code class="language-plaintext highlighter-rouge">70%</code> kita akan hand’s-on (praktek).</p>
+
+<p>Setelah kita mempelajari semua materi terkait docker, diakhir kita akan membahas Studi Kasus. Studi kasus yang akan saya bahas adalah beberapa pengalaman saya bekerja sebagai DevOps Engineer, Konsultan, Technical Advisor serta Training. Contohnya seperti</p>
+
+<ul>
+  <li>Memigrasikan aplikasi berbasis webserver ke container</li>
+  <li>Memigrasikan aplikasi dari linux agent (system) ke container</li>
+  <li>Memigrasikan aplikasi monolith ke microservice yang di deploy ke container system</li>
+</ul>
+
+<h2 id="who-this-course-is-for">Who this course is for?</h2>
+
+<p>Kelas ini dibuat buat siapa saya yang ingin menjadi DevOps engineer, bisa untuk yang belum bekerja seperti:</p>
+
+<ul>
+  <li>SMK (Sekolah menengah kejuruan) jurusan IT (ilmu komputer),</li>
+  <li>Mahasiswa jurusan/program studi IT (ilmu komputer)</li>
+</ul>
+
+<p>Dan juga yang sudah bekerja seperti:</p>
+
+<ul>
+  <li>Developer (programmer)</li>
+  <li>Operation team</li>
+</ul>
+
+<h2 id="after-taking-this-course-youll-be-able-to">After taking this course, you’ll be able to?</h2>
+
+<p>Setelah mengikuti kelas ini diharapkan temen-temen bisa menguasai secara keseluruhan baik teori maupun praktek dan bisa mengimplementasikan di kehidupan sehari-hari. Contohnya</p>
+
+<ul>
+  <li>Saya adalah seorang <strong>Developer/Programmer</strong> yang daily based/task membuat <strong>aplikasi bisnis</strong>. Ketika mendevelop aplikasi tersebut biasanya saya menggunakan docker untuk menjalankan beberapa backing service seperti Database, mail server dan lain-lain</li>
+  <li>Saya adalah seorang <strong>DevOps enginer</strong> yang daily based/task membantu membuat <strong>pipeline CI/CD</strong> terkait aplikasi yang dibangun oleh developer. Ketika membuat pipeline tersebut biasanya saya menggunakan docker sebagai executor dari pipeline tersebut agar environment lebih dynamic dan clean tanpa adanya hardening.</li>
+  <li>Saya adalah seorang <strong>Research and Developer (RnD)</strong> yang daily based/task yaitu <strong>Me-research suatu teknologi</strong>. Untuk melakukan research teknologi tersebut terkadang membutuhkan environment tertentu. Jika temen-temen menggunakan sistem operasi yang tidak disupport oleh teknologi yang sedang di research contohnya Microsoft SQL Server atau Oracle Database. Nah software tersebutkan hanya jalan di environment tertentu seperti Windows Server atau Linux jadi kita harus membuat virtualisasi atau container sebagai solusi.</li>
+</ul>
+
+        
+        <div class="text-right">
+          
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/tags/#centos" class="page__taxonomy-item p-category" rel="tag">CentOS</a><span class="sep">, </span>
+    
+      <a href="/tags/#linux" class="page__taxonomy-item p-category" rel="tag">Linux</a><span class="sep">, </span>
+    
+      <a href="/tags/#server" class="page__taxonomy-item p-category" rel="tag">Server</a>
+    
+    </span>
+  </p>
+
+
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-05-27T12:26:05+07:00">May 27, 2023</time></p>
+
+      </footer>
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "pages": [
+    
+    {
+      "title": "DDL - Purge Table & Recyclebin",
+      "link": "/posts/rdbms/oracle18c/016f-ddl-purge-table"
+    }
+    ,
+    {
+      "title": "DDL - Truncate Table",
+      "link": "/posts/rdbms/oracle18c/016e-ddl-truncate-table"
+    }
+    ,
+    {
+      "title": "DDL - Menghapus table dengan DROP",
+      "link": "/posts/rdbms/oracle18c/016d-ddl-drop-table"
+    }
+    ,
+    {
+      "title": "DDL - Merubah struktur table",
+      "link": "/posts/rdbms/oracle18c/016c-ddl-alter-table"
+    }
+    ,
+    {
+      "title": "DDL - Membuat Tabel di Oracle",
+      "link": "/posts/rdbms/oracle18c/016b-ddl-create-table"
+    }
+    ,
+    {
+      "title": "DDL - Static Data Dictionary View",
+      "link": "/posts/rdbms/oracle18c/016a-dictionary-table"
+    }
+    ,
+    {
+      "title": "Data Definition Language (DDL) di Oracle",
+      "link": "/posts/rdbms/oracle18c/016-ddl"
+    }
+    ,
+    {
+      "title": "TCL - Locking Transaction di Oracle",
+      "link": "/posts/rdbms/oracle18c/015e-tcl-locking"
+    }
+    ,
+    {
+      "title": "TCL - Concurrent Transaction",
+      "link": "/posts/rdbms/oracle18c/015d-tcl-concurrent"
+    }
+    ,
+    {
+      "title": "TCL - Savepoint di Oracle",
+      "link": "/posts/rdbms/oracle18c/015c-tcl-savepoint"
+    }
+  ]
+}

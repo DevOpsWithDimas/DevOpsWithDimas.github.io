@@ -1,0 +1,1109 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Silabus SRE - Nutanix AHV: Pemula sampai Mahir - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di cource ini kita akan membahas salah satu Profesi IT yaitu Site Reliability Engineering atau yang biasa kita kenal dengan SRE Engineer terkait dengan Nutanix HCI (Hyper-Converged Infrastructure).  Mungkin dari temen-temen masih asing atau mungkin sudah pernah mendengar istilah SRE Engineer tetapi gak teralu mengerti seperti apa profesi tersebut, Di instrustri IT khususnya tech company banyak sekali loh profesi-profesi selain programmer yang relate dengan IT salah satunya adalah Site Reliability Engineering. Nah terus apasih Site Reliability Engineering?     Site Reliability Engineering atau singkatan dari SRE adalah salah satu pekerjaan di bidang IT yang specialis menangani reliabilitas suatu aplikasi atau software agar bisa berjalan dengan baik pada suatu infrastruktur yang sesuai.">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Silabus SRE - Nutanix AHV: Pemula sampai Mahir">
+<meta property="og:url" content="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv">
+
+
+  <meta property="og:description" content="Hai semuanya, di cource ini kita akan membahas salah satu Profesi IT yaitu Site Reliability Engineering atau yang biasa kita kenal dengan SRE Engineer terkait dengan Nutanix HCI (Hyper-Converged Infrastructure).  Mungkin dari temen-temen masih asing atau mungkin sudah pernah mendengar istilah SRE Engineer tetapi gak teralu mengerti seperti apa profesi tersebut, Di instrustri IT khususnya tech company banyak sekali loh profesi-profesi selain programmer yang relate dengan IT salah satunya adalah Site Reliability Engineering. Nah terus apasih Site Reliability Engineering?     Site Reliability Engineering atau singkatan dari SRE adalah salah satu pekerjaan di bidang IT yang specialis menangani reliabilitas suatu aplikasi atau software agar bisa berjalan dengan baik pada suatu infrastruktur yang sesuai.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-02-04T20:23:05+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#infrastructur-knowledge">Infrastructur knowledge</a></li><li><a href="#operation-knowledge">Operation knowledge</a></li><li><a href="#development-knowlage">Development knowlage</a></li><li><a href="#devops-knowlage">DevOps knowlage</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Silabus SRE - Nutanix AHV: Pemula sampai Mahir">
+    <meta itemprop="description" content="Hai semuanya, di cource ini kita akan membahas salah satu Profesi IT yaitu Site Reliability Engineering atau yang biasa kita kenal dengan SRE Engineer terkait dengan Nutanix HCI (Hyper-Converged Infrastructure).Mungkin dari temen-temen masih asing atau mungkin sudah pernah mendengar istilah SRE Engineer tetapi gak teralu mengerti seperti apa profesi tersebut, Di instrustri IT khususnya tech company banyak sekali loh profesi-profesi selain programmer yang relate dengan IT salah satunya adalah Site Reliability Engineering. Nah terus apasih Site Reliability Engineering?  Site Reliability Engineering atau singkatan dari SRE adalah salah satu pekerjaan di bidang IT yang specialis menangani reliabilitas suatu aplikasi atau software agar bisa berjalan dengan baik pada suatu infrastruktur yang sesuai.">
+    <meta itemprop="datePublished" content="2023-02-04T20:23:05+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv" class="u-url" itemprop="url">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Nutanix AHV">
+        <label class="acordion-item-label" for="content-Pengenalan Nutanix AHV">
+            Pengenalan Nutanix AHV
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Silabus SRE - Nutanix AHV: ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class">
+                        
+                        Welcome to the Nutanix HCF ...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-PRISM Element">
+        <label class="acordion-item-label" for="content-PRISM Element">
+            PRISM Element
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-PRISM Central">
+        <label class="acordion-item-label" for="content-PRISM Central">
+            PRISM Central
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Compute VM">
+        <label class="acordion-item-label" for="content-Compute VM">
+            Compute VM
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking">
+        <label class="acordion-item-label" for="content-Networking">
+            Networking
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Unified Storage">
+        <label class="acordion-item-label" for="content-Unified Storage">
+            Unified Storage
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-IAM (Identity and Access Management)">
+        <label class="acordion-item-label" for="content-IAM (Identity and Access Management)">
+            IAM (Identity and Access Management)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Cluster Administration">
+        <label class="acordion-item-label" for="content-Cluster Administration">
+            Cluster Administration
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Nutanix products">
+        <label class="acordion-item-label" for="content-Nutanix products">
+            Nutanix products
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di cource ini kita akan membahas salah satu Profesi IT yaitu <strong>Site Reliability Engineering</strong> atau yang biasa kita kenal dengan <strong>SRE Engineer</strong> terkait dengan <strong>Nutanix HCI (Hyper-Converged Infrastructure)</strong>.</p>
+
+<p>Mungkin dari temen-temen masih asing atau mungkin sudah pernah mendengar istilah SRE Engineer tetapi gak teralu mengerti seperti apa profesi tersebut, Di instrustri IT khususnya tech company banyak sekali loh profesi-profesi selain programmer yang relate dengan IT salah satunya adalah Site Reliability Engineering. Nah terus apasih Site Reliability Engineering?</p>
+
+<blockquote>
+  <p>Site Reliability Engineering atau singkatan dari SRE adalah salah satu pekerjaan di bidang IT yang specialis menangani reliabilitas suatu aplikasi atau software agar bisa berjalan dengan baik pada suatu infrastruktur yang sesuai.</p>
+</blockquote>
+
+<!--more-->
+
+<p>Mungkin dari temen-temen masih belum tergambar magsudnya seperti apa? Okay nah jika temen-temen banyangkan dalam suatu development lifecycle biasanya terdiri beberapa team yaitu developer/programmer, bisnis analis, project/product manager, dan operation. Berikut adalah tugas masing-masing team:</p>
+
+<ol>
+  <li>Bisnis analis: bertugas merumuskan design berdasarkan user requirement yang di translate ke diagram agar mudah di terjemahkan oleh developer</li>
+  <li>Developer: bertugas menterjemahkan hasil design yang dibuat oleh bisnis analis menjadi software atau kode program</li>
+  <li>Operation: bertugas untuk mendeliver software atau kode program yang telah dibuat oleh programmer ke environment atau yang biasa disebut infrastructure.</li>
+  <li>Project/Product manager: bertugas untuk menjaga timeline, distribute task ke masing-masing team dan memastikan feature yang dibuat sesuai dengan user requirement.</li>
+</ol>
+
+<p>Nah salah satu problem yang biasa ditemui di perusahaan besar adalah orang Developer/Programer gak ngerti infra sedangkan orang Operation gak ngerti Programming jadi begitu mau deliver software dari Developer/Programmer ke team Operation apakah langsung bisa jalan??? tentu saja tidak nah maka dari itu disini ada yang namanya SRE atau Site Reliability Engineering. Jadi secara umum tanggung jawab Site Reliability Engineering adalah untuk membantu atau sebagai penengah antara team Developer/Programmer dan team Operation.</p>
+
+<p>Nah kira-kira udah ada gambaran sedikit khan tanggung jawab SRE seperti apa, nah jadi dikelas ini kita bahas dengan studi kasus menggunakan Nutanix HCI platform. Untuk memenuhi semua itu temen-temen perlu memahami dulu platform yang akan digunakan contohnya menggunakan Nutanix Hyper-Converged Infrastructure dan juga beberapa prinsip Developer/Programmer.</p>
+
+<p>Materi yang akan dibahas di kelas ini adalah gabungan dari 3 bidang yaitu Infrastructur, Operation, Development dan DevOps knowledge seperti berikut:</p>
+
+<h3 id="infrastructur-knowledge">Infrastructur knowledge</h3>
+
+<ol>
+  <li>What is Nutanix HCI</li>
+  <li>Overview Hardware, Servers, dan Networking</li>
+  <li>Introduction to Nutanix AHV</li>
+  <li>Nutanix Prism Element</li>
+  <li>Nutanix Prism Central</li>
+  <li>Virtual Machine (VM)</li>
+  <li>Monitoring cluster</li>
+  <li>Lifecycle management</li>
+</ol>
+
+<h3 id="operation-knowledge">Operation knowledge</h3>
+
+<ol>
+  <li>System operation</li>
+  <li>OS Server</li>
+  <li>Management files</li>
+  <li>Linux bash/shell script</li>
+  <li>Networking tools</li>
+</ol>
+
+<h3 id="development-knowlage">Development knowlage</h3>
+
+<ol>
+  <li>What is Programming language?</li>
+  <li>Types of programming language?</li>
+  <li>What is tools they used to develop application/software?</li>
+  <li>How to work with programmer?</li>
+</ol>
+
+<h3 id="devops-knowlage">DevOps knowlage</h3>
+
+<ol>
+  <li>What is DevOps?</li>
+  <li>What is tools they used to automate deployment of application/software that developer created?</li>
+  <li>What the different between DevOps and SRE?</li>
+</ol>
+
+<p>Okay mungkin sekian dulu yang bisa saya bahas terkait silabus yang akan kita pelajari di kelas ‘SRE - Nutanix AHV: Pemula sampai Mahir’, semoga temen-temen tertarik mengikuti kelas ini sampai akhir sampai jumpa dikelas!!!</p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="#" class=" disabled">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="#" class=" disabled">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 1 to 2
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" class="" 
+        title="Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class"  class="" title="Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#cloud-computing" class="page__taxonomy-item p-category" rel="tag">Cloud-Computing</a><span class="sep">, </span>
+    
+      <a href="/categories/#hyper-converged-infrastructure" class="page__taxonomy-item p-category" rel="tag">Hyper-Converged-Infrastructure</a><span class="sep">, </span>
+    
+      <a href="/categories/#nutanix" class="page__taxonomy-item p-category" rel="tag">Nutanix</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Silabus+SRE+-+Nutanix+AHV%3A+Pemula+sampai+Mahir%20%2Fposts%2Fcloud-computing%2Fhyper-converged-infrastructure%2Fnutanix%2F00-silabus-nutanix-ahv" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fcloud-computing%2Fhyper-converged-infrastructure%2Fnutanix%2F00-silabus-nutanix-ahv" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fcloud-computing%2Fhyper-converged-infrastructure%2Fnutanix%2F00-silabus-nutanix-ahv" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        27 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload" rel="permalink">What is Workload Resources?
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-01-17T20:07:04+07:00">January 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        7 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>
