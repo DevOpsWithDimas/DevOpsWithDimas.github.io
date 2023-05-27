@@ -10,7 +10,9 @@ header:
   teaser: assets/images/roadmap/devops-engineer-teaser.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
-tagline: "DevOps alias Development & Operation adalah Profesi IT yang sedang hype lagi saat ini karena menggabungkan 2 divisi sekaligus yaitu Developer dan Operation team, Profesi ini menangani suatu mekanisme release management pada suatu perusahan tergantung dari culture yang diterapkan."
+tagline: "Roadmap to a become DevOps engineer from Zero to Hero, pada roadmap ini teman-temen akan dipandu untuk mempelajari materi-materi yang related dengan DevOps seperti tools Continues Integration and Continues Delivery (CI/CD), Automation Deployment, GitOps dan lain-lain.<br>
+Materi yang dibuat didesign khusus secara sistematis, terstruktur dan terlengkap sehingga mudah di pahami/pelajari oleh seorang yang pemula sekalipun!.<br>
+Temen-temen tidak hanya mempelajari secara teori, tetapi juga akan melakukan hand-on pada masing-masing environment yang dimiliki. Ingat jika kita hanya menonton video tanpa di praktekan akan sia-sia (lupa begitu saja)! so let's try it now!"
 tags:
   - devops
   - developer
