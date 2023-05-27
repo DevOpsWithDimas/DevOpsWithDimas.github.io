@@ -1,5 +1,5 @@
 ---
-title: "PROMO Udemy Class"
+title: "PROMO Udemy class"
 excerpt: "Discount 99K untuk semua kelas"
 sitemap: false
 permalink: /pages/discount/
