@@ -60,3 +60,4 @@ GitLab CI/CD uses a number of concepts to describe and run your build and deploy
 7. Gitlab release
 8. Code quality
 
+Biasanya Gitlab CI digunakan untuk melakukan Automation seperti build, test, deploy and monitor suatu aplikasi yang dibuat oleh Developer. Karena materinya banyak sekali jadi kita akan breakdown semua meteri tersebut mejadi beberapa bagian. So mungkin sekian dulu apa yang bisa saya sampaikan terkait Silabus belajar Gitlab CI untuk Automation. 👋

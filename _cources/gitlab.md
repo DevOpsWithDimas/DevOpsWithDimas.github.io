@@ -79,6 +79,10 @@ Tell me about what you will get from this source
 
 Tell me something about this cources, why you should learn this
 
+## Cource content
+
+{% include cource_contents.html cource_name="key" %}
+
 ## After taking this course, you'll be able to
 
 Tell me something about this cource, what will you be able to
