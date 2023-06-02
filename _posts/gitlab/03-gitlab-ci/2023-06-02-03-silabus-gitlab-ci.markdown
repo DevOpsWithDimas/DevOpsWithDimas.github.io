@@ -2,6 +2,7 @@
 lang: gitlab
 catalog_key: gitlab-ci
 title: "Silabus 'Continues Integration' with Gitlab CI"
+date: 2023-06-02T20:18:43+07:00
 categories:
 - git
 - gitlab
