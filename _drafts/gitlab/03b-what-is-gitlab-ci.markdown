@@ -1,7 +1,7 @@
 ---
 lang: gitlab
 catalog_key: gitlab-ci
-title: "03b-setup-gitlab-ci"
+title: "What is Gitlab CI?"
 categories:
 - git
 - gitlab
@@ -9,7 +9,7 @@ categories:
 refs: 
 - https://docs.docker.com/
 youtube: 
-image_path: /resources/posts/docker//03b-setup-gitlab-ci
+image_path: /resources/posts/docker//03b-what-is-gitlab-ci
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---

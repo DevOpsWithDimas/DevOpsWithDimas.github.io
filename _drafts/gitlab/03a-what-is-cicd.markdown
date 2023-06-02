@@ -1,7 +1,7 @@
 ---
 lang: gitlab
 catalog_key: gitlab-ci
-title: "03a-what-gitlab-ci"
+title: "What is Continues Integration/Continues Delivery (CI/CD)?"
 categories:
 - git
 - gitlab
@@ -14,8 +14,7 @@ gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---
 
-
-description...
+Hai semuanya, 
 
 <!--more-->
 
