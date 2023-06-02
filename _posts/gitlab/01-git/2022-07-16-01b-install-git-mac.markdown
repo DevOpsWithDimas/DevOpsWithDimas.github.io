@@ -1,96 +1,108 @@
 ---
-
-title: "How to Install git on Linux"
-date: 2022-07-23T08:26:13+07:00
 lang: gitlab
-authors:
-- dimasm93
+catalog_key: git
+title: "How to Install git on MacOS"
+date: 2022-07-16T13:08:14+07:00
 categories:
 - git
-- gitops
-- gitlab
+- version-control
 refs: 
 - https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+- https://git-scm.com/download/mac
 - https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
 - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 youtube: 
 comments: true
-catalog_key: introduction
-image_path: /resources/posts/git/01b-install-git-linux
+image_path: /resources/posts/git/01b-install-git-mac
 gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
 downloads: []
 ---
 
-Hai semuanya, sebelum kita hand-on menggunakan Git SCM di Linux ada beberapa hal yang perlu kita siapkan. Diantaranya
+Hai semuanya, sebelum kita hand-on menggunakan Git SCM kita harus siapkan dulu environment di MacOS seperti:
 
-1. Install Git SCM
+1. Installing Git SCM
 2. Setup Terminal
 3. Git initialization config
 
-Ok tanpa berlama-lama. langsung saja kita bahas materi yang pertama:
+Ok langsung aja kita bahas materi yang pertama:
 
 <!--more-->
 
-## Install Git SCM
+## Installing Git SCM
 
-There are several options for installing Git on Linux distribution:
+There are several options for installing Git on macOS.
 
-1. Package manager, such as (apt, yum, zyper,etc)
-2. Binary installer
-3. Build from source
+1. Package manager, such as (homebrew, macport)
+2. Apple binary package, (build-in with Xcode)
+3. Binary installer
+4. Building from source
 
-Untuk saya sendiri meng-install git menggunakan package manager. Karena saya di sini menggunakan Ubuntu Desktop v22.04 Unity. Untuk step-by-stepnya simple sekali, kita buka Terminal dan menggunakan command seperti berikut:
+Sedangkan saya sendiri menggunakan Apple binary package dengan menggunakan perintah:
 
 {% highlight bash %}
-apt-get update && \
-apt-get install git vim tmux -y
+xcode-select --install
 {% endhighlight %}
 
-Jika sudah, temen-temen bisa check menggunakan perintah seperti berikut
+Setelah itu nanti akan muncul dialog seperti berikut yang kita execute di Terminal:
+
+![Install dialog]({{ page.image_path | prepend: site.baseurl }}/01-install-dialog.png)
+
+Kemudian muncul dialog aggrement to install commandline tools for developer, pilih Yes setelah itu akan mendownload softwarenya seperti berikut:
+
+![download commandline tools]({{ page.image_path | prepend: site.baseurl }}/02-install-commandline.png)
+
+Karena proses download & installasi lumayan lama, jadi monggo sambil ngopi atau santai dulu ja... :), jika sudah selesai seperti berikut:
+
+![installing done]({{ page.image_path | prepend: site.baseurl }}/03-installing-done.png)
+
+Sekarang kita bisa check di terminal apakah git sudah terinstall dengan menggunakan perintah seperti berikut:
 
 {% highlight bash %}
 git version
 {% endhighlight %}
 
-## Setup Terminal
+Jika sudah maka outputnya seperti berikut:
+
+![git version apple]({{ page.image_path | prepend: site.baseurl }}/04-git-version.png)
+
+## Setup Terminal for using Git
 
 Setelah kita menginstall Git di local machine kita, sebelum kita menggunakan Git kita akan setup dulu commandline / terminal supaya lebih nyaman dan menyenangkan menggunakannya. Adapun yang perlu kita lakukan adalah:
 
 1. Setup terminal application
-2. Install & Setup oh-my-zsh
-3. Install tools yang berguna seperti `curl`, `wget`.
+2. Setup [oh-my-zsh](https://ohmyz.sh)
+3. Install & setup package manager seperti [homebrew](https://brew.sh), portmac dan lainnya
+4. Install commandline editor seperti `vim`, `nano`, `tmux`, dan lain-lain.
 
-Untuk terminal aplikasinya sendiri kami menggunakan default `Terminal` jadi secara feature pun gak aneh-aneh tapi juga cukup powerfull untuk pengguna linux sendiri. Nah sekarang kita akan setup Aplikasi Terminal ini supaya lebih powerfull lagi yaitu menggunakan theme dan plugin dari [oh-my-zsh](https://ohmyz.sh/)
+Ok untuk terminal application yang saya gunakan adalah [iTerm2](https://iterm2.com), iTerm2 is a replacement for Terminal and the successor to iTerm.  
+
+![terminal application]({{ page.image_path | prepend: site.baseurl }}/05-iterm2.png)
+
+iTerm2 brings the terminal into the modern age with features you never knew you always wanted. Ada banyak sekali feature yang bisa kita gunakan di iTerm2 seperti
+
+1. Split Panes
+2. Hotkey Windows
+3. Search
+4. Autocomplate
+5. Copy Mode
+6. Paste history
+7. dan lain-lain.
+
+Untuk shell dan theme yang terdapat pada iTerm2 tersebut adalah [oh-my-zsh](https://ohmyz.sh). Dengan menggunakan oh-my-zsh kita bisa menambahkan plugin special untuk git dengan menggunakan command seperti berikut:
 
 {% highlight bash %}
-# install zsh engine
-sudo apt-get install zsh curl wget
-
-# download theme and plugins
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# set default to zsh
-chsh -s $(which zsh)
-{% endhighlight %}
-
-Setelah itu temen-temen bisa logout dulu dari session, setelah itu login lagi supaya theme berubah menjadi `zsh` bukan `bash` atau `shell`.
-
-Setelah temen-temen install kita bisa setting themenya dan pluginnya dengan menggunakan perintah:
-
-{% highlight bash %}
-# set theme to minimal
-omz theme set minimal
-
 # to see list all git plugins availables
 omz plugin list | grep git
 
 # to enabled it
-omz plugin enable git git-extras git-flow gitignore
+omz plugin enable  git git-extras git-flow gitignore
 {% endhighlight %}
 
-Nah sekarang kalo kita lihat tampilan theme seperti berikut
+Kemudian yang terakhir yang kita butuhkan adalah text editor via terminal seperti vim, atau nano. Untuk package tersebut kita bisa install menggunakan package manager seperti 
 
-![terminal oh-my-zsh]({{ page.image_path | prepend: site.baseurl }}/01-ohmyzsh-theme-minimal.jpg)
+{% highlight bash %}
+brew install vim tmux curl wget
+{% endhighlight %}
 
 ## Git initialization config
 
@@ -135,16 +147,23 @@ This creates a new SSH key, using the provided email as a label.
 3. Adding your SSH key to the ssh-agent
 4. Add your SSH private key to the ssh-agent and store your passphrase in the keychain.
 
-Start the ssh-agent in the background.
-
 {% highlight bash %}
 eval "$(ssh-agent -s)"
 {% endhighlight %}
 
-after that Add your SSH private key to the ssh-agent
+If you're using macOS Sierra 10.12.2 or later, you will need to modify your `~/.ssh/config` file to automatically load keys into the ssh-agent and store passphrases in your keychain. Open your `~/.ssh/config` file, then modify the file to contain the following lines. If your SSH key file has a different name or path than the example code, modify the filename or path to match your current setup.
+
+{% highlight config %}
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+{% endhighlight %}
+
+Then save and exit, after that Add your SSH private key to the ssh-agent
 
 {% highlight bash %}
-ssh-add ~/.ssh/id_ed25519
+ssh-add -K ~/.ssh/id_ed25519
 {% endhighlight %}
 
 And finaly you can add public key to git repository, But i will do it later on next capter.

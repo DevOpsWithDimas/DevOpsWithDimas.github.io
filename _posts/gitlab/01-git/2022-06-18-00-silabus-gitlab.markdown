@@ -1,19 +1,15 @@
 ---
-
+lang: gitlab
+catalog_key: git
 title: "Silabus GitOps - Gitlab: Pemula sampai Mahir"
 date: 2022-06-18T16:08:32+07:00
-lang: gitlab
-authors:
-- dimasm93
 categories:
 - git
-- gitops
-- gitlab
+- version-control
 refs: 
 - https://git-scm.com/doc
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/git/01-silabus
 gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
 downloads: []

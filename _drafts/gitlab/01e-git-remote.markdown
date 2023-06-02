@@ -1,11 +1,10 @@
 ---
 lang: gitlab
-catalog_key: introduction
+catalog_key: git
 title: "01f-git-working-remote"
 categories:
 - git
-- gitops
-- gitlab
+- version-control
 refs: 
 - https://git-scm.com/doc
 youtube: 

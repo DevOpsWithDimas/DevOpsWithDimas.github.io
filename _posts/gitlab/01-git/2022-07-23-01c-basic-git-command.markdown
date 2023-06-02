@@ -1,14 +1,11 @@
 ---
-
+lang: gitlab
+catalog_key: git
 title: "Getting started with git"
 date: 2022-07-23T12:41:05+07:00
-lang: gitlab
-authors:
-- dimasm93
 categories:
 - git
-- gitops
-- gitlab
+- version-control
 refs: 
 - https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
 - https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
@@ -16,7 +13,6 @@ refs:
 - https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/git/01c-basic-git-command
 gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
 downloads: []

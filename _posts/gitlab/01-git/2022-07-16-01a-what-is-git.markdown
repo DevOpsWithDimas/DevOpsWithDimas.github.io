@@ -1,19 +1,15 @@
 ---
-
+lang: gitlab
+catalog_key: git
 title: "What is Git SCM"
 date: 2022-07-16T10:42:04+07:00
-lang: gitlab
-authors:
-- dimasm93
 categories:
 - git
-- gitops
-- gitlab
+- version-control
 refs: 
 - https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/git/01a-what-is-git
 gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
 downloads: []

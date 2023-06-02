@@ -12,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      linkContentUrl: _posts/gitlab/01-introduction/2022-06-18-00-silabus-gitlab.markdown
+      linkContentUrl: _posts/gitlab/01-git/2022-06-18-00-silabus-gitlab.markdown
 tagline: "xxx"
 tags:
   - DevOps
@@ -20,7 +20,7 @@ tags:
   - Gitlab
 sidebar:
   - title: "Role"
-    text: "DevOps Engineer, Developer, Programmer, & Project Manager"
+    text: "Developer/Programmer, DevOps Engineer, Operation team & Project Manager"
   - title: "Responsibilities"
     text: "Temen-teman akan belajar GitOps dengan menggunakan Gitlab Stack terkait Project Manager, Automation Deployment, Monitoring, Issues Tracking, dan lain-lain."
 udemy: 
@@ -34,28 +34,16 @@ udemy:
   toc: true
 catalogs:
   - name: Pengenalan Git
-    key: introduction
+    key: git
     description: 'Eps 1: Pengenalan Git Version Control'
     messages: ''
-  - name: Gitlab SaaS
-    key: gitlab-saas
-    description: 'Eps 2: Gitlab SaaS'
+  - name: Gitlab Platform
+    key: gitlab
+    description: 'Eps 2: Gitlab Platform'
     messages: ''
-  - name: Gitlab self-managed service
-    key: gitlab-self-managed
-    description: 'Eps 3: Gitlab self-managed service'
-    messages: ''
-  - name: Issues Tracker
-    key: issues-tracker
-    description: 'Eps 4: Gitlab for Project Manager'
-    messages: ''
-  - name: Release Management
-    key: release-management
-    description: 'Eps 5: Management Release'
-    messages: ''
-  - name: Gitlab CI/CD
-    key: gitlab-cicd
-    description: 'Eps 6: Gitlab CI/CD'
+  - name: Gitlab CI for Automation
+    key: gitlab-ci
+    description: 'Eps 3: Continues Integration with Gitlab CI'
     messages: ''
   - name: Gitlab Integration
     key: gitlab-integration

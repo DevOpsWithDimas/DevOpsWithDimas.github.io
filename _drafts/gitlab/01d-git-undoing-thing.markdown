@@ -1,11 +1,10 @@
 ---
 lang: gitlab
-catalog_key: introduction
+catalog_key: git
 title: "Undoing Things"
 categories:
 - git
-- gitops
-- gitlab
+- version-control
 refs: 
 - https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
 youtube: 

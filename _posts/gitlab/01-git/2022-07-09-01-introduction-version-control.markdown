@@ -1,19 +1,15 @@
 ---
-
+lang: gitlab
+catalog_key: git
 title: "Pengenalan Version Control"
 date: 2022-07-09T12:40:08+07:00
-lang: gitlab
-authors:
-- dimasm93
 categories:
 - git
-- gitops
-- gitlab
+- version-control
 refs: 
 - https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/git/01-introduction-git
 gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
 downloads: []

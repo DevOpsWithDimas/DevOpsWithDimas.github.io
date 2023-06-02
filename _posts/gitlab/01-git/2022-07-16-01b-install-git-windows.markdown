@@ -1,21 +1,17 @@
 ---
-
+lang: gitlab
+catalog_key: git
 title: "How to Install git on Windows"
 date: 2022-07-16T15:32:36+07:00
-lang: gitlab
-authors:
-- dimasm93
 categories:
 - git
-- gitops
-- gitlab
+- version-control
 refs: 
 - https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 - https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
 - https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/git/01b-install-git-windows
 gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
 downloads: []

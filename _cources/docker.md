@@ -29,9 +29,9 @@ header:
       linkContentUrl: _posts/docker/01-introduction/2021-04-02-01-silabus.markdown
 sidebar:
   - title: "Role"
-    text: "DevOps Engineer, Developer & Programmer"
+    text: "Developer/Programmer, DevOps Engineer & Operation team"
   - title: "Responsibilities"
-    text: "Temen-teman akan belajar Containerization dengan Docker untuk Pemula sampai Mahir."
+    text: "Temen-teman akan belajar Teknologi Container dengan menggunakan Docker untuk Pemula sampai Mahir."
 catalogs:
   - name: Pengenalan Docker
     key: introduction
