@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "DDL - Dropping User Account",
+      "link": "/posts/rdbms/oracle18c/018c-drop-user"
+    }
+    ,
+    {
       "title": "DDL - Altering User Accounts",
       "link": "/posts/rdbms/oracle18c/018b-alter-user"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Default value untuk Primary Key di Oracle",
       "link": "/posts/rdbms/oracle18c/016r-default-value-pk"
-    }
-    ,
-    {
-      "title": "DDL - Sequences di Oracle",
-      "link": "/posts/rdbms/oracle18c/016q-sequences"
     }
   ]
 }

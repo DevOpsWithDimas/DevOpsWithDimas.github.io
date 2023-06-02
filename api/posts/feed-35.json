@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Join Entity dengan Hibernate Query Language (HQL)",
+      "link": "/posts/java/orm/hibernate/postgresql/04c-hql-joins"
+    }
+    ,
+    {
       "title": "Insert, Update dan Delete Statement dengan HQL",
       "link": "/posts/java/orm/hibernate/postgresql/04b-hql-insert-update-delete-statement"
     }
@@ -44,11 +49,6 @@
     {
       "title": "ManyToOne Mapping",
       "link": "/posts/java/orm/hibernate/postgresql/03e-mapping-many-to-one"
-    }
-    ,
-    {
-      "title": "OneToMany Mapping",
-      "link": "/posts/java/orm/hibernate/postgresql/03d-mapping-one-to-many"
     }
   ]
 }

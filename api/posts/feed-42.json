@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Setup Develoment environment untuk Javascript",
+      "link": "/posts/web/js/03-setup-env-development"
+    }
+    ,
+    {
       "title": "Pengenalan scripting language dengan Javascript",
       "link": "/posts/web/js/02-pengenalan-js"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Using Database Versioning with flyway",
       "link": "/posts/language/java/jdbc/04-using-flyway"
-    }
-    ,
-    {
-      "title": "Membuat connection ke Database PostgreSQL via JDBC",
-      "link": "/posts/language/java/jdbc/03-create-connection"
     }
   ]
 }

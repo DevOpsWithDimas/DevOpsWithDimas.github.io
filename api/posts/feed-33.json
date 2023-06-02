@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Read Only Entity dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/09-read-only-entity"
+    }
+    ,
+    {
       "title": "LIMIT & OFFSET dengan HQL",
       "link": "/posts/java/orm/hibernate/postgresql/08-hql-limit-offset"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Predicate BETWEEN dengan HQL",
       "link": "/posts/java/orm/hibernate/postgresql/05d-hql-predicate-between"
-    }
-    ,
-    {
-      "title": "Predicate LIKE dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05c-hql-predicate-like"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Setup Development Environment",
+      "link": "/posts/java/orm/hibernate/postgresql/01b-setup-dev-env"
+    }
+    ,
+    {
       "title": "Pengenalan ORM dengan Hibernate Framework",
       "link": "/posts/java/orm/hibernate/postgresql/01a-pengenalan-jpa-with-hibernate"
     }
@@ -44,11 +49,6 @@
     {
       "title": "JSP Scriptlet",
       "link": "/posts/java/web/war/023-jsp-scriptlet"
-    }
-    ,
-    {
-      "title": "Using JSP and Element of JSP",
-      "link": "/posts/java/web/war/022-using-jsp"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Menghilangkan nilai redundansi dengan klausa Distinct",
+      "link": "/posts/rdbms/oracle18c/005e-select-distinct"
+    }
+    ,
+    {
       "title": "Handle Null value dengan Coalesce",
       "link": "/posts/rdbms/oracle18c/005d-handle-null-value"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Install Database Editor untuk Oracle 18c",
       "link": "/posts/rdbms/oracle18c/003d-install-database-editor"
-    }
-    ,
-    {
-      "title": "Install Oracle 18c XE dengan Docker",
-      "link": "/posts/rdbms/oracle18c/003c-install-oracledb-docker-images"
     }
   ]
 }

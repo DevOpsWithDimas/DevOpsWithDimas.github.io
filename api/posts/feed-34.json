@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Predicate LIKE dengan HQL",
+      "link": "/posts/java/orm/hibernate/postgresql/05c-hql-predicate-like"
+    }
+    ,
+    {
       "title": "Nullness Predicate dengan HQL",
       "link": "/posts/java/orm/hibernate/postgresql/05b-hql-predicate-nullness"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Distinct dengan HQL",
       "link": "/posts/java/orm/hibernate/postgresql/04d-hql-distinct"
-    }
-    ,
-    {
-      "title": "Join Entity dengan Hibernate Query Language (HQL)",
-      "link": "/posts/java/orm/hibernate/postgresql/04c-hql-joins"
     }
   ]
 }

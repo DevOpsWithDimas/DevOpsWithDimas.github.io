@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Conditional Expression dengan Case When di Oracle",
+      "link": "/posts/rdbms/oracle18c/012a-case-when-expressions"
+    }
+    ,
+    {
       "title": "Expressions di Oracle",
       "link": "/posts/rdbms/oracle18c/012-expressions"
     }
@@ -44,11 +49,6 @@
     {
       "title": "In Predicates dengan Sub Query di Oracle",
       "link": "/posts/rdbms/oracle18c/011c-subquery-multi-row-where-in-operator"
-    }
-    ,
-    {
-      "title": "Handle Sub Query Multiple rows Result dengan where operator",
-      "link": "/posts/rdbms/oracle18c/011b-subquery-multi-row-where-operator"
     }
   ]
 }

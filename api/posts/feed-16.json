@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Springboot - Using Database",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db"
+    }
+    ,
+    {
       "title": "Springboot - where data such as files/images we stored?",
       "link": "/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Multiple Stage Builds",
       "link": "/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages"
-    }
-    ,
-    {
-      "title": "Health Check Instruction",
-      "link": "/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck"
     }
   ]
 }

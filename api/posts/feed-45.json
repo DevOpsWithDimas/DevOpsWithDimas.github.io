@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Method atau Functions",
+      "link": "/posts/language/java/function/08-function"
+    }
+    ,
+    {
       "title": "Time is your for practice part 2",
       "link": "/posts/language/java/control/07-quis-section-2"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Time is your practice",
       "link": "/posts/language/java/basic/04-quis-section-1"
-    }
-    ,
-    {
-      "title": "Konversi tipe data otomatis di Java",
-      "link": "/posts/language/java/basic/03a-conversi-tipe-data"
     }
   ]
 }

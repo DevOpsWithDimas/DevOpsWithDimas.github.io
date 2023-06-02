@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Silabus 'Continues Integration' with Gitlab CI",
+      "link": "/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci"
+    }
+    ,
+    {
       "title": "Working with Deployment object",
       "link": "/posts/devops/orchestration/kubernetes/workloads/05b-deployment"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Time your practice (part 3)",
       "link": "/posts/rdbms/postgresql/sql/dml/05g-quis-section-1"
-    }
-    ,
-    {
-      "title": "Cleanup Data from Table",
-      "link": "/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup"
     }
   ]
 }

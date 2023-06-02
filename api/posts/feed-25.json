@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "DDL - Macam-macam Constraint di Oracle",
+      "link": "/posts/rdbms/oracle18c/016g-ddl-contraints-table"
+    }
+    ,
+    {
       "title": "DDL - Purge Table & Recyclebin",
       "link": "/posts/rdbms/oracle18c/016f-ddl-purge-table"
     }
@@ -44,11 +49,6 @@
     {
       "title": "TCL - Concurrent Transaction",
       "link": "/posts/rdbms/oracle18c/015d-tcl-concurrent"
-    }
-    ,
-    {
-      "title": "TCL - Savepoint di Oracle",
-      "link": "/posts/rdbms/oracle18c/015c-tcl-savepoint"
     }
   ]
 }

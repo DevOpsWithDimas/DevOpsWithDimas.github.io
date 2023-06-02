@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Mengurutkan data dengan klausa ORDER BY di Oracle",
+      "link": "/posts/rdbms/oracle18c/007-order-by"
+    }
+    ,
+    {
       "title": "Combine Logical pada klausa where di Oracle",
       "link": "/posts/rdbms/oracle18c/006h-combine-logical"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Klausa where untuk filter data di Oracle",
       "link": "/posts/rdbms/oracle18c/006-where-clause"
-    }
-    ,
-    {
-      "title": "Menghilangkan nilai redundansi dengan klausa Distinct",
-      "link": "/posts/rdbms/oracle18c/005e-select-distinct"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "OneToMany Mapping",
+      "link": "/posts/java/orm/hibernate/postgresql/03d-mapping-one-to-many"
+    }
+    ,
+    {
       "title": "OneToOne Mapping",
       "link": "/posts/java/orm/hibernate/postgresql/03c-mapping-one-to-one"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Macam-Macam Constraint di Hibernate",
       "link": "/posts/java/orm/hibernate/postgresql/02f-constraints"
-    }
-    ,
-    {
-      "title": "Time is your to practice",
-      "link": "/posts/java/web/war/034-quis-section-01"
     }
   ]
 }

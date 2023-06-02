@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Using JSP and Element of JSP",
+      "link": "/posts/java/web/war/022-using-jsp"
+    }
+    ,
+    {
       "title": "JSP Architecture",
       "link": "/posts/java/web/war/021-jsp-architecture"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Submit value dengan Servlet menggunakan Http GET Method",
       "link": "/posts/java/web/war/013-submit-value-dengan-servlet-get-method"
-    }
-    ,
-    {
-      "title": "Pemograman Servlet dengan Annotation",
-      "link": "/posts/java/web/war/012-servlet-dengan-annotation"
     }
   ]
 }

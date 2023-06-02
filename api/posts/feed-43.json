@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Membuat connection ke Database PostgreSQL via JDBC",
+      "link": "/posts/language/java/jdbc/03-create-connection"
+    }
+    ,
+    {
       "title": "Setup Project JDBC dengan Apache Maven",
       "link": "/posts/language/java/jdbc/02-setup-project-maven"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Time is your practice part 4",
       "link": "/posts/language/java/oop/13-quis-section-4"
-    }
-    ,
-    {
-      "title": "Contructor adalah method",
-      "link": "/posts/language/java/oop/12-contructor-java"
     }
   ]
 }

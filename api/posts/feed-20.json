@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Management Docker Container",
+      "link": "/posts/devops/docker/container/04a-docker-container-command"
+    }
+    ,
+    {
       "title": "Docker CLI (Command Line Interface)",
       "link": "/posts/devops/docker/container/04-docker-cli"
     }
@@ -44,11 +49,6 @@
     {
       "title": "What to know before you install Docker",
       "link": "/posts/devops/docker/02-system-requirement"
-    }
-    ,
-    {
-      "title": "What is Container",
-      "link": "/posts/devops/docker/01b-container-overview"
     }
   ]
 }

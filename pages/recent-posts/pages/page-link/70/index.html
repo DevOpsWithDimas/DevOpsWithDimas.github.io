@@ -318,6 +318,89 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/java/orm/hibernate/postgresql/03i-collections-mapping" rel="permalink">Collections Mapping
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/orm-hibernate" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Object Relational Framework for Java
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-01-19T15:30:41+07:00">January 19, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        4 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai, di materi kali ini saya mau membahas tentang element collection dengan ORM Hibernate. Hibernate menggunakan collection yang memiliki fitur lazy-loading, caching atau state chnage detection semantics. untuk menggunakan Element Collection kita hanya bisa menggunakan class</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">java.util.Collection</code></li>
+  <li><code class="language-plaintext highlighter-rouge">java.util.List</code></li>
+  <li><code class="language-plaintext highlighter-rouge">java.util.Set</code></li>
+  <li><code class="language-plaintext highlighter-rouge">java.util.Map</code></li>
+  <li><code class="language-plaintext highlighter-rouge">java.util.SortedSet</code></li>
+  <li><code class="language-plaintext highlighter-rouge">java.util.SortedMap</code></li>
+</ol>
+
+<p>selain yang di sebukan di atas, maka biasanya gak bisa atau akan menyebabkan throwing exception.</p>
+
+<p>Element Collection pada dasarnya teridiri dari:</p>
+
+<ol>
+  <li>Value Type Collection</li>
+  <li>Embedded Type Collection</li>
+  <li>Entity Collection</li>
+</ol>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/java/orm/hibernate/postgresql/03h-parent-child-mapping" rel="permalink">Parent-Child Mapping
 </a>
       
@@ -566,70 +649,6 @@
     
       
       <span class="archive__item-excerpt" itemprop="description"><p>Untuk menggunakan mapping @ManyToOne kita akan buat mapping baru yaitu <code class="language-plaintext highlighter-rouge">mahasiswa</code> dan <code class="language-plaintext highlighter-rouge">kelas</code>, berikut adalah perancangannya databasenya:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/java/orm/hibernate/postgresql/03d-mapping-one-to-many" rel="permalink">OneToMany Mapping
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/orm-hibernate" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Object Relational Framework for Java
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2021-01-12T19:55:36+07:00">January 12, 2021</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        3 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Untuk mencoba mapping OneToMany kita membutuhkan 3 table, contohnya <code class="language-plaintext highlighter-rouge">mahasiswa</code>, <code class="language-plaintext highlighter-rouge">alamat</code>, relasi antara <code class="language-plaintext highlighter-rouge">mahasiswa</code> dan <code class="language-plaintext highlighter-rouge">alamat</code> misal namanya kita sebut <code class="language-plaintext highlighter-rouge">mahasiswa_alamat_list</code>, berikut adalah perancangan tabelnya:</p>
 
 </span>
       

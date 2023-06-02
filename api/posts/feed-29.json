@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Where clause dengan Group By Function",
+      "link": "/posts/rdbms/oracle18c/009b-group-by-where"
+    }
+    ,
+    {
       "title": "Klausa Group By di Oracle",
       "link": "/posts/rdbms/oracle18c/009a-group-by"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Single Row Function di Oracle",
       "link": "/posts/rdbms/oracle18c/008-single-row-function"
-    }
-    ,
-    {
-      "title": "Mengurutkan data dengan klausa ORDER BY di Oracle",
-      "link": "/posts/rdbms/oracle18c/007-order-by"
     }
   ]
 }

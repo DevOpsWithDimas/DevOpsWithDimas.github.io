@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Handle Sub Query Multiple rows Result dengan where operator",
+      "link": "/posts/rdbms/oracle18c/011b-subquery-multi-row-where-operator"
+    }
+    ,
+    {
       "title": "Sub Query single row result dengan where clause",
       "link": "/posts/rdbms/oracle18c/011a-subquery-single-row-where-operator"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Having clause dengan Group By Function",
       "link": "/posts/rdbms/oracle18c/009c-group-by-having"
-    }
-    ,
-    {
-      "title": "Where clause dengan Group By Function",
-      "link": "/posts/rdbms/oracle18c/009b-group-by-where"
     }
   ]
 }

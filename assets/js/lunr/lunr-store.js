@@ -2664,9 +2664,9 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus GitOps - Gitlab: Pemula sampai Mahir",
-        "excerpt":"Hai semuanya, di cource ini GitOps - Gitlab: Pemula sampai Mahir kita akan mengupas tuntas mengenai salah satu teknologi Version Control yang sangat popular sejak awal 2013 lalu yaitu Git SCM. Materi yang dibahas disini adalah Git berserta menggunakan Gitlab SaaS dan Self Menaged Service sebagai Hosted Git Repository. Untuk...","categories": ["git","gitops","gitlab"],
+        "excerpt":"Hai semuanya, di cource ini GitOps - Gitlab: Pemula sampai Mahir kita akan mengupas tuntas mengenai salah satu teknologi Version Control yang sangat popular sejak awal 2013 lalu yaitu Git SCM. Materi yang dibahas disini adalah Git berserta menggunakan Gitlab SaaS dan Self Menaged Service sebagai Hosted Git Repository. Untuk...","categories": ["git","version-control"],
         "tags": [],
-        "url": "/posts/git/gitops/gitlab/00-silabus-gitlab",
+        "url": "/posts/git/version-control/00-silabus-gitlab",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Configure liveness, readiness, and startup probes",
@@ -2688,39 +2688,39 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan Version Control",
-        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas tentang Version Control menggunakan salah satu yang paling popular yaitu Git Source Code Management (SCM). Sebelum kita memulai menggunakan Git Version Control kita akan bahas dulu tentang Version Control itu sendiri Diantaranya: About Version Control? Local VCS (Version Control System) Centralized...","categories": ["git","gitops","gitlab"],
+        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas tentang Version Control menggunakan salah satu yang paling popular yaitu Git Source Code Management (SCM). Sebelum kita memulai menggunakan Git Version Control kita akan bahas dulu tentang Version Control itu sendiri Diantaranya: About Version Control? Local VCS (Version Control System) Centralized...","categories": ["git","version-control"],
         "tags": [],
-        "url": "/posts/git/gitops/gitlab/01-introduction-version-control",
+        "url": "/posts/git/version-control/01-introduction-version-control",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "What is Git SCM",
-        "excerpt":"Hai semuanya, setelah kita membahas tentang Apa itu Version Control sekarang kita akan membahas salah satu teknologi-nya atau implementasinya yaitu menggunakan Git SCM. Sebelum kita hand-on menggunakan Git SCM ada baiknya kita lihat dulu beberapa pembahasan berikut: Apa itu Git SCM? How to work with Git? Short history of Git...","categories": ["git","gitops","gitlab"],
+        "excerpt":"Hai semuanya, setelah kita membahas tentang Apa itu Version Control sekarang kita akan membahas salah satu teknologi-nya atau implementasinya yaitu menggunakan Git SCM. Sebelum kita hand-on menggunakan Git SCM ada baiknya kita lihat dulu beberapa pembahasan berikut: Apa itu Git SCM? How to work with Git? Short history of Git...","categories": ["git","version-control"],
         "tags": [],
-        "url": "/posts/git/gitops/gitlab/01a-what-is-git",
+        "url": "/posts/git/version-control/01a-what-is-git",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "How to Install git on MacOS",
-        "excerpt":"Hai semuanya, sebelum kita hand-on menggunakan Git SCM kita harus siapkan dulu environment di MacOS seperti: Installing Git SCM Setup Terminal Git initialization config Ok langsung aja kita bahas materi yang pertama: Installing Git SCM There are several options for installing Git on macOS. Package manager, such as (homebrew, macport)...","categories": ["git","gitops","gitlab"],
+        "excerpt":"Hai semuanya, sebelum kita hand-on menggunakan Git SCM kita harus siapkan dulu environment di MacOS seperti: Installing Git SCM Setup Terminal Git initialization config Ok langsung aja kita bahas materi yang pertama: Installing Git SCM There are several options for installing Git on macOS. Package manager, such as (homebrew, macport)...","categories": ["git","version-control"],
         "tags": [],
-        "url": "/posts/git/gitops/gitlab/01b-install-git-mac",
+        "url": "/posts/git/version-control/01b-install-git-mac",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "How to Install git on Windows",
-        "excerpt":"Hai semuanya, sebelum kita hand-on menggunakan Git SCM di Windows 10/11 ada beberapa hal yang perlu kita siapkan. Diantaranya Install Git SCM Setup Terminal / Powershell Git initialization config Ok tanpa berlama-lama. langsung aja kita bahas materi yang pertama: Installing Git SCM There are several options for installing Git on...","categories": ["git","gitops","gitlab"],
+        "excerpt":"Hai semuanya, sebelum kita hand-on menggunakan Git SCM di Windows 10/11 ada beberapa hal yang perlu kita siapkan. Diantaranya Install Git SCM Setup Terminal / Powershell Git initialization config Ok tanpa berlama-lama. langsung aja kita bahas materi yang pertama: Installing Git SCM There are several options for installing Git on...","categories": ["git","version-control"],
         "tags": [],
-        "url": "/posts/git/gitops/gitlab/01b-install-git-windows",
+        "url": "/posts/git/version-control/01b-install-git-windows",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "How to Install git on Linux",
-        "excerpt":"Hai semuanya, sebelum kita hand-on menggunakan Git SCM di Linux ada beberapa hal yang perlu kita siapkan. Diantaranya Install Git SCM Setup Terminal Git initialization config Ok tanpa berlama-lama. langsung saja kita bahas materi yang pertama: Install Git SCM There are several options for installing Git on Linux distribution: Package...","categories": ["git","gitops","gitlab"],
+        "excerpt":"Hai semuanya, sebelum kita hand-on menggunakan Git SCM di Linux ada beberapa hal yang perlu kita siapkan. Diantaranya Install Git SCM Setup Terminal Git initialization config Ok tanpa berlama-lama. langsung saja kita bahas materi yang pertama: Install Git SCM There are several options for installing Git on Linux distribution: Package...","categories": ["git","version-control"],
         "tags": [],
-        "url": "/posts/git/gitops/gitlab/01b-install-git-linux",
+        "url": "/posts/git/version-control/01b-install-git-linux",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Getting started with git",
-        "excerpt":"Hai semuanya, setelah kita menyiapkan environment untuk belajar Git Version Control sekarang kita mulai Hand-on untuk Dasar perintah Git diantaranya: Getting a Git Repository Create new Git Repository Cloning an Existing Repository Recording Changes to the Repository Checking the Status of Your Files Tracking New Files Staging Modified Files Ignoring...","categories": ["git","gitops","gitlab"],
+        "excerpt":"Hai semuanya, setelah kita menyiapkan environment untuk belajar Git Version Control sekarang kita mulai Hand-on untuk Dasar perintah Git diantaranya: Getting a Git Repository Create new Git Repository Cloning an Existing Repository Recording Changes to the Repository Checking the Status of Your Files Tracking New Files Staging Modified Files Ignoring...","categories": ["git","version-control"],
         "tags": [],
-        "url": "/posts/git/gitops/gitlab/01c-basic-git-command",
+        "url": "/posts/git/version-control/01c-basic-git-command",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "WITH Queries (Common Table Expressions)",
@@ -2871,6 +2871,12 @@ var store = [{
         "excerpt":"Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya: What is Deployment Object? Create a Deployment Interaction with Deployment...","categories": ["DevOps","Orchestration","Kubernetes","Workloads"],
         "tags": [],
         "url": "/posts/devops/orchestration/kubernetes/workloads/05b-deployment",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Silabus 'Continues Integration' with Gitlab CI",
+        "excerpt":"Hai semuanya, selamat datang kembali di kelas GitOps dengan Gitlab untuk Pemula s/d Mahir materi kali ini kita membahas tentang Continues Integration dengan menggunakan Gitlab yaitu Gitlab CI. Pada materi kali ada beberapa topic yang akan kita pelajari yaitu Basic concepts of Gitlab CI GitLab CI/CD uses a number of...","categories": ["git","gitlab","gitlab-ci"],
+        "tags": [],
+        "url": "/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Golang Backend Developer",

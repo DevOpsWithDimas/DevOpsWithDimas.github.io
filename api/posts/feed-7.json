@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Time your practice (part 1)",
+      "link": "/posts/rdbms/postgresql/sql/select/03g-quis-section-1"
+    }
+    ,
+    {
       "title": "Limit dan Offset rows",
       "link": "/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Access your apps/service in minikube",
       "link": "/posts/devops/orchestration/kubernetes/02g-minikube-access-apps"
-    }
-    ,
-    {
-      "title": "Minikube addons features",
-      "link": "/posts/devops/orchestration/kubernetes/02f-minikube-addons"
     }
   ]
 }

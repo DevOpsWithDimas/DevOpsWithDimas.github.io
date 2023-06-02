@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Overview Study cases: IT Automation Platform for Docker Operations",
+      "link": "/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker"
+    }
+    ,
+    {
       "title": "Deep dive into INSERT Statement",
       "link": "/posts/rdbms/postgresql/sql/dml/05b-dml-insert"
     }
@@ -28,27 +33,22 @@
     ,
     {
       "title": "Getting started with git",
-      "link": "/posts/git/gitops/gitlab/01c-basic-git-command"
+      "link": "/posts/git/version-control/01c-basic-git-command"
     }
     ,
     {
       "title": "How to Install git on Linux",
-      "link": "/posts/git/gitops/gitlab/01b-install-git-linux"
+      "link": "/posts/git/version-control/01b-install-git-linux"
     }
     ,
     {
       "title": "How to Install git on Windows",
-      "link": "/posts/git/gitops/gitlab/01b-install-git-windows"
+      "link": "/posts/git/version-control/01b-install-git-windows"
     }
     ,
     {
       "title": "How to Install git on MacOS",
-      "link": "/posts/git/gitops/gitlab/01b-install-git-mac"
-    }
-    ,
-    {
-      "title": "What is Git SCM",
-      "link": "/posts/git/gitops/gitlab/01a-what-is-git"
+      "link": "/posts/git/version-control/01b-install-git-mac"
     }
   ]
 }

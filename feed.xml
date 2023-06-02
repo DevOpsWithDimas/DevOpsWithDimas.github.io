@@ -1,4 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2023-05-27T20:53:55+07:00</updated><id>/feed.xml</id><title type="html">DevOps with Dimas Maryanto</title><subtitle>Tutorial Pemrograman, Backend, Frontend, Website, Mobile dan Devops Terlengkap di Indonesia.</subtitle><author><name>Dimas Maryanto</name></author><entry xml:lang="k8s"><title type="html">Working with Deployment object</title><link href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="alternate" type="text/html" title="Working with Deployment object" /><published>2023-04-29T11:51:37+07:00</published><updated>2023-04-29T11:51:37+07:00</updated><id>/posts/devops/orchestration/kubernetes/workloads/05b-deployment</id><content type="html" xml:base="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"><![CDATA[<p>Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2023-06-02T20:20:25+07:00</updated><id>/feed.xml</id><title type="html">DevOps with Dimas Maryanto</title><subtitle>Tutorial Pemrograman, Backend, Frontend, Website, Mobile dan Devops Terlengkap di Indonesia.</subtitle><author><name>Dimas Maryanto</name></author><entry xml:lang="gitlab"><title type="html">Silabus ‘Continues Integration’ with Gitlab CI</title><link href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" rel="alternate" type="text/html" title="Silabus ‘Continues Integration’ with Gitlab CI" /><published>2023-06-02T20:18:43+07:00</published><updated>2023-06-02T20:18:43+07:00</updated><id>/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci</id><content type="html" xml:base="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci"><![CDATA[<p>Hai semuanya, selamat datang kembali di kelas <strong>GitOps dengan Gitlab untuk Pemula s/d Mahir</strong> materi kali ini kita membahas tentang Continues Integration dengan menggunakan Gitlab yaitu Gitlab CI.</p>
+
+<p>Pada materi kali ada beberapa topic yang akan kita pelajari yaitu</p>
+
+<!--more-->
+
+<h2 id="basic-concepts-of-gitlab-ci">Basic concepts of Gitlab CI</h2>
+
+<p>GitLab CI/CD uses a number of concepts to describe and run your build and deploy.</p>
+
+<ol>
+  <li>What is Gitlab CI</li>
+  <li>Seting up Gitlab &amp; Gitlab Runner</li>
+  <li>Build a pipeline</li>
+  <li>Using CI/CD Variables
+    <ul>
+      <li>Predefined variables</li>
+      <li>User defined variables (custom)</li>
+    </ul>
+  </li>
+  <li>Using environments</li>
+  <li>Job artifacts</li>
+  <li>Cache depedency</li>
+  <li>Job/Pipeline efficiency</li>
+  <li>Test case for Unit testing automation</li>
+</ol>
+
+<h2 id="configuration-of-gitlab-ci">Configuration of Gitlab CI</h2>
+
+<ol>
+  <li>Schedule pipeline</li>
+  <li>Pipeline triggers</li>
+  <li>Merge request pipeline</li>
+  <li>Opimize Gitlab and Gitlab Runner for large repositories</li>
+</ol>
+
+<h2 id="feature-of-gitlab-ci">Feature of Gitlab CI</h2>
+
+<ol>
+  <li><strong>Auto DevOps</strong>, Set up your app’s entire lifecycle.</li>
+  <li><strong>CI services</strong>, Link Docker containers with your base image.</li>
+  <li><strong>Auto Deploy</strong>, Deploy your application to a production environment in a Kubernetes cluster.</li>
+  <li>Build docker image</li>
+  <li>Canary deployments</li>
+  <li>Deploy boards</li>
+  <li>Gitlab release</li>
+  <li>Code quality</li>
+</ol>
+
+<p>Biasanya Gitlab CI digunakan untuk melakukan Automation seperti build, test, deploy and monitor suatu aplikasi yang dibuat oleh Developer. Karena materinya banyak sekali jadi kita akan breakdown semua meteri tersebut mejadi beberapa bagian. So mungkin sekian dulu apa yang bisa saya sampaikan terkait Silabus belajar Gitlab CI untuk Automation. 👋</p>]]></content><author><name>Dimas Maryanto</name></author><category term="git" /><category term="gitlab" /><category term="gitlab-ci" /><summary type="html"><![CDATA[Hai semuanya, selamat datang kembali di kelas GitOps dengan Gitlab untuk Pemula s/d Mahir materi kali ini kita membahas tentang Continues Integration dengan menggunakan Gitlab yaitu Gitlab CI. Pada materi kali ada beberapa topic yang akan kita pelajari yaitu]]></summary></entry><entry xml:lang="k8s"><title type="html">Working with Deployment object</title><link href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="alternate" type="text/html" title="Working with Deployment object" /><published>2023-04-29T11:51:37+07:00</published><updated>2023-04-29T11:51:37+07:00</updated><id>/posts/devops/orchestration/kubernetes/workloads/05b-deployment</id><content type="html" xml:base="/posts/devops/orchestration/kubernetes/workloads/05b-deployment"><![CDATA[<p>Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya:</p>
 
 <ol>
   <li>What is Deployment Object?</li>
@@ -2698,106 +2747,4 @@ Type <span class="s2">"help"</span> <span class="k">for </span>help.
       <li>column <code class="language-plaintext highlighter-rouge">max_salary</code> diambil dari <code class="language-plaintext highlighter-rouge">min_salary</code> ditambah <code class="language-plaintext highlighter-rouge">15000</code></li>
     </ol>
   </li>
-</ol>]]></content><author><name>Dimas Maryanto</name></author><category term="RDBMS" /><category term="PostgreSQL" /><category term="SQL" /><category term="DML" /><summary type="html"><![CDATA[Hai semuanya di materi sebelumnya kita sudah membahas perintah Data manipulation language sepertin INSERT, UPDATE, DELETE beserta combinasi antara SELECT dan DML tersebut, nah supaya temen-temen memahami materi yang telah saya sampaikan saatnya temen-temen untuk latihan / mengerjakan soal yang saya berikan seperti berikut:]]></summary></entry><entry xml:lang="postgres"><title type="html">Cleanup Data from Table</title><link href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup" rel="alternate" type="text/html" title="Cleanup Data from Table" /><published>2023-01-08T10:49:22+07:00</published><updated>2023-01-08T10:49:22+07:00</updated><id>/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup</id><content type="html" xml:base="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup"><![CDATA[<p>Hai semuanya, Selain <code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code> dan <code class="language-plaintext highlighter-rouge">DELETE</code> statement ada juga beberapa task seperti cleanup data/storage pada database PostgreSQL dengan menggunakan perintah <code class="language-plaintext highlighter-rouge">TRUNCATE</code> dan <code class="language-plaintext highlighter-rouge">VACUUM</code>.</p>
-
-<p>Ok jadi langsung aja kita bahas materi yang pertama:</p>
-
-<!--more-->
-
-<h2 id="cleanup-data-of-tables-using-truncate">Cleanup data of tables using <code class="language-plaintext highlighter-rouge">TRUNCATE</code></h2>
-
-<p><code class="language-plaintext highlighter-rouge">TRUNCATE</code> is a command to empty a table or set of tables. It has the same effect as an unqualified <code class="language-plaintext highlighter-rouge">DELETE</code> on each table, but since it does not actually scan the tables it is faster. Furthermore this is most useful on large tables. The syntax is:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">TRUNCATE</span> <span class="p">[</span> <span class="k">TABLE</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ONLY</span> <span class="p">]</span> <span class="n">name</span> <span class="p">[</span> <span class="o">*</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...</span> <span class="p">]</span>
-    <span class="p">[</span> <span class="k">RESTART</span> <span class="k">IDENTITY</span> <span class="o">|</span> <span class="k">CONTINUE</span> <span class="k">IDENTITY</span> <span class="p">]</span> <span class="p">[</span> <span class="k">CASCADE</span> <span class="o">|</span> <span class="k">RESTRICT</span> <span class="p">]</span></code></pre></figure>
-
-<p>Before you execute this command, You must have the <code class="language-plaintext highlighter-rouge">TRUNCATE</code> privilege on a table to truncate it.</p>
-
-<p><code class="language-plaintext highlighter-rouge">TRUNCATE</code> acquires an <code class="language-plaintext highlighter-rouge">ACCESS EXCLUSIVE</code> lock on each table it operates on, which blocks all other concurrent operations on the table. When <code class="language-plaintext highlighter-rouge">RESTART IDENTITY</code> is specified, any sequences that are to be restarted are likewise locked exclusively. If concurrent access to a table is required, then the <code class="language-plaintext highlighter-rouge">DELETE</code> command should be used instead.</p>
-
-<p><code class="language-plaintext highlighter-rouge">TRUNCATE</code> cannot be used on a table that has foreign-key references from other tables, unless all such tables are also truncated in the same command. Checking validity in such cases would require table scans, and the whole point is not to do one. The <code class="language-plaintext highlighter-rouge">CASCADE</code> option can be used to automatically include all dependent tables — but be very careful when using this option, or else you might lose data you did not intend to!</p>
-
-<p>When <code class="language-plaintext highlighter-rouge">RESTART IDENTITY</code> is specified, the implied <code class="language-plaintext highlighter-rouge">ALTER SEQUENCE RESTART</code> operations are also done transactionally; that is, they will be rolled back if the surrounding transaction does not commit. Be aware that if any additional sequence operations are done on the restarted sequences before the transaction rolls back, the effects of these operations on the sequences will be rolled back, but not their effects on <code class="language-plaintext highlighter-rouge">currval();</code> that is, after the transaction <code class="language-plaintext highlighter-rouge">currval()</code> will continue to reflect the last sequence value obtained inside the failed transaction, even though the sequence itself may no longer be consistent with that.</p>
-
-<p>Sebagai contoh, saya akan menghapus data table <code class="language-plaintext highlighter-rouge">job_history</code> seperti berikut perintahnya:</p>
-
-<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05f-dml-cleanup-truncate.sql"> </script>
-
-<p>Jika dijalankan seperti berikut:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">truncate</span> <span class="n">job_history</span> <span class="k">RESTART</span> <span class="k">IDENTITY</span> <span class="k">CASCADE</span><span class="p">;</span>
-<span class="k">TRUNCATE</span> <span class="k">TABLE</span>
-
-<span class="n">hr</span><span class="o">=#</span> <span class="k">select</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
-<span class="n">hr</span><span class="o">-#</span> <span class="k">from</span> <span class="n">job_history</span><span class="p">;</span>
- <span class="k">count</span>
-<span class="c1">-------</span>
-     <span class="mi">0</span>
-<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h2 id="cleanup-storage-to-reclaims-occupied-by-dead-tuples">Cleanup storage to reclaims occupied by dead tuples</h2>
-
-<p>VACUUM reclaims storage occupied by dead tuples. In normal PostgreSQL operation, tuples that are deleted or obsoleted by an update are not physically removed from their table; they remain present until a VACUUM is done. Therefore it’s necessary to do VACUUM periodically, especially on frequently-updated tables.</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">VACUUM</span> <span class="p">[</span> <span class="p">(</span> <span class="k">option</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span> <span class="p">[</span> <span class="n">table_and_columns</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
-<span class="k">VACUUM</span> <span class="p">[</span> <span class="k">FULL</span> <span class="p">]</span> <span class="p">[</span> <span class="k">FREEZE</span> <span class="p">]</span> <span class="p">[</span> <span class="k">VERBOSE</span> <span class="p">]</span> <span class="p">[</span> <span class="k">ANALYZE</span> <span class="p">]</span> <span class="p">[</span> <span class="n">table_and_columns</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
-
-<span class="k">where</span> <span class="k">option</span> <span class="n">can</span> <span class="n">be</span> <span class="n">one</span> <span class="k">of</span><span class="p">:</span>
-
-    <span class="k">FULL</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
-    <span class="k">FREEZE</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
-    <span class="k">VERBOSE</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
-    <span class="k">ANALYZE</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
-    <span class="n">DISABLE_PAGE_SKIPPING</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
-    <span class="n">SKIP_LOCKED</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
-    <span class="n">INDEX_CLEANUP</span> <span class="p">{</span> <span class="n">AUTO</span> <span class="o">|</span> <span class="k">ON</span> <span class="o">|</span> <span class="k">OFF</span> <span class="p">}</span>
-    <span class="n">PROCESS_TOAST</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
-    <span class="k">TRUNCATE</span> <span class="p">[</span> <span class="nb">boolean</span> <span class="p">]</span>
-    <span class="n">PARALLEL</span> <span class="nb">integer</span>
-
-<span class="k">and</span> <span class="n">table_and_columns</span> <span class="k">is</span><span class="p">:</span>
-
-    <span class="k">table_name</span> <span class="p">[</span> <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span></code></pre></figure>
-
-<p>To vacuum a table, one must ordinarily be the table’s owner or a superuser. However, database owners are allowed to vacuum all tables in their databases, except shared catalogs. (The restriction for shared catalogs means that a true database-wide VACUUM can only be performed by a superuser.) VACUUM will skip over any tables that the calling user does not have permission to vacuum.</p>
-
-<p>VACUUM cannot be executed inside a transaction block.</p>
-
-<p>We recommend that active production databases be vacuumed frequently (at least nightly), in order to remove dead rows. After adding or deleting a large number of rows, it might be a good idea to issue a VACUUM ANALYZE command for the affected table. This will update the system catalogs with the results of all recent changes, and allow the PostgreSQL query planner to make better choices in planning queries.</p>
-
-<p>VACUUM causes a substantial increase in I/O traffic, which might cause poor performance for other active sessions. Therefore, it is sometimes advisable to use the cost-based vacuum delay feature. For parallel vacuum, each worker sleeps in proportion to the work done by that worker.</p>
-
-<p>PostgreSQL includes an “autovacuum” facility which can automate routine vacuum maintenance.</p>
-
-<p>To clean a single table <code class="language-plaintext highlighter-rouge">employees</code>, analyze it for the optimizer and print a detailed vacuum activity report:</p>
-
-<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=05f-dml-cleanup-vacuum.sql"> </script>
-
-<p>Jika dijalankan hasilnya seperti berikut:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=#</span> <span class="k">VACUUM</span> <span class="p">(</span><span class="k">VERBOSE</span><span class="p">,</span> <span class="k">ANALYZE</span><span class="p">)</span> <span class="n">employees</span><span class="p">;</span>
-<span class="n">INFO</span><span class="p">:</span>  <span class="n">vacuuming</span> <span class="nv">"public.employees"</span>
-<span class="n">INFO</span><span class="p">:</span>  <span class="n">scanned</span> <span class="k">index</span> <span class="nv">"employees_pkey"</span> <span class="k">to</span> <span class="n">remove</span> <span class="mi">21</span> <span class="k">row</span> <span class="n">versions</span>
-<span class="n">DETAIL</span><span class="p">:</span>  <span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span>
-<span class="n">INFO</span><span class="p">:</span>  <span class="n">scanned</span> <span class="k">index</span> <span class="nv">"employees_email_key"</span> <span class="k">to</span> <span class="n">remove</span> <span class="mi">21</span> <span class="k">row</span> <span class="n">versions</span>
-<span class="n">DETAIL</span><span class="p">:</span>  <span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span>
-<span class="n">INFO</span><span class="p">:</span>  <span class="k">table</span> <span class="nv">"employees"</span><span class="p">:</span> <span class="n">removed</span> <span class="mi">21</span> <span class="n">dead</span> <span class="n">item</span> <span class="n">identifiers</span> <span class="k">in</span> <span class="mi">2</span> <span class="n">pages</span>
-<span class="n">DETAIL</span><span class="p">:</span>  <span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span>
-<span class="n">INFO</span><span class="p">:</span>  <span class="k">index</span> <span class="nv">"employees_pkey"</span> <span class="n">now</span> <span class="k">contains</span> <span class="mi">91</span> <span class="k">row</span> <span class="n">versions</span> <span class="k">in</span> <span class="mi">2</span> <span class="n">pages</span>
-<span class="n">DETAIL</span><span class="p">:</span>  <span class="mi">21</span> <span class="k">index</span> <span class="k">row</span> <span class="n">versions</span> <span class="n">were</span> <span class="n">removed</span><span class="p">.</span>
-<span class="mi">0</span> <span class="k">index</span> <span class="n">pages</span> <span class="n">were</span> <span class="n">newly</span> <span class="n">deleted</span><span class="p">.</span>
-<span class="mi">0</span> <span class="k">index</span> <span class="n">pages</span> <span class="k">are</span> <span class="n">currently</span> <span class="n">deleted</span><span class="p">,</span> <span class="k">of</span> <span class="n">which</span> <span class="mi">0</span> <span class="k">are</span> <span class="n">currently</span> <span class="n">reusable</span><span class="p">.</span>
-<span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">.</span>
-<span class="n">INFO</span><span class="p">:</span>  <span class="k">index</span> <span class="nv">"employees_email_key"</span> <span class="n">now</span> <span class="k">contains</span> <span class="mi">91</span> <span class="k">row</span> <span class="n">versions</span> <span class="k">in</span> <span class="mi">2</span> <span class="n">pages</span>
-<span class="n">DETAIL</span><span class="p">:</span>  <span class="mi">21</span> <span class="k">index</span> <span class="k">row</span> <span class="n">versions</span> <span class="n">were</span> <span class="n">removed</span><span class="p">.</span>
-<span class="mi">0</span> <span class="k">index</span> <span class="n">pages</span> <span class="n">were</span> <span class="n">newly</span> <span class="n">deleted</span><span class="p">.</span>
-<span class="mi">0</span> <span class="k">index</span> <span class="n">pages</span> <span class="k">are</span> <span class="n">currently</span> <span class="n">deleted</span><span class="p">,</span> <span class="k">of</span> <span class="n">which</span> <span class="mi">0</span> <span class="k">are</span> <span class="n">currently</span> <span class="n">reusable</span><span class="p">.</span>
-<span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">.</span>
-<span class="n">INFO</span><span class="p">:</span>  <span class="k">table</span> <span class="nv">"employees"</span><span class="p">:</span> <span class="k">found</span> <span class="mi">10</span> <span class="n">removable</span><span class="p">,</span> <span class="mi">91</span> <span class="n">nonremovable</span> <span class="k">row</span> <span class="n">versions</span> <span class="k">in</span> <span class="mi">2</span> <span class="k">out</span> <span class="k">of</span> <span class="mi">2</span> <span class="n">pages</span>
-<span class="n">DETAIL</span><span class="p">:</span>  <span class="mi">0</span> <span class="n">dead</span> <span class="k">row</span> <span class="n">versions</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">removed</span> <span class="n">yet</span><span class="p">,</span> <span class="n">oldest</span> <span class="n">xmin</span><span class="p">:</span> <span class="mi">762</span>
-<span class="n">Skipped</span> <span class="mi">0</span> <span class="n">pages</span> <span class="n">due</span> <span class="k">to</span> <span class="n">buffer</span> <span class="n">pins</span><span class="p">,</span> <span class="mi">0</span> <span class="n">frozen</span> <span class="n">pages</span><span class="p">.</span>
-<span class="n">CPU</span><span class="p">:</span> <span class="k">user</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="k">system</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">,</span> <span class="n">elapsed</span><span class="p">:</span> <span class="mi">0</span><span class="p">.</span><span class="mi">00</span> <span class="n">s</span><span class="p">.</span>
-<span class="n">INFO</span><span class="p">:</span>  <span class="n">analyzing</span> <span class="nv">"public.employees"</span>
-<span class="n">INFO</span><span class="p">:</span>  <span class="nv">"employees"</span><span class="p">:</span> <span class="n">scanned</span> <span class="mi">2</span> <span class="k">of</span> <span class="mi">2</span> <span class="n">pages</span><span class="p">,</span> <span class="n">containing</span> <span class="mi">91</span> <span class="n">live</span> <span class="k">rows</span> <span class="k">and</span> <span class="mi">0</span> <span class="n">dead</span> <span class="k">rows</span><span class="p">;</span> <span class="mi">91</span> <span class="k">rows</span> <span class="k">in</span> <span class="n">sample</span><span class="p">,</span> <span class="mi">91</span> <span class="n">estimated</span> <span class="n">total</span> <span class="k">rows</span>
-</code></pre></div></div>]]></content><author><name>Dimas Maryanto</name></author><category term="RDBMS" /><category term="PostgreSQL" /><category term="SQL" /><category term="DML" /><summary type="html"><![CDATA[Hai semuanya, Selain INSERT, UPDATE dan DELETE statement ada juga beberapa task seperti cleanup data/storage pada database PostgreSQL dengan menggunakan perintah TRUNCATE dan VACUUM. Ok jadi langsung aja kita bahas materi yang pertama:]]></summary></entry></feed>
+</ol>]]></content><author><name>Dimas Maryanto</name></author><category term="RDBMS" /><category term="PostgreSQL" /><category term="SQL" /><category term="DML" /><summary type="html"><![CDATA[Hai semuanya di materi sebelumnya kita sudah membahas perintah Data manipulation language sepertin INSERT, UPDATE, DELETE beserta combinasi antara SELECT dan DML tersebut, nah supaya temen-temen memahami materi yang telah saya sampaikan saatnya temen-temen untuk latihan / mengerjakan soal yang saya berikan seperti berikut:]]></summary></entry></feed>

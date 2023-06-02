@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Overview of Programming Languages",
+      "link": "/posts/language/java/01a-programming-language-overview"
+    }
+    ,
+    {
       "title": "Queries inside a query (subquery)",
       "link": "/posts/rdbms/postgresql/sql/select/04c-subquery"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Joined Tables",
       "link": "/posts/rdbms/postgresql/sql/select/04b-join-tables"
-    }
-    ,
-    {
-      "title": "Managing a machines in docker-machine",
-      "link": "/posts/devops/docker/machine/13c-managed-machines"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "TCL - Savepoint di Oracle",
+      "link": "/posts/rdbms/oracle18c/015c-tcl-savepoint"
+    }
+    ,
+    {
       "title": "TCL - Rollback Transaction di Oracle",
       "link": "/posts/rdbms/oracle18c/015b-tcl-rollback"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Pagination dengan fetch dan offset",
       "link": "/posts/rdbms/oracle18c/013-fetch-and-offset"
-    }
-    ,
-    {
-      "title": "Conditional Expression dengan Case When di Oracle",
-      "link": "/posts/rdbms/oracle18c/012a-case-when-expressions"
     }
   ]
 }

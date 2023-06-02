@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Pemograman Servlet dengan Annotation",
+      "link": "/posts/java/web/war/012-servlet-dengan-annotation"
+    }
+    ,
+    {
       "title": "Pengenalan Pemograman Servlet",
       "link": "/posts/java/web/war/011-pengenalan-servlet"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Time is your to practice",
       "link": "/posts/language/java/jdbc/011-quis-section-1"
-    }
-    ,
-    {
-      "title": "Silabus Belajar JPA Hibernate",
-      "link": "/posts/java/orm/hibernate/postgresql/01-silabus-orm-hibernate"
     }
   ]
 }

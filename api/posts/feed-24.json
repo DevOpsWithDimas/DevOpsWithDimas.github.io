@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "DDL - Sequences di Oracle",
+      "link": "/posts/rdbms/oracle18c/016q-sequences"
+    }
+    ,
+    {
       "title": "DDL - View di Oracle",
       "link": "/posts/rdbms/oracle18c/016p-views"
     }
@@ -44,11 +49,6 @@
     {
       "title": "DDL - Not Null Constraint",
       "link": "/posts/rdbms/oracle18c/016h-constraint-not-null"
-    }
-    ,
-    {
-      "title": "DDL - Macam-macam Constraint di Oracle",
-      "link": "/posts/rdbms/oracle18c/016g-ddl-contraints-table"
     }
   ]
 }

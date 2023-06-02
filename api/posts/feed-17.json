@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Health Check Instruction",
+      "link": "/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck"
+    }
+    ,
+    {
       "title": "User, Volumes and Working Directory",
       "link": "/posts/devops/docker/dockerfile/07j-dockerfile-user-workdir"
     }
@@ -44,11 +49,6 @@
     {
       "title": "FROM Instruction",
       "link": "/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction"
-    }
-    ,
-    {
-      "title": "Usage docker build",
-      "link": "/posts/devops/docker/dockerfile/07a-usage-docker-build"
     }
   ]
 }

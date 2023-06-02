@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Konversi tipe data otomatis di Java",
+      "link": "/posts/language/java/basic/03a-conversi-tipe-data"
+    }
+    ,
+    {
       "title": "Macam macam Operator di Java",
       "link": "/posts/language/java/basic/03-operator"
     }

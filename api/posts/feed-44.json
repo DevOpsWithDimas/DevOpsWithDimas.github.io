@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Contructor adalah method",
+      "link": "/posts/language/java/oop/12-contructor-java"
+    }
+    ,
+    {
       "title": "Mengenal keyword super dan this",
       "link": "/posts/language/java/oop/11d-keyword-super-this"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Menerima data dari paramenter ke dalam Function",
       "link": "/posts/language/java/function/08a-params-at-method"
-    }
-    ,
-    {
-      "title": "Method atau Functions",
-      "link": "/posts/language/java/function/08-function"
     }
   ]
 }

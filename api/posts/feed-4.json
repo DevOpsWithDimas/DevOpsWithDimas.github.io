@@ -2,8 +2,13 @@
   "pages": [
     
     {
+      "title": "What is Git SCM",
+      "link": "/posts/git/version-control/01a-what-is-git"
+    }
+    ,
+    {
       "title": "Pengenalan Version Control",
-      "link": "/posts/git/gitops/gitlab/01-introduction-version-control"
+      "link": "/posts/git/version-control/01-introduction-version-control"
     }
     ,
     {
@@ -23,7 +28,7 @@
     ,
     {
       "title": "Silabus GitOps - Gitlab: Pemula sampai Mahir",
-      "link": "/posts/git/gitops/gitlab/00-silabus-gitlab"
+      "link": "/posts/git/version-control/00-silabus-gitlab"
     }
     ,
     {
@@ -44,11 +49,6 @@
     {
       "title": "Overview of Java Programming",
       "link": "/posts/language/java/01b-java-programming-overview"
-    }
-    ,
-    {
-      "title": "Overview of Programming Languages",
-      "link": "/posts/language/java/01a-programming-language-overview"
     }
   ]
 }

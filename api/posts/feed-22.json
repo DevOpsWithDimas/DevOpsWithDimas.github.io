@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Perancangan / Design Table (Relationship)",
+      "link": "/posts/rdbms/oracle18c/019-schema-design-relationship"
+    }
+    ,
+    {
       "title": "Auditing Specific Activities with Fine-Grained Auditing",
       "link": "/posts/rdbms/oracle18c/018l-audit-fine-grained"
     }
@@ -44,11 +49,6 @@
     {
       "title": "DDL - System Privileges",
       "link": "/posts/rdbms/oracle18c/018d-ddl-system-privileges"
-    }
-    ,
-    {
-      "title": "DDL - Dropping User Account",
-      "link": "/posts/rdbms/oracle18c/018c-drop-user"
     }
   ]
 }

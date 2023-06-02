@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Managing a machines in docker-machine",
+      "link": "/posts/devops/docker/machine/13c-managed-machines"
+    }
+    ,
+    {
       "title": "Getting started with docker-machine",
       "link": "/posts/devops/docker/machine/13b-getting-started"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Deep dive into Select Statements",
       "link": "/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements"
-    }
-    ,
-    {
-      "title": "Time your practice (part 1)",
-      "link": "/posts/rdbms/postgresql/sql/select/03g-quis-section-1"
     }
   ]
 }

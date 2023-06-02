@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "What is Container",
+      "link": "/posts/devops/docker/01b-container-overview"
+    }
+    ,
+    {
       "title": "Docker Overview",
       "link": "/posts/devops/docker/01a-docker-overview"
     }
@@ -44,11 +49,6 @@
     {
       "title": "One To One Relationship Tables",
       "link": "/posts/rdbms/oracle18c/019a-mapping-one-to-one"
-    }
-    ,
-    {
-      "title": "Perancangan / Design Table (Relationship)",
-      "link": "/posts/rdbms/oracle18c/019-schema-design-relationship"
     }
   ]
 }

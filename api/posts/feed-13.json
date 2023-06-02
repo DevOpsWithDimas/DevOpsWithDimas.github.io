@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Springboot deployment using compose file",
+      "link": "/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case"
+    }
+    ,
+    {
       "title": "Laravel deployment using compose file",
       "link": "/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Build docker image using Compose file",
       "link": "/posts/devops/docker/compose/build/09m-compose-build-image"
-    }
-    ,
-    {
-      "title": "Dependency between services in Compose file",
-      "link": "/posts/devops/docker/compose/dependency/09l-compose-depend-on"
     }
   ]
 }

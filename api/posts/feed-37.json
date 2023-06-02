@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Time is your to practice",
+      "link": "/posts/java/web/war/034-quis-section-01"
+    }
+    ,
+    {
       "title": "Automated deploy with gitlab CI/CD",
       "link": "/posts/java/web/war/033-automated-deployer-gitlab-ci-cd-docker"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Membuat project Hibernate ORM dengan Apache Maven",
       "link": "/posts/java/orm/hibernate/postgresql/02-create-project-java-maven"
-    }
-    ,
-    {
-      "title": "Setup Development Environment",
-      "link": "/posts/java/orm/hibernate/postgresql/01b-setup-dev-env"
     }
   ]
 }

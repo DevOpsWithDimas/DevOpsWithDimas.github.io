@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Silabus Belajar JPA Hibernate",
+      "link": "/posts/java/orm/hibernate/postgresql/01-silabus-orm-hibernate"
+    }
+    ,
+    {
       "title": "Nested Object in Javascript",
       "link": "/posts/web/js/13-nexted-object-js"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Data Type di JavaScript",
       "link": "/posts/web/js/04-data-type-js"
-    }
-    ,
-    {
-      "title": "Setup Develoment environment untuk Javascript",
-      "link": "/posts/web/js/03-setup-env-development"
     }
   ]
 }

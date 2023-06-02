@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Install Oracle 18c XE dengan Docker",
+      "link": "/posts/rdbms/oracle18c/003c-install-oracledb-docker-images"
+    }
+    ,
+    {
       "title": "Install Oracle 18c XE untuk Linux",
       "link": "/posts/rdbms/oracle18c/003b-install-oracledb-linux-rpm"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Time is your Practice",
       "link": "/posts/java/orm/hibernate/postgresql/10-quis-3"
-    }
-    ,
-    {
-      "title": "Read Only Entity dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/09-read-only-entity"
     }
   ]
 }
