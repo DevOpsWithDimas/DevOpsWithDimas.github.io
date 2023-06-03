@@ -2663,10 +2663,10 @@ var store = [{
         "url": "/posts/rdbms/postgresql/sql/select/04d-conditional-expression",
         "teaser": "/assets/images/500x300.png"
       },{
-        "title": "Silabus GitOps - Gitlab: Pemula sampai Mahir",
-        "excerpt":"Hai semuanya, di cource ini GitOps - Gitlab: Pemula sampai Mahir kita akan mengupas tuntas mengenai salah satu teknologi Version Control yang sangat popular sejak awal 2013 lalu yaitu Git SCM. Materi yang dibahas disini adalah Git berserta menggunakan Gitlab SaaS dan Self Menaged Service sebagai Hosted Git Repository. Untuk...","categories": ["git","version-control"],
+        "title": "Silabus Git VCS: Pemula s/d Mahir",
+        "excerpt":"Hai semuanya, di cource ini GitOps dengan Gitlab untuk Pemula s/d Mahir kita akan mengupas tuntas mengenai salah satu teknologi Version Control yang sangat popular sejak awal 2013 lalu sampai saat ini yaitu Git SCM. Pada materi kali ada beberapa topic yang akan kita pelajari yaitu Pengenalan Git What is...","categories": ["git","version-control"],
         "tags": [],
-        "url": "/posts/git/version-control/00-silabus-gitlab",
+        "url": "/posts/git/version-control/00-silabus-git-vcs",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Configure liveness, readiness, and startup probes",
@@ -2873,8 +2873,8 @@ var store = [{
         "url": "/posts/devops/orchestration/kubernetes/workloads/05b-deployment",
         "teaser": "/assets/images/500x300.png"
       },{
-        "title": "Silabus 'Continues Integration' with Gitlab CI",
-        "excerpt":"Hai semuanya, selamat datang kembali di kelas GitOps dengan Gitlab untuk Pemula s/d Mahir materi kali ini kita membahas tentang Continues Integration dengan menggunakan Gitlab yaitu Gitlab CI. Pada materi kali ada beberapa topic yang akan kita pelajari yaitu Basic concepts of Gitlab CI GitLab CI/CD uses a number of...","categories": ["git","gitlab","gitlab-ci"],
+        "title": "Silabus Gitlab CI: Pemula s/d Mahir",
+        "excerpt":"Hai semuanya, selamat datang kembali di kelas GitOps dengan Gitlab untuk Pemula s/d Mahir materi kali ini kita membahas tentang Continues Integration (CI) dengan menggunakan Gitlab Platform yaitu Gitlab CI. Pada materi kali ada beberapa topic yang akan kita pelajari yaitu Basic concepts of Gitlab CI GitLab CI/CD uses a...","categories": ["git","gitlab","gitlab-ci"],
         "tags": [],
         "url": "/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci",
         "teaser": "/assets/images/500x300.png"
