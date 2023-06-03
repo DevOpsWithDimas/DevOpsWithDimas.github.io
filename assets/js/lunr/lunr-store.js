@@ -402,81 +402,81 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus Belajar Javascript",
-        "excerpt":"Hi, di materi kali ini ‘JavaScript’ membahas bahasa pemograman yang bersifat scriptiong language / bahasa pemograman yang berjalan di sisi client side, yang biasanya digunakan untuk menjadikan HTML dynamic atau kita bisa rubah DOM nya menggunakan bahasa pemograman Javascript. Ok jadi materi yang akan di bahas di section kali ini...","categories": ["web","js"],
+        "excerpt":"Hi, di materi kali ini ‘JavaScript’ membahas bahasa pemograman yang bersifat scriptiong language / bahasa pemograman yang berjalan di sisi client side, yang biasanya digunakan untuk menjadikan HTML dynamic atau kita bisa rubah DOM nya menggunakan bahasa pemograman Javascript. Ok jadi materi yang akan di bahas di section kali ini...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/01-silabus-js",
+        "url": "/posts/language/web/js/01-silabus-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan scripting language dengan Javascript",
-        "excerpt":"Apa itu Javascript? Menurut MDN (Mozilla Developer Network) JavaScript (JS) is a lightweight, interpreted, programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as node.js and Apache CouchDB. JS is a prototype-based, multi-paradigm, dynamic scripting...","categories": ["web","js"],
+        "excerpt":"Apa itu Javascript? Menurut MDN (Mozilla Developer Network) JavaScript (JS) is a lightweight, interpreted, programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as node.js and Apache CouchDB. JS is a prototype-based, multi-paradigm, dynamic scripting...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/02-pengenalan-js",
+        "url": "/posts/language/web/js/02-pengenalan-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Setup Develoment environment untuk Javascript",
-        "excerpt":"Untuk memulai belajar Javascript, kita perlu setup development environment. Tidak seperti Java, C++, Python. JavaScript tidak perlu menginstall software SDK karena by default sudah tertanam di Browser seperti (Internet Expoler, Mozilla Firefox, Google Chrome dll). yang perlu di install adalah Text Editor. Ada banyak text editor untuk JavaScript dari yang...","categories": ["web","js"],
+        "excerpt":"Untuk memulai belajar Javascript, kita perlu setup development environment. Tidak seperti Java, C++, Python. JavaScript tidak perlu menginstall software SDK karena by default sudah tertanam di Browser seperti (Internet Expoler, Mozilla Firefox, Google Chrome dll). yang perlu di install adalah Text Editor. Ada banyak text editor untuk JavaScript dari yang...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/03-setup-env-development",
+        "url": "/posts/language/web/js/03-setup-env-development",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Data Type di JavaScript",
-        "excerpt":"pada dasarnya tipe data di JavaScript terdiri dari: Number String Boolean Date Null Undefined Number Di JavaScript tipe data number ini terdiri dari bilangan positive, negative, dan pecahan contohnya 1, 1.0, 0.25 dan lain-lain. Perbedaannya dengan bahasa pemograman lainnya jika di Java bilangan bulat dengan bilangan pecahan itu diagap berbeda...","categories": ["web","js"],
+        "excerpt":"pada dasarnya tipe data di JavaScript terdiri dari: Number String Boolean Date Null Undefined Number Di JavaScript tipe data number ini terdiri dari bilangan positive, negative, dan pecahan contohnya 1, 1.0, 0.25 dan lain-lain. Perbedaannya dengan bahasa pemograman lainnya jika di Java bilangan bulat dengan bilangan pecahan itu diagap berbeda...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/04-data-type-js",
+        "url": "/posts/language/web/js/04-data-type-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Variable di JavaScript",
-        "excerpt":"Kali ini saya mau membahas tentang variable di JavaScript diantaranya pembahasanya local &amp; global variable, dan inisialisasi variable. ## Inisialisasi Variable Membuat variable pada dasarnya sama seperti bahasa pemograman lainnya yaitu Java, C++, PHP tapi disini JavaScript lebih mirip dengan PHP karena untuk variablenya tidak dibedakan dengan tipe data, dalam...","categories": ["web","js"],
+        "excerpt":"Kali ini saya mau membahas tentang variable di JavaScript diantaranya pembahasanya local &amp; global variable, dan inisialisasi variable. ## Inisialisasi Variable Membuat variable pada dasarnya sama seperti bahasa pemograman lainnya yaitu Java, C++, PHP tapi disini JavaScript lebih mirip dengan PHP karena untuk variablenya tidak dibedakan dengan tipe data, dalam...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/05-variables-js",
+        "url": "/posts/language/web/js/05-variables-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Operator Matematika di JavaScript",
-        "excerpt":"Operator pada dasarnya dibagi 3 yaitu Aritmatika, Assignment dan Bitwise. Kali ini saya mau membahas dulu tentang assignment atau penugasan (inisialisasi). ok sekarang coba perhatikan contoh koding berikut ini: Seperti yang dijelaskan di postingan sebelumnya penugasan adalah memberikan nilai ke variable lainnya. Hanya di disini ada yang unique dari bahasa...","categories": ["web","js"],
+        "excerpt":"Operator pada dasarnya dibagi 3 yaitu Aritmatika, Assignment dan Bitwise. Kali ini saya mau membahas dulu tentang assignment atau penugasan (inisialisasi). ok sekarang coba perhatikan contoh koding berikut ini: Seperti yang dijelaskan di postingan sebelumnya penugasan adalah memberikan nilai ke variable lainnya. Hanya di disini ada yang unique dari bahasa...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/06-math-operation-js",
+        "url": "/posts/language/web/js/06-math-operation-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Percabagan atau Selection di JavaScript",
-        "excerpt":"Percabangan sendiri dari dulu ada 3 yaitu ? ,if dan switch. Ok sekarang kita akan lihat 1 per 1 bagaimana sifat atau prilaku dari ketiga percabangan tersebut. yang pertama kita akan bahas dulu selection yang paling sedarhana yaitu dengan menggunakan ?. seperti berikut: Coba anda jalankan maka hasilnya adalah Benar...","categories": ["web","js"],
+        "excerpt":"Percabangan sendiri dari dulu ada 3 yaitu ? ,if dan switch. Ok sekarang kita akan lihat 1 per 1 bagaimana sifat atau prilaku dari ketiga percabangan tersebut. yang pertama kita akan bahas dulu selection yang paling sedarhana yaitu dengan menggunakan ?. seperti berikut: Coba anda jalankan maka hasilnya adalah Benar...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/07-selection-js",
+        "url": "/posts/language/web/js/07-selection-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Perulangan atau Looping dengan JavaScript",
-        "excerpt":"perulangan sebenarnya juga gak ada yang aneh kurang lebih sama seperti bahasa pemograman yang lain contohnya perulangan menggunakan for, do-while, while dan for-in. Perulangan dengan FOR perulangan dengan for basicnya sama seperti biasa yaitu seperti berikut contohnya: Jika dijalakan outputnya akan menghasilkan halo ini pesan ke x sebangak 10x dan...","categories": ["web","js"],
+        "excerpt":"perulangan sebenarnya juga gak ada yang aneh kurang lebih sama seperti bahasa pemograman yang lain contohnya perulangan menggunakan for, do-while, while dan for-in. Perulangan dengan FOR perulangan dengan for basicnya sama seperti biasa yaitu seperti berikut contohnya: Jika dijalakan outputnya akan menghasilkan halo ini pesan ke x sebangak 10x dan...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/08-loop-js",
+        "url": "/posts/language/web/js/08-loop-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Function di JavaScript",
-        "excerpt":"seperti yang ketahui JavaScript ini tidak mengenal yang namanya Class sebagai gantinya kita bisa menggunakan function sebagai pembungkusnya. Sekarang kita akan membuat function di JavaScript format dasarnya kurang lebih seperti berikut: Jadi disini untuk membuat function kita cukup gunakan keyword function kemudian diikuti dengan nama functionnya contohnya seperti diatas halo...","categories": ["web","js"],
+        "excerpt":"seperti yang ketahui JavaScript ini tidak mengenal yang namanya Class sebagai gantinya kita bisa menggunakan function sebagai pembungkusnya. Sekarang kita akan membuat function di JavaScript format dasarnya kurang lebih seperti berikut: Jadi disini untuk membuat function kita cukup gunakan keyword function kemudian diikuti dengan nama functionnya contohnya seperti diatas halo...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/09-function-js",
+        "url": "/posts/language/web/js/09-function-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Array di JavaScript",
-        "excerpt":"Tipe data array seperti yang anda ketahui kalo array ini pada dasarnya adalah sebuah variable yang bisa menampung data lebih dari satu. Ok langsung aja kita lihat bagaimana array ini bekerja, jadi contohnya disini saya memempunyai sample kode untuk tipe data array seperti berikut: Coba jika anda running di console...","categories": ["web","js"],
+        "excerpt":"Tipe data array seperti yang anda ketahui kalo array ini pada dasarnya adalah sebuah variable yang bisa menampung data lebih dari satu. Ok langsung aja kita lihat bagaimana array ini bekerja, jadi contohnya disini saya memempunyai sample kode untuk tipe data array seperti berikut: Coba jika anda running di console...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/10-array-js",
+        "url": "/posts/language/web/js/10-array-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Object Oriented Programming dengan Javascript",
-        "excerpt":"JavaScript is Object Oriented Programming. Untuk menulis object di JavaScript ada banyak cara yaitu cara paling sederhana adalah seperti berikut: var mhs = { key:\"value\" }; dan untuk mengakses object tersebut adalah seperti berikut: console.log(\"get value from key is \"+ mhs.key); Contoh lainya adalah seperti berikut: Output yang dihasilkan seperti...","categories": ["web","js"],
+        "excerpt":"JavaScript is Object Oriented Programming. Untuk menulis object di JavaScript ada banyak cara yaitu cara paling sederhana adalah seperti berikut: var mhs = { key:\"value\" }; dan untuk mengakses object tersebut adalah seperti berikut: console.log(\"get value from key is \"+ mhs.key); Contoh lainya adalah seperti berikut: Output yang dihasilkan seperti...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/12-object-js",
+        "url": "/posts/language/web/js/12-object-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Nested Object in Javascript",
-        "excerpt":"Kita sekarang akan membahas object dalam object kemudian mengaksesnya contohnya seperti berikut: Jadi cara membuat object dalam object seperti berikut: { \"key\" : { \"key\" : \"value\" } } dan Cara menghaksesnya bisa menggunakan 2 cara yaitu dengan menggunakan yaitu Dot notation obj.prop; Square bracket obj.[\"prop\"]; seperti pada koding diatas...","categories": ["web","js"],
+        "excerpt":"Kita sekarang akan membahas object dalam object kemudian mengaksesnya contohnya seperti berikut: Jadi cara membuat object dalam object seperti berikut: { \"key\" : { \"key\" : \"value\" } } dan Cara menghaksesnya bisa menggunakan 2 cara yaitu dengan menggunakan yaitu Dot notation obj.prop; Square bracket obj.[\"prop\"]; seperti pada koding diatas...","categories": ["language","web","js"],
         "tags": [],
-        "url": "/posts/web/js/13-nexted-object-js",
+        "url": "/posts/language/web/js/13-nexted-object-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus Belajar JPA Hibernate",
-        "excerpt":"Hi, in this section ‘ORM Hibernate’ ini temen-temen akan belajar dan memahami konsep JPA dengan menggunakan framework Hibernate. Scope yang akan kita bahas diantaranya: Pengenalan JPA Sejarah JPA Setup Development Environment Membuat project dengan Apache Maven Archetype Configurasi hibernate.cfg Membuat simple Entity CRUD Sederhana dengan Hibernate Mapping Embedded OneToOne ManyToOne...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hi, in this section ‘ORM Hibernate’ ini temen-temen akan belajar dan memahami konsep JPA dengan menggunakan framework Hibernate. Scope yang akan kita bahas diantaranya: Pengenalan JPA Sejarah JPA Setup Development Environment Membuat project dengan Apache Maven Archetype Configurasi hibernate.cfg Membuat simple Entity CRUD Sederhana dengan Hibernate Mapping Embedded OneToOne ManyToOne...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/01-silabus-orm-hibernate",
+        "url": "/posts/framework/java/orm/hibernate/basic/01-silabus-orm-hibernate",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Time is your to practice",
@@ -486,483 +486,483 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Technology Java Enterprice Edition",
-        "excerpt":"Platform Java Enterpice Edition, menyediakan API dan lingkungan runtime untuk mengembangkan dan menjalankan aplikasi Enterpice grade, multi-tier, scalable, aplikasi jaringan yang handal. Java Enterpice Edition diperkanalkan tahun 1998 yang biasanya disingkat jadi J2EE, J2EE dapat diexecute di multiplatform seperti Windows, Linux, Mac dan lain-lain. di materi ini kita akan membahas...","categories": ["language","java","web","war"],
+        "excerpt":"Platform Java Enterpice Edition, menyediakan API dan lingkungan runtime untuk mengembangkan dan menjalankan aplikasi Enterpice grade, multi-tier, scalable, aplikasi jaringan yang handal. Java Enterpice Edition diperkanalkan tahun 1998 yang biasanya disingkat jadi J2EE, J2EE dapat diexecute di multiplatform seperti Windows, Linux, Mac dan lain-lain. di materi ini kita akan membahas...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/language/java/web/war/002-pengenalan-java-web",
+        "url": "/posts/language/java/web/servlet/002-pengenalan-java-web",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan Scripting language dengan HTML",
-        "excerpt":"Internet yang kita akses itu berisi document media type application/html, HTML (Hypertext Markup Language) yaitu dokument web yang static yang berisi text, image, video dan media lain-nya. Format HTML berbentuk XML contohnya seperti berikut: &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;!-- Judul Page, akan muncil di tab browser --&gt; &lt;title&gt;Halamat Web&lt;/title&gt; &lt;/title&gt;...","categories": ["language","java","web","war"],
+        "excerpt":"Internet yang kita akses itu berisi document media type application/html, HTML (Hypertext Markup Language) yaitu dokument web yang static yang berisi text, image, video dan media lain-nya. Format HTML berbentuk XML contohnya seperti berikut: &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;!-- Judul Page, akan muncil di tab browser --&gt; &lt;title&gt;Halamat Web&lt;/title&gt; &lt;/title&gt;...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/language/java/web/war/003-pengenalan-html",
+        "url": "/posts/language/java/web/servlet/003-pengenalan-html",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan Styling dengan CSS",
-        "excerpt":"Untuk memberikan warna berbeda pada halaman HTML kita bisa melakukan styling menggunakan CSS atau Cascade Style Sheets. Dalam menggunakan CSS harus tau dulu apa itu selector dan jenis dari selector Selector Macam macam seletor dalam penggunakan Javascript yaitu by id -&gt; #property-id { ... } by class name -&gt; .property-class...","categories": ["language","java","web","war"],
+        "excerpt":"Untuk memberikan warna berbeda pada halaman HTML kita bisa melakukan styling menggunakan CSS atau Cascade Style Sheets. Dalam menggunakan CSS harus tau dulu apa itu selector dan jenis dari selector Selector Macam macam seletor dalam penggunakan Javascript yaitu by id -&gt; #property-id { ... } by class name -&gt; .property-class...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/language/java/web/war/004-pengenalan-css",
+        "url": "/posts/language/java/web/servlet/004-pengenalan-css",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan Pemograman Client Side dengan JS",
-        "excerpt":"Client side programming dalam 1 decade terakhir memang sedang jadi perbincangan, lantas apakah kita harus menggunakan? Jawabanya bisa iya bisa juga gak, ya klo saya lebih konsern dengan kebutuhan. Artinya kalo kita mau buat aplikasi kita prosesnya dilakukan di setiap client baru kita gunakan contohnya seperti validasi, prediksi perhitungan dan...","categories": ["java","web","war"],
+        "excerpt":"Client side programming dalam 1 decade terakhir memang sedang jadi perbincangan, lantas apakah kita harus menggunakan? Jawabanya bisa iya bisa juga gak, ya klo saya lebih konsern dengan kebutuhan. Artinya kalo kita mau buat aplikasi kita prosesnya dilakukan di setiap client baru kita gunakan contohnya seperti validasi, prediksi perhitungan dan...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/005-pengenalan-js",
+        "url": "/posts/language/java/web/servlet/005-pengenalan-js",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Membuat project Java Web dengan Apache Maven",
-        "excerpt":"kali ini saya akan membuat project Java Web dengan menggunakan Apache Maven dengan template project maven-archetype-webapp. berikut adalah langkah-langkahnya: Create Project dengan Apache Maven mvn archetype:generate \\ -DgroupId=com.maryanto.dimas.example \\ -DartifactId=bootcamp-java-webapp \\ -Dversion=1.0.0-release \\ -DarchetypeCatalog=internal \\ -DarchetypeGroupId=org.apache.maven.archetypes \\ -DarchetypeArtifactId=maven-archetype-webapp berikut adalah outputnya: [INFO] ---------------------------------------------------------------------------- [INFO] Using following parameters for creating project...","categories": ["java","web","war"],
+        "excerpt":"kali ini saya akan membuat project Java Web dengan menggunakan Apache Maven dengan template project maven-archetype-webapp. berikut adalah langkah-langkahnya: Create Project dengan Apache Maven mvn archetype:generate \\ -DgroupId=com.maryanto.dimas.example \\ -DartifactId=bootcamp-java-webapp \\ -Dversion=1.0.0-release \\ -DarchetypeCatalog=internal \\ -DarchetypeGroupId=org.apache.maven.archetypes \\ -DarchetypeArtifactId=maven-archetype-webapp berikut adalah outputnya: [INFO] ---------------------------------------------------------------------------- [INFO] Using following parameters for creating project...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/008-create-project-java-web",
+        "url": "/posts/language/java/web/servlet/008-create-project-java-web",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Memahami Struktur Project dengan maven-archetype-webapp",
-        "excerpt":"Setelah kita membuat project dengan maven menggunakan template maven-archetype-webapp berikut adalah struktur directory yang kita harus ketahui, berikut adalah folder dan file configurasinya: . ├── pom.xml ├── src │   ├── main │   │   ├── java │   │   ├── resources │   │   └── webapp │   │   ├── WEB-INF │   │   │  ...","categories": ["java","web","war"],
+        "excerpt":"Setelah kita membuat project dengan maven menggunakan template maven-archetype-webapp berikut adalah struktur directory yang kita harus ketahui, berikut adalah folder dan file configurasinya: . ├── pom.xml ├── src │   ├── main │   │   ├── java │   │   ├── resources │   │   └── webapp │   │   ├── WEB-INF │   │   │  ...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/009-structure-project-maven-archetype-webapp",
+        "url": "/posts/language/java/web/servlet/009-structure-project-maven-archetype-webapp",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Konsep Hypertext Transper Protocol (HTTP)",
-        "excerpt":"Hypertext Transper Protocol atau yang sering di singkat HTTP yaitu sebuah protocol untuk distributed, collaboration, hypermedia information system. Http biasanya digunakan untuk bertukar data melalui World Wide Web. HTTP function terdiri dari request dan response protocol di jaringan yang memiliki model computasi client-server. seperti yang saya gambarkan pada gambar berikut:...","categories": ["java","web","war"],
+        "excerpt":"Hypertext Transper Protocol atau yang sering di singkat HTTP yaitu sebuah protocol untuk distributed, collaboration, hypermedia information system. Http biasanya digunakan untuk bertukar data melalui World Wide Web. HTTP function terdiri dari request dan response protocol di jaringan yang memiliki model computasi client-server. seperti yang saya gambarkan pada gambar berikut:...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/010-memahami-konsep-http",
+        "url": "/posts/language/java/web/servlet/010-memahami-konsep-http",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan Pemograman Servlet",
-        "excerpt":"Sekarang saya mau membahas tentang basic pemograman Java Web yaitu Servlet. Apa itu Servlet? Pemograman Servlet, hal yang pertama yang anda harus ketahui jika kita ingin menggunakan teknologi Java Web karena sebelum kita menggunakan framework seperti JSP, SpringMVC, Struct2 dan lain-lain. Basic dari pemograman Java Web adalah Servlet. Nah sekarang...","categories": ["java","web","war"],
+        "excerpt":"Sekarang saya mau membahas tentang basic pemograman Java Web yaitu Servlet. Apa itu Servlet? Pemograman Servlet, hal yang pertama yang anda harus ketahui jika kita ingin menggunakan teknologi Java Web karena sebelum kita menggunakan framework seperti JSP, SpringMVC, Struct2 dan lain-lain. Basic dari pemograman Java Web adalah Servlet. Nah sekarang...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/011-pengenalan-servlet",
+        "url": "/posts/language/java/web/servlet/011-pengenalan-servlet",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pemograman Servlet dengan Annotation",
-        "excerpt":"Sebelumnya kita telah membuat servlet dengan menggunakan xml-mapping, jaman sekarang configurasi di xml udah usang atau jarang dipake. Sekarang udah Zamannya Annotation maka dari itu saya bakalan membahas tentang servlet dengan annotation. Buat kelas baru dengan nama ServletAnnotation seperti berikut: klo anda perhatikan, di beris ke terdapat sepenggalan koding seperti...","categories": ["java","web","war"],
+        "excerpt":"Sebelumnya kita telah membuat servlet dengan menggunakan xml-mapping, jaman sekarang configurasi di xml udah usang atau jarang dipake. Sekarang udah Zamannya Annotation maka dari itu saya bakalan membahas tentang servlet dengan annotation. Buat kelas baru dengan nama ServletAnnotation seperti berikut: klo anda perhatikan, di beris ke terdapat sepenggalan koding seperti...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/012-servlet-dengan-annotation",
+        "url": "/posts/language/java/web/servlet/012-servlet-dengan-annotation",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Submit value dengan Servlet menggunakan Http GET Method",
-        "excerpt":"Sekarang kita akan membuat untuk menerima request dari Form dari HTML menggunakan Servlet. Berikut adalah implementasinya: Pertama kita buat dulu file html dalam folder src/main/webapp misalnya dengan nama submitget.html berikut isi filenya: Setelah itu, kita buat action handler untuk url kirim-get yaitu dengan menggunakan servlet yaitu seperti berikut dengan nama...","categories": ["java","web","war"],
+        "excerpt":"Sekarang kita akan membuat untuk menerima request dari Form dari HTML menggunakan Servlet. Berikut adalah implementasinya: Pertama kita buat dulu file html dalam folder src/main/webapp misalnya dengan nama submitget.html berikut isi filenya: Setelah itu, kita buat action handler untuk url kirim-get yaitu dengan menggunakan servlet yaitu seperti berikut dengan nama...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/013-submit-value-dengan-servlet-get-method",
+        "url": "/posts/language/java/web/servlet/013-submit-value-dengan-servlet-get-method",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Submit value dengan Servlet menggunakan Http POST Method",
-        "excerpt":"Sebelumnya kita udah meng-submit request dengan menggunakan HTTP Method GET nah sekarang kita akan menggunakan HTTP Method POST dan sekalian kita akan membaningkan perbedaan kedua HTTP Method tersebut. Padasarnya saya akan membuat hal yang sama yaitu menginputkan nim dan nama kemudian di submit dengan menggunakan method POST, sekarang coba anda...","categories": ["java","web","war"],
+        "excerpt":"Sebelumnya kita udah meng-submit request dengan menggunakan HTTP Method GET nah sekarang kita akan menggunakan HTTP Method POST dan sekalian kita akan membaningkan perbedaan kedua HTTP Method tersebut. Padasarnya saya akan membuat hal yang sama yaitu menginputkan nim dan nama kemudian di submit dengan menggunakan method POST, sekarang coba anda...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/014-submit-value-dengan-servlet-post-method",
+        "url": "/posts/language/java/web/servlet/014-submit-value-dengan-servlet-post-method",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Submit Array value menggunakan Servlet",
-        "excerpt":"Kita sudah memahami perbedaan tentang HTTP Method GET dan POST, sekarang saya mau membahas tentang mengirim multiple parameter ke sebuah servlet dengan method GET, kenapa menggunakan GET? jawabanya supaya kita tau apa yang dikirim ditampilkan di URL ya tapi klo digunakan untuk aplikasi sesunggunya disarankan menggunakan POST ya!!!. Jadi saya...","categories": ["java","web","war"],
+        "excerpt":"Kita sudah memahami perbedaan tentang HTTP Method GET dan POST, sekarang saya mau membahas tentang mengirim multiple parameter ke sebuah servlet dengan method GET, kenapa menggunakan GET? jawabanya supaya kita tau apa yang dikirim ditampilkan di URL ya tapi klo digunakan untuk aplikasi sesunggunya disarankan menggunakan POST ya!!!. Jadi saya...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/015-submit-array-value-dengan-servlet",
+        "url": "/posts/language/java/web/servlet/015-submit-array-value-dengan-servlet",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Submit file menggunakan Servlet",
-        "excerpt":"Setelah kita belajar mengirimkan data berupa text, sekarang kita akan membahas mengirimkan file menggunakan servlet dan attribute enctype=\"multipart/form-data\". Untuk menggunakan attribute enctype hanya bisa digunakan dengan menggunakan HTTP Method POST selain itu juga untuk meng-upload file ada beberapa kondisi yaitu Servlet spec 3.1 or newer, bisa menggunakan native API Servlet...","categories": ["java","web","war"],
+        "excerpt":"Setelah kita belajar mengirimkan data berupa text, sekarang kita akan membahas mengirimkan file menggunakan servlet dan attribute enctype=\"multipart/form-data\". Untuk menggunakan attribute enctype hanya bisa digunakan dengan menggunakan HTTP Method POST selain itu juga untuk meng-upload file ada beberapa kondisi yaitu Servlet spec 3.1 or newer, bisa menggunakan native API Servlet...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/016-submit-file-dengan-servlet",
+        "url": "/posts/language/java/web/servlet/016-submit-file-dengan-servlet",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Logging incomming request dengan Servlet Filter",
-        "excerpt":"Servlet Filter yaitu sebuah object yang di trigger ketika sebelum atau sesudah suatu proces dari sebuah request ke web aplikasi. Filter biasanya digunakan untuk: Recording semua request yang masuk, Logging, Data compression, Encription dan Dencryption, Input validation. Untuk menggunakan filter di dalam servlet, kita harus mengimplement interface javax.servlet.Filter yang terdiri...","categories": ["java","web","war"],
+        "excerpt":"Servlet Filter yaitu sebuah object yang di trigger ketika sebelum atau sesudah suatu proces dari sebuah request ke web aplikasi. Filter biasanya digunakan untuk: Recording semua request yang masuk, Logging, Data compression, Encription dan Dencryption, Input validation. Untuk menggunakan filter di dalam servlet, kita harus mengimplement interface javax.servlet.Filter yang terdiri...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/017-logging-incomming-request-servlet-filter",
+        "url": "/posts/language/java/web/servlet/017-logging-incomming-request-servlet-filter",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Event Listeners using Servlet Context Level",
-        "excerpt":"Servlet Context Event Listener yaitu melakukan notifikasi terhadap suatu event web application procces dimulai (deployed) atau di shutdown (un-deployed). Contohnya biasanya digunakan untuk melakukan init database ketika web application startup kemudian objectnya disimpan di serlet context setelah berakhir kita bisa destroy connection-nya. Berikut adalah implementasinya: Berikut adalah event servlet context...","categories": ["java","web","war"],
+        "excerpt":"Servlet Context Event Listener yaitu melakukan notifikasi terhadap suatu event web application procces dimulai (deployed) atau di shutdown (un-deployed). Contohnya biasanya digunakan untuk melakukan init database ketika web application startup kemudian objectnya disimpan di serlet context setelah berakhir kita bisa destroy connection-nya. Berikut adalah implementasinya: Berikut adalah event servlet context...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/018-event-listener-using-servlet-context-level",
+        "url": "/posts/language/java/web/servlet/018-event-listener-using-servlet-context-level",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Event Listeners using Session Level",
-        "excerpt":"Event Listeners using Session Level yaitu Event atau kejadian yang biasanya di catch ketika session dibuat atau di destroy. Biasanya penggunaanya untuk authentication, mendapatkan user/session yang active. Berikut adalah contoh Event Listener using Session Level yang digunakan untuk menghitung jumlah user yang mengunjugi webapp. Pertama membuat halaman utama terlebih dahalu...","categories": ["java","web","war"],
+        "excerpt":"Event Listeners using Session Level yaitu Event atau kejadian yang biasanya di catch ketika session dibuat atau di destroy. Biasanya penggunaanya untuk authentication, mendapatkan user/session yang active. Berikut adalah contoh Event Listener using Session Level yang digunakan untuk menghitung jumlah user yang mengunjugi webapp. Pertama membuat halaman utama terlebih dahalu...","categories": ["language","java","web","servlet"],
         "tags": [],
-        "url": "/posts/java/web/war/019-event-listener-using-session-level",
+        "url": "/posts/language/java/web/servlet/019-event-listener-using-session-level",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan JavaServer Page (JSP)",
-        "excerpt":"JavaServer Page atau JSP yaitu Server-Side Programing Technology yang digunakan untuk membuat Web Aplikasi berupa content HTML menjadi dynamis. JSP ini berextensi .jsp bukan .html dan media internet typenya yaitu application/jsp. JSP component adalah sejenis dengan Java Servlet yang khusus di design supaya user membangun user interface dengan mudah untuk...","categories": ["java","web","war"],
+        "excerpt":"JavaServer Page atau JSP yaitu Server-Side Programing Technology yang digunakan untuk membuat Web Aplikasi berupa content HTML menjadi dynamis. JSP ini berextensi .jsp bukan .html dan media internet typenya yaitu application/jsp. JSP component adalah sejenis dengan Java Servlet yang khusus di design supaya user membangun user interface dengan mudah untuk...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/020-pengenalan-jsp",
+        "url": "/posts/language/java/web/jsp/020-pengenalan-jsp",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "JSP Architecture",
-        "excerpt":"JSP membutuhkan Web Server dengan spesifikasi JSP Proccessing tertentu, Contohnya seperti Apache Tomcat 7 yang kita gunakan yaitu memiliki spesifikasi servlet version 3.0, JSP version 2.2 dan JDK yang disupport yaitu 7 or later. Berikut adalah diagram dimana posisi JavaServer Page dalam container Web Server dalam Web Aplikasi JavaServer Pages...","categories": ["java","web","war"],
+        "excerpt":"JSP membutuhkan Web Server dengan spesifikasi JSP Proccessing tertentu, Contohnya seperti Apache Tomcat 7 yang kita gunakan yaitu memiliki spesifikasi servlet version 3.0, JSP version 2.2 dan JDK yang disupport yaitu 7 or later. Berikut adalah diagram dimana posisi JavaServer Page dalam container Web Server dalam Web Aplikasi JavaServer Pages...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/021-jsp-architecture",
+        "url": "/posts/language/java/web/jsp/021-jsp-architecture",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Using JSP and Element of JSP",
-        "excerpt":"Untuk menggunakan JavaServer Pages (JSP) kita harus meletakan file .jsp di dalam folder src/main/webapp jika menggunakan template maven-archetype-webapp *noted: jika membuat project dari eclipse, netbeans akan berbeda lokasinya Contohnya buka file index.jsp dalam folder src/main/webapp/ maka isinya seperti berikut: nah seperti yang temen-temen perhatikan pada sintax di atas yaitu sintax...","categories": ["java","web","war"],
+        "excerpt":"Untuk menggunakan JavaServer Pages (JSP) kita harus meletakan file .jsp di dalam folder src/main/webapp jika menggunakan template maven-archetype-webapp *noted: jika membuat project dari eclipse, netbeans akan berbeda lokasinya Contohnya buka file index.jsp dalam folder src/main/webapp/ maka isinya seperti berikut: nah seperti yang temen-temen perhatikan pada sintax di atas yaitu sintax...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/022-using-jsp",
+        "url": "/posts/language/java/web/jsp/022-using-jsp",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "JSP Scriptlet",
-        "excerpt":"1. JSP Scriptlet Scriptlet yaitu sintax yang memungkinkan statement Java seperti variables, method declaration atau expresion yang ditulis di web pages (HTML). Contohnya seperti berikut: 2. JSP Declaration Declaration, sama seperti namanya declaration yaitu kita bisa mendeklarikan variable atau method dalam JSP dengan menggunakan contoh 3. JSP Expression JSP Expression...","categories": ["java","web","war"],
+        "excerpt":"1. JSP Scriptlet Scriptlet yaitu sintax yang memungkinkan statement Java seperti variables, method declaration atau expresion yang ditulis di web pages (HTML). Contohnya seperti berikut: 2. JSP Declaration Declaration, sama seperti namanya declaration yaitu kita bisa mendeklarikan variable atau method dalam JSP dengan menggunakan contoh 3. JSP Expression JSP Expression...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/023-jsp-scriptlet",
+        "url": "/posts/language/java/web/jsp/023-jsp-scriptlet",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "JSP Directive",
-        "excerpt":"JSP Directive biasanya digunakan untuk merubah struktural pada servlet class yang akan di generate setelah di render. JSP Directive terdiri dari beberapa tag diantaranya page, include dan taglib. 4.1. Page Directive JSP Page Directive biasanya digunakan untuk menentukan behavior atau prilaku pada suatu jsp/servlet contohnya biasanya digunakan untuk import class,...","categories": ["java","web","war"],
+        "excerpt":"JSP Directive biasanya digunakan untuk merubah struktural pada servlet class yang akan di generate setelah di render. JSP Directive terdiri dari beberapa tag diantaranya page, include dan taglib. 4.1. Page Directive JSP Page Directive biasanya digunakan untuk menentukan behavior atau prilaku pada suatu jsp/servlet contohnya biasanya digunakan untuk import class,...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/024-jsp-directive",
+        "url": "/posts/language/java/web/jsp/024-jsp-directive",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "JSP Taglib Directive (JSTL)",
-        "excerpt":"JavaServet Page API mengijinkan untuk kita mendefinisikan custom JSP tag dengan format XML atau HTML, yang artinya kita bisa buat sendiri tag atau menggunakan lib yang sudah di define seperti JSTL atau JavaServer Pages Standard Tag Libaray. Fitur utamanya teridiri dari: Core Tag Formatting Tag SQL Tag XML Tag JSTL...","categories": ["java","web","war"],
+        "excerpt":"JavaServet Page API mengijinkan untuk kita mendefinisikan custom JSP tag dengan format XML atau HTML, yang artinya kita bisa buat sendiri tag atau menggunakan lib yang sudah di define seperti JSTL atau JavaServer Pages Standard Tag Libaray. Fitur utamanya teridiri dari: Core Tag Formatting Tag SQL Tag XML Tag JSTL...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/025-jsp-directive-taglib",
+        "url": "/posts/language/java/web/jsp/025-jsp-directive-taglib",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "JSP Action Element",
-        "excerpt":"JSP Action digunakan untuk meng-control servlet melalui XML syntax, contohnya seperti berikut: berikuat kelas Mahasiswa yang di panggil dalam jsp tersebut: 1 2 3 4 5 6 7 8 9 10 11 12 13 package com.maryanto.dimas.bootcamp.entity; import lombok.Data; import java.sql.Date; @Data public class Mahasiswa { private String nim; private String...","categories": ["java","web","war"],
+        "excerpt":"JSP Action digunakan untuk meng-control servlet melalui XML syntax, contohnya seperti berikut: berikuat kelas Mahasiswa yang di panggil dalam jsp tersebut: 1 2 3 4 5 6 7 8 9 10 11 12 13 package com.maryanto.dimas.bootcamp.entity; import lombok.Data; import java.sql.Date; @Data public class Mahasiswa { private String nim; private String...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/026-jsp-action-elements",
+        "url": "/posts/language/java/web/jsp/026-jsp-action-elements",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "JSP Implicit Object",
-        "excerpt":"JSP Implicit Object adalah pre-defined atau reseved variable atau variable yang sudah dibuatkan oleh JSP / Servlet untuk mengakses object seperti session, parameter, servlet context, dan exception handling. Contohnya seperti berikut:       Sekarang coba request dengan url seperti berikut host:port/context-path/jsp/scriplet-implicit.jsp?nim=1051148&amp;namaLengkap=Dimas%20Maryanto&amp;tanggalLahir=1991-01-01  ","categories": ["java","web","war"],
+        "excerpt":"JSP Implicit Object adalah pre-defined atau reseved variable atau variable yang sudah dibuatkan oleh JSP / Servlet untuk mengakses object seperti session, parameter, servlet context, dan exception handling. Contohnya seperti berikut:       Sekarang coba request dengan url seperti berikut host:port/context-path/jsp/scriplet-implicit.jsp?nim=1051148&amp;namaLengkap=Dimas%20Maryanto&amp;tanggalLahir=1991-01-01  ","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/027-jsp-implicit-object-elements",
+        "url": "/posts/language/java/web/jsp/027-jsp-implicit-object-elements",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Static Resources with WebJars",
-        "excerpt":"Update your pom.xml dengan menambahkan webjars library contohnya seperti jQuery, Bootstrap, DataTables seperti berikut: &lt;project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd\"&gt; &lt;!-- project properties --&gt; &lt;properties&gt; &lt;!-- properties value --&gt; &lt;/properties&gt; &lt;dependencies&gt; &lt;!-- other libs --&gt; &lt;!--webjars --&gt; &lt;dependency&gt; &lt;groupId&gt;org.webjars&lt;/groupId&gt; &lt;artifactId&gt;bootstrap&lt;/artifactId&gt; &lt;version&gt;4.5.2&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.webjars&lt;/groupId&gt; &lt;artifactId&gt;jquery&lt;/artifactId&gt; &lt;version&gt;3.5.1&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.webjars&lt;/groupId&gt; &lt;artifactId&gt;jquery-validation&lt;/artifactId&gt; &lt;version&gt;1.19.0&lt;/version&gt;...","categories": ["java","web","war"],
+        "excerpt":"Update your pom.xml dengan menambahkan webjars library contohnya seperti jQuery, Bootstrap, DataTables seperti berikut: &lt;project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd\"&gt; &lt;!-- project properties --&gt; &lt;properties&gt; &lt;!-- properties value --&gt; &lt;/properties&gt; &lt;dependencies&gt; &lt;!-- other libs --&gt; &lt;!--webjars --&gt; &lt;dependency&gt; &lt;groupId&gt;org.webjars&lt;/groupId&gt; &lt;artifactId&gt;bootstrap&lt;/artifactId&gt; &lt;version&gt;4.5.2&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.webjars&lt;/groupId&gt; &lt;artifactId&gt;jquery&lt;/artifactId&gt; &lt;version&gt;3.5.1&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;org.webjars&lt;/groupId&gt; &lt;artifactId&gt;jquery-validation&lt;/artifactId&gt; &lt;version&gt;1.19.0&lt;/version&gt;...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/028-static-resources-with-webjar",
+        "url": "/posts/language/java/web/jsp/028-static-resources-with-webjar",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Konsep Model View Controller (MVC) design pattern",
-        "excerpt":"Ada beberapa konsep design pattern yang popular dan membawa atau memberikan effect besar pada pengembangan aplikasi contohnya MVC (Model View Controller). MVC yaitu mecahkan masalah dengan membagi menjadi 2 kompenent yaitu Model View Controller Model Model merupakan representasi dari data dan bisnis logic yang mengatur akses dan memodifkias data. contoh...","categories": ["java","web","war"],
+        "excerpt":"Ada beberapa konsep design pattern yang popular dan membawa atau memberikan effect besar pada pengembangan aplikasi contohnya MVC (Model View Controller). MVC yaitu mecahkan masalah dengan membagi menjadi 2 kompenent yaitu Model View Controller Model Model merupakan representasi dari data dan bisnis logic yang mengatur akses dan memodifkias data. contoh...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/029-konsep-mvc-java-web",
+        "url": "/posts/language/java/web/jsp/029-konsep-mvc-java-web",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Implementasi MVC menggunakan JSP dan Servlet",
-        "excerpt":"Berikut adalah implementasi konsep MVC dengan Java Web, Model Untuk model kita masih menggunakan class Mahasiswa yang telah dibuat di materi sebelumnya seperti berikut: Kemudian kita siapkan data dengan membuat interface terlebih dahulu yang di letakan di package com/maryanto/dimas/bootcamp/service seperti berikut: Dan untuk merepresentasi data dari database kita buat data...","categories": ["java","web","war"],
+        "excerpt":"Berikut adalah implementasi konsep MVC dengan Java Web, Model Untuk model kita masih menggunakan class Mahasiswa yang telah dibuat di materi sebelumnya seperti berikut: Kemudian kita siapkan data dengan membuat interface terlebih dahulu yang di letakan di package com/maryanto/dimas/bootcamp/service seperti berikut: Dan untuk merepresentasi data dari database kita buat data...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/030-implementasi-mvc-java-web",
+        "url": "/posts/language/java/web/jsp/030-implementasi-mvc-java-web",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan ORM dengan Hibernate Framework",
-        "excerpt":"Halo kali ini saya mau membahas salah satu framework yang sifatnya ORM (Object Relational Mapping) yaitu Hibernate Framework. Tapi sebelum kita mulai belajar koding saya mau cerita dulu nih. Jadi… Jaman dulu sebelum ada JPA (Java Persistance API) kita murni kita menggunakan JDBC, Dengan menggunakan JDBC semuanya kita harus atur...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Halo kali ini saya mau membahas salah satu framework yang sifatnya ORM (Object Relational Mapping) yaitu Hibernate Framework. Tapi sebelum kita mulai belajar koding saya mau cerita dulu nih. Jadi… Jaman dulu sebelum ada JPA (Java Persistance API) kita murni kita menggunakan JDBC, Dengan menggunakan JDBC semuanya kita harus atur...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/01a-pengenalan-jpa-with-hibernate",
+        "url": "/posts/framework/java/orm/hibernate/basic/01a-pengenalan-jpa-with-hibernate",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Setup Development Environment",
-        "excerpt":"Hai semuanya kita udah berkenalan nih dengan Hibernate Framework, jadi sekarang kita akan mulai untuk persiapan-persiapan apa aja yang perlu di setup sebelum memulai koding dengan Hibernate. Persiapan Install Java 1.8 Install Apache Maven Install Database PostgreSql Text editor atau IDE seperti Netbeans, Eclipse, InteliJIDEA atau lain-lain. klo saya akan...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai semuanya kita udah berkenalan nih dengan Hibernate Framework, jadi sekarang kita akan mulai untuk persiapan-persiapan apa aja yang perlu di setup sebelum memulai koding dengan Hibernate. Persiapan Install Java 1.8 Install Apache Maven Install Database PostgreSql Text editor atau IDE seperti Netbeans, Eclipse, InteliJIDEA atau lain-lain. klo saya akan...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/01b-setup-dev-env",
+        "url": "/posts/framework/java/orm/hibernate/basic/01b-setup-dev-env",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Membuat project Hibernate ORM dengan Apache Maven",
-        "excerpt":"Hi, di materi kali ini kita akan membuat project java dengan Apache Maven dengan kebutuhan CRUD (Create Read Update Delete) database dari Java Application dengan menggunakan framework ORM yaitu Hibernate. berikut stepnya: Create project Membuat project dengan maven, cukup mudah kita cukup buka Command line atau Command Promnt kemudian berikut...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hi, di materi kali ini kita akan membuat project java dengan Apache Maven dengan kebutuhan CRUD (Create Read Update Delete) database dari Java Application dengan menggunakan framework ORM yaitu Hibernate. berikut stepnya: Create project Membuat project dengan maven, cukup mudah kita cukup buka Command line atau Command Promnt kemudian berikut...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02-create-project-java-maven",
+        "url": "/posts/framework/java/orm/hibernate/basic/02-create-project-java-maven",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Build Hibernate Session Factory",
-        "excerpt":"Sama halnya dengan menggunakan JDBC, untuk menggunakan Hibernate kita harus setup dulu connectionnya. Untuk menghubungkan antara Database &lt;-&gt; Hibernate kita membutuhkan hibernate configurasi yaitu dengan cara membuat file hibernate.cfg.xml dalam classpath karena kita menggunakan Apache Maven jadi kita simpan file tersebut di src/main/resources. Setup hibernate.cfg.xml Meng-konfigurasi hibernate sebenarnya ada 2...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Sama halnya dengan menggunakan JDBC, untuk menggunakan Hibernate kita harus setup dulu connectionnya. Untuk menghubungkan antara Database &lt;-&gt; Hibernate kita membutuhkan hibernate configurasi yaitu dengan cara membuat file hibernate.cfg.xml dalam classpath karena kita menggunakan Apache Maven jadi kita simpan file tersebut di src/main/resources. Setup hibernate.cfg.xml Meng-konfigurasi hibernate sebenarnya ada 2...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02a-create-connection",
+        "url": "/posts/framework/java/orm/hibernate/basic/02a-create-connection",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Memahami fungsi hibernate.cfg.xml",
-        "excerpt":"Konfigurasi Hibernate pada dasarnya ada 2 jenis konfigurasi yaitu dengan Source Code java atau saya lebih sering sebut Java Config dan XML (hibernate.cfg.xml). Jaman sekarang Konfigurasi dengan XML udah sangat jarang karena mengikuti style Java yang berbau annotation (@Annotations). Tpi gak apa karena kita mau niatnya belajar jadi Ya ikutin...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Konfigurasi Hibernate pada dasarnya ada 2 jenis konfigurasi yaitu dengan Source Code java atau saya lebih sering sebut Java Config dan XML (hibernate.cfg.xml). Jaman sekarang Konfigurasi dengan XML udah sangat jarang karena mengikuti style Java yang berbau annotation (@Annotations). Tpi gak apa karena kita mau niatnya belajar jadi Ya ikutin...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02b-memahami-hibernate-cfg",
+        "url": "/posts/framework/java/orm/hibernate/basic/02b-memahami-hibernate-cfg",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Membuat Simple Entity di Hibernate",
-        "excerpt":"Sekarang kita akan membuat entity dengan menggunakan Annotation. Untuk membuat entity pada dasarnya sama dengan membuat JavaBeans hanya memiliki tambahan annotation seperti @Entity, @Column, @Table dan lain-lain nanti kita akan bahas lebih lanjut di masing-masing annotation pada hibernate. Ok sekarang kita buat kelas baru dengan nama Mahasiswa dalam package com.maryanto.dimas.bootcamp.entity...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Sekarang kita akan membuat entity dengan menggunakan Annotation. Untuk membuat entity pada dasarnya sama dengan membuat JavaBeans hanya memiliki tambahan annotation seperti @Entity, @Column, @Table dan lain-lain nanti kita akan bahas lebih lanjut di masing-masing annotation pada hibernate. Ok sekarang kita buat kelas baru dengan nama Mahasiswa dalam package com.maryanto.dimas.bootcamp.entity...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02c-membuat-simple-entity",
+        "url": "/posts/framework/java/orm/hibernate/basic/02c-membuat-simple-entity",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Basic Annotation pada Hibernate",
-        "excerpt":"Sekarang saya mau membahas tentang aturan-aturan dasar menggunakan hibernate dengan Annotation. @Entity @Entity mendakan bahwa Java Class tersebut akan dibuatkan menjadi sebuah table. contohnya seperti berikut: @Entity public class Kelas { @Id @GeneratedValue private Long id; } Maka hibernate akan menggenerate sebuah table baru dengan nama Kelas yang memiliki kolom...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Sekarang saya mau membahas tentang aturan-aturan dasar menggunakan hibernate dengan Annotation. @Entity @Entity mendakan bahwa Java Class tersebut akan dibuatkan menjadi sebuah table. contohnya seperti berikut: @Entity public class Kelas { @Id @GeneratedValue private Long id; } Maka hibernate akan menggenerate sebuah table baru dengan nama Kelas yang memiliki kolom...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02d-hibernate-annotation-basic",
+        "url": "/posts/framework/java/orm/hibernate/basic/02d-hibernate-annotation-basic",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "CRUD menggunakan Hibernate",
-        "excerpt":"Sekarang saya akan membuat CRUD dengan menggunakan Hibernate Framework. Untuk membuat CRUD di hibernate sebenarnya sangat mudah, karena kita tidak perlu menggunakan query tetapi pemograman SQLnya masih tetap ada tapi nanti kita akan bahas di materi yang namananya Hibernate Query language atau yang lebih dikenal HQL. Sebelum membuat CRUD Operation...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Sekarang saya akan membuat CRUD dengan menggunakan Hibernate Framework. Untuk membuat CRUD di hibernate sebenarnya sangat mudah, karena kita tidak perlu menggunakan query tetapi pemograman SQLnya masih tetap ada tapi nanti kita akan bahas di materi yang namananya Hibernate Query language atau yang lebih dikenal HQL. Sebelum membuat CRUD Operation...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02e-crud-jpa-hibernate",
+        "url": "/posts/framework/java/orm/hibernate/basic/02e-crud-jpa-hibernate",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Persiapan untuk Deploy Java Webapp",
-        "excerpt":"Halo, kali ini saya akan membahas tentang Deployment menggunakan Apache Tomcat. sebenarnya untuk Web Server sendiri di Servlet Container ada beberapa, diantaranya: Apache Tomcat Oracle GlassFish Payara Redhat JBoss EAP WildFly Dan masih banyak lagi. Nah sekarang kita akan belajar melakukan Deploy aplikasi Java Web ke Web Server dengan menggunakan...","categories": ["java","web","war"],
+        "excerpt":"Halo, kali ini saya akan membahas tentang Deployment menggunakan Apache Tomcat. sebenarnya untuk Web Server sendiri di Servlet Container ada beberapa, diantaranya: Apache Tomcat Oracle GlassFish Payara Redhat JBoss EAP WildFly Dan masih banyak lagi. Nah sekarang kita akan belajar melakukan Deploy aplikasi Java Web ke Web Server dengan menggunakan...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/031-instal-webserver-tomcat8",
+        "url": "/posts/language/java/web/jsp/031-instal-webserver-tomcat8",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Deployment Java Webapp dengan Tomcat Web Server",
-        "excerpt":"Setelah kita install Apache Tomcat 8.x, sekarang kita akan mendeploy aplikasi Java Web kita dengan menggunakan Automate Deployment Approach dengan bantuan plugin cargo-maven-plugin jadi kita perlu tambahkan plugin dulu di file pom.xml seperti berikut: &lt;project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd\"&gt; &lt;dependencies&gt; &lt;!-- Other dependency here! --&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;finalName&gt;webapp&lt;/finalName&gt; &lt;!-- Other...","categories": ["java","web","war"],
+        "excerpt":"Setelah kita install Apache Tomcat 8.x, sekarang kita akan mendeploy aplikasi Java Web kita dengan menggunakan Automate Deployment Approach dengan bantuan plugin cargo-maven-plugin jadi kita perlu tambahkan plugin dulu di file pom.xml seperti berikut: &lt;project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd\"&gt; &lt;dependencies&gt; &lt;!-- Other dependency here! --&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;finalName&gt;webapp&lt;/finalName&gt; &lt;!-- Other...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/032-deploy-java-webapp",
+        "url": "/posts/language/java/web/jsp/032-deploy-java-webapp",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Automated deploy with gitlab CI/CD",
-        "excerpt":"Automation deployment / delivery object sebetulnya ada beberapa cara dan tools contohnya seperti: Jenkins Jebraint Team City Github Action Travis CI Gitlab CI/CD Nah di materi kali ini saya akan menggunakan Gitlab CI/CD karena ada beberapa alasan sih Gitlab ecosystem, udah lumayan lengkap dan yang pasti gratis. Bisa di install...","categories": ["java","web","war"],
+        "excerpt":"Automation deployment / delivery object sebetulnya ada beberapa cara dan tools contohnya seperti: Jenkins Jebraint Team City Github Action Travis CI Gitlab CI/CD Nah di materi kali ini saya akan menggunakan Gitlab CI/CD karena ada beberapa alasan sih Gitlab ecosystem, udah lumayan lengkap dan yang pasti gratis. Bisa di install...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/033-automated-deployer-gitlab-ci-cd-docker",
+        "url": "/posts/language/java/web/jsp/033-automated-deployer-gitlab-ci-cd-docker",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Time is your to practice",
-        "excerpt":"Setelah kita belajar materi Java Web, sekarang saatnya kita membuat aplikasi contohnya seperti Berikut: Nah jadi di real live-nya untuk membuat aplikasi developer/programer akan diberikan berupa tampilan atau bahasa keren nya FSD (Function Specification Design) seperti diatas yang kemudian di terjemahkan ke sebuah program. Nah untuk latihan berikut adalah soalnya:...","categories": ["java","web","war"],
+        "excerpt":"Setelah kita belajar materi Java Web, sekarang saatnya kita membuat aplikasi contohnya seperti Berikut: Nah jadi di real live-nya untuk membuat aplikasi developer/programer akan diberikan berupa tampilan atau bahasa keren nya FSD (Function Specification Design) seperti diatas yang kemudian di terjemahkan ke sebuah program. Nah untuk latihan berikut adalah soalnya:...","categories": ["language","java","web","jsp"],
         "tags": [],
-        "url": "/posts/java/web/war/034-quis-section-01",
+        "url": "/posts/language/java/web/jsp/034-quis-section-01",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Macam-Macam Constraint di Hibernate",
-        "excerpt":"Constraint pada dasarnya bisa juga di terapkan di Hibernate Framework yaitu: Not Null (Column level) Unqiue (Column dan Entity level) Check (Entity level) Primary Key Foreign Key Ok mari kita bahas satu-per-satu, yang pertama kita bahas contraint Not Null Not Null Untuk contraint not null telah di jelaskan di materi...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Constraint pada dasarnya bisa juga di terapkan di Hibernate Framework yaitu: Not Null (Column level) Unqiue (Column dan Entity level) Check (Entity level) Primary Key Foreign Key Ok mari kita bahas satu-per-satu, yang pertama kita bahas contraint Not Null Not Null Untuk contraint not null telah di jelaskan di materi...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02f-constraints",
+        "url": "/posts/framework/java/orm/hibernate/basic/02f-constraints",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Macam Macam Generator Value di Hibernate",
-        "excerpt":"Untuk generator sebetulnya sama halnya yang telah saya tulis materinya di sini yaitu dengan menggunakan: Sequance/Auto_Increment Generator UUID Ok yang pertama kita bahas dulu dengan menggunakan sequance generator: Sequance Generator Untuk menggunakan sequance yang pasti kita perlu check dulu apakah database yang kita gunakan support dengan sequance, jika tidak kita...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Untuk generator sebetulnya sama halnya yang telah saya tulis materinya di sini yaitu dengan menggunakan: Sequance/Auto_Increment Generator UUID Ok yang pertama kita bahas dulu dengan menggunakan sequance generator: Sequance Generator Untuk menggunakan sequance yang pasti kita perlu check dulu apakah database yang kita gunakan support dengan sequance, jika tidak kita...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02g-generator-value",
+        "url": "/posts/framework/java/orm/hibernate/basic/02g-generator-value",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Composite Primary Key",
-        "excerpt":"terkadang didalam struktur sebuah tabel, tidak hanya memiliki 1 primary key tetapi juga bisa lebih dari 2 primary key itu dinamakan Composite Primary Key. apakah hibernate bisa handle composite primary key??? tentu aja bisa, ada 2 cara yaitu: @EmbeddedId @IdClass Yang pertama kita bahas menggunakan EmbeddedId Embeddable Untuk EmbeddedId mapping,...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"terkadang didalam struktur sebuah tabel, tidak hanya memiliki 1 primary key tetapi juga bisa lebih dari 2 primary key itu dinamakan Composite Primary Key. apakah hibernate bisa handle composite primary key??? tentu aja bisa, ada 2 cara yaitu: @EmbeddedId @IdClass Yang pertama kita bahas menggunakan EmbeddedId Embeddable Untuk EmbeddedId mapping,...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02h-composite-primary-key",
+        "url": "/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus Belajar JasperReport",
-        "excerpt":"Hi in this section JasperReport, temen-temen akan belajar membuat Reporting dengan JasperReport Studio untuk Java dan menggunakan Database PostgreSQL. Adapun materi yang akan kita bahas yaitu: Pengenalan JasperReport Setup Development Environment Pengenalan Text Editor JasperReport Studio Membuat Project dengan Apache Maven Membuat Simple Report Menggunakan SQL Adapter Menggunakan Parameter Menggunakan...","categories": ["Java","JasperReport"],
+        "excerpt":"Hi in this section JasperReport, temen-temen akan belajar membuat Reporting dengan JasperReport Studio untuk Java dan menggunakan Database PostgreSQL. Adapun materi yang akan kita bahas yaitu: Pengenalan JasperReport Setup Development Environment Pengenalan Text Editor JasperReport Studio Membuat Project dengan Apache Maven Membuat Simple Report Menggunakan SQL Adapter Menggunakan Parameter Menggunakan...","categories": ["language","java","web","jasper"],
         "tags": [],
-        "url": "/posts/java/jasperreport/001-silabus",
+        "url": "/posts/language/java/web/jasper/001-silabus",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Time is your practice",
-        "excerpt":"Hi, setelah kita belajar materi tentang hibernate supaya temen-temen lebih memahami dan meresap kita akan latihan dulu ya… ok berikut soal latihannya Buatlah project dengan menggunakan Apache Maven dengan archetype maven-archetype-quistart dengan konfirgurasi artifactId=quis1-hibernate groupId=[isi dengan nama email anda contoh: `com.maryanto.dimas.bootcamp.latihan`] version=[isi dengan tanggal anda mengerjakan contoh `2020.12.01`] Buatlah database...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hi, setelah kita belajar materi tentang hibernate supaya temen-temen lebih memahami dan meresap kita akan latihan dulu ya… ok berikut soal latihannya Buatlah project dengan menggunakan Apache Maven dengan archetype maven-archetype-quistart dengan konfirgurasi artifactId=quis1-hibernate groupId=[isi dengan nama email anda contoh: `com.maryanto.dimas.bootcamp.latihan`] version=[isi dengan tanggal anda mengerjakan contoh `2020.12.01`] Buatlah database...","categories": ["Framework","java","orm","hibernate","basic"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/02i-quis-1",
+        "url": "/posts/framework/java/orm/hibernate/basic/02i-quis-1",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Hibernate ORM Relationship Mapping",
-        "excerpt":"Sekarang kita akan membahas macam-macam mapping yang kita bisa gunakan pada framework Hibernate ini. Mapping pada ummumnya: OneToOne Mapping OneToMany Mapping ManyToOne Mapping ManyToMany Mapping Mapping tersebut ya yang biasanya terjadi pada database relational, nah karena Hibernate Framework ini sifatnya ORM atau Object Relational Mapping maka ada beberapa tambahan /...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Sekarang kita akan membahas macam-macam mapping yang kita bisa gunakan pada framework Hibernate ini. Mapping pada ummumnya: OneToOne Mapping OneToMany Mapping ManyToOne Mapping ManyToMany Mapping Mapping tersebut ya yang biasanya terjadi pada database relational, nah karena Hibernate Framework ini sifatnya ORM atau Object Relational Mapping maka ada beberapa tambahan /...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03-hibernate-mapping",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03-hibernate-mapping",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Mapping Enum Ordinal & String",
-        "excerpt":"Sekarang kita membahas mapping yang paling mudah dulu ya yaitu ENUM Ordinal &amp; String. Enum mapping ini biasanya digunakan untuk status atau bahasa kerennya flaging. nah sebuah flag biasanya tidak hanya bersifat boolean saja tetepi juga bisa custome seperti contohnya ON | OFF, ACTIVE, PASSIVE, INACTIVE dan lain-lain. contohnya disini...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Sekarang kita membahas mapping yang paling mudah dulu ya yaitu ENUM Ordinal &amp; String. Enum mapping ini biasanya digunakan untuk status atau bahasa kerennya flaging. nah sebuah flag biasanya tidak hanya bersifat boolean saja tetepi juga bisa custome seperti contohnya ON | OFF, ACTIVE, PASSIVE, INACTIVE dan lain-lain. contohnya disini...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03a-mapping-enumeration",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03a-mapping-enumeration",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Embbeded Mapping",
-        "excerpt":"Hai, di materi kali ini saya akan membahas embedded mapping, Embedded mapping ini biasanya digunakan untuk mapping sebuah entity dengan model yang terpisah kedalam sebuah single database table. contohnya seperti berikut: Implementasi Embedded Model: Implementasi Entity: Implementasi DAO: Implementasi Unit Test: Jika di running, maka hasilnya seperti berikut: INFO: HHH10001501:...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini saya akan membahas embedded mapping, Embedded mapping ini biasanya digunakan untuk mapping sebuah entity dengan model yang terpisah kedalam sebuah single database table. contohnya seperti berikut: Implementasi Embedded Model: Implementasi Entity: Implementasi DAO: Implementasi Unit Test: Jika di running, maka hasilnya seperti berikut: INFO: HHH10001501:...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03b-mapping-embedded",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03b-mapping-embedded",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "OneToOne Mapping",
-        "excerpt":"Untuk mencoba mapping OneToOne kita perlu 2 table, contohnya disini kita buat antara mahasiswa dan alamat, berikut adalah contoh perancangan tablenya: pertama kita buat dulu entity untuk alamat seperti berikut Implementasi Entity Alamat: Implementasi DAO Alamat: Setelah itu alamat akan berrelasi dengan mahasiswa dengan mapping @OneToOne. seperti berikut: Implementasi Entity...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Untuk mencoba mapping OneToOne kita perlu 2 table, contohnya disini kita buat antara mahasiswa dan alamat, berikut adalah contoh perancangan tablenya: pertama kita buat dulu entity untuk alamat seperti berikut Implementasi Entity Alamat: Implementasi DAO Alamat: Setelah itu alamat akan berrelasi dengan mahasiswa dengan mapping @OneToOne. seperti berikut: Implementasi Entity...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03c-mapping-one-to-one",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03c-mapping-one-to-one",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "OneToMany Mapping",
-        "excerpt":"Untuk mencoba mapping OneToMany kita membutuhkan 3 table, contohnya mahasiswa, alamat, relasi antara mahasiswa dan alamat misal namanya kita sebut mahasiswa_alamat_list, berikut adalah perancangan tabelnya: Untuk alamat kita masih menggunakan class yang sebelunya yaitu Implementasi Entity Alamat: Implementasi DAO Alamat: Sedangkan untuk mahasiswa kita buat class baru, contohnya seperti berikut:...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Untuk mencoba mapping OneToMany kita membutuhkan 3 table, contohnya mahasiswa, alamat, relasi antara mahasiswa dan alamat misal namanya kita sebut mahasiswa_alamat_list, berikut adalah perancangan tabelnya: Untuk alamat kita masih menggunakan class yang sebelunya yaitu Implementasi Entity Alamat: Implementasi DAO Alamat: Sedangkan untuk mahasiswa kita buat class baru, contohnya seperti berikut:...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03d-mapping-one-to-many",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03d-mapping-one-to-many",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "ManyToOne Mapping",
-        "excerpt":"Untuk menggunakan mapping @ManyToOne kita akan buat mapping baru yaitu mahasiswa dan kelas, berikut adalah perancangannya databasenya: contohnya seperti berikut: Implementasi Entity kelas: Implementasi DAO Kelas: Implementasi Entity Mahasiswa: Implementasi DAO Mahasiswa: Berikut adalah implementasi Unit testing: Jika unit testing di running untuk method testSaveMahasiswa maka hasilnya seperti berikut: INFO:...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Untuk menggunakan mapping @ManyToOne kita akan buat mapping baru yaitu mahasiswa dan kelas, berikut adalah perancangannya databasenya: contohnya seperti berikut: Implementasi Entity kelas: Implementasi DAO Kelas: Implementasi Entity Mahasiswa: Implementasi DAO Mahasiswa: Berikut adalah implementasi Unit testing: Jika unit testing di running untuk method testSaveMahasiswa maka hasilnya seperti berikut: INFO:...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03e-mapping-many-to-one",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03e-mapping-many-to-one",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "ManyToMany Mapping",
-        "excerpt":"Untuk menggunakan mapping @ManyToMany kita akan buat table baru yaitu mahasiswa dan matakuliah, berikut adalah perancangan databasenya: Implementasi Entity Matakuliah: Implementasi DAO Matakuliah: Implementasi Entity Mahasiswa: Implementasi DAO Mahasiswa: Implementasi Unit Testing Mahasiswa: Jika di running, maka hasilnya seperti berikut: INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2eda2062] for (non-JTA) DDL...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Untuk menggunakan mapping @ManyToMany kita akan buat table baru yaitu mahasiswa dan matakuliah, berikut adalah perancangan databasenya: Implementasi Entity Matakuliah: Implementasi DAO Matakuliah: Implementasi Entity Mahasiswa: Implementasi DAO Mahasiswa: Implementasi Unit Testing Mahasiswa: Jika di running, maka hasilnya seperti berikut: INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@2eda2062] for (non-JTA) DDL...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03f-mapping-many-to-many",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03f-mapping-many-to-many",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Inherintance Mapping",
-        "excerpt":"Hai, di materi kali ini kita akan membahas tentang Inheritance Mapping menggunakan ORM Hibernate Framework. Nah sekedar informasi pada Database Relation tidak support object orientied paradigma seperti Pewarisan, Override, Overload dan lain-lain. Tetapi dengan menggunakan Object Relation Mapping kita bisa menggunakan feature MappedSupperclass Single Table Joined Table Table Per Class...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini kita akan membahas tentang Inheritance Mapping menggunakan ORM Hibernate Framework. Nah sekedar informasi pada Database Relation tidak support object orientied paradigma seperti Pewarisan, Override, Overload dan lain-lain. Tetapi dengan menggunakan Object Relation Mapping kita bisa menggunakan feature MappedSupperclass Single Table Joined Table Table Per Class...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03g-inherintance-mapping",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03g-inherintance-mapping",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Parent-Child Mapping",
-        "excerpt":"Hai, di materi kali ini saya mau ngebahas tentang Parent-Child mapping. ok jadi berikut adalah perancangan tabelnya: Berikut adalah implementasi Entity Employee: Implementasi DAO Employee: Implementasi Unit Testing: Jika dijalankan unit testing untuk method testSave maka hasilnya seperti berikut: INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@54895681] for (non-JTA) DDL execution...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini saya mau ngebahas tentang Parent-Child mapping. ok jadi berikut adalah perancangan tabelnya: Berikut adalah implementasi Entity Employee: Implementasi DAO Employee: Implementasi Unit Testing: Jika dijalankan unit testing untuk method testSave maka hasilnya seperti berikut: INFO: HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@54895681] for (non-JTA) DDL execution...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03h-parent-child-mapping",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03h-parent-child-mapping",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Collections Mapping",
-        "excerpt":"Hai, di materi kali ini saya mau membahas tentang element collection dengan ORM Hibernate. Hibernate menggunakan collection yang memiliki fitur lazy-loading, caching atau state chnage detection semantics. untuk menggunakan Element Collection kita hanya bisa menggunakan class java.util.Collection java.util.List java.util.Set java.util.Map java.util.SortedSet java.util.SortedMap selain yang di sebukan di atas, maka biasanya...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini saya mau membahas tentang element collection dengan ORM Hibernate. Hibernate menggunakan collection yang memiliki fitur lazy-loading, caching atau state chnage detection semantics. untuk menggunakan Element Collection kita hanya bisa menggunakan class java.util.Collection java.util.List java.util.Set java.util.Map java.util.SortedSet java.util.SortedMap selain yang di sebukan di atas, maka biasanya...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03i-collections-mapping",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03i-collections-mapping",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Time is your Practice",
-        "excerpt":"Hai setelah temen-temen mempelajari mapping dengan ORM Hibernate, sekarang saatnya untuk temen-temen latihan ya supaya memahami semua materi yang telah kita bahas. Berikut adalah soalnya. Berikut adalah perancangan UI untuk modul nasabah dan tabungan dalam sebuah aplikasi Perbankan: Form Nasabah Peorangan Form Nasabah Badan Usaha Form Pembukaan Rekening Tabungan untuk...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai setelah temen-temen mempelajari mapping dengan ORM Hibernate, sekarang saatnya untuk temen-temen latihan ya supaya memahami semua materi yang telah kita bahas. Berikut adalah soalnya. Berikut adalah perancangan UI untuk modul nasabah dan tabungan dalam sebuah aplikasi Perbankan: Form Nasabah Peorangan Form Nasabah Badan Usaha Form Pembukaan Rekening Tabungan untuk...","categories": ["Framework","java","orm","hibernate","mapping"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/03j-quis-2",
+        "url": "/posts/framework/java/orm/hibernate/mapping/03j-quis-2",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Hibernate Query Language (HQL-JPQL)",
-        "excerpt":"Hai, di materi kali ini saya mau membahas tentang Query di ORM Hibernate Framework, Query pada ORM Hibernate terdiri: Native Query (SQL) Hibernate Query Language (HQL) dan Java Persistenct Query Language (JPQL) Criteria API Untuk menggunakan query tersebut, misalnya disini saya kasih contoh entity seperti berikut: Native Query Native query...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini saya mau membahas tentang Query di ORM Hibernate Framework, Query pada ORM Hibernate terdiri: Native Query (SQL) Hibernate Query Language (HQL) dan Java Persistenct Query Language (JPQL) Criteria API Untuk menggunakan query tersebut, misalnya disini saya kasih contoh entity seperti berikut: Native Query Native query...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04-hibernate-queries",
+        "url": "/posts/framework/java/orm/hibernate/hql/04-hibernate-queries",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Select Statement dengan HQL",
-        "excerpt":"Hai, di materi kali ini saya mau ngebahas tentang Select Statement dengan menggunakan HQL. OK misalnya disini saya menggunakan entity yang udah pernah saya buat di materi sebelumnya yaitu: Dan berikut adalah implementasi DAO: kemudian berikut adalah implementasi Unit Testing: Sebelum kita coba siapkan dulu datanya contohnya seperti berikut: Setelah...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini saya mau ngebahas tentang Select Statement dengan menggunakan HQL. OK misalnya disini saya menggunakan entity yang udah pernah saya buat di materi sebelumnya yaitu: Dan berikut adalah implementasi DAO: kemudian berikut adalah implementasi Unit Testing: Sebelum kita coba siapkan dulu datanya contohnya seperti berikut: Setelah...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04a-hql-select-statement",
+        "url": "/posts/framework/java/orm/hibernate/hql/04a-hql-select-statement",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Insert, Update dan Delete Statement dengan HQL",
-        "excerpt":"Hai, pada materi kali ini saya mau membahas tentang Insert, Update, dan Delete Statement menggunakan HQL (Hibernate Query Language). Ok nah jadi kita masih pake entity yang sama yaitu Dan berikut adalah implementasi DAO: Implementasi Unit Testing: Jika teman-temen jalankan unit testing pada method testDeleteById, maka hasilnya seperti berikut: Jan...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, pada materi kali ini saya mau membahas tentang Insert, Update, dan Delete Statement menggunakan HQL (Hibernate Query Language). Ok nah jadi kita masih pake entity yang sama yaitu Dan berikut adalah implementasi DAO: Implementasi Unit Testing: Jika teman-temen jalankan unit testing pada method testDeleteById, maka hasilnya seperti berikut: Jan...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04b-hql-insert-update-delete-statement",
+        "url": "/posts/framework/java/orm/hibernate/hql/04b-hql-insert-update-delete-statement",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Join Entity dengan Hibernate Query Language (HQL)",
-        "excerpt":"Hai, di materi kali ini saya mau membahas tentang Join Entity menggunakan ORM Hiberate, Untuk join pada dasarnya ada 2 jenis yaitu Implicit Explicit Preparation Sebelum mencoba kita buat dulu satu record lagi di table mapping.mahasiswa_onetoone seperti berikut: Implicit JOIN Implicit join pada dasarnya query yang sudah di deklarasikan di...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini saya mau membahas tentang Join Entity menggunakan ORM Hiberate, Untuk join pada dasarnya ada 2 jenis yaitu Implicit Explicit Preparation Sebelum mencoba kita buat dulu satu record lagi di table mapping.mahasiswa_onetoone seperti berikut: Implicit JOIN Implicit join pada dasarnya query yang sudah di deklarasikan di...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04c-hql-joins",
+        "url": "/posts/framework/java/orm/hibernate/hql/04c-hql-joins",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Distinct dengan HQL",
-        "excerpt":"Hai, di materi kali ini saya mau membahas tentang clause DISTINCT. clausa distinct sendiri pada dasarnya untuk meng-eliminasi nilai yang redudant. Nah jadi clausa distinct ini di ORM Hibernate terdiri dari Distinct with SQL Projections Distinct with Entity queries Distinct with SQL Projection Untuk menggunakan perintah distinct dengan projection kita...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini saya mau membahas tentang clause DISTINCT. clausa distinct sendiri pada dasarnya untuk meng-eliminasi nilai yang redudant. Nah jadi clausa distinct ini di ORM Hibernate terdiri dari Distinct with SQL Projections Distinct with Entity queries Distinct with SQL Projection Untuk menggunakan perintah distinct dengan projection kita...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04d-hql-distinct",
+        "url": "/posts/framework/java/orm/hibernate/hql/04d-hql-distinct",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Aritmatic dengan HQL",
-        "excerpt":"Hai, pada kesempatan kali ini saya mau ngebahas tentang operator arithmetic pada ORM Hibernate menggunakan HQL. Pada dasarnya Operator Aritmetic bisa di terapkan pada select [operator] from ... dan select ... from ... where [operator] Ok langsung aja, berikut adalah implementasi menggunakan Arithmetic dengan HQL. buat class DTO / Model...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, pada kesempatan kali ini saya mau ngebahas tentang operator arithmetic pada ORM Hibernate menggunakan HQL. Pada dasarnya Operator Aritmetic bisa di terapkan pada select [operator] from ... dan select ... from ... where [operator] Ok langsung aja, berikut adalah implementasi menggunakan Arithmetic dengan HQL. buat class DTO / Model...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04e-hql-aritmetic",
+        "url": "/posts/framework/java/orm/hibernate/hql/04e-hql-aritmetic",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Concatnation dengan HQL",
-        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas tentang Concatnation menggunakan JPQL dan HQL. untuk concatnation kita bisa menggunakan function concat(...) dan operator || Ok, sekarang kita buat dulu DTO / Model seperti berikut: Implementasi DAO: Implementasi Unit Testing: Seperti biasa sebelum kita jalankan, kita check dulu tabelnya di database,...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas tentang Concatnation menggunakan JPQL dan HQL. untuk concatnation kita bisa menggunakan function concat(...) dan operator || Ok, sekarang kita buat dulu DTO / Model seperti berikut: Implementasi DAO: Implementasi Unit Testing: Seperti biasa sebelum kita jalankan, kita check dulu tabelnya di database,...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04f-hql-concatenation",
+        "url": "/posts/framework/java/orm/hibernate/hql/04f-hql-concatenation",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Aggregation Function dengan HQL",
-        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas tentang Aggregation Function dengan menggunakan HQL. Aggregation pada dasarnya ada beberapa function yang kita bisa gunakan yaitu COUNT AVG MIN MAX SUM Berikut adalah contoh penggunaanya, ok sebelum itu saya mau buat DTO dulu seperti berikut: Implementasi DAO: Implementasi Unit Testing: Seperti...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas tentang Aggregation Function dengan menggunakan HQL. Aggregation pada dasarnya ada beberapa function yang kita bisa gunakan yaitu COUNT AVG MIN MAX SUM Berikut adalah contoh penggunaanya, ok sebelum itu saya mau buat DTO dulu seperti berikut: Implementasi DAO: Implementasi Unit Testing: Seperti...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04g-hql-aggregate-function",
+        "url": "/posts/framework/java/orm/hibernate/hql/04g-hql-aggregate-function",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Case When dengan HQL",
-        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas tentang case-when Expresion menggunakan Hibernate Query Language (HQL). seperti biasa sebelum kita mulai kita check dulu data dan tabel misalnya saya punya data seperti berikut: Selanjutnya berikut adalah implementasi DAO: Implementasi Unit Testing: Jika temen-temen jalankan unit testing pada method testSimpleExpresion(), maka...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas tentang case-when Expresion menggunakan Hibernate Query Language (HQL). seperti biasa sebelum kita mulai kita check dulu data dan tabel misalnya saya punya data seperti berikut: Selanjutnya berikut adalah implementasi DAO: Implementasi Unit Testing: Jika temen-temen jalankan unit testing pada method testSimpleExpresion(), maka...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04h-hql-case-when-expresion",
+        "url": "/posts/framework/java/orm/hibernate/hql/04h-hql-case-when-expresion",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Coalesce & NullIF menggunakan HQL",
-        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas tentang function coalesce dan nullif menggunakan Hibernate Query Language. ok seperti biasa kita siapkan dulu datanya. contohnya saya punya tabel dan data seperti berikut: Selanjutnya, kita buat DAO seperti berikut: Implementasi Unit Testing: Setelah itu coba jalankan unit testing untuk method testCoalesceFunction(),...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas tentang function coalesce dan nullif menggunakan Hibernate Query Language. ok seperti biasa kita siapkan dulu datanya. contohnya saya punya tabel dan data seperti berikut: Selanjutnya, kita buat DAO seperti berikut: Implementasi Unit Testing: Setelah itu coba jalankan unit testing untuk method testCoalesceFunction(),...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/04i-hql-nullif-coalesce",
+        "url": "/posts/framework/java/orm/hibernate/hql/04i-hql-nullif-coalesce",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Predicates / Conditional Expressions dengan HQL",
-        "excerpt":"Hai, pada kesempatan kali ini kita akan membahas tentang Predicates atau Conditional Expression dengan menggunakan Hibernate Query Language (HQL). Pada dasarnya conditional expresion pada HQL sama seperti SQL tetapi ada beberapa feature tambahan. Relational Comparison Predicate Nullness Predicate Like Predicate Between Predicate In Predicate Collection Predicate Empty Collection Member OF...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, pada kesempatan kali ini kita akan membahas tentang Predicates atau Conditional Expression dengan menggunakan Hibernate Query Language (HQL). Pada dasarnya conditional expresion pada HQL sama seperti SQL tetapi ada beberapa feature tambahan. Relational Comparison Predicate Nullness Predicate Like Predicate Between Predicate In Predicate Collection Predicate Empty Collection Member OF...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05-hql-predicates",
+        "url": "/posts/framework/java/orm/hibernate/hql/05-hql-predicates",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Relational Comparison Predicate dengan HQL",
-        "excerpt":"Hai, di materi kali ini saya mau membahas tentang Relational Comparison Predicate dengan menggunakan HQL, berikut adalah operator Symbol Keterangan = Melakukan perbandingan dengan nilai yang bernilai sama != Melakukan perbandingan dengan nilai yang bernilai tidak sama &lt;&gt; Melakukan perbandingan dengan nilai yang bernilai tidak sama &gt; Melakukan perbandingan terhadap...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini saya mau membahas tentang Relational Comparison Predicate dengan menggunakan HQL, berikut adalah operator Symbol Keterangan = Melakukan perbandingan dengan nilai yang bernilai sama != Melakukan perbandingan dengan nilai yang bernilai tidak sama &lt;&gt; Melakukan perbandingan dengan nilai yang bernilai tidak sama &gt; Melakukan perbandingan terhadap...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05a-hql-predicate-relational-comparison",
+        "url": "/posts/framework/java/orm/hibernate/hql/05a-hql-predicate-relational-comparison",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Nullness Predicate dengan HQL",
-        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas predicate nullless, berikut adalah implementasi DAO: Implementasi Unit Testing: Sebelum kita test berikut data yang sudah saya siapkan pada table parentchild.employees: Setelah itu baru kita jalankan unit testingnya pada method testOperatorIsNotNull(), maka hasilnya seperti berikut: Jan 26, 2021 10:29:00 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, pada kesempatan kali ini saya mau membahas predicate nullless, berikut adalah implementasi DAO: Implementasi Unit Testing: Sebelum kita test berikut data yang sudah saya siapkan pada table parentchild.employees: Setelah itu baru kita jalankan unit testingnya pada method testOperatorIsNotNull(), maka hasilnya seperti berikut: Jan 26, 2021 10:29:00 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05b-hql-predicate-nullness",
+        "url": "/posts/framework/java/orm/hibernate/hql/05b-hql-predicate-nullness",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Predicate LIKE dengan HQL",
-        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tentang operator like menggunakan Hibernate Query Language (HQL). pada dasarnya operator like di terapkan pada tipe data varchar atau String. selain itu juga jika kita biasa menggunakan escape character, string expression seperti % dan _. Berikut adalah contoh penggunaan operator like expression...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tentang operator like menggunakan Hibernate Query Language (HQL). pada dasarnya operator like di terapkan pada tipe data varchar atau String. selain itu juga jika kita biasa menggunakan escape character, string expression seperti % dan _. Berikut adalah contoh penggunaan operator like expression...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05c-hql-predicate-like",
+        "url": "/posts/framework/java/orm/hibernate/hql/05c-hql-predicate-like",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Predicate BETWEEN dengan HQL",
-        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tantang between dengan menggunakan Hibernate Query Language (HQL). berikut adalah contoh implementasi DAO: Implementasi Unit Testing: Setelah membuat unit testing, seperti biasa berikut adalah data yang kita gunakan untuk melakukan testing pada table parentchild.employees dan enumeration.employee_string: Ok sekarang, coba jalankan unit testingnya...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tantang between dengan menggunakan Hibernate Query Language (HQL). berikut adalah contoh implementasi DAO: Implementasi Unit Testing: Setelah membuat unit testing, seperti biasa berikut adalah data yang kita gunakan untuk melakukan testing pada table parentchild.employees dan enumeration.employee_string: Ok sekarang, coba jalankan unit testingnya...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05d-hql-predicate-between",
+        "url": "/posts/framework/java/orm/hibernate/hql/05d-hql-predicate-between",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Predicate IN dengan HQL",
-        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tentang predicate in dengan menggunakan Hibernate Query Language (HQL), berikut adalah contoh implementasi DAO: Implementasi Unit Testing: Seperti biasa, kita check dulu data pada table yang kita gunakan kali ini yaitu enumeration.employee_string dan parentchild.employees seperti berikut: Ok, setelah coba jalankan unit testing...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tentang predicate in dengan menggunakan Hibernate Query Language (HQL), berikut adalah contoh implementasi DAO: Implementasi Unit Testing: Seperti biasa, kita check dulu data pada table yang kita gunakan kali ini yaitu enumeration.employee_string dan parentchild.employees seperti berikut: Ok, setelah coba jalankan unit testing...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05e-hql-predicate-in",
+        "url": "/posts/framework/java/orm/hibernate/hql/05e-hql-predicate-in",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Empty Collections Predicate dengan HQL",
-        "excerpt":"Hai, di materi kali ini saya mau membahas tentang operation Empty Collection menggunakan HQL. pada dasarnya operator empty collection terdiri dari is empty dan is not empty seperti berikut contoh implementasi DAO: Implementasi Unit Testing: Setelah itu, kita check dulu datanya pada tabel di databse, seperti berikut: Kemudian kita coba...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai, di materi kali ini saya mau membahas tentang operation Empty Collection menggunakan HQL. pada dasarnya operator empty collection terdiri dari is empty dan is not empty seperti berikut contoh implementasi DAO: Implementasi Unit Testing: Setelah itu, kita check dulu datanya pada tabel di databse, seperti berikut: Kemudian kita coba...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05f-hql-predicate-empty-collections",
+        "url": "/posts/framework/java/orm/hibernate/hql/05f-hql-predicate-empty-collections",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "SubQuery Qualifiers dengan HQL",
-        "excerpt":"Hai di materi kali ini saya mau membahas tantang Sub Query Qualifier, yap seperti yang kita tau klo kita juga bisa menggunakan where clause sebagai pembandingnya adalah sub query seperti halnya pada sql di materi postgresql. Untuk operator yang kita bisa gunakan di hibernate yaitu IN ANY SOME ALL Untuk...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai di materi kali ini saya mau membahas tantang Sub Query Qualifier, yap seperti yang kita tau klo kita juga bisa menggunakan where clause sebagai pembandingnya adalah sub query seperti halnya pada sql di materi postgresql. Untuk operator yang kita bisa gunakan di hibernate yaitu IN ANY SOME ALL Untuk...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05g-hql-subquery-qualifiers",
+        "url": "/posts/framework/java/orm/hibernate/hql/05g-hql-subquery-qualifiers",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Not Predicate dengan HQL",
-        "excerpt":"Hai di materi kali ini saya mau ngebahas tentang not predicate dengan Hibernate Query Language (HQL), ok langsung aja jadi berikut adalah implementasi DAO Not Predicate: Berikut adalah unit testing not predicate Dan berikut adalah contoh data yang saya gunakan: Ok nah setelah itu coba jalankan unit testing pada method...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai di materi kali ini saya mau ngebahas tentang not predicate dengan Hibernate Query Language (HQL), ok langsung aja jadi berikut adalah implementasi DAO Not Predicate: Berikut adalah unit testing not predicate Dan berikut adalah contoh data yang saya gunakan: Ok nah setelah itu coba jalankan unit testing pada method...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05h-hql-not-predicate",
+        "url": "/posts/framework/java/orm/hibernate/hql/05h-hql-not-predicate",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Combine Predicate dengan HQL",
-        "excerpt":"Hai kesempatan kali ini saya mau membahas tentang Combine Predicate dengan menggunakan Hibernate Query Language (HQL). Combine predicate terdiri dari OR Predicate And Predicate gabungan berikut adalah implementasi DAO: Implementasi unit testing Sebelum kita coba, berikut adalah data yang saya gunakan: Setelah itu coba jalankan unit testing pada method testAndOperator(),...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai kesempatan kali ini saya mau membahas tentang Combine Predicate dengan menggunakan Hibernate Query Language (HQL). Combine predicate terdiri dari OR Predicate And Predicate gabungan berikut adalah implementasi DAO: Implementasi unit testing Sebelum kita coba, berikut adalah data yang saya gunakan: Setelah itu coba jalankan unit testing pada method testAndOperator(),...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/05i-hql-combine-predicate",
+        "url": "/posts/framework/java/orm/hibernate/hql/05i-hql-combine-predicate",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Group By dengan HQL",
-        "excerpt":"Hai di kesempatan kali ini saya mau membahas tentang Group By dan clausa Having dengan menggunakan Hibernate Query Language (HQL). Sekarang kita buat modelnya dulu seperti berikut: Dan berikut adalah implementasi DAO: Implementasi Unit Testing: Berikut adalah contoh data yang saya gunakan: Setelah itu coba jalankan unit testing pada method...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai di kesempatan kali ini saya mau membahas tentang Group By dan clausa Having dengan menggunakan Hibernate Query Language (HQL). Sekarang kita buat modelnya dulu seperti berikut: Dan berikut adalah implementasi DAO: Implementasi Unit Testing: Berikut adalah contoh data yang saya gunakan: Setelah itu coba jalankan unit testing pada method...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/06-hql-group-by",
+        "url": "/posts/framework/java/orm/hibernate/hql/06-hql-group-by",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Order By dengan HQL",
-        "excerpt":"Hai di kesempatan kali ini saya mau membahas tentang Ordering dengan HQL, ok sekarang langsung ja berikut adalah implementasi DAO: Implementasi Unit Testing: Nah setelah itu coba jalankan unit testing pada method testOrderBySalaryAsc(), maka hasilnya seperti berikut: Feb 02, 2021 5:43:13 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService INFO: HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai di kesempatan kali ini saya mau membahas tentang Ordering dengan HQL, ok sekarang langsung ja berikut adalah implementasi DAO: Implementasi Unit Testing: Nah setelah itu coba jalankan unit testing pada method testOrderBySalaryAsc(), maka hasilnya seperti berikut: Feb 02, 2021 5:43:13 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService INFO: HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/07-hql-order-by",
+        "url": "/posts/framework/java/orm/hibernate/hql/07-hql-order-by",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "LIMIT & OFFSET dengan HQL",
-        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tentang limit dan offset dengan menggunakan Hibernate Query Language (HQL). ok langsung ja berikut adalah implementasi DAO: Berikut adalah implementasi Unit Testing: Setelah itu berikut adalah contoh data yang saya gunakan: Kemudian kita coba jalankan unit testing pada method testOffsetData(), maka hasilnya...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tentang limit dan offset dengan menggunakan Hibernate Query Language (HQL). ok langsung ja berikut adalah implementasi DAO: Berikut adalah implementasi Unit Testing: Setelah itu berikut adalah contoh data yang saya gunakan: Kemudian kita coba jalankan unit testing pada method testOffsetData(), maka hasilnya...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/08-hql-limit-offset",
+        "url": "/posts/framework/java/orm/hibernate/hql/08-hql-limit-offset",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Read Only Entity dengan HQL",
-        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tentang Read Only Entity, nah jadi klo kita misalnya pake query kemudian kita set nilai yang baru masih dalam session maka biasanya akan automatic update, contohnya berikut implementasi DAO: Berikut adalah Unit Testing Sebagai contoh berikut adalah data yang saya gunakan Dan...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Hai pada kesempatan kali ini saya mau membahas tentang Read Only Entity, nah jadi klo kita misalnya pake query kemudian kita set nilai yang baru masih dalam session maka biasanya akan automatic update, contohnya berikut implementasi DAO: Berikut adalah Unit Testing Sebagai contoh berikut adalah data yang saya gunakan Dan...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/09-read-only-entity",
+        "url": "/posts/framework/java/orm/hibernate/hql/09-read-only-entity",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Time is your Practice",
-        "excerpt":"Setelah temen-temen mempelajari materi Hibernate Query Language (HQL) dan supaya lebih memahami materinya jadi kita langsung ja ke studi kasusnya ya. Ok berikut adalah perancangan Entity Relational Diagramnya, Berdasarkan erd tersebut, buatlah project java dengan Apache Maven : maven-archetype-quickstart, artifactId: quis3-hibernate, groupId: your.email.com, version: tanggal-pengerjaan. Buatlah schama, dan table dengan...","categories": ["Java","ORM","Hibernate","PostgreSQL"],
+        "excerpt":"Setelah temen-temen mempelajari materi Hibernate Query Language (HQL) dan supaya lebih memahami materinya jadi kita langsung ja ke studi kasusnya ya. Ok berikut adalah perancangan Entity Relational Diagramnya, Berdasarkan erd tersebut, buatlah project java dengan Apache Maven : maven-archetype-quickstart, artifactId: quis3-hibernate, groupId: your.email.com, version: tanggal-pengerjaan. Buatlah schama, dan table dengan...","categories": ["Framework","java","orm","hibernate","hql"],
         "tags": [],
-        "url": "/posts/java/orm/hibernate/postgresql/10-quis-3",
+        "url": "/posts/framework/java/orm/hibernate/hql/10-quis-3",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus Belajar RDBMS Oracle 18c",
@@ -1721,10 +1721,10 @@ var store = [{
         "url": "/posts/devops/docker/registry/03b-insecure-registry",
         "teaser": "/assets/images/500x300.png"
       },{
-        "title": "Installing Nexus OSS",
+        "title": "Using Nexus OSS as insecure registry",
         "excerpt":"Hai semuanya, di materi kali ini kita akan membahas Insecure Registry dengan menggunakan Nexus OSS, diantaranya yang akan kita bahas yaitu System requirement to install Nexus OSS Installing Nexus OSS Setup Proxy Repository Docker from Docker HUB Setup Proxy Repository Docker from other registry Setup Hosted Repository Docker Setup Public...","categories": ["DevOps","Docker","Registry"],
         "tags": [],
-        "url": "/posts/devops/docker/registry/03c-install-nexus-oss",
+        "url": "/posts/devops/docker/registry/03c-using-nexus-oss",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Docker CLI (Command Line Interface)",
@@ -2538,9 +2538,9 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus - Spring Framework: Pemula sampai Mahir",
-        "excerpt":"Hai semuanya, di cource kali ini kita akan membahas salah satu framework yang paling popular yaitu Spring Framework. Di kelas Java Developer - Spring Framework: Pemula sampai Mahir ini temen-temen akan belajar Konsep dan Implementasi dari Features yang di tawarkan oleh Spring Framework. Materi yang dibahas adalah versi terbaru yaitu...","categories": ["java","framework","spring"],
+        "excerpt":"Hai semuanya, di cource kali ini kita akan membahas salah satu framework yang paling popular yaitu Spring Framework. Di kelas Java Developer - Spring Framework: Pemula sampai Mahir ini temen-temen akan belajar Konsep dan Implementasi dari Features yang di tawarkan oleh Spring Framework. Materi yang dibahas adalah versi terbaru yaitu...","categories": ["framework","java","spring"],
         "tags": [],
-        "url": "/posts/java/framework/spring/01-silabus",
+        "url": "/posts/framework/java/spring/01-silabus",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus - Java: Pemula sampai Mahir",

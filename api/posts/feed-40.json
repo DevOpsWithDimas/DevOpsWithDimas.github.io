@@ -3,47 +3,47 @@
     
     {
       "title": "Pemograman Servlet dengan Annotation",
-      "link": "/posts/java/web/war/012-servlet-dengan-annotation"
+      "link": "/posts/language/java/web/servlet/012-servlet-dengan-annotation"
     }
     ,
     {
       "title": "Pengenalan Pemograman Servlet",
-      "link": "/posts/java/web/war/011-pengenalan-servlet"
+      "link": "/posts/language/java/web/servlet/011-pengenalan-servlet"
     }
     ,
     {
       "title": "Konsep Hypertext Transper Protocol (HTTP)",
-      "link": "/posts/java/web/war/010-memahami-konsep-http"
+      "link": "/posts/language/java/web/servlet/010-memahami-konsep-http"
     }
     ,
     {
       "title": "Memahami Struktur Project dengan maven-archetype-webapp",
-      "link": "/posts/java/web/war/009-structure-project-maven-archetype-webapp"
+      "link": "/posts/language/java/web/servlet/009-structure-project-maven-archetype-webapp"
     }
     ,
     {
       "title": "Membuat project Java Web dengan Apache Maven",
-      "link": "/posts/java/web/war/008-create-project-java-web"
+      "link": "/posts/language/java/web/servlet/008-create-project-java-web"
     }
     ,
     {
       "title": "Pengenalan Pemograman Client Side dengan JS",
-      "link": "/posts/java/web/war/005-pengenalan-js"
+      "link": "/posts/language/java/web/servlet/005-pengenalan-js"
     }
     ,
     {
       "title": "Pengenalan Styling dengan CSS",
-      "link": "/posts/language/java/web/war/004-pengenalan-css"
+      "link": "/posts/language/java/web/servlet/004-pengenalan-css"
     }
     ,
     {
       "title": "Pengenalan Scripting language dengan HTML",
-      "link": "/posts/language/java/web/war/003-pengenalan-html"
+      "link": "/posts/language/java/web/servlet/003-pengenalan-html"
     }
     ,
     {
       "title": "Technology Java Enterprice Edition",
-      "link": "/posts/language/java/web/war/002-pengenalan-java-web"
+      "link": "/posts/language/java/web/servlet/002-pengenalan-java-web"
     }
     ,
     {

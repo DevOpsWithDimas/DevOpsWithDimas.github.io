@@ -1,0 +1,1833 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Inherintance Mapping - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai, di materi kali ini kita akan membahas tentang Inheritance Mapping menggunakan ORM Hibernate Framework. Nah sekedar informasi pada Database Relation tidak support object orientied paradigma seperti Pewarisan, Override, Overload dan lain-lain. Tetapi dengan menggunakan Object Relation Mapping kita bisa menggunakan feature     MappedSupperclass   Single Table   Joined Table   Table Per Class   Yuk langsung aja kita bahas satu-per-satu">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Inherintance Mapping">
+<meta property="og:url" content="/posts/framework/java/orm/hibernate/mapping/03g-inherintance-mapping">
+
+
+  <meta property="og:description" content="Hai, di materi kali ini kita akan membahas tentang Inheritance Mapping menggunakan ORM Hibernate Framework. Nah sekedar informasi pada Database Relation tidak support object orientied paradigma seperti Pewarisan, Override, Overload dan lain-lain. Tetapi dengan menggunakan Object Relation Mapping kita bisa menggunakan feature     MappedSupperclass   Single Table   Joined Table   Table Per Class   Yuk langsung aja kita bahas satu-per-satu">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-01-14T15:04:24+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/framework/java/orm/hibernate/mapping/03g-inherintance-mapping">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#mappedsuperclass-mapping">MappedSuperclass mapping</a></li><li><a href="#singletable-mapping">SingleTable mapping</a></li><li><a href="#singletable-with-discriminator">SingleTable with Discriminator</a></li><li><a href="#jointable-mapping">JoinTable Mapping</a></li><li><a href="#tableperclass-mapping">TablePerClass mapping</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Inherintance Mapping">
+    <meta itemprop="description" content="Hai, di materi kali ini kita akan membahas tentang Inheritance Mapping menggunakan ORM Hibernate Framework. Nah sekedar informasi pada Database Relation tidak support object orientied paradigma seperti Pewarisan, Override, Overload dan lain-lain. Tetapi dengan menggunakan Object Relation Mapping kita bisa menggunakan feature  MappedSupperclass  Single Table  Joined Table  Table Per ClassYuk langsung aja kita bahas satu-per-satu">
+    <meta itemprop="datePublished" content="2021-01-14T15:04:24+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/framework/java/orm/hibernate/mapping/03g-inherintance-mapping" class="u-url" itemprop="url">Inherintance Mapping
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/orm-hibernate" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Object Relational Framework for Java
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-01-14T15:04:24+07:00">January 14, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        12 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan ORM Hibernetes">
+        <label class="acordion-item-label" for="content-Pengenalan ORM Hibernetes">
+            Pengenalan ORM Hibernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/01-silabus-orm-hibernate">
+                        
+                        Silabus Belajar JPA Hibernate
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/01a-pengenalan-jpa-with-hibernate">
+                        
+                        Pengenalan ORM dengan Hiber...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/01b-setup-dev-env">
+                        
+                        Setup Development Environment
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02-create-project-java-maven">
+                        
+                        Membuat project Hibernate O...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02a-create-connection">
+                        
+                        Build Hibernate Session Fac...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02b-memahami-hibernate-cfg">
+                        
+                        Memahami fungsi hibernate.c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02c-membuat-simple-entity">
+                        
+                        Membuat Simple Entity di Hi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02d-hibernate-annotation-basic">
+                        
+                        Basic Annotation pada Hiber...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02e-crud-jpa-hibernate">
+                        
+                        CRUD menggunakan Hibernate
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02f-constraints">
+                        
+                        Macam-Macam Constraint di H...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02g-generator-value">
+                        
+                        Macam Macam Generator Value...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key">
+                        
+                        Composite Primary Key
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02i-quis-1">
+                        
+                        Time is your practice
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Mapping types of Hibernetes">
+        <label class="acordion-item-label" for="content-Mapping types of Hibernetes">
+            Mapping types of Hibernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03-hibernate-mapping">
+                        
+                        Hibernate ORM Relationship ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03a-mapping-enumeration">
+                        
+                        Mapping Enum Ordinal & String
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03b-mapping-embedded">
+                        
+                        Embbeded Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03c-mapping-one-to-one">
+                        
+                        OneToOne Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03d-mapping-one-to-many">
+                        
+                        OneToMany Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03e-mapping-many-to-one">
+                        
+                        ManyToOne Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03f-mapping-many-to-many">
+                        
+                        ManyToMany Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03g-inherintance-mapping">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Inherintance Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03h-parent-child-mapping">
+                        
+                        Parent-Child Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03i-collections-mapping">
+                        
+                        Collections Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03j-quis-2">
+                        
+                        Time is your Practice
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Hibernetes query language (HQL)">
+        <label class="acordion-item-label" for="content-Hibernetes query language (HQL)">
+            Hibernetes query language (HQL)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04-hibernate-queries">
+                        
+                        Hibernate Query Language (H...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04a-hql-select-statement">
+                        
+                        Select Statement dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04b-hql-insert-update-delete-statement">
+                        
+                        Insert, Update dan Delete S...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04c-hql-joins">
+                        
+                        Join Entity dengan Hibernat...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04d-hql-distinct">
+                        
+                        Distinct dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04e-hql-aritmetic">
+                        
+                        Aritmatic dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04f-hql-concatenation">
+                        
+                        Concatnation dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04g-hql-aggregate-function">
+                        
+                        Aggregation Function dengan...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04h-hql-case-when-expresion">
+                        
+                        Case When dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04i-hql-nullif-coalesce">
+                        
+                        Coalesce & NullIF menggunak...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05-hql-predicates">
+                        
+                        Predicates / Conditional Ex...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05a-hql-predicate-relational-comparison">
+                        
+                        Relational Comparison Predi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05b-hql-predicate-nullness">
+                        
+                        Nullness Predicate dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05c-hql-predicate-like">
+                        
+                        Predicate LIKE dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05d-hql-predicate-between">
+                        
+                        Predicate BETWEEN dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05e-hql-predicate-in">
+                        
+                        Predicate IN dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05f-hql-predicate-empty-collections">
+                        
+                        Empty Collections Predicate...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05g-hql-subquery-qualifiers">
+                        
+                        SubQuery Qualifiers dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05h-hql-not-predicate">
+                        
+                        Not Predicate dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05i-hql-combine-predicate">
+                        
+                        Combine Predicate dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/06-hql-group-by">
+                        
+                        Group By dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/07-hql-order-by">
+                        
+                        Order By dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/08-hql-limit-offset">
+                        
+                        LIMIT & OFFSET dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/09-read-only-entity">
+                        
+                        Read Only Entity dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/10-quis-3">
+                        
+                        Time is your Practice
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Java Query Persistence query language">
+        <label class="acordion-item-label" for="content-Java Query Persistence query language">
+            Java Query Persistence query language
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai, di materi kali ini kita akan membahas tentang Inheritance Mapping menggunakan ORM Hibernate Framework. Nah sekedar informasi pada Database Relation tidak support object orientied paradigma seperti Pewarisan, Override, Overload dan lain-lain. Tetapi dengan menggunakan Object Relation Mapping kita bisa menggunakan feature</p>
+
+<ol>
+  <li>MappedSupperclass</li>
+  <li>Single Table</li>
+  <li>Joined Table</li>
+  <li>Table Per Class</li>
+</ol>
+
+<p>Yuk langsung aja kita bahas satu-per-satu</p>
+
+<!--more-->
+
+<h2 id="mappedsuperclass-mapping">MappedSuperclass mapping</h2>
+
+<p>Untuk mencoba mapping ini, kita membutuhkan 2 tabel yang memiliki column yang hampir sama contohnya <code class="language-plaintext highlighter-rouge">mobil</code> sama <code class="language-plaintext highlighter-rouge">motor</code> berikut adalah perancangan databasenya:</p>
+
+<p><img src="/resources/posts/orm-hibernate/03g-inherintance-mapping/erd-mappedsuperclass.png" alt="erd" /></p>
+
+<p>Implementasi Entity superclass:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanMappedSuperclass.java"> </script>
+
+<p>Implementasi Entity child <code class="language-plaintext highlighter-rouge">mobil</code>:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MobilMappedSuperclass.java"> </script>
+
+<p>Implementasi Entity child <code class="language-plaintext highlighter-rouge">motor</code>:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MotorMappedSuperClass.java"> </script>
+
+<p>Implementasi DAO untuk <code class="language-plaintext highlighter-rouge">mobil</code>:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MobilMappedSuperClassDao.java"> </script>
+
+<p>Implementasi DAO untuk <code class="language-plaintext highlighter-rouge">motor</code>:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MotorMappedSuperClassDao.java"> </script>
+
+<p>Kemudian kita buat unit testingnya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=TestMappedSuperClass.java"> </script>
+
+<p>Jika di running maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO: HHH10001501: Connection obtained from JdbcConnectionAccess <span class="o">[</span>org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator<span class="nv">$ConnectionProviderJdbcConnectionAccess</span>@1e1e837d] <span class="k">for</span> <span class="o">(</span>non-JTA<span class="o">)</span> DDL execution was not <span class="k">in </span>auto-commit mode<span class="p">;</span> the Connection <span class="s1">'local transaction'</span> will be committed and the Connection will be <span class="nb">set </span>into auto-commit mode.
+Hibernate: 
+    
+    create table inherintance.mobil_mappedsuperclass <span class="o">(</span>
+       <span class="nb">id </span>varchar<span class="o">(</span>64<span class="o">)</span> not null,
+        cc int4,
+        jumlah_cylinder int4,
+        jumlah_roda int4,
+        nama varchar<span class="o">(</span>50<span class="o">)</span>,
+        nama_pabrikan varchar<span class="o">(</span>50<span class="o">)</span> not null,
+        is_all_wheel_drive boolean not null,
+        jumlah_kursi int4,
+        primary key <span class="o">(</span><span class="nb">id</span><span class="o">)</span>
+    <span class="o">)</span>
+Hibernate: 
+    
+    create table inherintance.motor_mappedsuperclass <span class="o">(</span>
+       <span class="nb">id </span>varchar<span class="o">(</span>64<span class="o">)</span> not null,
+        cc int4,
+        jumlah_cylinder int4,
+        jumlah_roda int4,
+        nama varchar<span class="o">(</span>50<span class="o">)</span>,
+        nama_pabrikan varchar<span class="o">(</span>50<span class="o">)</span> not null,
+        jenis_rantai varchar<span class="o">(</span>255<span class="o">)</span>,
+        primary key <span class="o">(</span><span class="nb">id</span><span class="o">)</span>
+    <span class="o">)</span>
+Jan 16, 2021 12:00:08 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    insert 
+    into
+        inherintance.mobil_mappedsuperclass
+        <span class="o">(</span>cc, jumlah_cylinder, jumlah_roda, nama, nama_pabrikan, is_all_wheel_drive, jumlah_kursi, <span class="nb">id</span><span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?, ?, ?, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestMappedSuperClass - mobil: MobilMappedSuperclass<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanMappedSuperclass<span class="o">(</span><span class="nv">nama</span><span class="o">=</span>Honda BRIO, <span class="nv">jumlahRoda</span><span class="o">=</span>4, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. Honda Motor Company<span class="o">)</span>, <span class="nb">id</span><span class="o">=</span>c5a7398c-a79c-4abd-9c55-deb3ec1e2bad, <span class="nv">jumlahKursi</span><span class="o">=</span>4, <span class="nv">allWheelDrive</span><span class="o">=</span><span class="nb">false</span><span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestMappedSuperClass - destroy hibernate session!
+</code></pre></div></div>
+
+<h2 id="singletable-mapping">SingleTable mapping</h2>
+
+<p>Untuk mencobanya disini masih menggunakan contoh kasus yang sama yaitu kendaran yang terdiri dari <code class="language-plaintext highlighter-rouge">mobil</code> dan <code class="language-plaintext highlighter-rouge">motor</code>. berikut adalah perancangan tabelnya:</p>
+
+<p><img src="/resources/posts/orm-hibernate/03g-inherintance-mapping/erd-singletable.png" alt="erd" /></p>
+
+<p>contoh implementasinya seperti berikut</p>
+
+<p>Implementasi Entity kendaraan:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanSingleTableEntity.java"> </script>
+
+<p>Implementasi Entity Mobil:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MobilSingleTableEntity.java"> </script>
+
+<p>Implementasi Entity Motor:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MotorSingleTableEntity.java"> </script>
+
+<p>Setelah itu kita buat DAO, karena kita menggunakan single table jadi kita cukup membuat 1 class DAO saja contohnya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanSingleTableDao.java"> </script>
+
+<p>Kemudian kita buat unit testing untuk menyimpan data mobil dan motor, implementasinya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=TestKendaraanSingleTable.java"> </script>
+
+<p>Jika di running maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO: HHH10001501: Connection obtained from JdbcConnectionAccess <span class="o">[</span>org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator<span class="nv">$ConnectionProviderJdbcConnectionAccess</span>@30f28b5] <span class="k">for</span> <span class="o">(</span>non-JTA<span class="o">)</span> DDL execution was not <span class="k">in </span>auto-commit mode<span class="p">;</span> the Connection <span class="s1">'local transaction'</span> will be committed and the Connection will be <span class="nb">set </span>into auto-commit mode.
+Hibernate: 
+    
+    create table inherintance.kendaraan_singletable <span class="o">(</span>
+       DTYPE varchar<span class="o">(</span>31<span class="o">)</span> not null,
+        <span class="nb">id </span>varchar<span class="o">(</span>255<span class="o">)</span> not null,
+        cc int4,
+        jumlah_cylinder int4,
+        jumlah_roda int4,
+        nama varchar<span class="o">(</span>50<span class="o">)</span>,
+        nama_pabrikan varchar<span class="o">(</span>50<span class="o">)</span> not null,
+        is_all_wheel_drive boolean,
+        jumlah_kursi int4,
+        jenis_rantai varchar<span class="o">(</span>255<span class="o">)</span>,
+        primary key <span class="o">(</span><span class="nb">id</span><span class="o">)</span>
+    <span class="o">)</span>
+Jan 16, 2021 12:53:13 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTable - connected!
+Hibernate: 
+    insert 
+    into
+        inherintance.kendaraan_singletable
+        <span class="o">(</span>cc, jumlah_cylinder, jumlah_roda, nama, nama_pabrikan, is_all_wheel_drive, jumlah_kursi, DTYPE, <span class="nb">id</span><span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?, ?, ?, <span class="s1">'MobilSingleTableEntity'</span>, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTable - mobil: MobilSingleTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanSingleTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>a010edcd-e33c-4e4e-b33e-75df8e3f1f31, <span class="nv">nama</span><span class="o">=</span>Honda BRIO, <span class="nv">jumlahRoda</span><span class="o">=</span>4, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. Honda Motor Company<span class="o">)</span>, <span class="nv">jumlahKursi</span><span class="o">=</span>4, <span class="nv">allWheelDrive</span><span class="o">=</span><span class="nb">false</span><span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTable - destroy hibernate session!
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTable - init hibernate session
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTable - connected!
+Hibernate: 
+    insert 
+    into
+        inherintance.kendaraan_singletable
+        <span class="o">(</span>cc, jumlah_cylinder, jumlah_roda, nama, nama_pabrikan, jenis_rantai, DTYPE, <span class="nb">id</span><span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?, ?, <span class="s1">'MotorSingleTableEntity'</span>, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTable - mobil: MotorSingleTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanSingleTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>9e3515af-1138-4738-9a0c-d1bfa18f4360, <span class="nv">nama</span><span class="o">=</span>BMW S1000RR, <span class="nv">jumlahRoda</span><span class="o">=</span>2, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. BMW Motorrad<span class="o">)</span>, <span class="nv">jenisRantai</span><span class="o">=</span>Rantai<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTable - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Jika kita check ke table, hasilnya seperti berikut:</p>
+
+<p><img src="/resources/posts/orm-hibernate/03g-inherintance-mapping/select-tables-singletable.png" alt="select-table" /></p>
+
+<h2 id="singletable-with-discriminator">SingleTable with Discriminator</h2>
+
+<p>Saya mau mengebahas tentang annotation <code class="language-plaintext highlighter-rouge">@Discriminator</code>, dengan annotation tersebut kita bisa menubah property/column <code class="language-plaintext highlighter-rouge">dtype</code> yang hibernate buat. contohnya disini saya mau ganti menjadi <code class="language-plaintext highlighter-rouge">jenis_kendaraan</code> dengan pilihan class <code class="language-plaintext highlighter-rouge">MobilSingleTable = Mobil</code> dan <code class="language-plaintext highlighter-rouge">MotorSingleTable = Motor</code>.</p>
+
+<p>berikut Implementasi Entity Kendaraan:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanSingleTableDiscriminatorEntity.java"> </script>
+
+<p>Impementasi Entity Mobil:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MobilSingleTableDiscriminatorEntity.java"> </script>
+
+<p>Implementasi Entity Motor:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MotorSingleTableDiscriminatorEntity.java"> </script>
+
+<p>Implementasi DAO Kendaraan:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanSingleTableDiscriminatorDao.java"> </script>
+
+<p>Implementasi Unit Testing Kendaraan:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanSingleTableDiscriminatorDao.java"> </script>
+
+<p>Jika unit testing di running maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO: HHH10001501: Connection obtained from JdbcConnectionAccess <span class="o">[</span>org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator<span class="nv">$ConnectionProviderJdbcConnectionAccess</span>@595f9916] <span class="k">for</span> <span class="o">(</span>non-JTA<span class="o">)</span> DDL execution was not <span class="k">in </span>auto-commit mode<span class="p">;</span> the Connection <span class="s1">'local transaction'</span> will be committed and the Connection will be <span class="nb">set </span>into auto-commit mode.
+Hibernate: 
+    
+    create table inherintance.kendaraan_singletable_discriminator <span class="o">(</span>
+       jenis_kendaraan varchar<span class="o">(</span>31<span class="o">)</span> not null,
+        <span class="nb">id </span>varchar<span class="o">(</span>255<span class="o">)</span> not null,
+        cc int4,
+        jumlah_cylinder int4,
+        jumlah_roda int4,
+        nama varchar<span class="o">(</span>50<span class="o">)</span>,
+        nama_pabrikan varchar<span class="o">(</span>50<span class="o">)</span> not null,
+        is_all_wheel_drive boolean,
+        jumlah_kursi int4,
+        jenis_rantai varchar<span class="o">(</span>255<span class="o">)</span>,
+        primary key <span class="o">(</span><span class="nb">id</span><span class="o">)</span>
+    <span class="o">)</span>
+Jan 16, 2021 3:59:53 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTableDiscriminator - connected!
+Hibernate: 
+    insert 
+    into
+        inherintance.kendaraan_singletable_discriminator
+        <span class="o">(</span>cc, jumlah_cylinder, jumlah_roda, nama, nama_pabrikan, is_all_wheel_drive, jumlah_kursi, jenis_kendaraan, <span class="nb">id</span><span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?, ?, ?, <span class="s1">'Mobil'</span>, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTableDiscriminator - mobil: MobilSingleTableDiscriminatorEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanSingleTableDiscriminatorEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>c5896473-7455-4e0d-8863-d386366e43d1, <span class="nv">nama</span><span class="o">=</span>Honda BRIO, <span class="nv">jumlahRoda</span><span class="o">=</span>4, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. Honda Motor Company<span class="o">)</span>, <span class="nv">jumlahKursi</span><span class="o">=</span>4, <span class="nv">allWheelDrive</span><span class="o">=</span><span class="nb">false</span><span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSingleTableDiscriminator - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Nah coba kita check tabelnya, maka hasilnya sebagai berikut:</p>
+
+<p><img src="/resources/posts/orm-hibernate/03g-inherintance-mapping/select-tables-singletable-discriminator.png" alt="select-tables" /></p>
+
+<h2 id="jointable-mapping">JoinTable Mapping</h2>
+
+<p>saya mau ngebahas Inherintance Mapping dengan metode Join Table, masih dalam contoh yang sama yaitu <code class="language-plaintext highlighter-rouge">kendaraan</code> yaitu <code class="language-plaintext highlighter-rouge">mobil</code> dan <code class="language-plaintext highlighter-rouge">motor</code> namun kali ini berikut adalah perancangan tabelnya:</p>
+
+<p><img src="/resources/posts/orm-hibernate/03g-inherintance-mapping/erd-jointable.png" alt="erd" /></p>
+
+<p>and berikut adalah adalah Implementasi Entity Kendaraan:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanJoinTableEntity.java"> </script>
+
+<p>Implementasi Entity Mobil:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MobilJoinTableEntity.java"> </script>
+
+<p>Implementasi Entity Motor:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MotorJoinTableEntity.java"> </script>
+
+<p>Implementasi DAO Kendaraan:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanJoinTableDao.java"> </script>
+
+<p>dan yang terakhir berikut adalah Implementasi Unit Testingnya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=TestKendaraanJoinTable.java"> </script>
+
+<p>Jika di jalankan unit testing untuk method <code class="language-plaintext highlighter-rouge">testSaveMotor</code> maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO: HHH10001501: Connection obtained from JdbcConnectionAccess <span class="o">[</span>org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator<span class="nv">$ConnectionProviderJdbcConnectionAccess</span>@35563e4c] <span class="k">for</span> <span class="o">(</span>non-JTA<span class="o">)</span> DDL execution was not <span class="k">in </span>auto-commit mode<span class="p">;</span> the Connection <span class="s1">'local transaction'</span> will be committed and the Connection will be <span class="nb">set </span>into auto-commit mode.
+Hibernate: 
+    
+    create table inherintance.kendaraan_jointable <span class="o">(</span>
+       <span class="nb">id </span>varchar<span class="o">(</span>255<span class="o">)</span> not null,
+        cc int4,
+        jumlah_cylinder int4,
+        jumlah_roda int4,
+        nama varchar<span class="o">(</span>50<span class="o">)</span>,
+        nama_pabrikan varchar<span class="o">(</span>50<span class="o">)</span> not null,
+        primary key <span class="o">(</span><span class="nb">id</span><span class="o">)</span>
+    <span class="o">)</span>
+Hibernate: 
+    
+    create table inherintance.mobil_jointable <span class="o">(</span>
+       is_all_wheel_drive boolean,
+        jumlah_kursi int4,
+        kendaraan_id varchar<span class="o">(</span>255<span class="o">)</span> not null,
+        primary key <span class="o">(</span>kendaraan_id<span class="o">)</span>
+    <span class="o">)</span>
+Hibernate: 
+    
+    create table inherintance.motor_jointable <span class="o">(</span>
+       jenis_rantai varchar<span class="o">(</span>255<span class="o">)</span>,
+        kendaraan_id varchar<span class="o">(</span>255<span class="o">)</span> not null,
+        primary key <span class="o">(</span>kendaraan_id<span class="o">)</span>
+    <span class="o">)</span>
+Hibernate: 
+    
+    alter table <span class="k">if </span>exists inherintance.mobil_jointable 
+       add constraint fk_kendaraan_mobil_id 
+       foreign key <span class="o">(</span>kendaraan_id<span class="o">)</span> 
+       references inherintance.kendaraan_jointable
+Hibernate: 
+    
+    alter table <span class="k">if </span>exists inherintance.motor_jointable 
+       add constraint fk_kendaraan_motor_id 
+       foreign key <span class="o">(</span>kendaraan_id<span class="o">)</span> 
+       references inherintance.kendaraan_jointable
+Jan 16, 2021 6:38:34 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    insert 
+    into
+        inherintance.kendaraan_jointable
+        <span class="o">(</span>cc, jumlah_cylinder, jumlah_roda, nama, nama_pabrikan, <span class="nb">id</span><span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?, ?<span class="o">)</span>
+Hibernate: 
+    insert 
+    into
+        inherintance.motor_jointable
+        <span class="o">(</span>jenis_rantai, kendaraan_id<span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanJoinTable - mobil: MotorJoinTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanJoinTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>ba765eb1-14fc-43fd-aede-620158775065, <span class="nv">nama</span><span class="o">=</span>BMW S1000RR, <span class="nv">jumlahRoda</span><span class="o">=</span>2, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. BMW Motorrad<span class="o">)</span>, <span class="nv">jenisRantai</span><span class="o">=</span>Rantai<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanJoinTable - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Kemudian coba jalankan unit testing untuk method <code class="language-plaintext highlighter-rouge">testSaveMobil</code> maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan 16, 2021 6:39:56 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    insert 
+    into
+        inherintance.kendaraan_jointable
+        <span class="o">(</span>cc, jumlah_cylinder, jumlah_roda, nama, nama_pabrikan, <span class="nb">id</span><span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?, ?<span class="o">)</span>
+Hibernate: 
+    insert 
+    into
+        inherintance.mobil_jointable
+        <span class="o">(</span>is_all_wheel_drive, jumlah_kursi, kendaraan_id<span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanJoinTable - mobil: MobilJoinTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanJoinTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>3463b2ea-cf49-49f1-b1a1-682d46f95573, <span class="nv">nama</span><span class="o">=</span>Honda BRIO, <span class="nv">jumlahRoda</span><span class="o">=</span>4, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. Honda Motor Company<span class="o">)</span>, <span class="nv">jumlahKursi</span><span class="o">=</span>4, <span class="nv">allWheelDrive</span><span class="o">=</span><span class="nb">false</span><span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanJoinTable - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Setelah 2 data terinsert coba test untuk <code class="language-plaintext highlighter-rouge">findById</code> ganti dengan id yang udah tersedia di table, maka outputnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan 16, 2021 6:41:26 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    <span class="k">select
+        </span>kendaraanj0_.id as id1_4_0_,
+        kendaraanj0_.cc as cc2_4_0_,
+        kendaraanj0_.jumlah_cylinder as jumlah_c3_4_0_,
+        kendaraanj0_.jumlah_roda as jumlah_r4_4_0_,
+        kendaraanj0_.nama as nama5_4_0_,
+        kendaraanj0_.nama_pabrikan as nama_pab6_4_0_,
+        kendaraanj0_1_.is_all_wheel_drive as is_all_w1_7_0_,
+        kendaraanj0_1_.jumlah_kursi as jumlah_k2_7_0_,
+        kendaraanj0_2_.jenis_rantai as jenis_ra1_9_0_,
+        <span class="k">case</span> 
+            when kendaraanj0_1_.kendaraan_id is not null <span class="k">then </span>1 
+            when kendaraanj0_2_.kendaraan_id is not null <span class="k">then </span>2 
+            when kendaraanj0_.id is not null <span class="k">then </span>0 
+        end as clazz_0_ 
+    from
+        inherintance.kendaraan_jointable kendaraanj0_ 
+    left outer <span class="nb">join
+        </span>inherintance.mobil_jointable kendaraanj0_1_ 
+            on kendaraanj0_.id<span class="o">=</span>kendaraanj0_1_.kendaraan_id 
+    left outer <span class="nb">join
+        </span>inherintance.motor_jointable kendaraanj0_2_ 
+            on kendaraanj0_.id<span class="o">=</span>kendaraanj0_2_.kendaraan_id 
+    where
+        kendaraanj0_.id<span class="o">=</span>?
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanJoinTable - mobil: MobilJoinTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanJoinTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>3463b2ea-cf49-49f1-b1a1-682d46f95573, <span class="nv">nama</span><span class="o">=</span>Honda BRIO, <span class="nv">jumlahRoda</span><span class="o">=</span>4, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. Honda Motor Company<span class="p">)</span>, <span class="nv">jumlahKursi</span><span class="o">=</span>4, <span class="nv">allWheelDrive</span><span class="o">=</span><span class="nb">false</span><span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanJoinTable - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Sekarang coba test untuk method <code class="language-plaintext highlighter-rouge">findByMobilId</code>, maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan 16, 2021 6:42:40 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    <span class="k">select
+        </span>mobiljoint0_.kendaraan_id as id1_4_0_,
+        mobiljoint0_1_.cc as cc2_4_0_,
+        mobiljoint0_1_.jumlah_cylinder as jumlah_c3_4_0_,
+        mobiljoint0_1_.jumlah_roda as jumlah_r4_4_0_,
+        mobiljoint0_1_.nama as nama5_4_0_,
+        mobiljoint0_1_.nama_pabrikan as nama_pab6_4_0_,
+        mobiljoint0_.is_all_wheel_drive as is_all_w1_7_0_,
+        mobiljoint0_.jumlah_kursi as jumlah_k2_7_0_ 
+    from
+        inherintance.mobil_jointable mobiljoint0_ 
+    inner <span class="nb">join
+        </span>inherintance.kendaraan_jointable mobiljoint0_1_ 
+            on mobiljoint0_.kendaraan_id<span class="o">=</span>mobiljoint0_1_.id 
+    where
+        mobiljoint0_.kendaraan_id<span class="o">=</span>?
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanJoinTable - mobil: MobilJoinTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanJoinTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>3463b2ea-cf49-49f1-b1a1-682d46f95573, <span class="nv">nama</span><span class="o">=</span>Honda BRIO, <span class="nv">jumlahRoda</span><span class="o">=</span>4, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. Honda Motor Company<span class="o">)</span>, <span class="nv">jumlahKursi</span><span class="o">=</span>4, <span class="nv">allWheelDrive</span><span class="o">=</span><span class="nb">false</span><span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanJoinTable - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Nah gimana ada perbedaan? yes jadi klo kita search pake model super / induknya maka dia akan join ke semua tabel tetapi jika menggunakan spesifik model dia akan join ke tabel tertentu saja.</p>
+
+<p>Berikut adalah hasil data yang di simpan dengan menggunakan join_table</p>
+
+<p><img src="/resources/posts/orm-hibernate/03g-inherintance-mapping/select-tables-jointable.png" alt="select-tables" /></p>
+
+<p>Dengan menggunakan metode <code class="language-plaintext highlighter-rouge">@Inheritance(strategy = InheritanceType.JOINED)</code> ini akan mepengaruhi performa aplikasi jadi <em>beaware</em> dalam pengguanaanya</p>
+
+<h2 id="tableperclass-mapping">TablePerClass mapping</h2>
+
+<p>kali ini kita akan membahas tentang Inherintance metode <code class="language-plaintext highlighter-rouge">TABLE_PER_CLASS</code> dengan perancangan tabel seperti berikut:</p>
+
+<p><img src="/resources/posts/orm-hibernate/03g-inherintance-mapping/erd-tableperclass.png" alt="erd" /></p>
+
+<p>Dan berikut adalah implementasi Entity Kendaraan:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanSeparateTableEntity.java"> </script>
+
+<p>Implementasi Entity Mobil:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MobilSeparateTableEntity.java"> </script>
+
+<p>Implementasi Entity Motor:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=MotorSeparateTableEntity.java"> </script>
+
+<p>Implementasi DAO:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KendaraanSeparateTableDao.java"> </script>
+
+<p>Implementasi Unit Testing:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=TestKendaraanSeparateTable.java"> </script>
+
+<p>Jika di running, method <code class="language-plaintext highlighter-rouge">testSaveMotor</code> maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO: HHH10001501: Connection obtained from JdbcConnectionAccess <span class="o">[</span>org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator<span class="nv">$ConnectionProviderJdbcConnectionAccess</span>@70091872] <span class="k">for</span> <span class="o">(</span>non-JTA<span class="o">)</span> DDL execution was not <span class="k">in </span>auto-commit mode<span class="p">;</span> the Connection <span class="s1">'local transaction'</span> will be committed and the Connection will be <span class="nb">set </span>into auto-commit mode.
+Hibernate: 
+    
+    create table inherintance.kendaraan_tableperclass <span class="o">(</span>
+       <span class="nb">id </span>varchar<span class="o">(</span>255<span class="o">)</span> not null,
+        cc int4,
+        jumlah_cylinder int4,
+        jumlah_roda int4,
+        nama varchar<span class="o">(</span>50<span class="o">)</span>,
+        nama_pabrikan varchar<span class="o">(</span>50<span class="o">)</span> not null,
+        primary key <span class="o">(</span><span class="nb">id</span><span class="o">)</span>
+    <span class="o">)</span>
+Hibernate: 
+    
+    create table inherintance.mobil_tableperclass <span class="o">(</span>
+       <span class="nb">id </span>varchar<span class="o">(</span>255<span class="o">)</span> not null,
+        cc int4,
+        jumlah_cylinder int4,
+        jumlah_roda int4,
+        nama varchar<span class="o">(</span>50<span class="o">)</span>,
+        nama_pabrikan varchar<span class="o">(</span>50<span class="o">)</span> not null,
+        is_all_wheel_drive boolean,
+        jumlah_kursi int4,
+        primary key <span class="o">(</span><span class="nb">id</span><span class="o">)</span>
+    <span class="o">)</span>
+Hibernate: 
+    
+    create table inherintance.motor_tableperclass <span class="o">(</span>
+       <span class="nb">id </span>varchar<span class="o">(</span>255<span class="o">)</span> not null,
+        cc int4,
+        jumlah_cylinder int4,
+        jumlah_roda int4,
+        nama varchar<span class="o">(</span>50<span class="o">)</span>,
+        nama_pabrikan varchar<span class="o">(</span>50<span class="o">)</span> not null,
+        jenis_rantai varchar<span class="o">(</span>255<span class="o">)</span>,
+        primary key <span class="o">(</span><span class="nb">id</span><span class="o">)</span>
+    <span class="o">)</span>
+Jan 16, 2021 8:29:59 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    insert 
+    into
+        inherintance.motor_tableperclass
+        <span class="o">(</span>cc, jumlah_cylinder, jumlah_roda, nama, nama_pabrikan, jenis_rantai, <span class="nb">id</span><span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?, ?, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSeparateTable - mobil: MotorSeparateTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanSeparateTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>600cd3a6-859b-4f63-9c66-dc4331e29c96, <span class="nv">nama</span><span class="o">=</span>BMW S1000RR, <span class="nv">jumlahRoda</span><span class="o">=</span>2, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. BMW Motorrad<span class="o">)</span>, <span class="nv">jenisRantai</span><span class="o">=</span>Rantai<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSeparateTable - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Setelah itu coba running unit testing untuk method <code class="language-plaintext highlighter-rouge">testSaveMobil</code> maka hasilnya akan seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    insert 
+    into
+        inherintance.mobil_tableperclass
+        <span class="o">(</span>cc, jumlah_cylinder, jumlah_roda, nama, nama_pabrikan, is_all_wheel_drive, jumlah_kursi, <span class="nb">id</span><span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?, ?, ?, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSeparateTable - mobil: MobilSeparateTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanSeparateTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>d98e1588-05a1-4c6f-950b-9204174c9009, <span class="nv">nama</span><span class="o">=</span>Honda BRIO, <span class="nv">jumlahRoda</span><span class="o">=</span>4, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. Honda Motor Company<span class="o">)</span>, <span class="nv">jumlahKursi</span><span class="o">=</span>4, <span class="nv">allWheelDrive</span><span class="o">=</span><span class="nb">false</span><span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSeparateTable - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Setelah data mobil dan motor tersimpan, sekarang coba jalankan method <code class="language-plaintext highlighter-rouge">testFindById</code> maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan 16, 2021 8:32:07 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    <span class="k">select
+        </span>kendaraans0_.id as id1_7_0_,
+        kendaraans0_.cc as cc2_7_0_,
+        kendaraans0_.jumlah_cylinder as jumlah_c3_7_0_,
+        kendaraans0_.jumlah_roda as jumlah_r4_7_0_,
+        kendaraans0_.nama as nama5_7_0_,
+        kendaraans0_.nama_pabrikan as nama_pab6_7_0_,
+        kendaraans0_.is_all_wheel_drive as is_all_w1_10_0_,
+        kendaraans0_.jumlah_kursi as jumlah_k2_10_0_,
+        kendaraans0_.jenis_rantai as jenis_ra1_13_0_,
+        kendaraans0_.clazz_ as clazz_0_ 
+    from
+        <span class="o">(</span> <span class="k">select
+            </span><span class="nb">id</span>,
+            cc,
+            jumlah_cylinder,
+            jumlah_roda,
+            nama,
+            nama_pabrikan,
+            null::boolean as is_all_wheel_drive,
+            null::int4 as jumlah_kursi,
+            null::varchar as jenis_rantai,
+            0 as clazz_ 
+        from
+            inherintance.kendaraan_tableperclass 
+        union
+        all <span class="k">select
+            </span><span class="nb">id</span>,
+            cc,
+            jumlah_cylinder,
+            jumlah_roda,
+            nama,
+            nama_pabrikan,
+            is_all_wheel_drive,
+            jumlah_kursi,
+            null::varchar as jenis_rantai,
+            1 as clazz_ 
+        from
+            inherintance.mobil_tableperclass 
+        union
+        all <span class="k">select
+            </span><span class="nb">id</span>,
+            cc,
+            jumlah_cylinder,
+            jumlah_roda,
+            nama,
+            nama_pabrikan,
+            null::boolean as is_all_wheel_drive,
+            null::int4 as jumlah_kursi,
+            jenis_rantai,
+            2 as clazz_ 
+        from
+            inherintance.motor_tableperclass 
+    <span class="o">)</span> kendaraans0_ 
+where
+    kendaraans0_.id<span class="o">=</span>?
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSeparateTable - mobil: MobilSeparateTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanSeparateTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>d98e1588-05a1-4c6f-950b-9204174c9009, <span class="nv">nama</span><span class="o">=</span>Honda BRIO, <span class="nv">jumlahRoda</span><span class="o">=</span>4, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. Honda Motor Company<span class="o">)</span>, <span class="nv">jumlahKursi</span><span class="o">=</span>4, <span class="nv">allWheelDrive</span><span class="o">=</span><span class="nb">false</span><span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSeparateTable - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Dan yang terakhir jalankan unit testing method <code class="language-plaintext highlighter-rouge">testFindByMobilId</code> maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan 16, 2021 8:33:15 PM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    <span class="k">select
+        </span>mobilsepar0_.id as id1_7_0_,
+        mobilsepar0_.cc as cc2_7_0_,
+        mobilsepar0_.jumlah_cylinder as jumlah_c3_7_0_,
+        mobilsepar0_.jumlah_roda as jumlah_r4_7_0_,
+        mobilsepar0_.nama as nama5_7_0_,
+        mobilsepar0_.nama_pabrikan as nama_pab6_7_0_,
+        mobilsepar0_.is_all_wheel_drive as is_all_w1_10_0_,
+        mobilsepar0_.jumlah_kursi as jumlah_k2_10_0_ 
+    from
+        inherintance.mobil_tableperclass mobilsepar0_ 
+    where
+        mobilsepar0_.id<span class="o">=</span>?
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSeparateTable - mobil: MobilSeparateTableEntity<span class="o">(</span><span class="nv">super</span><span class="o">=</span>KendaraanSeparateTableEntity<span class="o">(</span><span class="nb">id</span><span class="o">=</span>d98e1588-05a1-4c6f-950b-9204174c9009, <span class="nv">nama</span><span class="o">=</span>Honda BRIO, <span class="nv">jumlahRoda</span><span class="o">=</span>4, <span class="nv">jumlahCylinder</span><span class="o">=</span>4, <span class="nv">cc</span><span class="o">=</span>1000, <span class="nv">namaPabrikan</span><span class="o">=</span>PT. Honda Motor Company<span class="o">)</span>, <span class="nv">jumlahKursi</span><span class="o">=</span>4, <span class="nv">allWheelDrive</span><span class="o">=</span><span class="nb">false</span><span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.mapping.inherintance.TestKendaraanSeparateTable - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Dan berikut adalah data pada tabelnya:</p>
+
+<p><img src="/resources/posts/orm-hibernate/03g-inherintance-mapping/select-tables-tableperclass.png" alt="select-tables" /></p>
+
+<p>Untuk menggunakan <code class="language-plaintext highlighter-rouge">@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</code> pastikan database management system yang digunakan support dengan <code class="language-plaintext highlighter-rouge">UNION</code>, <code class="language-plaintext highlighter-rouge">UNION ALL</code> contohnya seperti <code class="language-plaintext highlighter-rouge">PostgreSQL</code>, <code class="language-plaintext highlighter-rouge">MySQL</code>, <code class="language-plaintext highlighter-rouge">Oracle</code>, <code class="language-plaintext highlighter-rouge">DB2</code>, <code class="language-plaintext highlighter-rouge">H2</code>.</p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/framework/java/orm/hibernate/basic/01-silabus-orm-hibernate"  class="" title="Silabus Belajar JPA Hibernate">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/framework/java/orm/hibernate/mapping/03f-mapping-many-to-many" class="" 
+        title="ManyToMany Mapping
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 21 to 49
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/framework/java/orm/hibernate/mapping/03h-parent-child-mapping" class="" 
+        title="Parent-Child Mapping
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/framework/java/orm/hibernate/hql/10-quis-3"  class="" title="Time is your Practice">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#framework" class="page__taxonomy-item p-category" rel="tag">Framework</a><span class="sep">, </span>
+    
+      <a href="/categories/#hibernate" class="page__taxonomy-item p-category" rel="tag">hibernate</a><span class="sep">, </span>
+    
+      <a href="/categories/#java" class="page__taxonomy-item p-category" rel="tag">java</a><span class="sep">, </span>
+    
+      <a href="/categories/#mapping" class="page__taxonomy-item p-category" rel="tag">mapping</a><span class="sep">, </span>
+    
+      <a href="/categories/#orm" class="page__taxonomy-item p-category" rel="tag">orm</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-01-14T15:04:24+07:00">January 14, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Inherintance+Mapping%20%2Fposts%2Fframework%2Fjava%2Form%2Fhibernate%2Fmapping%2F03g-inherintance-mapping" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fframework%2Fjava%2Form%2Fhibernate%2Fmapping%2F03g-inherintance-mapping" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fframework%2Fjava%2Form%2Fhibernate%2Fmapping%2F03g-inherintance-mapping" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" rel="permalink">Silabus Gitlab CI: Pemula s/d Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-02T20:18:43+07:00">June 2, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        23 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        36 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        4 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

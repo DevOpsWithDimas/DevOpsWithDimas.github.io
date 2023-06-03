@@ -3,52 +3,52 @@
     
     {
       "title": "Predicate LIKE dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05c-hql-predicate-like"
+      "link": "/posts/framework/java/orm/hibernate/hql/05c-hql-predicate-like"
     }
     ,
     {
       "title": "Nullness Predicate dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05b-hql-predicate-nullness"
+      "link": "/posts/framework/java/orm/hibernate/hql/05b-hql-predicate-nullness"
     }
     ,
     {
       "title": "Relational Comparison Predicate dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05a-hql-predicate-relational-comparison"
+      "link": "/posts/framework/java/orm/hibernate/hql/05a-hql-predicate-relational-comparison"
     }
     ,
     {
       "title": "Predicates / Conditional Expressions dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05-hql-predicates"
+      "link": "/posts/framework/java/orm/hibernate/hql/05-hql-predicates"
     }
     ,
     {
       "title": "Coalesce & NullIF menggunakan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/04i-hql-nullif-coalesce"
+      "link": "/posts/framework/java/orm/hibernate/hql/04i-hql-nullif-coalesce"
     }
     ,
     {
       "title": "Case When dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/04h-hql-case-when-expresion"
+      "link": "/posts/framework/java/orm/hibernate/hql/04h-hql-case-when-expresion"
     }
     ,
     {
       "title": "Aggregation Function dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/04g-hql-aggregate-function"
+      "link": "/posts/framework/java/orm/hibernate/hql/04g-hql-aggregate-function"
     }
     ,
     {
       "title": "Concatnation dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/04f-hql-concatenation"
+      "link": "/posts/framework/java/orm/hibernate/hql/04f-hql-concatenation"
     }
     ,
     {
       "title": "Aritmatic dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/04e-hql-aritmetic"
+      "link": "/posts/framework/java/orm/hibernate/hql/04e-hql-aritmetic"
     }
     ,
     {
       "title": "Distinct dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/04d-hql-distinct"
+      "link": "/posts/framework/java/orm/hibernate/hql/04d-hql-distinct"
     }
   ]
 }

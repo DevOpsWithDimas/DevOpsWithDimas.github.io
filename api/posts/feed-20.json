@@ -12,8 +12,8 @@
     }
     ,
     {
-      "title": "Installing Nexus OSS",
-      "link": "/posts/devops/docker/registry/03c-install-nexus-oss"
+      "title": "Using Nexus OSS as insecure registry",
+      "link": "/posts/devops/docker/registry/03c-using-nexus-oss"
     }
     ,
     {

@@ -3,52 +3,52 @@
     
     {
       "title": "Read Only Entity dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/09-read-only-entity"
+      "link": "/posts/framework/java/orm/hibernate/hql/09-read-only-entity"
     }
     ,
     {
       "title": "LIMIT & OFFSET dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/08-hql-limit-offset"
+      "link": "/posts/framework/java/orm/hibernate/hql/08-hql-limit-offset"
     }
     ,
     {
       "title": "Order By dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/07-hql-order-by"
+      "link": "/posts/framework/java/orm/hibernate/hql/07-hql-order-by"
     }
     ,
     {
       "title": "Group By dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/06-hql-group-by"
+      "link": "/posts/framework/java/orm/hibernate/hql/06-hql-group-by"
     }
     ,
     {
       "title": "Combine Predicate dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05i-hql-combine-predicate"
+      "link": "/posts/framework/java/orm/hibernate/hql/05i-hql-combine-predicate"
     }
     ,
     {
       "title": "Not Predicate dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05h-hql-not-predicate"
+      "link": "/posts/framework/java/orm/hibernate/hql/05h-hql-not-predicate"
     }
     ,
     {
       "title": "SubQuery Qualifiers dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05g-hql-subquery-qualifiers"
+      "link": "/posts/framework/java/orm/hibernate/hql/05g-hql-subquery-qualifiers"
     }
     ,
     {
       "title": "Empty Collections Predicate dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05f-hql-predicate-empty-collections"
+      "link": "/posts/framework/java/orm/hibernate/hql/05f-hql-predicate-empty-collections"
     }
     ,
     {
       "title": "Predicate IN dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05e-hql-predicate-in"
+      "link": "/posts/framework/java/orm/hibernate/hql/05e-hql-predicate-in"
     }
     ,
     {
       "title": "Predicate BETWEEN dengan HQL",
-      "link": "/posts/java/orm/hibernate/postgresql/05d-hql-predicate-between"
+      "link": "/posts/framework/java/orm/hibernate/hql/05d-hql-predicate-between"
     }
   ]
 }

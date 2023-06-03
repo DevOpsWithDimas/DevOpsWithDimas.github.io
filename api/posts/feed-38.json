@@ -3,52 +3,52 @@
     
     {
       "title": "Setup Development Environment",
-      "link": "/posts/java/orm/hibernate/postgresql/01b-setup-dev-env"
+      "link": "/posts/framework/java/orm/hibernate/basic/01b-setup-dev-env"
     }
     ,
     {
       "title": "Pengenalan ORM dengan Hibernate Framework",
-      "link": "/posts/java/orm/hibernate/postgresql/01a-pengenalan-jpa-with-hibernate"
+      "link": "/posts/framework/java/orm/hibernate/basic/01a-pengenalan-jpa-with-hibernate"
     }
     ,
     {
       "title": "Implementasi MVC menggunakan JSP dan Servlet",
-      "link": "/posts/java/web/war/030-implementasi-mvc-java-web"
+      "link": "/posts/language/java/web/jsp/030-implementasi-mvc-java-web"
     }
     ,
     {
       "title": "Konsep Model View Controller (MVC) design pattern",
-      "link": "/posts/java/web/war/029-konsep-mvc-java-web"
+      "link": "/posts/language/java/web/jsp/029-konsep-mvc-java-web"
     }
     ,
     {
       "title": "Static Resources with WebJars",
-      "link": "/posts/java/web/war/028-static-resources-with-webjar"
+      "link": "/posts/language/java/web/jsp/028-static-resources-with-webjar"
     }
     ,
     {
       "title": "JSP Implicit Object",
-      "link": "/posts/java/web/war/027-jsp-implicit-object-elements"
+      "link": "/posts/language/java/web/jsp/027-jsp-implicit-object-elements"
     }
     ,
     {
       "title": "JSP Action Element",
-      "link": "/posts/java/web/war/026-jsp-action-elements"
+      "link": "/posts/language/java/web/jsp/026-jsp-action-elements"
     }
     ,
     {
       "title": "JSP Taglib Directive (JSTL)",
-      "link": "/posts/java/web/war/025-jsp-directive-taglib"
+      "link": "/posts/language/java/web/jsp/025-jsp-directive-taglib"
     }
     ,
     {
       "title": "JSP Directive",
-      "link": "/posts/java/web/war/024-jsp-directive"
+      "link": "/posts/language/java/web/jsp/024-jsp-directive"
     }
     ,
     {
       "title": "JSP Scriptlet",
-      "link": "/posts/java/web/war/023-jsp-scriptlet"
+      "link": "/posts/language/java/web/jsp/023-jsp-scriptlet"
     }
   ]
 }

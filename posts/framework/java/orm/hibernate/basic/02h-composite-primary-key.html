@@ -1,0 +1,1356 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Composite Primary Key - DevOps with Dimas Maryanto</title>
+<meta name="description" content="terkadang didalam struktur sebuah tabel, tidak hanya memiliki 1 primary key tetapi juga bisa lebih dari 2 primary key itu dinamakan Composite Primary Key. apakah hibernate bisa handle composite primary key???  tentu aja bisa, ada 2 cara yaitu:     @EmbeddedId   @IdClass   Yang pertama kita bahas menggunakan EmbeddedId">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Composite Primary Key">
+<meta property="og:url" content="/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key">
+
+
+  <meta property="og:description" content="terkadang didalam struktur sebuah tabel, tidak hanya memiliki 1 primary key tetapi juga bisa lebih dari 2 primary key itu dinamakan Composite Primary Key. apakah hibernate bisa handle composite primary key???  tentu aja bisa, ada 2 cara yaitu:     @EmbeddedId   @IdClass   Yang pertama kita bahas menggunakan EmbeddedId">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2021-01-04T07:36:52+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#embeddable">Embeddable</a></li><li><a href="#idclass">IdClass</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Composite Primary Key">
+    <meta itemprop="description" content="terkadang didalam struktur sebuah tabel, tidak hanya memiliki 1 primary key tetapi juga bisa lebih dari 2 primary key itu dinamakan Composite Primary Key. apakah hibernate bisa handle composite primary key???tentu aja bisa, ada 2 cara yaitu:  @EmbeddedId  @IdClassYang pertama kita bahas menggunakan EmbeddedId">
+    <meta itemprop="datePublished" content="2021-01-04T07:36:52+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key" class="u-url" itemprop="url">Composite Primary Key
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/orm-hibernate" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Object Relational Framework for Java
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-01-04T07:36:52+07:00">January 4, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan ORM Hibernetes">
+        <label class="acordion-item-label" for="content-Pengenalan ORM Hibernetes">
+            Pengenalan ORM Hibernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/01-silabus-orm-hibernate">
+                        
+                        Silabus Belajar JPA Hibernate
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/01a-pengenalan-jpa-with-hibernate">
+                        
+                        Pengenalan ORM dengan Hiber...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/01b-setup-dev-env">
+                        
+                        Setup Development Environment
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02-create-project-java-maven">
+                        
+                        Membuat project Hibernate O...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02a-create-connection">
+                        
+                        Build Hibernate Session Fac...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02b-memahami-hibernate-cfg">
+                        
+                        Memahami fungsi hibernate.c...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02c-membuat-simple-entity">
+                        
+                        Membuat Simple Entity di Hi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02d-hibernate-annotation-basic">
+                        
+                        Basic Annotation pada Hiber...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02e-crud-jpa-hibernate">
+                        
+                        CRUD menggunakan Hibernate
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02f-constraints">
+                        
+                        Macam-Macam Constraint di H...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02g-generator-value">
+                        
+                        Macam Macam Generator Value...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Composite Primary Key
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/basic/02i-quis-1">
+                        
+                        Time is your practice
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Mapping types of Hibernetes">
+        <label class="acordion-item-label" for="content-Mapping types of Hibernetes">
+            Mapping types of Hibernetes
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03-hibernate-mapping">
+                        
+                        Hibernate ORM Relationship ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03a-mapping-enumeration">
+                        
+                        Mapping Enum Ordinal & String
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03b-mapping-embedded">
+                        
+                        Embbeded Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03c-mapping-one-to-one">
+                        
+                        OneToOne Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03d-mapping-one-to-many">
+                        
+                        OneToMany Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03e-mapping-many-to-one">
+                        
+                        ManyToOne Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03f-mapping-many-to-many">
+                        
+                        ManyToMany Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03g-inherintance-mapping">
+                        
+                        Inherintance Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03h-parent-child-mapping">
+                        
+                        Parent-Child Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03i-collections-mapping">
+                        
+                        Collections Mapping
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/mapping/03j-quis-2">
+                        
+                        Time is your Practice
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Hibernetes query language (HQL)">
+        <label class="acordion-item-label" for="content-Hibernetes query language (HQL)">
+            Hibernetes query language (HQL)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04-hibernate-queries">
+                        
+                        Hibernate Query Language (H...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04a-hql-select-statement">
+                        
+                        Select Statement dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04b-hql-insert-update-delete-statement">
+                        
+                        Insert, Update dan Delete S...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04c-hql-joins">
+                        
+                        Join Entity dengan Hibernat...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04d-hql-distinct">
+                        
+                        Distinct dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04e-hql-aritmetic">
+                        
+                        Aritmatic dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04f-hql-concatenation">
+                        
+                        Concatnation dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04g-hql-aggregate-function">
+                        
+                        Aggregation Function dengan...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04h-hql-case-when-expresion">
+                        
+                        Case When dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/04i-hql-nullif-coalesce">
+                        
+                        Coalesce & NullIF menggunak...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05-hql-predicates">
+                        
+                        Predicates / Conditional Ex...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05a-hql-predicate-relational-comparison">
+                        
+                        Relational Comparison Predi...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05b-hql-predicate-nullness">
+                        
+                        Nullness Predicate dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05c-hql-predicate-like">
+                        
+                        Predicate LIKE dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05d-hql-predicate-between">
+                        
+                        Predicate BETWEEN dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05e-hql-predicate-in">
+                        
+                        Predicate IN dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05f-hql-predicate-empty-collections">
+                        
+                        Empty Collections Predicate...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05g-hql-subquery-qualifiers">
+                        
+                        SubQuery Qualifiers dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05h-hql-not-predicate">
+                        
+                        Not Predicate dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/05i-hql-combine-predicate">
+                        
+                        Combine Predicate dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/06-hql-group-by">
+                        
+                        Group By dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/07-hql-order-by">
+                        
+                        Order By dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/08-hql-limit-offset">
+                        
+                        LIMIT & OFFSET dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/09-read-only-entity">
+                        
+                        Read Only Entity dengan HQL
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/framework/java/orm/hibernate/hql/10-quis-3">
+                        
+                        Time is your Practice
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Java Query Persistence query language">
+        <label class="acordion-item-label" for="content-Java Query Persistence query language">
+            Java Query Persistence query language
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>terkadang didalam struktur sebuah tabel, tidak hanya memiliki 1 primary key tetapi juga bisa lebih dari 2 primary key itu dinamakan Composite Primary Key. apakah hibernate bisa handle composite primary key???</p>
+
+<p>tentu aja bisa, ada 2 cara yaitu:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">@EmbeddedId</code></li>
+  <li><code class="language-plaintext highlighter-rouge">@IdClass</code></li>
+</ol>
+
+<p>Yang pertama kita bahas menggunakan EmbeddedId</p>
+
+<!--more-->
+
+<h2 id="embeddable">Embeddable</h2>
+
+<p>Untuk EmbeddedId mapping, pertama kita define dulu primary keynya di class Embeddable yang wajib implement serializable seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KeyClassRoomEmbeddedId.java"> </script>
+
+<p>Dan kita buat entitynya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=ClassRoomEmbeddedMapping.java"> </script>
+
+<p>Setelah itu kita buat DAO:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=ClassRoomEmbeddedDao.java"> </script>
+
+<p>Dan berikut adalah Unit Testingnya:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=TestSaveClassRoomEmbedded.java"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan 04, 2021 7:20:05 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    insert 
+    into
+        kampus.kelas_embedded
+        <span class="o">(</span>description, kelas_name, prodi, class_id, tahun_angkatan<span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.kampus.TestSaveClassRoomEmbedded - classroom saved: ClassRoomEmbeddedMapping<span class="o">(</span><span class="nv">pk</span><span class="o">=</span>KeyClassRoomEmbeddedId<span class="o">(</span><span class="nv">year</span><span class="o">=</span>2011, <span class="nv">classId</span><span class="o">=</span>si-ii<span class="o">)</span>, <span class="nv">name</span><span class="o">=</span>SI - II, <span class="nv">programStudy</span><span class="o">=</span>IF, <span class="nv">description</span><span class="o">=</span>System Informasi - II<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.kampus.TestSaveClassRoomEmbedded - destroy hibernate session!
+</code></pre></div></div>
+
+<h2 id="idclass">IdClass</h2>
+
+<p>Untuk IdClass Mapping, sama seperti embedded kita define dulu class primary key yang wajib implement serializable seperti beriku:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=KeyClassRoomIdClass.java"> </script>
+
+<p>Setelah itu baru kita buat entity dengan multiple @Id dan <code class="language-plaintext highlighter-rouge">@IdClass(KeyClassRoomIdClass.class)</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=ClassRoomMappingIdClass.java"> </script>
+
+<p>Nah abis itu baru buat DAO:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=ClassRoomIdClassDao.java"> </script>
+
+<p>Dan yang berikutnya adalah Unit Testing:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=TestSaveClassRoomIdClass.java"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan 04, 2021 7:30:21 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    insert 
+    into
+        kampus.kelas_idclass
+        <span class="o">(</span>description, kelas_name, prodi, class_id, tahun_angkatan<span class="o">)</span> 
+    values
+        <span class="o">(</span>?, ?, ?, ?, ?<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.kampus.TestSaveClassRoomIdClass - classroom saved: ClassRoomMappingIdClass<span class="o">(</span><span class="nv">year</span><span class="o">=</span>2011, <span class="nv">classId</span><span class="o">=</span>si-01, <span class="nv">name</span><span class="o">=</span>SI - II, <span class="nv">programStudy</span><span class="o">=</span>IF, <span class="nv">description</span><span class="o">=</span>System Informasi - II<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.kampus.TestSaveClassRoomIdClass - destroy hibernate session!
+</code></pre></div></div>
+
+<p>Dan untuk Unit Test find by id:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/e8d2abb5361e811860d6a462270f119b.js?file=TestFindByIdClassRoomIdClass.java"> </script>
+
+<p>Jika dijalankan maka hasilnya seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Jan 04, 2021 7:32:46 AM org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator initiateService
+INFO: HHH000490: Using JtaPlatform implementation: <span class="o">[</span>org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: 
+    <span class="k">select
+        </span>classroomm0_.class_id as class_id1_2_0_,
+        classroomm0_.tahun_angkatan as tahun_an2_2_0_,
+        classroomm0_.description as descript3_2_0_,
+        classroomm0_.kelas_name as kelas_na4_2_0_,
+        classroomm0_.prodi as prodi5_2_0_ 
+    from
+        kampus.kelas_idclass classroomm0_ 
+    where
+        classroomm0_.class_id<span class="o">=</span>? 
+        and classroomm0_.tahun_angkatan<span class="o">=</span>?
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.kampus.TestFindByIdClassRoomIdClass - classroom: ClassRoomMappingIdClass<span class="o">(</span><span class="nv">year</span><span class="o">=</span>2011, <span class="nv">classId</span><span class="o">=</span>si-01, <span class="nv">name</span><span class="o">=</span>SI - II, <span class="nv">programStudy</span><span class="o">=</span>IF, <span class="nv">description</span><span class="o">=</span>System Informasi - II<span class="o">)</span>
+<span class="o">[</span>main] INFO com.maryanto.dimas.bootcamp.test.kampus.TestFindByIdClassRoomIdClass - destroy hibernate session!
+</code></pre></div></div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/framework/java/orm/hibernate/basic/01-silabus-orm-hibernate"  class="" title="Silabus Belajar JPA Hibernate">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/framework/java/orm/hibernate/basic/02g-generator-value" class="" 
+        title="Macam Macam Generator Value di Hibernate
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 12 to 49
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/framework/java/orm/hibernate/basic/02i-quis-1" class="" 
+        title="Time is your practice
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/framework/java/orm/hibernate/hql/10-quis-3"  class="" title="Time is your Practice">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#basic" class="page__taxonomy-item p-category" rel="tag">basic</a><span class="sep">, </span>
+    
+      <a href="/categories/#framework" class="page__taxonomy-item p-category" rel="tag">Framework</a><span class="sep">, </span>
+    
+      <a href="/categories/#hibernate" class="page__taxonomy-item p-category" rel="tag">hibernate</a><span class="sep">, </span>
+    
+      <a href="/categories/#java" class="page__taxonomy-item p-category" rel="tag">java</a><span class="sep">, </span>
+    
+      <a href="/categories/#orm" class="page__taxonomy-item p-category" rel="tag">orm</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-01-04T07:36:52+07:00">January 4, 2021</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Composite+Primary+Key%20%2Fposts%2Fframework%2Fjava%2Form%2Fhibernate%2Fbasic%2F02h-composite-primary-key" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fframework%2Fjava%2Form%2Fhibernate%2Fbasic%2F02h-composite-primary-key" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fframework%2Fjava%2Form%2Fhibernate%2Fbasic%2F02h-composite-primary-key" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" rel="permalink">Silabus Gitlab CI: Pemula s/d Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-02T20:18:43+07:00">June 2, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        23 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        36 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        4 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

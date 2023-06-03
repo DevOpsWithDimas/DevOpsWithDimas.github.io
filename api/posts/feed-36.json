@@ -3,52 +3,52 @@
     
     {
       "title": "OneToMany Mapping",
-      "link": "/posts/java/orm/hibernate/postgresql/03d-mapping-one-to-many"
+      "link": "/posts/framework/java/orm/hibernate/mapping/03d-mapping-one-to-many"
     }
     ,
     {
       "title": "OneToOne Mapping",
-      "link": "/posts/java/orm/hibernate/postgresql/03c-mapping-one-to-one"
+      "link": "/posts/framework/java/orm/hibernate/mapping/03c-mapping-one-to-one"
     }
     ,
     {
       "title": "Embbeded Mapping",
-      "link": "/posts/java/orm/hibernate/postgresql/03b-mapping-embedded"
+      "link": "/posts/framework/java/orm/hibernate/mapping/03b-mapping-embedded"
     }
     ,
     {
       "title": "Mapping Enum Ordinal & String",
-      "link": "/posts/java/orm/hibernate/postgresql/03a-mapping-enumeration"
+      "link": "/posts/framework/java/orm/hibernate/mapping/03a-mapping-enumeration"
     }
     ,
     {
       "title": "Hibernate ORM Relationship Mapping",
-      "link": "/posts/java/orm/hibernate/postgresql/03-hibernate-mapping"
+      "link": "/posts/framework/java/orm/hibernate/mapping/03-hibernate-mapping"
     }
     ,
     {
       "title": "Time is your practice",
-      "link": "/posts/java/orm/hibernate/postgresql/02i-quis-1"
+      "link": "/posts/framework/java/orm/hibernate/basic/02i-quis-1"
     }
     ,
     {
       "title": "Silabus Belajar JasperReport",
-      "link": "/posts/java/jasperreport/001-silabus"
+      "link": "/posts/language/java/web/jasper/001-silabus"
     }
     ,
     {
       "title": "Composite Primary Key",
-      "link": "/posts/java/orm/hibernate/postgresql/02h-composite-primary-key"
+      "link": "/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key"
     }
     ,
     {
       "title": "Macam Macam Generator Value di Hibernate",
-      "link": "/posts/java/orm/hibernate/postgresql/02g-generator-value"
+      "link": "/posts/framework/java/orm/hibernate/basic/02g-generator-value"
     }
     ,
     {
       "title": "Macam-Macam Constraint di Hibernate",
-      "link": "/posts/java/orm/hibernate/postgresql/02f-constraints"
+      "link": "/posts/framework/java/orm/hibernate/basic/02f-constraints"
     }
   ]
 }
