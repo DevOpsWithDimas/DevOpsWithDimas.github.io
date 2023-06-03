@@ -33,7 +33,7 @@ udemy:
   expired: 15/04/2023
   toc: true
 catalogs:
-  - name: Pengenalan Git
+  - name: Git Version Control
     key: git
     description: 'Eps 1: Pengenalan Git Version Control'
     messages: ''

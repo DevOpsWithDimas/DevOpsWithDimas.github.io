@@ -1,7 +1,7 @@
 ---
 lang: gitlab
 catalog_key: git
-title: "Silabus GitOps - Gitlab: Pemula sampai Mahir"
+title: "Silabus Git Version Control System: Pemula s/d Mahir"
 date: 2022-06-18T16:08:32+07:00
 categories:
 - git
@@ -15,9 +15,9 @@ gist: dimMaryanto93/8f9f0ba4caf5a28c56111246499e97d0
 downloads: []
 ---
 
-Hai semuanya, di cource ini `GitOps - Gitlab: Pemula sampai Mahir` kita akan mengupas tuntas mengenai salah satu teknologi Version Control yang sangat popular sejak awal 2013 lalu yaitu Git SCM.
+Hai semuanya, di cource ini **GitOps dengan Gitlab untuk Pemula s/d Mahir** kita akan mengupas tuntas mengenai salah satu teknologi Version Control yang sangat popular sejak awal 2013 lalu sampai saat ini yaitu Git SCM.
 
-Materi yang dibahas disini adalah Git berserta menggunakan Gitlab SaaS dan Self Menaged Service sebagai Hosted Git Repository. Untuk materinya sendiri kita akan bagi-bagi menjadi beberapa section ya, Diantaranya:
+Pada materi kali ada beberapa topic yang akan kita pelajari yaitu
 
 <!--more-->
 

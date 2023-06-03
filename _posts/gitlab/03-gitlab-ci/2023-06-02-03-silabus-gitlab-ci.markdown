@@ -1,7 +1,7 @@
 ---
 lang: gitlab
 catalog_key: gitlab-ci
-title: "Silabus 'Continues Integration' with Gitlab CI"
+title: "Silabus Gitlab CI: Pemula s/d Mahir"
 date: 2023-06-02T20:18:43+07:00
 categories:
 - git
@@ -21,7 +21,7 @@ header:
 tagline: ""
 ---
 
-Hai semuanya, selamat datang kembali di kelas **GitOps dengan Gitlab untuk Pemula s/d Mahir** materi kali ini kita membahas tentang Continues Integration dengan menggunakan Gitlab yaitu Gitlab CI.
+Hai semuanya, selamat datang kembali di kelas **GitOps dengan Gitlab untuk Pemula s/d Mahir** materi kali ini kita membahas tentang Continues Integration (CI) dengan menggunakan Gitlab Platform yaitu Gitlab CI.
 
 Pada materi kali ada beberapa topic yang akan kita pelajari yaitu
 
