@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Pengenalan Pemograman Servlet"
 date: 2020-08-29T19:28:23+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: []
 youtube: FV25oL8U3hs
 gist: dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea

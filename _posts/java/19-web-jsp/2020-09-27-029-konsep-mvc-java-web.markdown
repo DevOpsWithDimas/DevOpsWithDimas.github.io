@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "Konsep Model View Controller (MVC) design pattern"
 date: 2020-09-27T13:54:42+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: []
 youtube: IdVjNkxaJnI
 comments: true

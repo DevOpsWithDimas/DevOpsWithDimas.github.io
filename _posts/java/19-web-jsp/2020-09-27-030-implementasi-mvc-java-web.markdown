@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "Implementasi MVC menggunakan JSP dan Servlet"
 date: 2020-09-27T15:31:42+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: []
 youtube: eEEZedZIwCw
 comments: true

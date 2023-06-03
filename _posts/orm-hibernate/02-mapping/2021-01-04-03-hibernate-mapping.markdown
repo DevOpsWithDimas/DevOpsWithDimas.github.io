@@ -6,10 +6,11 @@ date: 2021-01-04T14:21:26+07:00
 authors:
 - dimasm93
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- mapping
 refs: 
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: 0kKbp6bLwLE

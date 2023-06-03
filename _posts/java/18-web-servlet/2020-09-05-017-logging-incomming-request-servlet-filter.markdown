@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Logging incomming request dengan Servlet Filter"
 date: 2020-09-05T18:02:26+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: 
 - https://docs.oracle.com/cd/B14099_19/web.1012/b14017/filters.htm
 youtube: AQKBHFupBe0

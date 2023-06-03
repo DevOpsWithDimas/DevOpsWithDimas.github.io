@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "Deployment Java Webapp dengan Tomcat Web Server"
 date: 2020-12-15T17:32:41+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: 
 - http://tomcat.apache.org/
 - https://codehaus-cargo.github.io/cargo/Maven2+plugin.html

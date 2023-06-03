@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "Pengenalan JavaServer Page (JSP)"
 date: 2020-09-11T21:51:06+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: []
 youtube: ltPvm6tSRZQ
 comments: true

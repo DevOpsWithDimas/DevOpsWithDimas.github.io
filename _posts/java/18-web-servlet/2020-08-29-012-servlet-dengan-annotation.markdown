@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Pemograman Servlet dengan Annotation"
 date: 2020-08-29T19:28:33+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: []
 youtube: HjMOCEqbx8Q
 gist: dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea

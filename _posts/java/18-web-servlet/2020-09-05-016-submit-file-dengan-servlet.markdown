@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Submit file menggunakan Servlet"
 date: 2020-09-05T16:00:53+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: 
 - http://tomcat.apache.org/whichversion.html
 - https://stackoverflow.com/a/2424824/6685789

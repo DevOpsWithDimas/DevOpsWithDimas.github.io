@@ -4,10 +4,11 @@ catalog_key: introduction
 title: "Membuat Simple Entity di Hibernate"
 date: 2020-11-21T14:11:27+07:00
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- basic
 refs: 
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: RRPpzrdotwc

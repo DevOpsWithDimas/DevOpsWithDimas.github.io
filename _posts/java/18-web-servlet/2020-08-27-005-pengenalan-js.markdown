@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Pengenalan Pemograman Client Side dengan JS"
 date: 2020-08-27T22:19:05+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: []
 youtube: Q8l0nEvLk1g
 gist: dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea

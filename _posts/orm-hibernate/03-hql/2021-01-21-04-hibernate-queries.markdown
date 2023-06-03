@@ -4,10 +4,11 @@ catalog_key: hql
 title: "Hibernate Query Language (HQL-JPQL)"
 date: 2021-01-21T11:14:37+07:00
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- hql
 refs: 
 - https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#hql
 youtube: sSzUOkFiQlE

@@ -5,10 +5,11 @@ lang: orm-hibernate
 authors:
 - dimasm93
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- criteria-api
 refs: 
 - http://docs.jboss.org/hibernate/orm/5.2/quickstart/html_single/
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html

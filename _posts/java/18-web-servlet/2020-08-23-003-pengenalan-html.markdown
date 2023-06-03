@@ -7,7 +7,7 @@ categories:
 - language
 - java
 - web
-- war
+- servlet
 refs: 
 - https://www.w3schools.com/
 youtube: sc-MwxNg_wI

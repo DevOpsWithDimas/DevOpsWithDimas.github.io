@@ -3,8 +3,8 @@ lang: spring-core
 catalog_key: introduction
 title: "Getting started"
 categories:
-- java
 - framework
+- java
 - spring
 refs: 
 - https://spring.io/projects/spring-framework

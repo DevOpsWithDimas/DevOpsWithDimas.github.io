@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "JSP Taglib Directive (JSTL)"
 date: 2020-09-26T20:31:59+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: 
 - https://www.oracle.com/java/technologies/jstl-documentation.html
 - https://jcp.org/en/jsr/detail?xd_co_f=09ec3a41-b3f4-4b21-a917-90d5623c064d&id=52

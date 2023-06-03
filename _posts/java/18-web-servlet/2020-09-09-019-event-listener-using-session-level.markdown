@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Event Listeners using Session Level"
 date: 2020-09-09T09:30:11+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: 
 - https://docs.oracle.com/cd/B14099_19/web.1012/b14017/filters.htm#i1000654
 youtube: rPaGG6DYAZo

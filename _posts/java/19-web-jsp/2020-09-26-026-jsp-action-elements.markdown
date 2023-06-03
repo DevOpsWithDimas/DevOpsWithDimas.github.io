@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "JSP Action Element"
 date: 2020-09-26T20:32:06+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: 
 - https://docs.oracle.com/cd/B14099_19/web.1012/b14014/genlovw.htm#directives
 - https://docs.oracle.com/cd/B14099_19/web.1012/b14014/jspnls.htm

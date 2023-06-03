@@ -1,13 +1,13 @@
 ---
-
+lang: java
+catalog_key: jasper
 title: "Silabus Belajar JasperReport"
 date: 2021-01-04T08:21:19+07:00
-lang: jasper-report
-authors:
-- dimasm93
 categories:
-- Java
-- JasperReport
+- language
+- java
+- web
+- jasper
 refs: 
 - https://community.jaspersoft.com/wiki/jaspersoft-community-wiki-0
 youtube: 

@@ -4,10 +4,11 @@ catalog_key: introduction
 title: "Memahami fungsi hibernate.cfg.xml"
 date: 2020-11-21T13:19:34+07:00
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- basic
 refs: 
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: i-gJWAppCtc

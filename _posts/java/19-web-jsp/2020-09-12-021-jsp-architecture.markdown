@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "JSP Architecture"
 date: 2020-09-12T21:15:36+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: 
 - http://tomcat.apache.org/whichversion.html
 youtube: 442-W6LvC-8

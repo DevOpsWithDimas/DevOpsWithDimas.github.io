@@ -4,10 +4,11 @@ catalog_key: orm-mapping
 title: "Inherintance Mapping"
 date: 2021-01-14T15:04:24+07:00
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- mapping
 refs: 
 - https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#entity-inheritance
 youtube: k9_Jk-9hK_w

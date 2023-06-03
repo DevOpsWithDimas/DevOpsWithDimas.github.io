@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Membuat project Java Web dengan Apache Maven"
 date: 2020-08-27T22:54:34+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: []
 youtube: _PpFIcqq-IA
 gist: dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea

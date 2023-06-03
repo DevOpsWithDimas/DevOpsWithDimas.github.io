@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "Automated deploy with gitlab CI/CD"
 date: 2020-12-16T22:30:15+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: 
 - http://tomcat.apache.org/
 - https://codehaus-cargo.github.io/cargo/Maven2+plugin.html

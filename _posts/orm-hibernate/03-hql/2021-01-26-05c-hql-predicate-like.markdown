@@ -6,10 +6,11 @@ lang: orm-hibernate
 authors:
 - dimasm93
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- hql
 refs: 
 - https://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#hql-like-predicate
 youtube: 2x4R_XX9_Ac

@@ -7,7 +7,7 @@ categories:
 - language
 - java
 - web
-- war
+- servlet
 refs: 
 - https://www.oracle.com/java/technologies/java-ee-glance.html
 youtube: M_Fxiotj9WY

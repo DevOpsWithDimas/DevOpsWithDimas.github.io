@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "Time is your to practice"
 date: 2020-12-28T09:43:09+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: []
 youtube: WV00jAIZCcQ
 comments: true

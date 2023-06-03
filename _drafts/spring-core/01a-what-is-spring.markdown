@@ -3,8 +3,8 @@ lang: spring-core
 catalog_key: introduction
 title: "What is Spring Framework"
 categories:
-- java
 - framework
+- java
 - spring
 refs: 
 - https://docs.spring.io/spring-framework/docs/current/reference/html/overview.html#overview

@@ -4,10 +4,11 @@ catalog_key: orm-mapping
 title: "ManyToMany Mapping"
 date: 2021-01-13T15:08:30+07:00
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- mapping
 refs: 
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: cz0jiWqM2HY

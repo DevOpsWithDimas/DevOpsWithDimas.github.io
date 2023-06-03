@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "Persiapan untuk Deploy Java Webapp"
 date: 2020-12-09T15:24:04+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: 
 - http://tomcat.apache.org/
 - https://crunchify.com/how-to-change-jvm-heap-setting-xms-xmx-of-tomcat/

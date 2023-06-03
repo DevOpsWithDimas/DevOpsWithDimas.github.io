@@ -4,10 +4,11 @@ catalog_key: orm-mapping
 title: "Mapping Enum Ordinal & String"
 date: 2021-01-06T14:05:37+07:00
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- mapping
 refs: 
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: 3e3kZ-OKyp8

@@ -4,10 +4,11 @@ catalog_key: introduction
 title: "Composite Primary Key"
 date: 2021-01-04T07:36:52+07:00
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- basic
 refs: 
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 - https://www.baeldung.com/jpa-composite-primary-keys

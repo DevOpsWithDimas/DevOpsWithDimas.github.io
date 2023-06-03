@@ -4,10 +4,11 @@ catalog_key: introduction
 title: "Pengenalan ORM dengan Hibernate Framework"
 date: 2020-11-21T11:44:22+07:00
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- basic
 refs: 
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 - https://dzone.com/articles/about-transparent-persistence

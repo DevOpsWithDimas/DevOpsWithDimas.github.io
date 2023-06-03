@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Konsep Hypertext Transper Protocol (HTTP)"
 date: 2020-08-29T19:28:08+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: 
 - https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods

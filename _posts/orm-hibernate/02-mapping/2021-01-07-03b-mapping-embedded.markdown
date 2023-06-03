@@ -4,10 +4,11 @@ catalog_key: orm-mapping
 title: "Embbeded Mapping"
 date: 2021-01-07T12:57:19+07:00
 categories:
-- Java
-- ORM
-- Hibernate
-- PostgreSQL
+- Framework
+- java
+- orm
+- hibernate
+- mapping
 refs: 
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: dzEVXB5noo8

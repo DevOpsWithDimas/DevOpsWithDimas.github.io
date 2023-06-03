@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Submit value dengan Servlet menggunakan Http POST Method"
 date: 2020-08-29T19:28:47+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: []
 youtube: rNeiN6Pw5sY
 gist: dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea

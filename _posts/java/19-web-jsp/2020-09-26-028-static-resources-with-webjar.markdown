@@ -4,9 +4,10 @@ catalog_key: jsp
 title: "Static Resources with WebJars"
 date: 2020-09-26T20:32:24+07:00
 categories:
+- language
 - java
 - web
-- war
+- jsp
 refs: 
 - https://www.webjars.org/
 youtube: jarxlARpL9w

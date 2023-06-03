@@ -4,9 +4,10 @@ catalog_key: servlet
 title: "Memahami Struktur Project dengan maven-archetype-webapp"
 date: 2020-08-29T18:45:59+07:00
 categories:
+- language
 - java
 - web
-- war
+- servlet
 refs: []
 youtube: rPZXEh5DfXY
 gist: dimMaryanto93/c0a51e92e23ada4ecb71f9c18c803fea

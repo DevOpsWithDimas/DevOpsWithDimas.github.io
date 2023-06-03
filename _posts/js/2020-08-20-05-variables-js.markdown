@@ -3,9 +3,8 @@
 title: "Variable di JavaScript"
 date: 2020-08-20T16:48:00+07:00
 lang: js
-authors:
-- dimasm93
 categories:
+- language
 - web
 - js
 refs: 

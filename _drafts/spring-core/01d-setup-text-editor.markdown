@@ -3,8 +3,8 @@ lang: spring-core
 catalog_key: introduction
 title: "Install and Setup Integrated Development Editor (IDE)"
 categories:
-- java
 - framework
+- java
 - spring
 refs: 
 - https://spring.io/projects/spring-framework
