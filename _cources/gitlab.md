@@ -12,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      linkContentUrl: _posts/gitlab/01-git/2022-06-18-00-silabus-gitlab.markdown
+      linkContentUrl: _posts/gitlab/01-git/2022-06-18-00-silabus-git-vcs.markdown
 tagline: "xxx"
 tags:
   - DevOps
@@ -41,9 +41,13 @@ catalogs:
     key: gitlab
     description: 'Eps 2: Gitlab Platform'
     messages: ''
-  - name: Gitlab CI for Automation
+  - name: Gitlab CI for Automation (DevOps engineer)
     key: gitlab-ci
     description: 'Eps 3: Continues Integration with Gitlab CI'
+    messages: ''
+  - name: Gitlab for Project Management (PM Role)
+    key: gitlab-issue
+    description: 'Eps 4: Gitlab for Project management (PM)'
     messages: ''
   - name: Gitlab Integration
     key: gitlab-integration
