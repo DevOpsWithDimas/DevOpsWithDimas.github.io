@@ -28,27 +28,27 @@
     ,
     {
       "title": "Getting Started with Docker",
-      "link": "/posts/devops/docker/03-getting-started"
+      "link": "/posts/devops/docker/basic/03-getting-started"
     }
     ,
     {
       "title": "How to install Docker on Mac OS",
-      "link": "/posts/devops/docker/02c-install-on-mac"
+      "link": "/posts/devops/docker/basic/02c-install-on-mac"
     }
     ,
     {
       "title": "How to install Docker on Linux CentOS",
-      "link": "/posts/devops/docker/02b-install-on-linux-centos"
+      "link": "/posts/devops/docker/basic/02b-install-on-linux-centos"
     }
     ,
     {
       "title": "How to install Docker on Windows 10 with WSL",
-      "link": "/posts/devops/docker/02a-install-on-windows10-wls"
+      "link": "/posts/devops/docker/basic/02a-install-on-windows10-wls"
     }
     ,
     {
       "title": "What to know before you install Docker",
-      "link": "/posts/devops/docker/02-system-requirement"
+      "link": "/posts/devops/docker/basic/02-system-requirement"
     }
   ]
 }

@@ -1,0 +1,1111 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Welcome to the Nutanix HCF (Hybrid Cloud Fundamental) - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, selamat datang di kelas ‘SRE - Nutanix AHV untuk Pemula sampai Mahir’ di section pertama kali ini kita akan membahas technology yang biasanya digunakan oleh team Infra/Operation yaitu Hyperconverged Infrastructure.  Nah dengan kecanggihan teknology jaman sekarang, technologies dapat membantu mendorong kemajuan suatu perusahan dalam meningkatan performa dalam menentukan goals. Selain itu juga dengan technology perusahaan dapat menentukan flexibility, choice, agility, and cost efficiency supaya memastikan bahwa perusahaan tersebut bisa competitive in the marketplace and innovate, bringing new services and products to their customers faster than ever.  Okay untuk memenuhi semua tantangan tersebut, jadi kita akan membahas dari yang funamental yaitu The Nutanix Cloud Fundamental cource, it designed for familiarize the features, components and capabilities of Nutanix cluster as if this was your first week on the job with a freshly installed Nutanix cluster. Sebelum kita mulai practice lab dengan Nutanix cluster kita akan bahas dulu     What is Nutanix?   What we can do with Nutanix?   Why Nutanix?   Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)">
+<meta property="og:url" content="/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class">
+
+
+  <meta property="og:description" content="Hai semuanya, selamat datang di kelas ‘SRE - Nutanix AHV untuk Pemula sampai Mahir’ di section pertama kali ini kita akan membahas technology yang biasanya digunakan oleh team Infra/Operation yaitu Hyperconverged Infrastructure.  Nah dengan kecanggihan teknology jaman sekarang, technologies dapat membantu mendorong kemajuan suatu perusahan dalam meningkatan performa dalam menentukan goals. Selain itu juga dengan technology perusahaan dapat menentukan flexibility, choice, agility, and cost efficiency supaya memastikan bahwa perusahaan tersebut bisa competitive in the marketplace and innovate, bringing new services and products to their customers faster than ever.  Okay untuk memenuhi semua tantangan tersebut, jadi kita akan membahas dari yang funamental yaitu The Nutanix Cloud Fundamental cource, it designed for familiarize the features, components and capabilities of Nutanix cluster as if this was your first week on the job with a freshly installed Nutanix cluster. Sebelum kita mulai practice lab dengan Nutanix cluster kita akan bahas dulu     What is Nutanix?   What we can do with Nutanix?   Why Nutanix?   Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-02-05T12:00:40+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#what-is-nutanix">What is Nutanix?</a></li><li><a href="#what-we-can-do-with-nutanix">What we can do with Nutanix?</a></li><li><a href="#why-nutanix">Why Nutanix?</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)">
+    <meta itemprop="description" content="Hai semuanya, selamat datang di kelas ‘SRE - Nutanix AHV untuk Pemula sampai Mahir’ di section pertama kali ini kita akan membahas technology yang biasanya digunakan oleh team Infra/Operation yaitu Hyperconverged Infrastructure.Nah dengan kecanggihan teknology jaman sekarang, technologies dapat membantu mendorong kemajuan suatu perusahan dalam meningkatan performa dalam menentukan goals. Selain itu juga dengan technology perusahaan dapat menentukan flexibility, choice, agility, and cost efficiency supaya memastikan bahwa perusahaan tersebut bisa competitive in the marketplace and innovate, bringing new services and products to their customers faster than ever.Okay untuk memenuhi semua tantangan tersebut, jadi kita akan membahas dari yang funamental yaitu The Nutanix Cloud Fundamental cource, it designed for familiarize the features, components and capabilities of Nutanix cluster as if this was your first week on the job with a freshly installed Nutanix cluster. Sebelum kita mulai practice lab dengan Nutanix cluster kita akan bahas dulu  What is Nutanix?  What we can do with Nutanix?  Why Nutanix?Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:">
+    <meta itemprop="datePublished" content="2023-02-05T12:00:40+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class" class="u-url" itemprop="url">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        4 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Pengenalan Nutanix AHV">
+        <label class="acordion-item-label" for="content-Pengenalan Nutanix AHV">
+            Pengenalan Nutanix AHV
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/cloud-computing/nutanix/ahv/00-silabus-nutanix-ahv">
+                        
+                        Silabus SRE - Nutanix AHV: ...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Welcome to the Nutanix HCF ...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-PRISM Element">
+        <label class="acordion-item-label" for="content-PRISM Element">
+            PRISM Element
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-PRISM Central">
+        <label class="acordion-item-label" for="content-PRISM Central">
+            PRISM Central
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Compute VM">
+        <label class="acordion-item-label" for="content-Compute VM">
+            Compute VM
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Networking">
+        <label class="acordion-item-label" for="content-Networking">
+            Networking
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Unified Storage">
+        <label class="acordion-item-label" for="content-Unified Storage">
+            Unified Storage
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-IAM (Identity and Access Management)">
+        <label class="acordion-item-label" for="content-IAM (Identity and Access Management)">
+            IAM (Identity and Access Management)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Cluster Administration">
+        <label class="acordion-item-label" for="content-Cluster Administration">
+            Cluster Administration
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Nutanix products">
+        <label class="acordion-item-label" for="content-Nutanix products">
+            Nutanix products
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, selamat datang di kelas ‘SRE - Nutanix AHV untuk Pemula sampai Mahir’ di section pertama kali ini kita akan membahas technology yang biasanya digunakan oleh team Infra/Operation yaitu Hyperconverged Infrastructure.</p>
+
+<p>Nah dengan kecanggihan teknology jaman sekarang, technologies dapat membantu mendorong kemajuan suatu perusahan dalam meningkatan performa dalam menentukan goals. Selain itu juga dengan technology perusahaan dapat menentukan flexibility, choice, agility, and cost efficiency supaya memastikan bahwa perusahaan tersebut bisa competitive in the marketplace and innovate, bringing new services and products to their customers faster than ever.</p>
+
+<p>Okay untuk memenuhi semua tantangan tersebut, jadi kita akan membahas dari yang funamental yaitu The Nutanix Cloud Fundamental cource, it designed for familiarize the features, components and capabilities of Nutanix cluster as if this was your first week on the job with a freshly installed Nutanix cluster. Sebelum kita mulai practice lab dengan Nutanix cluster kita akan bahas dulu</p>
+
+<ol>
+  <li>What is Nutanix?</li>
+  <li>What we can do with Nutanix?</li>
+  <li>Why Nutanix?</li>
+</ol>
+
+<p>Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:</p>
+
+<!--more-->
+
+<h2 id="what-is-nutanix">What is Nutanix?</h2>
+
+<blockquote>
+  <p>Nutanix, Inc. is an American cloud computing company that sells software, cloud services (such as desktops as a service, disaster recovery as a service, and cloud monitoring), and software-defined storage. Nutanix was founded on September 23, 2009 by Dheeraj Pandey, Mohit Aron and Ajeet Singh.</p>
+</blockquote>
+
+<p><br />
+<img src="/resources/posts/nutanix-ahv/01-welcome-nutanix/nutanix-logo.png" alt="nutanix-logo" width="500px" /></p>
+
+<p>Jadi Nutanix adalah suatu perusahaan dengan main operation bisnis software yang meng-combine storage, computing, and virtualization menjadi satu kesatuan yang disebut Hyperconverged Infrastructure. Produk utama dari Nutanix yaitu Acropolis, Prism, Era, Frame, and Files. Serta pada tahun 2015 nutanix membuat Linux KVM based hypervisor yang disebut AHV (Acropolis HyperVisor) untuk memanage computer infrastructure lebih mudah.</p>
+
+<p>Pada awal Nutanix berdiri fokus utama bisnis perusahaan adalah berjualan Hardware appliances sama seperti IBM, Lenovo, Dell dan lain-lain tetapi pada 2021 beralih fokus menjadi subscription software. Dimana saat ini Nutanix menjadi partner beberapa vendor hardware tersebut, dengan menjadikan software Nutanix bisa dijalankan diatas hardware vendor seperti IBM, Lenovo.</p>
+
+<h2 id="what-we-can-do-with-nutanix">What we can do with Nutanix?</h2>
+
+<p>The Nutanix Cloud Platform comprises hybrid cloud infrastructure, multicloud management along with unified storage, database services, and desktop services, to support any application and workload, in any location.</p>
+
+<p><img src="/resources/posts/nutanix-ahv/01-welcome-nutanix/nutanix-cloud-platform.png" alt="nutanix-cloud-platform" /></p>
+
+<p>Nutanix menawarkan beberapa solusi untuk workload seperti Cloud, Nutanix Database Service, Unified storage dan Applications.</p>
+
+<ol>
+  <li><strong>Cloud</strong>: AHV Virtualization, Nutanix Kubernetes Engine (NKE), Nutanix Discover Recovery dan lain-lain</li>
+  <li><strong>Database</strong>: Database as a Services, Database operations dan lain-lain</li>
+  <li><strong>Unified storage</strong>: Files storage, Object storage, dan lain-lain</li>
+  <li><strong>Application</strong>: AI/ML, Big Data &amp; Analitics dan lain-lain</li>
+  <li><strong>End User Computing</strong>: VDI, VMware, Citrix dan lain-lain</li>
+</ol>
+
+<h2 id="why-nutanix">Why Nutanix?</h2>
+
+<p>Mungkin dari temen-temen bertanya Nutanix ini software Virtualisasi mengapa tidak menggunakan VMWare atau sejenisnya? the answer is yes but not simple as that.</p>
+
+<p>We solve the toughest cloud challenges, Nutanix unifies public cloud simplicity and agility with private cloud performance and security. Whether on-premises or hybrid, you’ll ensure business continuity through centralized management, one-click operations, and AI-driven automation. It’s your choice.</p>
+
+<p><img src="/resources/posts/nutanix-ahv/01-welcome-nutanix/nutanix-solution.png" alt="nutanix-solution" /></p>
+
+<ol>
+  <li><strong>Your apps</strong>: IDC says there will be 500 million new apps by 2023. Nutanix makes it easy to deploy, manage and provision them.</li>
+  <li><strong>Your infrastructure</strong>: Compute, storage, virtualization, and networking are hyperconverged and driven by software on the Nutanix Cloud Platform.</li>
+  <li><strong>Your cloud</strong>: Whether hybrid, multicloud, public or private, you can move apps effortlessly anywhere you want with zero data loss.</li>
+</ol>
+
+<p>Jika kita lihat, Nutanix ada 4 prinsip yaitu</p>
+
+<ol>
+  <li><strong>The power of simplicity</strong>: We empower a single team to manage applications, data and security across your multicloud environments.</li>
+  <li><strong>We’re data centric</strong>: Deploy, manage and scale a single software-driven storage platform that spans multiple clouds and datacenters.</li>
+  <li><strong>Unmatched flexibility</strong>: Our software is server, hypervisor and cloud agnostic so you can build an infrastructure that matches your needs.</li>
+  <li><strong>Substantial value</strong>: In five years, we can reduce operating costs by <code class="language-plaintext highlighter-rouge">62%</code> and deliver <code class="language-plaintext highlighter-rouge">477%</code> ROI. We’re obsessed with your long-term success.</li>
+</ol>
+
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/cloud-computing/nutanix/ahv/00-silabus-nutanix-ahv"  class="" title="Silabus SRE - Nutanix AHV: Pemula sampai Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/cloud-computing/nutanix/ahv/00-silabus-nutanix-ahv" class="" 
+        title="Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 2 to 2
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="#" class=" disabled">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="#" class=" disabled">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#ahv" class="page__taxonomy-item p-category" rel="tag">AHV</a><span class="sep">, </span>
+    
+      <a href="/categories/#cloud-computing" class="page__taxonomy-item p-category" rel="tag">Cloud-Computing</a><span class="sep">, </span>
+    
+      <a href="/categories/#nutanix" class="page__taxonomy-item p-category" rel="tag">Nutanix</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Welcome+to+the+Nutanix+HCF+%28Hybrid+Cloud+Fundamental%29%20%2Fposts%2Fcloud-computing%2Fnutanix%2Fahv%2F01-welcome-nutanix-class" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fcloud-computing%2Fnutanix%2Fahv%2F01-welcome-nutanix-class" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fcloud-computing%2Fnutanix%2Fahv%2F01-welcome-nutanix-class" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" rel="permalink">Silabus Gitlab CI: Pemula s/d Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-02T20:18:43+07:00">June 2, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        23 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps" rel="permalink">Study cases: Microservice apps (Springboot Rest API)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-26T16:19:54+07:00">February 26, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        36 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/nutanix/ahv/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-04T20:23:05+07:00">February 4, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

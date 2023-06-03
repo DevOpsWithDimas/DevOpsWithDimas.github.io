@@ -3,12 +3,12 @@
     
     {
       "title": "What is Container",
-      "link": "/posts/devops/docker/01b-container-overview"
+      "link": "/posts/devops/docker/basic/01b-container-overview"
     }
     ,
     {
       "title": "Docker Overview",
-      "link": "/posts/devops/docker/01a-docker-overview"
+      "link": "/posts/devops/docker/basic/01a-docker-overview"
     }
     ,
     {
@@ -23,7 +23,7 @@
     ,
     {
       "title": "Silabus Belajar Docker: Pemula sampai Mahir",
-      "link": "/posts/devops/docker/01-silabus"
+      "link": "/posts/devops/docker/basic/01-silabus"
     }
     ,
     {

@@ -1650,9 +1650,9 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus Belajar Docker: Pemula sampai Mahir",
-        "excerpt":"Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir kita akan membahas teknology container yang sedang popular saat ini yaitu Docker. Dengan menggunakan teknology container kita bisa melakukan banyak hal mulai dari development, Automate testing, Automate deployment dan lain-lain. Adapun materi/silabus yang akan kita bahas di kelas ini...","categories": ["DevOps","Docker"],
+        "excerpt":"Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir kita akan membahas teknology container yang sedang popular saat ini yaitu Docker. Dengan menggunakan teknology container kita bisa melakukan banyak hal mulai dari development, Automate testing, Automate deployment dan lain-lain. Adapun materi/silabus yang akan kita bahas di kelas ini...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/01-silabus",
+        "url": "/posts/devops/docker/basic/01-silabus",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Partitioning Table (Very Large Databases)",
@@ -1668,45 +1668,45 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Docker Overview",
-        "excerpt":"Hai semuanya, di materi kali ini kita akan berkenalan dulu dengan teknology container menggunakan Docker. Adapun materinya seperti berikut Apa itu Docker? Manfaat menggunakan Docker Platform? Docker Architecture Istilah-istilah dalam Docker? Daemon Docker Client Docker Registry Images Containers Isolated workspace Docker Overview Sebagai seorang Research and Development (RnD) dan sekaligus...","categories": ["DevOps","Docker"],
+        "excerpt":"Hai semuanya, di materi kali ini kita akan berkenalan dulu dengan teknology container menggunakan Docker. Adapun materinya seperti berikut Apa itu Docker? Manfaat menggunakan Docker Platform? Docker Architecture Istilah-istilah dalam Docker? Daemon Docker Client Docker Registry Images Containers Isolated workspace Docker Overview Sebagai seorang Research and Development (RnD) dan sekaligus...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/01a-docker-overview",
+        "url": "/posts/devops/docker/basic/01a-docker-overview",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "What is Container",
-        "excerpt":"Hai semuanya di materi kali ini, kita akan membahas Apa itu Container?, tpi sebelum itu saya mau ceritain dulu sejarahnya Docker. Docker Inc. was founded by Kamel Founadi, Solomon Hykes, and Sebastien Pahl during the Y Combinator Summer 2010 startup incubator group and launched in 2011. The startup was also...","categories": ["DevOps","Docker"],
+        "excerpt":"Hai semuanya di materi kali ini, kita akan membahas Apa itu Container?, tpi sebelum itu saya mau ceritain dulu sejarahnya Docker. Docker Inc. was founded by Kamel Founadi, Solomon Hykes, and Sebastien Pahl during the Y Combinator Summer 2010 startup incubator group and launched in 2011. The startup was also...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/01b-container-overview",
+        "url": "/posts/devops/docker/basic/01b-container-overview",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "What to know before you install Docker",
-        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas tentang System Requirement untuk menginstall Docker. Untuk memahami yang saya sampaikan, di harapkan temen-temen juga menginstall Docker sesuai dengan laptop dengan platform masing-masing. Nah jadi ada beberapa yang perlu kita siapkan diantaranya Pengguna Linux Untuk linux users, temen-temen diharuskan untuk memiliki...","categories": ["DevOps","Docker"],
+        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas tentang System Requirement untuk menginstall Docker. Untuk memahami yang saya sampaikan, di harapkan temen-temen juga menginstall Docker sesuai dengan laptop dengan platform masing-masing. Nah jadi ada beberapa yang perlu kita siapkan diantaranya Pengguna Linux Untuk linux users, temen-temen diharuskan untuk memiliki...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/02-system-requirement",
+        "url": "/posts/devops/docker/basic/02-system-requirement",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "How to install Docker on Windows 10 with WSL",
-        "excerpt":"Hai semuanya di materi kali ini kita akan meng-install Docker di platform Windows, ada beberapa step Install &amp; Configure Backend for Docker Engine Install Docker Desktop Setup Development Env Backend for Docker Engine Untuk menggunakan docker di Windows kita perlu menggunakan virtualization, ada beberapa cara yaitu Hyper-V (required Windows 10...","categories": ["DevOps","Docker"],
+        "excerpt":"Hai semuanya di materi kali ini kita akan meng-install Docker di platform Windows, ada beberapa step Install &amp; Configure Backend for Docker Engine Install Docker Desktop Setup Development Env Backend for Docker Engine Untuk menggunakan docker di Windows kita perlu menggunakan virtualization, ada beberapa cara yaitu Hyper-V (required Windows 10...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/02a-install-on-windows10-wls",
+        "url": "/posts/devops/docker/basic/02a-install-on-windows10-wls",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "How to install Docker on Linux CentOS",
-        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas tentang, bagaimana install Docker di Linux CentOS Platform dengan menggunakan CentOS Repository, Ada pun tahapannya Setting Selinux Add Repository Docker Install Docker Expose Docker Daemon http://localhost:2375 without TLS Set selinux = permissive Edit file /etc/selinux/config ganti SELINUX=permissive menjadi seperti berikut: #...","categories": ["DevOps","Docker"],
+        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas tentang, bagaimana install Docker di Linux CentOS Platform dengan menggunakan CentOS Repository, Ada pun tahapannya Setting Selinux Add Repository Docker Install Docker Expose Docker Daemon http://localhost:2375 without TLS Set selinux = permissive Edit file /etc/selinux/config ganti SELINUX=permissive menjadi seperti berikut: #...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/02b-install-on-linux-centos",
+        "url": "/posts/devops/docker/basic/02b-install-on-linux-centos",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "How to install Docker on Mac OS",
-        "excerpt":"Hai semuanya di materi kali ini, kita akan membahas bagaimana cara install Docker di MacOS. Adapun step by stepnya seperti berikut: Download Docker Desktop Installing Configure Setup development env Donwloading Docker Desktop Untuk download temen-temen bisa ke website official docker Untuk Intel based download disini Untuk ARM based (Apple M1)...","categories": ["DevOps","Docker"],
+        "excerpt":"Hai semuanya di materi kali ini, kita akan membahas bagaimana cara install Docker di MacOS. Adapun step by stepnya seperti berikut: Download Docker Desktop Installing Configure Setup development env Donwloading Docker Desktop Untuk download temen-temen bisa ke website official docker Untuk Intel based download disini Untuk ARM based (Apple M1)...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/02c-install-on-mac",
+        "url": "/posts/devops/docker/basic/02c-install-on-mac",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Getting Started with Docker",
-        "excerpt":"Hai semuanya, sekarang saatnya kita mulai belajar perintah-perintah docker. Basicly kita akan membahas yang paling penting yaitu Pull image from registry Show list of docker image Running docker image Accessing container View logs Cleanup Pulling image from registry Setelah kita pull image dari public registry, maka image docker akan di...","categories": ["DevOps","Docker"],
+        "excerpt":"Hai semuanya, sekarang saatnya kita mulai belajar perintah-perintah docker. Basicly kita akan membahas yang paling penting yaitu Pull image from registry Show list of docker image Running docker image Accessing container View logs Cleanup Pulling image from registry Setelah kita pull image dari public registry, maka image docker akan di...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/03-getting-started",
+        "url": "/posts/devops/docker/basic/03-getting-started",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Docker Registry (Docker HUB)",
@@ -2682,9 +2682,9 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus IaC - Ansible: Pemula sampai Mahir",
-        "excerpt":"Hai semuanya, di cource ini IaC - Ansible: Pemula sampai Mahir kita akan mengupas tuntas mengenai salah satu teknologi untuk IT Automation yang sangat popular sekali yaitu RedHad Ansible. Materi yang di bahas mencakup, beberapa kategori. Mulai dari pemula sampai mahir (advanced) yaitu Pengenalan Ansible Apa itu IT Automation? Tool...","categories": ["DevOps","IaC","Ansible"],
+        "excerpt":"Hai semuanya, di cource ini IaC - Ansible: Pemula sampai Mahir kita akan mengupas tuntas mengenai salah satu teknologi untuk IT Automation yang sangat popular sekali yaitu RedHad Ansible. Materi yang di bahas mencakup, beberapa kategori. Mulai dari pemula sampai mahir (advanced) yaitu Pengenalan Ansible Apa itu IT Automation? Tool...","categories": ["DevOps","Ansible","Basic"],
         "tags": [],
-        "url": "/posts/devops/iac/ansible/00-silabus",
+        "url": "/posts/devops/ansible/basic/00-silabus",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan Version Control",
@@ -2850,15 +2850,15 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Silabus SRE - Nutanix AHV: Pemula sampai Mahir",
-        "excerpt":"Hai semuanya, di cource ini kita akan membahas salah satu Profesi IT yaitu Site Reliability Engineering atau yang biasa kita kenal dengan SRE Engineer terkait dengan Nutanix HCI (Hyper-Converged Infrastructure). Mungkin dari temen-temen masih asing atau mungkin sudah pernah mendengar istilah SRE Engineer tetapi gak teralu mengerti seperti apa profesi...","categories": ["Cloud-Computing","Hyper-Converged-Infrastructure","Nutanix"],
+        "excerpt":"Hai semuanya, di cource ini kita akan membahas salah satu Profesi IT yaitu Site Reliability Engineering atau yang biasa kita kenal dengan SRE Engineer terkait dengan Nutanix HCI (Hyper-Converged Infrastructure). Mungkin dari temen-temen masih asing atau mungkin sudah pernah mendengar istilah SRE Engineer tetapi gak teralu mengerti seperti apa profesi...","categories": ["Cloud-Computing","Nutanix","AHV"],
         "tags": [],
-        "url": "/posts/cloud-computing/hyper-converged-infrastructure/nutanix/00-silabus-nutanix-ahv",
+        "url": "/posts/cloud-computing/nutanix/ahv/00-silabus-nutanix-ahv",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)",
-        "excerpt":"Hai semuanya, selamat datang di kelas ‘SRE - Nutanix AHV untuk Pemula sampai Mahir’ di section pertama kali ini kita akan membahas technology yang biasanya digunakan oleh team Infra/Operation yaitu Hyperconverged Infrastructure. Nah dengan kecanggihan teknology jaman sekarang, technologies dapat membantu mendorong kemajuan suatu perusahan dalam meningkatan performa dalam menentukan...","categories": ["Cloud-Computing","Hyper-Converged-Infrastructure","Nutanix"],
+        "excerpt":"Hai semuanya, selamat datang di kelas ‘SRE - Nutanix AHV untuk Pemula sampai Mahir’ di section pertama kali ini kita akan membahas technology yang biasanya digunakan oleh team Infra/Operation yaitu Hyperconverged Infrastructure. Nah dengan kecanggihan teknology jaman sekarang, technologies dapat membantu mendorong kemajuan suatu perusahan dalam meningkatan performa dalam menentukan...","categories": ["Cloud-Computing","Nutanix","AHV"],
         "tags": [],
-        "url": "/posts/cloud-computing/hyper-converged-infrastructure/nutanix/01-welcome-nutanix-class",
+        "url": "/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Study cases: Microservice apps (Springboot Rest API)",
