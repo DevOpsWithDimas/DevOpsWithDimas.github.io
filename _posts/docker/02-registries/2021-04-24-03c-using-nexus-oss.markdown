@@ -1,6 +1,6 @@
 ---
 
-title: "Installing Nexus OSS"
+title: "Using Nexus OSS as insecure registry"
 date: 2021-04-24T16:45:03+07:00
 lang: docker
 authors:
@@ -24,14 +24,14 @@ Hai semuanya, di materi kali ini kita akan membahas Insecure Registry dengan men
 
 1. System requirement to install Nexus OSS
 2. Installing Nexus OSS
-    1. Setup Proxy Repository Docker from Docker HUB
-    2. Setup Proxy Repository Docker from other registry
-    3. Setup Hosted Repository Docker
-    4. Setup Public Group Repository Docker
+    - Setup Proxy Repository Docker from Docker HUB
+    - Setup Proxy Repository Docker from other registry
+    - Setup Hosted Repository Docker
+    - Setup Public Group Repository Docker
 3. How to Push & Pull Docker images from Insecure Registry
-    1. Pulling docker image from Docker Hub using Proxy
-    2. Pulling docker image from an other registry using proxy repository
-    3. Push own docker image to hosted registry.
+    - Pulling docker image from Docker Hub using Proxy
+    - Pulling docker image from an other registry using proxy repository
+    - Push own docker image to hosted registry.
 
 <!--more-->
 

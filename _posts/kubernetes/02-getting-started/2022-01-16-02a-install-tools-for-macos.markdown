@@ -1,8 +1,8 @@
 ---
-
+lang: k8s
+catalog_key: minikube
 title: "Install minikube on Mac (Intel Chip)"
 date: 2022-01-16T14:36:35+07:00
-lang: k8s
 authors:
 - dimasm93
 categories:
@@ -17,7 +17,6 @@ refs:
 - https://formulae.brew.sh/formula/minikube
 youtube: 
 comments: true
-catalog_key: minikube
 image_path: /resources/posts/kubernetes/02a-install-minikube-mac
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []

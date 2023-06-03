@@ -1,10 +1,8 @@
 ---
-
+lang: k8s
+catalog_key: minikube
 title: "Minikube addons features"
 date: 2022-02-18T22:19:57+07:00
-lang: k8s
-authors:
-- dimasm93
 categories:
 - DevOps
 - Orchestration
@@ -16,7 +14,6 @@ refs:
 - https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/
 youtube: 
 comments: true
-catalog_key: minikube
 image_path: /resources/posts/kubernetes/02f-minikube-addons
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []
@@ -284,7 +281,7 @@ Insecure Registry ini adalah alternative jika container image mau di simpan di o
 3. [Gitlab Container Registry](https://docs.gitlab.com/ee/administration/packages/container_registry.html)
 4. dan masih banyak lagi.
 
-Disini saya sudah install insecure-registry menggunakan Nexus dan untuk cara installnya saya sudah pernah bahas di [artikel berikut]({% post_url docker/02-registries/2021-04-24-03c-install-nexus-oss %}) untuk registry urlnya seperti berikut:
+Disini saya sudah install insecure-registry menggunakan Nexus dan untuk cara installnya saya sudah pernah bahas di [artikel berikut]({% post_url docker/02-registries/2021-04-24-03c-using-nexus-oss %}) untuk registry urlnya seperti berikut:
 
 1. Hosted registry: `192.168.88.50:8087`
 2. Group registry: `192.168.88.50:8086`

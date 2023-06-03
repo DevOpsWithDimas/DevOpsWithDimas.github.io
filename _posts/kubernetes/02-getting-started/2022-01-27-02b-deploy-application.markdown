@@ -1,8 +1,8 @@
 ---
-
+lang: k8s
+catalog_key: minikube
 title: "Deploying an apps/services into Kubernetes"
 date: 2022-01-27T11:59:08+07:00
-lang: k8s
 authors:
 - dimasm93
 categories:
@@ -15,7 +15,6 @@ refs:
 - https://minikube.sigs.k8s.io/docs/
 youtube: 
 comments: true
-catalog_key: minikube
 image_path: /resources/posts/kubernetes/02b-deploy-application
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []

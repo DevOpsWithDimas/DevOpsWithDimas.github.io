@@ -1,10 +1,8 @@
 ---
-
+lang: k8s
+catalog_key: minikube
 title: "Using your own image into Minikube cluster"
 date: 2022-02-01T23:12:50+07:00
-lang: k8s
-authors:
-- dimasm93
 categories:
 - DevOps
 - Orchestration
@@ -15,7 +13,6 @@ refs:
 - https://minikube.sigs.k8s.io/docs/handbook/pushing/
 youtube: 
 comments: true
-catalog_key: minikube
 image_path: /resources/posts/kubernetes/02d-minikube-push-images
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []

@@ -167,7 +167,7 @@ Setelah kita bahas architecturenya jadi langsung aja kita lakukan installasi sem
 2. **Install gitlab self hosted**, untuk menginstall gitlab pada vm/server on premise kita bisa ikuti tutorial dari official website gitlab [seperti berikut](https://about.gitlab.com/install/?version=ce)
 3. **Install docker Linux**, Untuk install docker di server pada dasarnya sama dengan artikel sebelumnya ya, [baca disini]({% post_url docker/01-introduction/2021-04-11-02-system-requirement %})
 4. **Install gitlab-runner**, untuk menginstall gitlab-runner pada vm/server on premise kita bisa ikutin tutorial dari official website gitlab [seperti berikut](https://docs.gitlab.com/runner/install/linux-repository.html)
-5. **Install Sonatype nexus-oss**, untuk menginstall nexus-oss kita juga udah pernah bahas di artikel sebelumnya, [baca disini]({% post_url docker/02-registries/2021-04-24-03c-install-nexus-oss %}) 
+5. **Install Sonatype nexus-oss**, untuk menginstall nexus-oss kita juga udah pernah bahas di artikel sebelumnya, [baca disini]({% post_url docker/02-registries/2021-04-24-03c-using-nexus-oss %}) 
 
 Setelah semua component selesai kita install, sekarang kita configurasi untuk gitlab & gitlab-runner menggunakan docker executor. Jadi untuk me-register gitlab runner dalam gitlab kita perlu pilih scopenya yaitu 
 

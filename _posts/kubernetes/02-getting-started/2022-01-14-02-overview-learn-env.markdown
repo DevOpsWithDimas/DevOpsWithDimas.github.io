@@ -1,10 +1,8 @@
 ---
-
+lang: k8s
+catalog_key: minikube
 title: "Overview learning environment with Minikube"
 date: 2022-01-14T10:08:49+07:00
-lang: k8s
-authors:
-- dimasm93
 categories:
 - DevOps
 - Orchestration
@@ -15,7 +13,6 @@ refs:
 - https://minikube.sigs.k8s.io/docs/
 youtube: uQj0mJxDpeE
 comments: true
-catalog_key: minikube
 image_path: /resources/posts/kubernetes/02-overview-learn-env
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []

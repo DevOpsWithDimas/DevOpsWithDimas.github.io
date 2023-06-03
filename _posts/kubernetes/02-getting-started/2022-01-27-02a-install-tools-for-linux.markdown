@@ -1,10 +1,8 @@
 ---
-
+lang: k8s
+catalog_key: minikube
 title: "Install minikube for Linux users"
 date: 2022-01-27T11:51:22+07:00
-lang: k8s
-authors:
-- dimasm93
 categories:
 - DevOps
 - Orchestration
@@ -17,7 +15,6 @@ refs:
 - https://minikube.sigs.k8s.io/docs/start/
 youtube: 
 comments: true
-catalog_key: minikube
 image_path: /resources/posts/kubernetes/02a-install-minikube-linux
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []

@@ -1,10 +1,8 @@
 ---
-
+lang: k8s
+catalog_key: minikube
 title: "Minikube basic control"
 date: 2022-01-27T18:55:11+07:00
-lang: k8s
-authors:
-- dimasm93
 categories:
 - DevOps
 - Orchestration
@@ -18,7 +16,6 @@ refs:
 - https://minikube.sigs.k8s.io/docs/handbook/registry/
 youtube: 
 comments: true
-catalog_key: minikube
 image_path: /resources/posts/kubernetes/02c-minikube-manage-cluster
 gist: dimMaryanto93/a3a01b83910cf07914935a25a62d30ce
 downloads: []
