@@ -1,7 +1,7 @@
 ---
-
-title: "Selecting a tuple dengan Criteria API"
 lang: orm-hibernate
+catalog_key: jpql
+title: "Selecting a tuple dengan Criteria API"
 authors:
 - dimasm93
 categories:
@@ -15,7 +15,6 @@ refs:
 - http://docs.jboss.org/hibernate/orm/5.2/userguide/html_single/Hibernate_User_Guide.html
 youtube: 
 comments: true
-catalog_key: criteria-api
 image_path: /resources/posts/orm-hibernate/
 gist: dimMaryanto93/e8d2abb5361e811860d6a462270f119b
 downloads: []
