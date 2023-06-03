@@ -17,6 +17,7 @@ build-jekyll:
     name: "$CI_JOB_NAME-${CI_COMMIT_SHORT_SHA}"
     paths:
       - ${DIR_BUILD}/*
+    expire_in: 1 week
   only:    
     - /-release$/
 
