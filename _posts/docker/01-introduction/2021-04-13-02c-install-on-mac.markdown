@@ -8,6 +8,7 @@ authors:
 categories:
 - DevOps
 - Docker
+- Basic
 refs: 
 - https://docs.docker.com/docker-for-mac/install/
 - https://docs.docker.com/docker-for-mac/apple-m1/

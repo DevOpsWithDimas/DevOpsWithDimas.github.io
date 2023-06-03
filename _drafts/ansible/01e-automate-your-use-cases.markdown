@@ -4,8 +4,8 @@ catalog_key: introduction
 title: "Automate your use cases with Ansible"
 categories:
 - DevOps
-- IaC
 - Ansible
+- Basic
 refs: 
 - https://docs.ansible.com/ansible-core/devel/index.html
 youtube: 

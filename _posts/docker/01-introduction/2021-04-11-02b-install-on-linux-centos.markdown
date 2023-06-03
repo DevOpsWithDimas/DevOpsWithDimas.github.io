@@ -8,6 +8,7 @@ authors:
 categories:
 - DevOps
 - Docker
+- Basic
 refs: 
 - https://stackoverflow.com/a/63067436/6685789
 - https://linuxhint.com/install_docker_ce_centos8/

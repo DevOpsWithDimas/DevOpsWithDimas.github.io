@@ -9,6 +9,7 @@ authors:
 categories:
 - DevOps
 - Docker
+- Basic
 refs: 
 - https://docs.docker.com/
 youtube: oWKiax_drXQ

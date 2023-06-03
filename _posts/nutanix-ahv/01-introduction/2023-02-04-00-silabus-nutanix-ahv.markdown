@@ -7,8 +7,8 @@ authors:
 - dimasm93
 categories:
 - Cloud-Computing
-- Hyper-Converged-Infrastructure
 - Nutanix
+- AHV
 refs: 
 - https://www.nutanixuniversity.com/
 - https://www.atlassian.com/incident-management/devops/sre

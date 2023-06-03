@@ -4,8 +4,8 @@ catalog_key: introduction
 title: "Getting started with Ansible ad-hoc commands"
 categories:
 - DevOps
-- IaC
 - Ansible
+- Basic
 refs: 
 - https://docs.ansible.com/ansible-core/devel/index.html
 youtube: 

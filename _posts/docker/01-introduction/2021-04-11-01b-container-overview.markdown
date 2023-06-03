@@ -8,6 +8,7 @@ authors:
 categories:
 - DevOps
 - Docker
+- Basic
 refs: 
 - https://www.docker.com/resources/what-container
 - https://www.docker.com/products/container-runtime

@@ -8,6 +8,7 @@ authors:
 categories:
 - DevOps
 - Docker
+- Basic
 refs: 
 - https://docs.docker.com/get-started/overview/
 youtube: QSEPTICNdo0

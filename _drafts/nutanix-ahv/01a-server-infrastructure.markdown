@@ -6,8 +6,8 @@ authors:
 - dimasm93
 categories:
 - Cloud-Computing
-- Hyper-Converged-Infrastructure
 - Nutanix
+- AHV
 refs: 
 - https://www.nutanix.com/
 - https://www.nutanixuniversity.com/

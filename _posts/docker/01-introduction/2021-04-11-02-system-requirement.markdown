@@ -8,6 +8,7 @@ authors:
 categories:
 - DevOps
 - Docker
+- Basic
 refs: 
 - https://docs.docker.com/docker-for-mac/install/#what-to-know-before-you-install
 youtube: q43Ev6R-RVA

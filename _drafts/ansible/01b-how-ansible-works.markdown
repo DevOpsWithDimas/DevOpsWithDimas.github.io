@@ -4,8 +4,8 @@ catalog_key: introduction
 title: "How to Ansible Work?"
 categories:
 - DevOps
-- IaC
 - Ansible
+- Basic
 refs: 
 - https://docs.ansible.com/ansible-core/devel/index.html
 youtube: 

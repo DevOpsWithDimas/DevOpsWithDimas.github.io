@@ -4,8 +4,8 @@ catalog_key: introduction
 title: "Install and Configure Ansible on MacOS"
 categories:
 - DevOps
-- IaC
 - Ansible
+- Basic
 refs: 
 - https://docs.ansible.com/ansible-core/devel/index.html
 youtube: 

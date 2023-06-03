@@ -6,8 +6,8 @@ date: 2022-07-06T04:47:42+07:00
 sidebar_toc: false
 categories:
 - DevOps
-- IaC
 - Ansible
+- Basic
 refs: 
 - https://docs.ansible.com/ansible-core/devel/index.html
 youtube: 

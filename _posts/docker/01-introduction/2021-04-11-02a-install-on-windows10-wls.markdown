@@ -8,6 +8,7 @@ authors:
 categories:
 - DevOps
 - Docker
+- Basic
 refs: 
 - https://docs.microsoft.com/en-us/windows/wsl/install-win10
 - https://www.docker.com/products/docker-desktop
