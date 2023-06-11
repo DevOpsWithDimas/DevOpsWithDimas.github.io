@@ -34,7 +34,9 @@ sidebar:
     text: "Temen-teman akan belajar membuat aplikasi Web Single Pages Application (SPA) system dengan menggunakan Angular Framework"
 ---
 
-Hai semuanya selamat datang di kelas **xxx**, jadi kali ini kita akan membahas xxx yaitu menggunakan [xxx](link). 
+Hai semuanya 👋, Selamat datang Roadmap menjadi seorang `Site Reliable Engineer`. 
+
+Disini temen-temen akah diarahkan Step by Step menjadi seorang Site Reliable Engineer (SRE), Jadi Beberapa tahun belakangan sampai saat ini (2023) selain posisi DevOps Engineer ada juga posisi sebagai Site Reliable Engineer. Sebelum lebih jauh kita lihat dulu yuk apa sih Itu perbedaan antara DevOps dengan Site Reliable Engineer (SRE)?
 
 <!--more-->
 
