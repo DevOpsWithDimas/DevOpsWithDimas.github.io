@@ -14,6 +14,24 @@ youtube:
 image_path: /resources/posts/gitlab-ci/03a-what-cicd
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
+cicd_tools:
+  - image_path: resources/posts/gitlab-ci/03a-what-cicd/tools-jenkins.png
+    alt: "tools-jenkins"
+    title: "Jenkins"
+    excerpt: "Jenkins ini bersifat open source dan menggunakan bahasa pemrograman Java. Tool ini dapat digunakan pada berbagai sistem operasi seperti Windows, macOS, dan Linux serta dapat di deploy cloud maupun on-premise"
+  - image_path: resources/posts/gitlab-ci/03a-what-cicd/tools-gitlab-ci.png
+    alt: "tools-gitlab-ci"
+    title: "Gitlab CI"
+    excerpt: "Gitlab CI adalah bagian dari Gitlab Platform yang dibuat oleh gitlab itu sendiri dengan menggunakan bahasa Golang (go). Tool ini dapat digunakan di berbagai macam sistem operasi seperti Windows, macOS, dan linux. <br>Kita bisa mengguankan Gitlab CI yang telah tersedia (Shared runner) atau self managed (Private runner)"
+  - image_path: resources/posts/gitlab-ci/03a-what-cicd/tools-github-action.png
+    alt: "tools-github-action"
+    title: "Github Action"
+    excerpt: "Github Action adalah bagian dari Github Platform yang dibuat oleh github yang sekarang telah di akuisisi oleh Microsoft. Tools ini hanya dapat di gunakan secara cloud (github.com) dan kita bisa gunakan secara gratis/free"
+  - image_path: resources/posts/gitlab-ci/03a-what-cicd/tools-travis-ci.png
+    alt: "tools-travis-ci"
+    title: "Travis CI"
+    excerpt: "Travis CI adalah cloud-based CI/CD yang biasanya digunakan sebelum lahirnya Github Action yang memiliki jargon Code less dan deploy more. Tools ini juga selain hanya tersedia di cloud juga saat ini menjadi platform CI/CD yang berbayar"
+
 ---
 
 Hai semuanya, di materi kali ini kita akan membahas seputar **Continues Integration and Continues Delivery** alias **CI/CD** dalam suatu SDLC atau singkatan dari **Software Development Lifecycle**. 
@@ -31,6 +49,7 @@ Sebelum kita membahas lebih jauh, ada beberapa hal yang kita perlu pahami terleb
 3. How does CI/CD relate to DevOps?
 4. Benefit of implemented CI/CD in SDLC
 5. What are the benefits of CI/CD?
+6. CI/CD software tools
 
 Okay tanpa berlama lama yuk kita bahas satu-per-satu
 
@@ -94,3 +113,9 @@ Teams require an integrated toolchain of technologies to facilitate collaborativ
 - The great increase in overall speed of delivery enabled by CI/CD pipelines improves an organization’s competitive edge.
 - Automation frees team members to focus on what they do best, yielding the best end products.
 - Organizations with a successful CI/CD pipeline can attract great talent. By moving away from traditional waterfall methods, engineers and developers are no longer bogged down with repetitive activities that are often highly dependent on the completion of other tasks. 
+
+## CI/CD software tools
+
+Ada beberapa software tools yang dapat digunakan untuk membuat CI/CD Pipeline. Diantaranya sebagai berikut:
+
+{% include feature_row id="cicd_tools" %}

@@ -2,6 +2,7 @@
 lang: gitlab
 catalog_key: gitlab-ci
 title: "Introduction of Gitlab DevSecOps Platform"
+date: 2023-06-17T20:36:43+07:00
 categories:
 - git
 - gitlab
