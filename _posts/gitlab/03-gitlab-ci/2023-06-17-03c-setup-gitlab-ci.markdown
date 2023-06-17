@@ -2,6 +2,7 @@
 lang: gitlab
 catalog_key: gitlab-ci
 title: "Settings up Gitlab CI (on-premise)"
+date: 2023-06-17T21:12:16+07:00
 categories:
 - git
 - gitlab
