@@ -262,23 +262,19 @@ Setelah kita install package gitlab, gitlab-runner, executor (docker) dan regist
 1. Buat repository, contohnya name `test-gitlab-ci` kemudian visiblilty kita buat `public` serta untuk project configuration check pada `initilization repo with README` click `Create project`
 
 2. Kemudian coba buat file baru dengan nama `.gitlab-ci.yml` seperti berikut:
-
   {% gist page.gist "03c-test-gitlab-ci.yml" %}
 
 3. Dan coba commit, serta push ke branch `main`. Jika sudah temen-temen bisa lihat di menu Pipeline seperti berikut:
-
   ![pipeline]({{ page.image_path | prepend: site.baseurl }}/pipeline.png)
 
 4. Terdapat 1 pipeline yang sedang berjalan, kita coba lihat detailnya dengan click button `running` maka seperti berikut:
-
   ![pipeline-detail]({{ page.image_path | prepend: site.baseurl }}/pipeline-detail.png)
 
 5. Dalam detail pipeline tersebut terlihat sedang ada 1 job yang sedang berjalan, kita coba lihat detail dengan click button `job1` maka seperti berikut:
-
   ![job-detail]({{ page.image_path | prepend: site.baseurl }}/job-detail.png)
 
-6. Nah terlihat pada job, menjalankan script yang kita tulis pada file `.gitlab-ci.yml` menghasilkan output 
-
+6. Nah terlihat pada job, menjalankan script yang kita tulis pada file `.gitlab-ci.yml` menghasilkan output:
+  
   ```bash
   $ echo 'Hi my name is Dimas Maryanto'
   Hi my name is Dimas Maryanto
