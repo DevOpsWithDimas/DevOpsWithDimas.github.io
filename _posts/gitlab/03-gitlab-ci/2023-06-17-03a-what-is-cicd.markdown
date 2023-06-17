@@ -81,6 +81,8 @@ The key practice of DevSecOps is integrating security into all DevOps workflows.
 In more traditional security practices, security is not addressed until the production stage, which is no longer compatible with the faster and more agile DevOps approach. 
 Today, security tools must fit seamlessly into the developer workflow and the CI/CD pipeline in order to keep pace with DevOps and not slow development velocity. 
 
+![devops-tools]({{ page.image_path | prepend: site.baseurl }}/devops-tools.jpeg)
+
 The CI/CD pipeline is part of the broader DevOps/DevSecOps framework. In order to successfully implement and run a CI/CD pipeline, organizations need tools to prevent points of friction that slow down integration and delivery. 
 Teams require an integrated toolchain of technologies to facilitate collaborative and unimpeded development efforts.
 
