@@ -14,7 +14,11 @@ gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---
 
-Hai semuanya, di materi kali ini kita akan membahas seputar **Continues Integration and Continues Delivery** alias **CI/CD** dalam suatu SDLC atau singkatan dari **Software Development Lifecycle**. Saat ini banyak perusahaan/instansi menggunakan proses CI/CD untuk membantu proses Release Management dalam suatu project/product agar bisa lebih cepet dan autopilot sehinga developer dapat fokus untuk mendevelop bisnis proses. 
+Hai semuanya, di materi kali ini kita akan membahas seputar **Continues Integration and Continues Delivery** alias **CI/CD** dalam suatu SDLC atau singkatan dari **Software Development Lifecycle**. 
+
+Pada suatu project/product berbasis software development ini memiliki beberapa tahapan mulai dari coding, testing, dan deployment. Hal ini menjadi tantangan tersendiri jika melibatkan beberapa team/divisi/perusahaan dalam suatu development project/product tersebut.
+
+Saat ini banyak perusahaan/instansi menggunakan proses CI/CD untuk menghilankan kerumitan (simplify) dalam proses release suatu project/product agar bisa lebih cepet dan autopilot (automation deployment). 
 
 Sebelum kita membahas lebih jauh, ada beberapa hal yang kita perlu pahami terlebih dahulu tentang CI/CD diantaranya:
 
@@ -29,6 +33,7 @@ Okay tanpa berlama lama yuk kita bahas satu-per-satu
 <!--more-->
 
 ## What is Continues Integration & Continues Delivery/Deployment (CI/CD)?
+
 
 ## How does CI/CD relate to DevOps?
 
