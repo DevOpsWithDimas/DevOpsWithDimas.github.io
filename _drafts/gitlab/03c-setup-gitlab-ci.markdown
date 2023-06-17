@@ -10,7 +10,7 @@ refs:
 - https://docs.gitlab.com/runner/
 youtube: 
 image_path: /resources/posts/gitlab-ci/03c-setup-gitlab-ci
-gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
+gist: dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b
 downloads: []
 ---
 
@@ -254,3 +254,38 @@ sudo gitlab-runner register \
 Jika sudah maka gitlab-runner akan terdaftar seperti berikut:
 
 ![gitlat-runner-list]({{ page.image_path | prepend: site.baseurl }}/gitlab-runner-list.png)
+
+## Tryout Gitlab CI script
+
+Setelah kita install package gitlab, gitlab-runner, executor (docker) dan register gitlab runner agent ke gitlab instance tahap selanjutnya kita coba test menggunakan simple configuration. Berikut adalah step-by-step nya
+
+1. Buat repository, contohnya name `test-gitlab-ci` kemudian visiblilty kita buat `public` serta untuk project configuration check pada `initilization repo with README` click `Create project`
+
+2. Kemudian coba buat file baru dengan nama `.gitlab-ci.yml` seperti berikut:
+
+  {% gist page.gist "03c-test-gitlab-ci.yml" %}
+
+3. Dan coba commit, serta push ke branch `main`. Jika sudah temen-temen bisa lihat di menu Pipeline seperti berikut:
+
+  ![pipeline]({{ page.image_path | prepend: site.baseurl }}/pipeline.png)
+
+4. Terdapat 1 pipeline yang sedang berjalan, kita coba lihat detailnya dengan click button `running` maka seperti berikut:
+
+  ![pipeline-detail]({{ page.image_path | prepend: site.baseurl }}/pipeline-detail.png)
+
+5. Dalam detail pipeline tersebut terlihat sedang ada 1 job yang sedang berjalan, kita coba lihat detail dengan click button `job1` maka seperti berikut:
+
+  ![job-detail]({{ page.image_path | prepend: site.baseurl }}/job-detail.png)
+
+6. Nah terlihat pada job, menjalankan script yang kita tulis pada file `.gitlab-ci.yml` menghasilkan output 
+
+  ```bash
+  $ echo 'Hi my name is Dimas Maryanto'
+  Hi my name is Dimas Maryanto
+
+  Cleaning up project directory and file based variables
+  00:01
+  Job succeeded
+  ```
+
+Nah ini artinya, kita sudah bisa menggunakan Continues Integration dengan menggunakan Gitlab CI.
