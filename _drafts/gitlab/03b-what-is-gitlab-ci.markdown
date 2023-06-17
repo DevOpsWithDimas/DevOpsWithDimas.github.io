@@ -7,15 +7,16 @@ categories:
 - gitlab
 - gitlab-ci
 refs: 
-- https://docs.docker.com/
+- https://docs.gitlab.com/ee/ci/introduction/index.html
 youtube: 
 image_path: /resources/posts/gitlab-ci/03b-what-is-gitlab-ci
 gist: dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b
 downloads: []
 ---
 
+Hai semuanya, di materi kali ini kita akan membahas salah satu tools implementasi dari Continues Integration (CI) yaitu menggunakan Gitlab CI. 
 
-description...
+Gitlab CI secara feature menawarkan 3 consept yaitu **Continues Integration**, **Continues Delivery** dan **Continues Deployment**. Out-of-the-box management systems can decrease hours spent on maintaining toolchains by 10% or more, so you can test, build, and publish your software with no third-party application or integration needed because Gitlab CI is the part of Gitlab.
 
 <!--more-->
 
