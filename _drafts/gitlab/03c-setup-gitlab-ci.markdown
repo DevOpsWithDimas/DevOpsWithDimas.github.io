@@ -171,3 +171,86 @@ GitLab Runner implements a number of executors that can be used to run your buil
 5. **Kubernetes**, Use the Kubernetes executor to use Kubernetes clusters for your builds. The executor calls the Kubernetes cluster API and creates a pod for each GitLab CI job.
 
 Tahap selanjutnya temen-temen bisa pilih salah-satu, klo saya sendiri lebih sering menggunakan Docker executor sebagai main gitlab runner executornya so jadi kita bisa langsung install.
+
+## Setup & Konfigurasi software
+
+Untuk gitlab intances, kita bisa menggunakan Gitlab SaaS (online) atau on-premise (local). Untuk installasi gitlab on-premise kita bisa menggunakan yang sebelumnya jadi kita bisa skip atau bisa lanjutkan ke proses install gitlab-runner.
+
+Untuk installing gitlab runner kita bisa menggunakan Linux Repository distribution yaitu dengan menggunakan perintah berikut:
+
+{% highlight bash %}
+sudo yum install -y vim git tmux curl wget net-tools
+curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh" | sudo bash && \
+sudo yum -y install gitlab-runner
+{% endhighlight %}
+
+Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker repository. Afterward, you can install and update Docker from the repository. Install the `yum-utils` package (which provides the `yum-config-manager` utility) and set up the repository.
+
+{% highlight bash %}
+sudo yum install -y yum-utils && \
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+{% endhighlight %}
+
+Install Docker Engine
+
+{% highlight bash %}
+sudo yum install -y \
+ docker-ce \
+ docker-ce-cli \
+ containerd.io \
+ docker-compose-plugin
+ 
+sudo systemctl enable --now docker
+{% endhighlight %}
+
+Setelah itu pastikan configurasi selinux di update menjadi permissive dengan mengedit file `/etc/selinux/config` untuk property `SELINUX=enforce` menjadi `SELINUX=permissive` dan kemudian restart.
+
+Jangan lupa tambahkan rule pada firewall seperti berikut:
+
+{% highlight bash %}
+firewall-cmd --zone=public --add-masquerade --permanent 
+firewall-cmd --zone=public --add-port=2375/tcp --permanent
+firewall-cmd --reload
+{% endhighlight %}
+
+Setelah di install docker dan gitlab-runner package, kita Register gitlab-runner ke Gitlab Repository ada pun yang harus di perhatikan adalah
+
+1. Registered as Global
+2. Registered by group
+3. Registered by project
+
+Pilih yang mana? ini tergantung dari kebutuhan ada yang ingin semua project pake gitlab runner brati kita register sebagai Global (Menu `Admin -> Runners`), ada yang per project (Menu `Your project -> Settings -> CI/CD -> Runners`) jadi kita pilih by project. Karena disini saya mau general kita pilih yang Global. yang kita perlukan adalah `URL` dan `Registration token` seperti berikut:
+
+![gitlat-runner-registery]({{ page.image_path | prepend: site.baseurl }}/gitlab-runner-register.png)
+
+Sekarang kita register, gitlab runner agent ke gitlab dengan menggunakan perintah berikut:
+
+{% highlight bash %}
+export GITLAB_URL='<your-gitlab-ip-or-domain>'
+export GITLAB_RUNNER_TOKEN='<your-gitlab-runner-token>'
+export GITLAB_RUNNER_EXTRA_HOST='private.nexus-registry.docker.local:<ip-nexus-oss-server>'
+export GITLAB_RUNNER_DOCKER_VOLUMES=( "/certs/client" "/cache" )
+
+sudo gitlab-runner register \
+-r=${GITLAB_RUNNER_TOKEN} \
+--name=gitlab-runner-docker-executor \
+--non-interactive \
+--url=${GITLAB_URL} \
+--clone-url=${GITLAB_URL} \
+--executor="docker" \
+--docker-tlsverify=false \
+--docker-image="alpine:latest" \
+--docker-disable-entrypoint-overwrite=false \
+--docker-oom-kill-disable=false \
+--docker-extra-hosts=${GITLAB_RUNNER_EXTRA_HOST} \
+--docker-volumes=${GITLAB_RUNNER_DOCKER_VOLUMES[@]} \
+--env="DOCKER_TLS_CERTDIR=" \
+--docker-privileged=true \
+--tag-list="docker"
+{% endhighlight %}
+
+Jika sudah maka gitlab-runner akan terdaftar seperti berikut:
+
+![gitlat-runner-list]({{ page.image_path | prepend: site.baseurl }}/gitlab-runner-list.png)
