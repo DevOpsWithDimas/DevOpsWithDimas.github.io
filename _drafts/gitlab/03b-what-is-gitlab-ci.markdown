@@ -16,7 +16,7 @@ downloads: []
 
 Hai semuanya, di materi kali ini kita akan membahas salah satu tools implementasi dari Continues Integration (CI) yaitu menggunakan Gitlab CI. 
 
-Gitlab CI secara feature menawarkan 3 consept yaitu **Continues Integration**, **Continues Delivery** dan **Continues Deployment**. Out-of-the-box management systems can decrease hours spent on maintaining toolchains by 10% or more, so you can test, build, and publish your software with no third-party application or integration needed because Gitlab CI is the part of Gitlab.
+Gitlab CI menawarkan 3 konsep yaitu **Continues Integration**, **Continues Delivery** dan **Continues Deployment**. Out-of-the-box management systems can decrease hours spent on maintaining toolchains by 10% or more, so you can test, build, and publish your software with no third-party application or integration needed because Gitlab CI is the part of Gitlab.
 
 <!--more-->
 
