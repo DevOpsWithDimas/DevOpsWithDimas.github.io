@@ -318,6 +318,238 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/registry/03c-using-nexus-oss" rel="permalink">Using Nexus OSS as insecure registry
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Docker for DevOps engineer
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-04-24T16:45:03+07:00">April 24, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        5 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas Insecure Registry dengan menggunakan <a href="https://www.sonatype.com/products/repository-oss">Nexus OSS</a>, diantaranya yang akan kita bahas yaitu</p>
+
+<ol>
+  <li>System requirement to install Nexus OSS</li>
+  <li>Installing Nexus OSS
+    <ul>
+      <li>Setup Proxy Repository Docker from Docker HUB</li>
+      <li>Setup Proxy Repository Docker from other registry</li>
+      <li>Setup Hosted Repository Docker</li>
+      <li>Setup Public Group Repository Docker</li>
+    </ul>
+  </li>
+  <li>How to Push &amp; Pull Docker images from Insecure Registry
+    <ul>
+      <li>Pulling docker image from Docker Hub using Proxy</li>
+      <li>Pulling docker image from an other registry using proxy repository</li>
+      <li>Push own docker image to hosted registry.</li>
+    </ul>
+  </li>
+</ol>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/registry/03b-insecure-registry" rel="permalink">Insecure Registry
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Docker for DevOps engineer
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-04-24T16:44:03+07:00">April 24, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, sebelumnya kita sudah memahami apa itu Docker Registry, sekarang kita akan membahas tentang Insecure Registry. 
+Nah yang jadi pertanyaaan <strong>apa itu Insecure Registry?</strong>. Insecure Registry sama halnya dengan <a href="https://hub.docker.com/">Docker Hub</a> yaitu bertujuan menyimpan docker images tetapi disini insecure registry lebih flexible artinya kita bisa tentukan mulai dari lokasi registry (on-premise, cloud), private atau public docker repository dan lain-lain. Adapun materi yang akan kita bahas kali ini yaitu</p>
+
+<ol>
+  <li>Macam-Macam Provider Insecure Registry</li>
+  <li>Manfaat menggunakan Insecure Registry
+    <ol>
+      <li>Proxy Repository for saving bandwidth</li>
+      <li>Unlimited private repository</li>
+      <li>Push &amp; Pull Docker Images more faster than Docker Hub</li>
+    </ol>
+  </li>
+</ol>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/registry/03a-docker-registry" rel="permalink">Docker Registry (Docker HUB)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Docker for DevOps engineer
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2021-04-24T16:43:49+07:00">April 24, 2021</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        5 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>halo semuanya, di materi kali ini kita akan membahas tentang Docker Registry, The Registry is a stateless, highly scalable server side application that stores and lets you distribute Docker images. 
+The Registry is open-source, under the permissive Apache license. Secara default, Docker Registry menggunakan <a href="hub.docker.com">Docker Hub</a>. Ok nah jadi sekarang kita akan membahas:</p>
+
+<ol>
+  <li>Apa itu Official Images</li>
+  <li>Apa itu Public Images</li>
+  <li>Docker Hub Repository (Public/Private repository)</li>
+  <li>How to Sign-up &amp; Sign-in to <a href="https://hub.docker.com">hub.docker.com</a></li>
+  <li>How to Store your own images to <a href="https://hub.docker.com">hub.docker.com</a></li>
+</ol>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/basic/03-getting-started" rel="permalink">Getting Started with Docker
 </a>
       
@@ -445,211 +677,6 @@
   <li>Configure</li>
   <li>Setup development env</li>
 </ol>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/basic/02b-install-on-linux-centos" rel="permalink">How to install Docker on Linux CentOS
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Docker for DevOps engineer
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2021-04-11T22:16:33+07:00">April 11, 2021</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        3 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang, bagaimana install Docker di Linux CentOS Platform dengan menggunakan CentOS Repository, Ada pun tahapannya</p>
-
-<ol>
-  <li>Setting Selinux</li>
-  <li>Add Repository Docker</li>
-  <li>Install Docker</li>
-  <li>Expose Docker Daemon <code class="language-plaintext highlighter-rouge">http://localhost:2375</code> without TLS</li>
-</ol>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/basic/02a-install-on-windows10-wls" rel="permalink">How to install Docker on Windows 10 with WSL
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Docker for DevOps engineer
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2021-04-11T21:16:49+07:00">April 11, 2021</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        5 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya di materi kali ini kita akan meng-install Docker di platform Windows, ada beberapa step</p>
-
-<ol>
-  <li>Install &amp; Configure Backend for Docker Engine</li>
-  <li>Install Docker Desktop</li>
-  <li>Setup Development Env</li>
-</ol>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/basic/02-system-requirement" rel="permalink">What to know before you install Docker
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Docker for DevOps engineer
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2021-04-11T21:15:57+07:00">April 11, 2021</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        2 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang System Requirement untuk menginstall Docker. Untuk memahami yang saya sampaikan, di harapkan temen-temen juga menginstall Docker sesuai dengan laptop dengan platform masing-masing. Nah jadi ada beberapa yang perlu kita siapkan diantaranya</p>
 
 </span>
       

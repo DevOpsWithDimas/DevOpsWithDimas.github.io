@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "IF statement",
+      "link": "/posts/language/java/control/05a-if-statement"
+    }
+    ,
+    {
+      "title": "FLow control statement",
+      "link": "/posts/language/java/control/05-control-flow"
+    }
+    ,
+    {
+      "title": "Time is your practice",
+      "link": "/posts/language/java/basic/04-quis-section-1"
+    }
+    ,
+    {
       "title": "Konversi tipe data otomatis di Java",
       "link": "/posts/language/java/basic/03a-conversi-tipe-data"
     }
@@ -34,11 +49,6 @@
     {
       "title": "Variabel dan Tipe Data",
       "link": "/posts/language/java/basic/02a-data-type-and-variables"
-    }
-    ,
-    {
-      "title": "Standarisasi penulisan coding di Java",
-      "link": "/posts/language/java/basic/02-role-java"
     }
   ]
 }

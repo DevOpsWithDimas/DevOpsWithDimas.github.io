@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Pengenalan Oracle Database 18c",
+      "link": "/posts/rdbms/oracle18c/002-pengenalan-oracledb"
+    }
+    ,
+    {
+      "title": "Silabus Belajar RDBMS Oracle 18c",
+      "link": "/posts/rdbms/oracle18c/001-silabus-oracle-18c"
+    }
+    ,
+    {
+      "title": "Time is your Practice",
+      "link": "/posts/framework/java/orm/hibernate/hql/10-quis-3"
+    }
+    ,
+    {
       "title": "Read Only Entity dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/09-read-only-entity"
     }
@@ -34,21 +49,6 @@
     {
       "title": "SubQuery Qualifiers dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/05g-hql-subquery-qualifiers"
-    }
-    ,
-    {
-      "title": "Empty Collections Predicate dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/05f-hql-predicate-empty-collections"
-    }
-    ,
-    {
-      "title": "Predicate IN dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/05e-hql-predicate-in"
-    }
-    ,
-    {
-      "title": "Predicate BETWEEN dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/05d-hql-predicate-between"
     }
   ]
 }

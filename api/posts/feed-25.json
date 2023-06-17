@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "DDL - Check Constraint",
+      "link": "/posts/rdbms/oracle18c/016j-constraint-check"
+    }
+    ,
+    {
+      "title": "DDL - Unqiue Constraint",
+      "link": "/posts/rdbms/oracle18c/016i-constraint-unique"
+    }
+    ,
+    {
+      "title": "DDL - Not Null Constraint",
+      "link": "/posts/rdbms/oracle18c/016h-constraint-not-null"
+    }
+    ,
+    {
       "title": "DDL - Macam-macam Constraint di Oracle",
       "link": "/posts/rdbms/oracle18c/016g-ddl-contraints-table"
     }
@@ -34,21 +49,6 @@
     {
       "title": "DDL - Static Data Dictionary View",
       "link": "/posts/rdbms/oracle18c/016a-dictionary-table"
-    }
-    ,
-    {
-      "title": "Data Definition Language (DDL) di Oracle",
-      "link": "/posts/rdbms/oracle18c/016-ddl"
-    }
-    ,
-    {
-      "title": "TCL - Locking Transaction di Oracle",
-      "link": "/posts/rdbms/oracle18c/015e-tcl-locking"
-    }
-    ,
-    {
-      "title": "TCL - Concurrent Transaction",
-      "link": "/posts/rdbms/oracle18c/015d-tcl-concurrent"
     }
   ]
 }

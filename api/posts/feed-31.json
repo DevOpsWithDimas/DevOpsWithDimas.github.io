@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Like Predicate pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006b-like-predicate"
+    }
+    ,
+    {
+      "title": "Comparison Predicate pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006a-relational-comparison"
+    }
+    ,
+    {
+      "title": "Klausa where untuk filter data di Oracle",
+      "link": "/posts/rdbms/oracle18c/006-where-clause"
+    }
+    ,
+    {
       "title": "Menghilangkan nilai redundansi dengan klausa Distinct",
       "link": "/posts/rdbms/oracle18c/005e-select-distinct"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Data Types di Oracle Database",
       "link": "/posts/rdbms/oracle18c/004b-tipe-data"
-    }
-    ,
-    {
-      "title": "Aturan Penulisan SQL pada Oracle Database",
-      "link": "/posts/rdbms/oracle18c/004a-aturan-pada-oracle-database"
-    }
-    ,
-    {
-      "title": "Persiapan Sebelum mulai belajar",
-      "link": "/posts/rdbms/oracle18c/004-preparation-before-start"
-    }
-    ,
-    {
-      "title": "Install Database Editor untuk Oracle 18c",
-      "link": "/posts/rdbms/oracle18c/003d-install-database-editor"
     }
   ]
 }

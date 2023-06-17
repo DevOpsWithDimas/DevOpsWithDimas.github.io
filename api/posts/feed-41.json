@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Pengenalan Scripting language dengan HTML",
+      "link": "/posts/language/java/web/servlet/003-pengenalan-html"
+    }
+    ,
+    {
+      "title": "Technology Java Enterprice Edition",
+      "link": "/posts/language/java/web/servlet/002-pengenalan-java-web"
+    }
+    ,
+    {
+      "title": "Time is your to practice",
+      "link": "/posts/language/java/jdbc/011-quis-section-1"
+    }
+    ,
+    {
       "title": "Silabus Belajar JPA Hibernate",
       "link": "/posts/framework/java/orm/hibernate/basic/01-silabus-orm-hibernate"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Percabagan atau Selection di JavaScript",
       "link": "/posts/language/web/js/07-selection-js"
-    }
-    ,
-    {
-      "title": "Operator Matematika di JavaScript",
-      "link": "/posts/language/web/js/06-math-operation-js"
-    }
-    ,
-    {
-      "title": "Variable di JavaScript",
-      "link": "/posts/language/web/js/05-variables-js"
-    }
-    ,
-    {
-      "title": "Data Type di JavaScript",
-      "link": "/posts/language/web/js/04-data-type-js"
     }
   ]
 }

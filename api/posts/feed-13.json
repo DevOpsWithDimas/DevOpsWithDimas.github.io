@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Compose file for multiple git projects",
+      "link": "/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects"
+    }
+    ,
+    {
+      "title": "Deploy httpd with ssl/https on docker",
+      "link": "/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker"
+    }
+    ,
+    {
+      "title": "Angular deployment using compose file",
+      "link": "/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case"
+    }
+    ,
+    {
       "title": "Springboot deployment using compose file",
       "link": "/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Example use case of multiple compose files",
       "link": "/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases"
-    }
-    ,
-    {
-      "title": "Multiple Compose files to Add & Override attribute",
-      "link": "/posts/devops/docker/compose/workflows/09o-multiple-compose-add-override-attr"
-    }
-    ,
-    {
-      "title": "Using profiles with Compose file",
-      "link": "/posts/devops/docker/compose/workflows/09n-compose-using-profile"
-    }
-    ,
-    {
-      "title": "Build docker image using Compose file",
-      "link": "/posts/devops/docker/compose/build/09m-compose-build-image"
     }
   ]
 }

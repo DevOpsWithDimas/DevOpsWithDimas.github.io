@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Array 2 dimensi",
+      "link": "/posts/language/java/arrays/14a-array-2-dimension"
+    }
+    ,
+    {
+      "title": "Menyimpan multiple value dalam sebuah variable",
+      "link": "/posts/language/java/arrays/14-array"
+    }
+    ,
+    {
+      "title": "Time is your practice part 4",
+      "link": "/posts/language/java/oop/13-quis-section-4"
+    }
+    ,
+    {
       "title": "Contructor adalah method",
       "link": "/posts/language/java/oop/12-contructor-java"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Time is your for practice part 3",
       "link": "/posts/language/java/classes/10-quis-section-3"
-    }
-    ,
-    {
-      "title": "Organisasi class file dengan package",
-      "link": "/posts/language/java/classes/09a-package-import"
-    }
-    ,
-    {
-      "title": "Grouping source code dengan class",
-      "link": "/posts/language/java/classes/09-class-java"
-    }
-    ,
-    {
-      "title": "Menerima data dari paramenter ke dalam Function",
-      "link": "/posts/language/java/function/08a-params-at-method"
     }
   ]
 }

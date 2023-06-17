@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Composite Primary Key",
+      "link": "/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key"
+    }
+    ,
+    {
+      "title": "Macam Macam Generator Value di Hibernate",
+      "link": "/posts/framework/java/orm/hibernate/basic/02g-generator-value"
+    }
+    ,
+    {
+      "title": "Macam-Macam Constraint di Hibernate",
+      "link": "/posts/framework/java/orm/hibernate/basic/02f-constraints"
+    }
+    ,
+    {
       "title": "Time is your to practice",
       "link": "/posts/language/java/web/jsp/034-quis-section-01"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Membuat Simple Entity di Hibernate",
       "link": "/posts/framework/java/orm/hibernate/basic/02c-membuat-simple-entity"
-    }
-    ,
-    {
-      "title": "Memahami fungsi hibernate.cfg.xml",
-      "link": "/posts/framework/java/orm/hibernate/basic/02b-memahami-hibernate-cfg"
-    }
-    ,
-    {
-      "title": "Build Hibernate Session Factory",
-      "link": "/posts/framework/java/orm/hibernate/basic/02a-create-connection"
-    }
-    ,
-    {
-      "title": "Membuat project Hibernate ORM dengan Apache Maven",
-      "link": "/posts/framework/java/orm/hibernate/basic/02-create-project-java-maven"
     }
   ]
 }

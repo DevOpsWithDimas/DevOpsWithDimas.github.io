@@ -1,4 +1,793 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2023-06-03T14:35:19+07:00</updated><id>/feed.xml</id><title type="html">DevOps with Dimas Maryanto</title><subtitle>Tutorial Pemrograman, Backend, Frontend, Website, Mobile dan Devops Terlengkap di Indonesia.</subtitle><author><name>Dimas Maryanto</name></author><entry xml:lang="gitlab"><title type="html">Silabus Gitlab CI: Pemula s/d Mahir</title><link href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" rel="alternate" type="text/html" title="Silabus Gitlab CI: Pemula s/d Mahir" /><published>2023-06-02T20:18:43+07:00</published><updated>2023-06-02T20:18:43+07:00</updated><id>/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci</id><content type="html" xml:base="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci"><![CDATA[<p>Hai semuanya, selamat datang kembali di kelas <strong>GitOps dengan Gitlab untuk Pemula s/d Mahir</strong> materi kali ini kita membahas tentang Continues Integration (CI) dengan menggunakan Gitlab Platform yaitu Gitlab CI.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2023-06-17T21:13:57+07:00</updated><id>/feed.xml</id><title type="html">DevOps with Dimas Maryanto</title><subtitle>Tutorial Pemrograman, Backend, Frontend, Website, Mobile dan Devops Terlengkap di Indonesia.</subtitle><author><name>Dimas Maryanto</name></author><entry xml:lang="gitlab"><title type="html">Settings up Gitlab CI (on-premise)</title><link href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci" rel="alternate" type="text/html" title="Settings up Gitlab CI (on-premise)" /><published>2023-06-17T21:12:16+07:00</published><updated>2023-06-17T21:12:16+07:00</updated><id>/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci</id><content type="html" xml:base="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci"><![CDATA[<p>Hai semuanya, di materi kali ini kita akan membahas tentang Setup environment for Continues Integration (CI) menggunakan Gitlab CI di on-premise. Ok karena artikel ini akan lumayan panjang jadi kita akan bagi2 menjadi beberapa bagian yaitu</p>
+
+<ol>
+  <li>Requirement and prequisite</li>
+  <li>Arsitektur</li>
+  <li>Setup &amp; Konfigurasi software
+    <ul>
+      <li>Install gitlab</li>
+      <li>Install &amp; setting docker engine</li>
+      <li>Install gitlab runner</li>
+      <li>Register gitlab-runner to gitlab</li>
+    </ul>
+  </li>
+  <li>Tryout Gitlab CI script</li>
+</ol>
+
+<p>Ok langsung ja kita ke pembahasan pertama yaitu</p>
+
+<!--more-->
+
+<h2 id="requirement-and-prequisite">Requirement and prequisite</h2>
+
+<p>Untuk menggunakan Gitlab CI ada beberapa hal yang perlu kita siapkan diantaranya minimal 2 virtual machine dengan specifikasi seperti berikut:</p>
+
+<ol>
+  <li>
+    <p>VM Gitlab</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">vcs_repository</span><span class="pi">:</span>
+   <span class="na">os</span><span class="pi">:</span> <span class="s">Linux Distro</span>
+       <span class="s">distro</span><span class="err">:</span> <span class="s">Ubuntu Server</span>
+       <span class="s">vesion</span><span class="err">:</span> <span class="s1">'</span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">20.04'</span>
+   <span class="na">hardware</span><span class="pi">:</span>
+       <span class="na">cpu</span><span class="pi">:</span> <span class="s">4 CPU</span>
+       <span class="na">memory</span><span class="pi">:</span> <span class="s">8GB</span>
+       <span class="na">storage</span><span class="pi">:</span> <span class="s">250GB</span>
+           <span class="s">partitions</span><span class="err">:</span>
+               <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/</span>
+                 <span class="na">size</span><span class="pi">:</span> <span class="s">75 GB</span>
+               <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/var</span>
+                 <span class="na">size</span><span class="pi">:</span> <span class="s1">'</span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">150GB'</span>
+       <span class="err">    </span><span class="na">type</span><span class="pi">:</span> <span class="s">LVM</span>
+   <span class="na">networks</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">private ip</span>
+         <span class="na">ip4</span><span class="pi">:</span> <span class="s">192.168.88.101/24</span>
+         <span class="na">gateway</span><span class="pi">:</span> <span class="s">192.168.88.1</span>
+         <span class="na">dns</span><span class="pi">:</span> 
+           <span class="pi">-</span> <span class="s">8.8.8.8</span>
+           <span class="pi">-</span> <span class="s">8.8.4.4</span>
+   <span class="na">firewall-cmd</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">SSH</span>
+         <span class="na">port</span><span class="pi">:</span> <span class="s">22/tcp</span>
+         <span class="na">policy</span><span class="pi">:</span> <span class="s">allow</span>
+       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Gitlab Repository</span>
+         <span class="na">port</span><span class="pi">:</span> <span class="s">80/tcp, 443/tcp</span>   
+         <span class="na">policy</span><span class="pi">:</span> <span class="s">allow</span>
+   <span class="na">packages</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="s">gitlab-ce</span>
+       <span class="pi">-</span> <span class="s">OpenSSH-Server</span>   
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>VM gitlab-runner + docker</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">workers</span><span class="pi">:</span>
+   <span class="na">os</span><span class="pi">:</span> <span class="s">Linux Distro</span>
+       <span class="s">distro</span><span class="err">:</span> <span class="s">CentOS</span>
+       <span class="s">vesion</span><span class="err">:</span> <span class="s1">'</span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">7.9'</span>
+   <span class="na">hardware</span><span class="pi">:</span>
+       <span class="c1">## sesuaikan specifikasi hardwarenya dengan kebutuhan build</span>
+       <span class="c1">## karena ada beberapa bahasa pemograman membutuhkan lebih dari 4GB RAM dan jumlah cpu</span>
+       <span class="na">cpu</span><span class="pi">:</span> <span class="s">2 CPU</span>
+       <span class="na">memory</span><span class="pi">:</span> <span class="s">4GB</span>
+       <span class="na">storage</span><span class="pi">:</span> <span class="s">70GB</span>
+           <span class="s">partitions</span><span class="err">:</span>
+               <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/</span>
+                 <span class="na">size</span><span class="pi">:</span> <span class="s">20 GB</span>
+               <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/var</span>
+                 <span class="na">size</span><span class="pi">:</span> <span class="s1">'</span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">50GB'</span>
+       <span class="err">    </span><span class="na">type</span><span class="pi">:</span> <span class="s">LVM</span>
+   <span class="na">networks</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">private ip</span>
+         <span class="na">ip4</span><span class="pi">:</span> <span class="s">192.168.88.102/24</span>
+         <span class="na">gateway</span><span class="pi">:</span> <span class="s">192.168.88.1</span>
+         <span class="na">dns</span><span class="pi">:</span> 
+           <span class="pi">-</span> <span class="s">8.8.8.8</span>
+           <span class="pi">-</span> <span class="s">8.8.4.4</span>
+   <span class="na">packages</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="s">OpenSSH-Server</span>
+       <span class="pi">-</span> <span class="s">docker-ce</span>
+       <span class="pi">-</span> <span class="s">gitlab-runner</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Untuk membuat virtual-machine temen-temen boleh menggunakan hypervisor provider apapun misalnya; Oracle VirtualBox, VMware player, qemu dan lain-lain. Kalo saya sendiri menggunakan proxmox yang saya install di PC dengan spesifikasi seperti berikut:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">proxmox</span><span class="pi">:</span>
+  <span class="na">os</span><span class="pi">:</span> <span class="s">Proxmox </span><span class="m">7.8</span>
+  <span class="na">hardware</span><span class="pi">:</span>
+    <span class="na">cpu</span><span class="pi">:</span> <span class="s">Intel core i9-9900 (8core 16thread)</span>
+    <span class="na">memory</span><span class="pi">:</span> <span class="s">64GB</span>
+    <span class="na">storage</span><span class="pi">:</span>
+      <span class="na">SSD</span><span class="pi">:</span>
+        <span class="na">size</span><span class="pi">:</span> <span class="s">1TB</span>
+        <span class="na">partitions</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">lvm</span>
+          <span class="na">size</span><span class="pi">:</span> <span class="s">200 GB</span>
+          <span class="na">format</span><span class="pi">:</span> <span class="s">proxmox os</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">lvm-thin</span>
+          <span class="na">size</span><span class="pi">:</span> <span class="s">600 GB</span>
+          <span class="na">format</span><span class="pi">:</span> <span class="s">LVM Thin</span>
+  <span class="na">networks</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Microtik RouterBoard RBD52G</span>
+      <span class="na">ip4</span><span class="pi">:</span> <span class="s">192.168.88.1</span>
+</code></pre></div></div>
+
+<p>Seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/proxmox.png" alt="proxmox" /></p>
+
+<h2 id="arsitektur">Arsitektur</h2>
+
+<p>Okay sebelum kita install software-software tersebut kita lihat dulu secara architectur yang digunakan agar kita bisa memahami flownya, yaitu seperti berikut:</p>
+
+<p>This diagram shows how runners are registered and how jobs are requested and handled:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+sequenceDiagram
+  participant GitLab
+  participant GitLabRunner
+  participant Executor
+
+  opt registration
+    GitLabRunner -&gt;&gt;+ GitLab: POST /api/v4/runners with registration_token
+    GitLab --&gt;&gt;- GitLabRunner: Registered with runner_token
+  end
+
+  loop job requesting and handling
+    GitLabRunner -&gt;&gt;+ GitLab: POST /api/v4/jobs/request with runner_token
+    GitLab --&gt;&gt;+ GitLabRunner: job payload with job_token
+    GitLabRunner -&gt;&gt;+ Executor: Job payload
+    Executor -&gt;&gt;+ GitLab: clone sources with job_token
+    Executor -&gt;&gt;+ GitLab: download artifacts with job_token
+    Executor --&gt;&gt;- GitLabRunner: return job output and status
+    GitLabRunner --&gt;&gt;- GitLab: updating job output and status with job_token
+  end
+</div>
+
+<p><strong>GitLab Runner</strong>: The application that you install that executes GitLab CI jobs on a target computing platform.</p>
+
+<ul>
+  <li><strong>runner</strong>: The agent that runs the code on the host platform and displays in the UI. If a runner is registered with the same token, the runner could represent a collection of runners and runner managers.</li>
+  <li><strong>runner manager</strong>: A type of runner that can create multiple runners for autoscaling. Specific to the type of executor used.</li>
+  <li><strong>runner worker</strong>: The process created by the runner on the host computing platform to run jobs.</li>
+</ul>
+
+<p>GitLab Runner implements a number of executors that can be used to run your builds in different scenarios.</p>
+
+<ol>
+  <li><strong>SSH</strong>, is using Connect using ssh protocol to execute jobs</li>
+  <li><strong>Shell</strong>, is a simple executor that you use to execute builds locally on the machine where GitLab Runner is installed.</li>
+  <li>Hypervisor (VirtualBox, Paralles), is using VirtualMachine manager to execute the job</li>
+  <li><strong>Docker</strong>, GitLab Runner uses the Docker executor to run jobs on Docker images.</li>
+  <li><strong>Kubernetes</strong>, Use the Kubernetes executor to use Kubernetes clusters for your builds. The executor calls the Kubernetes cluster API and creates a pod for each GitLab CI job.</li>
+</ol>
+
+<p>Tahap selanjutnya temen-temen bisa pilih salah-satu, klo saya sendiri lebih sering menggunakan Docker executor sebagai main gitlab runner executornya so jadi kita bisa langsung install.</p>
+
+<h2 id="setup--konfigurasi-software">Setup &amp; Konfigurasi software</h2>
+
+<p>Untuk gitlab intances, kita bisa menggunakan Gitlab SaaS (online) atau on-premise (local). Untuk installasi gitlab on-premise kita bisa menggunakan yang sebelumnya jadi kita bisa skip atau bisa lanjutkan ke proses install gitlab-runner.</p>
+
+<p>Untuk installing gitlab runner kita bisa menggunakan Linux Repository distribution yaitu dengan menggunakan perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>yum <span class="nb">install</span> <span class="nt">-y</span> vim git tmux curl wget net-tools
+curl <span class="nt">-L</span> <span class="s2">"https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh"</span> | <span class="nb">sudo </span>bash <span class="o">&amp;&amp;</span> <span class="se">\</span>
+<span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>gitlab-runner</code></pre></figure>
+
+<p>Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker repository. Afterward, you can install and update Docker from the repository. Install the <code class="language-plaintext highlighter-rouge">yum-utils</code> package (which provides the <code class="language-plaintext highlighter-rouge">yum-config-manager</code> utility) and set up the repository.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>yum <span class="nb">install</span> <span class="nt">-y</span> yum-utils <span class="o">&amp;&amp;</span> <span class="se">\</span>
+<span class="nb">sudo </span>yum-config-manager <span class="se">\</span>
+    <span class="nt">--add-repo</span> <span class="se">\</span>
+    https://download.docker.com/linux/centos/docker-ce.repo</code></pre></figure>
+
+<p>Install Docker Engine</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>yum <span class="nb">install</span> <span class="nt">-y</span> <span class="se">\</span>
+ docker-ce <span class="se">\</span>
+ docker-ce-cli <span class="se">\</span>
+ containerd.io <span class="se">\</span>
+ docker-compose-plugin
+ 
+<span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nt">--now</span> docker</code></pre></figure>
+
+<p>Setelah itu pastikan configurasi selinux di update menjadi permissive dengan mengedit file <code class="language-plaintext highlighter-rouge">/etc/selinux/config</code> untuk property <code class="language-plaintext highlighter-rouge">SELINUX=enforce</code> menjadi <code class="language-plaintext highlighter-rouge">SELINUX=permissive</code> dan kemudian restart.</p>
+
+<p>Jangan lupa tambahkan rule pada firewall seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">firewall-cmd <span class="nt">--zone</span><span class="o">=</span>public <span class="nt">--add-masquerade</span> <span class="nt">--permanent</span> 
+firewall-cmd <span class="nt">--zone</span><span class="o">=</span>public <span class="nt">--add-port</span><span class="o">=</span>2375/tcp <span class="nt">--permanent</span>
+firewall-cmd <span class="nt">--reload</span></code></pre></figure>
+
+<p>Setelah di install docker dan gitlab-runner package, kita Register gitlab-runner ke Gitlab Repository ada pun yang harus di perhatikan adalah</p>
+
+<ol>
+  <li>Registered as Global</li>
+  <li>Registered by group</li>
+  <li>Registered by project</li>
+</ol>
+
+<p>Pilih yang mana? ini tergantung dari kebutuhan ada yang ingin semua project pake gitlab runner brati kita register sebagai Global (Menu <code class="language-plaintext highlighter-rouge">Admin -&gt; Runners</code>), ada yang per project (Menu <code class="language-plaintext highlighter-rouge">Your project -&gt; Settings -&gt; CI/CD -&gt; Runners</code>) jadi kita pilih by project. Karena disini saya mau general kita pilih yang Global. yang kita perlukan adalah <code class="language-plaintext highlighter-rouge">URL</code> dan <code class="language-plaintext highlighter-rouge">Registration token</code> seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/gitlab-runner-register.png" alt="gitlat-runner-registery" /></p>
+
+<p>Sekarang kita register, gitlab runner agent ke gitlab dengan menggunakan perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">GITLAB_URL</span><span class="o">=</span><span class="s1">'&lt;your-gitlab-ip-or-domain&gt;'</span>
+<span class="nb">export </span><span class="nv">GITLAB_RUNNER_TOKEN</span><span class="o">=</span><span class="s1">'&lt;your-gitlab-runner-token&gt;'</span>
+<span class="nb">export </span><span class="nv">GITLAB_RUNNER_EXTRA_HOST</span><span class="o">=</span><span class="s1">'private.nexus-registry.docker.local:&lt;ip-nexus-oss-server&gt;'</span>
+<span class="nb">export </span><span class="nv">GITLAB_RUNNER_DOCKER_VOLUMES</span><span class="o">=(</span> <span class="s2">"/certs/client"</span> <span class="s2">"/cache"</span> <span class="o">)</span>
+
+<span class="nb">sudo </span>gitlab-runner register <span class="se">\</span>
+<span class="nt">-r</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_RUNNER_TOKEN</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--name</span><span class="o">=</span>gitlab-runner-docker-executor <span class="se">\</span>
+<span class="nt">--non-interactive</span> <span class="se">\</span>
+<span class="nt">--url</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_URL</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--clone-url</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_URL</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--executor</span><span class="o">=</span><span class="s2">"docker"</span> <span class="se">\</span>
+<span class="nt">--docker-tlsverify</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+<span class="nt">--docker-image</span><span class="o">=</span><span class="s2">"alpine:latest"</span> <span class="se">\</span>
+<span class="nt">--docker-disable-entrypoint-overwrite</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+<span class="nt">--docker-oom-kill-disable</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+<span class="nt">--docker-extra-hosts</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_RUNNER_EXTRA_HOST</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--docker-volumes</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_RUNNER_DOCKER_VOLUMES</span><span class="p">[@]</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--env</span><span class="o">=</span><span class="s2">"DOCKER_TLS_CERTDIR="</span> <span class="se">\</span>
+<span class="nt">--docker-privileged</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+<span class="nt">--tag-list</span><span class="o">=</span><span class="s2">"docker"</span></code></pre></figure>
+
+<p>Jika sudah maka gitlab-runner akan terdaftar seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/gitlab-runner-list.png" alt="gitlat-runner-list" /></p>
+
+<h2 id="tryout-gitlab-ci-script">Tryout Gitlab CI script</h2>
+
+<p>Setelah kita install package gitlab, gitlab-runner, executor (docker) dan register gitlab runner agent ke gitlab instance tahap selanjutnya kita coba test menggunakan simple configuration. Berikut adalah step-by-step nya</p>
+
+<ol>
+  <li>
+    <p>Buat repository, contohnya name <code class="language-plaintext highlighter-rouge">test-gitlab-ci</code> kemudian visiblilty kita buat <code class="language-plaintext highlighter-rouge">public</code> serta untuk project configuration check pada <code class="language-plaintext highlighter-rouge">initilization repo with README</code> click <code class="language-plaintext highlighter-rouge">Create project</code></p>
+  </li>
+  <li>
+    <p>Kemudian coba buat file baru dengan nama <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> seperti berikut:
+  <script src="https://gist.github.com/dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b.js?file=03c-test-gitlab-ci.yml"> </script></p>
+  </li>
+  <li>
+    <p>Dan coba commit, serta push ke branch <code class="language-plaintext highlighter-rouge">main</code>. Jika sudah temen-temen bisa lihat di menu Pipeline seperti berikut:
+  <img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/pipeline.png" alt="pipeline" /></p>
+  </li>
+  <li>
+    <p>Terdapat 1 pipeline yang sedang berjalan, kita coba lihat detailnya dengan click button <code class="language-plaintext highlighter-rouge">running</code> maka seperti berikut:
+  <img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/pipeline-detail.png" alt="pipeline-detail" /></p>
+  </li>
+  <li>
+    <p>Dalam detail pipeline tersebut terlihat sedang ada 1 job yang sedang berjalan, kita coba lihat detail dengan click button <code class="language-plaintext highlighter-rouge">job1</code> maka seperti berikut:
+  <img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/job-detail.png" alt="job-detail" /></p>
+  </li>
+  <li>
+    <p>Nah terlihat pada job, menjalankan script yang kita tulis pada file <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> menghasilkan output:</p>
+  </li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'Hi my name is Dimas Maryanto'</span>
+  Hi my name is Dimas Maryanto
+
+  Cleaning up project directory and file based variables
+  00:01
+  Job succeeded
+</code></pre></div></div>
+
+<p>Nah ini artinya, kita sudah bisa menggunakan Continues Integration dengan menggunakan Gitlab CI.</p>]]></content><author><name>Dimas Maryanto</name></author><category term="git" /><category term="gitlab" /><category term="gitlab-ci" /><summary type="html"><![CDATA[Hai semuanya, di materi kali ini kita akan membahas tentang Setup environment for Continues Integration (CI) menggunakan Gitlab CI di on-premise. Ok karena artikel ini akan lumayan panjang jadi kita akan bagi2 menjadi beberapa bagian yaitu Requirement and prequisite Arsitektur Setup &amp; Konfigurasi software Install gitlab Install &amp; setting docker engine Install gitlab runner Register gitlab-runner to gitlab Tryout Gitlab CI script Ok langsung ja kita ke pembahasan pertama yaitu]]></summary></entry><entry xml:lang="gitlab"><title type="html">Introduction of Gitlab DevSecOps Platform</title><link href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci" rel="alternate" type="text/html" title="Introduction of Gitlab DevSecOps Platform" /><published>2023-06-17T20:36:43+07:00</published><updated>2023-06-17T20:36:43+07:00</updated><id>/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci</id><content type="html" xml:base="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci"><![CDATA[<p>Hai semuanya, di materi kali ini kita akan membahas salah satu tools implementasi dari Continues Integration (CI) yaitu menggunakan Gitlab DevSecOps Platform.</p>
+
+<p>Okay karena pembahasan kali ini akan lumayan panjang jadi kita bagi-bagi menjadi beberapa section diantaranya:</p>
+
+<ol>
+  <li>Gitlab DevSecOps Platform</li>
+  <li>Gitlab CI/CD workflow</li>
+  <li>What can Gitlab CI/CD do?</li>
+</ol>
+
+<!--more-->
+
+<h2 id="gitlab-devops-platform">Gitlab DevOps Platform</h2>
+
+<div class="feature__wrapper">
+
+  
+    <div class="feature__item--right">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-devsecops-platform.png" alt="gitlab-devsecops-platform" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Gitlab Features</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Fundamentally changing the way Development, Security, and Ops teams collaborate and build software - GitLab provides all of the essential DevSecOps tools in one DevSecOps platform. <br /><br />From idea to production, GitLab helps teams improve cycle time from weeks to minutes, reduce development costs, speed time to market, and deliver more secure and compliant applications.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+
+</div>
+
+<div class="feature__wrapper">
+
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-plan.png" alt="gitlab-plan" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Planning</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Regardless of your process, GitLab provides powerful planning tools to keep everyone synchronized.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-create.png" alt="gitlab-create" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Create</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Create, view, and manage code and project data through powerful branching tools.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-verify.png" alt="gitlab-verify" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Verify</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Keep strict quality standards for production code with automatic testing and reporting.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-package.png" alt="gitlab-package" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Package</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Create a consistent and dependable software supply chain with built-in package management.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-secure.png" alt="gitlab-secure" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Secure</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Security capabilities, integrated into your development lifecycle.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-release.png" alt="gitlab-release" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Deploy</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>GitLab’s integrated CD solution allows you to ship code with zero-touch, be it on one or one thousand servers.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-monitor.png" alt="gitlab-monitor" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Monitor</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Help reduce the severity and frequency of incidents.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-govern.png" alt="gitlab-govern" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Govern</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Manage security vulnerabilities, policies, and compliance across your organization.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+
+</div>
+
+<h2 id="gitlab-cicd-workflow">Gitlab CI/CD workflow</h2>
+
+<p>Gitlab CI menawarkan 3 konsep yaitu <strong>Continues Integration</strong>, <strong>Continues Delivery</strong> dan <strong>Continues Deployment</strong>. Out-of-the-box management systems can decrease hours spent on maintaining toolchains by 10% or more, so you can test, build, and publish your software with no third-party application or integration needed because Gitlab CI is the part of Gitlab.</p>
+
+<p>GitLab CI/CD fits in a common development workflow.</p>
+
+<p>You can start by discussing a code implementation in an issue and working locally on your proposed changes. 
+Then you can push your commits to a feature branch in a remote repository that’s hosted in GitLab. 
+The push triggers the CI/CD pipeline for your project. Then, GitLab CI/CD:</p>
+
+<p>Runs automated scripts (sequentially or in parallel) to:</p>
+<ul>
+  <li>Build and test your application.</li>
+  <li>Preview the changes in a Review App, the same as you would see on your localhost.</li>
+</ul>
+
+<p>After the implementation works as expected:</p>
+<ul>
+  <li>Get your code reviewed and approved.</li>
+  <li>Merge the feature branch into the default branch.</li>
+  <li>GitLab CI/CD deploys your changes automatically to a production environment.</li>
+  <li>If something goes wrong, you can roll back your changes.</li>
+</ul>
+
+<p><img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/basic-gitlab-ci.png" alt="basic-gitlab-ci-workflow" /></p>
+
+<p>This workflow shows the major steps in the GitLab process. You don’t need any external tools to deliver your software and you can visualize all the steps in the GitLab UI.</p>
+
+<h2 id="what-can-gitlab-cicd-do">What can Gitlab CI/CD do?</h2>
+
+<p>If you look deeper into the workflow, you can see the features available in GitLab at each stage of the DevOps lifecycle.</p>
+
+<p><img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/advanced-gitlab-ci.png" alt="advanced-gitlab-ci-workflow" /></p>
+
+<p>Stages continues integration:</p>
+
+<ul>
+  <li><strong>Code quality</strong>, To measure/analyze your source code’s quality and complexity.</li>
+  <li><strong>Unit tests</strong>, To test your source code’s with automated</li>
+  <li><strong>Dependency scanning</strong>, To measure/analyze your dependencies is verify and not contains vulnerability</li>
+</ul>
+
+<p>Stages continues delivery/deployment:</p>
+
+<ul>
+  <li><strong>Build &amp; Package</strong>, To compile then wrap your source code’s into package, it’s can be executeable from anywere</li>
+  <li><strong>Shipping</strong>, After build script succeed, we can store that artifact to registry such as Container registry, NPM registry, Maven repository and etc.</li>
+  <li><strong>Deploy</strong>, After artifact stored on registry/repository, we can used that object to run the application</li>
+</ul>]]></content><author><name>Dimas Maryanto</name></author><category term="git" /><category term="gitlab" /><category term="gitlab-ci" /><summary type="html"><![CDATA[Hai semuanya, di materi kali ini kita akan membahas salah satu tools implementasi dari Continues Integration (CI) yaitu menggunakan Gitlab DevSecOps Platform. Okay karena pembahasan kali ini akan lumayan panjang jadi kita bagi-bagi menjadi beberapa section diantaranya: Gitlab DevSecOps Platform Gitlab CI/CD workflow What can Gitlab CI/CD do?]]></summary></entry><entry xml:lang="gitlab"><title type="html">What is Continues Integration/Continues Delivery (CI/CD)?</title><link href="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd" rel="alternate" type="text/html" title="What is Continues Integration/Continues Delivery (CI/CD)?" /><published>2023-06-17T16:52:30+07:00</published><updated>2023-06-17T16:52:30+07:00</updated><id>/posts/git/gitlab/gitlab-ci/03a-what-is-cicd</id><content type="html" xml:base="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd"><![CDATA[<p>Hai semuanya, di materi kali ini kita akan membahas seputar <strong>Continues Integration and Continues Delivery</strong> alias <strong>CI/CD</strong> dalam suatu SDLC atau singkatan dari <strong>Software Development Lifecycle</strong>.</p>
+
+<p>Pada suatu project/product berbasis software development ini memiliki beberapa tahapan mulai dari coding, testing, dan deployment. Hal ini menjadi tantangan tersendiri jika melibatkan beberapa team/divisi/perusahaan dalam suatu development project/product tersebut.</p>
+
+<p><img src="/resources/posts/gitlab-ci/03a-what-cicd/cicd.svg" alt="ci-ci" /></p>
+
+<p>Saat ini banyak perusahaan/instansi menggunakan proses CI/CD untuk menghilankan kerumitan (simplify) dalam proses release suatu project/product agar bisa lebih cepet dan autopilot (automation deployment).</p>
+
+<p>Sebelum kita membahas lebih jauh, ada beberapa hal yang kita perlu pahami terlebih dahulu tentang CI/CD diantaranya:</p>
+
+<ol>
+  <li>What is Continues Integration &amp; Continues Delivery/Deployment (CI/CD)?</li>
+  <li>What is the difference between CI and CD?</li>
+  <li>How does CI/CD relate to DevOps?</li>
+  <li>Benefit of implemented CI/CD in SDLC</li>
+  <li>What are the benefits of CI/CD?</li>
+  <li>CI/CD software tools</li>
+</ol>
+
+<p>Okay tanpa berlama lama yuk kita bahas satu-per-satu</p>
+
+<!--more-->
+
+<h2 id="what-is-continues-integration--continues-deliverydeployment-cicd">What is Continues Integration &amp; Continues Delivery/Deployment (CI/CD)?</h2>
+
+<blockquote>
+  <p>CI and CD stand for continuous integration and continuous delivery/continuous deployment. CI/CD is a method to frequently deliver apps to customers by introducing automation into the stages of app development.</p>
+</blockquote>
+
+<p>Main concepts attributed to CI/CD are</p>
+
+<ol>
+  <li>Continuous integration,</li>
+  <li>Continuous delivery, and</li>
+  <li>Continuous deployment.</li>
+</ol>
+
+<p>CI/CD is a solution to the problems integrating new code can cause for development and operations teams. 
+Specifically, CI/CD introduces ongoing automation and continuous monitoring throughout the lifecycle of apps, from integration and testing phases to delivery and deployment. 
+Taken together, these connected practices are often referred to as a “CI/CD pipeline” and are supported by development and operations teams working together in an agile way.</p>
+
+<p>Why is CI/CD important?</p>
+
+<p>CI/CD allows organizations to ship software quickly and efficiently. CI/CD facilitates an effective process for getting products to market faster than ever before, continuously delivering code into production, and ensuring an ongoing flow of new features and bug fixes via the most efficient delivery method.</p>
+
+<h2 id="what-is-the-difference-between-ci-and-cd">What is the difference between CI and CD?</h2>
+
+<p>Kita telah mengenal Continues integration dan Continues Delivery/Deployment alias CI/CD, tetapi apa sih sebetulnya perbedaan diantaranya? yuk kita bahas satu-per-satu mulai dari Continues Integration.</p>
+
+<p><strong>Continuous Integration</strong>, Consider an application that has its code stored in a Git repository. Developers push code changes every day, multiple times a day. For every push to the repository, you can create a set of scripts to build and test your application automatically. These scripts help decrease the chances that you introduce errors in your application.</p>
+
+<p>Each change submitted to an application, even to development branches, is built and tested automatically and continuously. These tests ensure the changes pass all tests, guidelines, and code compliance standards you established for your application.</p>
+
+<p><strong>Continuous Delivery</strong>, is a step beyond Continuous Integration. Not only is your application built and tested each time a code change is pushed to the codebase, the application is also deployed continuously. However, with continuous delivery, you trigger the deployments manually.</p>
+
+<p>Continuous Delivery checks the code automatically, but it requires human intervention to manually and strategically trigger the deployment of the changes.</p>
+
+<p><strong>Continuous Deployment</strong>, is another step beyond Continuous Integration, similar to Continuous Delivery. The difference is that instead of deploying your application manually, you set it to be deployed automatically. Human intervention is not required.</p>
+
+<p>For more details, here is the diagram ci/cd workflow</p>
+
+<p><img src="/resources/posts/gitlab-ci/03a-what-cicd/ci-cd-workflow.png" alt="ci-ci-workflow" /></p>
+
+<h2 id="how-does-cicd-relate-to-devops">How does CI/CD relate to DevOps?</h2>
+
+<p>DevOps is a set of practices and tools designed to increase an organization’s ability to deliver applications and services faster than traditional software development processes. 
+The increased speed of DevOps helps an organization serve its customers more successfully and be more competitive in the market. In a DevOps environment, successful organizations “bake security in” to all phases of the development life cycle, a practice called DevSecOps.</p>
+
+<p>The key practice of DevSecOps is integrating security into all DevOps workflows. By conducting security activities early and consistently throughout the software development life cycle (SDLC), organizations can ensure that they catch vulnerabilities as early as possible, and are better able to make informed decisions about risk and mitigation. 
+In more traditional security practices, security is not addressed until the production stage, which is no longer compatible with the faster and more agile DevOps approach. 
+Today, security tools must fit seamlessly into the developer workflow and the CI/CD pipeline in order to keep pace with DevOps and not slow development velocity.</p>
+
+<p><img src="/resources/posts/gitlab-ci/03a-what-cicd/devops-tools.jpeg" alt="devops-tools" /></p>
+
+<p>The CI/CD pipeline is part of the broader DevOps/DevSecOps framework. In order to successfully implement and run a CI/CD pipeline, organizations need tools to prevent points of friction that slow down integration and delivery. 
+Teams require an integrated toolchain of technologies to facilitate collaborative and unimpeded development efforts.</p>
+
+<h2 id="what-are-the-benefits-of-cicd">What are the benefits of CI/CD?</h2>
+
+<ul>
+  <li>Automated testing enables continuous delivery, which ensures software quality and security and increases the profitability of code in production.</li>
+  <li>CI/CD pipelines enable a much shorter time to market for new product features, creating happier customers and lowering strain on development.</li>
+  <li>The great increase in overall speed of delivery enabled by CI/CD pipelines improves an organization’s competitive edge.</li>
+  <li>Automation frees team members to focus on what they do best, yielding the best end products.</li>
+  <li>Organizations with a successful CI/CD pipeline can attract great talent. By moving away from traditional waterfall methods, engineers and developers are no longer bogged down with repetitive activities that are often highly dependent on the completion of other tasks.</li>
+</ul>
+
+<h2 id="cicd-software-tools">CI/CD software tools</h2>
+
+<p>Ada beberapa software tools yang dapat digunakan untuk membuat CI/CD Pipeline. Diantaranya sebagai berikut:</p>
+
+<div class="feature__wrapper">
+
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03a-what-cicd/tools-jenkins.png" alt="tools-jenkins" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Jenkins</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Jenkins ini bersifat open source dan menggunakan bahasa pemrograman Java. Tool ini dapat digunakan pada berbagai sistem operasi seperti Windows, macOS, dan Linux serta dapat di deploy cloud maupun on-premise</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03a-what-cicd/tools-gitlab-ci.png" alt="tools-gitlab-ci" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Gitlab CI</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Gitlab CI adalah bagian dari Gitlab Platform yang dibuat oleh gitlab itu sendiri dengan menggunakan bahasa Golang (go). Tool ini dapat digunakan di berbagai macam sistem operasi seperti Windows, macOS, dan linux. <br />Kita bisa mengguankan Gitlab CI yang telah tersedia (Shared runner) atau self managed (Private runner)</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03a-what-cicd/tools-github-action.png" alt="tools-github-action" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Github Action</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Github Action adalah bagian dari Github Platform yang dibuat oleh github yang sekarang telah di akuisisi oleh Microsoft. Tools ini hanya dapat di gunakan secara cloud (github.com) dan kita bisa gunakan secara gratis/free</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03a-what-cicd/tools-travis-ci.png" alt="tools-travis-ci" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Travis CI</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Travis CI adalah cloud-based CI/CD yang biasanya digunakan sebelum lahirnya Github Action yang memiliki jargon Code less dan deploy more. Tools ini juga selain hanya tersedia di cloud juga saat ini menjadi platform CI/CD yang berbayar</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+
+</div>]]></content><author><name>Dimas Maryanto</name></author><category term="git" /><category term="gitlab" /><category term="gitlab-ci" /><summary type="html"><![CDATA[Hai semuanya, di materi kali ini kita akan membahas seputar Continues Integration and Continues Delivery alias CI/CD dalam suatu SDLC atau singkatan dari Software Development Lifecycle. Pada suatu project/product berbasis software development ini memiliki beberapa tahapan mulai dari coding, testing, dan deployment. Hal ini menjadi tantangan tersendiri jika melibatkan beberapa team/divisi/perusahaan dalam suatu development project/product tersebut. Saat ini banyak perusahaan/instansi menggunakan proses CI/CD untuk menghilankan kerumitan (simplify) dalam proses release suatu project/product agar bisa lebih cepet dan autopilot (automation deployment). Sebelum kita membahas lebih jauh, ada beberapa hal yang kita perlu pahami terlebih dahulu tentang CI/CD diantaranya: What is Continues Integration &amp; Continues Delivery/Deployment (CI/CD)? What is the difference between CI and CD? How does CI/CD relate to DevOps? Benefit of implemented CI/CD in SDLC What are the benefits of CI/CD? CI/CD software tools Okay tanpa berlama lama yuk kita bahas satu-per-satu]]></summary></entry><entry xml:lang="gitlab"><title type="html">Silabus Gitlab CI: Pemula s/d Mahir</title><link href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" rel="alternate" type="text/html" title="Silabus Gitlab CI: Pemula s/d Mahir" /><published>2023-06-02T20:18:43+07:00</published><updated>2023-06-02T20:18:43+07:00</updated><id>/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci</id><content type="html" xml:base="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci"><![CDATA[<p>Hai semuanya, selamat datang kembali di kelas <strong>GitOps dengan Gitlab untuk Pemula s/d Mahir</strong> materi kali ini kita membahas tentang Continues Integration (CI) dengan menggunakan Gitlab Platform yaitu Gitlab CI.</p>
 
 <p>Pada materi kali ada beberapa topic yang akan kita pelajari yaitu</p>
 
@@ -2429,322 +3218,4 @@ No resources found <span class="k">in </span>default namespace.
   <li>ReplicaSet &amp; ReplicationController</li>
 </ol>
 
-<p>Okay mungkin sekian dulu apa yang bisa saya sampaikan terkait materi yang akan di bahas pada section Kubernetes Workload Resources, semoga temen-temen tertarik mempelajarinya dan mendapatkan benefit terkait feature yang ditawarkan oleh Kubernetes Workload ini. See you next post!!!</p>]]></content><author><name>Dimas Maryanto</name></author><category term="DevOps" /><category term="Orchestration" /><category term="Kubernetes" /><category term="Workloads" /><summary type="html"><![CDATA[Hai semuanya, setelah kita membahas tentang Pod and Container specification, dan juga study cases selanjutnya kita akan bahas Kubernetes Workload Resources atau kebanyakan orang menggunakan istilah Kubernetes Resource Controller API. Pada Kubernetes Workload Resources ini, sangat berguna sekali untuk memange object pod dalam suatu kubernetes cluster seperti Update pod specification, handle replications (scaling up &amp; down), Stateless &amp; Stateful workload, Handle cronjob dan lain-lain. Adapun yang kita akan bahas terkait Workload Resources diantaranya:]]></summary></entry><entry xml:lang="postgres"><title type="html">Getting started with Transaction Control (TCL)</title><link href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl" rel="alternate" type="text/html" title="Getting started with Transaction Control (TCL)" /><published>2023-01-15T10:31:46+07:00</published><updated>2023-01-15T10:31:46+07:00</updated><id>/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl</id><content type="html" xml:base="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"><![CDATA[<p>Hai semuanya, sekarang kita akan membahas tentang Transaction Language Control atau singkatanya TCL, dimana transaction control ini adalah salah satu feature di Relational Database Management System (RDBMS) yang secara umum digunakan untuk mengelompokan sekumpulan query yang akan dikirimkan ke database server secara atomic, consistent, isolated dan durable.</p>
-
-<p>Untuk lebih jelasnya, yuk kita bahas secara lebih detail. Adapun materi yang akan kita bahas kali ini adalah</p>
-
-<ol>
-  <li>Default Transaction Control behavior</li>
-  <li>Using Commit clause</li>
-  <li>Using Rollback clause</li>
-  <li>Using Savepoint clause</li>
-</ol>
-
-<p>Ok tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:</p>
-
-<!--more-->
-
-<h2 id="default-transaction-control-behavior">Default Transaction Control behavior</h2>
-
-<p>A PostgreSQL transaction is <strong>atomic</strong>, <strong>consistent</strong>, <strong>isolated</strong>, and <strong>durable</strong>. These properties are often referred to as ACID:</p>
-
-<ol>
-  <li>Atomicity guarantees that the transaction completes in an all-or-nothing manner.</li>
-  <li>Consistency ensures the change to data written to the database must be valid and follow predefined rules.</li>
-  <li>Isolation determines how transaction integrity is visible to other transactions.</li>
-  <li>Durability makes sure that transactions that have been committed will be stored in the database permanently.</li>
-</ol>
-
-<p>By default PostgreSQL using auto-commit every single query executed by database atau setiap 1 query yang kita jalankan di database server PostgreSQL maka akan automatis di commit. Seperti berikut contohnya:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">regions</span><span class="p">(</span><span class="n">region_id</span><span class="p">,</span> <span class="n">region_name</span><span class="p">)</span>
-<span class="k">VALUES</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">'Other'</span><span class="p">);</span></code></pre></figure>
-
-<p>Ketika di execute, maka secara default data akan bertambah ke dalam tabel dan simpan secara permanent. Tetapi jika kita ingin merubah behavior menjadi manual, kita perlu menggunakan keywork <code class="language-plaintext highlighter-rouge">BEGIN</code> pada awal statement.</p>
-
-<p>Syntaxnya seperti berikut</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">BEGIN</span><span class="p">;</span>
-<span class="c1">--- Select, Insert, Update, and Delete statement here</span></code></pre></figure>
-
-<p>Berikut adalah implementasi penggunakan manual transaction:</p>
-
-<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=06a-begin-transaction.sql"> </script>
-
-<p>Jika kita execute, maka hasilnya seperti berikut:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>database/postgres-14 <span class="o">[</span>master●] » psql <span class="nt">-U</span> hr
-psql <span class="o">(</span>14.6<span class="o">)</span>
-Type <span class="s2">"help"</span> <span class="k">for </span>help.
-
-<span class="nv">hr</span><span class="o">=</span> begin<span class="p">;</span>
-BEGIN
-<span class="nv">hr</span><span class="o">=</span><span class="k">*</span> insert into regions<span class="o">(</span>region_id, region_name<span class="o">)</span>
-hr-<span class="k">*</span> values <span class="o">(</span>7, <span class="s1">'Other 2'</span><span class="o">)</span><span class="p">;</span>
-INSERT 0 1
-<span class="nv">hr</span><span class="o">=</span><span class="k">*</span> <span class="k">select</span> <span class="k">*</span> from regions where region_id <span class="o">=</span> 7<span class="p">;</span>
- region_id | region_name
-<span class="nt">-----------</span>+-------------
-         7 | Other 2
-<span class="o">(</span>1 row<span class="o">)</span>
-
-<span class="nv">hr</span><span class="o">=</span><span class="k">*</span> <span class="nb">exit
-</span>database/postgres-14 <span class="o">[</span>master●] » psql <span class="nt">-U</span> hr
-psql <span class="o">(</span>14.6<span class="o">)</span>
-Type <span class="s2">"help"</span> <span class="k">for </span>help.
-
-<span class="nv">hr</span><span class="o">=</span> <span class="k">select</span> <span class="k">*</span> from regions where region_id <span class="o">=</span> 7<span class="p">;</span>
- region_id | region_name
-<span class="nt">-----------</span>+-------------
-<span class="o">(</span>0 rows<span class="o">)</span>
-
-<span class="nv">hr</span><span class="o">=</span><span class="c">#</span>
-</code></pre></div></div>
-
-<p>Nah terlihat hasilnya ketika query di execute, maka secara temporary data akan tersimpan ke tabel tetapi begitu session habis atau kita keluar dari session tersebut, maka datanya akan hilang.</p>
-
-<h2 id="using-commit-clause">Using Commit clause</h2>
-
-<p>Perintah <code class="language-plaintext highlighter-rouge">commit</code> digunakan untuk menyimpan perubahan yang dilakukan oleh perintah Data Manipulation secara permanent di database, Seperti pada section sebelumnya jika kita tidak menggunakan perintah <code class="language-plaintext highlighter-rouge">commit</code> di akhir statement maka data akan hilang jika kita hapus session connection.</p>
-
-<p>Perintah <code class="language-plaintext highlighter-rouge">commit</code> hanya bisa dilakukan jika diawali dengan menggunakan <code class="language-plaintext highlighter-rouge">begin</code> clause, tanpa perintah <code class="language-plaintext highlighter-rouge">begin</code> atau jika tidak memiliki transaction dalamnya maka, akan muncul warning <code class="language-plaintext highlighter-rouge">there is no transaction in progress</code></p>
-
-<p>Syntaxnya seperti berikut:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">BEGIN</span><span class="p">;</span>
-
-<span class="c1">--- Select, Insert, Update, and Delete statement here</span>
-
-<span class="k">COMMIT</span><span class="p">;</span></code></pre></figure>
-
-<p>Implementasinya seperti berikut:</p>
-
-<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=06a-begin-commit-transaction.sql"> </script>
-
-<p>Jika dijalankan hasilnya seperti berikut:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>database/postgres-14 <span class="o">[</span>master●] » psql <span class="nt">-U</span> hr
-psql <span class="o">(</span>14.6<span class="o">)</span>
-Type <span class="s2">"help"</span> <span class="k">for </span>help.
-
-<span class="nv">hr</span><span class="o">=</span> BEGIN<span class="p">;</span>
-BEGIN
-
-<span class="nv">hr</span><span class="o">=</span><span class="k">*</span> INSERT INTO regions<span class="o">(</span>region_id, region_name<span class="o">)</span>
-hr-<span class="k">*</span> VALUES <span class="o">(</span>7, <span class="s1">'Other 2'</span><span class="o">)</span><span class="p">;</span>
-INSERT 0 1
-
-<span class="nv">hr</span><span class="o">=</span><span class="k">*</span> COMMIT<span class="p">;</span>
-COMMIT
-
-<span class="nv">hr</span><span class="o">=</span> <span class="k">select</span> <span class="k">*</span> from regions where region_id <span class="o">=</span> 7<span class="p">;</span>
- region_id | region_name
-<span class="nt">-----------</span>+-------------
-         7 | Other 2
-<span class="o">(</span>1 row<span class="o">)</span>
-
-<span class="nv">hr</span><span class="o">=</span> <span class="nb">exit
-
-</span>database/postgres-14 <span class="o">[</span>master●] » psql <span class="nt">-U</span> hr
-psql <span class="o">(</span>14.6<span class="o">)</span>
-Type <span class="s2">"help"</span> <span class="k">for </span>help.
-
-<span class="nv">hr</span><span class="o">=</span> <span class="k">select</span> <span class="k">*</span> from regions where region_id <span class="o">=</span> 7<span class="p">;</span>
- region_id | region_name
-<span class="nt">-----------</span>+-------------
-         7 | Other 2
-<span class="o">(</span>1 row<span class="o">)</span>
-</code></pre></div></div>
-
-<p>Nah jadi bisa kita perhatihan dari output diatas, meskipun kita close session connect data masih tersimpan di table <code class="language-plaintext highlighter-rouge">regions</code> tersebut karena kita sudah menggunakan perintah <code class="language-plaintext highlighter-rouge">commit</code>.</p>
-
-<h2 id="using-rollback-clause">Using Rollback clause</h2>
-
-<p>Perintah <code class="language-plaintext highlighter-rouge">rollback</code> digunakan untuk membatalkan transaksi yang sedang aktif untuk mengembalikan ke last state commit pada database. Sama halnya dengan perintah <code class="language-plaintext highlighter-rouge">commit</code> perintah <code class="language-plaintext highlighter-rouge">rollback</code> tidak akan berjalan jika tanpa <code class="language-plaintext highlighter-rouge">begin</code> atau transaction sedang tidak aktif.</p>
-
-<p><strong>NOTES:</strong> Jika perintah <code class="language-plaintext highlighter-rouge">commit</code> sudah di execute kita tidak bisa mengembalikannya, perintah <code class="language-plaintext highlighter-rouge">rollback</code> hanya bisa mengembalikan perubahan ketika belum di <code class="language-plaintext highlighter-rouge">commit</code>.</p>
-
-<p>Syntaxnya seperti berikut:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">BEGIN</span><span class="p">;</span>
-
-<span class="c1">--- Select, Insert, Update, and Delete statement here</span>
-
-<span class="k">ROLLBACK</span><span class="p">;</span></code></pre></figure>
-
-<p>Perintah rollback ini biasanya digunakan jika terjadi kesalahan baik dari human error, system error maupun runtime error diataranya:</p>
-
-<ol>
-  <li>Salah input value pada data manipulation</li>
-  <li>Error pada constraint (unique, foreign key, check)</li>
-</ol>
-
-<p>Contoh implementasinya seperti berikut:</p>
-
-<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=06a-begin-rollback-transaction.sql"> </script>
-
-<p>Jika dijalnakan maka outputnya seperti bertikut:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=</span> <span class="k">BEGIN</span><span class="p">;</span>
-<span class="k">BEGIN</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">UPDATE</span> <span class="n">regions</span> <span class="k">set</span> <span class="n">region_name</span> <span class="o">=</span> <span class="s1">'Other 3'</span>
-<span class="n">hr</span><span class="o">-*</span> <span class="k">WHERE</span> <span class="n">region_id</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
-<span class="k">UPDATE</span> <span class="mi">1</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">regions</span> <span class="k">WHERE</span> <span class="n">region_id</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
- <span class="n">region_id</span> <span class="o">|</span> <span class="n">region_name</span>
-<span class="c1">-----------+-------------</span>
-         <span class="mi">7</span> <span class="o">|</span> <span class="n">Other</span> <span class="mi">3</span>
-<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">ROLLBACK</span><span class="p">;</span>
-<span class="k">ROLLBACK</span>
-
-<span class="n">hr</span><span class="o">=</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">regions</span> <span class="k">WHERE</span> <span class="n">region_id</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
- <span class="n">region_id</span> <span class="o">|</span> <span class="n">region_name</span>
-<span class="c1">-----------+-------------</span>
-         <span class="mi">7</span> <span class="o">|</span> <span class="n">Other</span> <span class="mi">2</span>
-<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>
-</code></pre></div></div>
-
-<p>Nah jadi kita perhatikan pada output diatas, ketika kita jalankan perintah <code class="language-plaintext highlighter-rouge">update</code> dan juga <code class="language-plaintext highlighter-rouge">select</code> data sudah berubah di tabel begitu di rollback maka data akan kembali ke last update sebelumnya.</p>
-
-<h2 id="using-savepoint-clause">Using Savepoint clause</h2>
-
-<p>Perintah <code class="language-plaintext highlighter-rouge">savepoint</code> secara fungsi mirip seperti di game-game balapan yaitu checkpoint dimana jika kita melintas pada check point tersebut maka game akan tersimpan jika ada crash/tabrakan maka game tidak akan mengulang dari awal lagi tetapi dari last savepoint terkahir. Pada kenyataannya perintah <code class="language-plaintext highlighter-rouge">savepoint</code> ini akan berguna jika kita memiliki banyak query dalam suatu transaksi seperti berikut:</p>
-
-<p><img src="/resources/posts/postgresql/06a-basic-tcl/sql-savepoint.png" alt="savepoint" /></p>
-
-<p>So A savepoint is a special mark inside a transaction that allows all commands that are executed after it was established to be rolled back, restoring the transaction state to what it was at the time of the savepoint.</p>
-
-<p>Syntax seperti berikut</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="n">SAVEPOINT</span> <span class="n">savepoint_name</span></code></pre></figure>
-
-<p>Implementasinya seperti berikut:</p>
-
-<script src="https://gist.github.com/dimMaryanto93/7ae7632f9418feb724bc431eff412a3f.js?file=06a-savepoint-transaction.sql"> </script>
-
-<p>Jika dijalankan maka outputnya seperti berikut:</p>
-
-<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hr</span><span class="o">=</span> <span class="k">BEGIN</span><span class="p">;</span>
-<span class="k">BEGIN</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">regions</span><span class="p">(</span><span class="n">region_id</span><span class="p">,</span> <span class="n">region_name</span><span class="p">)</span>
-<span class="n">hr</span><span class="o">-*</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s1">'Other 3'</span><span class="p">);</span>
-<span class="k">INSERT</span> <span class="mi">0</span> <span class="mi">1</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">UPDATE</span> <span class="n">regions</span>
-<span class="n">hr</span><span class="o">-*</span> <span class="k">set</span> <span class="n">region_name</span> <span class="o">=</span> <span class="s1">'Other 3'</span>
-<span class="n">hr</span><span class="o">-*</span> <span class="k">WHERE</span> <span class="n">region_id</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
-<span class="k">UPDATE</span> <span class="mi">1</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">regions</span> <span class="k">WHERE</span> <span class="n">region_id</span> <span class="k">in</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
- <span class="n">region_id</span> <span class="o">|</span> <span class="n">region_name</span>
-<span class="c1">-----------+-------------</span>
-         <span class="mi">7</span> <span class="o">|</span> <span class="n">Other</span> <span class="mi">3</span>
-         <span class="mi">8</span> <span class="o">|</span> <span class="n">Other</span> <span class="mi">3</span>
-<span class="p">(</span><span class="mi">2</span> <span class="k">rows</span><span class="p">)</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="n">SAVEPOINT</span> <span class="n">trx_1</span><span class="p">;</span>
-<span class="n">SAVEPOINT</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">UPDATE</span> <span class="n">regions</span>
-<span class="n">hr</span><span class="o">-*</span> <span class="k">set</span> <span class="n">region_name</span> <span class="o">=</span> <span class="s1">'Other 4'</span>
-<span class="n">hr</span><span class="o">-*</span> <span class="k">WHERE</span> <span class="n">region_id</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
-<span class="k">UPDATE</span> <span class="mi">1</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">regions</span><span class="p">(</span><span class="n">region_id</span><span class="p">,</span> <span class="n">region_name</span><span class="p">)</span>
-<span class="n">hr</span><span class="o">-*</span> <span class="k">VALUES</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s1">'Other 3'</span><span class="p">);</span>
-<span class="n">ERROR</span><span class="p">:</span>  <span class="n">duplicate</span> <span class="k">key</span> <span class="n">value</span> <span class="n">violates</span> <span class="k">unique</span> <span class="k">constraint</span> <span class="nv">"regions_pkey"</span>
-<span class="n">DETAIL</span><span class="p">:</span>  <span class="k">Key</span> <span class="p">(</span><span class="n">region_id</span><span class="p">)</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="n">already</span> <span class="k">exists</span><span class="p">.</span>
-
-<span class="n">hr</span><span class="o">=!</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">regions</span> <span class="k">WHERE</span> <span class="n">region_id</span> <span class="k">in</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
-<span class="n">ERROR</span><span class="p">:</span>  <span class="k">current</span> <span class="n">transaction</span> <span class="k">is</span> <span class="n">aborted</span><span class="p">,</span> <span class="n">commands</span> <span class="n">ignored</span> <span class="k">until</span> <span class="k">end</span> <span class="k">of</span> <span class="n">transaction</span> <span class="n">block</span>
-
-<span class="n">hr</span><span class="o">=!</span> <span class="k">ROLLBACK</span> <span class="k">TO</span> <span class="n">SAVEPOINT</span> <span class="n">trx_1</span><span class="p">;</span>
-<span class="k">ROLLBACK</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">regions</span> <span class="k">WHERE</span> <span class="n">region_id</span> <span class="k">in</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
- <span class="n">region_id</span> <span class="o">|</span> <span class="n">region_name</span>
-<span class="c1">-----------+-------------</span>
-         <span class="mi">7</span> <span class="o">|</span> <span class="n">Other</span> <span class="mi">3</span>
-         <span class="mi">8</span> <span class="o">|</span> <span class="n">Other</span> <span class="mi">3</span>
-<span class="p">(</span><span class="mi">2</span> <span class="k">rows</span><span class="p">)</span>
-
-<span class="n">hr</span><span class="o">=*</span> <span class="k">COMMIT</span><span class="p">;</span>
-<span class="k">COMMIT</span>
-</code></pre></div></div>
-
-<p>Nah jadi kita kita lihat dari output tersebut, sesuai harapan kita kita bisa rollback ke terakhir savepoint jadi kita tidak harus melakukan task dari awal lagi.</p>]]></content><author><name>Dimas Maryanto</name></author><category term="RDBMS" /><category term="PostgreSQL" /><category term="SQL" /><category term="TCL" /><summary type="html"><![CDATA[Hai semuanya, sekarang kita akan membahas tentang Transaction Language Control atau singkatanya TCL, dimana transaction control ini adalah salah satu feature di Relational Database Management System (RDBMS) yang secara umum digunakan untuk mengelompokan sekumpulan query yang akan dikirimkan ke database server secara atomic, consistent, isolated dan durable. Untuk lebih jelasnya, yuk kita bahas secara lebih detail. Adapun materi yang akan kita bahas kali ini adalah Default Transaction Control behavior Using Commit clause Using Rollback clause Using Savepoint clause Ok tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:]]></summary></entry><entry xml:lang="postgres"><title type="html">Overview of Concurrency Control</title><link href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control" rel="alternate" type="text/html" title="Overview of Concurrency Control" /><published>2023-01-14T16:05:01+07:00</published><updated>2023-01-14T16:05:01+07:00</updated><id>/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control</id><content type="html" xml:base="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control"><![CDATA[<p>Hai semuanya, setelah kita mempelajari perintah Select statement, dan Data Manipulation language ada satuhal lagi yang kita perlu kita pelajari yaitu Concurrent Control. Conncurrent control ini berfungsi untuk Mengatur behavior dari Database Server terkait multiple access seperti multiple query, transaction, multiple session execute at the same time on same database.</p>
-
-<p>Jika pada materi sebelumnya kita hanya menggunakan simple query dan di execute secara singleton. Bagaimana jika saya memiliki contoh ilustrasi seperti berikut:</p>
-
-<p><img src="/resources/posts/postgresql/06-overview-concurrent-control/bisnis-logic-transfer.png" alt="flow-bisnis-transaction" /></p>
-
-<p>Jadi pada contoh kasus tersebut, kita memiliki system untuk transfer saldo dari rekening A ke rekening B. Jika kita gambarkan yang pasti kita harus melakukan beberapa query dan harus memiliki suatu mekanisme jika suatu proses tersebut gagal. Dimana query kita execute minimal adalah</p>
-
-<ol>
-  <li>Inquery rekening tujuan</li>
-  <li>Inquery saldo rekening sumber</li>
-  <li>Update saldo rekening A dengan menggurangi sejumlah yang di transfer</li>
-  <li>Update saldo rekening B dengan menambah sejumlah yang di transfer</li>
-  <li>Insert Data transaksi ke tabel journal</li>
-</ol>
-
-<p>Jika pada saat proses no 4 gagal, bisa di banyangkan apa yang terjadi???</p>
-
-<p>Yup betul saldo rekening A kok berkurang tapi saldo di rekening tujuan tidak bertambah trus kemana uangnya?. maka dari itu proses tersebut harus dihandle dengan system transaction seperti <code class="language-plaintext highlighter-rouge">commit</code>, <code class="language-plaintext highlighter-rouge">rollback</code> dan lain-lain.</p>
-
-<p>Nah system transaction tersebut adalah bagian dari Concurrent Control, Jadi kita akan bahas lebih detail seperti berikut:</p>
-
-<!--more-->
-
-<ol>
-  <li>Transaction Isolation</li>
-  <li>Explicit Locking</li>
-  <li>Data Consistency Checks at the Application Level</li>
-  <li>Caveats</li>
-  <li>Locking and Indexes</li>
-</ol>
-
-<p>Ok mungkin sekian dulu aja yang bisa saya sampaikan terkait materi yang akan kita bahas di materi selanjutnya.</p>]]></content><author><name>Dimas Maryanto</name></author><category term="RDBMS" /><category term="PostgreSQL" /><category term="SQL" /><category term="TCL" /><summary type="html"><![CDATA[Hai semuanya, setelah kita mempelajari perintah Select statement, dan Data Manipulation language ada satuhal lagi yang kita perlu kita pelajari yaitu Concurrent Control. Conncurrent control ini berfungsi untuk Mengatur behavior dari Database Server terkait multiple access seperti multiple query, transaction, multiple session execute at the same time on same database. Jika pada materi sebelumnya kita hanya menggunakan simple query dan di execute secara singleton. Bagaimana jika saya memiliki contoh ilustrasi seperti berikut: Jadi pada contoh kasus tersebut, kita memiliki system untuk transfer saldo dari rekening A ke rekening B. Jika kita gambarkan yang pasti kita harus melakukan beberapa query dan harus memiliki suatu mekanisme jika suatu proses tersebut gagal. Dimana query kita execute minimal adalah Inquery rekening tujuan Inquery saldo rekening sumber Update saldo rekening A dengan menggurangi sejumlah yang di transfer Update saldo rekening B dengan menambah sejumlah yang di transfer Insert Data transaksi ke tabel journal Jika pada saat proses no 4 gagal, bisa di banyangkan apa yang terjadi??? Yup betul saldo rekening A kok berkurang tapi saldo di rekening tujuan tidak bertambah trus kemana uangnya?. maka dari itu proses tersebut harus dihandle dengan system transaction seperti commit, rollback dan lain-lain. Nah system transaction tersebut adalah bagian dari Concurrent Control, Jadi kita akan bahas lebih detail seperti berikut:]]></summary></entry><entry xml:lang="postgres"><title type="html">Time your practice (part 3)</title><link href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1" rel="alternate" type="text/html" title="Time your practice (part 3)" /><published>2023-01-14T12:36:56+07:00</published><updated>2023-01-14T12:36:56+07:00</updated><id>/posts/rdbms/postgresql/sql/dml/05g-quis-section-1</id><content type="html" xml:base="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1"><![CDATA[<p>Hai semuanya di materi sebelumnya kita sudah membahas perintah Data manipulation language sepertin <code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code>, <code class="language-plaintext highlighter-rouge">DELETE</code> beserta combinasi antara <code class="language-plaintext highlighter-rouge">SELECT</code> dan DML tersebut, nah supaya temen-temen memahami materi yang telah saya sampaikan saatnya temen-temen untuk latihan / mengerjakan soal yang saya berikan seperti berikut:</p>
-
-<!--more-->
-
-<ol>
-  <li>
-    <p>Tambahkan data ke tabel <code class="language-plaintext highlighter-rouge">countries</code> dengan data seperti berikut
-<img src="/resources/posts/postgresql/05g-quis-section-1/soal1.png" alt="data insert query countries" /></p>
-  </li>
-  <li>
-    <p>Tambahkan data ke tabel <code class="language-plaintext highlighter-rouge">locations</code> dengan data seperti berikut
-<img src="/resources/posts/postgresql/05g-quis-section-1/soal2.png" alt="data insert query locations" /></p>
-  </li>
-  <li>
-    <p>Buatlah query untuk merubah nilai dari field/column <code class="language-plaintext highlighter-rouge">commission_pct</code> menjadi <code class="language-plaintext highlighter-rouge">10%</code> dari table <code class="language-plaintext highlighter-rouge">employees</code> yang memiliki <code class="language-plaintext highlighter-rouge">job_id = 'IT_PROG'</code> kecuali <code class="language-plaintext highlighter-rouge">employee_id = 104</code>, jika di tampilkan hasilnya seperti berikut:
-<img src="/resources/posts/postgresql/05g-quis-section-1/hasil3.png" alt="hasil query" /></p>
-  </li>
-  <li>Buatlah query untuk menambahkan data karyawan dengan ketentuan seperti berikut:
-    <ol>
-      <li>column <code class="language-plaintext highlighter-rouge">fist_name</code> = <code class="language-plaintext highlighter-rouge">Dimas</code></li>
-      <li>column <code class="language-plaintext highlighter-rouge">last_name</code> = <code class="language-plaintext highlighter-rouge">Maryanto</code></li>
-      <li>column <code class="language-plaintext highlighter-rouge">email</code> ambil dari column <code class="language-plaintext highlighter-rouge">fist_name</code> yang dirubah menjadi hurup besar semua.</li>
-      <li>column <code class="language-plaintext highlighter-rouge">phone_number</code> = <code class="language-plaintext highlighter-rouge">081223334444</code></li>
-      <li>column <code class="language-plaintext highlighter-rouge">job_id</code> = <code class="language-plaintext highlighter-rouge">'IT_PROG'</code></li>
-      <li>column <code class="language-plaintext highlighter-rouge">salary</code> ambil dari table <code class="language-plaintext highlighter-rouge">jobs</code> berdasarkan nilai tengah antara column <code class="language-plaintext highlighter-rouge">min_salary</code> dan <code class="language-plaintext highlighter-rouge">max_salary</code> berdasarkan job id karyawan tersebut.</li>
-      <li>column <code class="language-plaintext highlighter-rouge">commission_pct</code> = <code class="language-plaintext highlighter-rouge">9%</code></li>
-      <li>column <code class="language-plaintext highlighter-rouge">department_id</code> diisi dengan kode department <code class="language-plaintext highlighter-rouge">IT</code></li>
-      <li>column <code class="language-plaintext highlighter-rouge">manager_id</code> diisi dengan employee yang memimpin department tersebut.</li>
-    </ol>
-  </li>
-  <li>Buatlah query untuk menambahkan atau jika sudah ada lakukan update ke table <code class="language-plaintext highlighter-rouge">jobs</code> dengan ketentuan seperti berikut:
-    <ol>
-      <li>column <code class="language-plaintext highlighter-rouge">job_id</code> = <code class="language-plaintext highlighter-rouge">IT_MAN</code></li>
-      <li>column <code class="language-plaintext highlighter-rouge">job_name</code> = <code class="language-plaintext highlighter-rouge">IT Project Manager</code></li>
-      <li>column <code class="language-plaintext highlighter-rouge">min_salary</code> diambil dari <code class="language-plaintext highlighter-rouge">max_salary</code> untuk <code class="language-plaintext highlighter-rouge">job_id = 'IT_PROG'</code></li>
-      <li>column <code class="language-plaintext highlighter-rouge">max_salary</code> diambil dari <code class="language-plaintext highlighter-rouge">min_salary</code> ditambah <code class="language-plaintext highlighter-rouge">15000</code></li>
-    </ol>
-  </li>
-</ol>]]></content><author><name>Dimas Maryanto</name></author><category term="RDBMS" /><category term="PostgreSQL" /><category term="SQL" /><category term="DML" /><summary type="html"><![CDATA[Hai semuanya di materi sebelumnya kita sudah membahas perintah Data manipulation language sepertin INSERT, UPDATE, DELETE beserta combinasi antara SELECT dan DML tersebut, nah supaya temen-temen memahami materi yang telah saya sampaikan saatnya temen-temen untuk latihan / mengerjakan soal yang saya berikan seperti berikut:]]></summary></entry></feed>
+<p>Okay mungkin sekian dulu apa yang bisa saya sampaikan terkait materi yang akan di bahas pada section Kubernetes Workload Resources, semoga temen-temen tertarik mempelajarinya dan mendapatkan benefit terkait feature yang ditawarkan oleh Kubernetes Workload ini. See you next post!!!</p>]]></content><author><name>Dimas Maryanto</name></author><category term="DevOps" /><category term="Orchestration" /><category term="Kubernetes" /><category term="Workloads" /><summary type="html"><![CDATA[Hai semuanya, setelah kita membahas tentang Pod and Container specification, dan juga study cases selanjutnya kita akan bahas Kubernetes Workload Resources atau kebanyakan orang menggunakan istilah Kubernetes Resource Controller API. Pada Kubernetes Workload Resources ini, sangat berguna sekali untuk memange object pod dalam suatu kubernetes cluster seperti Update pod specification, handle replications (scaling up &amp; down), Stateless &amp; Stateful workload, Handle cronjob dan lain-lain. Adapun yang kita akan bahas terkait Workload Resources diantaranya:]]></summary></entry></feed>

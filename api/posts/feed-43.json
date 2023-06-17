@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Mengenal class java.sql.PreparedStatement",
+      "link": "/posts/language/java/jdbc/06-prepared-statement"
+    }
+    ,
+    {
+      "title": "Mengenal class java.sql.Statement",
+      "link": "/posts/language/java/jdbc/05-statement"
+    }
+    ,
+    {
+      "title": "Using Database Versioning with flyway",
+      "link": "/posts/language/java/jdbc/04-using-flyway"
+    }
+    ,
+    {
       "title": "Membuat connection ke Database PostgreSQL via JDBC",
       "link": "/posts/language/java/jdbc/03-create-connection"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Element Collection",
       "link": "/posts/language/java/arrays/15-element-collections"
-    }
-    ,
-    {
-      "title": "Array 2 dimensi",
-      "link": "/posts/language/java/arrays/14a-array-2-dimension"
-    }
-    ,
-    {
-      "title": "Menyimpan multiple value dalam sebuah variable",
-      "link": "/posts/language/java/arrays/14-array"
-    }
-    ,
-    {
-      "title": "Time is your practice part 4",
-      "link": "/posts/language/java/oop/13-quis-section-4"
     }
   ]
 }

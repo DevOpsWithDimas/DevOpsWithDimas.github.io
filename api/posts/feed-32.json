@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Aturan Penulisan SQL pada Oracle Database",
+      "link": "/posts/rdbms/oracle18c/004a-aturan-pada-oracle-database"
+    }
+    ,
+    {
+      "title": "Persiapan Sebelum mulai belajar",
+      "link": "/posts/rdbms/oracle18c/004-preparation-before-start"
+    }
+    ,
+    {
+      "title": "Install Database Editor untuk Oracle 18c",
+      "link": "/posts/rdbms/oracle18c/003d-install-database-editor"
+    }
+    ,
+    {
       "title": "Install Oracle 18c XE dengan Docker",
       "link": "/posts/rdbms/oracle18c/003c-install-oracledb-docker-images"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Konsep User dan Schema di Oracle Database 18c",
       "link": "/posts/rdbms/oracle18c/002a-consept-user-schema"
-    }
-    ,
-    {
-      "title": "Pengenalan Oracle Database 18c",
-      "link": "/posts/rdbms/oracle18c/002-pengenalan-oracledb"
-    }
-    ,
-    {
-      "title": "Silabus Belajar RDBMS Oracle 18c",
-      "link": "/posts/rdbms/oracle18c/001-silabus-oracle-18c"
-    }
-    ,
-    {
-      "title": "Time is your Practice",
-      "link": "/posts/framework/java/orm/hibernate/hql/10-quis-3"
     }
   ]
 }

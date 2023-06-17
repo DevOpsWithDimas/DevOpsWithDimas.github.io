@@ -318,6 +318,243 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/select/03e-order-by-clause" rel="permalink">Sorting rows using ORDER BY clause
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-03-10T04:37:48+07:00">March 10, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        6 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang Sorting rows menggunakan <code class="language-plaintext highlighter-rouge">ORDER BY</code> clause. Adapun materinya kita akan bagi menjadi</p>
+
+<ol>
+  <li>Basic usage of <code class="language-plaintext highlighter-rouge">ORDER BY</code> clause</li>
+  <li>The sort expression</li>
+  <li>Using multiple columns to sort</li>
+  <li>Choose Null value show at first or last?</li>
+</ol>
+
+<p>Ok langsung aja kita bahas materi yang pertama</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/select/03d-where-clause" rel="permalink">Filtering data with WHERE clause
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-03-08T20:28:05+07:00">March 8, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        13 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang mem-Filter data dengan menggunakan <code class="language-plaintext highlighter-rouge">WHERE</code> clause di PostgreSQL. By default jika kita menggunakan perintah <code class="language-plaintext highlighter-rouge">select</code> itu akan menampilkan semua data pada suatu atau berberapa table. Dengan menggunakan clause WHERE kita bisa memfilter atau memilih data yang akan kita tampilkan.</p>
+
+<p>Perintah dasar untuk <code class="language-plaintext highlighter-rouge">WHERE</code> clause seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">select</span> <span class="o">*</span> <span class="o">|</span> <span class="n">column_list</span> <span class="p">...</span>
+<span class="k">from</span> <span class="n">a_table</span>
+<span class="k">where</span> <span class="n">search_condition</span></code></pre></figure>
+
+<p>Dimana <code class="language-plaintext highlighter-rouge">search_condition</code> adalah any value expression (<code class="language-plaintext highlighter-rouge">functions</code>, <code class="language-plaintext highlighter-rouge">operators</code> and <code class="language-plaintext highlighter-rouge">predicates</code> ) yang mengembalikan nilai boolean. Sebagai gambaran berikut ilustrasinya:</p>
+
+<p><img src="/resources/posts/postgresql/03d-where-clause/01-consept-where-cluase.png" alt="filter-data" /></p>
+
+<p>Ilustrasi tersebut menggambarkan, suatu predicate atau <code class="language-plaintext highlighter-rouge">search_condition</code> yaitu menggunakan operator equal pada column <code class="language-plaintext highlighter-rouge">status</code> dengan nilai <code class="language-plaintext highlighter-rouge">active</code> maka database akan mencari nilainya <code class="language-plaintext highlighter-rouge">active</code> saja pada kolom <code class="language-plaintext highlighter-rouge">status</code>. Untuk <code class="language-plaintext highlighter-rouge">search_condition</code> tersebut biasanya di sebut dengan predicate. Ada banyak sekali predicate yang kita bisa gunakan tapi disini kita bahasnya paling dasar dulu ya yaitu:</p>
+
+<ol>
+  <li>Relational predicate</li>
+  <li>Like predicates</li>
+  <li>Between predicates</li>
+  <li>Null predicate</li>
+  <li>Logical predicate</li>
+  <li>Regular Expression (Regex) predicate</li>
+  <li>Row and Array Comparisons</li>
+</ol>
+
+<p>Ok kita bahas satu-per-satu ya, mulai dari relational predicate</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/select/03c-sql-functions" rel="permalink">Build-in Functions
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-03-04T19:22:24+07:00">March 4, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        11 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas Fuctions pada PostgreSQL, PostgreSQL provides a large number of functions for the built-in data types. Users can also define their own functions, as described in previews section but for now we explain build-in fuctions.</p>
+
+<p>ada banyak selali Fucntions, kita akan bahas beberapa yang menurut saya penting untuk di pelajari pada cource ini diantaranya:</p>
+
+<ol>
+  <li>String function</li>
+  <li>Math function</li>
+  <li>Date/Time function</li>
+  <li>Nulless function</li>
+  <li>Data type formatting function</li>
+</ol>
+
+<p>Ok langsung aja kita bahas materi yang pertama</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/select/03b-sql-operators" rel="permalink">Build-in Operators
 </a>
       
@@ -453,221 +690,6 @@
 </ol>
 
 <p>Ok langsung saja kita bahas materi yang pertama</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/select/03-overview-sql" rel="permalink">Overview SQL Select statements
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      PostgreSQL
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-02-24T05:20:30+07:00">February 24, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        6 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang SQL (Structure Query Language) untuk Select Statement menggunakan PostgreSQL. Materi yang akan di bahas diantaranya:</p>
-
-<ol>
-  <li>Apa itu SQL &amp; Basic Consepts?</li>
-  <li>Aturan penulisan SQL di PostgreSQL</li>
-  <li>Data Types di PostgreSQL</li>
-  <li>Object schema di PostgreSQL</li>
-</ol>
-
-<p>Ok langsung saja kita bahas materi yang pertama</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/02h-minikube-mount" rel="permalink">Mounting filesystems to minikube cluster
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Kubernetes for DevOps
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-02-21T20:33:54+07:00">February 21, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        1 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang mount your data from workstation to minikube cluster. Mounting data ini berguna untuk bind files dari container ke volume ataupun sebaliknya (mount-bind). Dengan menggunakan minikube kita bisa menggunakan 2 cara yaitu:</p>
-
-<ol>
-  <li>Using 9P Mounts</li>
-  <li>Using Driver mounts</li>
-</ol>
-
-<p>Ok langsung aja kita bahas materi yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/02g-minikube-access-apps" rel="permalink">Access your apps/service in minikube
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Kubernetes for DevOps
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-02-20T15:01:52+07:00">February 20, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        5 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas bagaimana cara mengakses apps/service pada kubernetes menggunakan Minikube. Diantaranya</p>
-
-<ol>
-  <li>Using <code class="language-plaintext highlighter-rouge">minikube service</code> command</li>
-  <li>Using <code class="language-plaintext highlighter-rouge">minikube tunnel</code> command</li>
-</ol>
-
-<p>Ok langsung aja kita ke pembahasan yang pertama</p>
 
 </span>
       

@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Setup environment for CI using Gitlab & Nexus OSS",
+      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12a-setup-gitlab-ci"
+    }
+    ,
+    {
+      "title": "Overview of Study Cases using docker for CI",
+      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12-overview-docker-for-ci"
+    }
+    ,
+    {
+      "title": "Deprecated Engine Features",
+      "link": "/posts/devops/docker/context/11g-deprecated-features"
+    }
+    ,
+    {
       "title": "Using docker on portainer.io",
       "link": "/posts/devops/docker/context/dashboard/11f-docker-portainer"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Overview of Docker Context",
       "link": "/posts/devops/docker/context/11-overview-docker-engine"
-    }
-    ,
-    {
-      "title": "Compose file for multiple git projects",
-      "link": "/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects"
-    }
-    ,
-    {
-      "title": "Deploy httpd with ssl/https on docker",
-      "link": "/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker"
-    }
-    ,
-    {
-      "title": "Angular deployment using compose file",
-      "link": "/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case"
     }
   ]
 }

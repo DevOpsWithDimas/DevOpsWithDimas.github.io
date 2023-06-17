@@ -1,0 +1,1258 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>What is Continues Integration/Continues Delivery (CI/CD)? - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas seputar Continues Integration and Continues Delivery alias CI/CD dalam suatu SDLC atau singkatan dari Software Development Lifecycle.  Pada suatu project/product berbasis software development ini memiliki beberapa tahapan mulai dari coding, testing, dan deployment. Hal ini menjadi tantangan tersendiri jika melibatkan beberapa team/divisi/perusahaan dalam suatu development project/product tersebut.    Saat ini banyak perusahaan/instansi menggunakan proses CI/CD untuk menghilankan kerumitan (simplify) dalam proses release suatu project/product agar bisa lebih cepet dan autopilot (automation deployment).  Sebelum kita membahas lebih jauh, ada beberapa hal yang kita perlu pahami terlebih dahulu tentang CI/CD diantaranya:     What is Continues Integration &amp; Continues Delivery/Deployment (CI/CD)?   What is the difference between CI and CD?   How does CI/CD relate to DevOps?   Benefit of implemented CI/CD in SDLC   What are the benefits of CI/CD?   CI/CD software tools   Okay tanpa berlama lama yuk kita bahas satu-per-satu">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="What is Continues Integration/Continues Delivery (CI/CD)?">
+<meta property="og:url" content="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas seputar Continues Integration and Continues Delivery alias CI/CD dalam suatu SDLC atau singkatan dari Software Development Lifecycle.  Pada suatu project/product berbasis software development ini memiliki beberapa tahapan mulai dari coding, testing, dan deployment. Hal ini menjadi tantangan tersendiri jika melibatkan beberapa team/divisi/perusahaan dalam suatu development project/product tersebut.    Saat ini banyak perusahaan/instansi menggunakan proses CI/CD untuk menghilankan kerumitan (simplify) dalam proses release suatu project/product agar bisa lebih cepet dan autopilot (automation deployment).  Sebelum kita membahas lebih jauh, ada beberapa hal yang kita perlu pahami terlebih dahulu tentang CI/CD diantaranya:     What is Continues Integration &amp; Continues Delivery/Deployment (CI/CD)?   What is the difference between CI and CD?   How does CI/CD relate to DevOps?   Benefit of implemented CI/CD in SDLC   What are the benefits of CI/CD?   CI/CD software tools   Okay tanpa berlama lama yuk kita bahas satu-per-satu">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-06-17T16:52:30+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#what-is-continues-integration--continues-deliverydeployment-cicd">What is Continues Integration &amp; Continues Delivery/Deployment (CI/CD)?</a></li><li><a href="#what-is-the-difference-between-ci-and-cd">What is the difference between CI and CD?</a></li><li><a href="#how-does-cicd-relate-to-devops">How does CI/CD relate to DevOps?</a></li><li><a href="#what-are-the-benefits-of-cicd">What are the benefits of CI/CD?</a></li><li><a href="#cicd-software-tools">CI/CD software tools</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="What is Continues Integration/Continues Delivery (CI/CD)?">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas seputar Continues Integration and Continues Delivery alias CI/CD dalam suatu SDLC atau singkatan dari Software Development Lifecycle.Pada suatu project/product berbasis software development ini memiliki beberapa tahapan mulai dari coding, testing, dan deployment. Hal ini menjadi tantangan tersendiri jika melibatkan beberapa team/divisi/perusahaan dalam suatu development project/product tersebut.Saat ini banyak perusahaan/instansi menggunakan proses CI/CD untuk menghilankan kerumitan (simplify) dalam proses release suatu project/product agar bisa lebih cepet dan autopilot (automation deployment).Sebelum kita membahas lebih jauh, ada beberapa hal yang kita perlu pahami terlebih dahulu tentang CI/CD diantaranya:  What is Continues Integration &amp; Continues Delivery/Deployment (CI/CD)?  What is the difference between CI and CD?  How does CI/CD relate to DevOps?  Benefit of implemented CI/CD in SDLC  What are the benefits of CI/CD?  CI/CD software toolsOkay tanpa berlama lama yuk kita bahas satu-per-satu">
+    <meta itemprop="datePublished" content="2023-06-17T16:52:30+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd" class="u-url" itemprop="url">What is Continues Integration/Continues Delivery (CI/CD)?
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-17T16:52:30+07:00">June 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        6 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Git Version Control">
+        <label class="acordion-item-label" for="content-Git Version Control">
+            Git Version Control
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/git/version-control/00-silabus-git-vcs">
+                        
+                        Silabus Git VCS: Pemula s/d...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01-introduction-version-control">
+                        
+                        Pengenalan Version Control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01a-what-is-git">
+                        
+                        What is Git SCM
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01b-install-git-mac">
+                        
+                        How to Install git on MacOS
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01b-install-git-windows">
+                        
+                        How to Install git on Windows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01b-install-git-linux">
+                        
+                        How to Install git on Linux
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01c-basic-git-command">
+                        
+                        Getting started with git
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Platform">
+        <label class="acordion-item-label" for="content-Gitlab Platform">
+            Gitlab Platform
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab CI for Automation (DevOps engineer)">
+        <label class="acordion-item-label" for="content-Gitlab CI for Automation (DevOps engineer)">
+            Gitlab CI for Automation (DevOps engineer)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci">
+                        
+                        Silabus Gitlab CI: Pemula s...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        What is Continues Integrati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci">
+                        
+                        Introduction of Gitlab DevS...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci">
+                        
+                        Settings up Gitlab CI (on-p...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab for Project Management (PM Role)">
+        <label class="acordion-item-label" for="content-Gitlab for Project Management (PM Role)">
+            Gitlab for Project Management (PM Role)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Integration">
+        <label class="acordion-item-label" for="content-Gitlab Integration">
+            Gitlab Integration
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Monitoring">
+        <label class="acordion-item-label" for="content-Gitlab Monitoring">
+            Gitlab Monitoring
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Migration">
+        <label class="acordion-item-label" for="content-Gitlab Migration">
+            Gitlab Migration
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas seputar <strong>Continues Integration and Continues Delivery</strong> alias <strong>CI/CD</strong> dalam suatu SDLC atau singkatan dari <strong>Software Development Lifecycle</strong>.</p>
+
+<p>Pada suatu project/product berbasis software development ini memiliki beberapa tahapan mulai dari coding, testing, dan deployment. Hal ini menjadi tantangan tersendiri jika melibatkan beberapa team/divisi/perusahaan dalam suatu development project/product tersebut.</p>
+
+<p><img src="/resources/posts/gitlab-ci/03a-what-cicd/cicd.svg" alt="ci-ci" /></p>
+
+<p>Saat ini banyak perusahaan/instansi menggunakan proses CI/CD untuk menghilankan kerumitan (simplify) dalam proses release suatu project/product agar bisa lebih cepet dan autopilot (automation deployment).</p>
+
+<p>Sebelum kita membahas lebih jauh, ada beberapa hal yang kita perlu pahami terlebih dahulu tentang CI/CD diantaranya:</p>
+
+<ol>
+  <li>What is Continues Integration &amp; Continues Delivery/Deployment (CI/CD)?</li>
+  <li>What is the difference between CI and CD?</li>
+  <li>How does CI/CD relate to DevOps?</li>
+  <li>Benefit of implemented CI/CD in SDLC</li>
+  <li>What are the benefits of CI/CD?</li>
+  <li>CI/CD software tools</li>
+</ol>
+
+<p>Okay tanpa berlama lama yuk kita bahas satu-per-satu</p>
+
+<!--more-->
+
+<h2 id="what-is-continues-integration--continues-deliverydeployment-cicd">What is Continues Integration &amp; Continues Delivery/Deployment (CI/CD)?</h2>
+
+<blockquote>
+  <p>CI and CD stand for continuous integration and continuous delivery/continuous deployment. CI/CD is a method to frequently deliver apps to customers by introducing automation into the stages of app development.</p>
+</blockquote>
+
+<p>Main concepts attributed to CI/CD are</p>
+
+<ol>
+  <li>Continuous integration,</li>
+  <li>Continuous delivery, and</li>
+  <li>Continuous deployment.</li>
+</ol>
+
+<p>CI/CD is a solution to the problems integrating new code can cause for development and operations teams. 
+Specifically, CI/CD introduces ongoing automation and continuous monitoring throughout the lifecycle of apps, from integration and testing phases to delivery and deployment. 
+Taken together, these connected practices are often referred to as a “CI/CD pipeline” and are supported by development and operations teams working together in an agile way.</p>
+
+<p>Why is CI/CD important?</p>
+
+<p>CI/CD allows organizations to ship software quickly and efficiently. CI/CD facilitates an effective process for getting products to market faster than ever before, continuously delivering code into production, and ensuring an ongoing flow of new features and bug fixes via the most efficient delivery method.</p>
+
+<h2 id="what-is-the-difference-between-ci-and-cd">What is the difference between CI and CD?</h2>
+
+<p>Kita telah mengenal Continues integration dan Continues Delivery/Deployment alias CI/CD, tetapi apa sih sebetulnya perbedaan diantaranya? yuk kita bahas satu-per-satu mulai dari Continues Integration.</p>
+
+<p><strong>Continuous Integration</strong>, Consider an application that has its code stored in a Git repository. Developers push code changes every day, multiple times a day. For every push to the repository, you can create a set of scripts to build and test your application automatically. These scripts help decrease the chances that you introduce errors in your application.</p>
+
+<p>Each change submitted to an application, even to development branches, is built and tested automatically and continuously. These tests ensure the changes pass all tests, guidelines, and code compliance standards you established for your application.</p>
+
+<p><strong>Continuous Delivery</strong>, is a step beyond Continuous Integration. Not only is your application built and tested each time a code change is pushed to the codebase, the application is also deployed continuously. However, with continuous delivery, you trigger the deployments manually.</p>
+
+<p>Continuous Delivery checks the code automatically, but it requires human intervention to manually and strategically trigger the deployment of the changes.</p>
+
+<p><strong>Continuous Deployment</strong>, is another step beyond Continuous Integration, similar to Continuous Delivery. The difference is that instead of deploying your application manually, you set it to be deployed automatically. Human intervention is not required.</p>
+
+<p>For more details, here is the diagram ci/cd workflow</p>
+
+<p><img src="/resources/posts/gitlab-ci/03a-what-cicd/ci-cd-workflow.png" alt="ci-ci-workflow" /></p>
+
+<h2 id="how-does-cicd-relate-to-devops">How does CI/CD relate to DevOps?</h2>
+
+<p>DevOps is a set of practices and tools designed to increase an organization’s ability to deliver applications and services faster than traditional software development processes. 
+The increased speed of DevOps helps an organization serve its customers more successfully and be more competitive in the market. In a DevOps environment, successful organizations “bake security in” to all phases of the development life cycle, a practice called DevSecOps.</p>
+
+<p>The key practice of DevSecOps is integrating security into all DevOps workflows. By conducting security activities early and consistently throughout the software development life cycle (SDLC), organizations can ensure that they catch vulnerabilities as early as possible, and are better able to make informed decisions about risk and mitigation. 
+In more traditional security practices, security is not addressed until the production stage, which is no longer compatible with the faster and more agile DevOps approach. 
+Today, security tools must fit seamlessly into the developer workflow and the CI/CD pipeline in order to keep pace with DevOps and not slow development velocity.</p>
+
+<p><img src="/resources/posts/gitlab-ci/03a-what-cicd/devops-tools.jpeg" alt="devops-tools" /></p>
+
+<p>The CI/CD pipeline is part of the broader DevOps/DevSecOps framework. In order to successfully implement and run a CI/CD pipeline, organizations need tools to prevent points of friction that slow down integration and delivery. 
+Teams require an integrated toolchain of technologies to facilitate collaborative and unimpeded development efforts.</p>
+
+<h2 id="what-are-the-benefits-of-cicd">What are the benefits of CI/CD?</h2>
+
+<ul>
+  <li>Automated testing enables continuous delivery, which ensures software quality and security and increases the profitability of code in production.</li>
+  <li>CI/CD pipelines enable a much shorter time to market for new product features, creating happier customers and lowering strain on development.</li>
+  <li>The great increase in overall speed of delivery enabled by CI/CD pipelines improves an organization’s competitive edge.</li>
+  <li>Automation frees team members to focus on what they do best, yielding the best end products.</li>
+  <li>Organizations with a successful CI/CD pipeline can attract great talent. By moving away from traditional waterfall methods, engineers and developers are no longer bogged down with repetitive activities that are often highly dependent on the completion of other tasks.</li>
+</ul>
+
+<h2 id="cicd-software-tools">CI/CD software tools</h2>
+
+<p>Ada beberapa software tools yang dapat digunakan untuk membuat CI/CD Pipeline. Diantaranya sebagai berikut:</p>
+
+<div class="feature__wrapper">
+
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03a-what-cicd/tools-jenkins.png" alt="tools-jenkins" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Jenkins</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Jenkins ini bersifat open source dan menggunakan bahasa pemrograman Java. Tool ini dapat digunakan pada berbagai sistem operasi seperti Windows, macOS, dan Linux serta dapat di deploy cloud maupun on-premise</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03a-what-cicd/tools-gitlab-ci.png" alt="tools-gitlab-ci" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Gitlab CI</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Gitlab CI adalah bagian dari Gitlab Platform yang dibuat oleh gitlab itu sendiri dengan menggunakan bahasa Golang (go). Tool ini dapat digunakan di berbagai macam sistem operasi seperti Windows, macOS, dan linux. <br />Kita bisa mengguankan Gitlab CI yang telah tersedia (Shared runner) atau self managed (Private runner)</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03a-what-cicd/tools-github-action.png" alt="tools-github-action" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Github Action</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Github Action adalah bagian dari Github Platform yang dibuat oleh github yang sekarang telah di akuisisi oleh Microsoft. Tools ini hanya dapat di gunakan secara cloud (github.com) dan kita bisa gunakan secara gratis/free</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03a-what-cicd/tools-travis-ci.png" alt="tools-travis-ci" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Travis CI</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Travis CI adalah cloud-based CI/CD yang biasanya digunakan sebelum lahirnya Github Action yang memiliki jargon Code less dan deploy more. Tools ini juga selain hanya tersedia di cloud juga saat ini menjadi platform CI/CD yang berbayar</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+
+</div>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/git/version-control/00-silabus-git-vcs"  class="" title="Silabus Git VCS: Pemula s/d Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" class="" 
+        title="Silabus Gitlab CI: Pemula s/d Mahir
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 9 to 11
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci" class="" 
+        title="Introduction of Gitlab DevSecOps Platform
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci"  class="" title="Settings up Gitlab CI (on-premise)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#git" class="page__taxonomy-item p-category" rel="tag">git</a><span class="sep">, </span>
+    
+      <a href="/categories/#gitlab" class="page__taxonomy-item p-category" rel="tag">gitlab</a><span class="sep">, </span>
+    
+      <a href="/categories/#gitlab-ci" class="page__taxonomy-item p-category" rel="tag">gitlab-ci</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-06-17T16:52:30+07:00">June 17, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=What+is+Continues+Integration%2FContinues+Delivery+%28CI%2FCD%29%3F%20%2Fposts%2Fgit%2Fgitlab%2Fgitlab-ci%2F03a-what-is-cicd" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fgit%2Fgitlab%2Fgitlab-ci%2F03a-what-is-cicd" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fgit%2Fgitlab%2Fgitlab-ci%2F03a-what-is-cicd" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci" rel="permalink">Settings up Gitlab CI (on-premise)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-17T21:12:16+07:00">June 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        8 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci" rel="permalink">Introduction of Gitlab DevSecOps Platform
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-17T20:36:43+07:00">June 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        2 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" rel="permalink">Silabus Gitlab CI: Pemula s/d Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-02T20:18:43+07:00">June 2, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        22 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

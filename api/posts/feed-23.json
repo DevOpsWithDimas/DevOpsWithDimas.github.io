@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "DDL - Grouping Privileges dengan Roles",
+      "link": "/posts/rdbms/oracle18c/018f-ddl-roles"
+    }
+    ,
+    {
+      "title": "DDL - Object Privileges",
+      "link": "/posts/rdbms/oracle18c/018e-ddl-object-privileges"
+    }
+    ,
+    {
+      "title": "DDL - System Privileges",
+      "link": "/posts/rdbms/oracle18c/018d-ddl-system-privileges"
+    }
+    ,
+    {
       "title": "DDL - Dropping User Account",
       "link": "/posts/rdbms/oracle18c/018c-drop-user"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Index - Bitmap",
       "link": "/posts/rdbms/oracle18c/017b-bitmap-index"
-    }
-    ,
-    {
-      "title": "Index - Balanced Tree (B-Tree)",
-      "link": "/posts/rdbms/oracle18c/017a-normal-index"
-    }
-    ,
-    {
-      "title": "Pengenalan Index di Oracle",
-      "link": "/posts/rdbms/oracle18c/017-ddl-indexes"
-    }
-    ,
-    {
-      "title": "Default value untuk Primary Key di Oracle",
-      "link": "/posts/rdbms/oracle18c/016r-default-value-pk"
     }
   ]
 }

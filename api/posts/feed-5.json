@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Configure Request and Limit of Resources (CPUs & Memory)",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit"
+    }
+    ,
+    {
+      "title": "Configure env (Environment Variables) in a Pods",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config"
+    }
+    ,
+    {
+      "title": "Overview of Java Programming",
+      "link": "/posts/language/java/01b-java-programming-overview"
+    }
+    ,
+    {
       "title": "Overview of Programming Languages",
       "link": "/posts/language/java/01a-programming-language-overview"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Kubernetes Workloads with Pods",
       "link": "/posts/devops/orchestration/kubernetes/pods/03a-workload-pods"
-    }
-    ,
-    {
-      "title": "Example Use Cases of docker-machine",
-      "link": "/posts/devops/docker/machine/13d-usecases-docker-machine"
-    }
-    ,
-    {
-      "title": "Overview Pod and Container in Kubernetes",
-      "link": "/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers"
-    }
-    ,
-    {
-      "title": "Joined Tables",
-      "link": "/posts/rdbms/postgresql/sql/select/04b-join-tables"
     }
   ]
 }

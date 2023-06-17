@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Organisasi class file dengan package",
+      "link": "/posts/language/java/classes/09a-package-import"
+    }
+    ,
+    {
+      "title": "Grouping source code dengan class",
+      "link": "/posts/language/java/classes/09-class-java"
+    }
+    ,
+    {
+      "title": "Menerima data dari paramenter ke dalam Function",
+      "link": "/posts/language/java/function/08a-params-at-method"
+    }
+    ,
+    {
       "title": "Method atau Functions",
       "link": "/posts/language/java/function/08-function"
     }
@@ -34,21 +49,6 @@
     {
       "title": "SWITCH-CASE statement",
       "link": "/posts/language/java/control/05b-swith-statement"
-    }
-    ,
-    {
-      "title": "IF statement",
-      "link": "/posts/language/java/control/05a-if-statement"
-    }
-    ,
-    {
-      "title": "FLow control statement",
-      "link": "/posts/language/java/control/05-control-flow"
-    }
-    ,
-    {
-      "title": "Time is your practice",
-      "link": "/posts/language/java/basic/04-quis-section-1"
     }
   ]
 }

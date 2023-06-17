@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Inherintance Mapping",
+      "link": "/posts/framework/java/orm/hibernate/mapping/03g-inherintance-mapping"
+    }
+    ,
+    {
+      "title": "ManyToMany Mapping",
+      "link": "/posts/framework/java/orm/hibernate/mapping/03f-mapping-many-to-many"
+    }
+    ,
+    {
+      "title": "ManyToOne Mapping",
+      "link": "/posts/framework/java/orm/hibernate/mapping/03e-mapping-many-to-one"
+    }
+    ,
+    {
       "title": "OneToMany Mapping",
       "link": "/posts/framework/java/orm/hibernate/mapping/03d-mapping-one-to-many"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Silabus Belajar JasperReport",
       "link": "/posts/language/java/web/jasper/001-silabus"
-    }
-    ,
-    {
-      "title": "Composite Primary Key",
-      "link": "/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key"
-    }
-    ,
-    {
-      "title": "Macam Macam Generator Value di Hibernate",
-      "link": "/posts/framework/java/orm/hibernate/basic/02g-generator-value"
-    }
-    ,
-    {
-      "title": "Macam-Macam Constraint di Hibernate",
-      "link": "/posts/framework/java/orm/hibernate/basic/02f-constraints"
     }
   ]
 }

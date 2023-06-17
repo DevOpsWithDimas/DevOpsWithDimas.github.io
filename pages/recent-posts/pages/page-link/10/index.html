@@ -318,6 +318,241 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/03e-init-containers" rel="permalink">Initialization of Containers
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-05-03T06:02:56+07:00">May 3, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        8 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, setelah kita mempelajari tentang basic Container dan Pod configuration selanjutnya kita bahas Init Containers. Ok seperti biasa karena materi ini akan lumayan panyang jadi kita akan bagi-bagi menjadi beberapa bagian diantaranya:</p>
+
+<ol>
+  <li>What is init containers</li>
+  <li>Differences from regular containers</li>
+  <li>what are <code class="language-plaintext highlighter-rouge">initContainers</code> for?</li>
+  <li>Examples using <code class="language-plaintext highlighter-rouge">initContainers</code></li>
+  <li>Behavior of <code class="language-plaintext highlighter-rouge">initContainers</code></li>
+</ol>
+
+<p>Ok langsung aja kita bahas ke materi yang pertama</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle" rel="permalink">Pod &amp; Container Lifecycle
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-04-30T05:41:45+07:00">April 30, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        16 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang Pod Lifecycle. Pods follow a defined lifecycle, starting in the <code class="language-plaintext highlighter-rouge">Pending</code> phase, moving through <code class="language-plaintext highlighter-rouge">Running</code> if at least one of its primary containers starts OK, and then through either the <code class="language-plaintext highlighter-rouge">Succeeded</code> or <code class="language-plaintext highlighter-rouge">Failed</code> phases depending on whether any container in the Pod terminated in failure.</p>
+
+<p>Whilst a Pod is <code class="language-plaintext highlighter-rouge">running</code>, the kubelet is able to <code class="language-plaintext highlighter-rouge">restart</code> containers to handle some kind of faults. Within a Pod, Kubernetes tracks different container <code class="language-plaintext highlighter-rouge">states</code> and determines what action to take to make the Pod healthy again.</p>
+
+<p>In the Kubernetes API, Pods have both a specification and an actual status. The status for a Pod object consists of a set of Pod conditions. You can also inject custom readiness information into the condition data for a Pod, if that is useful to your application.</p>
+
+<p>Pods are only scheduled once in their lifetime. Once a Pod is scheduled (assigned) to a Node, the Pod runs on that Node until it stops or is terminated.</p>
+
+<p>Ok untuk lebih detailnya kita akan bagi-bagi menjadi beberapa section yaitu:</p>
+
+<ol>
+  <li>Pod lifetime</li>
+  <li>Pod phase</li>
+  <li>Container states</li>
+  <li>Container restart policy</li>
+  <li>Container probes</li>
+  <li>Termination of Pods</li>
+</ol>
+
+<p>Ok lansung aja kita bahas materi yang pertama</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config" rel="permalink">Basic Pods and Containers Configs
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-04-28T12:35:36+07:00">April 28, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        17 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang Basic configuration pada Pods and Containers. PodSpec adalah Specification supaya kita bisa meng-konfigurasi container yang akan kita sesuai dengan harapan kita contohnya seperti command apa yang akan di execute ketika container startup, port berapa yang kita mau expose ke luar, dan masih banyak lagi.</p>
+
+<p>Ok karena materinya akan lumayan panjang kita akan bagi memjadi beberapa bagian diantaranya:</p>
+
+<ol>
+  <li>Using Labels in a Pods</li>
+  <li>Using Namespace</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">image</code> &amp; <code class="language-plaintext highlighter-rouge">imagePullPolicy</code> in containerSpec</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">imagePullSecrets</code> for pull image from private registry</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">env</code> (Environment Variables)</li>
+  <li>Define a Command and Args for a Container</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">ports</code> in containerSpec</li>
+</ol>
+
+<p>Ok lansung aja kita bahas materi yang pertama</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods" rel="permalink">Working with Pods
 </a>
       
@@ -461,222 +696,6 @@
 </ol>
 
 <p>Ok langsung aja kita bahas materi pertama</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/machine/13d-usecases-docker-machine" rel="permalink">Example Use Cases of docker-machine
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Docker for DevOps engineer
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-04-10T17:22:46+07:00">April 10, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        6 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas salah satu contoh penggunaannya untuk Docker Machine. Diantaranya</p>
-
-<ol>
-  <li>Multiple Docker Host by Projects</li>
-  <li>DRC (Disaster Revovery Center) system.</li>
-</ol>
-
-<p>Ok langsung aja kita bahas materi yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers" rel="permalink">Overview Pod and Container in Kubernetes
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Kubernetes for DevOps
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-04-04T03:53:03+07:00">April 4, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        less than 1 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, materi kali ini kita akan membahas tentang Pod dan Container pada Kubernetes (K8S). Mendifinisikan Pod dan Container adalah hal yang paling basic pada Orchestration Container System yang sering sekali dianggap remeh, karena kebanyakan orang2 sudah tidak lagi mendefined Pod dan Container secara explicit bisanya langsung menggunakan Controller seperti Deployment, Stateful, DaemonSet dan lain-lain.</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/select/04b-join-tables" rel="permalink">Joined Tables
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      PostgreSQL
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-04-03T20:18:30+07:00">April 3, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        17 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas Join Tables di PostgreSQL, Seperti biasa materinya karena akan lumayan panjang jadi kita bagi menjadi beberapa section ya diantaranya:</p>
-
-<ol>
-  <li>What is join tables?</li>
-  <li>Natural Join</li>
-  <li>Cross join</li>
-  <li>Qualified join
-    <ol>
-      <li>Inner Joins</li>
-      <li>Left or Right Outer Joins</li>
-      <li>Full Outer Joins</li>
-      <li>Self Joins</li>
-    </ol>
-  </li>
-  <li><code class="language-plaintext highlighter-rouge">join_condition</code> expressions</li>
-</ol>
-
-<p>Ok langsung aja yuk kita bahas materi yang pertama:</p>
 
 </span>
       

@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Memahami fungsi hibernate.cfg.xml",
+      "link": "/posts/framework/java/orm/hibernate/basic/02b-memahami-hibernate-cfg"
+    }
+    ,
+    {
+      "title": "Build Hibernate Session Factory",
+      "link": "/posts/framework/java/orm/hibernate/basic/02a-create-connection"
+    }
+    ,
+    {
+      "title": "Membuat project Hibernate ORM dengan Apache Maven",
+      "link": "/posts/framework/java/orm/hibernate/basic/02-create-project-java-maven"
+    }
+    ,
+    {
       "title": "Setup Development Environment",
       "link": "/posts/framework/java/orm/hibernate/basic/01b-setup-dev-env"
     }
@@ -34,21 +49,6 @@
     {
       "title": "JSP Action Element",
       "link": "/posts/language/java/web/jsp/026-jsp-action-elements"
-    }
-    ,
-    {
-      "title": "JSP Taglib Directive (JSTL)",
-      "link": "/posts/language/java/web/jsp/025-jsp-directive-taglib"
-    }
-    ,
-    {
-      "title": "JSP Directive",
-      "link": "/posts/language/java/web/jsp/024-jsp-directive"
-    }
-    ,
-    {
-      "title": "JSP Scriptlet",
-      "link": "/posts/language/java/web/jsp/023-jsp-scriptlet"
     }
   ]
 }

@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Using your own image into Minikube cluster",
+      "link": "/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images"
+    }
+    ,
+    {
+      "title": "Minikube basic control",
+      "link": "/posts/devops/orchestration/kubernetes/02c-minikube-basic-control"
+    }
+    ,
+    {
+      "title": "Deploying an apps/services into Kubernetes",
+      "link": "/posts/devops/orchestration/kubernetes/02b-deploy-application"
+    }
+    ,
+    {
       "title": "Install minikube for Linux users",
       "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Accessing a Database",
       "link": "/posts/rdbms/postgresql/01d-accessing-database"
-    }
-    ,
-    {
-      "title": "Overview of Object Relational Database Management System (ORDBMS)",
-      "link": "/posts/rdbms/postgresql/01c-postgresql-database"
-    }
-    ,
-    {
-      "title": "Architecture of PostgreSQL Database",
-      "link": "/posts/rdbms/postgresql/01b-postgresql-architecture"
-    }
-    ,
-    {
-      "title": "Overview of PostgreSQL Database",
-      "link": "/posts/rdbms/postgresql/01a-what-is-postgresql"
     }
   ]
 }

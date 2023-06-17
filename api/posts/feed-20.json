@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Expose services to outside using ports",
+      "link": "/posts/devops/docker/container/04d-expose-service-outside"
+    }
+    ,
+    {
+      "title": "Run a command in a running container",
+      "link": "/posts/devops/docker/container/04c-docker-exec-command"
+    }
+    ,
+    {
+      "title": "Management Docker Images",
+      "link": "/posts/devops/docker/container/04b-docker-image-command"
+    }
+    ,
+    {
       "title": "Management Docker Container",
       "link": "/posts/devops/docker/container/04a-docker-container-command"
     }
@@ -34,21 +49,6 @@
     {
       "title": "How to install Docker on Mac OS",
       "link": "/posts/devops/docker/basic/02c-install-on-mac"
-    }
-    ,
-    {
-      "title": "How to install Docker on Linux CentOS",
-      "link": "/posts/devops/docker/basic/02b-install-on-linux-centos"
-    }
-    ,
-    {
-      "title": "How to install Docker on Windows 10 with WSL",
-      "link": "/posts/devops/docker/basic/02a-install-on-windows10-wls"
-    }
-    ,
-    {
-      "title": "What to know before you install Docker",
-      "link": "/posts/devops/docker/basic/02-system-requirement"
     }
   ]
 }

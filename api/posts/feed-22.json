@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Many To Many Relationship Tables",
+      "link": "/posts/rdbms/oracle18c/019c-mapping-many-to-many"
+    }
+    ,
+    {
+      "title": "One To Many Relationship Tables",
+      "link": "/posts/rdbms/oracle18c/019b-mapping-one-to-many"
+    }
+    ,
+    {
+      "title": "One To One Relationship Tables",
+      "link": "/posts/rdbms/oracle18c/019a-mapping-one-to-one"
+    }
+    ,
+    {
       "title": "Perancangan / Design Table (Relationship)",
       "link": "/posts/rdbms/oracle18c/019-schema-design-relationship"
     }
@@ -34,21 +49,6 @@
     {
       "title": "DDL - Managing Resource & Password dengan Profiles",
       "link": "/posts/rdbms/oracle18c/018g-ddl-profiles"
-    }
-    ,
-    {
-      "title": "DDL - Grouping Privileges dengan Roles",
-      "link": "/posts/rdbms/oracle18c/018f-ddl-roles"
-    }
-    ,
-    {
-      "title": "DDL - Object Privileges",
-      "link": "/posts/rdbms/oracle18c/018e-ddl-object-privileges"
-    }
-    ,
-    {
-      "title": "DDL - System Privileges",
-      "link": "/posts/rdbms/oracle18c/018d-ddl-system-privileges"
     }
   ]
 }

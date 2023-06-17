@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Operator Matematika di JavaScript",
+      "link": "/posts/language/web/js/06-math-operation-js"
+    }
+    ,
+    {
+      "title": "Variable di JavaScript",
+      "link": "/posts/language/web/js/05-variables-js"
+    }
+    ,
+    {
+      "title": "Data Type di JavaScript",
+      "link": "/posts/language/web/js/04-data-type-js"
+    }
+    ,
+    {
       "title": "Setup Develoment environment untuk Javascript",
       "link": "/posts/language/web/js/03-setup-env-development"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Perbedaan method executeQuery() dan executeUpdate()",
       "link": "/posts/language/java/jdbc/07-execute-query-and-update"
-    }
-    ,
-    {
-      "title": "Mengenal class java.sql.PreparedStatement",
-      "link": "/posts/language/java/jdbc/06-prepared-statement"
-    }
-    ,
-    {
-      "title": "Mengenal class java.sql.Statement",
-      "link": "/posts/language/java/jdbc/05-statement"
-    }
-    ,
-    {
-      "title": "Using Database Versioning with flyway",
-      "link": "/posts/language/java/jdbc/04-using-flyway"
     }
   ]
 }

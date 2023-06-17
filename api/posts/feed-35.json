@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Concatnation dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/04f-hql-concatenation"
+    }
+    ,
+    {
+      "title": "Aritmatic dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/04e-hql-aritmetic"
+    }
+    ,
+    {
+      "title": "Distinct dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/04d-hql-distinct"
+    }
+    ,
+    {
       "title": "Join Entity dengan Hibernate Query Language (HQL)",
       "link": "/posts/framework/java/orm/hibernate/hql/04c-hql-joins"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Parent-Child Mapping",
       "link": "/posts/framework/java/orm/hibernate/mapping/03h-parent-child-mapping"
-    }
-    ,
-    {
-      "title": "Inherintance Mapping",
-      "link": "/posts/framework/java/orm/hibernate/mapping/03g-inherintance-mapping"
-    }
-    ,
-    {
-      "title": "ManyToMany Mapping",
-      "link": "/posts/framework/java/orm/hibernate/mapping/03f-mapping-many-to-many"
-    }
-    ,
-    {
-      "title": "ManyToOne Mapping",
-      "link": "/posts/framework/java/orm/hibernate/mapping/03e-mapping-many-to-one"
     }
   ]
 }

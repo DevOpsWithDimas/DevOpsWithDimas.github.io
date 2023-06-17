@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Index - Balanced Tree (B-Tree)",
+      "link": "/posts/rdbms/oracle18c/017a-normal-index"
+    }
+    ,
+    {
+      "title": "Pengenalan Index di Oracle",
+      "link": "/posts/rdbms/oracle18c/017-ddl-indexes"
+    }
+    ,
+    {
+      "title": "Default value untuk Primary Key di Oracle",
+      "link": "/posts/rdbms/oracle18c/016r-default-value-pk"
+    }
+    ,
+    {
       "title": "DDL - Sequences di Oracle",
       "link": "/posts/rdbms/oracle18c/016q-sequences"
     }
@@ -34,21 +49,6 @@
     {
       "title": "DDL - Primary Key Constraint",
       "link": "/posts/rdbms/oracle18c/016k-constraint-primary-key"
-    }
-    ,
-    {
-      "title": "DDL - Check Constraint",
-      "link": "/posts/rdbms/oracle18c/016j-constraint-check"
-    }
-    ,
-    {
-      "title": "DDL - Unqiue Constraint",
-      "link": "/posts/rdbms/oracle18c/016i-constraint-unique"
-    }
-    ,
-    {
-      "title": "DDL - Not Null Constraint",
-      "link": "/posts/rdbms/oracle18c/016h-constraint-not-null"
     }
   ]
 }

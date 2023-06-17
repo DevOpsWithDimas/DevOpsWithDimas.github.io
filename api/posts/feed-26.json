@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Data Definition Language (DDL) di Oracle",
+      "link": "/posts/rdbms/oracle18c/016-ddl"
+    }
+    ,
+    {
+      "title": "TCL - Locking Transaction di Oracle",
+      "link": "/posts/rdbms/oracle18c/015e-tcl-locking"
+    }
+    ,
+    {
+      "title": "TCL - Concurrent Transaction",
+      "link": "/posts/rdbms/oracle18c/015d-tcl-concurrent"
+    }
+    ,
+    {
       "title": "TCL - Savepoint di Oracle",
       "link": "/posts/rdbms/oracle18c/015c-tcl-savepoint"
     }
@@ -34,21 +49,6 @@
     {
       "title": "DML - Update Statement di Oracle",
       "link": "/posts/rdbms/oracle18c/014b-dml-update"
-    }
-    ,
-    {
-      "title": "DML - Insert Statement di Oracle",
-      "link": "/posts/rdbms/oracle18c/014a-dml-insert"
-    }
-    ,
-    {
-      "title": "Data Manipulation Language (DML)",
-      "link": "/posts/rdbms/oracle18c/014-dml"
-    }
-    ,
-    {
-      "title": "Pagination dengan fetch dan offset",
-      "link": "/posts/rdbms/oracle18c/013-fetch-and-offset"
     }
   ]
 }

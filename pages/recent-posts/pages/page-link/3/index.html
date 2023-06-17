@@ -318,6 +318,229 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl" rel="permalink">Getting started with Transaction Control (TCL)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-01-15T10:31:46+07:00">January 15, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        7 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, sekarang kita akan membahas tentang Transaction Language Control atau singkatanya TCL, dimana transaction control ini adalah salah satu feature di Relational Database Management System (RDBMS) yang secara umum digunakan untuk mengelompokan sekumpulan query yang akan dikirimkan ke database server secara atomic, consistent, isolated dan durable.</p>
+
+<p>Untuk lebih jelasnya, yuk kita bahas secara lebih detail. Adapun materi yang akan kita bahas kali ini adalah</p>
+
+<ol>
+  <li>Default Transaction Control behavior</li>
+  <li>Using Commit clause</li>
+  <li>Using Rollback clause</li>
+  <li>Using Savepoint clause</li>
+</ol>
+
+<p>Ok tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control" rel="permalink">Overview of Concurrency Control
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-01-14T16:05:01+07:00">January 14, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, setelah kita mempelajari perintah Select statement, dan Data Manipulation language ada satuhal lagi yang kita perlu kita pelajari yaitu Concurrent Control. Conncurrent control ini berfungsi untuk Mengatur behavior dari Database Server terkait multiple access seperti multiple query, transaction, multiple session execute at the same time on same database.</p>
+
+<p>Jika pada materi sebelumnya kita hanya menggunakan simple query dan di execute secara singleton. Bagaimana jika saya memiliki contoh ilustrasi seperti berikut:</p>
+
+<p><img src="/resources/posts/postgresql/06-overview-concurrent-control/bisnis-logic-transfer.png" alt="flow-bisnis-transaction" /></p>
+
+<p>Jadi pada contoh kasus tersebut, kita memiliki system untuk transfer saldo dari rekening A ke rekening B. Jika kita gambarkan yang pasti kita harus melakukan beberapa query dan harus memiliki suatu mekanisme jika suatu proses tersebut gagal. Dimana query kita execute minimal adalah</p>
+
+<ol>
+  <li>Inquery rekening tujuan</li>
+  <li>Inquery saldo rekening sumber</li>
+  <li>Update saldo rekening A dengan menggurangi sejumlah yang di transfer</li>
+  <li>Update saldo rekening B dengan menambah sejumlah yang di transfer</li>
+  <li>Insert Data transaksi ke tabel journal</li>
+</ol>
+
+<p>Jika pada saat proses no 4 gagal, bisa di banyangkan apa yang terjadi???</p>
+
+<p>Yup betul saldo rekening A kok berkurang tapi saldo di rekening tujuan tidak bertambah trus kemana uangnya?. maka dari itu proses tersebut harus dihandle dengan system transaction seperti <code class="language-plaintext highlighter-rouge">commit</code>, <code class="language-plaintext highlighter-rouge">rollback</code> dan lain-lain.</p>
+
+<p>Nah system transaction tersebut adalah bagian dari Concurrent Control, Jadi kita akan bahas lebih detail seperti berikut:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1" rel="permalink">Time your practice (part 3)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-01-14T12:36:56+07:00">January 14, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya di materi sebelumnya kita sudah membahas perintah Data manipulation language sepertin <code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code>, <code class="language-plaintext highlighter-rouge">DELETE</code> beserta combinasi antara <code class="language-plaintext highlighter-rouge">SELECT</code> dan DML tersebut, nah supaya temen-temen memahami materi yang telah saya sampaikan saatnya temen-temen untuk latihan / mengerjakan soal yang saya berikan seperti berikut:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup" rel="permalink">Cleanup Data from Table
 </a>
       
@@ -460,225 +683,6 @@
 </ol>
 
 <p>Ok tanpa berlama-lama yuk langsung aja ke pembahasan yang pertama.</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases" rel="permalink">Overview Study Cases: Pod and Containers
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Kubernetes for DevOps
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-11-28T22:03:44+07:00">November 28, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        less than 1 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, Setelah kita membahas secara mendetail terkait Pod and Container specification di Kubernetes sekarang saatnya kita lansung mencoba study cases dengan beberapa skenario yang sudah saya rangkum dari beberapa pengalaman saya dan juga beberapa referensi sertifikasi yang mengacu ke CKAD (Certified Kubernetes Application Developer) yaitu</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions" rel="permalink">Pod Disruptions
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Kubernetes for DevOps
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-11-19T14:07:43+07:00">November 19, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        9 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, sebelumnya kita sudah membahas secara detail tentang Pod Specification selanjutnya jika kita mau membuat aplikasi yang support dengan Highly Available containers pada kubernetes kita harus memahami System yang namanya Distruption dan juga beberapa cluster administration upgrading and autoscaling clusters.</p>
-
-<p>So karena pembahasannya ini akan lumayan panjang jadi kita akan bagi-bagi menjadi beberapa bagian diantaranya:</p>
-
-<ol>
-  <li>Voluntary and involuntary disruptions</li>
-  <li>Pod disruption budgets</li>
-  <li>Pod disruption conditions</li>
-</ol>
-
-<p>Ok tanpa berlama-lama yuk lansung aja kita bahas materi yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement" rel="permalink">Prepared Statement in SQL
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      PostgreSQL
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-10-10T20:51:35+07:00">October 10, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        5 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang Prepared Statement pada SQL, feature ini biasanya hanya bisa digunakan pada Bahasa Pemograman yang menggunakan API seperti <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.sql/java/sql/PreparedStatement.html">JDBC</a> di Java, <a href="https://www.php.net/manual/en/pdo.prepared-statements.php">pdo</a> di PHP dan lain-lain, Nah tetapi di PostgreSQL Database kita bisa terapkan secara directly pada query SQL baik untuk select, insert, update dan delete. Perintah sqlnya seperti berikut:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">PREPARE</span> <span class="n">name</span> <span class="p">[</span> <span class="p">(</span> <span class="n">data_type</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span> <span class="k">AS</span> <span class="k">statement</span></code></pre></figure>
-
-<p>Dan untuk menjalankan perintanya kita bisa menggunakan perintah seperti berikut:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">EXPLAIN</span> <span class="k">EXECUTE</span> <span class="n">name</span><span class="p">(</span><span class="n">parameter_values</span><span class="p">);</span></code></pre></figure>
-
-<p>Jadi dengan kita mendefined prepared query tersebut, kita bisa meng-execute multiple times dengan parameter yang berbeda. Pada implemetasinya kita bisa gunakan untuk:</p>
-
-<ol>
-  <li>Create a Prepared statement for INSERT, UPDATE, DELETE</li>
-  <li>Show all prepared statement</li>
-  <li>Remove prepared statement from a session.</li>
-  <li>Create input parameterized with text editor (Jetbraints Database)</li>
-</ol>
-
-<p>Ok tanpa berlama-lama kita bahas kemateri yang pertama:</p>
 
 </span>
       

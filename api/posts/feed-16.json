@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Angular - Proxy to backend",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend"
+    }
+    ,
+    {
+      "title": "Angular - Access Rest API",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api"
+    }
+    ,
+    {
+      "title": "Build docker image for Angular Project",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08g-build-angular-project"
+    }
+    ,
+    {
       "title": "Springboot - Using Database",
       "link": "/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Build specific docker image by programming languages",
       "link": "/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage"
-    }
-    ,
-    {
-      "title": "Best practices for scanning images",
-      "link": "/posts/devops/docker/dockerfile/07n-docker-image-scan"
-    }
-    ,
-    {
-      "title": "Best practices for writing Dockerfiles",
-      "link": "/posts/devops/docker/dockerfile/07m-best-practice-dockerfile"
-    }
-    ,
-    {
-      "title": "Multiple Stage Builds",
-      "link": "/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages"
     }
   ]
 }

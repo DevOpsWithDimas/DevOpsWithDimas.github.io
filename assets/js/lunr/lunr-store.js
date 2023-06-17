@@ -2879,6 +2879,24 @@ var store = [{
         "url": "/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci",
         "teaser": "/assets/images/500x300.png"
       },{
+        "title": "What is Continues Integration/Continues Delivery (CI/CD)?",
+        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas seputar Continues Integration and Continues Delivery alias CI/CD dalam suatu SDLC atau singkatan dari Software Development Lifecycle. Pada suatu project/product berbasis software development ini memiliki beberapa tahapan mulai dari coding, testing, dan deployment. Hal ini menjadi tantangan tersendiri jika melibatkan beberapa...","categories": ["git","gitlab","gitlab-ci"],
+        "tags": [],
+        "url": "/posts/git/gitlab/gitlab-ci/03a-what-is-cicd",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Introduction of Gitlab DevSecOps Platform",
+        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas salah satu tools implementasi dari Continues Integration (CI) yaitu menggunakan Gitlab DevSecOps Platform. Okay karena pembahasan kali ini akan lumayan panjang jadi kita bagi-bagi menjadi beberapa section diantaranya: Gitlab DevSecOps Platform Gitlab CI/CD workflow What can Gitlab CI/CD do? Gitlab DevOps...","categories": ["git","gitlab","gitlab-ci"],
+        "tags": [],
+        "url": "/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Settings up Gitlab CI (on-premise)",
+        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas tentang Setup environment for Continues Integration (CI) menggunakan Gitlab CI di on-premise. Ok karena artikel ini akan lumayan panjang jadi kita akan bagi2 menjadi beberapa bagian yaitu Requirement and prequisite Arsitektur Setup &amp; Konfigurasi software Install gitlab Install &amp; setting docker...","categories": ["git","gitlab","gitlab-ci"],
+        "tags": [],
+        "url": "/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci",
+        "teaser": "/assets/images/500x300.png"
+      },{
         "title": "Golang Backend Developer",
         "excerpt":"Hai semuanya selamat datang di kelas xxx, jadi kali ini kita akan membahas xxx yaitu menggunakan xxx. Skill-sets requirement Ada beberapa skill-set yang harus ditempuh untuk menjadi seorang DevOps (Develoment &amp; Operation) Engineer diataranya seperti berikut: mindmap root((Backend Developer with Golang)) Description Tell me something about this roadmap, why you...","categories": [],
         "tags": ["devops","developer","operation","tools","automation"],
@@ -2928,7 +2946,7 @@ var store = [{
         "teaser": "/assets/images/roadmap/dba-teaser.png"
       },{
         "title": "Site Reliability Engineer",
-        "excerpt":"Hai semuanya selamat datang di kelas xxx, jadi kali ini kita akan membahas xxx yaitu menggunakan xxx. Skill-sets requirement Ada beberapa skill-set yang harus ditempuh untuk menjadi seorang DevOps (Develoment &amp; Operation) Engineer diataranya seperti berikut: mindmap root((Site Reliability Engineer)) Description Tell me something about this roadmap, why you should...","categories": [],
+        "excerpt":"Hai semuanya 👋, Selamat datang Roadmap menjadi seorang Site Reliable Engineer. Disini temen-temen akah diarahkan Step by Step menjadi seorang Site Reliable Engineer (SRE), Jadi Beberapa tahun belakangan sampai saat ini (2023) selain posisi DevOps Engineer ada juga posisi sebagai Site Reliable Engineer. Sebelum lebih jauh kita lihat dulu yuk...","categories": [],
         "tags": ["devops","developer","operation","tools","automation"],
         "url": "/pages/roadmaps/sre-engineer",
         "teaser": "/assets/images/roadmap/sre-engineer-teaser.png"

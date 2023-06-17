@@ -1,0 +1,1339 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Settings up Gitlab CI (on-premise) - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Setup environment for Continues Integration (CI) menggunakan Gitlab CI di on-premise. Ok karena artikel ini akan lumayan panjang jadi kita akan bagi2 menjadi beberapa bagian yaitu     Requirement and prequisite   Arsitektur   Setup &amp; Konfigurasi software            Install gitlab       Install &amp; setting docker engine       Install gitlab runner       Register gitlab-runner to gitlab           Tryout Gitlab CI script   Ok langsung ja kita ke pembahasan pertama yaitu">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Settings up Gitlab CI (on-premise)">
+<meta property="og:url" content="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Setup environment for Continues Integration (CI) menggunakan Gitlab CI di on-premise. Ok karena artikel ini akan lumayan panjang jadi kita akan bagi2 menjadi beberapa bagian yaitu     Requirement and prequisite   Arsitektur   Setup &amp; Konfigurasi software            Install gitlab       Install &amp; setting docker engine       Install gitlab runner       Register gitlab-runner to gitlab           Tryout Gitlab CI script   Ok langsung ja kita ke pembahasan pertama yaitu">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-06-17T21:12:16+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#requirement-and-prequisite">Requirement and prequisite</a></li><li><a href="#arsitektur">Arsitektur</a></li><li><a href="#setup--konfigurasi-software">Setup &amp; Konfigurasi software</a></li><li><a href="#tryout-gitlab-ci-script">Tryout Gitlab CI script</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Settings up Gitlab CI (on-premise)">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Setup environment for Continues Integration (CI) menggunakan Gitlab CI di on-premise. Ok karena artikel ini akan lumayan panjang jadi kita akan bagi2 menjadi beberapa bagian yaitu  Requirement and prequisite  Arsitektur  Setup &amp; Konfigurasi software          Install gitlab      Install &amp; setting docker engine      Install gitlab runner      Register gitlab-runner to gitlab        Tryout Gitlab CI scriptOk langsung ja kita ke pembahasan pertama yaitu">
+    <meta itemprop="datePublished" content="2023-06-17T21:12:16+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci" class="u-url" itemprop="url">Settings up Gitlab CI (on-premise)
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-17T21:12:16+07:00">June 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        7 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Git Version Control">
+        <label class="acordion-item-label" for="content-Git Version Control">
+            Git Version Control
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/git/version-control/00-silabus-git-vcs">
+                        
+                        Silabus Git VCS: Pemula s/d...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01-introduction-version-control">
+                        
+                        Pengenalan Version Control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01a-what-is-git">
+                        
+                        What is Git SCM
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01b-install-git-mac">
+                        
+                        How to Install git on MacOS
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01b-install-git-windows">
+                        
+                        How to Install git on Windows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01b-install-git-linux">
+                        
+                        How to Install git on Linux
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01c-basic-git-command">
+                        
+                        Getting started with git
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Platform">
+        <label class="acordion-item-label" for="content-Gitlab Platform">
+            Gitlab Platform
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab CI for Automation (DevOps engineer)">
+        <label class="acordion-item-label" for="content-Gitlab CI for Automation (DevOps engineer)">
+            Gitlab CI for Automation (DevOps engineer)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci">
+                        
+                        Silabus Gitlab CI: Pemula s...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd">
+                        
+                        What is Continues Integrati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci">
+                        
+                        Introduction of Gitlab DevS...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Settings up Gitlab CI (on-p...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab for Project Management (PM Role)">
+        <label class="acordion-item-label" for="content-Gitlab for Project Management (PM Role)">
+            Gitlab for Project Management (PM Role)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Integration">
+        <label class="acordion-item-label" for="content-Gitlab Integration">
+            Gitlab Integration
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Monitoring">
+        <label class="acordion-item-label" for="content-Gitlab Monitoring">
+            Gitlab Monitoring
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Migration">
+        <label class="acordion-item-label" for="content-Gitlab Migration">
+            Gitlab Migration
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas tentang Setup environment for Continues Integration (CI) menggunakan Gitlab CI di on-premise. Ok karena artikel ini akan lumayan panjang jadi kita akan bagi2 menjadi beberapa bagian yaitu</p>
+
+<ol>
+  <li>Requirement and prequisite</li>
+  <li>Arsitektur</li>
+  <li>Setup &amp; Konfigurasi software
+    <ul>
+      <li>Install gitlab</li>
+      <li>Install &amp; setting docker engine</li>
+      <li>Install gitlab runner</li>
+      <li>Register gitlab-runner to gitlab</li>
+    </ul>
+  </li>
+  <li>Tryout Gitlab CI script</li>
+</ol>
+
+<p>Ok langsung ja kita ke pembahasan pertama yaitu</p>
+
+<!--more-->
+
+<h2 id="requirement-and-prequisite">Requirement and prequisite</h2>
+
+<p>Untuk menggunakan Gitlab CI ada beberapa hal yang perlu kita siapkan diantaranya minimal 2 virtual machine dengan specifikasi seperti berikut:</p>
+
+<ol>
+  <li>
+    <p>VM Gitlab</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">vcs_repository</span><span class="pi">:</span>
+   <span class="na">os</span><span class="pi">:</span> <span class="s">Linux Distro</span>
+       <span class="s">distro</span><span class="err">:</span> <span class="s">Ubuntu Server</span>
+       <span class="s">vesion</span><span class="err">:</span> <span class="s1">'</span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">20.04'</span>
+   <span class="na">hardware</span><span class="pi">:</span>
+       <span class="na">cpu</span><span class="pi">:</span> <span class="s">4 CPU</span>
+       <span class="na">memory</span><span class="pi">:</span> <span class="s">8GB</span>
+       <span class="na">storage</span><span class="pi">:</span> <span class="s">250GB</span>
+           <span class="s">partitions</span><span class="err">:</span>
+               <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/</span>
+                 <span class="na">size</span><span class="pi">:</span> <span class="s">75 GB</span>
+               <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/var</span>
+                 <span class="na">size</span><span class="pi">:</span> <span class="s1">'</span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">150GB'</span>
+       <span class="err">    </span><span class="na">type</span><span class="pi">:</span> <span class="s">LVM</span>
+   <span class="na">networks</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">private ip</span>
+         <span class="na">ip4</span><span class="pi">:</span> <span class="s">192.168.88.101/24</span>
+         <span class="na">gateway</span><span class="pi">:</span> <span class="s">192.168.88.1</span>
+         <span class="na">dns</span><span class="pi">:</span> 
+           <span class="pi">-</span> <span class="s">8.8.8.8</span>
+           <span class="pi">-</span> <span class="s">8.8.4.4</span>
+   <span class="na">firewall-cmd</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">SSH</span>
+         <span class="na">port</span><span class="pi">:</span> <span class="s">22/tcp</span>
+         <span class="na">policy</span><span class="pi">:</span> <span class="s">allow</span>
+       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Gitlab Repository</span>
+         <span class="na">port</span><span class="pi">:</span> <span class="s">80/tcp, 443/tcp</span>   
+         <span class="na">policy</span><span class="pi">:</span> <span class="s">allow</span>
+   <span class="na">packages</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="s">gitlab-ce</span>
+       <span class="pi">-</span> <span class="s">OpenSSH-Server</span>   
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>VM gitlab-runner + docker</p>
+
+    <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="na">workers</span><span class="pi">:</span>
+   <span class="na">os</span><span class="pi">:</span> <span class="s">Linux Distro</span>
+       <span class="s">distro</span><span class="err">:</span> <span class="s">CentOS</span>
+       <span class="s">vesion</span><span class="err">:</span> <span class="s1">'</span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">7.9'</span>
+   <span class="na">hardware</span><span class="pi">:</span>
+       <span class="c1">## sesuaikan specifikasi hardwarenya dengan kebutuhan build</span>
+       <span class="c1">## karena ada beberapa bahasa pemograman membutuhkan lebih dari 4GB RAM dan jumlah cpu</span>
+       <span class="na">cpu</span><span class="pi">:</span> <span class="s">2 CPU</span>
+       <span class="na">memory</span><span class="pi">:</span> <span class="s">4GB</span>
+       <span class="na">storage</span><span class="pi">:</span> <span class="s">70GB</span>
+           <span class="s">partitions</span><span class="err">:</span>
+               <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/</span>
+                 <span class="na">size</span><span class="pi">:</span> <span class="s">20 GB</span>
+               <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">/var</span>
+                 <span class="na">size</span><span class="pi">:</span> <span class="s1">'</span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">50GB'</span>
+       <span class="err">    </span><span class="na">type</span><span class="pi">:</span> <span class="s">LVM</span>
+   <span class="na">networks</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">private ip</span>
+         <span class="na">ip4</span><span class="pi">:</span> <span class="s">192.168.88.102/24</span>
+         <span class="na">gateway</span><span class="pi">:</span> <span class="s">192.168.88.1</span>
+         <span class="na">dns</span><span class="pi">:</span> 
+           <span class="pi">-</span> <span class="s">8.8.8.8</span>
+           <span class="pi">-</span> <span class="s">8.8.4.4</span>
+   <span class="na">packages</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="s">OpenSSH-Server</span>
+       <span class="pi">-</span> <span class="s">docker-ce</span>
+       <span class="pi">-</span> <span class="s">gitlab-runner</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>Untuk membuat virtual-machine temen-temen boleh menggunakan hypervisor provider apapun misalnya; Oracle VirtualBox, VMware player, qemu dan lain-lain. Kalo saya sendiri menggunakan proxmox yang saya install di PC dengan spesifikasi seperti berikut:</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">proxmox</span><span class="pi">:</span>
+  <span class="na">os</span><span class="pi">:</span> <span class="s">Proxmox </span><span class="m">7.8</span>
+  <span class="na">hardware</span><span class="pi">:</span>
+    <span class="na">cpu</span><span class="pi">:</span> <span class="s">Intel core i9-9900 (8core 16thread)</span>
+    <span class="na">memory</span><span class="pi">:</span> <span class="s">64GB</span>
+    <span class="na">storage</span><span class="pi">:</span>
+      <span class="na">SSD</span><span class="pi">:</span>
+        <span class="na">size</span><span class="pi">:</span> <span class="s">1TB</span>
+        <span class="na">partitions</span><span class="pi">:</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">lvm</span>
+          <span class="na">size</span><span class="pi">:</span> <span class="s">200 GB</span>
+          <span class="na">format</span><span class="pi">:</span> <span class="s">proxmox os</span>
+        <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">lvm-thin</span>
+          <span class="na">size</span><span class="pi">:</span> <span class="s">600 GB</span>
+          <span class="na">format</span><span class="pi">:</span> <span class="s">LVM Thin</span>
+  <span class="na">networks</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Microtik RouterBoard RBD52G</span>
+      <span class="na">ip4</span><span class="pi">:</span> <span class="s">192.168.88.1</span>
+</code></pre></div></div>
+
+<p>Seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/proxmox.png" alt="proxmox" /></p>
+
+<h2 id="arsitektur">Arsitektur</h2>
+
+<p>Okay sebelum kita install software-software tersebut kita lihat dulu secara architectur yang digunakan agar kita bisa memahami flownya, yaitu seperti berikut:</p>
+
+<p>This diagram shows how runners are registered and how jobs are requested and handled:</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+sequenceDiagram
+  participant GitLab
+  participant GitLabRunner
+  participant Executor
+
+  opt registration
+    GitLabRunner -&gt;&gt;+ GitLab: POST /api/v4/runners with registration_token
+    GitLab --&gt;&gt;- GitLabRunner: Registered with runner_token
+  end
+
+  loop job requesting and handling
+    GitLabRunner -&gt;&gt;+ GitLab: POST /api/v4/jobs/request with runner_token
+    GitLab --&gt;&gt;+ GitLabRunner: job payload with job_token
+    GitLabRunner -&gt;&gt;+ Executor: Job payload
+    Executor -&gt;&gt;+ GitLab: clone sources with job_token
+    Executor -&gt;&gt;+ GitLab: download artifacts with job_token
+    Executor --&gt;&gt;- GitLabRunner: return job output and status
+    GitLabRunner --&gt;&gt;- GitLab: updating job output and status with job_token
+  end
+</div>
+
+<p><strong>GitLab Runner</strong>: The application that you install that executes GitLab CI jobs on a target computing platform.</p>
+
+<ul>
+  <li><strong>runner</strong>: The agent that runs the code on the host platform and displays in the UI. If a runner is registered with the same token, the runner could represent a collection of runners and runner managers.</li>
+  <li><strong>runner manager</strong>: A type of runner that can create multiple runners for autoscaling. Specific to the type of executor used.</li>
+  <li><strong>runner worker</strong>: The process created by the runner on the host computing platform to run jobs.</li>
+</ul>
+
+<p>GitLab Runner implements a number of executors that can be used to run your builds in different scenarios.</p>
+
+<ol>
+  <li><strong>SSH</strong>, is using Connect using ssh protocol to execute jobs</li>
+  <li><strong>Shell</strong>, is a simple executor that you use to execute builds locally on the machine where GitLab Runner is installed.</li>
+  <li>Hypervisor (VirtualBox, Paralles), is using VirtualMachine manager to execute the job</li>
+  <li><strong>Docker</strong>, GitLab Runner uses the Docker executor to run jobs on Docker images.</li>
+  <li><strong>Kubernetes</strong>, Use the Kubernetes executor to use Kubernetes clusters for your builds. The executor calls the Kubernetes cluster API and creates a pod for each GitLab CI job.</li>
+</ol>
+
+<p>Tahap selanjutnya temen-temen bisa pilih salah-satu, klo saya sendiri lebih sering menggunakan Docker executor sebagai main gitlab runner executornya so jadi kita bisa langsung install.</p>
+
+<h2 id="setup--konfigurasi-software">Setup &amp; Konfigurasi software</h2>
+
+<p>Untuk gitlab intances, kita bisa menggunakan Gitlab SaaS (online) atau on-premise (local). Untuk installasi gitlab on-premise kita bisa menggunakan yang sebelumnya jadi kita bisa skip atau bisa lanjutkan ke proses install gitlab-runner.</p>
+
+<p>Untuk installing gitlab runner kita bisa menggunakan Linux Repository distribution yaitu dengan menggunakan perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>yum <span class="nb">install</span> <span class="nt">-y</span> vim git tmux curl wget net-tools
+curl <span class="nt">-L</span> <span class="s2">"https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh"</span> | <span class="nb">sudo </span>bash <span class="o">&amp;&amp;</span> <span class="se">\</span>
+<span class="nb">sudo </span>yum <span class="nt">-y</span> <span class="nb">install </span>gitlab-runner</code></pre></figure>
+
+<p>Before you install Docker Engine for the first time on a new host machine, you need to set up the Docker repository. Afterward, you can install and update Docker from the repository. Install the <code class="language-plaintext highlighter-rouge">yum-utils</code> package (which provides the <code class="language-plaintext highlighter-rouge">yum-config-manager</code> utility) and set up the repository.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>yum <span class="nb">install</span> <span class="nt">-y</span> yum-utils <span class="o">&amp;&amp;</span> <span class="se">\</span>
+<span class="nb">sudo </span>yum-config-manager <span class="se">\</span>
+    <span class="nt">--add-repo</span> <span class="se">\</span>
+    https://download.docker.com/linux/centos/docker-ce.repo</code></pre></figure>
+
+<p>Install Docker Engine</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>yum <span class="nb">install</span> <span class="nt">-y</span> <span class="se">\</span>
+ docker-ce <span class="se">\</span>
+ docker-ce-cli <span class="se">\</span>
+ containerd.io <span class="se">\</span>
+ docker-compose-plugin
+ 
+<span class="nb">sudo </span>systemctl <span class="nb">enable</span> <span class="nt">--now</span> docker</code></pre></figure>
+
+<p>Setelah itu pastikan configurasi selinux di update menjadi permissive dengan mengedit file <code class="language-plaintext highlighter-rouge">/etc/selinux/config</code> untuk property <code class="language-plaintext highlighter-rouge">SELINUX=enforce</code> menjadi <code class="language-plaintext highlighter-rouge">SELINUX=permissive</code> dan kemudian restart.</p>
+
+<p>Jangan lupa tambahkan rule pada firewall seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">firewall-cmd <span class="nt">--zone</span><span class="o">=</span>public <span class="nt">--add-masquerade</span> <span class="nt">--permanent</span> 
+firewall-cmd <span class="nt">--zone</span><span class="o">=</span>public <span class="nt">--add-port</span><span class="o">=</span>2375/tcp <span class="nt">--permanent</span>
+firewall-cmd <span class="nt">--reload</span></code></pre></figure>
+
+<p>Setelah di install docker dan gitlab-runner package, kita Register gitlab-runner ke Gitlab Repository ada pun yang harus di perhatikan adalah</p>
+
+<ol>
+  <li>Registered as Global</li>
+  <li>Registered by group</li>
+  <li>Registered by project</li>
+</ol>
+
+<p>Pilih yang mana? ini tergantung dari kebutuhan ada yang ingin semua project pake gitlab runner brati kita register sebagai Global (Menu <code class="language-plaintext highlighter-rouge">Admin -&gt; Runners</code>), ada yang per project (Menu <code class="language-plaintext highlighter-rouge">Your project -&gt; Settings -&gt; CI/CD -&gt; Runners</code>) jadi kita pilih by project. Karena disini saya mau general kita pilih yang Global. yang kita perlukan adalah <code class="language-plaintext highlighter-rouge">URL</code> dan <code class="language-plaintext highlighter-rouge">Registration token</code> seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/gitlab-runner-register.png" alt="gitlat-runner-registery" /></p>
+
+<p>Sekarang kita register, gitlab runner agent ke gitlab dengan menggunakan perintah berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">export </span><span class="nv">GITLAB_URL</span><span class="o">=</span><span class="s1">'&lt;your-gitlab-ip-or-domain&gt;'</span>
+<span class="nb">export </span><span class="nv">GITLAB_RUNNER_TOKEN</span><span class="o">=</span><span class="s1">'&lt;your-gitlab-runner-token&gt;'</span>
+<span class="nb">export </span><span class="nv">GITLAB_RUNNER_EXTRA_HOST</span><span class="o">=</span><span class="s1">'private.nexus-registry.docker.local:&lt;ip-nexus-oss-server&gt;'</span>
+<span class="nb">export </span><span class="nv">GITLAB_RUNNER_DOCKER_VOLUMES</span><span class="o">=(</span> <span class="s2">"/certs/client"</span> <span class="s2">"/cache"</span> <span class="o">)</span>
+
+<span class="nb">sudo </span>gitlab-runner register <span class="se">\</span>
+<span class="nt">-r</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_RUNNER_TOKEN</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--name</span><span class="o">=</span>gitlab-runner-docker-executor <span class="se">\</span>
+<span class="nt">--non-interactive</span> <span class="se">\</span>
+<span class="nt">--url</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_URL</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--clone-url</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_URL</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--executor</span><span class="o">=</span><span class="s2">"docker"</span> <span class="se">\</span>
+<span class="nt">--docker-tlsverify</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+<span class="nt">--docker-image</span><span class="o">=</span><span class="s2">"alpine:latest"</span> <span class="se">\</span>
+<span class="nt">--docker-disable-entrypoint-overwrite</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+<span class="nt">--docker-oom-kill-disable</span><span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
+<span class="nt">--docker-extra-hosts</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_RUNNER_EXTRA_HOST</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--docker-volumes</span><span class="o">=</span><span class="k">${</span><span class="nv">GITLAB_RUNNER_DOCKER_VOLUMES</span><span class="p">[@]</span><span class="k">}</span> <span class="se">\</span>
+<span class="nt">--env</span><span class="o">=</span><span class="s2">"DOCKER_TLS_CERTDIR="</span> <span class="se">\</span>
+<span class="nt">--docker-privileged</span><span class="o">=</span><span class="nb">true</span> <span class="se">\</span>
+<span class="nt">--tag-list</span><span class="o">=</span><span class="s2">"docker"</span></code></pre></figure>
+
+<p>Jika sudah maka gitlab-runner akan terdaftar seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/gitlab-runner-list.png" alt="gitlat-runner-list" /></p>
+
+<h2 id="tryout-gitlab-ci-script">Tryout Gitlab CI script</h2>
+
+<p>Setelah kita install package gitlab, gitlab-runner, executor (docker) dan register gitlab runner agent ke gitlab instance tahap selanjutnya kita coba test menggunakan simple configuration. Berikut adalah step-by-step nya</p>
+
+<ol>
+  <li>
+    <p>Buat repository, contohnya name <code class="language-plaintext highlighter-rouge">test-gitlab-ci</code> kemudian visiblilty kita buat <code class="language-plaintext highlighter-rouge">public</code> serta untuk project configuration check pada <code class="language-plaintext highlighter-rouge">initilization repo with README</code> click <code class="language-plaintext highlighter-rouge">Create project</code></p>
+  </li>
+  <li>
+    <p>Kemudian coba buat file baru dengan nama <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> seperti berikut:
+  <script src="https://gist.github.com/dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b.js?file=03c-test-gitlab-ci.yml"> </script></p>
+  </li>
+  <li>
+    <p>Dan coba commit, serta push ke branch <code class="language-plaintext highlighter-rouge">main</code>. Jika sudah temen-temen bisa lihat di menu Pipeline seperti berikut:
+  <img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/pipeline.png" alt="pipeline" /></p>
+  </li>
+  <li>
+    <p>Terdapat 1 pipeline yang sedang berjalan, kita coba lihat detailnya dengan click button <code class="language-plaintext highlighter-rouge">running</code> maka seperti berikut:
+  <img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/pipeline-detail.png" alt="pipeline-detail" /></p>
+  </li>
+  <li>
+    <p>Dalam detail pipeline tersebut terlihat sedang ada 1 job yang sedang berjalan, kita coba lihat detail dengan click button <code class="language-plaintext highlighter-rouge">job1</code> maka seperti berikut:
+  <img src="/resources/posts/gitlab-ci/03c-setup-gitlab-ci/job-detail.png" alt="job-detail" /></p>
+  </li>
+  <li>
+    <p>Nah terlihat pada job, menjalankan script yang kita tulis pada file <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> menghasilkan output:</p>
+  </li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span><span class="nb">echo</span> <span class="s1">'Hi my name is Dimas Maryanto'</span>
+  Hi my name is Dimas Maryanto
+
+  Cleaning up project directory and file based variables
+  00:01
+  Job succeeded
+</code></pre></div></div>
+
+<p>Nah ini artinya, kita sudah bisa menggunakan Continues Integration dengan menggunakan Gitlab CI.</p>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/git/version-control/00-silabus-git-vcs"  class="" title="Silabus Git VCS: Pemula s/d Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci" class="" 
+        title="Introduction of Gitlab DevSecOps Platform
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 11 to 11
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="#" class=" disabled">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="#" class=" disabled">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#git" class="page__taxonomy-item p-category" rel="tag">git</a><span class="sep">, </span>
+    
+      <a href="/categories/#gitlab" class="page__taxonomy-item p-category" rel="tag">gitlab</a><span class="sep">, </span>
+    
+      <a href="/categories/#gitlab-ci" class="page__taxonomy-item p-category" rel="tag">gitlab-ci</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-06-17T21:12:16+07:00">June 17, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Settings+up+Gitlab+CI+%28on-premise%29%20%2Fposts%2Fgit%2Fgitlab%2Fgitlab-ci%2F03c-setup-gitlab-ci" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fgit%2Fgitlab%2Fgitlab-ci%2F03c-setup-gitlab-ci" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fgit%2Fgitlab%2Fgitlab-ci%2F03c-setup-gitlab-ci" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci" rel="permalink">Introduction of Gitlab DevSecOps Platform
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-17T20:36:43+07:00">June 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd" rel="permalink">What is Continues Integration/Continues Delivery (CI/CD)?
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-17T16:52:30+07:00">June 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        6 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" rel="permalink">Silabus Gitlab CI: Pemula s/d Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-02T20:18:43+07:00">June 2, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        22 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "JSP Taglib Directive (JSTL)",
+      "link": "/posts/language/java/web/jsp/025-jsp-directive-taglib"
+    }
+    ,
+    {
+      "title": "JSP Directive",
+      "link": "/posts/language/java/web/jsp/024-jsp-directive"
+    }
+    ,
+    {
+      "title": "JSP Scriptlet",
+      "link": "/posts/language/java/web/jsp/023-jsp-scriptlet"
+    }
+    ,
+    {
       "title": "Using JSP and Element of JSP",
       "link": "/posts/language/java/web/jsp/022-using-jsp"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Submit file menggunakan Servlet",
       "link": "/posts/language/java/web/servlet/016-submit-file-dengan-servlet"
-    }
-    ,
-    {
-      "title": "Submit Array value menggunakan Servlet",
-      "link": "/posts/language/java/web/servlet/015-submit-array-value-dengan-servlet"
-    }
-    ,
-    {
-      "title": "Submit value dengan Servlet menggunakan Http POST Method",
-      "link": "/posts/language/java/web/servlet/014-submit-value-dengan-servlet-post-method"
-    }
-    ,
-    {
-      "title": "Submit value dengan Servlet menggunakan Http GET Method",
-      "link": "/posts/language/java/web/servlet/013-submit-value-dengan-servlet-get-method"
     }
   ]
 }

@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Empty Collections Predicate dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/05f-hql-predicate-empty-collections"
+    }
+    ,
+    {
+      "title": "Predicate IN dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/05e-hql-predicate-in"
+    }
+    ,
+    {
+      "title": "Predicate BETWEEN dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/05d-hql-predicate-between"
+    }
+    ,
+    {
       "title": "Predicate LIKE dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/05c-hql-predicate-like"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Aggregation Function dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/04g-hql-aggregate-function"
-    }
-    ,
-    {
-      "title": "Concatnation dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/04f-hql-concatenation"
-    }
-    ,
-    {
-      "title": "Aritmatic dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/04e-hql-aritmetic"
-    }
-    ,
-    {
-      "title": "Distinct dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/04d-hql-distinct"
     }
   ]
 }

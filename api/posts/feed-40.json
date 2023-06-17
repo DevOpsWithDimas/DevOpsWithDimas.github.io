@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Submit Array value menggunakan Servlet",
+      "link": "/posts/language/java/web/servlet/015-submit-array-value-dengan-servlet"
+    }
+    ,
+    {
+      "title": "Submit value dengan Servlet menggunakan Http POST Method",
+      "link": "/posts/language/java/web/servlet/014-submit-value-dengan-servlet-post-method"
+    }
+    ,
+    {
+      "title": "Submit value dengan Servlet menggunakan Http GET Method",
+      "link": "/posts/language/java/web/servlet/013-submit-value-dengan-servlet-get-method"
+    }
+    ,
+    {
       "title": "Pemograman Servlet dengan Annotation",
       "link": "/posts/language/java/web/servlet/012-servlet-dengan-annotation"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Pengenalan Styling dengan CSS",
       "link": "/posts/language/java/web/servlet/004-pengenalan-css"
-    }
-    ,
-    {
-      "title": "Pengenalan Scripting language dengan HTML",
-      "link": "/posts/language/java/web/servlet/003-pengenalan-html"
-    }
-    ,
-    {
-      "title": "Technology Java Enterprice Edition",
-      "link": "/posts/language/java/web/servlet/002-pengenalan-java-web"
-    }
-    ,
-    {
-      "title": "Time is your to practice",
-      "link": "/posts/language/java/jdbc/011-quis-section-1"
     }
   ]
 }

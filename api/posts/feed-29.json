@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Natural Join di Oracle",
+      "link": "/posts/rdbms/oracle18c/010a-natural-join"
+    }
+    ,
+    {
+      "title": "Join clause di Oracle",
+      "link": "/posts/rdbms/oracle18c/010-join-tables"
+    }
+    ,
+    {
+      "title": "Having clause dengan Group By Function",
+      "link": "/posts/rdbms/oracle18c/009c-group-by-having"
+    }
+    ,
+    {
       "title": "Where clause dengan Group By Function",
       "link": "/posts/rdbms/oracle18c/009b-group-by-where"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Date & Time Single Row Function di Oracle",
       "link": "/posts/rdbms/oracle18c/008c-date-function"
-    }
-    ,
-    {
-      "title": "Number Single Row Function di Oracle",
-      "link": "/posts/rdbms/oracle18c/008b-number-function"
-    }
-    ,
-    {
-      "title": "Character Single Row Function di Oracle",
-      "link": "/posts/rdbms/oracle18c/008a-character-function"
-    }
-    ,
-    {
-      "title": "Single Row Function di Oracle",
-      "link": "/posts/rdbms/oracle18c/008-single-row-function"
     }
   ]
 }

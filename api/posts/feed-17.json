@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Best practices for scanning images",
+      "link": "/posts/devops/docker/dockerfile/07n-docker-image-scan"
+    }
+    ,
+    {
+      "title": "Best practices for writing Dockerfiles",
+      "link": "/posts/devops/docker/dockerfile/07m-best-practice-dockerfile"
+    }
+    ,
+    {
+      "title": "Multiple Stage Builds",
+      "link": "/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages"
+    }
+    ,
+    {
       "title": "Health Check Instruction",
       "link": "/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Excluding files/directories",
       "link": "/posts/devops/docker/dockerfile/07e-dockerfile-ignore"
-    }
-    ,
-    {
-      "title": "Copying Resources",
-      "link": "/posts/devops/docker/dockerfile/07d-dockerfile-copy"
-    }
-    ,
-    {
-      "title": "Environtment Replacement",
-      "link": "/posts/devops/docker/dockerfile/07c-dockerfile-env"
-    }
-    ,
-    {
-      "title": "FROM Instruction",
-      "link": "/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction"
     }
   ]
 }

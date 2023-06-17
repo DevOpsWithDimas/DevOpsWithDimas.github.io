@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Number Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008b-number-function"
+    }
+    ,
+    {
+      "title": "Character Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008a-character-function"
+    }
+    ,
+    {
+      "title": "Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008-single-row-function"
+    }
+    ,
+    {
       "title": "Mengurutkan data dengan klausa ORDER BY di Oracle",
       "link": "/posts/rdbms/oracle18c/007-order-by"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Between Predicate pada klausa where di Oracle",
       "link": "/posts/rdbms/oracle18c/006c-between-predicate"
-    }
-    ,
-    {
-      "title": "Like Predicate pada klausa where di Oracle",
-      "link": "/posts/rdbms/oracle18c/006b-like-predicate"
-    }
-    ,
-    {
-      "title": "Comparison Predicate pada klausa where di Oracle",
-      "link": "/posts/rdbms/oracle18c/006a-relational-comparison"
-    }
-    ,
-    {
-      "title": "Klausa where untuk filter data di Oracle",
-      "link": "/posts/rdbms/oracle18c/006-where-clause"
     }
   ]
 }

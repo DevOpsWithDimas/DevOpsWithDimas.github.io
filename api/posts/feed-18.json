@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Copying Resources",
+      "link": "/posts/devops/docker/dockerfile/07d-dockerfile-copy"
+    }
+    ,
+    {
+      "title": "Environtment Replacement",
+      "link": "/posts/devops/docker/dockerfile/07c-dockerfile-env"
+    }
+    ,
+    {
+      "title": "FROM Instruction",
+      "link": "/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction"
+    }
+    ,
+    {
       "title": "Usage docker build",
       "link": "/posts/devops/docker/dockerfile/07a-usage-docker-build"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Docker Volume Overview",
       "link": "/posts/devops/docker/volume/06-docker-volume"
-    }
-    ,
-    {
-      "title": "Disable networking for a container",
-      "link": "/posts/devops/docker/network/05g-docker-none-network"
-    }
-    ,
-    {
-      "title": "Use host networking",
-      "link": "/posts/devops/docker/network/05e-docker-host-network"
-    }
-    ,
-    {
-      "title": "Advanced user-defined bridge network",
-      "link": "/posts/devops/docker/network/05d-docker-advance-user-defined-bridge-network"
     }
   ]
 }

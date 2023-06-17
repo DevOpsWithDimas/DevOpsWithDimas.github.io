@@ -1,0 +1,1367 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Introduction of Gitlab DevSecOps Platform - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas salah satu tools implementasi dari Continues Integration (CI) yaitu menggunakan Gitlab DevSecOps Platform.  Okay karena pembahasan kali ini akan lumayan panjang jadi kita bagi-bagi menjadi beberapa section diantaranya:     Gitlab DevSecOps Platform   Gitlab CI/CD workflow   What can Gitlab CI/CD do?">
+
+
+  <meta name="author" content="Dimas Maryanto">
+  
+  <meta property="article:author" content="Dimas Maryanto">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DevOps with Dimas Maryanto">
+<meta property="og:title" content="Introduction of Gitlab DevSecOps Platform">
+<meta property="og:url" content="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci">
+
+
+  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas salah satu tools implementasi dari Continues Integration (CI) yaitu menggunakan Gitlab DevSecOps Platform.  Okay karena pembahasan kali ini akan lumayan panjang jadi kita bagi-bagi menjadi beberapa section diantaranya:     Gitlab DevSecOps Platform   Gitlab CI/CD workflow   What can Gitlab CI/CD do?">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2023-06-17T20:36:43+07:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "Dimas maryanto",
+      "url": "/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DevOps with Dimas Maryanto Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+<script src="/assets/js/jquery/jquery-3.6.4.min.js"></script>
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="/assets/favicon/site.webmanifest">
+<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/logo.png" alt="DevOps with Dimas Maryanto"></a>
+        
+        <a class="site-title" href="/">
+          DevOps with Dimas Maryanto
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/pages/recent-posts/">Archives</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/cources/">Cources</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/roadmaps/">Roadmaps</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/private-class/">Private class</a>
+            </li><li class="masthead__menu-item">
+              <a href="/pages/discount/">Promo</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person" class="h-card">
+
+  
+    <div class="author__avatar">
+      <img src="/assets/images/profile.jpeg" alt="Dimas Maryanto" itemprop="image" class="u-photo">
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name p-name" itemprop="name">
+      Dimas Maryanto
+    </h3>
+    
+      <div class="author__bio p-note" itemprop="description">
+        <p>I am an <strong>Instructure</strong> at Udemy and 
+<strong>Chief Technology Officer</strong> at PT. Tabeldata Informatika</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  <hr>
+  
+
+  
+
+  
+
+  
+    
+    
+  
+  
+  
+  <nav class="toc">
+    <header>
+      <h4 class="nav__title">
+        <i class="fas fa-file-alt"></i> 
+        On this page
+      </h4>
+    </header>
+    <ul class="toc__menu"><li><a href="#gitlab-devops-platform">Gitlab DevOps Platform</a></li><li><a href="#gitlab-cicd-workflow">Gitlab CI/CD workflow</a></li><li><a href="#what-can-gitlab-cicd-do">What can Gitlab CI/CD do?</a></li></ul>
+
+  </nav>
+  
+  </div>
+
+
+
+
+  <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Introduction of Gitlab DevSecOps Platform">
+    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas salah satu tools implementasi dari Continues Integration (CI) yaitu menggunakan Gitlab DevSecOps Platform.Okay karena pembahasan kali ini akan lumayan panjang jadi kita bagi-bagi menjadi beberapa section diantaranya:  Gitlab DevSecOps Platform  Gitlab CI/CD workflow  What can Gitlab CI/CD do?">
+    <meta itemprop="datePublished" content="2023-06-17T20:36:43+07:00">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title p-name" itemprop="headline">
+            <a href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci" class="u-url" itemprop="url">Introduction of Gitlab DevSecOps Platform
+</a>
+          </h1>
+          
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-17T20:36:43+07:00">June 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        3 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        </header>
+      
+
+      <section class="page__content e-content" itemprop="text">
+        
+        <div class="text-right">
+          <label class="switch">
+            <input name="cource-content" onchange="showCourceContent(this.checked)" type="checkbox">
+            <span class="slider"></span>
+          </label>
+        </div>        
+        <aside id="cource_contents" style="display: none;" class="sidebar__right">
+          
+            
+            
+            
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Git Version Control">
+        <label class="acordion-item-label" for="content-Git Version Control">
+            Git Version Control
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/git/version-control/00-silabus-git-vcs">
+                        
+                        Silabus Git VCS: Pemula s/d...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01-introduction-version-control">
+                        
+                        Pengenalan Version Control
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01a-what-is-git">
+                        
+                        What is Git SCM
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01b-install-git-mac">
+                        
+                        How to Install git on MacOS
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01b-install-git-windows">
+                        
+                        How to Install git on Windows
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01b-install-git-linux">
+                        
+                        How to Install git on Linux
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/version-control/01c-basic-git-command">
+                        
+                        Getting started with git
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Platform">
+        <label class="acordion-item-label" for="content-Gitlab Platform">
+            Gitlab Platform
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab CI for Automation (DevOps engineer)">
+        <label class="acordion-item-label" for="content-Gitlab CI for Automation (DevOps engineer)">
+            Gitlab CI for Automation (DevOps engineer)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci">
+                        
+                        Silabus Gitlab CI: Pemula s...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd">
+                        
+                        What is Continues Integrati...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci">
+                        
+                        <i class="fas fa-bookmark"></i>
+                        
+                        Introduction of Gitlab DevS...
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci">
+                        
+                        Settings up Gitlab CI (on-p...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab for Project Management (PM Role)">
+        <label class="acordion-item-label" for="content-Gitlab for Project Management (PM Role)">
+            Gitlab for Project Management (PM Role)
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Integration">
+        <label class="acordion-item-label" for="content-Gitlab Integration">
+            Gitlab Integration
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Monitoring">
+        <label class="acordion-item-label" for="content-Gitlab Monitoring">
+            Gitlab Monitoring
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
+        <input type="checkbox" id="content-Gitlab Migration">
+        <label class="acordion-item-label" for="content-Gitlab Migration">
+            Gitlab Migration
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+            <li>
+                <a href="#!">Materi belum tersedia</a>
+            </li>
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+                
+                      
+          
+        </aside>
+        
+        <p>Hai semuanya, di materi kali ini kita akan membahas salah satu tools implementasi dari Continues Integration (CI) yaitu menggunakan Gitlab DevSecOps Platform.</p>
+
+<p>Okay karena pembahasan kali ini akan lumayan panjang jadi kita bagi-bagi menjadi beberapa section diantaranya:</p>
+
+<ol>
+  <li>Gitlab DevSecOps Platform</li>
+  <li>Gitlab CI/CD workflow</li>
+  <li>What can Gitlab CI/CD do?</li>
+</ol>
+
+<!--more-->
+
+<h2 id="gitlab-devops-platform">Gitlab DevOps Platform</h2>
+
+<div class="feature__wrapper">
+
+  
+    <div class="feature__item--right">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-devsecops-platform.png" alt="gitlab-devsecops-platform" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Gitlab Features</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Fundamentally changing the way Development, Security, and Ops teams collaborate and build software - GitLab provides all of the essential DevSecOps tools in one DevSecOps platform. <br /><br />From idea to production, GitLab helps teams improve cycle time from weeks to minutes, reduce development costs, speed time to market, and deliver more secure and compliant applications.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+
+</div>
+
+<div class="feature__wrapper">
+
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-plan.png" alt="gitlab-plan" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Planning</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Regardless of your process, GitLab provides powerful planning tools to keep everyone synchronized.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-create.png" alt="gitlab-create" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Create</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Create, view, and manage code and project data through powerful branching tools.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-verify.png" alt="gitlab-verify" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Verify</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Keep strict quality standards for production code with automatic testing and reporting.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-package.png" alt="gitlab-package" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Package</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Create a consistent and dependable software supply chain with built-in package management.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-secure.png" alt="gitlab-secure" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Secure</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Security capabilities, integrated into your development lifecycle.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-release.png" alt="gitlab-release" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Deploy</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>GitLab’s integrated CD solution allows you to ship code with zero-touch, be it on one or one thousand servers.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-monitor.png" alt="gitlab-monitor" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Monitor</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Help reduce the severity and frequency of incidents.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+    <div class="feature__item">
+      <div class="archive__item">
+        
+          <div class="archive__item-teaser">
+            <img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/gitlab-govern.png" alt="gitlab-govern" />
+            
+          </div>
+        
+
+        <div class="archive__item-body text-left">
+          
+            <h2 class="archive__item-title">Govern</h2>
+          
+
+          
+            <div class="archive__item-excerpt text-justify">
+              <p>Manage security vulnerabilities, policies, and compliance across your organization.</p>
+
+            </div>
+          
+
+          
+        </div>
+      </div>
+    </div>
+  
+
+</div>
+
+<h2 id="gitlab-cicd-workflow">Gitlab CI/CD workflow</h2>
+
+<p>Gitlab CI menawarkan 3 konsep yaitu <strong>Continues Integration</strong>, <strong>Continues Delivery</strong> dan <strong>Continues Deployment</strong>. Out-of-the-box management systems can decrease hours spent on maintaining toolchains by 10% or more, so you can test, build, and publish your software with no third-party application or integration needed because Gitlab CI is the part of Gitlab.</p>
+
+<p>GitLab CI/CD fits in a common development workflow.</p>
+
+<p>You can start by discussing a code implementation in an issue and working locally on your proposed changes. 
+Then you can push your commits to a feature branch in a remote repository that’s hosted in GitLab. 
+The push triggers the CI/CD pipeline for your project. Then, GitLab CI/CD:</p>
+
+<p>Runs automated scripts (sequentially or in parallel) to:</p>
+<ul>
+  <li>Build and test your application.</li>
+  <li>Preview the changes in a Review App, the same as you would see on your localhost.</li>
+</ul>
+
+<p>After the implementation works as expected:</p>
+<ul>
+  <li>Get your code reviewed and approved.</li>
+  <li>Merge the feature branch into the default branch.</li>
+  <li>GitLab CI/CD deploys your changes automatically to a production environment.</li>
+  <li>If something goes wrong, you can roll back your changes.</li>
+</ul>
+
+<p><img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/basic-gitlab-ci.png" alt="basic-gitlab-ci-workflow" /></p>
+
+<p>This workflow shows the major steps in the GitLab process. You don’t need any external tools to deliver your software and you can visualize all the steps in the GitLab UI.</p>
+
+<h2 id="what-can-gitlab-cicd-do">What can Gitlab CI/CD do?</h2>
+
+<p>If you look deeper into the workflow, you can see the features available in GitLab at each stage of the DevOps lifecycle.</p>
+
+<p><img src="/resources/posts/gitlab-ci/03b-intro-gitlab-ci/advanced-gitlab-ci.png" alt="advanced-gitlab-ci-workflow" /></p>
+
+<p>Stages continues integration:</p>
+
+<ul>
+  <li><strong>Code quality</strong>, To measure/analyze your source code’s quality and complexity.</li>
+  <li><strong>Unit tests</strong>, To test your source code’s with automated</li>
+  <li><strong>Dependency scanning</strong>, To measure/analyze your dependencies is verify and not contains vulnerability</li>
+</ul>
+
+<p>Stages continues delivery/deployment:</p>
+
+<ul>
+  <li><strong>Build &amp; Package</strong>, To compile then wrap your source code’s into package, it’s can be executeable from anywere</li>
+  <li><strong>Shipping</strong>, After build script succeed, we can store that artifact to registry such as Container registry, NPM registry, Maven repository and etc.</li>
+  <li><strong>Deploy</strong>, After artifact stored on registry/repository, we can used that object to run the application</li>
+</ul>
+
+        
+        <div class="text-right">
+          <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+<nav>
+  <ul class="pagination text-right">
+    <!-- goto first page -->
+    <li id="first_post" class="page-item">
+      
+      <a href="/posts/git/version-control/00-silabus-git-vcs"  class="" title="Silabus Git VCS: Pemula s/d Mahir">
+        First page
+      </a>
+      
+    </li>
+    <li id="previous_page" class="page-item">
+      
+      <a href="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd" class="" 
+        title="What is Continues Integration/Continues Delivery (CI/CD)?
+">
+        <i class="fas fa-chevron-left"></i>
+      </a>
+       
+    </li>
+    <li class="page-item">
+      <a href="#" class=" disabled">
+        Page 10 to 11
+      </a>
+    </li>
+    <li id="next_page" class="page-item">
+      
+      <a href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci" class="" 
+        title="Settings up Gitlab CI (on-premise)
+">
+        <i class="fas fa-chevron-right"></i>
+      </a>
+      
+    </li>
+    <li id="last_post" class="page-item">
+      
+      <a href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci"  class="" title="Settings up Gitlab CI (on-premise)">
+        Last page
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<a href="#page-title" class="back-to-top">Back to top &uarr;</a>
+        </div>
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/categories/#git" class="page__taxonomy-item p-category" rel="tag">git</a><span class="sep">, </span>
+    
+      <a href="/categories/#gitlab" class="page__taxonomy-item p-category" rel="tag">gitlab</a><span class="sep">, </span>
+    
+      <a href="/categories/#gitlab-ci" class="page__taxonomy-item p-category" rel="tag">gitlab-ci</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-06-17T20:36:43+07:00">June 17, 2023</time></p>
+
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Introduction+of+Gitlab+DevSecOps+Platform%20%2Fposts%2Fgit%2Fgitlab%2Fgitlab-ci%2F03b-introduction-gitlab-ci" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fgit%2Fgitlab%2Fgitlab-ci%2F03b-introduction-gitlab-ci" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fgit%2Fgitlab%2Fgitlab-ci%2F03b-introduction-gitlab-ci" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h2 class="page__related-title">You may also enjoy</h2>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci" rel="permalink">Settings up Gitlab CI (on-premise)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-17T21:12:16+07:00">June 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        8 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03a-what-is-cicd" rel="permalink">What is Continues Integration/Continues Delivery (CI/CD)?
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-17T16:52:30+07:00">June 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        6 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci" rel="permalink">Silabus Gitlab CI: Pemula s/d Mahir
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-02T20:18:43+07:00">June 2, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/500x300.png" alt="">
+      </div>
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+      
+        22 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+        
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+<script>
+function showCourceContent(data){
+  if(data) {
+    $('body').removeClass('wide');
+    $('#cource_contents').show();
+  } else {
+    $('body').addClass('wide');
+    $('#cource_contents').hide();
+  }
+}
+
+</script>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';" role="search">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+
+    
+      
+        
+          <li><a href="https://facebook.com/dimmaryanto93/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-facebook-square" aria-hidden="true"></i> Facebook</a></li>
+        
+      
+        
+          <li><a href="https://github.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/dimmaryanto93" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@DimasMaryanto" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-youtube" aria-hidden="true"></i> Youtube</a></li>
+        
+      
+    
+
+    
+      <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dimas maryanto. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

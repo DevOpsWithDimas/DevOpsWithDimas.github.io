@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Overview SQL Select statements",
+      "link": "/posts/rdbms/postgresql/sql/select/03-overview-sql"
+    }
+    ,
+    {
+      "title": "Mounting filesystems to minikube cluster",
+      "link": "/posts/devops/orchestration/kubernetes/02h-minikube-mount"
+    }
+    ,
+    {
+      "title": "Access your apps/service in minikube",
+      "link": "/posts/devops/orchestration/kubernetes/02g-minikube-access-apps"
+    }
+    ,
+    {
       "title": "Minikube addons features",
       "link": "/posts/devops/orchestration/kubernetes/02f-minikube-addons"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Install PostgreSQL for Mac users",
       "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac"
-    }
-    ,
-    {
-      "title": "Using your own image into Minikube cluster",
-      "link": "/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images"
-    }
-    ,
-    {
-      "title": "Minikube basic control",
-      "link": "/posts/devops/orchestration/kubernetes/02c-minikube-basic-control"
-    }
-    ,
-    {
-      "title": "Deploying an apps/services into Kubernetes",
-      "link": "/posts/devops/orchestration/kubernetes/02b-deploy-application"
     }
   ]
 }

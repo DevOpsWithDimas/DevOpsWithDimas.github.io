@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Getting started with Transaction Control (TCL)",
+      "link": "/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"
+    }
+    ,
+    {
+      "title": "Overview of Concurrency Control",
+      "link": "/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control"
+    }
+    ,
+    {
+      "title": "Time your practice (part 3)",
+      "link": "/posts/rdbms/postgresql/sql/dml/05g-quis-section-1"
+    }
+    ,
+    {
       "title": "Cleanup Data from Table",
       "link": "/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Deep dive into UPDATE Statement",
       "link": "/posts/rdbms/postgresql/sql/dml/05c-dml-update"
-    }
-    ,
-    {
-      "title": "Getting started with Ansible role, tasks for docker",
-      "link": "/posts/devops/docker/14c-ansible-for-docker-operations"
-    }
-    ,
-    {
-      "title": "Setup Ansible Control and Managed Nodes",
-      "link": "/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment"
-    }
-    ,
-    {
-      "title": "IT Automation Platform for Docker Operations",
-      "link": "/posts/devops/docker/14a-it-automation-platform"
     }
   ]
 }

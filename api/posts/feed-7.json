@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Overview of Docker machines",
+      "link": "/posts/devops/docker/machine/13-docker-machine-overview"
+    }
+    ,
+    {
+      "title": "Single Row / Group functions",
+      "link": "/posts/rdbms/postgresql/sql/select/04a-single-group-function"
+    }
+    ,
+    {
+      "title": "Deep dive into Select Statements",
+      "link": "/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements"
+    }
+    ,
+    {
       "title": "Time your practice (part 1)",
       "link": "/posts/rdbms/postgresql/sql/select/03g-quis-section-1"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Basic SQL Select statements",
       "link": "/posts/rdbms/postgresql/sql/select/03a-basic-select-statement"
-    }
-    ,
-    {
-      "title": "Overview SQL Select statements",
-      "link": "/posts/rdbms/postgresql/sql/select/03-overview-sql"
-    }
-    ,
-    {
-      "title": "Mounting filesystems to minikube cluster",
-      "link": "/posts/devops/orchestration/kubernetes/02h-minikube-mount"
-    }
-    ,
-    {
-      "title": "Access your apps/service in minikube",
-      "link": "/posts/devops/orchestration/kubernetes/02g-minikube-access-apps"
     }
   ]
 }
