@@ -35,9 +35,8 @@ Okay karena pembahasan kali ini akan lumayan panjang, jadi kita akan bagi-bagi m
 
 1. Create a `.gitlab-ci.yml` file
 2. Running the Gitlab CI pipelines
-3. How Gitlab CI/CD pipeline works?
-4. Tips for writing the `.gitlab-ci.yml`
-5. Tips for design Gitlab CI/CD pipeline
+3. Tips for writing the `.gitlab-ci.yml`
+4. Tips for design Gitlab CI/CD pipeline
 
 <!--more-->
 
@@ -224,3 +223,23 @@ Sekarang coba jalankan perintah berikut di terminal
 Sekarang kita lihat hasilnya:
 
 ![trigger-curl]({{ page.image_path | prepend: site.baseurl }}/05b-triger-pipeline.png)
+
+## Tips for writing the `.gitlab-ci.yml`
+
+Here are some tips to get started working with the `.gitlab-ci.yml` file.
+
+For the complete `.gitlab-ci.yml` syntax, see [the full `.gitlab-ci.yml` keyword reference](https://docs.gitlab.com/ee/ci/yaml/index.html).
+
+- Use the [pipeline editor](https://docs.gitlab.com/ee/ci/pipeline_editor/index.html) to edit your `.gitlab-ci.yml` file.
+
+- Each job contains a script section and belongs to a stage:
+    - `stage` describes the sequential execution of jobs. If there are runners available, jobs in a single stage run in parallel.
+    - Use the `needs` keyword to run jobs out of stage order.
+
+- You can set additional configuration to customize how your jobs and stages perform:
+    - Use the `rules` keyword to specify when to run or skip jobs. The `only` and `except` legacy keywords are still supported, but can’t be used with `rules` in the same job.
+    - Keep information across jobs and stages persistent in a pipeline with `cache` and `artifacts`. These keywords are ways to store dependencies and job output, even when using ephemeral runners for each job.
+    - Use the `default` keyword to specify additional configurations that are applied to all jobs. This keyword is often used to define `before_script` and `after_script` sections that should run on every job.
+
+## Tips for design Gitlab CI/CD pipeline
+
