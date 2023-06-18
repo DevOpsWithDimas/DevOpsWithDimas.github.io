@@ -170,3 +170,37 @@ Lanjutan dari run pipeline secara manual tersebut, kita juga bisa meng-schedule 
 Dan perhatikan ke menu Pipeline 5 menit mendatang hasilnya seperti berikut:
 
 ![run-from-schedule]({{ page.image_path | prepend: site.baseurl }}/04b-schedule-run.png)
+
+### Trigger using (`webhook`, `rest-api`)
+
+Yang terkahir kita juga bisa me-trigger dari Webhook atau Rest-API menggunakan tools seperti `curl` atau bahkan Postman. Untuk membuat Gitlab CI yang bisa di triger kita membuat dulu TOKEN di menu **Settings -> CI/CD -> expand Triger pipeline** seperti berikut:
+
+![create-token-trigger]({{ page.image_path | prepend: site.baseurl }}/05a-trigger-token.png)
+
+Kemudian input nama/description contohnya `trigger-curl` dan kemudian click button `Add triger` maka akan muncul tokennya, coba simpan token tersebut.
+
+Setelah itu kita bisa triger pipeline dengan perintah curl berikut:
+
+{% highlight bash %}
+curl -X POST \
+     --fail \
+     -F token=TOKEN \
+     -F ref=REF_NAME \
+     PROTOCOL://SERVER_GITLAB/api/v4/projects/PROJECT_ID/trigger/pipeline
+{% endhighlight %}
+
+Sekarang coba jalankan perintah berikut di terminal
+
+```bash
+➡ curl -X POST \
+     --fail \
+     -F token=glptt-da5dbea331d2c78071752e4528ba52c34a9a9567 \
+     -F ref=main \
+     https://gitlab.dimas-maryanto.com/api/v4/projects/364/trigger/pipeline
+
+"id":1029,"iid":12,"project_id":364,"sha":"93b7c2cfda83cda7b42bea5619c2756f7e57022e","ref":"main","status":"created","source":"trigger","created_at":"2023-06-18T07:00:35.016Z","updated_at":"2023-06-18T07:00:35.016Z","web_url":"https://gitlab.dimas-maryanto.com/examples/gitlab-ci-cd/test-gitlab-ci/-/pipelines/1029","before_sha":"0000000000000000000000000000000000000000","tag":false,"yaml_errors":null,"user":{"id":2,"username":"dimasm93","name":"Dimas Maryanto","state":"active","avatar_url":"https://gitlab.dimas-maryanto.com/uploads/-/system/user/avatar/2/avatar.png","web_url":"https://gitlab.dimas-maryanto.com/dimasm93"},"started_at":null,"finished_at":null,"committed_at":null,"duration":null,"queued_duration":null,"coverage":null,"detailed_status":{"icon":"status_created","text":"created","label":"created","group":"created","tooltip":"created","has_details":true,"details_path":"/examples/gitlab-ci-cd/test-gitlab-ci/-/pipelines/1029","illustration":null,"favicon":"/assets/ci_favicons/favicon_status_created-4b975aa976d24e5a3ea7cd9a5713e6ce2cd9afd08b910415e96675de35f64955.png"}}%
+```
+
+Sekarang kita lihat hasilnya:
+
+![trigger-curl]({{ page.image_path | prepend: site.baseurl }}/05b-triger-pipeline.png)
