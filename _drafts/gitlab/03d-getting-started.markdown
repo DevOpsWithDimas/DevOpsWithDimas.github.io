@@ -90,8 +90,8 @@ By default, when you push or changed the file of `.gitlab-ci.yml` it's trigger p
 
 - Workflow (`rules`, `only`)
 - Manually run pipeline
-- Trigger
-- Schedule
+- Schedule to run pipeline
+- Trigger using (`webhook`, `rest-api`)
 
 ### Updating file `.gitlab-ci.yml`
 
@@ -152,3 +152,21 @@ Selain menggunakan script based, dan workflow Gitlab CI kita juga bisa menjalank
 Kemudian muncul form seperti berikut, jika tidak ada option yang kita define pada script `.gitlab-ci.yml` just click the button, hasilnya seperti berikut:
 
 ![form-run-pipeline]({{ page.image_path | prepend: site.baseurl }}/03c-manual-run-pipeline.png)
+
+### Schedule to run pipeline
+
+Lanjutan dari run pipeline secara manual tersebut, kita juga bisa meng-schedule pipeline dengan menggunakan cron pattern caranya 
+
+- Akses ke menu **Pipelines -> Schedule** seperti berikut:
+
+    ![schedule-pipeline]({{ page.image_path | prepend: site.baseurl }}/03c-manual-run-pipeline.png)
+
+- Misalnya kita mau menjalankan pipeline tersebut setiap 5 menit, jadi pilih Interfal pattern `Custom` input seperti berikut `*/5 * * * *`
+
+- Kemudian save, seperti berikut:
+
+![schedule-list]({{ page.image_path | prepend: site.baseurl }}/04a-schedule-pipeline.png)
+
+Dan perhatikan ke menu Pipeline 5 menit mendatang hasilnya seperti berikut:
+
+![run-from-schedule]({{ page.image_path | prepend: site.baseurl }}/04b-schedule-run.png)
