@@ -2,6 +2,7 @@
 lang: gitlab
 catalog_key: gitlab-ci
 title: "Getting started: Create and run your first Gitlab CI/CD pipeline"
+date: 2023-06-18T15:30:55+07:00
 categories:
 - git
 - gitlab
