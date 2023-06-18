@@ -10,7 +10,7 @@ categories:
 refs: 
 - - https://kubernetes.io/docs/
 youtube: {{ youtube }}
-image_path: /resources/posts/kubernetes/{{ page.catalog_key }}/{{ title }}
+image_path: /resources/posts/kubernetes/{{ catalog_key }}/{{ title }}
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---

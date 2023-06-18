@@ -1,18 +1,19 @@
 ---
 lang: gitlab
 catalog_key: gitlab-ci
-title: "{{ title }}"
+title: "03f-gitlab-ci-job-condition-references"
 categories:
 - git
 - gitlab
 - gitlab-ci
 refs: 
 - https://docs.docker.com/
-youtube: {{ youtube }}
-image_path: /resources/posts/{{ catalog_key }}/{{ title }}
+youtube: 
+image_path: /resources/posts/gitlab-ci/03f-gitlab-ci-job-condition-references
 gist: dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b
 downloads: []
 ---
+
 
 description...
 
