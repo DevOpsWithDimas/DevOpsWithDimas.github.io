@@ -36,7 +36,6 @@ Okay karena pembahasan kali ini akan lumayan panjang, jadi kita akan bagi-bagi m
 1. Create a `.gitlab-ci.yml` file
 2. Running the Gitlab CI pipelines
 3. Tips for writing the `.gitlab-ci.yml`
-4. Tips for design Gitlab CI/CD pipeline
 
 <!--more-->
 
@@ -240,6 +239,4 @@ For the complete `.gitlab-ci.yml` syntax, see [the full `.gitlab-ci.yml` keyword
     - Use the `rules` keyword to specify when to run or skip jobs. The `only` and `except` legacy keywords are still supported, but can’t be used with `rules` in the same job.
     - Keep information across jobs and stages persistent in a pipeline with `cache` and `artifacts`. These keywords are ways to store dependencies and job output, even when using ephemeral runners for each job.
     - Use the `default` keyword to specify additional configurations that are applied to all jobs. This keyword is often used to define `before_script` and `after_script` sections that should run on every job.
-
-## Tips for design Gitlab CI/CD pipeline
 
