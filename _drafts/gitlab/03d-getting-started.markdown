@@ -43,3 +43,43 @@ Okay karena pembahasan kali ini akan lumayan panjang, jadi kita akan bagi-bagi m
 
 ## Create a `.gitlab-ci.yml` file
 
+File `.gitlab-ci.yml` basiclly it's a [YAML](https://en.wikipedia.org/wiki/YAML) format that you can specify to instruction of Gitlab CI/CD. in this file, you can define:
+
+- The structure and order of jobs that the runner should execute.
+- The decisions the runner should make when specific conditions are encountered.
+
+To create a `.gitlab-ci.yml` file you can used:
+
+- Manually, by using text-editor such as vscode, vim, nodepad, etc
+- Build-in text-editor by gitlab
+
+    {% gist page.gist "03d-basic-gitlab-ci.yml" %}
+
+    This example shows four jobs: `build-job`, `test-job1`, `test-job2`, and `deploy-prod`. The comments listed in the `echo` commands are displayed in the UI when you view the jobs. The values for the [predefined variables](https://docs.gitlab.com/ee/ci/variables/predefined_variables.html) `$GITLAB_USER_LOGIN` and `$CI_COMMIT_BRANCH` are populated when the jobs run.
+
+- Then submit, commit & push
+
+Now take a look at your pipeline and the jobs within.
+
+1. Go to **CI/CD > Pipelines**. A pipeline with three stages should be displayed:
+
+    ![gitlab-pipeline]({{ page.image_path | prepend: site.baseurl }}/01-pipeline.png)
+
+2. View a visual representation of your pipeline by selecting the pipeline ID:
+
+    ![gitlab-pipeline-detail]({{ page.image_path | prepend: site.baseurl }}/01a-pipeline-detail.png)
+
+3. View details of a job by selecting the job name.
+
+    - This is `build-job`
+        ![job-build]({{ page.image_path | prepend: site.baseurl }}/01b-job-build.png)
+
+    - This is `build-test2`
+        ![job-build]({{ page.image_path | prepend: site.baseurl }}/01c-job-test2.png)
+
+    - This is `build-deploy-prod`
+        ![job-build]({{ page.image_path | prepend: site.baseurl }}/01d-job-deploy-prod.png)
+
+You have successfully created your first CI/CD pipeline in GitLab. Congratulations!
+
+Now you can get started customizing your `.gitlab-ci.yml` and defining more advanced jobs.
