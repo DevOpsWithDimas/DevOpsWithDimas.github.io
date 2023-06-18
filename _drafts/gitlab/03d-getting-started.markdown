@@ -83,3 +83,60 @@ Now take a look at your pipeline and the jobs within.
 You have successfully created your first CI/CD pipeline in GitLab. Congratulations!
 
 Now you can get started customizing your `.gitlab-ci.yml` and defining more advanced jobs.
+
+## Running the Gitlab CI pipelines
+
+By default, when you push or changed the file of `.gitlab-ci.yml` it's trigger pipeline to run, but we have an other way to run it. Here is 4 deffrent method to the run pipeline:
+
+- Workflow (`rules`, `only`)
+- Manually start
+- Trigger
+- Schedule
+
+### Updating file `.gitlab-ci.yml`
+
+Okay kita bahas satu-per-satu, mulai dari update file `.gitlab-ci.yml` yang sebelumnya seperti berikut:
+
+{% gist page.gist "03d-basic-gitlab-ci-edited.yml" %}
+
+Ketika di push maka secara otomatis akan jalan pipeline baru seperti berikut:
+
+![gitlab-pipeline-edited]({{ page.image_path | prepend: site.baseurl }}/02a-gitlab-ci-edited.png)
+
+The output will print look like this:
+
+```bash
+Hello, my name is Dimas Maryanto ! \n i'm trying to learn CI/CD feature with Gitlab CI
+```
+
+### Using workflow
+
+Sekarang kita coba untuk workflow method, dengan mengupdate file `.gitlab-ci.yml` menggunakan property `only` atau `rules` seperti berikut:
+
+{% gist page.gist "03d-basic-gitlab-ci-workflow.yml" %}
+
+Ketika di push maka secara otomatis akan jalan pipeline baru dan berikut adalah pipeline detailnya:
+
+![gitlab-pipeline-detail-workflow]({{ page.image_path | prepend: site.baseurl }}/02b-workflow-pipeline-detail.png)
+
+Nah terlihat disana terdapat 3 job yaitu `build-job`, `test-job2` dan `deploy-prod`. Terus untuk job `test-job1` kemana?
+
+Job `test-job1` hanya akan muncul jika kita membuat `branch`, `tags` atau `commit message` dengan prefix `-release` seperti berikut:
+
+Kita coba buat tag `2023.06.18.12.51-release` pada branch `main seperti berikut:
+
+![create-tags]({{ page.image_path | prepend: site.baseurl }}/02c-workflow-create-tag.png)
+
+Sekarang jika kita lihat pada pipeline detail yang terbaru maka jobnya jalan seperti berikut:
+
+![workflow-tags]({{ page.image_path | prepend: site.baseurl }}/02c-workflow-create-tag-pipeline.png)
+
+Dengan dengan membuat tag tersebut, kita menjalankan kembali job sebelumnya beserta `test-job1` tetapi tanpa job `deploy-prod`
+
+Sedangkan untuk menjalankan yang job `build-prod` kita bisa membuat Merge request dari branch dengan prefix `hotfix/` ke branch default yang which is `main`.
+
+- Buat branch baru misalnya dengan nama `hotfix/issue01` dari branch main
+- Buat perubahan dan commit serta push
+- Buat merge request ke main maka hasilnya seperti berikut:
+
+![workflow-tags]({{ page.image_path | prepend: site.baseurl }}/02d-workflow-mr.png)
