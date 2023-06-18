@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Build specific docker image by programming languages",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage"
+    }
+    ,
+    {
       "title": "Best practices for scanning images",
       "link": "/posts/devops/docker/dockerfile/07n-docker-image-scan"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Label Instruction",
       "link": "/posts/devops/docker/dockerfile/07f-dockerfile-label"
-    }
-    ,
-    {
-      "title": "Excluding files/directories",
-      "link": "/posts/devops/docker/dockerfile/07e-dockerfile-ignore"
     }
   ]
 }

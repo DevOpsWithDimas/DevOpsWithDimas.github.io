@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Overview Kubernetes Workloads resources",
+      "link": "/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources"
+    }
+    ,
+    {
       "title": "Getting started with Transaction Control (TCL)",
       "link": "/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Deep dive into DELETE statement",
       "link": "/posts/rdbms/postgresql/sql/dml/05d-dml-delete"
-    }
-    ,
-    {
-      "title": "Deep dive into UPDATE Statement",
-      "link": "/posts/rdbms/postgresql/sql/dml/05c-dml-update"
     }
   ]
 }

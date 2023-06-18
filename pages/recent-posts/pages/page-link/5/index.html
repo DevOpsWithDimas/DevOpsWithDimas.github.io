@@ -318,6 +318,93 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05c-dml-update" rel="permalink">Deep dive into UPDATE Statement
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-10-03T21:57:19+07:00">October 3, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        10 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, setelah kita membahas Insert Statement perintah selanjutnya yang kita perlu perlajari adalah merubah data pada suatu tabel dengan menggunakan perintah <code class="language-plaintext highlighter-rouge">UPDATE</code> statement. Seperti yang temen-temen telah pelajari Perintah <code class="language-plaintext highlighter-rouge">UPDATE</code> statement yang telah bahas sebelumnya masih hal yang simple, sebetulnya secara syntax perintahnya seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">[</span> <span class="k">WITH</span> <span class="p">[</span> <span class="k">RECURSIVE</span> <span class="p">]</span> <span class="n">with_query</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
+<span class="k">UPDATE</span> <span class="p">[</span> <span class="k">ONLY</span> <span class="p">]</span> <span class="k">table_name</span> <span class="p">[</span> <span class="o">*</span> <span class="p">]</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
+    <span class="k">SET</span> <span class="p">{</span> <span class="k">column_name</span> <span class="o">=</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="o">|</span>
+          <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">[</span> <span class="k">ROW</span> <span class="p">]</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">|</span>
+          <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">sub</span><span class="o">-</span><span class="k">SELECT</span> <span class="p">)</span>
+        <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span>
+    <span class="p">[</span> <span class="k">FROM</span> <span class="n">from_item</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="o">|</span> <span class="k">WHERE</span> <span class="k">CURRENT</span> <span class="k">OF</span> <span class="k">cursor_name</span> <span class="p">]</span>
+    <span class="p">[</span> <span class="n">RETURNING</span> <span class="o">*</span> <span class="o">|</span> <span class="n">output_expression</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="n">output_name</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span></code></pre></figure>
+
+<p>Nah jadi jika kita perhatikan ada beberapa clause yang kita bisa digunakan diantaranya:</p>
+
+<ol>
+  <li>UPDATE using <code class="language-plaintext highlighter-rouge">DEFAULT</code> value clause</li>
+  <li>UPDATE using sub-SELECT clause</li>
+  <li>UPDATE using column-list syntax</li>
+  <li>UPDATE using <code class="language-plaintext highlighter-rouge">WITH</code> clause</li>
+  <li>UPDATE using <code class="language-plaintext highlighter-rouge">FROM</code> clause</li>
+  <li>UPDATE using <code class="language-plaintext highlighter-rouge">RETURNING</code> clause</li>
+</ol>
+
+<p>Nah jadi akan lebih enak jika kita break-down untuk pembahasanya masing-masing feature tersebut.</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/14c-ansible-for-docker-operations" rel="permalink">Getting started with Ansible role, tasks for docker
 </a>
       
@@ -590,105 +677,6 @@
 <p>Ok materi yang akan kita bahas di section kali ini tidak akan terlalu men-detail mengenai RedHat Ansible melainkan penggunaannya terkait Docker operation ya, jika temen-temen tertarik lebih detail mengenai IT Automation dengan RedHat Ansible nanti saya akan buatkan kelas tersendiri :)</p>
 
 <p>Jadi materinya yang akan kita bahas yaitu</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05b-dml-insert" rel="permalink">Deep dive into INSERT Statement
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      PostgreSQL
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-09-04T11:38:35+07:00">September 4, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        18 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, pada materi sebelumnya kita sudah membahas sedikit tentang Data Manipulation language atau di singkat DML. Nah sekarang kita akan bahas lebih detail khususnya untuk perintah <code class="language-plaintext highlighter-rouge">INSERT</code> yang telah kita pelajari di materi sebelumnya hanyalah simple sebetulnya secara syntax perintahnya seperti berikut:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">[</span> <span class="k">WITH</span> <span class="p">[</span> <span class="k">RECURSIVE</span> <span class="p">]</span> <span class="n">with_query</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
-<span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">table_name</span> <span class="p">[</span> <span class="k">AS</span> <span class="k">alias</span> <span class="p">]</span> <span class="p">[</span> <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span>
-    <span class="p">[</span> <span class="k">OVERRIDING</span> <span class="p">{</span> <span class="k">SYSTEM</span> <span class="o">|</span> <span class="k">USER</span> <span class="p">}</span> <span class="n">VALUE</span> <span class="p">]</span>
-    <span class="p">{</span> <span class="k">DEFAULT</span> <span class="k">VALUES</span> <span class="o">|</span> <span class="k">VALUES</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[,</span> <span class="p">...]</span> <span class="o">|</span> <span class="n">query</span> <span class="p">}</span>
-    <span class="p">[</span> <span class="k">ON</span> <span class="n">CONFLICT</span> <span class="p">[</span> <span class="n">conflict_target</span> <span class="p">]</span> <span class="n">conflict_action</span> <span class="p">]</span>
-    <span class="p">[</span> <span class="n">RETURNING</span> <span class="o">*</span> <span class="o">|</span> <span class="n">output_expression</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="n">output_name</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
-
-<span class="k">where</span> <span class="n">conflict_target</span> <span class="n">can</span> <span class="n">be</span> <span class="n">one</span> <span class="k">of</span><span class="p">:</span>
-
-    <span class="p">(</span> <span class="p">{</span> <span class="n">index_column_name</span> <span class="o">|</span> <span class="p">(</span> <span class="n">index_expression</span> <span class="p">)</span> <span class="p">}</span> <span class="p">[</span> <span class="k">COLLATE</span> <span class="k">collation</span> <span class="p">]</span> <span class="p">[</span> <span class="n">opclass</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">[</span> <span class="k">WHERE</span> <span class="n">index_predicate</span> <span class="p">]</span>
-    <span class="k">ON</span> <span class="k">CONSTRAINT</span> <span class="k">constraint_name</span>
-
-<span class="k">and</span> <span class="n">conflict_action</span> <span class="k">is</span> <span class="n">one</span> <span class="k">of</span><span class="p">:</span>
-
-    <span class="k">DO</span> <span class="k">NOTHING</span>
-    <span class="k">DO</span> <span class="k">UPDATE</span> <span class="k">SET</span> <span class="p">{</span> <span class="k">column_name</span> <span class="o">=</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="o">|</span>
-                    <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">[</span> <span class="k">ROW</span> <span class="p">]</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">|</span>
-                    <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">sub</span><span class="o">-</span><span class="k">SELECT</span> <span class="p">)</span>
-                  <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span>
-              <span class="p">[</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="p">]</span></code></pre></figure>
-
-<p>Nah jadi jika kita perhatikan ada beberapa clause yang kita bisa gunakan diantaranya:</p>
-
-<ol>
-  <li>Insert with specific columns and data type</li>
-  <li>Insert with <code class="language-plaintext highlighter-rouge">DEFAULT VALUE</code></li>
-  <li>Insert single and multiple rows</li>
-  <li>Insert with <code class="language-plaintext highlighter-rouge">ON CONFLICT</code></li>
-  <li>Insert with <code class="language-plaintext highlighter-rouge">OVERRIDING</code> keyword</li>
-  <li>Using with query in INSERT statement</li>
-  <li>Error message on insert statement</li>
-</ol>
-
-<p>Nah lumayan banyak dan panjang juga ya ternyata untuk perintah insert yang kita bisa gunakan, jadi kita akan coba break-down aja ya masing-masing feature:</p>
 
 </span>
       

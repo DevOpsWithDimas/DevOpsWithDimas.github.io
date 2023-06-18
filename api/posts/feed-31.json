@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Between Predicate pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006c-between-predicate"
+    }
+    ,
+    {
       "title": "Like Predicate pada klausa where di Oracle",
       "link": "/posts/rdbms/oracle18c/006b-like-predicate"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Select Statement dalam SQL",
       "link": "/posts/rdbms/oracle18c/005-select-statement"
-    }
-    ,
-    {
-      "title": "Data Types di Oracle Database",
-      "link": "/posts/rdbms/oracle18c/004b-tipe-data"
     }
   ]
 }

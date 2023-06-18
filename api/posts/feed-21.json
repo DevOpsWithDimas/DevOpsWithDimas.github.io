@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "How to install Docker on Mac OS",
+      "link": "/posts/devops/docker/basic/02c-install-on-mac"
+    }
+    ,
+    {
       "title": "How to install Docker on Linux CentOS",
       "link": "/posts/devops/docker/basic/02b-install-on-linux-centos"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Inherintance Mapping (OODMBS)",
       "link": "/posts/rdbms/oracle18c/019e-mapping-inherintance"
-    }
-    ,
-    {
-      "title": "Parent Childs Relationship",
-      "link": "/posts/rdbms/oracle18c/019d-mapping-parent-child"
     }
   ]
 }

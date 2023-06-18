@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Index - Bitmap",
+      "link": "/posts/rdbms/oracle18c/017b-bitmap-index"
+    }
+    ,
+    {
       "title": "Index - Balanced Tree (B-Tree)",
       "link": "/posts/rdbms/oracle18c/017a-normal-index"
     }
@@ -44,11 +49,6 @@
     {
       "title": "DDL - Foreign Key Constraint",
       "link": "/posts/rdbms/oracle18c/016l-constraint-foreign-key"
-    }
-    ,
-    {
-      "title": "DDL - Primary Key Constraint",
-      "link": "/posts/rdbms/oracle18c/016k-constraint-primary-key"
     }
   ]
 }

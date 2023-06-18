@@ -316,6 +316,100 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03d-getting-started" rel="permalink">Getting started: Create and run your first Gitlab CI/CD pipeline
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/gitlab" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      GitOps with Gitlab
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-06-18T15:30:55+07:00">June 18, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        7 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, sekarang kita akan mencoba menggunakan Gitlab CI/CD pipeline. Tetapi ada beberapa prerequisites yang harus dipenuhi diantaranya:</p>
+
+<p>Before you start, make sure you have:</p>
+
+<ul>
+  <li>A project in GitLab that you would like to use CI/CD for.</li>
+  <li>The Maintainer or Owner role for the project.</li>
+</ul>
+
+<p>To create and run your first pipeline:</p>
+
+<ul>
+  <li>Ensure you have runners available to run your jobs. To view available runners: Go to <code class="language-plaintext highlighter-rouge">Settings &gt; CI/CD</code> and expand <code class="language-plaintext highlighter-rouge">Runners</code>.</li>
+  <li>If you’re using <a href="gitLab.com">gitLab.com</a>, you can skip this step. <a href="gitLab.com">gitLab.com</a> provides shared runners for you. If you don’t have a runner
+    <ol>
+      <li><a href="https://docs.gitlab.com/runner/install/">Install GitLab Runner</a> on your local machine.</li>
+      <li><a href="https://docs.gitlab.com/runner/register/">Register the runner</a> for your project. Choose the shell executor.</li>
+    </ol>
+  </li>
+  <li>Create a <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file at the root of your repository. This file is where you define the CI/CD jobs.</li>
+</ul>
+
+<p>When you commit the file to your repository, the runner runs your jobs. The job results are displayed in a pipeline.</p>
+
+<p>Okay karena pembahasan kali ini akan lumayan panjang, jadi kita akan bagi-bagi menjadi beberapa bagian diantaranya seperti berikut:</p>
+
+<ol>
+  <li>Create a <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file</li>
+  <li>Running the Gitlab CI pipelines</li>
+  <li>Tips for writing the <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code></li>
+</ol>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci" rel="permalink">Settings up Gitlab CI (on-premise)
 </a>
       
@@ -600,82 +694,6 @@
       <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, selamat datang kembali di kelas <strong>GitOps dengan Gitlab untuk Pemula s/d Mahir</strong> materi kali ini kita membahas tentang Continues Integration (CI) dengan menggunakan Gitlab Platform yaitu Gitlab CI.</p>
 
 <p>Pada materi kali ada beberapa topic yang akan kita pelajari yaitu</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05b-deployment" rel="permalink">Working with Deployment object
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Kubernetes for DevOps
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2023-04-29T11:51:37+07:00">April 29, 2023</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        22 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya:</p>
-
-<ol>
-  <li>What is Deployment Object?</li>
-  <li>Create a Deployment</li>
-  <li>Interaction with Deployment object</li>
-  <li>Updating a Deployment</li>
-  <li>Rolling Back a Deployment</li>
-  <li>Pause and Resume rollout of a Deployment</li>
-  <li>Deployment status</li>
-</ol>
-
-<p>Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:</p>
 
 </span>
       

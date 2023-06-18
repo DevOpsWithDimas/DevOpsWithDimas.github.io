@@ -318,6 +318,74 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources" rel="permalink">Overview Kubernetes Workloads resources
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-01-17T19:45:16+07:00">January 17, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, setelah kita membahas tentang Pod and Container specification, dan juga study cases selanjutnya kita akan bahas Kubernetes Workload Resources atau kebanyakan orang menggunakan istilah Kubernetes Resource Controller API.</p>
+
+<p>Pada Kubernetes Workload Resources ini, sangat berguna sekali untuk memange object pod dalam suatu kubernetes cluster seperti Update pod specification, handle replications (scaling up &amp; down), Stateless &amp; Stateful workload, Handle cronjob dan lain-lain.</p>
+
+<p>Adapun yang kita akan bahas terkait Workload Resources diantaranya:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl" rel="permalink">Getting started with Transaction Control (TCL)
 </a>
       
@@ -590,99 +658,6 @@
       <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, Selain <code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code> dan <code class="language-plaintext highlighter-rouge">DELETE</code> statement ada juga beberapa task seperti cleanup data/storage pada database PostgreSQL dengan menggunakan perintah <code class="language-plaintext highlighter-rouge">TRUNCATE</code> dan <code class="language-plaintext highlighter-rouge">VACUUM</code>.</p>
 
 <p>Ok jadi langsung aja kita bahas materi yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps" rel="permalink">Study Cases: Monolith apps (Laravel Web MVC)
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Kubernetes for DevOps
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-12-19T21:25:03+07:00">December 19, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        21 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi study cases untuk Pod dan Container specification kita coba create, and build  aplikasi monolith dengan framework Laravel Web MVC (Model View Controller) dengan architecture seperti berikut:</p>
-
-<p><img src="/resources/posts/kubernetes/04a-study-cases-monolith-apps/monolith-architecture.png" alt="architecture mvc" /></p>
-
-<p>Mengapa kita membahas ini, seperti yang temen-temen ketahui hampir <code class="language-plaintext highlighter-rouge">85%</code> aplikasi yang ada masih menggunakan architecture tersebut, mungkin dari beberapa temen-temen pernah mengalami begitu aplikasi tersebut diakses secara public atau banyak orang mengakases aplikasi terasa lambat dalam mereseponse atau tiba-tiba mati (downtime) hal ini penyebabnya bisa macam-macam tapi salah satu penyebabnya adalah server tidak mampu menghandle request yang masuk sehingga menyebabkan performa dari aplikasi menurun.</p>
-
-<p>Sebetulnya ada banyak solusi dari masalah tersebut, misalnya</p>
-
-<ol>
-  <li>Replikasi aplikasi</li>
-  <li>Cloning server (node) baik berbentuk virtual maupun physical</li>
-</ol>
-
-<p>Kubernetes memprovide solusi terserbut dengan High Availablity, Self Healing, Auto scaling dan lain-lain. So jadi kita akan migrasikan aplikasi terserbut supaya bisa jalan di atas kubernetes dengan tujuan untuk memudahkan di maintanance secara operational, mudah di scale up and down serta meningkatkan zero down time. Adapun step by step yang akan kita lakukan adalah</p>
-
-<ol>
-  <li>Develop aplikasi</li>
-  <li>Containerize apps</li>
-  <li>Deploy to Kubernetes
-    <ol>
-      <li>Running as a Pod</li>
-      <li>Specify resource request and limit</li>
-      <li>Using configmap and secret for connect to a database</li>
-      <li>Using initContainer to migrate db</li>
-      <li>Specify container probes (health check)</li>
-    </ol>
-  </li>
-</ol>
-
-<p>Ok tanpa berlama-lama yuk langsung aja ke pembahasan yang pertama.</p>
 
 </span>
       

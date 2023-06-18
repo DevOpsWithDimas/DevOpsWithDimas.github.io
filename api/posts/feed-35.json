@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Aggregation Function dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/04g-hql-aggregate-function"
+    }
+    ,
+    {
       "title": "Concatnation dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/04f-hql-concatenation"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Collections Mapping",
       "link": "/posts/framework/java/orm/hibernate/mapping/03i-collections-mapping"
-    }
-    ,
-    {
-      "title": "Parent-Child Mapping",
-      "link": "/posts/framework/java/orm/hibernate/mapping/03h-parent-child-mapping"
     }
   ]
 }

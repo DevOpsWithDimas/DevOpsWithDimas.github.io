@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "DDL - Primary Key Constraint",
+      "link": "/posts/rdbms/oracle18c/016k-constraint-primary-key"
+    }
+    ,
+    {
       "title": "DDL - Check Constraint",
       "link": "/posts/rdbms/oracle18c/016j-constraint-check"
     }
@@ -44,11 +49,6 @@
     {
       "title": "DDL - Membuat Tabel di Oracle",
       "link": "/posts/rdbms/oracle18c/016b-ddl-create-table"
-    }
-    ,
-    {
-      "title": "DDL - Static Data Dictionary View",
-      "link": "/posts/rdbms/oracle18c/016a-dictionary-table"
     }
   ]
 }

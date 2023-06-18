@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Perbedaan method executeQuery() dan executeUpdate()",
+      "link": "/posts/language/java/jdbc/07-execute-query-and-update"
+    }
+    ,
+    {
       "title": "Mengenal class java.sql.PreparedStatement",
       "link": "/posts/language/java/jdbc/06-prepared-statement"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Perulangan for untuk Array, List, Set dan Map",
       "link": "/posts/language/java/arrays/16-foreach"
-    }
-    ,
-    {
-      "title": "Element Collection",
-      "link": "/posts/language/java/arrays/15-element-collections"
     }
   ]
 }

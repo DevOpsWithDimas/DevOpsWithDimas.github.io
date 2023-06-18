@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Getting started: Create and run your first Gitlab CI/CD pipeline",
+      "link": "/posts/git/gitlab/gitlab-ci/03d-getting-started"
+    }
+    ,
+    {
       "title": "Settings up Gitlab CI (on-premise)",
       "link": "/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci"
     }
@@ -44,11 +49,6 @@
     {
       "title": "What is Workload Resources?",
       "link": "/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload"
-    }
-    ,
-    {
-      "title": "Overview Kubernetes Workloads resources",
-      "link": "/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources"
     }
   ]
 }

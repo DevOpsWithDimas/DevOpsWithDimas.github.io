@@ -2897,6 +2897,12 @@ var store = [{
         "url": "/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci",
         "teaser": "/assets/images/500x300.png"
       },{
+        "title": "Getting started: Create and run your first Gitlab CI/CD pipeline",
+        "excerpt":"Hai semuanya, sekarang kita akan mencoba menggunakan Gitlab CI/CD pipeline. Tetapi ada beberapa prerequisites yang harus dipenuhi diantaranya: Before you start, make sure you have: A project in GitLab that you would like to use CI/CD for. The Maintainer or Owner role for the project. To create and run your...","categories": ["git","gitlab","gitlab-ci"],
+        "tags": [],
+        "url": "/posts/git/gitlab/gitlab-ci/03d-getting-started",
+        "teaser": "/assets/images/500x300.png"
+      },{
         "title": "Golang Backend Developer",
         "excerpt":"Hai semuanya selamat datang di kelas xxx, jadi kali ini kita akan membahas xxx yaitu menggunakan xxx. Skill-sets requirement Ada beberapa skill-set yang harus ditempuh untuk menjadi seorang DevOps (Develoment &amp; Operation) Engineer diataranya seperti berikut: mindmap root((Backend Developer with Golang)) Description Tell me something about this roadmap, why you...","categories": [],
         "tags": ["devops","developer","operation","tools","automation"],

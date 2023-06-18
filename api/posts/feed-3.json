@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Deep dive into UPDATE Statement",
+      "link": "/posts/rdbms/postgresql/sql/dml/05c-dml-update"
+    }
+    ,
+    {
       "title": "Getting started with Ansible role, tasks for docker",
       "link": "/posts/devops/docker/14c-ansible-for-docker-operations"
     }
@@ -44,11 +49,6 @@
     {
       "title": "WITH Queries (Common Table Expressions)",
       "link": "/posts/rdbms/postgresql/sql/select/04f-with-queries"
-    }
-    ,
-    {
-      "title": "Getting started with git",
-      "link": "/posts/git/version-control/01c-basic-git-command"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Basic SQL Select statements",
+      "link": "/posts/rdbms/postgresql/sql/select/03a-basic-select-statement"
+    }
+    ,
+    {
       "title": "Overview SQL Select statements",
       "link": "/posts/rdbms/postgresql/sql/select/03-overview-sql"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Install PostgreSQL for Linux Ubuntu users",
       "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu"
-    }
-    ,
-    {
-      "title": "Install PostgreSQL for Mac users",
-      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac"
     }
   ]
 }

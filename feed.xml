@@ -1,4 +1,268 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2023-06-17T21:13:57+07:00</updated><id>/feed.xml</id><title type="html">DevOps with Dimas Maryanto</title><subtitle>Tutorial Pemrograman, Backend, Frontend, Website, Mobile dan Devops Terlengkap di Indonesia.</subtitle><author><name>Dimas Maryanto</name></author><entry xml:lang="gitlab"><title type="html">Settings up Gitlab CI (on-premise)</title><link href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci" rel="alternate" type="text/html" title="Settings up Gitlab CI (on-premise)" /><published>2023-06-17T21:12:16+07:00</published><updated>2023-06-17T21:12:16+07:00</updated><id>/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci</id><content type="html" xml:base="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci"><![CDATA[<p>Hai semuanya, di materi kali ini kita akan membahas tentang Setup environment for Continues Integration (CI) menggunakan Gitlab CI di on-premise. Ok karena artikel ini akan lumayan panjang jadi kita akan bagi2 menjadi beberapa bagian yaitu</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2023-06-18T15:32:30+07:00</updated><id>/feed.xml</id><title type="html">DevOps with Dimas Maryanto</title><subtitle>Tutorial Pemrograman, Backend, Frontend, Website, Mobile dan Devops Terlengkap di Indonesia.</subtitle><author><name>Dimas Maryanto</name></author><entry xml:lang="gitlab"><title type="html">Getting started: Create and run your first Gitlab CI/CD pipeline</title><link href="/posts/git/gitlab/gitlab-ci/03d-getting-started" rel="alternate" type="text/html" title="Getting started: Create and run your first Gitlab CI/CD pipeline" /><published>2023-06-18T15:30:55+07:00</published><updated>2023-06-18T15:30:55+07:00</updated><id>/posts/git/gitlab/gitlab-ci/03d-getting-started</id><content type="html" xml:base="/posts/git/gitlab/gitlab-ci/03d-getting-started"><![CDATA[<p>Hai semuanya, sekarang kita akan mencoba menggunakan Gitlab CI/CD pipeline. Tetapi ada beberapa prerequisites yang harus dipenuhi diantaranya:</p>
+
+<p>Before you start, make sure you have:</p>
+
+<ul>
+  <li>A project in GitLab that you would like to use CI/CD for.</li>
+  <li>The Maintainer or Owner role for the project.</li>
+</ul>
+
+<p>To create and run your first pipeline:</p>
+
+<ul>
+  <li>Ensure you have runners available to run your jobs. To view available runners: Go to <code class="language-plaintext highlighter-rouge">Settings &gt; CI/CD</code> and expand <code class="language-plaintext highlighter-rouge">Runners</code>.</li>
+  <li>If you’re using <a href="gitLab.com">gitLab.com</a>, you can skip this step. <a href="gitLab.com">gitLab.com</a> provides shared runners for you. If you don’t have a runner
+    <ol>
+      <li><a href="https://docs.gitlab.com/runner/install/">Install GitLab Runner</a> on your local machine.</li>
+      <li><a href="https://docs.gitlab.com/runner/register/">Register the runner</a> for your project. Choose the shell executor.</li>
+    </ol>
+  </li>
+  <li>Create a <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file at the root of your repository. This file is where you define the CI/CD jobs.</li>
+</ul>
+
+<p>When you commit the file to your repository, the runner runs your jobs. The job results are displayed in a pipeline.</p>
+
+<p>Okay karena pembahasan kali ini akan lumayan panjang, jadi kita akan bagi-bagi menjadi beberapa bagian diantaranya seperti berikut:</p>
+
+<ol>
+  <li>Create a <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file</li>
+  <li>Running the Gitlab CI pipelines</li>
+  <li>Tips for writing the <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code></li>
+</ol>
+
+<!--more-->
+
+<h2 id="create-a-gitlab-ciyml-file">Create a <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file</h2>
+
+<p>File <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> basiclly it’s a <a href="https://en.wikipedia.org/wiki/YAML">YAML</a> format that you can specify to instruction of Gitlab CI/CD. in this file, you can define:</p>
+
+<ul>
+  <li>The structure and order of jobs that the runner should execute.</li>
+  <li>The decisions the runner should make when specific conditions are encountered.</li>
+</ul>
+
+<p>To create a <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file you can used:</p>
+
+<ul>
+  <li>Manually, by using text-editor such as vscode, vim, nodepad, etc</li>
+  <li>
+    <p>Build-in text-editor by gitlab</p>
+
+    <script src="https://gist.github.com/dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b.js?file=03d-basic-gitlab-ci.yml"> </script>
+
+    <p>This example shows four jobs: <code class="language-plaintext highlighter-rouge">build-job</code>, <code class="language-plaintext highlighter-rouge">test-job1</code>, <code class="language-plaintext highlighter-rouge">test-job2</code>, and <code class="language-plaintext highlighter-rouge">deploy-prod</code>. The comments listed in the <code class="language-plaintext highlighter-rouge">echo</code> commands are displayed in the UI when you view the jobs. The values for the <a href="https://docs.gitlab.com/ee/ci/variables/predefined_variables.html">predefined variables</a> <code class="language-plaintext highlighter-rouge">$GITLAB_USER_LOGIN</code> and <code class="language-plaintext highlighter-rouge">$CI_COMMIT_BRANCH</code> are populated when the jobs run.</p>
+  </li>
+  <li>Then submit, commit &amp; push</li>
+</ul>
+
+<p>Now take a look at your pipeline and the jobs within.</p>
+
+<ol>
+  <li>
+    <p>Go to <strong>CI/CD &gt; Pipelines</strong>. A pipeline with three stages should be displayed:</p>
+
+    <p><img src="/resources/posts/gitlab-ci/03d-getting-started/01-pipeline.png" alt="gitlab-pipeline" /></p>
+  </li>
+  <li>
+    <p>View a visual representation of your pipeline by selecting the pipeline ID:</p>
+
+    <p><img src="/resources/posts/gitlab-ci/03d-getting-started/01a-pipeline-detail.png" alt="gitlab-pipeline-detail" /></p>
+  </li>
+  <li>
+    <p>View details of a job by selecting the job name.</p>
+
+    <ul>
+      <li>
+        <p>This is <code class="language-plaintext highlighter-rouge">build-job</code>
+  <img src="/resources/posts/gitlab-ci/03d-getting-started/01b-job-build.png" alt="job-build" /></p>
+      </li>
+      <li>
+        <p>This is <code class="language-plaintext highlighter-rouge">build-test2</code>
+  <img src="/resources/posts/gitlab-ci/03d-getting-started/01c-job-test2.png" alt="job-build" /></p>
+      </li>
+      <li>
+        <p>This is <code class="language-plaintext highlighter-rouge">build-deploy-prod</code>
+  <img src="/resources/posts/gitlab-ci/03d-getting-started/01d-job-deploy-prod.png" alt="job-build" /></p>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<p>You have successfully created your first CI/CD pipeline in GitLab. Congratulations!</p>
+
+<p>Now you can get started customizing your <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> and defining more advanced jobs.</p>
+
+<h2 id="running-the-gitlab-ci-pipelines">Running the Gitlab CI pipelines</h2>
+
+<p>By default, when you push or changed the file of <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> it’s trigger pipeline to run, but we have an other way to run it. Here is 4 deffrent method to the run pipeline:</p>
+
+<ul>
+  <li>Workflow (<code class="language-plaintext highlighter-rouge">rules</code>, <code class="language-plaintext highlighter-rouge">only</code>)</li>
+  <li>Manually run pipeline</li>
+  <li>Schedule to run pipeline</li>
+  <li>Trigger using (<code class="language-plaintext highlighter-rouge">webhook</code>, <code class="language-plaintext highlighter-rouge">rest-api</code>)</li>
+</ul>
+
+<h3 id="updating-file-gitlab-ciyml">Updating file <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code></h3>
+
+<p>Okay kita bahas satu-per-satu, mulai dari update file <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> yang sebelumnya seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b.js?file=03d-basic-gitlab-ci-edited.yml"> </script>
+
+<p>Ketika di push maka secara otomatis akan jalan pipeline baru seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/02a-gitlab-ci-edited.png" alt="gitlab-pipeline-edited" /></p>
+
+<p>The output will print look like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello, my name is Dimas Maryanto <span class="o">!</span> <span class="se">\n</span> i<span class="s1">'m trying to learn CI/CD feature with Gitlab CI
+</span></code></pre></div></div>
+
+<h3 id="using-workflow">Using workflow</h3>
+
+<p>Sekarang kita coba untuk workflow method, dengan mengupdate file <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> menggunakan property <code class="language-plaintext highlighter-rouge">only</code> atau <code class="language-plaintext highlighter-rouge">rules</code> seperti berikut:</p>
+
+<script src="https://gist.github.com/dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b.js?file=03d-basic-gitlab-ci-workflow.yml"> </script>
+
+<p>Ketika di push maka secara otomatis akan jalan pipeline baru dan berikut adalah pipeline detailnya:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/02b-workflow-pipeline-detail.png" alt="gitlab-pipeline-detail-workflow" /></p>
+
+<p>Nah terlihat disana terdapat 3 job yaitu <code class="language-plaintext highlighter-rouge">build-job</code>, <code class="language-plaintext highlighter-rouge">test-job2</code> dan <code class="language-plaintext highlighter-rouge">deploy-prod</code>. Terus untuk job <code class="language-plaintext highlighter-rouge">test-job1</code> kemana?</p>
+
+<p>Job <code class="language-plaintext highlighter-rouge">test-job1</code> hanya akan muncul jika kita membuat <code class="language-plaintext highlighter-rouge">branch</code>, <code class="language-plaintext highlighter-rouge">tags</code> atau <code class="language-plaintext highlighter-rouge">commit message</code> dengan prefix <code class="language-plaintext highlighter-rouge">-release</code> seperti berikut:</p>
+
+<p>Kita coba buat tag <code class="language-plaintext highlighter-rouge">2023.06.18.12.51-release</code> pada branch `main seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/02c-workflow-create-tag.png" alt="create-tags" /></p>
+
+<p>Sekarang jika kita lihat pada pipeline detail yang terbaru maka jobnya jalan seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/02c-workflow-create-tag-pipeline.png" alt="workflow-tags" width="400" /></p>
+
+<p>Dengan dengan membuat tag tersebut, kita menjalankan kembali job sebelumnya beserta <code class="language-plaintext highlighter-rouge">test-job1</code> tetapi tanpa job <code class="language-plaintext highlighter-rouge">deploy-prod</code></p>
+
+<p>Sedangkan untuk menjalankan yang job <code class="language-plaintext highlighter-rouge">build-prod</code> kita bisa membuat Merge request dari branch dengan prefix <code class="language-plaintext highlighter-rouge">hotfix/</code> ke branch default yang which is <code class="language-plaintext highlighter-rouge">main</code>.</p>
+
+<ul>
+  <li>Buat branch baru misalnya dengan nama <code class="language-plaintext highlighter-rouge">hotfix/issue01</code> dari branch main</li>
+  <li>Buat perubahan dan commit serta push</li>
+  <li>Buat merge request ke main maka hasilnya seperti berikut:</li>
+</ul>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/02d-workflow-mr.png" alt="workflow-merge-request" width="400" /></p>
+
+<h3 id="manually-run-pipeline">Manually run pipeline</h3>
+
+<p>Selain menggunakan script based, dan workflow Gitlab CI kita juga bisa menjalankan pipeline secara manual dengan click <code class="language-plaintext highlighter-rouge">Run pipeline</code> pada menu <code class="language-plaintext highlighter-rouge">Pipelines</code> seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/03a-manual-run-pipeline.png" alt="manual-run-pipeline" /></p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/03b-form-run-pipeline.png" alt="form-run-pipeline" /></p>
+
+<p>Kemudian muncul form seperti berikut, jika tidak ada option yang kita define pada script <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> just click the button, hasilnya seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/03c-manual-run-pipeline.png" alt="form-run-pipeline" /></p>
+
+<h3 id="schedule-to-run-pipeline">Schedule to run pipeline</h3>
+
+<p>Lanjutan dari run pipeline secara manual tersebut, kita juga bisa meng-schedule pipeline dengan menggunakan cron pattern caranya</p>
+
+<ul>
+  <li>
+    <p>Akses ke menu <strong>Pipelines -&gt; Schedule</strong> seperti berikut:</p>
+
+    <p><img src="/resources/posts/gitlab-ci/03d-getting-started/03c-manual-run-pipeline.png" alt="schedule-pipeline" /></p>
+  </li>
+  <li>
+    <p>Misalnya kita mau menjalankan pipeline tersebut setiap 5 menit, jadi pilih Interfal pattern <code class="language-plaintext highlighter-rouge">Custom</code> input seperti berikut <code class="language-plaintext highlighter-rouge">*/5 * * * *</code></p>
+  </li>
+  <li>
+    <p>Kemudian save, seperti berikut:</p>
+  </li>
+</ul>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/04a-schedule-pipeline.png" alt="schedule-list" /></p>
+
+<p>Dan perhatikan ke menu Pipeline 5 menit mendatang hasilnya seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/04b-schedule-run.png" alt="run-from-schedule" /></p>
+
+<h3 id="trigger-using-webhook-rest-api">Trigger using (<code class="language-plaintext highlighter-rouge">webhook</code>, <code class="language-plaintext highlighter-rouge">rest-api</code>)</h3>
+
+<p>Yang terkahir kita juga bisa me-trigger dari Webhook atau Rest-API menggunakan tools seperti <code class="language-plaintext highlighter-rouge">curl</code> atau bahkan Postman. Untuk membuat Gitlab CI yang bisa di triger kita membuat dulu TOKEN di menu <strong>Settings -&gt; CI/CD -&gt; expand Triger pipeline</strong> seperti berikut:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/05a-trigger-token.png" alt="create-token-trigger" /></p>
+
+<p>Kemudian input nama/description contohnya <code class="language-plaintext highlighter-rouge">trigger-curl</code> dan kemudian click button <code class="language-plaintext highlighter-rouge">Add triger</code> maka akan muncul tokennya, coba simpan token tersebut.</p>
+
+<p>Setelah itu kita bisa triger pipeline dengan perintah curl berikut:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">curl <span class="nt">-X</span> POST <span class="se">\</span>
+     <span class="nt">--fail</span> <span class="se">\</span>
+     <span class="nt">-F</span> <span class="nv">token</span><span class="o">=</span>TOKEN <span class="se">\</span>
+     <span class="nt">-F</span> <span class="nv">ref</span><span class="o">=</span>REF_NAME <span class="se">\</span>
+     PROTOCOL://SERVER_GITLAB/api/v4/projects/PROJECT_ID/trigger/pipeline</code></pre></figure>
+
+<p>Sekarang coba jalankan perintah berikut di terminal</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➡ curl <span class="nt">-X</span> POST <span class="se">\</span>
+     <span class="nt">--fail</span> <span class="se">\</span>
+     <span class="nt">-F</span> <span class="nv">token</span><span class="o">=</span>glptt-da5dbea331d2c78071752e4528ba52c34a9a9567 <span class="se">\</span>
+     <span class="nt">-F</span> <span class="nv">ref</span><span class="o">=</span>main <span class="se">\</span>
+     https://gitlab.dimas-maryanto.com/api/v4/projects/364/trigger/pipeline
+
+<span class="o">{</span>
+  <span class="s2">"id"</span>: 1029,
+  <span class="s2">"iid"</span>: 12,
+  <span class="s2">"project_id"</span>: 364,
+  <span class="s2">"sha"</span>: <span class="s2">"93b7c2cfda83cda7b42bea5619c2756f7e57022e"</span>,
+  <span class="s2">"ref"</span>: <span class="s2">"main"</span>,
+  <span class="s2">"status"</span>: <span class="s2">"created"</span>,
+  <span class="s2">"source"</span>: <span class="s2">"trigger"</span>,
+  <span class="s2">"before_sha"</span>: <span class="s2">"0000000000000000000000000000000000000000"</span>,
+  <span class="s2">"tag"</span>: <span class="nb">false</span>,
+  <span class="s2">"yaml_errors"</span>: null,
+  <span class="s2">"user"</span>: <span class="o">{</span>
+    <span class="s2">"id"</span>: 2,
+    <span class="s2">"username"</span>: <span class="s2">"dimasm93"</span>,
+    <span class="s2">"web_url"</span>: <span class="s2">"https://gitlab.dimas-maryanto.com/dimasm93"</span>
+  <span class="o">}</span>,
+  <span class="s2">"detailed_status"</span>: <span class="o">{</span>
+    <span class="s2">"icon"</span>: <span class="s2">"status_created"</span>,
+    <span class="s2">"details_path"</span>: <span class="s2">"/examples/gitlab-ci-cd/test-gitlab-ci/-/pipelines/1029"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Sekarang kita lihat hasilnya:</p>
+
+<p><img src="/resources/posts/gitlab-ci/03d-getting-started/05b-triger-pipeline.png" alt="trigger-curl" /></p>
+
+<h2 id="tips-for-writing-the-gitlab-ciyml">Tips for writing the <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code></h2>
+
+<p>Here are some tips to get started working with the <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file.</p>
+
+<p>For the complete <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> syntax, see <a href="https://docs.gitlab.com/ee/ci/yaml/index.html">the full <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> keyword reference</a>.</p>
+
+<ul>
+  <li>
+    <p>Use the <a href="https://docs.gitlab.com/ee/ci/pipeline_editor/index.html">pipeline editor</a> to edit your <code class="language-plaintext highlighter-rouge">.gitlab-ci.yml</code> file.</p>
+  </li>
+  <li>Each job contains a script section and belongs to a stage:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">stage</code> describes the sequential execution of jobs. If there are runners available, jobs in a single stage run in parallel.</li>
+      <li>Use the <code class="language-plaintext highlighter-rouge">needs</code> keyword to run jobs out of stage order.</li>
+    </ul>
+  </li>
+  <li>You can set additional configuration to customize how your jobs and stages perform:
+    <ul>
+      <li>Use the <code class="language-plaintext highlighter-rouge">rules</code> keyword to specify when to run or skip jobs. The <code class="language-plaintext highlighter-rouge">only</code> and <code class="language-plaintext highlighter-rouge">except</code> legacy keywords are still supported, but can’t be used with <code class="language-plaintext highlighter-rouge">rules</code> in the same job.</li>
+      <li>Keep information across jobs and stages persistent in a pipeline with <code class="language-plaintext highlighter-rouge">cache</code> and <code class="language-plaintext highlighter-rouge">artifacts</code>. These keywords are ways to store dependencies and job output, even when using ephemeral runners for each job.</li>
+      <li>Use the <code class="language-plaintext highlighter-rouge">default</code> keyword to specify additional configurations that are applied to all jobs. This keyword is often used to define <code class="language-plaintext highlighter-rouge">before_script</code> and <code class="language-plaintext highlighter-rouge">after_script</code> sections that should run on every job.</li>
+    </ul>
+  </li>
+</ul>]]></content><author><name>Dimas Maryanto</name></author><category term="git" /><category term="gitlab" /><category term="gitlab-ci" /><summary type="html"><![CDATA[Hai semuanya, sekarang kita akan mencoba menggunakan Gitlab CI/CD pipeline. Tetapi ada beberapa prerequisites yang harus dipenuhi diantaranya: Before you start, make sure you have: A project in GitLab that you would like to use CI/CD for. The Maintainer or Owner role for the project. To create and run your first pipeline: Ensure you have runners available to run your jobs. To view available runners: Go to Settings &gt; CI/CD and expand Runners. If you’re using gitLab.com, you can skip this step. gitLab.com provides shared runners for you. If you don’t have a runner Install GitLab Runner on your local machine. Register the runner for your project. Choose the shell executor. Create a .gitlab-ci.yml file at the root of your repository. This file is where you define the CI/CD jobs. When you commit the file to your repository, the runner runs your jobs. The job results are displayed in a pipeline. Okay karena pembahasan kali ini akan lumayan panjang, jadi kita akan bagi-bagi menjadi beberapa bagian diantaranya seperti berikut: Create a .gitlab-ci.yml file Running the Gitlab CI pipelines Tips for writing the .gitlab-ci.yml]]></summary></entry><entry xml:lang="gitlab"><title type="html">Settings up Gitlab CI (on-premise)</title><link href="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci" rel="alternate" type="text/html" title="Settings up Gitlab CI (on-premise)" /><published>2023-06-17T21:12:16+07:00</published><updated>2023-06-17T21:12:16+07:00</updated><id>/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci</id><content type="html" xml:base="/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci"><![CDATA[<p>Hai semuanya, di materi kali ini kita akan membahas tentang Setup environment for Continues Integration (CI) menggunakan Gitlab CI di on-premise. Ok karena artikel ini akan lumayan panjang jadi kita akan bagi2 menjadi beberapa bagian yaitu</p>
 
 <ol>
   <li>Requirement and prequisite</li>
@@ -3202,20 +3466,4 @@ No resources found <span class="k">in </span>default namespace.
 No resources found <span class="k">in </span>default namespace.
 </code></pre></div></div>
 
-<p>Okay mungkin sekian dulu yang bisa saya sampaikan terkait Kubernetes workload resources, masih banyak yang masih kita perlu pelajari tentang Kubernetes Workload resources ini. Semoga temen-temen tertarik mengikuti materinya sampai akhir, see you next post!!</p>]]></content><author><name>Dimas Maryanto</name></author><category term="DevOps" /><category term="Orchestration" /><category term="Kubernetes" /><category term="Workloads" /><summary type="html"><![CDATA[Hai semuanya, sebelum kita mulai menggunakan Workload Resources ada baiknya kita lihat dulu apa sih itu Workload Resources secara definisi dan pemahaman. Karena kebanyak orang tidak memahami dan juga salah menggunakan/menentukan object workload resource yang tepat maka akan menyebabkan problem di kemudian hari. Maka dari itu disini kita bahas What is Kubernetes Workloads? Types of workloads How to working with Workload resources? Getting started with Workload Resources Ok langsung aja kita bahas materi yang pertama]]></summary></entry><entry xml:lang="k8s"><title type="html">Overview Kubernetes Workloads resources</title><link href="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources" rel="alternate" type="text/html" title="Overview Kubernetes Workloads resources" /><published>2023-01-17T19:45:16+07:00</published><updated>2023-01-17T19:45:16+07:00</updated><id>/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources</id><content type="html" xml:base="/posts/devops/orchestration/kubernetes/workloads/05-overview-workload-resources"><![CDATA[<p>Hai semuanya, setelah kita membahas tentang Pod and Container specification, dan juga study cases selanjutnya kita akan bahas Kubernetes Workload Resources atau kebanyakan orang menggunakan istilah Kubernetes Resource Controller API.</p>
-
-<p>Pada Kubernetes Workload Resources ini, sangat berguna sekali untuk memange object pod dalam suatu kubernetes cluster seperti Update pod specification, handle replications (scaling up &amp; down), Stateless &amp; Stateful workload, Handle cronjob dan lain-lain.</p>
-
-<p>Adapun yang kita akan bahas terkait Workload Resources diantaranya:</p>
-
-<!--more-->
-
-<ol>
-  <li>Deployment</li>
-  <li>StatefulSet</li>
-  <li>DaemonSets</li>
-  <li>Jobs &amp; CronJob</li>
-  <li>ReplicaSet &amp; ReplicationController</li>
-</ol>
-
-<p>Okay mungkin sekian dulu apa yang bisa saya sampaikan terkait materi yang akan di bahas pada section Kubernetes Workload Resources, semoga temen-temen tertarik mempelajarinya dan mendapatkan benefit terkait feature yang ditawarkan oleh Kubernetes Workload ini. See you next post!!!</p>]]></content><author><name>Dimas Maryanto</name></author><category term="DevOps" /><category term="Orchestration" /><category term="Kubernetes" /><category term="Workloads" /><summary type="html"><![CDATA[Hai semuanya, setelah kita membahas tentang Pod and Container specification, dan juga study cases selanjutnya kita akan bahas Kubernetes Workload Resources atau kebanyakan orang menggunakan istilah Kubernetes Resource Controller API. Pada Kubernetes Workload Resources ini, sangat berguna sekali untuk memange object pod dalam suatu kubernetes cluster seperti Update pod specification, handle replications (scaling up &amp; down), Stateless &amp; Stateful workload, Handle cronjob dan lain-lain. Adapun yang kita akan bahas terkait Workload Resources diantaranya:]]></summary></entry></feed>
+<p>Okay mungkin sekian dulu yang bisa saya sampaikan terkait Kubernetes workload resources, masih banyak yang masih kita perlu pelajari tentang Kubernetes Workload resources ini. Semoga temen-temen tertarik mengikuti materinya sampai akhir, see you next post!!</p>]]></content><author><name>Dimas Maryanto</name></author><category term="DevOps" /><category term="Orchestration" /><category term="Kubernetes" /><category term="Workloads" /><summary type="html"><![CDATA[Hai semuanya, sebelum kita mulai menggunakan Workload Resources ada baiknya kita lihat dulu apa sih itu Workload Resources secara definisi dan pemahaman. Karena kebanyak orang tidak memahami dan juga salah menggunakan/menentukan object workload resource yang tepat maka akan menyebabkan problem di kemudian hari. Maka dari itu disini kita bahas What is Kubernetes Workloads? Types of workloads How to working with Workload resources? Getting started with Workload Resources Ok langsung aja kita bahas materi yang pertama]]></summary></entry></feed>

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Time is your for practice part 3",
+      "link": "/posts/language/java/classes/10-quis-section-3"
+    }
+    ,
+    {
       "title": "Organisasi class file dengan package",
       "link": "/posts/language/java/classes/09a-package-import"
     }
@@ -44,11 +49,6 @@
     {
       "title": "For statement",
       "link": "/posts/language/java/control/06-for-statement"
-    }
-    ,
-    {
-      "title": "SWITCH-CASE statement",
-      "link": "/posts/language/java/control/05b-swith-statement"
     }
   ]
 }

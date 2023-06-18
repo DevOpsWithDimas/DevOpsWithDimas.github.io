@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Membuat Simple Entity di Hibernate",
+      "link": "/posts/framework/java/orm/hibernate/basic/02c-membuat-simple-entity"
+    }
+    ,
+    {
       "title": "Memahami fungsi hibernate.cfg.xml",
       "link": "/posts/framework/java/orm/hibernate/basic/02b-memahami-hibernate-cfg"
     }
@@ -44,11 +49,6 @@
     {
       "title": "JSP Implicit Object",
       "link": "/posts/language/java/web/jsp/027-jsp-implicit-object-elements"
-    }
-    ,
-    {
-      "title": "JSP Action Element",
-      "link": "/posts/language/java/web/jsp/026-jsp-action-elements"
     }
   ]
 }

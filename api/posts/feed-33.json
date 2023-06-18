@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Konsep User dan Schema di Oracle Database 18c",
+      "link": "/posts/rdbms/oracle18c/002a-consept-user-schema"
+    }
+    ,
+    {
       "title": "Pengenalan Oracle Database 18c",
       "link": "/posts/rdbms/oracle18c/002-pengenalan-oracledb"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Not Predicate dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/05h-hql-not-predicate"
-    }
-    ,
-    {
-      "title": "SubQuery Qualifiers dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/05g-hql-subquery-qualifiers"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "SWITCH-CASE statement",
+      "link": "/posts/language/java/control/05b-swith-statement"
+    }
+    ,
+    {
       "title": "IF statement",
       "link": "/posts/language/java/control/05a-if-statement"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Tipe data yang bernilai Number",
       "link": "/posts/language/java/basic/02b-tipe-data-number"
-    }
-    ,
-    {
-      "title": "Variabel dan Tipe Data",
-      "link": "/posts/language/java/basic/02a-data-type-and-variables"
     }
   ]
 }

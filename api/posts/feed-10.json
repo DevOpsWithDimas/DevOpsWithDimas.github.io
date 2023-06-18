@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Accessing a Database",
+      "link": "/posts/rdbms/postgresql/01d-accessing-database"
+    }
+    ,
+    {
       "title": "Overview of Object Relational Database Management System (ORDBMS)",
       "link": "/posts/rdbms/postgresql/01c-postgresql-database"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Managing Kubernetes Object",
       "link": "/posts/devops/orchestration/kubernetes/01e-k8s-object-management"
-    }
-    ,
-    {
-      "title": "What is Kubernetes Objects?",
-      "link": "/posts/devops/orchestration/kubernetes/01d-k8s-objects"
     }
   ]
 }

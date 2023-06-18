@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Please be carefull using natural join di Oracle",
+      "link": "/posts/rdbms/oracle18c/010b-cartesian-product-join"
+    }
+    ,
+    {
       "title": "Natural Join di Oracle",
       "link": "/posts/rdbms/oracle18c/010a-natural-join"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Conversion Single Row Function di Oracle",
       "link": "/posts/rdbms/oracle18c/008d-conversion-function"
-    }
-    ,
-    {
-      "title": "Date & Time Single Row Function di Oracle",
-      "link": "/posts/rdbms/oracle18c/008c-date-function"
     }
   ]
 }

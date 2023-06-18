@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "SubQuery Qualifiers dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/05g-hql-subquery-qualifiers"
+    }
+    ,
+    {
       "title": "Empty Collections Predicate dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/05f-hql-predicate-empty-collections"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Case When dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/04h-hql-case-when-expresion"
-    }
-    ,
-    {
-      "title": "Aggregation Function dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/04g-hql-aggregate-function"
     }
   ]
 }

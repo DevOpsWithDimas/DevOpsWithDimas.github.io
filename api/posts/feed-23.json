@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "DDL - Managing Resource & Password dengan Profiles",
+      "link": "/posts/rdbms/oracle18c/018g-ddl-profiles"
+    }
+    ,
+    {
       "title": "DDL - Grouping Privileges dengan Roles",
       "link": "/posts/rdbms/oracle18c/018f-ddl-roles"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Index - Function-Based",
       "link": "/posts/rdbms/oracle18c/017c-function-based-index"
-    }
-    ,
-    {
-      "title": "Index - Bitmap",
-      "link": "/posts/rdbms/oracle18c/017b-bitmap-index"
     }
   ]
 }
