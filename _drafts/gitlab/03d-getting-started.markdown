@@ -89,7 +89,7 @@ Now you can get started customizing your `.gitlab-ci.yml` and defining more adva
 By default, when you push or changed the file of `.gitlab-ci.yml` it's trigger pipeline to run, but we have an other way to run it. Here is 4 deffrent method to the run pipeline:
 
 - Workflow (`rules`, `only`)
-- Manually start
+- Manually run pipeline
 - Trigger
 - Schedule
 
@@ -129,7 +129,7 @@ Kita coba buat tag `2023.06.18.12.51-release` pada branch `main seperti berikut:
 
 Sekarang jika kita lihat pada pipeline detail yang terbaru maka jobnya jalan seperti berikut:
 
-![workflow-tags]({{ page.image_path | prepend: site.baseurl }}/02c-workflow-create-tag-pipeline.png)
+![workflow-tags]({{ page.image_path | prepend: site.baseurl }}/02c-workflow-create-tag-pipeline.png){: width="400" }
 
 Dengan dengan membuat tag tersebut, kita menjalankan kembali job sebelumnya beserta `test-job1` tetapi tanpa job `deploy-prod`
 
@@ -139,4 +139,16 @@ Sedangkan untuk menjalankan yang job `build-prod` kita bisa membuat Merge reques
 - Buat perubahan dan commit serta push
 - Buat merge request ke main maka hasilnya seperti berikut:
 
-![workflow-tags]({{ page.image_path | prepend: site.baseurl }}/02d-workflow-mr.png)
+![workflow-merge-request]({{ page.image_path | prepend: site.baseurl }}/02d-workflow-mr.png){: width="400" }
+
+### Manually run pipeline
+
+Selain menggunakan script based, dan workflow Gitlab CI kita juga bisa menjalankan pipeline secara manual dengan click `Run pipeline` pada menu `Pipelines` seperti berikut:
+
+![manual-run-pipeline]({{ page.image_path | prepend: site.baseurl }}/03a-manual-run-pipeline.png)
+
+![form-run-pipeline]({{ page.image_path | prepend: site.baseurl }}/03b-form-run-pipeline.png)
+
+Kemudian muncul form seperti berikut, jika tidak ada option yang kita define pada script `.gitlab-ci.yml` just click the button, hasilnya seperti berikut:
+
+![form-run-pipeline]({{ page.image_path | prepend: site.baseurl }}/03c-manual-run-pipeline.png)
