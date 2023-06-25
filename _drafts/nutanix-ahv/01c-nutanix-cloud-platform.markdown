@@ -1,9 +1,7 @@
 ---
-
-title: "01c-nutanix-cloud-platform"
 lang: nutanix-ahv
-authors:
-- dimasm93
+catalog_key: introduction
+title: "01c-nutanix-cloud-platform"
 categories:
 - Cloud-Computing
 - Nutanix
@@ -13,7 +11,6 @@ refs:
 - https://www.nutanixuniversity.com/
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/nutanix-ahv/01c-nutanix-cloud-platform
 gist: 
 downloads: []

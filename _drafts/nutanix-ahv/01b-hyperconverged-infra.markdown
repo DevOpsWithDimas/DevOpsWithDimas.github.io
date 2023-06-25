@@ -1,9 +1,7 @@
 ---
-
-title: "01a-what-is-hci"
 lang: nutanix-ahv
-authors:
-- dimasm93
+catalog_key: introduction
+title: "01a-what-is-hci"
 categories:
 - Cloud-Computing
 - Nutanix
@@ -13,7 +11,6 @@ refs:
 - https://www.nutanixuniversity.com/
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/nutanix-ahv/01a-hci
 gist: 
 downloads: []

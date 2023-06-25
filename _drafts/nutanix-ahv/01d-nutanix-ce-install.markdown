@@ -1,9 +1,7 @@
 ---
-
-title: "01d-nutanix-ce-install"
 lang: nutanix-ahv
-authors:
-- dimasm93
+title: "01d-nutanix-ce-install"
+catalog_key: introduction
 categories:
 - Cloud-Computing
 - Nutanix
@@ -13,12 +11,10 @@ refs:
 - https://www.nutanixuniversity.com/
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/nutanix-ahv/01d-nutanix-ce-install
 gist: 
 downloads: []
 ---
-
 
 description...
 
