@@ -1,7 +1,7 @@
 ---
 lang: gitlab
 catalog_key: gitlab-ci
-title: "03e-gitlab-ci-job-references"
+title: "Basic Gitlab CI/CD"
 categories:
 - git
 - gitlab
@@ -9,7 +9,7 @@ categories:
 refs: 
 - https://docs.docker.com/
 youtube: 
-image_path: /resources/posts/gitlab-ci/03e-gitlab-ci-job-references
+image_path: /resources/posts/gitlab-ci/03e-basic-gitlab-ci
 gist: dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b
 downloads: []
 ---
