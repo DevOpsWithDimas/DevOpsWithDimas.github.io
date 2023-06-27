@@ -11,20 +11,29 @@ refs:
 - https://www.nutanixuniversity.com/
 youtube: 
 comments: true
-image_path: /resources/posts/nutanix-ahv/01a-what-is-infra
+image_path: /resources/posts/nutanix-ahv/01a-what-is-server
 gist: 
 downloads: []
 ---
 
-Hai semuanya, 
+Hai semuanya, di materi kali ini kita akan membahas tentang Infrastructure khususnya Servers. Jadi Server ini jika dipandang dari seorang Software Developer/Programmer bisa dibaratkan sebagai wadah/container yang dapat menampung suatu atau bebereapa aplikasi yang berjalan diatasnya. 
+
+Pada dasarnya, server ini dibagi-bagi 3 layer yaitu 
+
+- Server network, seperti Router, switch, Hub dan lain-lain.
+- Server storage, seperti NAS, SAN dan lain-lain
+- Server compute, seperti Virtual Machine, containers dan lain-lain.
+
+Untuk berkenalan lebih jauh tentang Server, yuk kita breakdown aja mulai dari 
+
+1. Histrical of Servers
+2. Cloud concepts (Private, Hybrid, and Multicloud)
+3. Hyperconverged Infra Revolution
+
+Okay langsung aja kita bahas satu-per-satu
 
 <!--more-->
 
-Materi: 
+## Histrical of Servers
 
-1. Topic1
-2. Topic2
-    1. Topic 2.a
-    2. Topic 2.b
-3. Topic 3
-4. Topic 4
+Pada 10tahun terakhir, kehadiran cloud service bergantung pada 
