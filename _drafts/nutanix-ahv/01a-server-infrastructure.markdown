@@ -36,4 +36,3 @@ Okay langsung aja kita bahas satu-per-satu
 
 ## Histrical of Servers
 
-Pada 10tahun terakhir, kehadiran cloud service bergantung pada 
