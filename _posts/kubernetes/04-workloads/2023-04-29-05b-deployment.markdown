@@ -23,10 +23,15 @@ Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes worklo
 1. What is Deployment Object?
 2. Create a Deployment
 3. Interaction with Deployment object
-  1. Updating a Deployment
-  2. Rolling Back a Deployment
-  3. Pause and Resume rollout of a Deployment
+  - Updating a Deployment
+  - Rolling Back a Deployment
+  - Scalling the pods with a Deployment
+  - Pause and Resume rollout of a Deployment
 4. Deployment status
+  - `type: progressing`
+  - `type: complete`
+  - `type: failed`
+  - `type: pending`
 
 Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:
 
@@ -219,7 +224,7 @@ nginx-deploy-c9bcb48d4-dzg7p   0/1     Terminating         0          14m
 
 Okay nah itu adalah salah satu interacation yang paling simple pada object deployment, Untuk update deployment spec, rolling back to previews version akan di bahas pada section selanjutnya ya supaya tidak terlalu panjang.
 
-## Updating a Deployment
+### Updating a Deployment
 
 Ada beberapa cara melakukan update suatu Deployment object pada kubernetes
 
@@ -325,7 +330,7 @@ Deployment ensures that only a certain number of Pods are down while they are be
 
 For example, if you look at the above Deployment closely, you will see that it first creates a new Pod, then deletes an old Pod, and creates another new one. It does not kill old Pods until a sufficient number of new Pods have come up, and does not create new Pods until a sufficient number of old Pods have been killed. It makes sure that at least `3` Pods are available and that at max `4` Pods in total are available. In case of a Deployment with `4` replicas, the number of Pods would be between `3` and `5`.
 
-## Rolling Back a Deployment
+### Rolling Back a Deployment
 
 Sometimes, you may want to rollback a Deployment; for example, when the Deployment is not stable, such as crash looping. By default, all of the Deployment's rollout history is kept in the system so that you can rollback anytime you want (you can change that by modifying revision history limit).
 
@@ -536,7 +541,7 @@ Events:
   Normal  ScalingReplicaSet  61s (x6 over 63s)  deployment-controller  (combined from similar events): Scaled down replica set nginx-deploy-5c7b8c97f6 to 0 from 1
 ```
 
-## Scalling a Deployment
+### Scalling the pods with a Deployment
 
 Selain kita bisa meng-update specifikasi pod dan container, kita juga bisa melakukan scalling suatu Deployment object dengan menggunakan beberapa cara yaitu
 
@@ -573,7 +578,7 @@ nginx-deploy-c9bcb48d4-sg97l   1/1     Running   0          3m46s
 nginx-deploy-c9bcb48d4-tvtq8   1/1     Running   0          69s
 ```
 
-## RollingUpdate a Deployment
+### RollingUpdate a Deployment
 
 RollingUpdate Deployments support running multiple versions of an application at the same time. When you or an autoscaler scales a RollingUpdate Deployment that is in the middle of a rollout (either in progress or paused), the Deployment controller balances the additional replicas in the existing active ReplicaSets (ReplicaSets with Pods) in order to mitigate risk. This is called proportional scaling.
 
@@ -637,7 +642,7 @@ rollingupdate-nginx-deploy-cd8ddf7d8    0         0         0       4s
 rollingupdate-nginx-deploy-77599d4db8   10        10        10      5s
 ```
 
-## Pause and Resume rollout of a Deployment
+### Pause and Resume rollout of a Deployment
 
 When you update a Deployment, or plan to, you can pause rollouts for that Deployment before you trigger one or more updates. When you're ready to apply those changes, you resume rollouts for the Deployment. This approach allows you to apply multiple fixes in between pausing and resuming without triggering unnecessary rollouts.
 
@@ -759,4 +764,30 @@ Conditions:
   Available      True    MinimumReplicasAvailable
   Progressing    True    NewReplicaSetAvailable
 NewReplicaSet:   rollingupdate-nginx-deploy-679cf9c85d (10/10 replicas created)
+```
+
+## Status of a Deployment object
+
+A Deployment enters various states during its lifecycle. 
+
+1. It can be `progressing` while rolling out a new ReplicaSet, 
+2. it can be `complete`, 
+3. or it can `fail` to progress.
+
+To check status you can use this command:
+
+{% highlight bash %}
+kubectl describe deploy/<object-name>
+{% endhighlight %}
+
+Untuk informasi status temen-temen bisa check di property `conditions:` seperti berikut:
+
+```bash
+~ ➡ kubectl describe deploy/nginx-deploy
+# <...>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
 ```
