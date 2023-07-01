@@ -1,11 +1,11 @@
 ---
 lang: ansible
-catalog_key: introduction
-title: "Silabus IaC - Ansible: Pemula sampai Mahir"
-date: 2022-07-06T04:47:42+07:00
+catalog_key: ansible
+title: "Silabus Ansible: Pemula sampai Mahir"
 sidebar_toc: false
 categories:
 - DevOps
+- Automation
 - Ansible
 - Basic
 refs: 
@@ -17,7 +17,7 @@ gist: dimMaryanto93/ab4bbfd903a7ae297349960787a45ff4
 downloads: []
 ---
 
-Hai semuanya, di cource ini `IaC - Ansible: Pemula sampai Mahir` kita akan mengupas tuntas mengenai salah satu teknologi untuk IT Automation yang sangat popular sekali yaitu [RedHad Ansible](https://www.ansible.com).
+Hai semuanya, di cource ini `Ansible: Pemula sampai Mahir` kita akan mengupas tuntas mengenai salah satu teknologi untuk IT Automation yang sangat popular sekali yaitu [RedHad Ansible](https://www.ansible.com).
 
 Materi yang di bahas mencakup, beberapa kategori. Mulai dari pemula sampai mahir (advanced) yaitu
 

@@ -1,9 +1,10 @@
 ---
 lang: ansible
-catalog_key: introduction
+catalog_key: ansible
 title: "What is RedHad Ansible?"
 categories:
 - DevOps
+- Automation
 - Ansible
 - Basic
 refs: 

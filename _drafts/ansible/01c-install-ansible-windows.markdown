@@ -1,9 +1,10 @@
 ---
 lang: ansible
-catalog_key: introduction
+catalog_key: ansible
 title: "Install and Configure Ansible on Windows 10/11"
 categories:
 - DevOps
+- Automation
 - Ansible
 - Basic
 refs: 

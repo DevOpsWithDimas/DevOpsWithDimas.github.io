@@ -1,9 +1,10 @@
 ---
 lang: ansible
-catalog_key: introduction
+catalog_key: ansible
 title: "Install and Configure Ansible on Linux"
 categories:
 - DevOps
+- Automation
 - Ansible
 - Basic
 refs: 

@@ -1,9 +1,10 @@
 ---
 lang: ansible
-catalog_key: introduction
+catalog_key: ansible
 title: "What is IT Automation?"
 categories:
 - DevOps
+- Automation
 - Ansible
 - Basic
 refs: 
@@ -15,8 +16,7 @@ gist: dimMaryanto93/ab4bbfd903a7ae297349960787a45ff4
 downloads: []
 ---
 
-
-description...
+Hai semuanya, 
 
 <!--more-->
 

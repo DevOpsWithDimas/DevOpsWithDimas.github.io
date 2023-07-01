@@ -1,9 +1,10 @@
 ---
 lang: ansible
-catalog_key: introduction
+catalog_key: ansible
 title: "How to Ansible Work?"
 categories:
 - DevOps
+- Automation
 - Ansible
 - Basic
 refs: 

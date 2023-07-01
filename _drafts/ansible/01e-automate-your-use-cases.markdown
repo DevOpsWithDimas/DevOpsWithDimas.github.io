@@ -1,9 +1,10 @@
 ---
 lang: ansible
-catalog_key: introduction
+catalog_key: ansible
 title: "Automate your use cases with Ansible"
 categories:
 - DevOps
+- Automation
 - Ansible
 - Basic
 refs: 

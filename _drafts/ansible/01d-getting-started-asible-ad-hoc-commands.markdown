@@ -1,9 +1,10 @@
 ---
 lang: ansible
-catalog_key: introduction
+catalog_key: ansible
 title: "Getting started with Ansible ad-hoc commands"
 categories:
 - DevOps
+- Automation
 - Ansible
 - Basic
 refs: 

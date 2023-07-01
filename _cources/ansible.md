@@ -1,22 +1,22 @@
 ---
 title: "Ansible"
-subtitle: "Ansible for DevOps Engineer"
+subtitle: "Ansible Automation Platform"
 key: ansible
-publish: 
+publish: 2023-06-01T18:46:00+07:00
 hidden: false
 coming_soon: true
 header:
-  overlay_image: "assets/images/cources/ansible.png"
+  overlay_image: "assets/images/cources/ansible-teaser.png"
   teaser: assets/images/cources/ansible.png
   overlay_filter: 0.7
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      linkContentUrl: _posts/ansible/01-ansible/2022-07-06-00-silabus.markdown
-tagline: "xxx"
+      # linkContentUrl: _posts/ansible/01-ansible/2022-07-06-00-silabus.markdown
+tagline: "Software Automation terkait Deployment adalah salah satu teknologi yang saat ini sedang banyak dibutuhakan di industri IT khususnya perusahan sekala menengah hinga besar seperti Software House hingga Software Vendor. <br><b>Ansible</b> adalah Automation Platform bersifat <b>Configuration as a Code</b> (CaaC) yang popular dan banyak digunakan karena menggunakan system agentless buatan RedHat."
 tags:
   - DevOps
-  - IaC
+  - Automation
   - Ansible
 sidebar:
   - title: "Role"
@@ -32,32 +32,81 @@ udemy:
   referralCode: 8DA27E06BF0BA6935CCC
   expired: 15/04/2023
   toc: true
+catalogs:
+  - name: Ansible Basic
+    key: ansible
+    description: 'Eps. 1 - Pengenalan Ansible'
+    deprecated: false
+    messages: ''
+  - name: Ansible Playbook
+    key: ansible-playbook
+    description: 'Eps. 2 - Ansible Playbook'
+    deprecated: false
+    messages: ''
+  - name: Ansible Roles
+    key: ansible-roles
+    description: 'Eps. 3 - Ansible Roles'
+    deprecated: false
+    messages: ''
+  - name: Ansible Galaxy
+    key: ansible-galaxy
+    description: 'Eps. 4 - Ansible Galaxy'
+    deprecated: false
+    messages: ''
 ---
 
-Hai semuanya selamat datang di kelas **xxx**, jadi kali ini kita akan membahas xxx yaitu menggunakan [xxx](link). 
+Hai semuanya, di cource ini `Ansible: Pemula sampai Mahir` kita akan mengupas tuntas mengenai salah satu teknologi untuk IT Automation yang sangat popular sekali yaitu [RedHad Ansible](https://www.ansible.com).
 
 <!--more-->
 
 ## What you'll learn
 
-Tell me about what will you learn this cource
+Secara garis besar apa saja sih yang akan temen-temen pelajari:
+
+1. Bagaimana menggunakan Ansible pada PC/Laptop kamu supaya bisa membantu task dalam Automation Deployment.
+2. Hand's-on terkait best practices untuk menggunakan Ansible, membuat Playbook and Roles like a Pro!
+3. Mempublish Ansible roles ke Ansible Galaxy sehingga code dapat digunakan secara berulang / reused
+4. Disertai dengan berbagai macam workload, seperti Automation deploy DevOps platform seperti Kubernetes, Gitlab dan lain-lain.
+6. Membuat mini project (sederhana) sebagai final project sebagai tolak ukur, temen-temen telah mengelesaikan kelas ini.
 
 ## Requirement
 
-Tell me about what requirement to learn this cource
+Untuk mengikuti kelas ini, disarankan temen-temen sudah memenuhi beberapa syarat berikut:
+
+- Memiliki PC / Laptop / Virtual Machine dengan memenuhi standard minimum menjalankan Ansible
+- Memahami sedikit basic tentang commandline / terminal command
+- Memahami perintah `git` dasar, seperti `clone`, `pull`, `checkout`, dan `push`
+- Memahami basic networking, seperti bagaimana setiap node/server berkomunikasi.
+- Memahami basic installation seperti install database, application menggunakan commandline, membuat service dengan systemd dan lain-lain.
 
 ## What you'll get from this cource
 
-Tell me about what you will get from this source
+Beberapa benefit jika temen-temen mengikuti kelas ini, diantaranya:
 
-## Description
+- Materi berbentuk website/blog post, persentation file dan beberapa file pendukung lainnya.
+- Materi yang disampakan akan terus bertambah dan di-update seiring dengan bertambahnya waktu
+- Materi yang disampaikan disertai dengan Latihan baik pilihan ganda (knowlagebase) maupun hand's on  (praktek)
+- Temen-temen bisa bertanya ke group/community baik melalu channel Udemy maupun Discord untuk premium members
+- Materi lebih dari 15jam tayang, serta dapat diakses selamanya
+- Temen-temen bisa konsultasi secara langsung dengan saya (instruktur) melalui off/online meet jika dibutuhkan. (Contact Me!)
+- Mendapatkan Certificate of completion
 
-Tell me something about this cources, why you should learn this
+## Who this course is for?
 
-## After taking this course, you'll be able to
+Kelas ini dibuat buat siapa saya yang ingin menjadi DevOps engineer, bisa untuk yang belum bekerja seperti:
 
-Tell me something about this cource, what will you be able to
+- SMK (Sekolah menengah kejuruan) jurusan IT (ilmu komputer), 
+- Mahasiswa jurusan/program studi IT (ilmu komputer)
 
-## Who this course is for
+Dan juga yang sudah bekerja seperti:
 
-Tell me someting about this cource, who is this class for?
+- DevOps engineer
+- Operation team
+
+## Cource content
+
+{% include cource_contents.html cource_name="key" %}
+
+## After taking this course, you'll be able to?
+
+Setelah mengikuti kelas ini diharapkan temen-temen bisa menguasai secara keseluruhan baik teori maupun praktek dan bisa mengimplementasikan di kehidupan sehari-hari.
