@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "What is Kubernetes Objects?",
-      "link": "/posts/devops/orchestration/kubernetes/01d-k8s-objects"
-    }
-    ,
-    {
       "title": "The Kubernetes API",
       "link": "/posts/devops/orchestration/kubernetes/01c-k8s-api"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Pipeline: PHP deployment using Gitlab CI",
       "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12c-pipeline-php-gitlab-ci"
+    }
+    ,
+    {
+      "title": "The `.gitlab-ci.yml` file",
+      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12b-syntax-gitlab-ci-yml"
     }
   ]
 }

@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "JSP Action Element",
-      "link": "/posts/language/java/web/jsp/026-jsp-action-elements"
-    }
-    ,
-    {
       "title": "JSP Taglib Directive (JSTL)",
       "link": "/posts/language/java/web/jsp/025-jsp-directive-taglib"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Logging incomming request dengan Servlet Filter",
       "link": "/posts/language/java/web/servlet/017-logging-incomming-request-servlet-filter"
+    }
+    ,
+    {
+      "title": "Submit file menggunakan Servlet",
+      "link": "/posts/language/java/web/servlet/016-submit-file-dengan-servlet"
     }
   ]
 }

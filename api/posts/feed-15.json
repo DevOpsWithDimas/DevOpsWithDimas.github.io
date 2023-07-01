@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Share data between Containers in Compose",
-      "link": "/posts/devops/docker/compose/volume/09f-compose-share-data-between-containers"
-    }
-    ,
-    {
       "title": "Volume in Compose",
       "link": "/posts/devops/docker/compose/volume/09e-compose-volume"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Build Docker image for Laravel Framework",
       "link": "/posts/devops/docker/dockerfile/study-cases/08k-build-laravel-apps"
+    }
+    ,
+    {
+      "title": "Build docker image for PHP",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08j-build-php"
     }
   ]
 }

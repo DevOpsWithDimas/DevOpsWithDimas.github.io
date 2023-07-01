@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Install PostgreSQL for Mac users",
-      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac"
-    }
-    ,
-    {
       "title": "Using your own image into Minikube cluster",
       "link": "/posts/devops/orchestration/kubernetes/02d-minikube-use-your-own-images"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Overview Installing PostgreSQL",
       "link": "/posts/rdbms/postgresql/getting-started/02-overview-install-postgres"
+    }
+    ,
+    {
+      "title": "Accessing a Database",
+      "link": "/posts/rdbms/postgresql/01d-accessing-database"
     }
   ]
 }

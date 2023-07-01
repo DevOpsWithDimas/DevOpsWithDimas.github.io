@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Percabagan atau Selection di JavaScript",
-      "link": "/posts/language/web/js/07-selection-js"
-    }
-    ,
-    {
       "title": "Operator Matematika di JavaScript",
       "link": "/posts/language/web/js/06-math-operation-js"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Mengenal class ResultSet",
       "link": "/posts/language/java/jdbc/08-resultset"
+    }
+    ,
+    {
+      "title": "Perbedaan method executeQuery() dan executeUpdate()",
+      "link": "/posts/language/java/jdbc/07-execute-query-and-update"
     }
   ]
 }

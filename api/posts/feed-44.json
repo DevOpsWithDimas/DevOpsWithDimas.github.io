@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Element Collection",
-      "link": "/posts/language/java/arrays/15-element-collections"
-    }
-    ,
-    {
       "title": "Array 2 dimensi",
       "link": "/posts/language/java/arrays/14a-array-2-dimension"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Object oriented dengan Java class",
       "link": "/posts/language/java/oop/11-class-oop"
+    }
+    ,
+    {
+      "title": "Time is your for practice part 3",
+      "link": "/posts/language/java/classes/10-quis-section-3"
     }
   ]
 }

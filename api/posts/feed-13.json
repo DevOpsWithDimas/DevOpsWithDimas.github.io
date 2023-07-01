@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Overview of Docker Context",
-      "link": "/posts/devops/docker/context/11-overview-docker-engine"
-    }
-    ,
-    {
       "title": "Compose file for multiple git projects",
       "link": "/posts/devops/docker/compose/study-cases/git/10f-compose-using-multiple-git-projects"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Scale services using compose command",
       "link": "/posts/devops/docker/compose/scale/09q-compose-scale-services"
+    }
+    ,
+    {
+      "title": "Example use case of multiple compose files",
+      "link": "/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases"
     }
   ]
 }

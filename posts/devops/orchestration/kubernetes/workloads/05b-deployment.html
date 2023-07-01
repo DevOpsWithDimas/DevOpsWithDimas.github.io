@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Working with Deployment object - DevOps with Dimas Maryanto</title>
-<meta name="description" content="Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya:     What is Deployment Object?   Create a Deployment   Interaction with Deployment object   Updating a Deployment   Rolling Back a Deployment   Pause and Resume rollout of a Deployment   Deployment status   Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:">
+<meta name="description" content="Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya:     What is Deployment Object?   Create a Deployment   Interaction with Deployment object            Updating a Deployment       Rolling Back a Deployment       Scalling the pods with a Deployment       Pause and Resume rollout of a Deployment           Deployment status            type: progressing       type: complete       type: failed       type: pending           Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:">
 
 
   <meta name="author" content="Dimas Maryanto">
@@ -26,7 +26,7 @@
 <meta property="og:url" content="/posts/devops/orchestration/kubernetes/workloads/05b-deployment">
 
 
-  <meta property="og:description" content="Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya:     What is Deployment Object?   Create a Deployment   Interaction with Deployment object   Updating a Deployment   Rolling Back a Deployment   Pause and Resume rollout of a Deployment   Deployment status   Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:">
+  <meta property="og:description" content="Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya:     What is Deployment Object?   Create a Deployment   Interaction with Deployment object            Updating a Deployment       Rolling Back a Deployment       Scalling the pods with a Deployment       Pause and Resume rollout of a Deployment           Deployment status            type: progressing       type: complete       type: failed       type: pending           Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:">
 
 
 
@@ -273,7 +273,7 @@
         On this page
       </h4>
     </header>
-    <ul class="toc__menu"><li><a href="#what-is-deployment-object">What is Deployment Object</a></li><li><a href="#create-deployment-using-yaml-file">Create Deployment using yaml file</a></li><li><a href="#interaction-with-development-object">Interaction with Development object</a></li><li><a href="#updating-a-deployment">Updating a Deployment</a></li><li><a href="#rolling-back-a-deployment">Rolling Back a Deployment</a></li><li><a href="#scalling-a-deployment">Scalling a Deployment</a></li><li><a href="#rollingupdate-a-deployment">RollingUpdate a Deployment</a></li><li><a href="#pause-and-resume-rollout-of-a-deployment">Pause and Resume rollout of a Deployment</a></li></ul>
+    <ul class="toc__menu"><li><a href="#what-is-deployment-object">What is Deployment Object</a></li><li><a href="#create-deployment-using-yaml-file">Create Deployment using yaml file</a></li><li><a href="#interaction-with-development-object">Interaction with Development object</a><ul><li><a href="#updating-a-deployment">Updating a Deployment</a></li><li><a href="#rolling-back-a-deployment">Rolling Back a Deployment</a></li><li><a href="#scalling-the-pods-with-a-deployment">Scalling the pods with a Deployment</a></li><li><a href="#rollingupdate-a-deployment">RollingUpdate a Deployment</a></li><li><a href="#pause-and-resume-rollout-of-a-deployment">Pause and Resume rollout of a Deployment</a></li></ul></li><li><a href="#status-of-a-deployment-object">Status of a Deployment object</a></li></ul>
 
   </nav>
   
@@ -284,7 +284,7 @@
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Working with Deployment object">
-    <meta itemprop="description" content="Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya:  What is Deployment Object?  Create a Deployment  Interaction with Deployment object  Updating a Deployment  Rolling Back a Deployment  Pause and Resume rollout of a Deployment  Deployment statusOkay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:">
+    <meta itemprop="description" content="Hai semuanya, materi sebelumnya kita sudah mencoba menggunakan Kubernetes workload resources dengan Object Deployment yang paling simple. Sekarang kita akan membahas yang lebih detail tentang Object Deployment. Karena pembahasan kali ini lumayan panjang jadi kita bagi2 jadi beberapa bagian diantaranya:  What is Deployment Object?  Create a Deployment  Interaction with Deployment object          Updating a Deployment      Rolling Back a Deployment      Scalling the pods with a Deployment      Pause and Resume rollout of a Deployment        Deployment status          type: progressing      type: complete      type: failed      type: pending      Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:">
     <meta itemprop="datePublished" content="2023-04-29T11:51:37+07:00">
     
 
@@ -895,11 +895,22 @@
 <ol>
   <li>What is Deployment Object?</li>
   <li>Create a Deployment</li>
-  <li>Interaction with Deployment object</li>
-  <li>Updating a Deployment</li>
-  <li>Rolling Back a Deployment</li>
-  <li>Pause and Resume rollout of a Deployment</li>
-  <li>Deployment status</li>
+  <li>Interaction with Deployment object
+    <ul>
+      <li>Updating a Deployment</li>
+      <li>Rolling Back a Deployment</li>
+      <li>Scalling the pods with a Deployment</li>
+      <li>Pause and Resume rollout of a Deployment</li>
+    </ul>
+  </li>
+  <li>Deployment status
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">type: progressing</code></li>
+      <li><code class="language-plaintext highlighter-rouge">type: complete</code></li>
+      <li><code class="language-plaintext highlighter-rouge">type: failed</code></li>
+      <li><code class="language-plaintext highlighter-rouge">type: pending</code></li>
+    </ul>
+  </li>
 </ol>
 
 <p>Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:</p>
@@ -1094,7 +1105,7 @@ nginx-deploy-c9bcb48d4-dzg7p   0/1     Terminating         0          14m
 
 <p>Okay nah itu adalah salah satu interacation yang paling simple pada object deployment, Untuk update deployment spec, rolling back to previews version akan di bahas pada section selanjutnya ya supaya tidak terlalu panjang.</p>
 
-<h2 id="updating-a-deployment">Updating a Deployment</h2>
+<h3 id="updating-a-deployment">Updating a Deployment</h3>
 
 <p>Ada beberapa cara melakukan update suatu Deployment object pada kubernetes</p>
 
@@ -1200,7 +1211,7 @@ Events:
 
 <p>For example, if you look at the above Deployment closely, you will see that it first creates a new Pod, then deletes an old Pod, and creates another new one. It does not kill old Pods until a sufficient number of new Pods have come up, and does not create new Pods until a sufficient number of old Pods have been killed. It makes sure that at least <code class="language-plaintext highlighter-rouge">3</code> Pods are available and that at max <code class="language-plaintext highlighter-rouge">4</code> Pods in total are available. In case of a Deployment with <code class="language-plaintext highlighter-rouge">4</code> replicas, the number of Pods would be between <code class="language-plaintext highlighter-rouge">3</code> and <code class="language-plaintext highlighter-rouge">5</code>.</p>
 
-<h2 id="rolling-back-a-deployment">Rolling Back a Deployment</h2>
+<h3 id="rolling-back-a-deployment">Rolling Back a Deployment</h3>
 
 <p>Sometimes, you may want to rollback a Deployment; for example, when the Deployment is not stable, such as crash looping. By default, all of the Deployment’s rollout history is kept in the system so that you can rollback anytime you want (you can change that by modifying revision history limit).</p>
 
@@ -1393,7 +1404,7 @@ Events:
   Normal  ScalingReplicaSet  61s <span class="o">(</span>x6 over 63s<span class="o">)</span>  deployment-controller  <span class="o">(</span>combined from similar events<span class="o">)</span>: Scaled down replica <span class="nb">set </span>nginx-deploy-5c7b8c97f6 to 0 from 1
 </code></pre></div></div>
 
-<h2 id="scalling-a-deployment">Scalling a Deployment</h2>
+<h3 id="scalling-the-pods-with-a-deployment">Scalling the pods with a Deployment</h3>
 
 <p>Selain kita bisa meng-update specifikasi pod dan container, kita juga bisa melakukan scalling suatu Deployment object dengan menggunakan beberapa cara yaitu</p>
 
@@ -1429,7 +1440,7 @@ nginx-deploy-c9bcb48d4-sg97l   1/1     Running   0          3m46s
 nginx-deploy-c9bcb48d4-tvtq8   1/1     Running   0          69s
 </code></pre></div></div>
 
-<h2 id="rollingupdate-a-deployment">RollingUpdate a Deployment</h2>
+<h3 id="rollingupdate-a-deployment">RollingUpdate a Deployment</h3>
 
 <p>RollingUpdate Deployments support running multiple versions of an application at the same time. When you or an autoscaler scales a RollingUpdate Deployment that is in the middle of a rollout (either in progress or paused), the Deployment controller balances the additional replicas in the existing active ReplicaSets (ReplicaSets with Pods) in order to mitigate risk. This is called proportional scaling.</p>
 
@@ -1487,7 +1498,7 @@ rollingupdate-nginx-deploy-cd8ddf7d8    0         0         0       4s
 rollingupdate-nginx-deploy-77599d4db8   10        10        10      5s
 </code></pre></div></div>
 
-<h2 id="pause-and-resume-rollout-of-a-deployment">Pause and Resume rollout of a Deployment</h2>
+<h3 id="pause-and-resume-rollout-of-a-deployment">Pause and Resume rollout of a Deployment</h3>
 
 <p>When you update a Deployment, or plan to, you can pause rollouts for that Deployment before you trigger one or more updates. When you’re ready to apply those changes, you resume rollouts for the Deployment. This approach allows you to apply multiple fixes in between pausing and resuming without triggering unnecessary rollouts.</p>
 
@@ -1600,6 +1611,31 @@ Conditions:
   Available      True    MinimumReplicasAvailable
   Progressing    True    NewReplicaSetAvailable
 NewReplicaSet:   rollingupdate-nginx-deploy-679cf9c85d <span class="o">(</span>10/10 replicas created<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="status-of-a-deployment-object">Status of a Deployment object</h2>
+
+<p>A Deployment enters various states during its lifecycle.</p>
+
+<ol>
+  <li>It can be <code class="language-plaintext highlighter-rouge">progressing</code> while rolling out a new ReplicaSet,</li>
+  <li>it can be <code class="language-plaintext highlighter-rouge">complete</code>,</li>
+  <li>or it can <code class="language-plaintext highlighter-rouge">fail</code> to progress.</li>
+</ol>
+
+<p>To check status you can use this command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">kubectl describe deploy/&lt;object-name&gt;</code></pre></figure>
+
+<p>Untuk informasi status temen-temen bisa check di property <code class="language-plaintext highlighter-rouge">conditions:</code> seperti berikut:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ ➡ kubectl describe deploy/nginx-deploy
+<span class="c"># &lt;...&gt;</span>
+Conditions:
+  Type           Status  Reason
+  <span class="nt">----</span>           <span class="nt">------</span>  <span class="nt">------</span>
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
 </code></pre></div></div>
 
         

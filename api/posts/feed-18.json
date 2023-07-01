@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Excluding files/directories",
-      "link": "/posts/devops/docker/dockerfile/07e-dockerfile-ignore"
-    }
-    ,
-    {
       "title": "Copying Resources",
       "link": "/posts/devops/docker/dockerfile/07d-dockerfile-copy"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Management Volume",
       "link": "/posts/devops/docker/volume/06a-management-volume"
+    }
+    ,
+    {
+      "title": "Docker Volume Overview",
+      "link": "/posts/devops/docker/volume/06-docker-volume"
     }
   ]
 }

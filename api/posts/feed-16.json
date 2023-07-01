@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Build docker image for PHP",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08j-build-php"
-    }
-    ,
-    {
       "title": "Angular - Proxy to backend",
       "link": "/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Build Docker Image for Java Webapp",
       "link": "/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat"
+    }
+    ,
+    {
+      "title": "Build specific docker image by programming languages",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage"
     }
   ]
 }

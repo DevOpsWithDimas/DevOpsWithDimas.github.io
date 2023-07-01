@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Silabus Belajar JasperReport",
-      "link": "/posts/language/java/web/jasper/001-silabus"
-    }
-    ,
-    {
       "title": "Composite Primary Key",
       "link": "/posts/framework/java/orm/hibernate/basic/02h-composite-primary-key"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Basic Annotation pada Hibernate",
       "link": "/posts/framework/java/orm/hibernate/basic/02d-hibernate-annotation-basic"
+    }
+    ,
+    {
+      "title": "Membuat Simple Entity di Hibernate",
+      "link": "/posts/framework/java/orm/hibernate/basic/02c-membuat-simple-entity"
     }
   ]
 }

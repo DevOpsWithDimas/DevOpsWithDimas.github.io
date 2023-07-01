@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "The `.gitlab-ci.yml` file",
-      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12b-syntax-gitlab-ci-yml"
-    }
-    ,
-    {
       "title": "Setup environment for CI using Gitlab & Nexus OSS",
       "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12a-setup-gitlab-ci"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Usage & Managing Docker Context",
       "link": "/posts/devops/docker/context/11a-docker-context"
+    }
+    ,
+    {
+      "title": "Overview of Docker Context",
+      "link": "/posts/devops/docker/context/11-overview-docker-engine"
     }
   ]
 }

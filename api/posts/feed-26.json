@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "DDL - Static Data Dictionary View",
-      "link": "/posts/rdbms/oracle18c/016a-dictionary-table"
-    }
-    ,
-    {
       "title": "Data Definition Language (DDL) di Oracle",
       "link": "/posts/rdbms/oracle18c/016-ddl"
     }
@@ -49,6 +44,11 @@
     {
       "title": "DML - Delete Statement di Oracle",
       "link": "/posts/rdbms/oracle18c/014c-dml-delete"
+    }
+    ,
+    {
+      "title": "DML - Update Statement di Oracle",
+      "link": "/posts/rdbms/oracle18c/014b-dml-update"
     }
   ]
 }

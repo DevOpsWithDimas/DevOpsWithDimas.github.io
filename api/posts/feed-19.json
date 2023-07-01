@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Docker Volume Overview",
-      "link": "/posts/devops/docker/volume/06-docker-volume"
-    }
-    ,
-    {
       "title": "Disable networking for a container",
       "link": "/posts/devops/docker/network/05g-docker-none-network"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Logging, Inspect, & Resource Usage Statistics Containers",
       "link": "/posts/devops/docker/container/04f-logging-inspect-stats-container"
+    }
+    ,
+    {
+      "title": "Copying files/content between container and filesystem",
+      "link": "/posts/devops/docker/container/04e-docker-copy"
     }
   ]
 }

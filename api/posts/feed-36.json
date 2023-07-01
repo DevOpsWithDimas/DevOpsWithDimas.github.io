@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Parent-Child Mapping",
-      "link": "/posts/framework/java/orm/hibernate/mapping/03h-parent-child-mapping"
-    }
-    ,
-    {
       "title": "Inherintance Mapping",
       "link": "/posts/framework/java/orm/hibernate/mapping/03g-inherintance-mapping"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Time is your practice",
       "link": "/posts/framework/java/orm/hibernate/basic/02i-quis-1"
+    }
+    ,
+    {
+      "title": "Silabus Belajar JasperReport",
+      "link": "/posts/language/java/web/jasper/001-silabus"
     }
   ]
 }

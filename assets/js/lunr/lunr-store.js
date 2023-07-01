@@ -6,8 +6,8 @@ var store = [{
         "teaser": "/assets/images/cources/angular.png"
       },{
         "title": "Ansible",
-        "excerpt":"Hai semuanya selamat datang di kelas xxx, jadi kali ini kita akan membahas xxx yaitu menggunakan xxx. What you’ll learn Tell me about what will you learn this cource Requirement Tell me about what requirement to learn this cource What you’ll get from this cource Tell me about what you...","categories": [],
-        "tags": ["DevOps","IaC","Ansible"],
+        "excerpt":"Hai semuanya, di cource ini Ansible: Pemula sampai Mahir kita akan mengupas tuntas mengenai salah satu teknologi untuk IT Automation yang sangat popular sekali yaitu RedHad Ansible. What you’ll learn Secara garis besar apa saja sih yang akan temen-temen pelajari: Bagaimana menggunakan Ansible pada PC/Laptop kamu supaya bisa membantu task...","categories": [],
+        "tags": ["DevOps","Automation","Ansible"],
         "url": "/pages/cources/ansible",
         "teaser": "/assets/images/cources/ansible.png"
       },{
@@ -2679,12 +2679,6 @@ var store = [{
         "excerpt":"Hai semuanya, di materi kali ini kita akan membahas tentang Menggabungkan beberapa query menjadi suatu resutlset atau klo bahas kerennya Combining Queries. Pada combining queries ini ada beberapa macam teknik atau metode diataranya UNION INTERSECT EXCEPT Dari setiap method tersebut memiliki fungsinya masing-masing, Untuk lebih jelasnya yukk langsung aja kita...","categories": ["RDBMS","PostgreSQL","sql","select"],
         "tags": [],
         "url": "/posts/rdbms/postgresql/sql/select/04e-combining-queries",
-        "teaser": "/assets/images/500x300.png"
-      },{
-        "title": "Silabus IaC - Ansible: Pemula sampai Mahir",
-        "excerpt":"Hai semuanya, di cource ini IaC - Ansible: Pemula sampai Mahir kita akan mengupas tuntas mengenai salah satu teknologi untuk IT Automation yang sangat popular sekali yaitu RedHad Ansible. Materi yang di bahas mencakup, beberapa kategori. Mulai dari pemula sampai mahir (advanced) yaitu Pengenalan Ansible Apa itu IT Automation? Tool...","categories": ["DevOps","Ansible","Basic"],
-        "tags": [],
-        "url": "/posts/devops/ansible/basic/00-silabus",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Pengenalan Version Control",

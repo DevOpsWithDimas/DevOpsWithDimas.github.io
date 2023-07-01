@@ -32,11 +32,6 @@
     }
     ,
     {
-      "title": "Silabus IaC - Ansible: Pemula sampai Mahir",
-      "link": "/posts/devops/ansible/basic/00-silabus"
-    }
-    ,
-    {
       "title": "Combining Queries (UNION, INTERSECT, EXCEPT)",
       "link": "/posts/rdbms/postgresql/sql/select/04e-combining-queries"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Silabus Git VCS: Pemula s/d Mahir",
       "link": "/posts/git/version-control/00-silabus-git-vcs"
+    }
+    ,
+    {
+      "title": "Conditional Expressions",
+      "link": "/posts/rdbms/postgresql/sql/select/04d-conditional-expression"
     }
   ]
 }

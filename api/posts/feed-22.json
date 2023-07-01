@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Parent Childs Relationship",
-      "link": "/posts/rdbms/oracle18c/019d-mapping-parent-child"
-    }
-    ,
-    {
       "title": "Many To Many Relationship Tables",
       "link": "/posts/rdbms/oracle18c/019c-mapping-many-to-many"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Monitoring Database Activity dengan Audit",
       "link": "/posts/rdbms/oracle18c/018h-auditing"
+    }
+    ,
+    {
+      "title": "DDL - Managing Resource & Password dengan Profiles",
+      "link": "/posts/rdbms/oracle18c/018g-ddl-profiles"
     }
   ]
 }

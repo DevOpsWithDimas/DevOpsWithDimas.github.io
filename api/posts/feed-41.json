@@ -2,11 +2,6 @@
   "pages": [
     
     {
-      "title": "Pengenalan Styling dengan CSS",
-      "link": "/posts/language/java/web/servlet/004-pengenalan-css"
-    }
-    ,
-    {
       "title": "Pengenalan Scripting language dengan HTML",
       "link": "/posts/language/java/web/servlet/003-pengenalan-html"
     }
@@ -49,6 +44,11 @@
     {
       "title": "Perulangan atau Looping dengan JavaScript",
       "link": "/posts/language/web/js/08-loop-js"
+    }
+    ,
+    {
+      "title": "Percabagan atau Selection di JavaScript",
+      "link": "/posts/language/web/js/07-selection-js"
     }
   ]
 }
