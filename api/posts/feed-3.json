@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Deep dive into DELETE statement",
+      "link": "/posts/rdbms/postgresql/sql/dml/05d-dml-delete"
+    }
+    ,
+    {
       "title": "Deep dive into UPDATE Statement",
       "link": "/posts/rdbms/postgresql/sql/dml/05c-dml-update"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Time your practice (part 2)",
       "link": "/posts/rdbms/postgresql/sql/select/04g-quis-section-2"
-    }
-    ,
-    {
-      "title": "WITH Queries (Common Table Expressions)",
-      "link": "/posts/rdbms/postgresql/sql/select/04f-with-queries"
     }
   ]
 }

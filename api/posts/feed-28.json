@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Sub Query Correlate di Oracle",
+      "link": "/posts/rdbms/oracle18c/011f-subquery-correlate"
+    }
+    ,
+    {
       "title": "ALL Operator dengan Sub Query di Oracle",
       "link": "/posts/rdbms/oracle18c/011e-subquery-multi-row-where-all-operator"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Inner Join di Oracle",
       "link": "/posts/rdbms/oracle18c/010c-inner-join"
-    }
-    ,
-    {
-      "title": "Please be carefull using natural join di Oracle",
-      "link": "/posts/rdbms/oracle18c/010b-cartesian-product-join"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Conditional Expressions",
+      "link": "/posts/rdbms/postgresql/sql/select/04d-conditional-expression"
+    }
+    ,
+    {
       "title": "Configure Request and Limit of Resources (CPUs & Memory)",
       "link": "/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Working with Pods",
       "link": "/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods"
-    }
-    ,
-    {
-      "title": "Kubernetes Workloads with Pods",
-      "link": "/posts/devops/orchestration/kubernetes/pods/03a-workload-pods"
     }
   ]
 }

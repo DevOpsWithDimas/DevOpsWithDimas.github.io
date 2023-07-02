@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "DML - Update Statement di Oracle",
+      "link": "/posts/rdbms/oracle18c/014b-dml-update"
+    }
+    ,
+    {
       "title": "DML - Insert Statement di Oracle",
       "link": "/posts/rdbms/oracle18c/014a-dml-insert"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Sub Query EXIST Predicates di Oracle",
       "link": "/posts/rdbms/oracle18c/011g-subquery-exists-predicate"
-    }
-    ,
-    {
-      "title": "Sub Query Correlate di Oracle",
-      "link": "/posts/rdbms/oracle18c/011f-subquery-correlate"
     }
   ]
 }

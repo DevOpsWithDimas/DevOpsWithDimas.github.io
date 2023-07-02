@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Silabus Ansible: Pemula sampai Mahir",
+      "link": "/posts/devops/automation/ansible/basic/00-silabus-ansible"
+    }
+    ,
+    {
       "title": "Getting started: Create and run your first Gitlab CI/CD pipeline",
       "link": "/posts/git/gitlab/gitlab-ci/03d-getting-started"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Silabus SRE - Nutanix AHV: Pemula sampai Mahir",
       "link": "/posts/cloud-computing/nutanix/ahv/00-silabus-nutanix-ahv"
-    }
-    ,
-    {
-      "title": "What is Workload Resources?",
-      "link": "/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload"
     }
   ]
 }

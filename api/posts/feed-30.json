@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Date & Time Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008c-date-function"
+    }
+    ,
+    {
       "title": "Number Single Row Function di Oracle",
       "link": "/posts/rdbms/oracle18c/008b-number-function"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Null Conditions pada klausa where di Oracle",
       "link": "/posts/rdbms/oracle18c/006d-null-predicate"
-    }
-    ,
-    {
-      "title": "Between Predicate pada klausa where di Oracle",
-      "link": "/posts/rdbms/oracle18c/006c-between-predicate"
     }
   ]
 }

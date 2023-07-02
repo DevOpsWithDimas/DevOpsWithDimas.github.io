@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Copying files/content between container and filesystem",
+      "link": "/posts/devops/docker/container/04e-docker-copy"
+    }
+    ,
+    {
       "title": "Expose services to outside using ports",
       "link": "/posts/devops/docker/container/04d-expose-service-outside"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Getting Started with Docker",
       "link": "/posts/devops/docker/basic/03-getting-started"
-    }
-    ,
-    {
-      "title": "How to install Docker on Mac OS",
-      "link": "/posts/devops/docker/basic/02c-install-on-mac"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Submit file menggunakan Servlet",
+      "link": "/posts/language/java/web/servlet/016-submit-file-dengan-servlet"
+    }
+    ,
+    {
       "title": "Submit Array value menggunakan Servlet",
       "link": "/posts/language/java/web/servlet/015-submit-array-value-dengan-servlet"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Pengenalan Pemograman Client Side dengan JS",
       "link": "/posts/language/java/web/servlet/005-pengenalan-js"
-    }
-    ,
-    {
-      "title": "Pengenalan Styling dengan CSS",
-      "link": "/posts/language/java/web/servlet/004-pengenalan-css"
     }
   ]
 }

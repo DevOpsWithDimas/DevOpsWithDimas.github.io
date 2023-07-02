@@ -2897,6 +2897,12 @@ var store = [{
         "url": "/posts/git/gitlab/gitlab-ci/03d-getting-started",
         "teaser": "/assets/images/500x300.png"
       },{
+        "title": "Silabus Ansible: Pemula sampai Mahir",
+        "excerpt":"Hai semuanya, kembali lagi di Channel DevOps with Dimas Maryanto jadi kali ini aku mau jelasin dulu Silabus yang akan kita pelajari terkait kelas DevOps - Ansible untuk Pemula s/d Mahir Materi yang di bahas pada section ini yaitu Pengenalan Ansible Tahap pertama yaitu kita akan berkenalan dengan Teknologi Ansible...","categories": ["DevOps","Automation","Ansible","Basic"],
+        "tags": [],
+        "url": "/posts/devops/automation/ansible/basic/00-silabus-ansible",
+        "teaser": "/assets/images/500x300.png"
+      },{
         "title": "Golang Backend Developer",
         "excerpt":"Hai semuanya selamat datang di kelas xxx, jadi kali ini kita akan membahas xxx yaitu menggunakan xxx. Skill-sets requirement Ada beberapa skill-set yang harus ditempuh untuk menjadi seorang DevOps (Develoment &amp; Operation) Engineer diataranya seperti berikut: mindmap root((Backend Developer with Golang)) Description Tell me something about this roadmap, why you...","categories": [],
         "tags": ["devops","developer","operation","tools","automation"],
