@@ -30,4 +30,5 @@ Okay langsung aja kita mulai dari materi yang pertama:
 
 ## What is IT automation?
 
-> **IT automation** is the process of creating software and systems to replace repeatable processes and reduce manual intervention. It accelerates the delivery of IT infrastructure and applications by automating manual processes that previously required a human touch. With IT automation, software is used to set up and repeat instructions, processes, or policies that save time and free up IT staff for more strategic work. With the rise of virtualized networks and cloud services that require rapid, complex provisioning, automation is an indispensable strategy for helping IT teams deliver services with improved speed, consistency, and security.
+IT automation is basiclly automasi suatu/beberapa proses dalam bisnis IT dengan menggunakan software atau system untuk merubah culture dari manual ke automated sehingga mengurangi ketergantungan terhadap Human intervension (IT Staff). 
+Dengan menggunakan methode IT automation, IT operation team dapat ber-akselerasi dan fokus pada main bisnis karena tidak lagi meng-handle jobs yang bersifat manual (consuming times) dan terkadang tasks yang sama secara berulang (repeatable).

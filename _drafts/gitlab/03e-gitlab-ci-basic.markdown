@@ -14,8 +14,10 @@ gist: dimMaryanto93/fd40c02b1cc0d4eccb7c03103397591b
 downloads: []
 ---
 
+Hai semuanya, di materi sebelumnya kita sudah berkenalan dengan Gitlab CI dengan menggunakan `.gitlab-ci.yml` file. Sekarang kita akan membahas lebih jauh lagi tentang Gitlab CI, karena pembahasannya lumayan panjang dan specifik jadi kita akan bagi-bagi seperti berikut:
 
-description...
+1. Job vs Global keyword/syntaxs
+2. 
 
 <!--more-->
 
