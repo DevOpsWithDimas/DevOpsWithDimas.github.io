@@ -1,13 +1,13 @@
 ---
 lang: ansible
-catalog_key: ansible
-title: "Silabus Ansible: Pemula sampai Mahir"
+catalog_key: ansible-playbook
+title: "Silabus Ansible-playbook: Pemula sampai Mahir"
 sidebar_toc: false
 categories:
 - DevOps
 - Automation
 - Ansible
-- Basic
+- Playbook
 refs: 
 - https://docs.ansible.com/ansible-core/devel/index.html
 youtube: 
@@ -17,7 +17,7 @@ gist: dimMaryanto93/ab4bbfd903a7ae297349960787a45ff4
 downloads: []
 ---
 
-Hai semuanya, di cource ini `Ansible: Pemula sampai Mahir` kita akan mengupas tuntas mengenai salah satu teknologi untuk IT Automation yang sangat popular sekali yaitu [RedHad Ansible](https://www.ansible.com).
+Hai semuanya, kembali lagi di Channel `DevOps with Dimas Maryanto` jadi kali ini aku mau jelasin dulu Silabus yang akan kita pelajari terkait kelas `DevOps - Ansible untuk Pemula s/d Mahir` yaitu
 
 Materi yang di bahas mencakup, beberapa kategori. Mulai dari pemula sampai mahir (advanced) yaitu
 

@@ -12,7 +12,7 @@ header:
   caption: "Tutorial & Dokumentasi: Programming, DevOps, GitOps, Database, & Servers"
   actions:
     - label: "Learn more"
-      # linkContentUrl: _posts/ansible/01-ansible/2022-07-06-00-silabus.markdown
+      linkContentUrl: _posts/ansible/01-ansible/2023-07-02-00-silabus-ansible.markdown
 tagline: "Software Automation terkait Deployment adalah salah satu teknologi yang saat ini sedang banyak dibutuhakan di industri IT khususnya perusahan sekala menengah hinga besar seperti Software House hingga Software Vendor. <br><b>Ansible</b> adalah Automation Platform bersifat <b>Configuration as a Code</b> (CaaC) yang popular dan banyak digunakan karena menggunakan system agentless buatan RedHat."
 tags:
   - DevOps
