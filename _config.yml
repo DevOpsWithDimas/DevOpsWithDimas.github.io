@@ -109,6 +109,13 @@ author:
   bio              : "I am an **Instructure** at Udemy and \n**Chief Technology Officer** at PT. Tabeldata Informatika"
   location         : "Bandung, Jawa Barat (Indonesia)"
   email            : 
+  badges:
+    - link: https://www.credly.com/badges/1d80ea25-175b-4910-9e27-872c1912f608/public_url
+      excerpt: '<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="1d80ea25-175b-4910-9e27-872c1912f608" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>'
+      name: 'Nutanix Certified Associate v6.5'
+    - link: https://www.credly.com/badges/d4e996d3-193a-49ca-8163-5b0d54352b43/public_url
+      excerpt: '<div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="d4e996d3-193a-49ca-8163-5b0d54352b43" data-share-badge-host="https://www.credly.com"></div><script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>'
+      name: 'GitLab Solutions Architect Core Associate'
   links:
     - label: "Youtube"
       icon: "fab fa-fw fa-youtube"
