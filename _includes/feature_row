@@ -9,6 +9,12 @@
   {% for f in feature_row %}
     <div class="feature__item{% if include.type %}--{{ include.type }}{% endif %}">
       <div class="archive__item">
+        {% if f.embed_code %}
+          <div class="archive__item-teaser">
+            {{ f.embed_code }}
+          </div>
+        {% endif %}
+
         {% if f.image_path %}
           <div class="archive__item-teaser">
             <img src="{{ f.image_path | relative_url }}"

@@ -18,7 +18,7 @@ tagline: "Voucher discount Rp. 99.000,- untuk semua kelas berlaku selama 5 Hari,
 feature_teaser:
   - image_path: "assets/images/udemy-coupon.png"
     alt: "coupon-code"
-    title: "Celebrate your learning with courses from Rp99,000 "
+    title: "Celebrate your learning with courses from Rp99,000"
     excerpt: "harga special `Rp. 99.000,-` untuk semua kelas di Udemy berlaku sampai tgl `15-JULY-2023` dengan menggunakan kode coupon `NTNXDAY_202307`<br><br> Yukk buruah sebelum expired dan kehabisa kuotanya! checkout sekarang"
 ---
 
