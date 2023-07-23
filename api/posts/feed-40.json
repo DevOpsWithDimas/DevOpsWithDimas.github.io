@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Logging incomming request dengan Servlet Filter",
+      "link": "/posts/language/java/web/servlet/017-logging-incomming-request-servlet-filter"
+    }
+    ,
+    {
       "title": "Submit file menggunakan Servlet",
       "link": "/posts/language/java/web/servlet/016-submit-file-dengan-servlet"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Membuat project Java Web dengan Apache Maven",
       "link": "/posts/language/java/web/servlet/008-create-project-java-web"
-    }
-    ,
-    {
-      "title": "Pengenalan Pemograman Client Side dengan JS",
-      "link": "/posts/language/java/web/servlet/005-pengenalan-js"
     }
   ]
 }

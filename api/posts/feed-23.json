@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Monitoring Database Activity dengan Audit",
+      "link": "/posts/rdbms/oracle18c/018h-auditing"
+    }
+    ,
+    {
       "title": "DDL - Managing Resource & Password dengan Profiles",
       "link": "/posts/rdbms/oracle18c/018g-ddl-profiles"
     }
@@ -44,11 +49,6 @@
     {
       "title": "DDL - Menghapus Index",
       "link": "/posts/rdbms/oracle18c/017d-drop-index"
-    }
-    ,
-    {
-      "title": "Index - Function-Based",
-      "link": "/posts/rdbms/oracle18c/017c-function-based-index"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Usage docker build",
+      "link": "/posts/devops/docker/dockerfile/07a-usage-docker-build"
+    }
+    ,
+    {
       "title": "Build Docker Image Overview",
       "link": "/posts/devops/docker/dockerfile/07-silabus-dockerfile"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Advanced user-defined bridge network",
       "link": "/posts/devops/docker/network/05d-docker-advance-user-defined-bridge-network"
-    }
-    ,
-    {
-      "title": "Use user-defined bridge networks",
-      "link": "/posts/devops/docker/network/05c-docker-user-defined-briged-network"
     }
   ]
 }

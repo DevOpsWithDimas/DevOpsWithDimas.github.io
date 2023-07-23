@@ -7,6 +7,11 @@
     }
     ,
     {
+      "title": "Silabus: Docker Registry",
+      "link": "/posts/devops/docker/registry/03-silabus-registry"
+    }
+    ,
+    {
       "title": "Silabus: Docker Container",
       "link": "/posts/devops/docker/container/04-silabus-docker-container"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Introduction of Gitlab DevSecOps Platform",
       "link": "/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci"
-    }
-    ,
-    {
-      "title": "What is Continues Integration/Continues Delivery (CI/CD)?",
-      "link": "/posts/git/gitlab/gitlab-ci/03a-what-is-cicd"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Time is your practice",
+      "link": "/posts/framework/java/orm/hibernate/basic/02i-quis-1"
+    }
+    ,
+    {
       "title": "Silabus Belajar JasperReport",
       "link": "/posts/language/java/web/jasper/001-silabus"
     }
@@ -44,11 +49,6 @@
     {
       "title": "CRUD menggunakan Hibernate",
       "link": "/posts/framework/java/orm/hibernate/basic/02e-crud-jpa-hibernate"
-    }
-    ,
-    {
-      "title": "Basic Annotation pada Hibernate",
-      "link": "/posts/framework/java/orm/hibernate/basic/02d-hibernate-annotation-basic"
     }
   ]
 }

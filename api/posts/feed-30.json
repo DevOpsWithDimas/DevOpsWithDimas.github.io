@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Conversion Single Row Function di Oracle",
+      "link": "/posts/rdbms/oracle18c/008d-conversion-function"
+    }
+    ,
+    {
       "title": "Date & Time Single Row Function di Oracle",
       "link": "/posts/rdbms/oracle18c/008c-date-function"
     }
@@ -44,11 +49,6 @@
     {
       "title": "In Predicates pada klausa where di Oracle",
       "link": "/posts/rdbms/oracle18c/006e-in-predicate"
-    }
-    ,
-    {
-      "title": "Null Conditions pada klausa where di Oracle",
-      "link": "/posts/rdbms/oracle18c/006d-null-predicate"
     }
   ]
 }

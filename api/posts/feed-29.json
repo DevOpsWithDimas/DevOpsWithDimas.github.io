@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Inner Join di Oracle",
+      "link": "/posts/rdbms/oracle18c/010c-inner-join"
+    }
+    ,
+    {
       "title": "Please be carefull using natural join di Oracle",
       "link": "/posts/rdbms/oracle18c/010b-cartesian-product-join"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Casting Build-In Data Type di Oracle",
       "link": "/posts/rdbms/oracle18c/008e-casting-buildin-data-type"
-    }
-    ,
-    {
-      "title": "Conversion Single Row Function di Oracle",
-      "link": "/posts/rdbms/oracle18c/008d-conversion-function"
     }
   ]
 }

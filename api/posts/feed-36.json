@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Collections Mapping",
+      "link": "/posts/framework/java/orm/hibernate/mapping/03i-collections-mapping"
+    }
+    ,
+    {
       "title": "Parent-Child Mapping",
       "link": "/posts/framework/java/orm/hibernate/mapping/03h-parent-child-mapping"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Hibernate ORM Relationship Mapping",
       "link": "/posts/framework/java/orm/hibernate/mapping/03-hibernate-mapping"
-    }
-    ,
-    {
-      "title": "Time is your practice",
-      "link": "/posts/framework/java/orm/hibernate/basic/02i-quis-1"
     }
   ]
 }

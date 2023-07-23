@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "How to Install git on MacOS",
+      "link": "/posts/git/version-control/01b-install-git-mac"
+    }
+    ,
+    {
       "title": "What is Git SCM",
       "link": "/posts/git/version-control/01a-what-is-git"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Overview of Java Programming",
       "link": "/posts/language/java/01b-java-programming-overview"
-    }
-    ,
-    {
-      "title": "Overview of Programming Languages",
-      "link": "/posts/language/java/01a-programming-language-overview"
     }
   ]
 }

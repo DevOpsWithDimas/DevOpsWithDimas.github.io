@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "DDL - Foreign Key Constraint",
+      "link": "/posts/rdbms/oracle18c/016l-constraint-foreign-key"
+    }
+    ,
+    {
       "title": "DDL - Primary Key Constraint",
       "link": "/posts/rdbms/oracle18c/016k-constraint-primary-key"
     }
@@ -44,11 +49,6 @@
     {
       "title": "DDL - Merubah struktur table",
       "link": "/posts/rdbms/oracle18c/016c-ddl-alter-table"
-    }
-    ,
-    {
-      "title": "DDL - Membuat Tabel di Oracle",
-      "link": "/posts/rdbms/oracle18c/016b-ddl-create-table"
     }
   ]
 }

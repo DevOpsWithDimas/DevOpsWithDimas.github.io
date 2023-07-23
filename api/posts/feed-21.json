@@ -2,18 +2,23 @@
   "pages": [
     
     {
+      "title": "Management Docker Container",
+      "link": "/posts/devops/docker/container/04a-docker-container-command"
+    }
+    ,
+    {
       "title": "Using Nexus OSS as insecure registry",
       "link": "/posts/devops/docker/registry/03c-using-nexus-oss"
     }
     ,
     {
       "title": "Insecure Registry",
-      "link": "/posts/devops/docker/registry/03b-insecure-registry"
+      "link": "/posts/devops/docker/registry/03c-insecure-reg-with-nexus"
     }
     ,
     {
-      "title": "Docker Registry (Docker HUB)",
-      "link": "/posts/devops/docker/registry/03a-docker-registry"
+      "title": "Default Docker Registry (Docker HUB)",
+      "link": "/posts/devops/docker/registry/03b-default-registry"
     }
     ,
     {
@@ -44,11 +49,6 @@
     {
       "title": "Partitioning Table (Very Large Databases)",
       "link": "/posts/rdbms/oracle18c/019f-partitioning-table"
-    }
-    ,
-    {
-      "title": "Inherintance Mapping (OODMBS)",
-      "link": "/posts/rdbms/oracle18c/019e-mapping-inherintance"
     }
   ]
 }

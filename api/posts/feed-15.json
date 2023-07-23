@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Dependency between services in Compose file",
+      "link": "/posts/devops/docker/compose/dependency/09l-compose-depend-on"
+    }
+    ,
+    {
       "title": "Specify custom networks in Compose file",
       "link": "/posts/devops/docker/compose/network/09k-compose-network-specify-custom"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Compose file specification and syntax",
       "link": "/posts/devops/docker/compose/09c-syntax-compose-file"
-    }
-    ,
-    {
-      "title": "Overview of docker-compose CLI",
-      "link": "/posts/devops/docker/compose/09b-compose-cli"
     }
   ]
 }

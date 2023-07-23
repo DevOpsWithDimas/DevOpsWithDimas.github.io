@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Interface untuk Oracle Database",
+      "link": "/posts/rdbms/oracle18c/002b-interface-for-oracle-database"
+    }
+    ,
+    {
       "title": "Konsep User dan Schema di Oracle Database 18c",
       "link": "/posts/rdbms/oracle18c/002a-consept-user-schema"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Combine Predicate dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/05i-hql-combine-predicate"
-    }
-    ,
-    {
-      "title": "Not Predicate dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/05h-hql-not-predicate"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Minikube addons features",
+      "link": "/posts/devops/orchestration/kubernetes/02f-minikube-addons"
+    }
+    ,
+    {
       "title": "Using thirdparty Editor untuk PostgreSQL Server",
       "link": "/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Deploying an apps/services into Kubernetes",
       "link": "/posts/devops/orchestration/kubernetes/02b-deploy-application"
-    }
-    ,
-    {
-      "title": "Install minikube for Linux users",
-      "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux"
     }
   ]
 }

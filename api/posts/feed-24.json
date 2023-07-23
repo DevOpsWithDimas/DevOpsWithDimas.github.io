@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Index - Function-Based",
+      "link": "/posts/rdbms/oracle18c/017c-function-based-index"
+    }
+    ,
+    {
       "title": "Index - Bitmap",
       "link": "/posts/rdbms/oracle18c/017b-bitmap-index"
     }
@@ -44,11 +49,6 @@
     {
       "title": "DDL - Foreign Key Constraint dengan Options",
       "link": "/posts/rdbms/oracle18c/016m-constraint-foreign-key-cascade-options"
-    }
-    ,
-    {
-      "title": "DDL - Foreign Key Constraint",
-      "link": "/posts/rdbms/oracle18c/016l-constraint-foreign-key"
     }
   ]
 }

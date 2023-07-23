@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Object oriented dengan Java class",
+      "link": "/posts/language/java/oop/11-class-oop"
+    }
+    ,
+    {
       "title": "Time is your for practice part 3",
       "link": "/posts/language/java/classes/10-quis-section-3"
     }
@@ -44,11 +49,6 @@
     {
       "title": "For statement #2",
       "link": "/posts/language/java/control/06a-for-statement-2"
-    }
-    ,
-    {
-      "title": "For statement",
-      "link": "/posts/language/java/control/06-for-statement"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "What is Continues Integration/Continues Delivery (CI/CD)?",
+      "link": "/posts/git/gitlab/gitlab-ci/03a-what-is-cicd"
+    }
+    ,
+    {
       "title": "Silabus Gitlab CI: Pemula s/d Mahir",
       "link": "/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Overview of Concurrency Control",
       "link": "/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control"
-    }
-    ,
-    {
-      "title": "Time your practice (part 3)",
-      "link": "/posts/rdbms/postgresql/sql/dml/05g-quis-section-1"
     }
   ]
 }

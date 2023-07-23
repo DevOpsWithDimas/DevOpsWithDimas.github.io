@@ -318,6 +318,87 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement" rel="permalink">Prepared Statement in SQL
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-10-10T20:51:35+07:00">October 10, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        5 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang Prepared Statement pada SQL, feature ini biasanya hanya bisa digunakan pada Bahasa Pemograman yang menggunakan API seperti <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.sql/java/sql/PreparedStatement.html">JDBC</a> di Java, <a href="https://www.php.net/manual/en/pdo.prepared-statements.php">pdo</a> di PHP dan lain-lain, Nah tetapi di PostgreSQL Database kita bisa terapkan secara directly pada query SQL baik untuk select, insert, update dan delete. Perintah sqlnya seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">PREPARE</span> <span class="n">name</span> <span class="p">[</span> <span class="p">(</span> <span class="n">data_type</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span> <span class="k">AS</span> <span class="k">statement</span></code></pre></figure>
+
+<p>Dan untuk menjalankan perintanya kita bisa menggunakan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">EXPLAIN</span> <span class="k">EXECUTE</span> <span class="n">name</span><span class="p">(</span><span class="n">parameter_values</span><span class="p">);</span></code></pre></figure>
+
+<p>Jadi dengan kita mendefined prepared query tersebut, kita bisa meng-execute multiple times dengan parameter yang berbeda. Pada implemetasinya kita bisa gunakan untuk:</p>
+
+<ol>
+  <li>Create a Prepared statement for INSERT, UPDATE, DELETE</li>
+  <li>Show all prepared statement</li>
+  <li>Remove prepared statement from a session.</li>
+  <li>Create input parameterized with text editor (Jetbraints Database)</li>
+</ol>
+
+<p>Ok tanpa berlama-lama kita bahas kemateri yang pertama:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete" rel="permalink">Deep dive into DELETE statement
 </a>
       
@@ -616,79 +697,6 @@
 </ol>
 
 <p>Ok tanpa berlama-lama yukk langsung aja kita bahas materi yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/14a-it-automation-platform" rel="permalink">IT Automation Platform for Docker Operations
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Docker for DevOps engineer
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-09-10T17:18:51+07:00">September 10, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        5 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya di materi kali ini kita akan membahas salah satu topic yang lumayan menarik dikalangan DevOps yaitu IT Automation khususnya untuk Docker Operation diantaranya:</p>
-
-<ol>
-  <li>What is IT Automation?</li>
-  <li>What IT automation is used for?</li>
-  <li>What kind a tools for IT automation?</li>
-  <li>What is RedHat Ansible?</li>
-</ol>
-
-<p>Ok langsung aja kita bahas materi yang pertama:</p>
 
 </span>
       

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "IT Automation Platform for Docker Operations",
+      "link": "/posts/devops/docker/14a-it-automation-platform"
+    }
+    ,
+    {
       "title": "Overview Study cases: IT Automation Platform for Docker Operations",
       "link": "/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker"
     }
@@ -44,11 +49,6 @@
     {
       "title": "How to Install git on Windows",
       "link": "/posts/git/version-control/01b-install-git-windows"
-    }
-    ,
-    {
-      "title": "How to Install git on MacOS",
-      "link": "/posts/git/version-control/01b-install-git-mac"
     }
   ]
 }

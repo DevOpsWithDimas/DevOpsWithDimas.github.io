@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Perulangan for untuk Array, List, Set dan Map",
+      "link": "/posts/language/java/arrays/16-foreach"
+    }
+    ,
+    {
       "title": "Element Collection",
       "link": "/posts/language/java/arrays/15-element-collections"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Object Oriented Approach di Java8",
       "link": "/posts/language/java/oop/11a-konsep-oop"
-    }
-    ,
-    {
-      "title": "Object oriented dengan Java class",
-      "link": "/posts/language/java/oop/11-class-oop"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Mengenal class ResultSet",
+      "link": "/posts/language/java/jdbc/08-resultset"
+    }
+    ,
+    {
       "title": "Perbedaan method executeQuery() dan executeUpdate()",
       "link": "/posts/language/java/jdbc/07-execute-query-and-update"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Why Use Generics?",
       "link": "/posts/language/java/arrays/17-generics"
-    }
-    ,
-    {
-      "title": "Perulangan for untuk Array, List, Set dan Map",
-      "link": "/posts/language/java/arrays/16-foreach"
     }
   ]
 }

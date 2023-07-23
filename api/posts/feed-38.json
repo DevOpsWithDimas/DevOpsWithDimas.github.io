@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Basic Annotation pada Hibernate",
+      "link": "/posts/framework/java/orm/hibernate/basic/02d-hibernate-annotation-basic"
+    }
+    ,
+    {
       "title": "Membuat Simple Entity di Hibernate",
       "link": "/posts/framework/java/orm/hibernate/basic/02c-membuat-simple-entity"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Static Resources with WebJars",
       "link": "/posts/language/java/web/jsp/028-static-resources-with-webjar"
-    }
-    ,
-    {
-      "title": "JSP Implicit Object",
-      "link": "/posts/language/java/web/jsp/027-jsp-implicit-object-elements"
     }
   ]
 }

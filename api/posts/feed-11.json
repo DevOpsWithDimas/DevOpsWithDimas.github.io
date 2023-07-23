@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Silabus - PostgreSQL: Pemula sampai Mahir",
+      "link": "/posts/rdbms/postgresql/01-silabus-psql"
+    }
+    ,
+    {
       "title": "Overview learning environment with Minikube",
       "link": "/posts/devops/orchestration/kubernetes/02-overview-learn-env"
     }
@@ -44,11 +49,6 @@
     {
       "title": "What is Kubernetes (k8s) ?",
       "link": "/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes"
-    }
-    ,
-    {
-      "title": "Silabus - DevOps Kubernetes: Pemula sampai Mahir",
-      "link": "/posts/devops/orchestration/kubernetes/01-silabus"
     }
   ]
 }

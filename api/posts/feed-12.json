@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Silabus - DevOps Kubernetes: Pemula sampai Mahir",
+      "link": "/posts/devops/orchestration/kubernetes/01-silabus"
+    }
+    ,
+    {
       "title": "Pipeline: Laravel deploy with Gitlab CI",
       "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12g-pipeline-laravel-gitlab-ci"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Deprecated Engine Features",
       "link": "/posts/devops/docker/context/11g-deprecated-features"
-    }
-    ,
-    {
-      "title": "Using docker on portainer.io",
-      "link": "/posts/devops/docker/context/dashboard/11f-docker-portainer"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Install minikube for Linux users",
+      "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux"
+    }
+    ,
+    {
       "title": "Install minikube for Windows 11/10 Users",
       "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Overview of PostgreSQL Database",
       "link": "/posts/rdbms/postgresql/01a-what-is-postgresql"
-    }
-    ,
-    {
-      "title": "Silabus - PostgreSQL: Pemula sampai Mahir",
-      "link": "/posts/rdbms/postgresql/01-silabus-psql"
     }
   ]
 }

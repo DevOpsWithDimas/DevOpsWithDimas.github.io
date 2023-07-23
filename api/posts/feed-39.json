@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "JSP Implicit Object",
+      "link": "/posts/language/java/web/jsp/027-jsp-implicit-object-elements"
+    }
+    ,
+    {
       "title": "JSP Action Element",
       "link": "/posts/language/java/web/jsp/026-jsp-action-elements"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Event Listeners using Servlet Context Level",
       "link": "/posts/language/java/web/servlet/018-event-listener-using-servlet-context-level"
-    }
-    ,
-    {
-      "title": "Logging incomming request dengan Servlet Filter",
-      "link": "/posts/language/java/web/servlet/017-logging-incomming-request-servlet-filter"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Pengenalan Pemograman Client Side dengan JS",
+      "link": "/posts/language/java/web/servlet/005-pengenalan-js"
+    }
+    ,
+    {
       "title": "Pengenalan Styling dengan CSS",
       "link": "/posts/language/java/web/servlet/004-pengenalan-css"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Function di JavaScript",
       "link": "/posts/language/web/js/09-function-js"
-    }
-    ,
-    {
-      "title": "Perulangan atau Looping dengan JavaScript",
-      "link": "/posts/language/web/js/08-loop-js"
     }
   ]
 }

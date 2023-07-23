@@ -1709,28 +1709,34 @@ var store = [{
         "url": "/posts/devops/docker/basic/03-getting-started",
         "teaser": "/assets/images/500x300.png"
       },{
-        "title": "Docker Registry (Docker HUB)",
+        "title": "Silabus: Docker Container",
+        "excerpt":"Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir section kedua ini kita akan membahas Docker Container dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum commandline interface CLI digunakan untuk me-manage object docker seperti Container, Volume, Network, Images dan lain-lain. Okay, jadi di silabus belajar Docker Container...","categories": ["DevOps","Docker","Container"],
+        "tags": [],
+        "url": "/posts/devops/docker/container/04-silabus-docker-container",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Silabus: Docker Registry",
+        "excerpt":"Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir section ketiga ini kita akan membahas Docker Registry dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum Registry digunakan untuk menyimpan container image dan dapat di distribusikan. Okay, jadi di silabus belajar Docker Registry kali ini kita akan membahas...","categories": ["DevOps","Docker","Registry"],
+        "tags": [],
+        "url": "/posts/devops/docker/registry/03-silabus-registry",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Default Docker Registry (Docker HUB)",
         "excerpt":"halo semuanya, di materi kali ini kita akan membahas tentang Docker Registry, The Registry is a stateless, highly scalable server side application that stores and lets you distribute Docker images. The Registry is open-source, under the permissive Apache license. Secara default, Docker Registry menggunakan Docker Hub. Ok nah jadi sekarang...","categories": ["DevOps","Docker","Registry"],
         "tags": [],
-        "url": "/posts/devops/docker/registry/03a-docker-registry",
+        "url": "/posts/devops/docker/registry/03b-default-registry",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Insecure Registry",
         "excerpt":"Hai semuanya, sebelumnya kita sudah memahami apa itu Docker Registry, sekarang kita akan membahas tentang Insecure Registry. Nah yang jadi pertanyaaan apa itu Insecure Registry?. Insecure Registry sama halnya dengan Docker Hub yaitu bertujuan menyimpan docker images tetapi disini insecure registry lebih flexible artinya kita bisa tentukan mulai dari lokasi...","categories": ["DevOps","Docker","Registry"],
         "tags": [],
-        "url": "/posts/devops/docker/registry/03b-insecure-registry",
+        "url": "/posts/devops/docker/registry/03c-insecure-reg-with-nexus",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Using Nexus OSS as insecure registry",
         "excerpt":"Hai semuanya, di materi kali ini kita akan membahas Insecure Registry dengan menggunakan Nexus OSS, diantaranya yang akan kita bahas yaitu System requirement to install Nexus OSS Installing Nexus OSS Setup Proxy Repository Docker from Docker HUB Setup Proxy Repository Docker from other registry Setup Hosted Repository Docker Setup Public...","categories": ["DevOps","Docker","Registry"],
         "tags": [],
         "url": "/posts/devops/docker/registry/03c-using-nexus-oss",
-        "teaser": "/assets/images/500x300.png"
-      },{
-        "title": "Silabus: Docker Container",
-        "excerpt":"Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir section kedua ini kita akan membahas Docker Container dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum commandline interface CLI digunakan untuk me-manage object docker seperti Container, Volume, Network, Images dan lain-lain. Okay, jadi di silabus belajar Docker Container...","categories": ["DevOps","Docker","Container"],
-        "tags": [],
-        "url": "/posts/devops/docker/container/04-silabus-docker-container",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Management Docker Container",

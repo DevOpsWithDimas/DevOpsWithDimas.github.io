@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Case When dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/04h-hql-case-when-expresion"
+    }
+    ,
+    {
       "title": "Aggregation Function dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/04g-hql-aggregate-function"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Time is your Practice",
       "link": "/posts/framework/java/orm/hibernate/mapping/03j-quis-2"
-    }
-    ,
-    {
-      "title": "Collections Mapping",
-      "link": "/posts/framework/java/orm/hibernate/mapping/03i-collections-mapping"
     }
   ]
 }

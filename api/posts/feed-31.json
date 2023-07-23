@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Null Conditions pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006d-null-predicate"
+    }
+    ,
+    {
       "title": "Between Predicate pada klausa where di Oracle",
       "link": "/posts/rdbms/oracle18c/006c-between-predicate"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Pemberian alias pada column dan table",
       "link": "/posts/rdbms/oracle18c/005a-select-alias-column-table"
-    }
-    ,
-    {
-      "title": "Select Statement dalam SQL",
-      "link": "/posts/rdbms/oracle18c/005-select-statement"
     }
   ]
 }

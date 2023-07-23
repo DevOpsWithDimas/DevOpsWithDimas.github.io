@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Not Predicate dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/05h-hql-not-predicate"
+    }
+    ,
+    {
       "title": "SubQuery Qualifiers dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/05g-hql-subquery-qualifiers"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Coalesce & NullIF menggunakan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/04i-hql-nullif-coalesce"
-    }
-    ,
-    {
-      "title": "Case When dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/04h-hql-case-when-expresion"
     }
   ]
 }

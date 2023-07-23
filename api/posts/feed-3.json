@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Time your practice (part 3)",
+      "link": "/posts/rdbms/postgresql/sql/dml/05g-quis-section-1"
+    }
+    ,
+    {
       "title": "Cleanup Data from Table",
       "link": "/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Setup Ansible Control and Managed Nodes",
       "link": "/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment"
-    }
-    ,
-    {
-      "title": "IT Automation Platform for Docker Operations",
-      "link": "/posts/devops/docker/14a-it-automation-platform"
     }
   ]
 }

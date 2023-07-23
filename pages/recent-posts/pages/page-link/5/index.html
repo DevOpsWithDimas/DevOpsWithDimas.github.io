@@ -318,6 +318,70 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05g-quis-section-1" rel="permalink">Time your practice (part 3)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-01-14T12:36:56+07:00">January 14, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya di materi sebelumnya kita sudah membahas perintah Data manipulation language sepertin <code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code>, <code class="language-plaintext highlighter-rouge">DELETE</code> beserta combinasi antara <code class="language-plaintext highlighter-rouge">SELECT</code> dan DML tersebut, nah supaya temen-temen memahami materi yang telah saya sampaikan saatnya temen-temen untuk latihan / mengerjakan soal yang saya berikan seperti berikut:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup" rel="permalink">Cleanup Data from Table
 </a>
       
@@ -598,87 +662,6 @@
 </ol>
 
 <p>Ok tanpa berlama-lama yuk lansung aja kita bahas materi yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement" rel="permalink">Prepared Statement in SQL
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      PostgreSQL
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-10-10T20:51:35+07:00">October 10, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        5 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang Prepared Statement pada SQL, feature ini biasanya hanya bisa digunakan pada Bahasa Pemograman yang menggunakan API seperti <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.sql/java/sql/PreparedStatement.html">JDBC</a> di Java, <a href="https://www.php.net/manual/en/pdo.prepared-statements.php">pdo</a> di PHP dan lain-lain, Nah tetapi di PostgreSQL Database kita bisa terapkan secara directly pada query SQL baik untuk select, insert, update dan delete. Perintah sqlnya seperti berikut:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">PREPARE</span> <span class="n">name</span> <span class="p">[</span> <span class="p">(</span> <span class="n">data_type</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span> <span class="k">AS</span> <span class="k">statement</span></code></pre></figure>
-
-<p>Dan untuk menjalankan perintanya kita bisa menggunakan perintah seperti berikut:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">EXPLAIN</span> <span class="k">EXECUTE</span> <span class="n">name</span><span class="p">(</span><span class="n">parameter_values</span><span class="p">);</span></code></pre></figure>
-
-<p>Jadi dengan kita mendefined prepared query tersebut, kita bisa meng-execute multiple times dengan parameter yang berbeda. Pada implemetasinya kita bisa gunakan untuk:</p>
-
-<ol>
-  <li>Create a Prepared statement for INSERT, UPDATE, DELETE</li>
-  <li>Show all prepared statement</li>
-  <li>Remove prepared statement from a session.</li>
-  <li>Create input parameterized with text editor (Jetbraints Database)</li>
-</ol>
-
-<p>Ok tanpa berlama-lama kita bahas kemateri yang pertama:</p>
 
 </span>
       

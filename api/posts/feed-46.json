@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "For statement",
+      "link": "/posts/language/java/control/06-for-statement"
+    }
+    ,
+    {
       "title": "SWITCH-CASE statement",
       "link": "/posts/language/java/control/05b-swith-statement"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Tipe data logika (true of false)",
       "link": "/posts/language/java/basic/02d-tipe-data-logika"
-    }
-    ,
-    {
-      "title": "Tipe data yang bernilai Number",
-      "link": "/posts/language/java/basic/02b-tipe-data-number"
     }
   ]
 }
