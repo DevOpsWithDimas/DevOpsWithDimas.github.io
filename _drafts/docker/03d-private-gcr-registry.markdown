@@ -1,6 +1,6 @@
 ---
 lang: docker
-catalog_key: introduction
+catalog_key: docker-registry
 title: "Using private Google Container Registry"
 date: 2021-04-24T18:45:03+07:00
 last_modified_at: 2023-07-23T16:27:00+07:00
