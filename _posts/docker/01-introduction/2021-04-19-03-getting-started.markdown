@@ -1,10 +1,8 @@
 ---
-
+lang: docker
+catalog_key: introduction
 title: "Getting Started with Docker"
 date: 2021-04-19T08:13:48+07:00
-lang: docker
-authors:
-- dimasm93
 categories:
 - DevOps
 - Docker
@@ -13,7 +11,6 @@ refs:
 - https://docs.docker.com/
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/docker/05-getting-started
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

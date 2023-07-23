@@ -1,38 +1,38 @@
 ---
-title: "Docker CLI (Command Line Interface)"
-date: 2021-04-24T16:45:53+07:00
 lang: docker
+catalog_key: docker-container
+title: "Silabus: Docker Container"
+date: 2021-04-24T16:45:53+07:00
+last_modified_at: 2023-07-23T16:27:00+07:00
 sidebar_toc: false
-authors:
-- dimasm93
 categories:
 - DevOps
 - Docker
 - Container
 refs: 
 - https://docs.docker.com/
-youtube: n1u-F9ktVKs
+youtube: 
 comments: true
-catalog_key: docker-container
 image_path: /resources/posts/docker/06-docker-cli
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---
 
-Hai semuanya, di materi kali ini kita akan membahas tentang Docker CLI atau kepanjangan dari Docker Command Line Interface.
+Hai semuanya, di cource ini `DevOps - Docker: Pemula sampai Mahir` section kedua ini kita akan membahas `Docker Container` dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum commandline interface CLI digunakan untuk me-manage object docker seperti Container, Volume, Network, Images dan lain-lain. 
+
+Okay, jadi di silabus belajar `Docker Container` kali ini kita akan membahas seperti
 
 <!--more-->
 
-Command pada docker client, pada dasarnya terdiri dari
+1. Introduction docker CLI
+2. Me-manage docker container
+3. Me-manage docker image
+4. Me-expose container to host
+5. Menjalankan command dalam container
+6. Logging pada container
+7. Environment variable pada container
 
-1. `docker image` atau `docker images`, digunakan untuk memanage image docker
-2. `docker container`, digunakan untuk memanage container
-3. `docker volume`, digunakan untuk memanage volume
-4. `docker network`, digunakan untuk memange network
-5. `docker run`, digunakan untuk menjalakan image
-6. `docker inspact`, digunakan untuk melihat informasi pada object docker
-7. `docker top`, digunakan untuk melihat prosess, memory yang digunakan dalam suatu container yang sedang berjalan
-8. Dan masih banyak lagi
+## Introduction docker CLI
 
 Untuk lebih lengkapnya `docker help` maka outputnya seperti berikut:
 

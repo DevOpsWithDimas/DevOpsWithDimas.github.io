@@ -1,10 +1,8 @@
 ---
-
+lang: docker
+catalog_key: introduction
 title: "How to install Docker on Mac OS"
 date: 2021-04-13T04:49:21+07:00
-lang: docker
-authors:
-- dimasm93
 categories:
 - DevOps
 - Docker
@@ -14,7 +12,6 @@ refs:
 - https://docs.docker.com/docker-for-mac/apple-m1/
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/docker/02c-install-mac
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

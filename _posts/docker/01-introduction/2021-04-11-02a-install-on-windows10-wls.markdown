@@ -1,10 +1,9 @@
 ---
-
+lang: docker
+catalog_key: introduction
 title: "How to install Docker on Windows 10 with WSL"
 date: 2021-04-11T21:16:49+07:00
-lang: docker
-authors:
-- dimasm93
+last_modified_at: 2023-07-23T16:35:00+07:00
 categories:
 - DevOps
 - Docker
@@ -14,7 +13,6 @@ refs:
 - https://www.docker.com/products/docker-desktop
 youtube: 
 comments: true
-catalog_key: introduction
 image_path: /resources/posts/docker/02a-install-windows10
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
@@ -27,15 +25,6 @@ Hai semuanya di materi kali ini kita akan meng-install Docker di platform Window
 3. Setup Development Env
 
 <!--more-->
-
-## Backend for Docker Engine
-
-Untuk menggunakan docker di Windows kita perlu menggunakan virtualization, ada beberapa cara yaitu 
-
-1. Hyper-V (required Windows 10 Enterprise, Pro, or Education)
-2. WSL
-
-Nah karena untuk yang Hyper-V membutuhkan Windows 10 versi mahal, jadi kita pake WSL saja ya. selain alasan tersebut juga klo menggunakan Hyper-V beberapa aplikasi Virtualization lainnya seperti VirtualBox, VmWware jadi gak bisa di jalanin. maka dari itu Docker rekomendasikan menggunakan WSL
 
 ## Enabled WSL
 

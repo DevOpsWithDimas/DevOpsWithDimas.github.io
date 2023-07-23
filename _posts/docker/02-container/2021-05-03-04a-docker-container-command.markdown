@@ -1,10 +1,8 @@
 ---
-
+lang: docker
+catalog_key: docker-container
 title: "Management Docker Container"
 date: 2021-05-03T06:29:41+07:00
-lang: docker
-authors:
-- dimasm93
 categories:
 - DevOps
 - Docker
@@ -12,14 +10,12 @@ categories:
 refs: 
 - https://docs.docker.com/engine/reference/commandline/container/
 - https://docs.docker.com/engine/reference/commandline/ps/
-youtube: 8rJHARK5cbo
+youtube: 
 comments: true
-catalog_key: docker-container
 image_path: /resources/posts/docker/06b-docker-container-command
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---
-
 
 Hai semuanya, di materi kali ini kita akan membahas lebih dalam tentang perintah / command line `docker container`. diantaranya tentang:
 
@@ -27,7 +23,6 @@ Hai semuanya, di materi kali ini kita akan membahas lebih dalam tentang perintah
 2. Melihat daftar container
 3. Management proccess (start, stop, pause, kill) dalam container
 4. Cleanup
-
 
 <!--more-->
 
