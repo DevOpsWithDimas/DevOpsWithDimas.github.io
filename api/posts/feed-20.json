@@ -27,6 +27,21 @@
     }
     ,
     {
+      "title": "Using Nexus OSS as insecure registry",
+      "link": "/posts/devops/docker/registry/03c-using-nexus-oss"
+    }
+    ,
+    {
+      "title": "Insecure Registry",
+      "link": "/posts/devops/docker/registry/03c-insecure-reg-with-nexus"
+    }
+    ,
+    {
+      "title": "Default Docker Registry (Docker HUB)",
+      "link": "/posts/devops/docker/registry/03b-default-registry"
+    }
+    ,
+    {
       "title": "Run a Container using Environtment File",
       "link": "/posts/devops/docker/container/04g-docker-run-env-file"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Logging, Inspect, & Resource Usage Statistics Containers",
       "link": "/posts/devops/docker/container/04f-logging-inspect-stats-container"
-    }
-    ,
-    {
-      "title": "Copying files/content between container and filesystem",
-      "link": "/posts/devops/docker/container/04e-docker-copy"
-    }
-    ,
-    {
-      "title": "Expose services to outside using ports",
-      "link": "/posts/devops/docker/container/04d-expose-service-outside"
-    }
-    ,
-    {
-      "title": "Run a command in a running container",
-      "link": "/posts/devops/docker/container/04c-docker-exec-command"
     }
   ]
 }

@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Copying files/content between container and filesystem",
+      "link": "/posts/devops/docker/container/04e-docker-copy"
+    }
+    ,
+    {
+      "title": "Expose services to outside using ports",
+      "link": "/posts/devops/docker/container/04d-expose-service-outside"
+    }
+    ,
+    {
+      "title": "Run a command in a running container",
+      "link": "/posts/devops/docker/container/04c-docker-exec-command"
+    }
+    ,
+    {
       "title": "Management Docker Images",
       "link": "/posts/devops/docker/container/04b-docker-image-command"
     }
@@ -9,21 +24,6 @@
     {
       "title": "Management Docker Container",
       "link": "/posts/devops/docker/container/04a-docker-container-command"
-    }
-    ,
-    {
-      "title": "Using Nexus OSS as insecure registry",
-      "link": "/posts/devops/docker/registry/03c-using-nexus-oss"
-    }
-    ,
-    {
-      "title": "Insecure Registry",
-      "link": "/posts/devops/docker/registry/03c-insecure-reg-with-nexus"
-    }
-    ,
-    {
-      "title": "Default Docker Registry (Docker HUB)",
-      "link": "/posts/devops/docker/registry/03b-default-registry"
     }
     ,
     {

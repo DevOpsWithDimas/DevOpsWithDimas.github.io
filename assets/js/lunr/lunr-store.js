@@ -1715,36 +1715,6 @@ var store = [{
         "url": "/posts/devops/docker/container/04-silabus-docker-container",
         "teaser": "/assets/images/500x300.png"
       },{
-        "title": "Silabus: Docker Registry",
-        "excerpt":"Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir section ketiga ini kita akan membahas Docker Registry dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum Registry digunakan untuk menyimpan container image dan dapat di distribusikan. Okay, jadi di silabus belajar Docker Registry kali ini kita akan membahas...","categories": ["DevOps","Docker","Registry"],
-        "tags": [],
-        "url": "/posts/devops/docker/registry/03-silabus-registry",
-        "teaser": "/assets/images/500x300.png"
-      },{
-        "title": "What is Docker Registry?",
-        "excerpt":"Hai semuanya, di section sebelumnya kita udah belajar memanage docker object dengan docker cli (Commandline interface). Sekarang kita akan membahas khusus Docker Registry. Seperti yang temen-temen ketahui sebelumnya, Docker Registry digunakan untuk menyimpan dan men-distribusikan container image. Sebelum kita menggunakan Container Registry khususnya Docker Registry kita lihat dulu yuk secara...","categories": ["DevOps","Docker","Registry"],
-        "tags": [],
-        "url": "/posts/devops/docker/registry/03a-what-is-registry",
-        "teaser": "/assets/images/500x300.png"
-      },{
-        "title": "Default Docker Registry (Docker HUB)",
-        "excerpt":"halo semuanya, di materi kali ini kita akan membahas tentang Docker Registry, The Registry is a stateless, highly scalable server side application that stores and lets you distribute Docker images. The Registry is open-source, under the permissive Apache license. Secara default, Docker Registry menggunakan Docker Hub. Ok nah jadi sekarang...","categories": ["DevOps","Docker","Registry"],
-        "tags": [],
-        "url": "/posts/devops/docker/registry/03b-default-registry",
-        "teaser": "/assets/images/500x300.png"
-      },{
-        "title": "Insecure Registry",
-        "excerpt":"Hai semuanya, sebelumnya kita sudah memahami apa itu Docker Registry, sekarang kita akan membahas tentang Insecure Registry. Nah yang jadi pertanyaaan apa itu Insecure Registry?. Insecure Registry sama halnya dengan Docker Hub yaitu bertujuan menyimpan docker images tetapi disini insecure registry lebih flexible artinya kita bisa tentukan mulai dari lokasi...","categories": ["DevOps","Docker","Registry"],
-        "tags": [],
-        "url": "/posts/devops/docker/registry/03c-insecure-reg-with-nexus",
-        "teaser": "/assets/images/500x300.png"
-      },{
-        "title": "Using Nexus OSS as insecure registry",
-        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas Insecure Registry dengan menggunakan Nexus OSS, diantaranya yang akan kita bahas yaitu System requirement to install Nexus OSS Installing Nexus OSS Setup Proxy Repository Docker from Docker HUB Setup Proxy Repository Docker from other registry Setup Hosted Repository Docker Setup Public...","categories": ["DevOps","Docker","Registry"],
-        "tags": [],
-        "url": "/posts/devops/docker/registry/03c-using-nexus-oss",
-        "teaser": "/assets/images/500x300.png"
-      },{
         "title": "Management Docker Container",
         "excerpt":"Hai semuanya, di materi kali ini kita akan membahas lebih dalam tentang perintah / command line docker container. diantaranya tentang: Membuat container dengan argument Melihat daftar container Management proccess (start, stop, pause, kill) dalam container Cleanup Berikut daftar perintahnya, dengan melihat help Berikut hasilnya: Windows PowerShell Copyright (C) Microsoft Corporation....","categories": ["DevOps","Docker","Container"],
         "tags": [],
@@ -1785,6 +1755,36 @@ var store = [{
         "excerpt":"Hai semuanya, di materi kali ini kita akan membahas tentang Environment Variables pada Docker diantaranya: What is Environtment Variable Create Docker Container using Env Variables Using Env Files for Create Docker Containers What is Environtment Variable An environment variable is a dynamic-named value that can affect the way running processes...","categories": ["DevOps","Docker","Container"],
         "tags": [],
         "url": "/posts/devops/docker/container/04g-docker-run-env-file",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Silabus: Docker Registry",
+        "excerpt":"Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir section ketiga ini kita akan membahas Docker Registry dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum Registry digunakan untuk menyimpan container image dan dapat di distribusikan. Okay, jadi di silabus belajar Docker Registry kali ini kita akan membahas...","categories": ["DevOps","Docker","Registry"],
+        "tags": [],
+        "url": "/posts/devops/docker/registry/03-silabus-registry",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "What is Docker Registry?",
+        "excerpt":"Hai semuanya, di section sebelumnya kita udah belajar memanage docker object dengan docker cli (Commandline interface). Sekarang kita akan membahas khusus Docker Registry. Seperti yang temen-temen ketahui sebelumnya, Docker Registry digunakan untuk menyimpan dan men-distribusikan container image. Sebelum kita menggunakan Container Registry khususnya Docker Registry kita lihat dulu yuk secara...","categories": ["DevOps","Docker","Registry"],
+        "tags": [],
+        "url": "/posts/devops/docker/registry/03a-what-is-registry",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Default Docker Registry (Docker HUB)",
+        "excerpt":"halo semuanya, di materi kali ini kita akan membahas tentang Docker Registry, The Registry is a stateless, highly scalable server side application that stores and lets you distribute Docker images. The Registry is open-source, under the permissive Apache license. Secara default, Docker Registry menggunakan Docker Hub. Ok nah jadi sekarang...","categories": ["DevOps","Docker","Registry"],
+        "tags": [],
+        "url": "/posts/devops/docker/registry/03b-default-registry",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Insecure Registry",
+        "excerpt":"Hai semuanya, sebelumnya kita sudah memahami apa itu Docker Registry, sekarang kita akan membahas tentang Insecure Registry. Nah yang jadi pertanyaaan apa itu Insecure Registry?. Insecure Registry sama halnya dengan Docker Hub yaitu bertujuan menyimpan docker images tetapi disini insecure registry lebih flexible artinya kita bisa tentukan mulai dari lokasi...","categories": ["DevOps","Docker","Registry"],
+        "tags": [],
+        "url": "/posts/devops/docker/registry/03c-insecure-reg-with-nexus",
+        "teaser": "/assets/images/500x300.png"
+      },{
+        "title": "Using Nexus OSS as insecure registry",
+        "excerpt":"Hai semuanya, di materi kali ini kita akan membahas Insecure Registry dengan menggunakan Nexus OSS, diantaranya yang akan kita bahas yaitu System requirement to install Nexus OSS Installing Nexus OSS Setup Proxy Repository Docker from Docker HUB Setup Proxy Repository Docker from other registry Setup Hosted Repository Docker Setup Public...","categories": ["DevOps","Docker","Registry"],
+        "tags": [],
+        "url": "/posts/devops/docker/registry/03c-using-nexus-oss",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Networking overview",
