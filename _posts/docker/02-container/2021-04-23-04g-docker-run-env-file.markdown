@@ -1,10 +1,8 @@
 ---
-
-title: "Run a Container using Environtment File"
-date: 2021-05-18T22:07:38+07:00
 lang: docker
-authors:
-- dimasm93
+catalog_key: docker-container
+title: "Run a Container using Environtment File"
+date: 2021-04-23T08:07:38+07:00
 categories:
 - DevOps
 - Docker
@@ -12,9 +10,8 @@ categories:
 refs: 
 - https://docs.docker.com/compose/env-file/
 - https://en.wikipedia.org/wiki/Environment_variable
-youtube: yziLpra32U4
+youtube: 
 comments: true
-catalog_key: docker-container
 image_path: /resources/posts/docker/04h-docker-run-env-file
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

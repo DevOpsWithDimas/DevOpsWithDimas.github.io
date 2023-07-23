@@ -1,19 +1,16 @@
 ---
-
-title: "Copying files/content between container and filesystem"
-date: 2021-05-10T06:21:24+07:00
 lang: docker
-authors:
-- dimasm93
+catalog_key: docker-container
+title: "Copying files/content between container and filesystem"
+date: 2021-04-23T06:21:24+07:00
 categories:
 - DevOps
 - Docker
 - Container
 refs: 
 - https://docs.docker.com/engine/reference/commandline/cp/
-youtube: MTX6Z0fUBEM
+youtube: 
 comments: true
-catalog_key: docker-container
 image_path: /resources/posts/docker/04e-docker-cp
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

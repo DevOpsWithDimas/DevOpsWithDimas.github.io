@@ -1,10 +1,8 @@
 ---
-
-title: "Run a command in a running container"
-date: 2021-05-05T07:52:32+07:00
 lang: docker
-authors:
-- dimasm93
+catalog_key: docker-container
+title: "Run a command in a running container"
+date: 2021-04-23T04:52:32+07:00
 categories:
 - DevOps
 - Docker
@@ -13,7 +11,6 @@ refs:
 - https://docs.docker.com/engine/reference/commandline/exec/
 youtube: 6YTYvKk3OZs
 comments: true
-catalog_key: docker-container
 image_path: /resources/posts/docker/06e-docker-exec-command
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

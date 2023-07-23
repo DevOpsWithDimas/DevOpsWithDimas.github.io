@@ -1,10 +1,8 @@
 ---
-
-title: "Management Docker Images"
-date: 2021-05-05T05:00:17+07:00
 lang: docker
-authors:
-- dimasm93
+catalog_key: docker-container
+title: "Management Docker Images"
+date: 2021-04-23T03:00:17+07:00
 categories:
 - DevOps
 - Docker
@@ -12,9 +10,8 @@ categories:
 refs: 
 - https://docs.docker.com/engine/reference/commandline/image/
 - https://docs.docker.com/engine/reference/commandline/images/
-youtube: KPGHfMQjBNw
+youtube: 
 comments: true
-catalog_key: docker-container
 image_path: /resources/posts/docker/06a-docker-image-command
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

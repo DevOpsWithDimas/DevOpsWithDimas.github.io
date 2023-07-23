@@ -1,10 +1,8 @@
 ---
-
-title: "Logging, Inspect, & Resource Usage Statistics Containers"
-date: 2021-05-10T09:09:41+07:00
 lang: docker
-authors:
-- dimasm93
+catalog_key: docker-container
+title: "Logging, Inspect, & Resource Usage Statistics Containers"
+date: 2021-04-23T07:09:41+07:00
 categories:
 - DevOps
 - Docker
@@ -14,9 +12,8 @@ refs:
 - https://docs.docker.com/engine/reference/commandline/logs/
 - https://docs.docker.com/engine/reference/commandline/stats/
 - https://docs.docker.com/engine/reference/commandline/container_stats/
-youtube: -Pk7bzvrDOY
+youtube: 
 comments: true
-catalog_key: docker-container
 image_path: /resources/posts/docker/06c-docker-logs-ps-command
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
