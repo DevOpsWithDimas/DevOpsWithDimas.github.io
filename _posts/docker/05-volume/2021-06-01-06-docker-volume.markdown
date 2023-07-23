@@ -1,11 +1,9 @@
 ---
-
+lang: docker
+catalog_key: docker-volume
 title: "Docker Volume Overview"
 date: 2021-06-01T04:17:45+07:00
-lang: docker
 sidebar_toc: false
-authors:
-- dimasm93
 categories:
 - DevOps
 - Docker
@@ -14,7 +12,6 @@ refs:
 - https://docs.docker.com/storage/volumes/
 youtube: 5L-ngkZ1D8k
 comments: true
-catalog_key: docker-volume
 image_path: /resources/posts/docker/06h-docker-volume
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

@@ -281,7 +281,7 @@ Insecure Registry ini adalah alternative jika container image mau di simpan di o
 3. [Gitlab Container Registry](https://docs.gitlab.com/ee/administration/packages/container_registry.html)
 4. dan masih banyak lagi.
 
-Disini saya sudah install insecure-registry menggunakan Nexus dan untuk cara installnya saya sudah pernah bahas di [artikel berikut]({% post_url docker/02-registries/2021-04-24-03c-using-nexus-oss %}) untuk registry urlnya seperti berikut:
+Disini saya sudah install insecure-registry menggunakan Nexus dan untuk cara installnya saya sudah pernah bahas di [artikel berikut]({% post_url docker/03-registries/2021-04-24-03c-using-nexus-oss %}) untuk registry urlnya seperti berikut:
 
 1. Hosted registry: `192.168.88.50:8087`
 2. Group registry: `192.168.88.50:8086`

@@ -12,7 +12,7 @@ categories:
 refs: 
 - https://stackoverflow.com/a/63067436/6685789
 - https://linuxhint.com/install_docker_ce_centos8/
-youtube: SVrW4AqwroM
+youtube: 
 comments: true
 catalog_key: introduction
 image_path: /resources/posts/docker/04b-install-linux-centos

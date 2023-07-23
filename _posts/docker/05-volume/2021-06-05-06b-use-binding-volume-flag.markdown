@@ -1,8 +1,8 @@
 ---
-
+lang: docker
+catalog_key: docker-volume
 title: "Use Bind Mounts"
 date: 2021-06-05T16:19:57+07:00
-lang: docker
 authors:
 - dimasm93
 categories:
@@ -13,7 +13,6 @@ refs:
 - https://docs.docker.com/storage/bind-mounts/
 youtube: gv1OgVl0I7U
 comments: true
-catalog_key: docker-volume
 image_path: /resources/posts/docker/06b-use-bind-volume
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

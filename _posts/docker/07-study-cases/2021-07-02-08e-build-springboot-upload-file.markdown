@@ -34,7 +34,7 @@ Ok langsung aja kita ke pembahasan yang pertama
 
 ## Don't store data inside containers
 
-Jika temen-temen masih ingat pada materi sebelumya tentang [persistence volume]({% post_url docker/05-docker-volume/2021-06-01-06-docker-volume %}), kita tidak disarankan untuk menyimpan data ke dalam suatu container karena 
+Jika temen-temen masih ingat pada materi sebelumya tentang [persistence volume]({% post_url docker/05-volume/2021-06-01-06-docker-volume %}), kita tidak disarankan untuk menyimpan data ke dalam suatu container karena 
 
 1. Akan membuat image semakin lama, semakin besar
 2. Container yang kita jalankan tidak boleh di destroy, karena data yang kita simpan akan hilang.

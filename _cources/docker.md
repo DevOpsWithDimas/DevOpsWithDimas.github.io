@@ -38,14 +38,14 @@ catalogs:
     description: 'Eps. 1 - Pengenalan Container dengan Docker'
     deprecated: false
     messages: ''
-  - name: Docker Registry
-    key: docker-registry
-    description: 'Eps. 2 - Docker Registry'
-    deprecated: false
-    messages: ''
   - name: Docker Container CLI
     key: docker-container
     description: 'Eps. 3 - Docker Container'
+    deprecated: false
+    messages: ''
+  - name: Docker Registry
+    key: docker-registry
+    description: 'Eps. 2 - Docker Registry'
     deprecated: false
     messages: ''
   - name: Docker Networks

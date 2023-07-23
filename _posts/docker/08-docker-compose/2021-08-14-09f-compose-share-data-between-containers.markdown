@@ -22,7 +22,7 @@ downloads: []
 
 Hai semuanya di materi kali ini kita akan membahas tentang share volume between containers 
 
-Temen-temen masih ingat khan [materi sebelumnya]({% post_url docker/05-docker-volume/2021-06-05-06c-share-data-among-containers %}) untuk share data between container??
+Temen-temen masih ingat khan [materi sebelumnya]({% post_url docker/05-volume/2021-06-05-06c-share-data-among-containers %}) untuk share data between container??
 
 <!--more-->
 

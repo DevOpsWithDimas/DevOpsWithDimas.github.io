@@ -23,7 +23,7 @@ downloads: []
 
 Hai semuanya, di materi kali ini kita akan membahas tentang share data between machine menggunakan docker plugin volume yaitu [sshfs](https://github.com/vieux/docker-volume-sshfs) di compose file.
 
-Temen-temen masih inget khan terminologinya? aku lupa boleh baca-baca lagi [artikel ini]({% post_url docker/05-docker-volume/2021-06-08-06e-share-data-among-machines %}) Jadi kesimpulnya kita perlu ssh-server.
+Temen-temen masih inget khan terminologinya? aku lupa boleh baca-baca lagi [artikel ini]({% post_url docker/05-volume/2021-06-08-06e-share-data-among-machines %}) Jadi kesimpulnya kita perlu ssh-server.
 
 <!--more-->
 

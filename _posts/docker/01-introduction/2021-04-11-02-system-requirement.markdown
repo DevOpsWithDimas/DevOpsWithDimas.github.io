@@ -11,7 +11,7 @@ categories:
 - Basic
 refs: 
 - https://docs.docker.com/docker-for-mac/install/#what-to-know-before-you-install
-youtube: q43Ev6R-RVA
+youtube: 
 comments: true
 catalog_key: introduction
 image_path: /resources/posts/docker/04-system-requirement

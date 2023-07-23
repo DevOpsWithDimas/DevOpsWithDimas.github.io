@@ -1,10 +1,8 @@
 ---
-
+lang: docker
+catalog_key: docker-volume
 title: "Share data among machines"
 date: 2021-06-08T05:18:06+07:00
-lang: docker
-authors:
-- dimasm93
 categories:
 - DevOps
 - Docker
@@ -14,7 +12,6 @@ refs:
 - https://github.com/vieux/docker-volume-sshfs
 youtube: nIBzQZ4Vqqs
 comments: true
-catalog_key: docker-volume
 image_path: /resources/posts/docker/06e-share-data-among-machines
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

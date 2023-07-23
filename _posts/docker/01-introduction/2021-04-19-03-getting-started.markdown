@@ -11,7 +11,7 @@ categories:
 - Basic
 refs: 
 - https://docs.docker.com/
-youtube: iXDCJbiM2E4
+youtube: 
 comments: true
 catalog_key: introduction
 image_path: /resources/posts/docker/05-getting-started
