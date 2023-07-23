@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Using thirdparty Editor untuk PostgreSQL Server",
+      "link": "/posts/rdbms/postgresql/getting-started/02d-use-third-party-editors"
+    }
+    ,
+    {
+      "title": "Using pgAdmin4 as PostgreSQL editor",
+      "link": "/posts/rdbms/postgresql/getting-started/02c-use-pgadmin"
+    }
+    ,
+    {
       "title": "Using psql as PostgreSQL editor",
       "link": "/posts/rdbms/postgresql/getting-started/02b-use-psql"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Install minikube for Linux users",
       "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux"
-    }
-    ,
-    {
-      "title": "Install minikube for Windows 11/10 Users",
-      "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows"
-    }
-    ,
-    {
-      "title": "Install PostgreSQL for Windows users",
-      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows"
     }
   ]
 }

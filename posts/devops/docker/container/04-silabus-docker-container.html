@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Best practices for scanning images - DevOps with Dimas Maryanto</title>
-<meta name="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Scanning docker images yang telah kita build berserta best practice nya. Berikut adalah materi yang akan kita bahas     Vulnerability images   How to scan using the CLI   Choose the right base image   Scan images during development &amp; production   Conclusion   Ok langsung aja kita bahas ke materi yang pertama">
+<!-- begin _includes/seo.html --><title>Silabus: Docker Container - DevOps with Dimas Maryanto</title>
+<meta name="description" content="Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir section kedua ini kita akan membahas Docker Container dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum commandline interface CLI digunakan untuk me-manage object docker seperti Container, Volume, Network, Images dan lain-lain.  Okay, jadi di silabus belajar Docker Container kali ini kita akan membahas seperti">
 
 
   <meta name="author" content="Dimas Maryanto">
@@ -22,21 +22,23 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="DevOps with Dimas Maryanto">
-<meta property="og:title" content="Best practices for scanning images">
-<meta property="og:url" content="/posts/devops/docker/dockerfile/07n-docker-image-scan">
+<meta property="og:title" content="Silabus: Docker Container">
+<meta property="og:url" content="/posts/devops/docker/container/04-silabus-docker-container">
 
 
-  <meta property="og:description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Scanning docker images yang telah kita build berserta best practice nya. Berikut adalah materi yang akan kita bahas     Vulnerability images   How to scan using the CLI   Choose the right base image   Scan images during development &amp; production   Conclusion   Ok langsung aja kita bahas ke materi yang pertama">
-
-
-
+  <meta property="og:description" content="Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir section kedua ini kita akan membahas Docker Container dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum commandline interface CLI digunakan untuk me-manage object docker seperti Container, Volume, Network, Images dan lain-lain.  Okay, jadi di silabus belajar Docker Container kali ini kita akan membahas seperti">
 
 
 
 
-  <meta property="article:published_time" content="2021-06-27T13:28:32+07:00">
 
 
+
+  <meta property="article:published_time" content="2021-04-24T16:45:53+07:00">
+
+
+
+  <meta property="article:modified_time" content="2023-07-23T16:27:00+07:00">
 
 
 
@@ -45,7 +47,7 @@
   
 
 
-<link rel="canonical" href="/posts/devops/docker/dockerfile/07n-docker-image-scan">
+<link rel="canonical" href="/posts/devops/docker/container/04-silabus-docker-container">
 
 
 
@@ -266,33 +268,22 @@
   
   
   
-  <nav class="toc">
-    <header>
-      <h4 class="nav__title">
-        <i class="fas fa-file-alt"></i> 
-        On this page
-      </h4>
-    </header>
-    <ul class="toc__menu"><li><a href="#vulnerability-docker-images">Vulnerability docker images</a></li><li><a href="#how-to-scan-using-the-cli">How to scan using the CLI</a></li><li><a href="#choose-the-right-base-image">Choose the right base image</a></li><li><a href="#scan-images-during-development--production">Scan images during development &amp; production</a></li><li><a href="#conclusion">Conclusion</a></li></ul>
-
-  </nav>
-  
   </div>
 
 
 
 
   <article class="page h-entry" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Best practices for scanning images">
-    <meta itemprop="description" content="Hai semuanya, di materi kali ini kita akan membahas tentang Scanning docker images yang telah kita build berserta best practice nya. Berikut adalah materi yang akan kita bahas  Vulnerability images  How to scan using the CLI  Choose the right base image  Scan images during development &amp; production  ConclusionOk langsung aja kita bahas ke materi yang pertama">
-    <meta itemprop="datePublished" content="2021-06-27T13:28:32+07:00">
-    
+    <meta itemprop="headline" content="Silabus: Docker Container">
+    <meta itemprop="description" content="Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir section kedua ini kita akan membahas Docker Container dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum commandline interface CLI digunakan untuk me-manage object docker seperti Container, Volume, Network, Images dan lain-lain.Okay, jadi di silabus belajar Docker Container kali ini kita akan membahas seperti">
+    <meta itemprop="datePublished" content="2021-04-24T16:45:53+07:00">
+    <meta itemprop="dateModified" content="2023-07-23T16:27:00+07:00">
 
     <div class="page__inner-wrap">
       
         <header>
           <h1 id="page-title" class="page__title p-name" itemprop="headline">
-            <a href="/posts/devops/docker/dockerfile/07n-docker-image-scan" class="u-url" itemprop="url">Best practices for scanning images
+            <a href="/posts/devops/docker/container/04-silabus-docker-container" class="u-url" itemprop="url">Silabus: Docker Container
 </a>
           </h1>
           
@@ -314,7 +305,7 @@
     <span class="page__meta-date">
       <i class="far fa-calendar-alt" aria-hidden="true"></i>
       
-      <time datetime="2021-06-27T13:28:32+07:00">June 27, 2021</time>
+      <time datetime="2023-07-23T16:27:00+07:00">July 23, 2023</time>
     </span>
   
 
@@ -327,7 +318,7 @@
     <span class="page__meta-readtime">
       <i class="far fa-clock" aria-hidden="true"></i>
       
-        7 minute read
+        4 minute read
       
     </span>
   
@@ -448,6 +439,8 @@
                 
                 <li>
                     <a href="/posts/devops/docker/container/04-silabus-docker-container">
+                        
+                        <i class="fas fa-bookmark"></i>
                         
                         Silabus: Docker Container
                     </a>
@@ -795,8 +788,6 @@
                 
                 <li>
                     <a href="/posts/devops/docker/dockerfile/07n-docker-image-scan">
-                        
-                        <i class="fas fa-bookmark"></i>
                         
                         Best practices for scanning...
                     </a>
@@ -1483,156 +1474,120 @@
           
         </aside>
         
-        <p>Hai semuanya, di materi kali ini kita akan membahas tentang Scanning docker images yang telah kita build berserta best practice nya. Berikut adalah materi yang akan kita bahas</p>
+        <p>Hai semuanya, di cource ini <code class="language-plaintext highlighter-rouge">DevOps - Docker: Pemula sampai Mahir</code> section kedua ini kita akan membahas <code class="language-plaintext highlighter-rouge">Docker Container</code> dengan menggunakan CLI atau Commandline Interface, Secara gambaran umum commandline interface CLI digunakan untuk me-manage object docker seperti Container, Volume, Network, Images dan lain-lain.</p>
 
-<ol>
-  <li>Vulnerability images</li>
-  <li>How to scan using the CLI</li>
-  <li>Choose the right base image</li>
-  <li>Scan images during development &amp; production</li>
-  <li>Conclusion</li>
-</ol>
-
-<p>Ok langsung aja kita bahas ke materi yang pertama</p>
+<p>Okay, jadi di silabus belajar <code class="language-plaintext highlighter-rouge">Docker Container</code> kali ini kita akan membahas seperti</p>
 
 <!--more-->
 
-<h2 id="vulnerability-docker-images">Vulnerability docker images</h2>
-
-<p>Setelah kita melakukan build docker image, apa yang harus dilakukan selanjutnya? langsung kita push ke registry? ettss tunggu dulu, coba perhatikan tentang security issue dalam docker image apakah image yang kita build sudah aman?</p>
-
-<p>Vulnerability scanning for Docker local images allows developers and development teams to review the security state of the container images and take actions to fix issues identified during the scan, resulting in more secure deployments. 
-Docker Scan runs on Snyk engine, providing users with visibility into the security posture of their local Dockerfiles and local images.</p>
-
-<p>Users trigger vulnerability scans through the CLI, and use the CLI to view the scan results. 
-The scan results contain a list of Common Vulnerabilities and Exposures (CVEs), the sources, such as OS packages and libraries, versions in which they were introduced, and a recommended fixed version (if available) to remediate the CVEs discovered.</p>
-
-<h2 id="how-to-scan-using-the-cli">How to scan using the CLI</h2>
-
-<p>The <code class="language-plaintext highlighter-rouge">docker scan</code> command allows you to scan existing Docker images using the image name or ID. For example, run the following command to scan the hello-world image:</p>
-
-<script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=07n-docker-scan-help.bash"> </script>
-
-<p>Jika di jalankan maka hasilnya seperti berikut:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="mi">07</span><span class="nt">-dockerfile</span><span class="w">  </span><span class="n">docker</span><span class="w"> </span><span class="nx">scan</span><span class="w"> </span><span class="nt">--help</span><span class="w">
-
-</span><span class="n">Usage:</span><span class="w">  </span><span class="nx">docker</span><span class="w"> </span><span class="nx">scan</span><span class="w"> </span><span class="p">[</span><span class="n">OPTIONS</span><span class="p">]</span><span class="w"> </span><span class="nx">IMAGE</span><span class="w">
-
-</span><span class="n">A</span><span class="w"> </span><span class="nx">tool</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">scan</span><span class="w"> </span><span class="nx">your</span><span class="w"> </span><span class="nx">images</span><span class="w">
-
-</span><span class="n">Options:</span><span class="w">
-      </span><span class="nt">--accept-license</span><span class="w">    </span><span class="nx">Accept</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">third</span><span class="w"> </span><span class="nx">party</span><span class="w"> </span><span class="nx">scanning</span><span class="w"> </span><span class="nx">provider</span><span class="w">
-      </span><span class="nt">--dependency-tree</span><span class="w">   </span><span class="n">Show</span><span class="w"> </span><span class="nx">dependency</span><span class="w"> </span><span class="nx">tree</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">scan</span><span class="w"> </span><span class="nx">results</span><span class="w">
-      </span><span class="nt">--exclude-base</span><span class="w">      </span><span class="n">Exclude</span><span class="w"> </span><span class="nx">base</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">vulnerability</span><span class="w"> </span><span class="nx">scanning</span><span class="w">
-                          </span><span class="p">(</span><span class="n">requires</span><span class="w"> </span><span class="nt">--file</span><span class="p">)</span><span class="w">
-  </span><span class="nt">-f</span><span class="p">,</span><span class="w"> </span><span class="nt">--file</span><span class="w"> </span><span class="n">string</span><span class="w">       </span><span class="nx">Dockerfile</span><span class="w"> </span><span class="nx">associated</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">image</span><span class="p">,</span><span class="w"> </span><span class="nx">provides</span><span class="w"> </span><span class="nx">more</span><span class="w">
-                          </span><span class="n">detailed</span><span class="w"> </span><span class="nx">results</span><span class="w">
-      </span><span class="nt">--group-issues</span><span class="w">      </span><span class="n">Aggregate</span><span class="w"> </span><span class="nx">duplicated</span><span class="w"> </span><span class="nx">vulnerabilities</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">group</span><span class="w">
-                          </span><span class="n">them</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">single</span><span class="w"> </span><span class="nx">one</span><span class="w"> </span><span class="p">(</span><span class="n">requires</span><span class="w"> </span><span class="nt">--json</span><span class="p">)</span><span class="w">
-      </span><span class="nt">--json</span><span class="w">              </span><span class="n">Output</span><span class="w"> </span><span class="nx">results</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">JSON</span><span class="w"> </span><span class="nx">format</span><span class="w">
-      </span><span class="nt">--login</span><span class="w">             </span><span class="n">Authenticate</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">scan</span><span class="w"> </span><span class="nx">provider</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">an</span><span class="w">
-                          </span><span class="n">optional</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="p">(</span><span class="n">with</span><span class="w"> </span><span class="nt">--token</span><span class="p">),</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">web</span><span class="w"> </span><span class="nx">base</span><span class="w">
-                          </span><span class="n">token</span><span class="w"> </span><span class="nx">if</span><span class="w"> </span><span class="nx">empty</span><span class="w">
-      </span><span class="nt">--reject-license</span><span class="w">    </span><span class="n">Reject</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">third</span><span class="w"> </span><span class="nx">party</span><span class="w"> </span><span class="nx">scanning</span><span class="w"> </span><span class="nx">provider</span><span class="w">
-      </span><span class="nt">--severity</span><span class="w"> </span><span class="n">string</span><span class="w">   </span><span class="nx">Only</span><span class="w"> </span><span class="nx">report</span><span class="w"> </span><span class="nx">vulnerabilities</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">provided</span><span class="w"> </span><span class="nx">level</span><span class="w">
-                          </span><span class="n">or</span><span class="w"> </span><span class="nx">higher</span><span class="w"> </span><span class="p">(</span><span class="n">low</span><span class="o">|</span><span class="n">medium</span><span class="o">|</span><span class="n">high</span><span class="p">)</span><span class="w">
-      </span><span class="nt">--token</span><span class="w"> </span><span class="n">string</span><span class="w">      </span><span class="nx">Authentication</span><span class="w"> </span><span class="nx">token</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">login</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">third</span><span class="w">
-                          </span><span class="n">party</span><span class="w"> </span><span class="nx">scanning</span><span class="w"> </span><span class="nx">provider</span><span class="w">
-      </span><span class="nt">--version</span><span class="w">           </span><span class="n">Display</span><span class="w"> </span><span class="nx">version</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">scan</span><span class="w"> </span><span class="nx">plugin</span><span class="w">
-</span></code></pre></div></div>
-
-<p>Sekarang kita coba jalankan perintah <code class="language-plaintext highlighter-rouge">docker scan</code> untuk docker image yang terakhir yang kita build yaitu <code class="language-plaintext highlighter-rouge">dimmaryanto93/centos:1.8</code> seperti berikut:</p>
-
-<script src="https://gist.github.com/dimMaryanto93/d92bd18da1c73c230d7762361f738524.js?file=07n-docker-scan.bash"> </script>
-
-<p>Jika dijalankan maka hasilnya seperti berikut:</p>
-
-<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">➜</span><span class="w"> </span><span class="mi">07</span><span class="nt">-dockerfile</span><span class="w">  </span><span class="n">docker</span><span class="w"> </span><span class="nx">scan</span><span class="w"> </span><span class="nt">--exclude-base</span><span class="w"> </span><span class="nt">--file</span><span class="w"> </span><span class="nx">Dockerfile</span><span class="w"> </span><span class="nx">dimmaryanto93/centos:1.8</span><span class="w">
-
-</span><span class="n">Testing</span><span class="w"> </span><span class="nx">dimmaryanto93/centos:1.8...</span><span class="w">
-
-</span><span class="n">Package</span><span class="w"> </span><span class="nx">manager:</span><span class="w">   </span><span class="nx">deb</span><span class="w">
-</span><span class="n">Target</span><span class="w"> </span><span class="nx">file:</span><span class="w">       </span><span class="nx">Dockerfile</span><span class="w">
-</span><span class="n">Project</span><span class="w"> </span><span class="nx">name:</span><span class="w">      </span><span class="nx">docker-image</span><span class="o">|</span><span class="n">dimmaryanto93/centos</span><span class="w">
-</span><span class="nx">Docker</span><span class="w"> </span><span class="nx">image:</span><span class="w">      </span><span class="nx">dimmaryanto93/centos:1.8</span><span class="w">
-</span><span class="n">Platform:</span><span class="w">          </span><span class="nx">linux/amd64</span><span class="w">
-</span><span class="kr">Base</span><span class="w"> </span><span class="n">image:</span><span class="w">        </span><span class="nx">php:7.3-apache</span><span class="w">
-
-</span><span class="n">Tested</span><span class="w"> </span><span class="nx">176</span><span class="w"> </span><span class="nx">dependencies</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">known</span><span class="w"> </span><span class="nx">vulnerabilities</span><span class="p">,</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="nx">0</span><span class="w"> </span><span class="nx">vulnerabilities.</span><span class="w">
-
-</span><span class="kr">Base</span><span class="w"> </span><span class="n">Image</span><span class="w">      </span><span class="nx">Vulnerabilities</span><span class="w">  </span><span class="nx">Severity</span><span class="w">
-</span><span class="n">php:7.3-apache</span><span class="w">  </span><span class="nx">158</span><span class="w">              </span><span class="nx">18</span><span class="w"> </span><span class="nx">high</span><span class="p">,</span><span class="w"> </span><span class="nx">11</span><span class="w"> </span><span class="nx">medium</span><span class="p">,</span><span class="w"> </span><span class="nx">129</span><span class="w"> </span><span class="nx">low</span><span class="w">
-
-</span><span class="n">Recommendations</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">base</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="nx">upgrade:</span><span class="w">
-
-</span><span class="n">Alternative</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="nx">types</span><span class="w">
-</span><span class="kr">Base</span><span class="w"> </span><span class="n">Image</span><span class="w">             </span><span class="nx">Vulnerabilities</span><span class="w">  </span><span class="nx">Severity</span><span class="w">
-</span><span class="n">php:7.3-fpm-buster</span><span class="w">     </span><span class="nx">141</span><span class="w">              </span><span class="nx">13</span><span class="w"> </span><span class="nx">high</span><span class="p">,</span><span class="w"> </span><span class="nx">9</span><span class="w"> </span><span class="nx">medium</span><span class="p">,</span><span class="w"> </span><span class="nx">119</span><span class="w"> </span><span class="nx">low</span><span class="w">
-</span><span class="n">php:7.3.28-cli-buster</span><span class="w">  </span><span class="nx">141</span><span class="w">              </span><span class="nx">13</span><span class="w"> </span><span class="nx">high</span><span class="p">,</span><span class="w"> </span><span class="nx">9</span><span class="w"> </span><span class="nx">medium</span><span class="p">,</span><span class="w"> </span><span class="nx">119</span><span class="w"> </span><span class="nx">low</span><span class="w">
-</span><span class="n">php:7.3.28-zts-buster</span><span class="w">  </span><span class="nx">141</span><span class="w">              </span><span class="nx">13</span><span class="w"> </span><span class="nx">high</span><span class="p">,</span><span class="w"> </span><span class="nx">9</span><span class="w"> </span><span class="nx">medium</span><span class="p">,</span><span class="w"> </span><span class="nx">119</span><span class="w"> </span><span class="nx">low</span><span class="w">
-</span><span class="n">php:8-buster</span><span class="w">           </span><span class="nx">148</span><span class="w">              </span><span class="nx">13</span><span class="w"> </span><span class="nx">high</span><span class="p">,</span><span class="w"> </span><span class="nx">9</span><span class="w"> </span><span class="nx">medium</span><span class="p">,</span><span class="w"> </span><span class="nx">126</span><span class="w"> </span><span class="nx">low</span><span class="w">
-
-</span><span class="kr">For</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="nx">free</span><span class="w"> </span><span class="nx">scans</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">keep</span><span class="w"> </span><span class="nx">your</span><span class="w"> </span><span class="nx">images</span><span class="w"> </span><span class="nx">secure</span><span class="p">,</span><span class="w"> </span><span class="nx">sign</span><span class="w"> </span><span class="nx">up</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">Snyk</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="nx">https://dockr.ly/3ePqVcp</span><span class="w">
-</span></code></pre></div></div>
-
-<h2 id="choose-the-right-base-image">Choose the right base image</h2>
-
-<p>The first step towards achieving a secure image is to choose the right base image. When choosing an image, ensure it is built from a trusted source and keep it small.</p>
-
-<p>Docker Hub has more than 8.3 million repositories. Some of these images are Official Images, which are published by Docker as a curated set of Docker open source and drop-in solution repositories.</p>
-
-<p>When building your own image from a <code class="language-plaintext highlighter-rouge">Dockerfile</code>, ensure you choose a minimal base image that matches your requirements. A smaller base image not just offers portability and fast downloads, but also shrinks the size of your image and minimizes the number of vulnerabilities introduced through the dependencies.</p>
-
-<p>when rebuild your own imag from a <code class="language-plaintext highlighter-rouge">Dockerfile</code>, A Dockerfile contains a set of instructions which allows you to automate the steps you would normally (manually) take to create an image. Additionally, it can include some imported libraries and install custom software. These appear as instructions in the Dockerfile. Building your image is a snapshot of that image, at that moment in time. When you depend on a base image without a tag, you’ll get a different base image every time you rebuild. Also, when you install packages using a package installer, rebuilding can change the image drastically. For example, a Dockerfile containing the following entries can potentially have a different binary with every rebuild.</p>
-
-<figure class="highlight"><pre><code class="language-docker" data-lang="docker"><span class="k">FROM</span><span class="s"> ubuntu:latest</span>
-<span class="k">RUN </span>apt-get <span class="nt">-y</span> update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> python</code></pre></figure>
-
-<p>We recommend that you rebuild your Docker image regularly to prevent known vulnerabilities that have been addressed. When rebuilding, use the option <code class="language-plaintext highlighter-rouge">--no-cache</code> to avoid cache hits and to ensure a fresh download.</p>
-
-<figure class="highlight"><pre><code class="language-docker" data-lang="docker">docker build --no-cache -t myImage:myTag myPath/</code></pre></figure>
-
-<p>Consider the following best practices when rebuilding an image:</p>
-
 <ol>
-  <li>Each container should have only one responsibility.</li>
-  <li>Containers should be immutable, lightweight, and fast.</li>
-  <li>Don’t store data in your container. Use a shared data store instead.</li>
-  <li>Containers should be easy to destroy and rebuild.</li>
-  <li>Use a small base image (such as Linux Alpine). Smaller images are easier to distribute.</li>
-  <li>Avoid installing unnecessary packages. This keeps the image clean and safe.</li>
-  <li>Auto-scan your image before deploying to avoid pushing vulnerable containers to production.</li>
-  <li>Scan your images daily both during development and production for vulnerabilities Based on that, automate the rebuild of images if necessary.</li>
+  <li>Introduction docker CLI</li>
+  <li>Me-manage docker container</li>
+  <li>Me-manage docker image</li>
+  <li>Me-expose container to host</li>
+  <li>Menjalankan command dalam container</li>
+  <li>Logging pada container</li>
+  <li>Environment variable pada container</li>
 </ol>
 
-<h2 id="scan-images-during-development--production">Scan images during development &amp; production</h2>
+<h2 id="introduction-docker-cli">Introduction docker CLI</h2>
 
-<p>Creating an image from a Dockerfile and even rebuilding an image can introduce new vulnerabilities in your system. 
-Scanning your Docker images during development should be part of your workflow to catch vulnerabilities earlier in your development. 
-You should scan images at all stages of the development cycle, and ideally consider automating scans. For example, consider configuring automated scans during the build process, before pushing the image to Docker Hub (or any other registry), and finally before pushing it to a production environment.</p>
+<p>Untuk lebih lengkapnya <code class="language-plaintext highlighter-rouge">docker help</code> maka outputnya seperti berikut:</p>
 
-<p>Actively checking your container can save you a lot of hassle when a new vulnerability is discovered, which otherwise can put your production system at risk.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>➜ ~  docker <span class="nb">help
 
-<p>Periodically scanning your Docker image is possible by using the Snyk monitor capabilities for containers. Snyk creates a snapshot of the image’s dependencies for continuous monitoring. Additionally, you should also activate runtime monitoring.</p>
+</span>Usage:  docker <span class="o">[</span>OPTIONS] COMMAND
 
-<p>Scanning for unused modules and packages inside your runtime gives insight into how to shrink images. Removing unused components prevents unnecessary vulnerabilities from entering both system and application libraries. This also makes an image more easily maintainable.</p>
+A self-sufficient runtime <span class="k">for </span>containers
 
-<h2 id="conclusion">Conclusion</h2>
+Options:
+      <span class="nt">--config</span> string      Location of client config files <span class="o">(</span>default
+                           <span class="s2">"C:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="s2">dimasm93</span><span class="se">\\</span><span class="s2">.docker"</span><span class="o">)</span>
+  <span class="nt">-c</span>, <span class="nt">--context</span> string     Name of the context to use to connect to the
+                           daemon <span class="o">(</span>overrides DOCKER_HOST <span class="nb">env </span>var and
+                           default context <span class="nb">set </span>with <span class="s2">"docker context use"</span><span class="o">)</span>
+  <span class="nt">-D</span>, <span class="nt">--debug</span>              Enable debug mode
+  <span class="nt">-H</span>, <span class="nt">--host</span> list          Daemon socket<span class="o">(</span>s<span class="o">)</span> to connect to
+  <span class="nt">-l</span>, <span class="nt">--log-level</span> string   Set the logging level
+                           <span class="o">(</span><span class="s2">"debug"</span>|<span class="s2">"info"</span>|<span class="s2">"warn"</span>|<span class="s2">"error"</span>|<span class="s2">"fatal"</span><span class="o">)</span>
+                           <span class="o">(</span>default <span class="s2">"info"</span><span class="o">)</span>
+      <span class="nt">--tls</span>                Use TLS<span class="p">;</span> implied by <span class="nt">--tlsverify</span>
+      <span class="nt">--tlscacert</span> string   Trust certs signed only by this CA <span class="o">(</span>default
+                           <span class="s2">"C:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="s2">dimasm93</span><span class="se">\\</span><span class="s2">.docker</span><span class="se">\\</span><span class="s2">ca.pem"</span><span class="o">)</span>
+      <span class="nt">--tlscert</span> string     Path to TLS certificate file <span class="o">(</span>default
+                           <span class="s2">"C:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="s2">dimasm93</span><span class="se">\\</span><span class="s2">.docker</span><span class="se">\\</span><span class="s2">cert.pem"</span><span class="o">)</span>
+      <span class="nt">--tlskey</span> string      Path to TLS key file <span class="o">(</span>default
+                           <span class="s2">"C:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="s2">dimasm93</span><span class="se">\\</span><span class="s2">.docker</span><span class="se">\\</span><span class="s2">key.pem"</span><span class="o">)</span>
+      <span class="nt">--tlsverify</span>          Use TLS and verify the remote
+  <span class="nt">-v</span>, <span class="nt">--version</span>            Print version information and quit
 
-<p>Building secure images is a continuous process. Consider the recommendations and best practices highlighted in this guide to plan and build efficient, scalable, and secure images.</p>
+Management Commands:
+  app<span class="k">*</span>        Docker App <span class="o">(</span>Docker Inc., v0.9.1-beta3<span class="o">)</span>
+  builder     Manage builds
+  buildx<span class="k">*</span>     Build with BuildKit <span class="o">(</span>Docker Inc., v0.5.1-docker<span class="o">)</span>
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan<span class="k">*</span>       Docker Scan <span class="o">(</span>Docker Inc., v0.6.0<span class="o">)</span>
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
 
-<p>Let’s recap what we’ve learnt in this guide:</p>
+Commands:
+  attach      Attach <span class="nb">local </span>standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container<span class="se">\'</span>s changes
+  <span class="nb">cp          </span>Copy files/folders between a container and the <span class="nb">local </span>filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container<span class="se">\'</span>s filesystem
+  events      Get real <span class="nb">time </span>events from the server
+  <span class="nb">exec        </span>Run a <span class="nb">command </span><span class="k">in </span>a running container
+  <span class="nb">export      </span>Export a container<span class="se">\'</span>s filesystem as a <span class="nb">tar </span>archive
+  <span class="nb">history     </span>Show the <span class="nb">history </span>of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  <span class="nb">kill        </span>Kill one or more running containers
+  load        Load an image from a <span class="nb">tar </span>archive or STDIN
+  login       Log <span class="k">in </span>to a Docker registry
+  <span class="nb">logout      </span>Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping <span class="k">for </span>the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  <span class="nb">rm          </span>Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a <span class="nb">command </span><span class="k">in </span>a new container
+  save        Save one or more images to a <span class="nb">tar </span>archive <span class="o">(</span>streamed to STDOUT by default<span class="o">)</span>
+  search      Search the Docker Hub <span class="k">for </span>images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container<span class="o">(</span>s<span class="o">)</span> resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  <span class="nb">wait        </span>Block <span class="k">until </span>one or more containers stop, <span class="k">then </span>print their <span class="nb">exit </span>codes
 
-<ol>
-  <li>Start with a base image that you trust. Remember the Official image and Verified Publisher badges when you choose your base images.</li>
-  <li>Secure your code and its dependencies.</li>
-  <li>Select a minimal base image which contains only the required packages.</li>
-  <li>Use multi-stage builds to optimize your image.</li>
-  <li>Ensure you carefully monitor and manage the tools and dependencies you add to your image.</li>
-  <li>Ensure you scan images at multiple stages during your development lifecycle.</li>
-  <li>Check your images frequently for vulnerabilities.</li>
-</ol>
+Run <span class="s1">'docker COMMAND --help'</span> <span class="k">for </span>more information on a command.
+
+To get more <span class="nb">help </span>with docker, check out our guides at https://docs.docker.com/go/guides/
+</code></pre></div></div>
 
         
         <div class="text-right">
@@ -1661,8 +1616,8 @@ You should scan images at all stages of the development cycle, and ideally consi
     </li>
     <li id="previous_page" class="page-item">
       
-      <a href="/posts/devops/docker/dockerfile/07m-best-practice-dockerfile" class="" 
-        title="Best practices for writing Dockerfiles
+      <a href="/posts/devops/docker/registry/03c-using-nexus-oss" class="" 
+        title="Using Nexus OSS as insecure registry
 ">
         <i class="fas fa-chevron-left"></i>
       </a>
@@ -1670,13 +1625,13 @@ You should scan images at all stages of the development cycle, and ideally consi
     </li>
     <li class="page-item">
       <a href="#" class=" disabled">
-        Page 46 to 113
+        Page 12 to 113
       </a>
     </li>
     <li id="next_page" class="page-item">
       
-      <a href="/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage" class="" 
-        title="Build specific docker image by programming languages
+      <a href="/posts/devops/docker/container/04a-docker-container-command" class="" 
+        title="Management Docker Container
 ">
         <i class="fas fa-chevron-right"></i>
       </a>
@@ -1710,11 +1665,11 @@ You should scan images at all stages of the development cycle, and ideally consi
     <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
     <span itemprop="keywords">
     
+      <a href="/categories/#container" class="page__taxonomy-item p-category" rel="tag">Container</a><span class="sep">, </span>
+    
       <a href="/categories/#devops" class="page__taxonomy-item p-category" rel="tag">DevOps</a><span class="sep">, </span>
     
-      <a href="/categories/#docker" class="page__taxonomy-item p-category" rel="tag">Docker</a><span class="sep">, </span>
-    
-      <a href="/categories/#dockerfile" class="page__taxonomy-item p-category" rel="tag">Dockerfile</a>
+      <a href="/categories/#docker" class="page__taxonomy-item p-category" rel="tag">Docker</a>
     
     </span>
   </p>
@@ -1722,7 +1677,7 @@ You should scan images at all stages of the development cycle, and ideally consi
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-06-27T13:28:32+07:00">June 27, 2021</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-07-23">July 23, 2023</time></p>
 
       </footer>
 
@@ -1731,11 +1686,11 @@ You should scan images at all stages of the development cycle, and ideally consi
     <h4 class="page__share-title">Share on</h4>
   
 
-  <a href="https://twitter.com/intent/tweet?text=Best+practices+for+scanning+images%20%2Fposts%2Fdevops%2Fdocker%2Fdockerfile%2F07n-docker-image-scan" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Silabus%3A+Docker+Container%20%2Fposts%2Fdevops%2Fdocker%2Fcontainer%2F04-silabus-docker-container" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Fdocker%2Fdockerfile%2F07n-docker-image-scan" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=%2Fposts%2Fdevops%2Fdocker%2Fcontainer%2F04-silabus-docker-container" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Fdocker%2Fdockerfile%2F07n-docker-image-scan" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=%2Fposts%2Fdevops%2Fdocker%2Fcontainer%2F04-silabus-docker-container" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
     </div>

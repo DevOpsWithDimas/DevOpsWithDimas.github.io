@@ -2,8 +2,18 @@
   "pages": [
     
     {
+      "title": "Use default bridge networks",
+      "link": "/posts/devops/docker/network/05b-docker-bridge-network"
+    }
+    ,
+    {
+      "title": "Legacy feature of Docker Network - Container Links",
+      "link": "/posts/devops/docker/network/05a-connect-to-other-container-use-link"
+    }
+    ,
+    {
       "title": "Networking overview",
-      "link": "/posts/devops/docker/network/05-docker-network"
+      "link": "/posts/devops/docker/network/05-silabus-docker-network"
     }
     ,
     {
@@ -39,16 +49,6 @@
     {
       "title": "Management Docker Container",
       "link": "/posts/devops/docker/container/04a-docker-container-command"
-    }
-    ,
-    {
-      "title": "Docker CLI (Command Line Interface)",
-      "link": "/posts/devops/docker/container/04-docker-cli"
-    }
-    ,
-    {
-      "title": "Using Nexus OSS as insecure registry",
-      "link": "/posts/devops/docker/registry/03c-using-nexus-oss"
     }
   ]
 }

@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Silabus Gitlab CI: Pemula s/d Mahir",
+      "link": "/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci"
+    }
+    ,
+    {
+      "title": "Working with Deployment object",
+      "link": "/posts/devops/orchestration/kubernetes/workloads/05b-deployment"
+    }
+    ,
+    {
       "title": "Study cases: Microservice apps (Springboot Rest API)",
       "link": "/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Time your practice (part 3)",
       "link": "/posts/rdbms/postgresql/sql/dml/05g-quis-section-1"
-    }
-    ,
-    {
-      "title": "Cleanup Data from Table",
-      "link": "/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup"
-    }
-    ,
-    {
-      "title": "Study Cases: Monolith apps (Laravel Web MVC)",
-      "link": "/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps"
     }
   ]
 }

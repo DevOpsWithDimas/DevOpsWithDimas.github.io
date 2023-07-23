@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Getting started with docker-machine",
+      "link": "/posts/devops/docker/machine/13b-getting-started"
+    }
+    ,
+    {
+      "title": "Install docker-machine on MacOS",
+      "link": "/posts/devops/docker/machine/13a-install-docker-machine-for-mac"
+    }
+    ,
+    {
       "title": "Install docker-machine on Linux",
       "link": "/posts/devops/docker/machine/13a-install-docker-machine-for-linux"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Time your practice (part 1)",
       "link": "/posts/rdbms/postgresql/sql/select/03g-quis-section-1"
-    }
-    ,
-    {
-      "title": "Limit dan Offset rows",
-      "link": "/posts/rdbms/postgresql/sql/select/03f-limit-offset-clause"
-    }
-    ,
-    {
-      "title": "Sorting rows using ORDER BY clause",
-      "link": "/posts/rdbms/postgresql/sql/select/03e-order-by-clause"
     }
   ]
 }

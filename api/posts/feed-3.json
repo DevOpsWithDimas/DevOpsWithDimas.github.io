@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Cleanup Data from Table",
+      "link": "/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup"
+    }
+    ,
+    {
+      "title": "Study Cases: Monolith apps (Laravel Web MVC)",
+      "link": "/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps"
+    }
+    ,
+    {
       "title": "Overview Study Cases: Pod and Containers",
       "link": "/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases"
     }
@@ -39,16 +49,6 @@
     {
       "title": "IT Automation Platform for Docker Operations",
       "link": "/posts/devops/docker/14a-it-automation-platform"
-    }
-    ,
-    {
-      "title": "Overview Study cases: IT Automation Platform for Docker Operations",
-      "link": "/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker"
-    }
-    ,
-    {
-      "title": "Deep dive into INSERT Statement",
-      "link": "/posts/rdbms/postgresql/sql/dml/05b-dml-insert"
     }
   ]
 }

@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Overview Study cases: IT Automation Platform for Docker Operations",
+      "link": "/posts/devops/docker/ansible/study-cases/14-overview-ansible-for-docker"
+    }
+    ,
+    {
+      "title": "Deep dive into INSERT Statement",
+      "link": "/posts/rdbms/postgresql/sql/dml/05b-dml-insert"
+    }
+    ,
+    {
       "title": "Basic Create, Update, Delete statement",
       "link": "/posts/rdbms/postgresql/sql/dml/05a-cud-statement"
     }
@@ -39,16 +49,6 @@
     {
       "title": "How to Install git on MacOS",
       "link": "/posts/git/version-control/01b-install-git-mac"
-    }
-    ,
-    {
-      "title": "What is Git SCM",
-      "link": "/posts/git/version-control/01a-what-is-git"
-    }
-    ,
-    {
-      "title": "Pengenalan Version Control",
-      "link": "/posts/git/version-control/01-introduction-version-control"
     }
   ]
 }

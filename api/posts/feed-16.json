@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Get started with Docker Compose",
+      "link": "/posts/devops/docker/compose/09a-compose-getting-started"
+    }
+    ,
+    {
+      "title": "Overview of Docker Compose",
+      "link": "/posts/devops/docker/compose/09-docker-compose-overview"
+    }
+    ,
+    {
       "title": "Laravel - Using Database",
       "link": "/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Springboot - Using Database",
       "link": "/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db"
-    }
-    ,
-    {
-      "title": "Springboot - where data such as files/images we stored?",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file"
-    }
-    ,
-    {
-      "title": "Springboot - using Environtment",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env"
     }
   ]
 }

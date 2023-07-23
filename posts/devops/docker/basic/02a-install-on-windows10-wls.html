@@ -38,6 +38,8 @@
 
 
 
+  <meta property="article:modified_time" content="2023-07-23T16:35:00+07:00">
+
 
 
   
@@ -273,7 +275,7 @@
         On this page
       </h4>
     </header>
-    <ul class="toc__menu"><li><a href="#backend-for-docker-engine">Backend for Docker Engine</a></li><li><a href="#enabled-wsl">Enabled WSL</a></li><li><a href="#install-docker-desktop">Install Docker Desktop</a></li><li><a href="#configure-resources">Configure Resources</a></li><li><a href="#testing">Testing</a></li><li><a href="#setup-development-env">Setup development env</a></li></ul>
+    <ul class="toc__menu"><li><a href="#enabled-wsl">Enabled WSL</a></li><li><a href="#install-docker-desktop">Install Docker Desktop</a></li><li><a href="#configure-resources">Configure Resources</a></li><li><a href="#testing">Testing</a></li><li><a href="#setup-development-env">Setup development env</a></li></ul>
 
   </nav>
   
@@ -286,7 +288,7 @@
     <meta itemprop="headline" content="How to install Docker on Windows 10 with WSL">
     <meta itemprop="description" content="Hai semuanya di materi kali ini kita akan meng-install Docker di platform Windows, ada beberapa step  Install &amp; Configure Backend for Docker Engine  Install Docker Desktop  Setup Development Env">
     <meta itemprop="datePublished" content="2021-04-11T21:16:49+07:00">
-    
+    <meta itemprop="dateModified" content="2023-07-23T16:35:00+07:00">
 
     <div class="page__inner-wrap">
       
@@ -314,7 +316,7 @@
     <span class="page__meta-date">
       <i class="far fa-calendar-alt" aria-hidden="true"></i>
       
-      <time datetime="2021-04-11T21:16:49+07:00">April 11, 2021</time>
+      <time datetime="2023-07-23T16:35:00+07:00">July 23, 2023</time>
     </span>
   
 
@@ -327,7 +329,7 @@
     <span class="page__meta-readtime">
       <i class="far fa-clock" aria-hidden="true"></i>
       
-        5 minute read
+        4 minute read
       
     </span>
   
@@ -440,49 +442,6 @@
 
 <div class="accordion-container">
     <div class="acordion-item">
-        <input type="checkbox" id="content-Docker Registry">
-        <label class="acordion-item-label" for="content-Docker Registry">
-            Docker Registry
-        </label>
-        <div class="acordion-item-content">
-            <ul>
-            
-                
-                <li>
-                    <a href="/posts/devops/docker/registry/03a-docker-registry">
-                        
-                        Docker Registry (Docker HUB)
-                    </a>
-                </li>
-                
-                <li>
-                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
-                        
-                        Insecure Registry
-                    </a>
-                </li>
-                
-                <li>
-                    <a href="/posts/devops/docker/registry/03c-using-nexus-oss">
-                        
-                        Using Nexus OSS as insecure...
-                    </a>
-                </li>
-                
-            
-            </ul>
-        </div>
-    </div>
-</nav>
-              
-                
-                
-                
-
-
-
-<div class="accordion-container">
-    <div class="acordion-item">
         <input type="checkbox" id="content-Docker Container CLI">
         <label class="acordion-item-label" for="content-Docker Container CLI">
             Docker Container CLI
@@ -492,9 +451,9 @@
             
                 
                 <li>
-                    <a href="/posts/devops/docker/container/04-docker-cli">
+                    <a href="/posts/devops/docker/container/04-silabus-docker-container">
                         
-                        Docker CLI (Command Line In...
+                        Silabus: Docker Container
                     </a>
                 </li>
                 
@@ -561,6 +520,49 @@
 
 <div class="accordion-container">
     <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Registry">
+        <label class="acordion-item-label" for="content-Docker Registry">
+            Docker Registry
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03a-docker-registry">
+                        
+                        Docker Registry (Docker HUB)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
+                        
+                        Insecure Registry
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03c-using-nexus-oss">
+                        
+                        Using Nexus OSS as insecure...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
         <input type="checkbox" id="content-Docker Networks">
         <label class="acordion-item-label" for="content-Docker Networks">
             Docker Networks
@@ -570,7 +572,7 @@
             
                 
                 <li>
-                    <a href="/posts/devops/docker/network/05-docker-network">
+                    <a href="/posts/devops/docker/network/05-silabus-docker-network">
                         
                         Networking overview
                     </a>
@@ -641,7 +643,7 @@
             
                 
                 <li>
-                    <a href="/posts/devops/docker/volume/06-docker-volume">
+                    <a href="/posts/devops/docker/volume/06-silabus-docker-volume">
                         
                         Docker Volume Overview
                     </a>
@@ -698,7 +700,7 @@
             
                 
                 <li>
-                    <a href="/posts/devops/docker/dockerfile/07-dockerfile">
+                    <a href="/posts/devops/docker/dockerfile/07-silabus-dockerfile">
                         
                         Build Docker Image Overview
                     </a>
@@ -1493,17 +1495,6 @@
 
 <!--more-->
 
-<h2 id="backend-for-docker-engine">Backend for Docker Engine</h2>
-
-<p>Untuk menggunakan docker di Windows kita perlu menggunakan virtualization, ada beberapa cara yaitu</p>
-
-<ol>
-  <li>Hyper-V (required Windows 10 Enterprise, Pro, or Education)</li>
-  <li>WSL</li>
-</ol>
-
-<p>Nah karena untuk yang Hyper-V membutuhkan Windows 10 versi mahal, jadi kita pake WSL saja ya. selain alasan tersebut juga klo menggunakan Hyper-V beberapa aplikasi Virtualization lainnya seperti VirtualBox, VmWware jadi gak bisa di jalanin. maka dari itu Docker rekomendasikan menggunakan WSL</p>
-
 <h2 id="enabled-wsl">Enabled WSL</h2>
 
 <p>Sebelum kita menginstall Docker, kita siapkan dulu Windows Subsystem for Linux menggunakan wsl dengan menggunakan PowerShell yang di jalankan dengan Adminsitration permision, kemudian jalankan perintah berikut:</p>
@@ -1806,7 +1797,7 @@
 
         
 
-  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2021-04-11T21:16:49+07:00">April 11, 2021</time></p>
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time class="dt-published" datetime="2023-07-23">July 23, 2023</time></p>
 
       </footer>
 

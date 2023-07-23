@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Using Docker on Jetbraint IDE",
+      "link": "/posts/devops/docker/context/dashboard/11e-docker-jetbraint"
+    }
+    ,
+    {
+      "title": "Dashboard using Docker Desktop",
+      "link": "/posts/devops/docker/context/dashboard/11d-docker-desktop"
+    }
+    ,
+    {
       "title": "Docker Inside Docker (DinD)",
       "link": "/posts/devops/docker/context/11c-dind"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Springboot deployment using compose file",
       "link": "/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case"
-    }
-    ,
-    {
-      "title": "Laravel deployment using compose file",
-      "link": "/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case"
-    }
-    ,
-    {
-      "title": "PHP deployment using compose file",
-      "link": "/posts/devops/docker/compose/study-cases/10a-compose-php-study-case"
     }
   ]
 }

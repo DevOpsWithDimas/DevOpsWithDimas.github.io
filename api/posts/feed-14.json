@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Laravel deployment using compose file",
+      "link": "/posts/devops/docker/compose/study-cases/10b-compose-laravel-study-case"
+    }
+    ,
+    {
+      "title": "PHP deployment using compose file",
+      "link": "/posts/devops/docker/compose/study-cases/10a-compose-php-study-case"
+    }
+    ,
+    {
       "title": "Overview of Study Cases using Docker Compose",
       "link": "/posts/devops/docker/compose/study-cases/10-overview-compose-study-case"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Dependency between services in Compose file",
       "link": "/posts/devops/docker/compose/dependency/09l-compose-depend-on"
-    }
-    ,
-    {
-      "title": "Specify custom networks in Compose file",
-      "link": "/posts/devops/docker/compose/network/09k-compose-network-specify-custom"
-    }
-    ,
-    {
-      "title": "Network links in Compose file",
-      "link": "/posts/devops/docker/compose/network/09j-compose-network-link"
     }
   ]
 }

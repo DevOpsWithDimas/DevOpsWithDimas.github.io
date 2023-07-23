@@ -327,7 +327,7 @@
     <span class="page__meta-readtime">
       <i class="far fa-clock" aria-hidden="true"></i>
       
-        2 minute read
+        1 minute read
       
     </span>
   
@@ -440,49 +440,6 @@
 
 <div class="accordion-container">
     <div class="acordion-item">
-        <input type="checkbox" id="content-Docker Registry">
-        <label class="acordion-item-label" for="content-Docker Registry">
-            Docker Registry
-        </label>
-        <div class="acordion-item-content">
-            <ul>
-            
-                
-                <li>
-                    <a href="/posts/devops/docker/registry/03a-docker-registry">
-                        
-                        Docker Registry (Docker HUB)
-                    </a>
-                </li>
-                
-                <li>
-                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
-                        
-                        Insecure Registry
-                    </a>
-                </li>
-                
-                <li>
-                    <a href="/posts/devops/docker/registry/03c-using-nexus-oss">
-                        
-                        Using Nexus OSS as insecure...
-                    </a>
-                </li>
-                
-            
-            </ul>
-        </div>
-    </div>
-</nav>
-              
-                
-                
-                
-
-
-
-<div class="accordion-container">
-    <div class="acordion-item">
         <input type="checkbox" id="content-Docker Container CLI">
         <label class="acordion-item-label" for="content-Docker Container CLI">
             Docker Container CLI
@@ -492,9 +449,9 @@
             
                 
                 <li>
-                    <a href="/posts/devops/docker/container/04-docker-cli">
+                    <a href="/posts/devops/docker/container/04-silabus-docker-container">
                         
-                        Docker CLI (Command Line In...
+                        Silabus: Docker Container
                     </a>
                 </li>
                 
@@ -561,6 +518,49 @@
 
 <div class="accordion-container">
     <div class="acordion-item">
+        <input type="checkbox" id="content-Docker Registry">
+        <label class="acordion-item-label" for="content-Docker Registry">
+            Docker Registry
+        </label>
+        <div class="acordion-item-content">
+            <ul>
+            
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03a-docker-registry">
+                        
+                        Docker Registry (Docker HUB)
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03b-insecure-registry">
+                        
+                        Insecure Registry
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/posts/devops/docker/registry/03c-using-nexus-oss">
+                        
+                        Using Nexus OSS as insecure...
+                    </a>
+                </li>
+                
+            
+            </ul>
+        </div>
+    </div>
+</nav>
+              
+                
+                
+                
+
+
+
+<div class="accordion-container">
+    <div class="acordion-item">
         <input type="checkbox" id="content-Docker Networks">
         <label class="acordion-item-label" for="content-Docker Networks">
             Docker Networks
@@ -570,7 +570,7 @@
             
                 
                 <li>
-                    <a href="/posts/devops/docker/network/05-docker-network">
+                    <a href="/posts/devops/docker/network/05-silabus-docker-network">
                         
                         Networking overview
                     </a>
@@ -641,7 +641,7 @@
             
                 
                 <li>
-                    <a href="/posts/devops/docker/volume/06-docker-volume">
+                    <a href="/posts/devops/docker/volume/06-silabus-docker-volume">
                         
                         Docker Volume Overview
                     </a>
@@ -698,7 +698,7 @@
             
                 
                 <li>
-                    <a href="/posts/devops/docker/dockerfile/07-dockerfile">
+                    <a href="/posts/devops/docker/dockerfile/07-silabus-dockerfile">
                         
                         Build Docker Image Overview
                     </a>
@@ -1502,37 +1502,24 @@
 
 <p>Untuk mac users, temen-temen diharuskan untuk memiliki spesifikasi minimum seperti berikut:</p>
 
-<ol>
-  <li>macOS must be version 10.14 or newer. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.</li>
-  <li>At least 4GB of RAM</li>
-  <li>VirtualBox prior to version 4.3.30 must not be installed as it is not compatible with Docker Desktop.</li>
-  <li>Mac hardware must be a 2010 or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode</li>
-</ol>
+<ul>
+  <li>macOS must be version <code class="language-plaintext highlighter-rouge">10.14</code> or newer. That is, Mojave, Catalina, or Big Sur. We recommend upgrading to the latest version of macOS.</li>
+  <li>At least <code class="language-plaintext highlighter-rouge">4GB</code> of RAM</li>
+  <li>Mac hardware must be a <code class="language-plaintext highlighter-rouge">2010</code> or newer model, with Intel’s hardware support for memory management unit (MMU) virtualization, including Extended Page Tables (EPT) and Unrestricted Mode</li>
+</ul>
 
 <h2 id="pengguna-windows">Pengguna Windows</h2>
 
-<p>Untuk windows users, temen-temen bisa menggunakan Hyper-V atau WSL2 sebagai virtualization linux yang dibutuhkan oleh docker, beriktu adalah spesifikasinya</p>
+<p>Untuk windows users, temen-temen perlu mengaktifkan WSL2 sebagai virtualization linux yang dibutuhkan oleh docker, berikut adalah spesifikasinya</p>
 
-<ol>
-  <li>Hyper-V backend and Windows containers
-    <ol>
-      <li>Windows 10 64-bit: <code class="language-plaintext highlighter-rouge">Pro</code>, <code class="language-plaintext highlighter-rouge">Enterprise</code>, or <code class="language-plaintext highlighter-rouge">Education</code> (<code class="language-plaintext highlighter-rouge">Build 17134</code> or higher).</li>
-      <li>64 bit processor with Second Level Address Translation (SLAT)</li>
-      <li>4GB system RAM</li>
-      <li>BIOS-level hardware virtualization support must be enabled in the BIOS settings. For more information, see Virtualization.</li>
-    </ol>
-  </li>
-  <li>WSL 2 backend
-    <ol>
-      <li>Windows 10 64-bit: <code class="language-plaintext highlighter-rouge">Home</code>, <code class="language-plaintext highlighter-rouge">Pro</code>, <code class="language-plaintext highlighter-rouge">Enterprise</code>, or <code class="language-plaintext highlighter-rouge">Education</code>, version <code class="language-plaintext highlighter-rouge">1903</code> (<code class="language-plaintext highlighter-rouge">Build 18362</code> or higher).</li>
-      <li>Enable the WSL 2 feature on Windows.</li>
-      <li>64-bit processor with Second Level Address Translation (SLAT)</li>
-      <li>4GB system RAM</li>
-      <li>BIOS-level hardware virtualization support must be enabled in the BIOS settings. For more information, see Virtualization.</li>
-      <li>Download and install the Linux kernel update package.</li>
-    </ol>
-  </li>
-</ol>
+<ul>
+  <li>Windows 10 64-bit: <code class="language-plaintext highlighter-rouge">Home</code>, <code class="language-plaintext highlighter-rouge">Pro</code>, <code class="language-plaintext highlighter-rouge">Enterprise</code>, or <code class="language-plaintext highlighter-rouge">Education</code>, version <code class="language-plaintext highlighter-rouge">1903</code> (<code class="language-plaintext highlighter-rouge">Build 18362</code> or higher).</li>
+  <li>Enable the WSL 2 feature on Windows.</li>
+  <li>64-bit processor with Second Level Address Translation (SLAT)</li>
+  <li>4GB system RAM</li>
+  <li>BIOS-level hardware virtualization support must be enabled in the BIOS settings. For more information, see Virtualization.</li>
+  <li>Download and install the Linux kernel update package.</li>
+</ul>
 
 <p>Klo saya sih, lebih merekomendasikan menggunakan WSL2 (Windows SubSystem for Linux v2).</p>
 

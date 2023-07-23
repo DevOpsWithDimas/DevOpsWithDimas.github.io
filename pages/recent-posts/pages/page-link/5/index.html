@@ -318,6 +318,165 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05f-dml-cleanup" rel="permalink">Cleanup Data from Table
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-01-08T10:49:22+07:00">January 8, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        6 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, Selain <code class="language-plaintext highlighter-rouge">INSERT</code>, <code class="language-plaintext highlighter-rouge">UPDATE</code> dan <code class="language-plaintext highlighter-rouge">DELETE</code> statement ada juga beberapa task seperti cleanup data/storage pada database PostgreSQL dengan menggunakan perintah <code class="language-plaintext highlighter-rouge">TRUNCATE</code> dan <code class="language-plaintext highlighter-rouge">VACUUM</code>.</p>
+
+<p>Ok jadi langsung aja kita bahas materi yang pertama:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps" rel="permalink">Study Cases: Monolith apps (Laravel Web MVC)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-12-19T21:25:03+07:00">December 19, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        21 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi study cases untuk Pod dan Container specification kita coba create, and build  aplikasi monolith dengan framework Laravel Web MVC (Model View Controller) dengan architecture seperti berikut:</p>
+
+<p><img src="/resources/posts/kubernetes/04a-study-cases-monolith-apps/monolith-architecture.png" alt="architecture mvc" /></p>
+
+<p>Mengapa kita membahas ini, seperti yang temen-temen ketahui hampir <code class="language-plaintext highlighter-rouge">85%</code> aplikasi yang ada masih menggunakan architecture tersebut, mungkin dari beberapa temen-temen pernah mengalami begitu aplikasi tersebut diakses secara public atau banyak orang mengakases aplikasi terasa lambat dalam mereseponse atau tiba-tiba mati (downtime) hal ini penyebabnya bisa macam-macam tapi salah satu penyebabnya adalah server tidak mampu menghandle request yang masuk sehingga menyebabkan performa dari aplikasi menurun.</p>
+
+<p>Sebetulnya ada banyak solusi dari masalah tersebut, misalnya</p>
+
+<ol>
+  <li>Replikasi aplikasi</li>
+  <li>Cloning server (node) baik berbentuk virtual maupun physical</li>
+</ol>
+
+<p>Kubernetes memprovide solusi terserbut dengan High Availablity, Self Healing, Auto scaling dan lain-lain. So jadi kita akan migrasikan aplikasi terserbut supaya bisa jalan di atas kubernetes dengan tujuan untuk memudahkan di maintanance secara operational, mudah di scale up and down serta meningkatkan zero down time. Adapun step by step yang akan kita lakukan adalah</p>
+
+<ol>
+  <li>Develop aplikasi</li>
+  <li>Containerize apps</li>
+  <li>Deploy to Kubernetes
+    <ol>
+      <li>Running as a Pod</li>
+      <li>Specify resource request and limit</li>
+      <li>Using configmap and secret for connect to a database</li>
+      <li>Using initContainer to migrate db</li>
+      <li>Specify container probes (health check)</li>
+    </ol>
+  </li>
+</ol>
+
+<p>Ok tanpa berlama-lama yuk langsung aja ke pembahasan yang pertama.</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases" rel="permalink">Overview Study Cases: Pod and Containers
 </a>
       
@@ -520,173 +679,6 @@
 </ol>
 
 <p>Ok tanpa berlama-lama kita bahas kemateri yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete" rel="permalink">Deep dive into DELETE statement
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      PostgreSQL
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-10-08T19:00:23+07:00">October 8, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        4 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, Setelah kita membahas tentang Update statement perintah selanjutnya yang kita perlu perlajari untuk menghapus data pada suatu tabel yaitu <code class="language-plaintext highlighter-rouge">DELETE</code> statement. Terkiat perintah delete yang temen-temen telah pelajari sebelumnya hanya sekilas saja sebetulnya secara mendetail perintah delete seperti berikut:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">[</span> <span class="k">WITH</span> <span class="p">[</span> <span class="k">RECURSIVE</span> <span class="p">]</span> <span class="n">with_query</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
-<span class="k">DELETE</span> <span class="k">FROM</span> <span class="p">[</span> <span class="k">ONLY</span> <span class="p">]</span> <span class="k">table_name</span> <span class="p">[</span> <span class="o">*</span> <span class="p">]</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
-    <span class="p">[</span> <span class="k">USING</span> <span class="n">from_item</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
-    <span class="p">[</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="o">|</span> <span class="k">WHERE</span> <span class="k">CURRENT</span> <span class="k">OF</span> <span class="k">cursor_name</span> <span class="p">]</span>
-    <span class="p">[</span> <span class="n">RETURNING</span> <span class="o">*</span> <span class="o">|</span> <span class="n">output_expression</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="n">output_name</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span></code></pre></figure>
-
-<p>Jika temen-temen perhatikan ada beberapa feature dan yang kita bisa gunakan seperti:</p>
-
-<ol>
-  <li>Delete with <code class="language-plaintext highlighter-rouge">USING from_item</code> clause</li>
-  <li>Delete using <code class="language-plaintext highlighter-rouge">RETURNING</code></li>
-  <li>Delete using WITH queries</li>
-</ol>
-
-<p>Ok tanpa berlama-lama jadi lansung aja bahas materi yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05c-dml-update" rel="permalink">Deep dive into UPDATE Statement
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      PostgreSQL
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-10-03T21:57:19+07:00">October 3, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        10 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, setelah kita membahas Insert Statement perintah selanjutnya yang kita perlu perlajari adalah merubah data pada suatu tabel dengan menggunakan perintah <code class="language-plaintext highlighter-rouge">UPDATE</code> statement. Seperti yang temen-temen telah pelajari Perintah <code class="language-plaintext highlighter-rouge">UPDATE</code> statement yang telah bahas sebelumnya masih hal yang simple, sebetulnya secara syntax perintahnya seperti berikut:</p>
-
-<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="p">[</span> <span class="k">WITH</span> <span class="p">[</span> <span class="k">RECURSIVE</span> <span class="p">]</span> <span class="n">with_query</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
-<span class="k">UPDATE</span> <span class="p">[</span> <span class="k">ONLY</span> <span class="p">]</span> <span class="k">table_name</span> <span class="p">[</span> <span class="o">*</span> <span class="p">]</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="k">alias</span> <span class="p">]</span>
-    <span class="k">SET</span> <span class="p">{</span> <span class="k">column_name</span> <span class="o">=</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="o">|</span>
-          <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">[</span> <span class="k">ROW</span> <span class="p">]</span> <span class="p">(</span> <span class="p">{</span> <span class="n">expression</span> <span class="o">|</span> <span class="k">DEFAULT</span> <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">|</span>
-          <span class="p">(</span> <span class="k">column_name</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="o">=</span> <span class="p">(</span> <span class="n">sub</span><span class="o">-</span><span class="k">SELECT</span> <span class="p">)</span>
-        <span class="p">}</span> <span class="p">[,</span> <span class="p">...]</span>
-    <span class="p">[</span> <span class="k">FROM</span> <span class="n">from_item</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span>
-    <span class="p">[</span> <span class="k">WHERE</span> <span class="n">condition</span> <span class="o">|</span> <span class="k">WHERE</span> <span class="k">CURRENT</span> <span class="k">OF</span> <span class="k">cursor_name</span> <span class="p">]</span>
-    <span class="p">[</span> <span class="n">RETURNING</span> <span class="o">*</span> <span class="o">|</span> <span class="n">output_expression</span> <span class="p">[</span> <span class="p">[</span> <span class="k">AS</span> <span class="p">]</span> <span class="n">output_name</span> <span class="p">]</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">]</span></code></pre></figure>
-
-<p>Nah jadi jika kita perhatikan ada beberapa clause yang kita bisa digunakan diantaranya:</p>
-
-<ol>
-  <li>UPDATE using <code class="language-plaintext highlighter-rouge">DEFAULT</code> value clause</li>
-  <li>UPDATE using sub-SELECT clause</li>
-  <li>UPDATE using column-list syntax</li>
-  <li>UPDATE using <code class="language-plaintext highlighter-rouge">WITH</code> clause</li>
-  <li>UPDATE using <code class="language-plaintext highlighter-rouge">FROM</code> clause</li>
-  <li>UPDATE using <code class="language-plaintext highlighter-rouge">RETURNING</code> clause</li>
-</ol>
-
-<p>Nah jadi akan lebih enak jika kita break-down untuk pembahasanya masing-masing feature tersebut.</p>
 
 </span>
       

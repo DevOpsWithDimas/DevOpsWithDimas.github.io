@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Build Docker Image Overview",
+      "link": "/posts/devops/docker/dockerfile/07-silabus-dockerfile"
+    }
+    ,
+    {
+      "title": "Share data among machines",
+      "link": "/posts/devops/docker/volume/06e-share-data-among-machines"
+    }
+    ,
+    {
       "title": "Share data among containers",
       "link": "/posts/devops/docker/volume/06c-share-data-among-containers"
     }
@@ -18,7 +28,7 @@
     ,
     {
       "title": "Docker Volume Overview",
-      "link": "/posts/devops/docker/volume/06-docker-volume"
+      "link": "/posts/devops/docker/volume/06-silabus-docker-volume"
     }
     ,
     {
@@ -39,16 +49,6 @@
     {
       "title": "Use user-defined bridge networks",
       "link": "/posts/devops/docker/network/05c-docker-user-defined-briged-network"
-    }
-    ,
-    {
-      "title": "Use default bridge networks",
-      "link": "/posts/devops/docker/network/05b-docker-bridge-network"
-    }
-    ,
-    {
-      "title": "Legacy feature of Docker Network - Container Links",
-      "link": "/posts/devops/docker/network/05a-connect-to-other-container-use-link"
     }
   ]
 }

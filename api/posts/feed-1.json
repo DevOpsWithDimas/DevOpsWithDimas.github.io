@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "How to install Docker on Windows 10 with WSL",
+      "link": "/posts/devops/docker/basic/02a-install-on-windows10-wls"
+    }
+    ,
+    {
+      "title": "Silabus: Docker Container",
+      "link": "/posts/devops/docker/container/04-silabus-docker-container"
+    }
+    ,
+    {
       "title": "Docker overview",
       "link": "/posts/devops/docker/basic/01b-docker-overview"
     }
@@ -39,16 +49,6 @@
     {
       "title": "What is Continues Integration/Continues Delivery (CI/CD)?",
       "link": "/posts/git/gitlab/gitlab-ci/03a-what-is-cicd"
-    }
-    ,
-    {
-      "title": "Silabus Gitlab CI: Pemula s/d Mahir",
-      "link": "/posts/git/gitlab/gitlab-ci/03-silabus-gitlab-ci"
-    }
-    ,
-    {
-      "title": "Working with Deployment object",
-      "link": "/posts/devops/orchestration/kubernetes/workloads/05b-deployment"
     }
   ]
 }

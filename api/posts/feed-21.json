@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Using Nexus OSS as insecure registry",
+      "link": "/posts/devops/docker/registry/03c-using-nexus-oss"
+    }
+    ,
+    {
       "title": "Insecure Registry",
       "link": "/posts/devops/docker/registry/03b-insecure-registry"
     }
@@ -24,11 +29,6 @@
     {
       "title": "How to install Docker on Linux CentOS",
       "link": "/posts/devops/docker/basic/02b-install-on-linux-centos"
-    }
-    ,
-    {
-      "title": "How to install Docker on Windows 10 with WSL",
-      "link": "/posts/devops/docker/basic/02a-install-on-windows10-wls"
     }
     ,
     {

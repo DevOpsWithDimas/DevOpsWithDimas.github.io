@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Specify custom networks in Compose file",
+      "link": "/posts/devops/docker/compose/network/09k-compose-network-specify-custom"
+    }
+    ,
+    {
+      "title": "Network links in Compose file",
+      "link": "/posts/devops/docker/compose/network/09j-compose-network-link"
+    }
+    ,
+    {
       "title": "Networking Overview in Compose file",
       "link": "/posts/devops/docker/compose/network/09i-compose-network-overview"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Overview of docker-compose CLI",
       "link": "/posts/devops/docker/compose/09b-compose-cli"
-    }
-    ,
-    {
-      "title": "Get started with Docker Compose",
-      "link": "/posts/devops/docker/compose/09a-compose-getting-started"
-    }
-    ,
-    {
-      "title": "Overview of Docker Compose",
-      "link": "/posts/devops/docker/compose/09-docker-compose-overview"
     }
   ]
 }

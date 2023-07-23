@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "What is Git SCM",
+      "link": "/posts/git/version-control/01a-what-is-git"
+    }
+    ,
+    {
+      "title": "Pengenalan Version Control",
+      "link": "/posts/git/version-control/01-introduction-version-control"
+    }
+    ,
+    {
       "title": "Combining Queries (UNION, INTERSECT, EXCEPT)",
       "link": "/posts/rdbms/postgresql/sql/select/04e-combining-queries"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Overview of Programming Languages",
       "link": "/posts/language/java/01a-programming-language-overview"
-    }
-    ,
-    {
-      "title": "Queries inside a query (subquery)",
-      "link": "/posts/rdbms/postgresql/sql/select/04c-subquery"
-    }
-    ,
-    {
-      "title": "Initialization of Containers",
-      "link": "/posts/devops/orchestration/kubernetes/pods/03e-init-containers"
     }
   ]
 }

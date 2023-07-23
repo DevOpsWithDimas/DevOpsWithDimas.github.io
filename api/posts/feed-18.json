@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "User, Volumes and Working Directory",
+      "link": "/posts/devops/docker/dockerfile/07j-dockerfile-user-workdir"
+    }
+    ,
+    {
+      "title": "Exposing Ports",
+      "link": "/posts/devops/docker/dockerfile/07i-dockerfile-expose"
+    }
+    ,
+    {
       "title": "CMD vs ENTRYPOINT?",
       "link": "/posts/devops/docker/dockerfile/07h-dockerfile-cmd-vs-entrypoint"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Usage docker build",
       "link": "/posts/devops/docker/dockerfile/07a-usage-docker-build"
-    }
-    ,
-    {
-      "title": "Build Docker Image Overview",
-      "link": "/posts/devops/docker/dockerfile/07-dockerfile"
-    }
-    ,
-    {
-      "title": "Share data among machines",
-      "link": "/posts/devops/docker/volume/06e-share-data-among-machines"
     }
   ]
 }

@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Install minikube for Windows 11/10 Users",
+      "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-windows"
+    }
+    ,
+    {
+      "title": "Install PostgreSQL for Windows users",
+      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows"
+    }
+    ,
+    {
       "title": "Install minikube on Mac (Apple silicon Chip)",
       "link": "/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Silabus - PostgreSQL: Pemula sampai Mahir",
       "link": "/posts/rdbms/postgresql/01-silabus-psql"
-    }
-    ,
-    {
-      "title": "Overview learning environment with Minikube",
-      "link": "/posts/devops/orchestration/kubernetes/02-overview-learn-env"
-    }
-    ,
-    {
-      "title": "Kubernetes cluster environtments",
-      "link": "/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments"
     }
   ]
 }

@@ -2,6 +2,16 @@
   "pages": [
     
     {
+      "title": "Springboot - where data such as files/images we stored?",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08e-build-springboot-upload-file"
+    }
+    ,
+    {
+      "title": "Springboot - using Environtment",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env"
+    }
+    ,
+    {
       "title": "Build docker image for spring-boot",
       "link": "/posts/devops/docker/dockerfile/study-cases/08c-build-springboot"
     }
@@ -39,16 +49,6 @@
     {
       "title": "Health Check Instruction",
       "link": "/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck"
-    }
-    ,
-    {
-      "title": "User, Volumes and Working Directory",
-      "link": "/posts/devops/docker/dockerfile/07j-dockerfile-user-workdir"
-    }
-    ,
-    {
-      "title": "Exposing Ports",
-      "link": "/posts/devops/docker/dockerfile/07i-dockerfile-expose"
     }
   ]
 }
