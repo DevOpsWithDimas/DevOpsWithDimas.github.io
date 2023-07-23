@@ -1,10 +1,8 @@
 ---
-
-title: "Using Nexus OSS as insecure registry"
-date: 2021-04-24T16:45:03+07:00
 lang: docker
-authors:
-- dimasm93
+catalog_key: docker-registry
+title: "Using Nexus OSS as insecure registry"
+date: 2021-04-24T20:45:03+07:00
 categories:
 - DevOps
 - Docker
@@ -12,9 +10,8 @@ categories:
 refs: 
 - https://help.sonatype.com/repomanager3/installation
 - https://help.sonatype.com/repomanager3/system-requirements
-youtube: prAwBAdQpk4
+youtube:
 comments: true
-catalog_key: docker-registry
 image_path: /resources/posts/docker/03b-private-registry
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []

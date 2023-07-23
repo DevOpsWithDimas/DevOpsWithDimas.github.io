@@ -1,10 +1,8 @@
 ---
-
-title: "Insecure Registry"
-date: 2021-04-24T16:44:03+07:00
 lang: docker
-authors:
-- dimasm93
+catalog_key: docker-registry
+title: "Insecure Registry"
+date: 2021-04-24T19:44:03+07:00
 categories:
 - DevOps
 - Docker
@@ -16,15 +14,15 @@ refs:
 - https://docs.gitlab.com/ce/user/packages/container_registry/
 - https://docs.github.com/en/packages/guides/about-github-container-registry
 - https://www.redhat.com/en/technologies/cloud-computing/openshift-data-foundation
-youtube: -FSutpLEEWc
+youtube: 
 comments: true
-catalog_key: docker-registry
 image_path: /resources/posts/docker/03b-private-registry
 gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---
 
 Hai semuanya, sebelumnya kita sudah memahami apa itu Docker Registry, sekarang kita akan membahas tentang Insecure Registry. 
+
 Nah yang jadi pertanyaaan **apa itu Insecure Registry?**. Insecure Registry sama halnya dengan [Docker Hub](https://hub.docker.com/) yaitu bertujuan menyimpan docker images tetapi disini insecure registry lebih flexible artinya kita bisa tentukan mulai dari lokasi registry (on-premise, cloud), private atau public docker repository dan lain-lain. Adapun materi yang akan kita bahas kali ini yaitu
 
 1. Macam-Macam Provider Insecure Registry
