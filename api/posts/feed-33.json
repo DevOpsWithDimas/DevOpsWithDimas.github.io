@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Database Interaction dengan SQL",
+      "link": "/posts/rdbms/oracle18c/002c-interaction-oracle-database-sql"
+    }
+    ,
+    {
       "title": "Interface untuk Oracle Database",
       "link": "/posts/rdbms/oracle18c/002b-interface-for-oracle-database"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Group By dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/06-hql-group-by"
-    }
-    ,
-    {
-      "title": "Combine Predicate dengan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/05i-hql-combine-predicate"
     }
   ]
 }

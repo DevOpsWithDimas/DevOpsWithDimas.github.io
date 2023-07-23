@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Hibernate ORM Relationship Mapping",
+      "link": "/posts/framework/java/orm/hibernate/mapping/03-hibernate-mapping"
+    }
+    ,
+    {
       "title": "Time is your practice",
       "link": "/posts/framework/java/orm/hibernate/basic/02i-quis-1"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Persiapan untuk Deploy Java Webapp",
       "link": "/posts/language/java/web/jsp/031-instal-webserver-tomcat8"
-    }
-    ,
-    {
-      "title": "CRUD menggunakan Hibernate",
-      "link": "/posts/framework/java/orm/hibernate/basic/02e-crud-jpa-hibernate"
     }
   ]
 }

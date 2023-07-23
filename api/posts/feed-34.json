@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Combine Predicate dengan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/05i-hql-combine-predicate"
+    }
+    ,
+    {
       "title": "Not Predicate dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/05h-hql-not-predicate"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Predicates / Conditional Expressions dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/05-hql-predicates"
-    }
-    ,
-    {
-      "title": "Coalesce & NullIF menggunakan HQL",
-      "link": "/posts/framework/java/orm/hibernate/hql/04i-hql-nullif-coalesce"
     }
   ]
 }

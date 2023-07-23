@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "What is Docker Registry?",
+      "link": "/posts/devops/docker/registry/03a-what-is-registry"
+    }
+    ,
+    {
       "title": "How to install Docker on Windows 10 with WSL",
       "link": "/posts/devops/docker/basic/02a-install-on-windows10-wls"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Settings up Gitlab CI (on-premise)",
       "link": "/posts/git/gitlab/gitlab-ci/03c-setup-gitlab-ci"
-    }
-    ,
-    {
-      "title": "Introduction of Gitlab DevSecOps Platform",
-      "link": "/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci"
     }
   ]
 }

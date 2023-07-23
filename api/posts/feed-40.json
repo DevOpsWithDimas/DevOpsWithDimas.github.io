@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Event Listeners using Servlet Context Level",
+      "link": "/posts/language/java/web/servlet/018-event-listener-using-servlet-context-level"
+    }
+    ,
+    {
       "title": "Logging incomming request dengan Servlet Filter",
       "link": "/posts/language/java/web/servlet/017-logging-incomming-request-servlet-filter"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Memahami Struktur Project dengan maven-archetype-webapp",
       "link": "/posts/language/java/web/servlet/009-structure-project-maven-archetype-webapp"
-    }
-    ,
-    {
-      "title": "Membuat project Java Web dengan Apache Maven",
-      "link": "/posts/language/java/web/servlet/008-create-project-java-web"
     }
   ]
 }

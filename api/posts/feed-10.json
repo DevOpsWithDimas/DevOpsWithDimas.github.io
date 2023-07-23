@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Deploying an apps/services into Kubernetes",
+      "link": "/posts/devops/orchestration/kubernetes/02b-deploy-application"
+    }
+    ,
+    {
       "title": "Install minikube for Linux users",
       "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-linux"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Architecture of PostgreSQL Database",
       "link": "/posts/rdbms/postgresql/01b-postgresql-architecture"
-    }
-    ,
-    {
-      "title": "Overview of PostgreSQL Database",
-      "link": "/posts/rdbms/postgresql/01a-what-is-postgresql"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Multiple Stage Builds",
+      "link": "/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages"
+    }
+    ,
+    {
       "title": "Health Check Instruction",
       "link": "/posts/devops/docker/dockerfile/07k-dockerfile-healthcheck"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Environtment Replacement",
       "link": "/posts/devops/docker/dockerfile/07c-dockerfile-env"
-    }
-    ,
-    {
-      "title": "FROM Instruction",
-      "link": "/posts/devops/docker/dockerfile/07b-dockerfile-from-instruction"
     }
   ]
 }

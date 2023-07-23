@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Mengenal Transactional dengan JDBC",
+      "link": "/posts/language/java/jdbc/09-transactional"
+    }
+    ,
+    {
       "title": "Mengenal class ResultSet",
       "link": "/posts/language/java/jdbc/08-resultset"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Time to your practice part 5",
       "link": "/posts/language/java/arrays/18-quis-section-5"
-    }
-    ,
-    {
-      "title": "Why Use Generics?",
-      "link": "/posts/language/java/arrays/17-generics"
     }
   ]
 }

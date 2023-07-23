@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Pemberian alias pada column dan table",
+      "link": "/posts/rdbms/oracle18c/005a-select-alias-column-table"
+    }
+    ,
+    {
       "title": "Select Statement dalam SQL",
       "link": "/posts/rdbms/oracle18c/005-select-statement"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Persiapan install Oracle Database 18c",
       "link": "/posts/rdbms/oracle18c/003-pre-install-oracledb"
-    }
-    ,
-    {
-      "title": "Database Interaction dengan SQL",
-      "link": "/posts/rdbms/oracle18c/002c-interaction-oracle-database-sql"
     }
   ]
 }

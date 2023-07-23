@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Time is your Practice",
+      "link": "/posts/framework/java/orm/hibernate/mapping/03j-quis-2"
+    }
+    ,
+    {
       "title": "Collections Mapping",
       "link": "/posts/framework/java/orm/hibernate/mapping/03i-collections-mapping"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Mapping Enum Ordinal & String",
       "link": "/posts/framework/java/orm/hibernate/mapping/03a-mapping-enumeration"
-    }
-    ,
-    {
-      "title": "Hibernate ORM Relationship Mapping",
-      "link": "/posts/framework/java/orm/hibernate/mapping/03-hibernate-mapping"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "DML - Merge Statement di Oracle",
+      "link": "/posts/rdbms/oracle18c/014d-dml-merge"
+    }
+    ,
+    {
       "title": "DML - Delete Statement di Oracle",
       "link": "/posts/rdbms/oracle18c/014c-dml-delete"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Sub Query Inline View di Oracle",
       "link": "/posts/rdbms/oracle18c/011i-subquery-inline-view"
-    }
-    ,
-    {
-      "title": "Pairwise Sub Query di Oracle",
-      "link": "/posts/rdbms/oracle18c/011h-subquery-multi-columns"
     }
   ]
 }

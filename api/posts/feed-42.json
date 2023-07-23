@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Function di JavaScript",
+      "link": "/posts/language/web/js/09-function-js"
+    }
+    ,
+    {
       "title": "Perulangan atau Looping dengan JavaScript",
       "link": "/posts/language/web/js/08-loop-js"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Batch processing dengan JDBC",
       "link": "/posts/language/java/jdbc/010-batch"
-    }
-    ,
-    {
-      "title": "Mengenal Transactional dengan JDBC",
-      "link": "/posts/language/java/jdbc/09-transactional"
     }
   ]
 }

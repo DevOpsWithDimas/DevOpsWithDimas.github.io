@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Pairwise Sub Query di Oracle",
+      "link": "/posts/rdbms/oracle18c/011h-subquery-multi-columns"
+    }
+    ,
+    {
       "title": "Sub Query EXIST Predicates di Oracle",
       "link": "/posts/rdbms/oracle18c/011g-subquery-exists-predicate"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Self Join di Oracle",
       "link": "/posts/rdbms/oracle18c/010e-self-join"
-    }
-    ,
-    {
-      "title": "Outer Join di Oracle",
-      "link": "/posts/rdbms/oracle18c/010d-outer-join"
     }
   ]
 }

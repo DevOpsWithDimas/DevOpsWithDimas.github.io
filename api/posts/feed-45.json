@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Object Oriented Approach di Java8",
+      "link": "/posts/language/java/oop/11a-konsep-oop"
+    }
+    ,
+    {
       "title": "Object oriented dengan Java class",
       "link": "/posts/language/java/oop/11-class-oop"
     }
@@ -44,11 +49,6 @@
     {
       "title": "WHILE dan DO-WHILE statement",
       "link": "/posts/language/java/control/06b-while-statement"
-    }
-    ,
-    {
-      "title": "For statement #2",
-      "link": "/posts/language/java/control/06a-for-statement-2"
     }
   ]
 }

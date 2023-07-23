@@ -318,6 +318,82 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class" rel="permalink">Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/nutanix-ahv" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Nutanix AHV for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2023-02-05T12:00:40+07:00">February 5, 2023</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        4 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, selamat datang di kelas ‘SRE - Nutanix AHV untuk Pemula sampai Mahir’ di section pertama kali ini kita akan membahas technology yang biasanya digunakan oleh team Infra/Operation yaitu Hyperconverged Infrastructure.</p>
+
+<p>Nah dengan kecanggihan teknology jaman sekarang, technologies dapat membantu mendorong kemajuan suatu perusahan dalam meningkatan performa dalam menentukan goals. Selain itu juga dengan technology perusahaan dapat menentukan flexibility, choice, agility, and cost efficiency supaya memastikan bahwa perusahaan tersebut bisa competitive in the marketplace and innovate, bringing new services and products to their customers faster than ever.</p>
+
+<p>Okay untuk memenuhi semua tantangan tersebut, jadi kita akan membahas dari yang funamental yaitu The Nutanix Cloud Fundamental cource, it designed for familiarize the features, components and capabilities of Nutanix cluster as if this was your first week on the job with a freshly installed Nutanix cluster. Sebelum kita mulai practice lab dengan Nutanix cluster kita akan bahas dulu</p>
+
+<ol>
+  <li>What is Nutanix?</li>
+  <li>What we can do with Nutanix?</li>
+  <li>Why Nutanix?</li>
+</ol>
+
+<p>Okay tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/cloud-computing/nutanix/ahv/00-silabus-nutanix-ahv" rel="permalink">Silabus SRE - Nutanix AHV: Pemula sampai Mahir
 </a>
       
@@ -587,90 +663,6 @@
 </ol>
 
 <p>Ok tanpa berlama-lama yuk langsung aja kita bahas materi yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control" rel="permalink">Overview of Concurrency Control
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      PostgreSQL
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2023-01-14T16:05:01+07:00">January 14, 2023</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        1 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, setelah kita mempelajari perintah Select statement, dan Data Manipulation language ada satuhal lagi yang kita perlu kita pelajari yaitu Concurrent Control. Conncurrent control ini berfungsi untuk Mengatur behavior dari Database Server terkait multiple access seperti multiple query, transaction, multiple session execute at the same time on same database.</p>
-
-<p>Jika pada materi sebelumnya kita hanya menggunakan simple query dan di execute secara singleton. Bagaimana jika saya memiliki contoh ilustrasi seperti berikut:</p>
-
-<p><img src="/resources/posts/postgresql/06-overview-concurrent-control/bisnis-logic-transfer.png" alt="flow-bisnis-transaction" /></p>
-
-<p>Jadi pada contoh kasus tersebut, kita memiliki system untuk transfer saldo dari rekening A ke rekening B. Jika kita gambarkan yang pasti kita harus melakukan beberapa query dan harus memiliki suatu mekanisme jika suatu proses tersebut gagal. Dimana query kita execute minimal adalah</p>
-
-<ol>
-  <li>Inquery rekening tujuan</li>
-  <li>Inquery saldo rekening sumber</li>
-  <li>Update saldo rekening A dengan menggurangi sejumlah yang di transfer</li>
-  <li>Update saldo rekening B dengan menambah sejumlah yang di transfer</li>
-  <li>Insert Data transaksi ke tabel journal</li>
-</ol>
-
-<p>Jika pada saat proses no 4 gagal, bisa di banyangkan apa yang terjadi???</p>
-
-<p>Yup betul saldo rekening A kok berkurang tapi saldo di rekening tujuan tidak bertambah trus kemana uangnya?. maka dari itu proses tersebut harus dihandle dengan system transaction seperti <code class="language-plaintext highlighter-rouge">commit</code>, <code class="language-plaintext highlighter-rouge">rollback</code> dan lain-lain.</p>
-
-<p>Nah system transaction tersebut adalah bagian dari Concurrent Control, Jadi kita akan bahas lebih detail seperti berikut:</p>
 
 </span>
       

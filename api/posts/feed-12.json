@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "What is Kubernetes (k8s) ?",
+      "link": "/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes"
+    }
+    ,
+    {
       "title": "Silabus - DevOps Kubernetes: Pemula sampai Mahir",
       "link": "/posts/devops/orchestration/kubernetes/01-silabus"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Overview of Study Cases using docker for CI",
       "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12-overview-docker-for-ci"
-    }
-    ,
-    {
-      "title": "Deprecated Engine Features",
-      "link": "/posts/devops/docker/context/11g-deprecated-features"
     }
   ]
 }

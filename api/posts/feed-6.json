@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Overview of Java Programming",
+      "link": "/posts/language/java/01b-java-programming-overview"
+    }
+    ,
+    {
       "title": "Overview of Programming Languages",
       "link": "/posts/language/java/01a-programming-language-overview"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Overview Pod and Container in Kubernetes",
       "link": "/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers"
-    }
-    ,
-    {
-      "title": "Joined Tables",
-      "link": "/posts/rdbms/postgresql/sql/select/04b-join-tables"
     }
   ]
 }

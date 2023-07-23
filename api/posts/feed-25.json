@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "DDL - Foreign Key Constraint dengan Options",
+      "link": "/posts/rdbms/oracle18c/016m-constraint-foreign-key-cascade-options"
+    }
+    ,
+    {
       "title": "DDL - Foreign Key Constraint",
       "link": "/posts/rdbms/oracle18c/016l-constraint-foreign-key"
     }
@@ -44,11 +49,6 @@
     {
       "title": "DDL - Menghapus table dengan DROP",
       "link": "/posts/rdbms/oracle18c/016d-ddl-drop-table"
-    }
-    ,
-    {
-      "title": "DDL - Merubah struktur table",
-      "link": "/posts/rdbms/oracle18c/016c-ddl-alter-table"
     }
   ]
 }

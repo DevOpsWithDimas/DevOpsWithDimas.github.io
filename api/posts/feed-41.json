@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Membuat project Java Web dengan Apache Maven",
+      "link": "/posts/language/java/web/servlet/008-create-project-java-web"
+    }
+    ,
+    {
       "title": "Pengenalan Pemograman Client Side dengan JS",
       "link": "/posts/language/java/web/servlet/005-pengenalan-js"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Array di JavaScript",
       "link": "/posts/language/web/js/10-array-js"
-    }
-    ,
-    {
-      "title": "Function di JavaScript",
-      "link": "/posts/language/web/js/09-function-js"
     }
   ]
 }

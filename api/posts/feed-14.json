@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Angular deployment using compose file",
+      "link": "/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case"
+    }
+    ,
+    {
       "title": "Springboot deployment using compose file",
       "link": "/posts/devops/docker/compose/study-cases/10c-compose-springboot-study-case"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Using profiles with Compose file",
       "link": "/posts/devops/docker/compose/workflows/09n-compose-using-profile"
-    }
-    ,
-    {
-      "title": "Build docker image using Compose file",
-      "link": "/posts/devops/docker/compose/build/09m-compose-build-image"
     }
   ]
 }

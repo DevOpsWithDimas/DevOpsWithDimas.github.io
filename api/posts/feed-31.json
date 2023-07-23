@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "In Predicates pada klausa where di Oracle",
+      "link": "/posts/rdbms/oracle18c/006e-in-predicate"
+    }
+    ,
+    {
       "title": "Null Conditions pada klausa where di Oracle",
       "link": "/posts/rdbms/oracle18c/006d-null-predicate"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Operation Arithmetic di Oracle",
       "link": "/posts/rdbms/oracle18c/005b-select-arithmetic"
-    }
-    ,
-    {
-      "title": "Pemberian alias pada column dan table",
-      "link": "/posts/rdbms/oracle18c/005a-select-alias-column-table"
     }
   ]
 }

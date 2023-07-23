@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Compose file specification and syntax",
+      "link": "/posts/devops/docker/compose/09c-syntax-compose-file"
+    }
+    ,
+    {
       "title": "Overview of docker-compose CLI",
       "link": "/posts/devops/docker/compose/09b-compose-cli"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Angular - Access Rest API",
       "link": "/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api"
-    }
-    ,
-    {
-      "title": "Build docker image for Angular Project",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08g-build-angular-project"
     }
   ]
 }

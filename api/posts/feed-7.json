@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Joined Tables",
+      "link": "/posts/rdbms/postgresql/sql/select/04b-join-tables"
+    }
+    ,
+    {
       "title": "Managing a machines in docker-machine",
       "link": "/posts/devops/docker/machine/13c-managed-machines"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Single Row / Group functions",
       "link": "/posts/rdbms/postgresql/sql/select/04a-single-group-function"
-    }
-    ,
-    {
-      "title": "Deep dive into Select Statements",
-      "link": "/posts/rdbms/postgresql/sql/select/04-overview-more-select-statements"
     }
   ]
 }

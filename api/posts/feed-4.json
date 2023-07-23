@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Setup Ansible Control and Managed Nodes",
+      "link": "/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment"
+    }
+    ,
+    {
       "title": "IT Automation Platform for Docker Operations",
       "link": "/posts/devops/docker/14a-it-automation-platform"
     }
@@ -44,11 +49,6 @@
     {
       "title": "How to Install git on Linux",
       "link": "/posts/git/version-control/01b-install-git-linux"
-    }
-    ,
-    {
-      "title": "How to Install git on Windows",
-      "link": "/posts/git/version-control/01b-install-git-windows"
     }
   ]
 }

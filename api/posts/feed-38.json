@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "CRUD menggunakan Hibernate",
+      "link": "/posts/framework/java/orm/hibernate/basic/02e-crud-jpa-hibernate"
+    }
+    ,
+    {
       "title": "Basic Annotation pada Hibernate",
       "link": "/posts/framework/java/orm/hibernate/basic/02d-hibernate-annotation-basic"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Konsep Model View Controller (MVC) design pattern",
       "link": "/posts/language/java/web/jsp/029-konsep-mvc-java-web"
-    }
-    ,
-    {
-      "title": "Static Resources with WebJars",
-      "link": "/posts/language/java/web/jsp/028-static-resources-with-webjar"
     }
   ]
 }

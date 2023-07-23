@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Access your apps/service in minikube",
+      "link": "/posts/devops/orchestration/kubernetes/02g-minikube-access-apps"
+    }
+    ,
+    {
       "title": "Minikube addons features",
       "link": "/posts/devops/orchestration/kubernetes/02f-minikube-addons"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Minikube basic control",
       "link": "/posts/devops/orchestration/kubernetes/02c-minikube-basic-control"
-    }
-    ,
-    {
-      "title": "Deploying an apps/services into Kubernetes",
-      "link": "/posts/devops/orchestration/kubernetes/02b-deploy-application"
     }
   ]
 }

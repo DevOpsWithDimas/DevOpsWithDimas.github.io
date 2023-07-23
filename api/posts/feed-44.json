@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Why Use Generics?",
+      "link": "/posts/language/java/arrays/17-generics"
+    }
+    ,
+    {
       "title": "Perulangan for untuk Array, List, Set dan Map",
       "link": "/posts/language/java/arrays/16-foreach"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Mengenal lebih jauh tentang inheritance",
       "link": "/posts/language/java/oop/11b-inheritance-java"
-    }
-    ,
-    {
-      "title": "Object Oriented Approach di Java8",
-      "link": "/posts/language/java/oop/11a-konsep-oop"
     }
   ]
 }

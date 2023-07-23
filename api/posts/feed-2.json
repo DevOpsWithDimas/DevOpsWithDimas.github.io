@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Introduction of Gitlab DevSecOps Platform",
+      "link": "/posts/git/gitlab/gitlab-ci/03b-introduction-gitlab-ci"
+    }
+    ,
+    {
       "title": "What is Continues Integration/Continues Delivery (CI/CD)?",
       "link": "/posts/git/gitlab/gitlab-ci/03a-what-is-cicd"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Getting started with Transaction Control (TCL)",
       "link": "/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"
-    }
-    ,
-    {
-      "title": "Overview of Concurrency Control",
-      "link": "/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control"
     }
   ]
 }

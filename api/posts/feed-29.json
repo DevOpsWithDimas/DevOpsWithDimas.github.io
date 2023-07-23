@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Outer Join di Oracle",
+      "link": "/posts/rdbms/oracle18c/010d-outer-join"
+    }
+    ,
+    {
       "title": "Inner Join di Oracle",
       "link": "/posts/rdbms/oracle18c/010c-inner-join"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Null-Related Single Row Function",
       "link": "/posts/rdbms/oracle18c/008f-null-related-function"
-    }
-    ,
-    {
-      "title": "Casting Build-In Data Type di Oracle",
-      "link": "/posts/rdbms/oracle18c/008e-casting-buildin-data-type"
     }
   ]
 }

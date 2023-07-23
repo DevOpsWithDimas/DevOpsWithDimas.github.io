@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Coalesce & NullIF menggunakan HQL",
+      "link": "/posts/framework/java/orm/hibernate/hql/04i-hql-nullif-coalesce"
+    }
+    ,
+    {
       "title": "Case When dengan HQL",
       "link": "/posts/framework/java/orm/hibernate/hql/04h-hql-case-when-expresion"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Hibernate Query Language (HQL-JPQL)",
       "link": "/posts/framework/java/orm/hibernate/hql/04-hibernate-queries"
-    }
-    ,
-    {
-      "title": "Time is your Practice",
-      "link": "/posts/framework/java/orm/hibernate/mapping/03j-quis-2"
     }
   ]
 }

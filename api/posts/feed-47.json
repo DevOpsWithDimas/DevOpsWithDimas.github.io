@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Tipe data logika (true of false)",
+      "link": "/posts/language/java/basic/02d-tipe-data-logika"
+    }
+    ,
+    {
       "title": "Tipe data yang bernilai Number",
       "link": "/posts/language/java/basic/02b-tipe-data-number"
     }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Static Resources with WebJars",
+      "link": "/posts/language/java/web/jsp/028-static-resources-with-webjar"
+    }
+    ,
+    {
       "title": "JSP Implicit Object",
       "link": "/posts/language/java/web/jsp/027-jsp-implicit-object-elements"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Event Listeners using Session Level",
       "link": "/posts/language/java/web/servlet/019-event-listener-using-session-level"
-    }
-    ,
-    {
-      "title": "Event Listeners using Servlet Context Level",
-      "link": "/posts/language/java/web/servlet/018-event-listener-using-servlet-context-level"
     }
   ]
 }

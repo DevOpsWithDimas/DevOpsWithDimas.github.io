@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Overview of PostgreSQL Database",
+      "link": "/posts/rdbms/postgresql/01a-what-is-postgresql"
+    }
+    ,
+    {
       "title": "Silabus - PostgreSQL: Pemula sampai Mahir",
       "link": "/posts/rdbms/postgresql/01-silabus-psql"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Kubernetes Components",
       "link": "/posts/devops/orchestration/kubernetes/01b-k8s-components"
-    }
-    ,
-    {
-      "title": "What is Kubernetes (k8s) ?",
-      "link": "/posts/devops/orchestration/kubernetes/01a-what-is-kubernetes"
     }
   ]
 }

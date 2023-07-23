@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Build docker image for Angular Project",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08g-build-angular-project"
+    }
+    ,
+    {
       "title": "Springboot - Using Database",
       "link": "/posts/devops/docker/dockerfile/study-cases/08f-build-springboot-using-db"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Best practices for writing Dockerfiles",
       "link": "/posts/devops/docker/dockerfile/07m-best-practice-dockerfile"
-    }
-    ,
-    {
-      "title": "Multiple Stage Builds",
-      "link": "/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages"
     }
   ]
 }

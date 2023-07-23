@@ -1721,6 +1721,12 @@ var store = [{
         "url": "/posts/devops/docker/registry/03-silabus-registry",
         "teaser": "/assets/images/500x300.png"
       },{
+        "title": "What is Docker Registry?",
+        "excerpt":"Hai semuanya, di section sebelumnya kita udah belajar memanage docker object dengan docker cli (Commandline interface). Sekarang kita akan membahas khusus Docker Registry. Seperti yang temen-temen ketahui sebelumnya, Docker Registry digunakan untuk menyimpan dan men-distribusikan container image. Sebelum kita menggunakan Container Registry khususnya Docker Registry kita lihat dulu yuk secara...","categories": ["DevOps","Docker","Registry"],
+        "tags": [],
+        "url": "/posts/devops/docker/registry/03a-what-is-registry",
+        "teaser": "/assets/images/500x300.png"
+      },{
         "title": "Default Docker Registry (Docker HUB)",
         "excerpt":"halo semuanya, di materi kali ini kita akan membahas tentang Docker Registry, The Registry is a stateless, highly scalable server side application that stores and lets you distribute Docker images. The Registry is open-source, under the permissive Apache license. Secara default, Docker Registry menggunakan Docker Hub. Ok nah jadi sekarang...","categories": ["DevOps","Docker","Registry"],
         "tags": [],
