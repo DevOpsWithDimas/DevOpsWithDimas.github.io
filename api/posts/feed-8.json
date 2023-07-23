@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Filtering data with WHERE clause",
+      "link": "/posts/rdbms/postgresql/sql/select/03d-where-clause"
+    }
+    ,
+    {
+      "title": "Build-in Functions",
+      "link": "/posts/rdbms/postgresql/sql/select/03c-sql-functions"
+    }
+    ,
+    {
+      "title": "Build-in Operators",
+      "link": "/posts/rdbms/postgresql/sql/select/03b-sql-operators"
+    }
+    ,
+    {
       "title": "Basic SQL Select statements",
       "link": "/posts/rdbms/postgresql/sql/select/03a-basic-select-statement"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Using pgAdmin4 as PostgreSQL editor",
       "link": "/posts/rdbms/postgresql/getting-started/02c-use-pgadmin"
-    }
-    ,
-    {
-      "title": "Using psql as PostgreSQL editor",
-      "link": "/posts/rdbms/postgresql/getting-started/02b-use-psql"
-    }
-    ,
-    {
-      "title": "Install PostgreSQL using Docker",
-      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker"
-    }
-    ,
-    {
-      "title": "Install PostgreSQL for Linux Ubuntu users",
-      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu"
     }
   ]
 }

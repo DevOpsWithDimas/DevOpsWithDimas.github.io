@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "What is Kubernetes Namespaces?",
+      "link": "/posts/devops/orchestration/kubernetes/01g-k8s-namespaces"
+    }
+    ,
+    {
+      "title": "Kubernetes Object Names and IDs",
+      "link": "/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids"
+    }
+    ,
+    {
+      "title": "Managing Kubernetes Object",
+      "link": "/posts/devops/orchestration/kubernetes/01e-k8s-object-management"
+    }
+    ,
+    {
       "title": "What is Kubernetes Objects?",
       "link": "/posts/devops/orchestration/kubernetes/01d-k8s-objects"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Pipeline: Angular deploy with Gitlab CI",
       "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12f-pipeline-angular-gitlab-ci"
-    }
-    ,
-    {
-      "title": "Pipeline: spring-boot deploy with Gitlab CI",
-      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12e-pipeline-spring-boot-gitlab-ci"
-    }
-    ,
-    {
-      "title": "Pipeline: Java Web deployment using Gitlab CI",
-      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12d-pipeline-javaweb-gitlab-ci"
-    }
-    ,
-    {
-      "title": "Pipeline: PHP deployment using Gitlab CI",
-      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12c-pipeline-php-gitlab-ci"
     }
   ]
 }

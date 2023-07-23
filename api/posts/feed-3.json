@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Overview Study Cases: Pod and Containers",
+      "link": "/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases"
+    }
+    ,
+    {
+      "title": "Pod Disruptions",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03i-distruptions"
+    }
+    ,
+    {
+      "title": "Prepared Statement in SQL",
+      "link": "/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement"
+    }
+    ,
+    {
       "title": "Deep dive into DELETE statement",
       "link": "/posts/rdbms/postgresql/sql/dml/05d-dml-delete"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Deep dive into INSERT Statement",
       "link": "/posts/rdbms/postgresql/sql/dml/05b-dml-insert"
-    }
-    ,
-    {
-      "title": "Basic Create, Update, Delete statement",
-      "link": "/posts/rdbms/postgresql/sql/dml/05a-cud-statement"
-    }
-    ,
-    {
-      "title": "Overview of Data Manipulation Language (DML)",
-      "link": "/posts/rdbms/postgresql/sql/dml/05-overview-dml"
-    }
-    ,
-    {
-      "title": "Time your practice (part 2)",
-      "link": "/posts/rdbms/postgresql/sql/select/04g-quis-section-2"
     }
   ]
 }

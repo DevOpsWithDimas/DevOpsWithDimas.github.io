@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "CMD vs ENTRYPOINT?",
+      "link": "/posts/devops/docker/dockerfile/07h-dockerfile-cmd-vs-entrypoint"
+    }
+    ,
+    {
+      "title": "Execution Instruction",
+      "link": "/posts/devops/docker/dockerfile/07g-dockerfile-exec"
+    }
+    ,
+    {
+      "title": "Label Instruction",
+      "link": "/posts/devops/docker/dockerfile/07f-dockerfile-label"
+    }
+    ,
+    {
       "title": "Excluding files/directories",
       "link": "/posts/devops/docker/dockerfile/07e-dockerfile-ignore"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Share data among machines",
       "link": "/posts/devops/docker/volume/06e-share-data-among-machines"
-    }
-    ,
-    {
-      "title": "Share data among containers",
-      "link": "/posts/devops/docker/volume/06c-share-data-among-containers"
-    }
-    ,
-    {
-      "title": "Use Bind Mounts",
-      "link": "/posts/devops/docker/volume/06b-use-binding-volume-flag"
-    }
-    ,
-    {
-      "title": "Management Volume",
-      "link": "/posts/devops/docker/volume/06a-management-volume"
     }
   ]
 }

@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Build docker image for spring-boot",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08c-build-springboot"
+    }
+    ,
+    {
+      "title": "Build Java Web using maven-docker-plugin",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08b-using-maven-docker-plugin"
+    }
+    ,
+    {
+      "title": "Build Docker Image for Java Webapp",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat"
+    }
+    ,
+    {
       "title": "Build specific docker image by programming languages",
       "link": "/posts/devops/docker/dockerfile/study-cases/08-build-specific-programming-lanaguage"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Exposing Ports",
       "link": "/posts/devops/docker/dockerfile/07i-dockerfile-expose"
-    }
-    ,
-    {
-      "title": "CMD vs ENTRYPOINT?",
-      "link": "/posts/devops/docker/dockerfile/07h-dockerfile-cmd-vs-entrypoint"
-    }
-    ,
-    {
-      "title": "Execution Instruction",
-      "link": "/posts/devops/docker/dockerfile/07g-dockerfile-exec"
-    }
-    ,
-    {
-      "title": "Label Instruction",
-      "link": "/posts/devops/docker/dockerfile/07f-dockerfile-label"
     }
   ]
 }

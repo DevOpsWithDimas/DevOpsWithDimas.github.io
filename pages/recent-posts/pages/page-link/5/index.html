@@ -318,6 +318,225 @@
     
     <h3 class="archive__item-title no_toc" itemprop="headline">
       
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases" rel="permalink">Overview Study Cases: Pod and Containers
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-11-28T22:03:44+07:00">November 28, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        less than 1 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, Setelah kita membahas secara mendetail terkait Pod and Container specification di Kubernetes sekarang saatnya kita lansung mencoba study cases dengan beberapa skenario yang sudah saya rangkum dari beberapa pengalaman saya dan juga beberapa referensi sertifikasi yang mengacu ke CKAD (Certified Kubernetes Application Developer) yaitu</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/orchestration/kubernetes/pods/03i-distruptions" rel="permalink">Pod Disruptions
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/kubernetes" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      Kubernetes for DevOps
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-11-19T14:07:43+07:00">November 19, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        9 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, sebelumnya kita sudah membahas secara detail tentang Pod Specification selanjutnya jika kita mau membuat aplikasi yang support dengan Highly Available containers pada kubernetes kita harus memahami System yang namanya Distruption dan juga beberapa cluster administration upgrading and autoscaling clusters.</p>
+
+<p>So karena pembahasannya ini akan lumayan panjang jadi kita akan bagi-bagi menjadi beberapa bagian diantaranya:</p>
+
+<ol>
+  <li>Voluntary and involuntary disruptions</li>
+  <li>Pod disruption budgets</li>
+  <li>Pod disruption conditions</li>
+</ol>
+
+<p>Ok tanpa berlama-lama yuk lansung aja kita bahas materi yang pertama:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement" rel="permalink">Prepared Statement in SQL
+</a>
+      
+    </h3>
+    
+<p class="page__meta">
+
+  
+  
+    <a href="/pages/cources/postgres-query" target="_blank" rel="noopener noreferrer">
+      <i class="fas fa-link"></i>
+      PostgreSQL
+    </a>
+    <span class="page__meta-sep"></span>
+  
+
+
+
+  
+    
+    <span class="page__meta-date">
+      <i class="far fa-calendar-alt" aria-hidden="true"></i>
+      
+      <time datetime="2022-10-10T20:51:35+07:00">October 10, 2022</time>
+    </span>
+  
+
+  <span class="page__meta-sep"></span>
+
+  
+    
+    
+
+    <span class="page__meta-readtime">
+      <i class="far fa-clock" aria-hidden="true"></i>
+      
+        5 minute read
+      
+    </span>
+  
+    
+
+</p>
+
+    
+      
+      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, di materi kali ini kita akan membahas tentang Prepared Statement pada SQL, feature ini biasanya hanya bisa digunakan pada Bahasa Pemograman yang menggunakan API seperti <a href="https://docs.oracle.com/en/java/javase/13/docs/api/java.sql/java/sql/PreparedStatement.html">JDBC</a> di Java, <a href="https://www.php.net/manual/en/pdo.prepared-statements.php">pdo</a> di PHP dan lain-lain, Nah tetapi di PostgreSQL Database kita bisa terapkan secara directly pada query SQL baik untuk select, insert, update dan delete. Perintah sqlnya seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">PREPARE</span> <span class="n">name</span> <span class="p">[</span> <span class="p">(</span> <span class="n">data_type</span> <span class="p">[,</span> <span class="p">...]</span> <span class="p">)</span> <span class="p">]</span> <span class="k">AS</span> <span class="k">statement</span></code></pre></figure>
+
+<p>Dan untuk menjalankan perintanya kita bisa menggunakan perintah seperti berikut:</p>
+
+<figure class="highlight"><pre><code class="language-sql" data-lang="sql"><span class="k">EXPLAIN</span> <span class="k">EXECUTE</span> <span class="n">name</span><span class="p">(</span><span class="n">parameter_values</span><span class="p">);</span></code></pre></figure>
+
+<p>Jadi dengan kita mendefined prepared query tersebut, kita bisa meng-execute multiple times dengan parameter yang berbeda. Pada implemetasinya kita bisa gunakan untuk:</p>
+
+<ol>
+  <li>Create a Prepared statement for INSERT, UPDATE, DELETE</li>
+  <li>Show all prepared statement</li>
+  <li>Remove prepared statement from a session.</li>
+  <li>Create input parameterized with text editor (Jetbraints Database)</li>
+</ol>
+
+<p>Ok tanpa berlama-lama kita bahas kemateri yang pertama:</p>
+
+</span>
+      
+        
+  </article>
+</div>
+
+  
+    
+
+
+
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h3 class="archive__item-title no_toc" itemprop="headline">
+      
         <a class="btn btn-sm btn-light text-nowrap" href="/posts/rdbms/postgresql/sql/dml/05d-dml-delete" rel="permalink">Deep dive into DELETE statement
 </a>
       
@@ -468,227 +687,6 @@
 </ol>
 
 <p>Nah jadi akan lebih enak jika kita break-down untuk pembahasanya masing-masing feature tersebut.</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/14c-ansible-for-docker-operations" rel="permalink">Getting started with Ansible role, tasks for docker
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Docker for DevOps engineer
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-09-11T20:26:35+07:00">September 11, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        13 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, setelah sebelumnya kita menyiapkan environment seperti Ansible Controller node dan Managed node dengan Virtual Machine sekarang kita akan membahas beberapa IT Automation dengan meggunakan Ansible khususnya terkait dengan Docker operation yaitu</p>
-
-<ol>
-  <li>Install Docker engine with ansible role <a href="https://galaxy.ansible.com/dimmaryanto93/docker">dimmaryanto93.docker</a></li>
-  <li>Manage docker image using ansible <a href="https://docs.ansible.com/ansible/latest/collections/community/docker/docker_image_module.html#ansible-collections-community-docker-docker-image-module">docker_image</a> module</li>
-  <li>Running a container using ansible <a href="https://docs.ansible.com/ansible/latest/collections/community/docker/docker_container_module.html#ansible-collections-community-docker-docker-container-module">docker_container</a> module</li>
-  <li>Execute a container using ansible <a href="https://docs.ansible.com/ansible/latest/collections/community/docker/docker_container_exec_module.html#ansible-collections-community-docker-docker-container-exec-module">docker_container_exec</a> module</li>
-  <li>Manage multi-container Docker applications with Docker Compose using ansible <a href="https://docs.ansible.com/ansible/latest/collections/community/docker/docker_compose_module.html#ansible-collections-community-docker-docker-compose-module">docker_compose</a> module</li>
-</ol>
-
-<p>Ok tanpa berlama-lama yuk lansung aja kita bahas materi yang pertama</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment" rel="permalink">Setup Ansible Control and Managed Nodes
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Docker for DevOps engineer
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-09-11T12:14:02+07:00">September 11, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        7 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya, sebelum kita mulai ada beberapa hal yang perlu kita siapkan yaitu Ansible CLI dan Text editor seperti VS Code, Vim dan Terminal. Adapun materi yang akan dibahas kali ini yaitu</p>
-
-<ol>
-  <li>Install Ansible CLI for MacOs users</li>
-  <li>Install Ansible CLI for Linux users</li>
-  <li>Install Ansible CLI for Windows users</li>
-  <li>Create Virtual machine for Managed node</li>
-  <li>Create ansible inventory and testing using ad-hoc commanline</li>
-</ol>
-
-<p>Ok tanpa berlama-lama yukk langsung aja kita bahas materi yang pertama:</p>
-
-</span>
-      
-        
-  </article>
-</div>
-
-  
-    
-
-
-
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h3 class="archive__item-title no_toc" itemprop="headline">
-      
-        <a class="btn btn-sm btn-light text-nowrap" href="/posts/devops/docker/14a-it-automation-platform" rel="permalink">IT Automation Platform for Docker Operations
-</a>
-      
-    </h3>
-    
-<p class="page__meta">
-
-  
-  
-    <a href="/pages/cources/docker" target="_blank" rel="noopener noreferrer">
-      <i class="fas fa-link"></i>
-      Docker for DevOps engineer
-    </a>
-    <span class="page__meta-sep"></span>
-  
-
-
-
-  
-    
-    <span class="page__meta-date">
-      <i class="far fa-calendar-alt" aria-hidden="true"></i>
-      
-      <time datetime="2022-09-10T17:18:51+07:00">September 10, 2022</time>
-    </span>
-  
-
-  <span class="page__meta-sep"></span>
-
-  
-    
-    
-
-    <span class="page__meta-readtime">
-      <i class="far fa-clock" aria-hidden="true"></i>
-      
-        5 minute read
-      
-    </span>
-  
-    
-
-</p>
-
-    
-      
-      <span class="archive__item-excerpt" itemprop="description"><p>Hai semuanya di materi kali ini kita akan membahas salah satu topic yang lumayan menarik dikalangan DevOps yaitu IT Automation khususnya untuk Docker Operation diantaranya:</p>
-
-<ol>
-  <li>What is IT Automation?</li>
-  <li>What IT automation is used for?</li>
-  <li>What kind a tools for IT automation?</li>
-  <li>What is RedHat Ansible?</li>
-</ol>
-
-<p>Ok langsung aja kita bahas materi yang pertama:</p>
 
 </span>
       

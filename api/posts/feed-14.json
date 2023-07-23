@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Overview of Study Cases using Docker Compose",
+      "link": "/posts/devops/docker/compose/study-cases/10-overview-compose-study-case"
+    }
+    ,
+    {
+      "title": "Use Compose in production",
+      "link": "/posts/devops/docker/compose/workflow/09r-compose-in-production"
+    }
+    ,
+    {
+      "title": "Scale services using compose command",
+      "link": "/posts/devops/docker/compose/scale/09q-compose-scale-services"
+    }
+    ,
+    {
       "title": "Example use case of multiple compose files",
       "link": "/posts/devops/docker/compose/workflows/09p-multi-compose-use-cases"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Network links in Compose file",
       "link": "/posts/devops/docker/compose/network/09j-compose-network-link"
-    }
-    ,
-    {
-      "title": "Networking Overview in Compose file",
-      "link": "/posts/devops/docker/compose/network/09i-compose-network-overview"
-    }
-    ,
-    {
-      "title": "Using NFS for share data in Compose",
-      "link": "/posts/devops/docker/compose/volume/09h-share-data-using-nfs-in-compose"
-    }
-    ,
-    {
-      "title": "Using sshfs for share data in Compose",
-      "link": "/posts/devops/docker/compose/volume/09g-share-data-using-sshfs-in-compose"
     }
   ]
 }

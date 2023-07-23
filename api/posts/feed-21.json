@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Insecure Registry",
+      "link": "/posts/devops/docker/registry/03b-insecure-registry"
+    }
+    ,
+    {
+      "title": "Docker Registry (Docker HUB)",
+      "link": "/posts/devops/docker/registry/03a-docker-registry"
+    }
+    ,
+    {
+      "title": "Getting Started with Docker",
+      "link": "/posts/devops/docker/basic/03-getting-started"
+    }
+    ,
+    {
       "title": "How to install Docker on Mac OS",
       "link": "/posts/devops/docker/basic/02c-install-on-mac"
     }
@@ -22,16 +37,6 @@
     }
     ,
     {
-      "title": "What is Container",
-      "link": "/posts/devops/docker/basic/01b-container-overview"
-    }
-    ,
-    {
-      "title": "Docker Overview",
-      "link": "/posts/devops/docker/basic/01a-docker-overview"
-    }
-    ,
-    {
       "title": "JSON Data in Oracle Database",
       "link": "/posts/rdbms/oracle18c/019g-json-data"
     }
@@ -39,11 +44,6 @@
     {
       "title": "Partitioning Table (Very Large Databases)",
       "link": "/posts/rdbms/oracle18c/019f-partitioning-table"
-    }
-    ,
-    {
-      "title": "Silabus Belajar Docker: Pemula sampai Mahir",
-      "link": "/posts/devops/docker/basic/01-silabus"
     }
     ,
     {

@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Using psql as PostgreSQL editor",
+      "link": "/posts/rdbms/postgresql/getting-started/02b-use-psql"
+    }
+    ,
+    {
+      "title": "Install PostgreSQL using Docker",
+      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-docker"
+    }
+    ,
+    {
+      "title": "Install PostgreSQL for Linux Ubuntu users",
+      "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-linux-ubuntu"
+    }
+    ,
+    {
       "title": "Install PostgreSQL for Mac users",
       "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-mac"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Install PostgreSQL for Windows users",
       "link": "/posts/rdbms/postgresql/getting-started/02a-install-postgresql-windows"
-    }
-    ,
-    {
-      "title": "Install minikube on Mac (Apple silicon Chip)",
-      "link": "/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon"
-    }
-    ,
-    {
-      "title": "Install minikube on Mac (Intel Chip)",
-      "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos"
-    }
-    ,
-    {
-      "title": "Overview Installing PostgreSQL",
-      "link": "/posts/rdbms/postgresql/getting-started/02-overview-install-postgres"
     }
   ]
 }

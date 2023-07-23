@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Networking Overview in Compose file",
+      "link": "/posts/devops/docker/compose/network/09i-compose-network-overview"
+    }
+    ,
+    {
+      "title": "Using NFS for share data in Compose",
+      "link": "/posts/devops/docker/compose/volume/09h-share-data-using-nfs-in-compose"
+    }
+    ,
+    {
+      "title": "Using sshfs for share data in Compose",
+      "link": "/posts/devops/docker/compose/volume/09g-share-data-using-sshfs-in-compose"
+    }
+    ,
+    {
       "title": "Share data between Containers in Compose",
       "link": "/posts/devops/docker/compose/volume/09f-compose-share-data-between-containers"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Overview of Docker Compose",
       "link": "/posts/devops/docker/compose/09-docker-compose-overview"
-    }
-    ,
-    {
-      "title": "Laravel - Using Database",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db"
-    }
-    ,
-    {
-      "title": "Laravel - Using Frontend & Rest API",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08l-build-laravel-webapp-and-restapi"
-    }
-    ,
-    {
-      "title": "Build Docker image for Laravel Framework",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08k-build-laravel-apps"
     }
   ]
 }

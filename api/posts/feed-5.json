@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Combining Queries (UNION, INTERSECT, EXCEPT)",
+      "link": "/posts/rdbms/postgresql/sql/select/04e-combining-queries"
+    }
+    ,
+    {
+      "title": "Configure liveness, readiness, and startup probes",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config"
+    }
+    ,
+    {
+      "title": "Silabus Git VCS: Pemula s/d Mahir",
+      "link": "/posts/git/version-control/00-silabus-git-vcs"
+    }
+    ,
+    {
       "title": "Conditional Expressions",
       "link": "/posts/rdbms/postgresql/sql/select/04d-conditional-expression"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Initialization of Containers",
       "link": "/posts/devops/orchestration/kubernetes/pods/03e-init-containers"
-    }
-    ,
-    {
-      "title": "Pod & Container Lifecycle",
-      "link": "/posts/devops/orchestration/kubernetes/pods/03d-pod-lifecycle"
-    }
-    ,
-    {
-      "title": "Basic Pods and Containers Configs",
-      "link": "/posts/devops/orchestration/kubernetes/pods/03c-basic-pod-and-containers-config"
-    }
-    ,
-    {
-      "title": "Working with Pods",
-      "link": "/posts/devops/orchestration/kubernetes/pods/03b-working-with-pods"
     }
   ]
 }

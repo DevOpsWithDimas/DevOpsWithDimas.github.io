@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Basic Create, Update, Delete statement",
+      "link": "/posts/rdbms/postgresql/sql/dml/05a-cud-statement"
+    }
+    ,
+    {
+      "title": "Overview of Data Manipulation Language (DML)",
+      "link": "/posts/rdbms/postgresql/sql/dml/05-overview-dml"
+    }
+    ,
+    {
+      "title": "Time your practice (part 2)",
+      "link": "/posts/rdbms/postgresql/sql/select/04g-quis-section-2"
+    }
+    ,
+    {
       "title": "WITH Queries (Common Table Expressions)",
       "link": "/posts/rdbms/postgresql/sql/select/04f-with-queries"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Pengenalan Version Control",
       "link": "/posts/git/version-control/01-introduction-version-control"
-    }
-    ,
-    {
-      "title": "Combining Queries (UNION, INTERSECT, EXCEPT)",
-      "link": "/posts/rdbms/postgresql/sql/select/04e-combining-queries"
-    }
-    ,
-    {
-      "title": "Configure liveness, readiness, and startup probes",
-      "link": "/posts/devops/orchestration/kubernetes/pods/03h-pod-container-probe-config"
-    }
-    ,
-    {
-      "title": "Silabus Git VCS: Pemula s/d Mahir",
-      "link": "/posts/git/version-control/00-silabus-git-vcs"
     }
   ]
 }

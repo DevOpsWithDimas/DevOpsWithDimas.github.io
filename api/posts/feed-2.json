@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Study cases: Microservice apps (Springboot Rest API)",
+      "link": "/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps"
+    }
+    ,
+    {
+      "title": "Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)",
+      "link": "/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class"
+    }
+    ,
+    {
+      "title": "Silabus SRE - Nutanix AHV: Pemula sampai Mahir",
+      "link": "/posts/cloud-computing/nutanix/ahv/00-silabus-nutanix-ahv"
+    }
+    ,
+    {
       "title": "What is Workload Resources?",
       "link": "/posts/devops/orchestration/kubernetes/workloads/05a-what-is-workload"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Study Cases: Monolith apps (Laravel Web MVC)",
       "link": "/posts/devops/orchestration/kubernetes/pods/04a-study-cases-monolith-apps"
-    }
-    ,
-    {
-      "title": "Overview Study Cases: Pod and Containers",
-      "link": "/posts/devops/orchestration/kubernetes/pods/04-overview-study-cases"
-    }
-    ,
-    {
-      "title": "Pod Disruptions",
-      "link": "/posts/devops/orchestration/kubernetes/pods/03i-distruptions"
-    }
-    ,
-    {
-      "title": "Prepared Statement in SQL",
-      "link": "/posts/rdbms/postgresql/sql/dml/05e-dml-prepared-statement"
     }
   ]
 }

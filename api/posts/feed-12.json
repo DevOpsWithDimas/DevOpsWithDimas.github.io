@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Pipeline: spring-boot deploy with Gitlab CI",
+      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12e-pipeline-spring-boot-gitlab-ci"
+    }
+    ,
+    {
+      "title": "Pipeline: Java Web deployment using Gitlab CI",
+      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12d-pipeline-javaweb-gitlab-ci"
+    }
+    ,
+    {
+      "title": "Pipeline: PHP deployment using Gitlab CI",
+      "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12c-pipeline-php-gitlab-ci"
+    }
+    ,
+    {
       "title": "The `.gitlab-ci.yml` file",
       "link": "/posts/devops/docker/ci/study-cases/gitlab-ci/12b-syntax-gitlab-ci-yml"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Dashboard using Docker Desktop",
       "link": "/posts/devops/docker/context/dashboard/11d-docker-desktop"
-    }
-    ,
-    {
-      "title": "Docker Inside Docker (DinD)",
-      "link": "/posts/devops/docker/context/11c-dind"
-    }
-    ,
-    {
-      "title": "Remote deployment using docker-compose",
-      "link": "/posts/devops/docker/context/11b-docker-compose-remote-access"
-    }
-    ,
-    {
-      "title": "Usage & Managing Docker Context",
-      "link": "/posts/devops/docker/context/11a-docker-context"
     }
   ]
 }

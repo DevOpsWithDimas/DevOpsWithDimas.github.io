@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Docker overview",
+      "link": "/posts/devops/docker/basic/01b-docker-overview"
+    }
+    ,
+    {
+      "title": "Container overview",
+      "link": "/posts/devops/docker/basic/01a-container-overview"
+    }
+    ,
+    {
+      "title": "Silabus: Basic Docker",
+      "link": "/posts/devops/docker/basic/01-silabus"
+    }
+    ,
+    {
       "title": "Silabus Ansible: Pemula sampai Mahir",
       "link": "/posts/devops/automation/ansible/basic/00-silabus-ansible"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Working with Deployment object",
       "link": "/posts/devops/orchestration/kubernetes/workloads/05b-deployment"
-    }
-    ,
-    {
-      "title": "Study cases: Microservice apps (Springboot Rest API)",
-      "link": "/posts/devops/orchestration/kubernetes/pods/04b-study-cases-microservice-backend-apps"
-    }
-    ,
-    {
-      "title": "Welcome to the Nutanix HCF (Hybrid Cloud Fundamental)",
-      "link": "/posts/cloud-computing/nutanix/ahv/01-welcome-nutanix-class"
-    }
-    ,
-    {
-      "title": "Silabus SRE - Nutanix AHV: Pemula sampai Mahir",
-      "link": "/posts/cloud-computing/nutanix/ahv/00-silabus-nutanix-ahv"
     }
   ]
 }

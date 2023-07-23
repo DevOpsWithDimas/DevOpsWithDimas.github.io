@@ -1649,8 +1649,8 @@ var store = [{
         "url": "/posts/rdbms/oracle18c/019e-mapping-inherintance",
         "teaser": "/assets/images/500x300.png"
       },{
-        "title": "Silabus Belajar Docker: Pemula sampai Mahir",
-        "excerpt":"Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir kita akan membahas teknology container yang sedang popular saat ini yaitu Docker. Dengan menggunakan teknology container kita bisa melakukan banyak hal mulai dari development, Automate testing, Automate deployment dan lain-lain. Adapun materi/silabus yang akan kita bahas di kelas ini...","categories": ["DevOps","Docker","Basic"],
+        "title": "Silabus: Basic Docker",
+        "excerpt":"Hai semuanya, di cource ini DevOps - Docker: Pemula sampai Mahir kita akan membahas teknologi container yaitu Docker, Docker ini yang sangatlah popular dan paling sering digunakan di berbagai situasi dalam Software development lifecycle (SDLC) seperti Development (dev) Testing (test) Staging/ bahkan Production (prod) Selain itu juga Docker ini biasanya...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
         "url": "/posts/devops/docker/basic/01-silabus",
         "teaser": "/assets/images/500x300.png"
@@ -1667,16 +1667,16 @@ var store = [{
         "url": "/posts/rdbms/oracle18c/019g-json-data",
         "teaser": "/assets/images/500x300.png"
       },{
-        "title": "Docker Overview",
-        "excerpt":"Hai semuanya, di materi kali ini kita akan berkenalan dulu dengan teknology container menggunakan Docker. Adapun materinya seperti berikut Apa itu Docker? Manfaat menggunakan Docker Platform? Docker Architecture Istilah-istilah dalam Docker? Daemon Docker Client Docker Registry Images Containers Isolated workspace Docker Overview Sebagai seorang Research and Development (RnD) dan sekaligus...","categories": ["DevOps","Docker","Basic"],
+        "title": "Container overview",
+        "excerpt":"Hai semuanya, di materi pertama kali ini kita akan berkenalan dulu dengan teknology yang namanya Container dalam virtualisasi (server). Virtualisasi container sendiri berfokus kepada isolasi, lighwith package dan dapat di deploy pada semua platform. Penasaran apa itu Container? yuk kita bahas… What is Container? Apa bedanya dengan Virtual Machine (vm)?...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/basic/01a-docker-overview",
+        "url": "/posts/devops/docker/basic/01a-container-overview",
         "teaser": "/assets/images/500x300.png"
       },{
-        "title": "What is Container",
-        "excerpt":"Hai semuanya di materi kali ini, kita akan membahas Apa itu Container?, tpi sebelum itu saya mau ceritain dulu sejarahnya Docker. Docker Inc. was founded by Kamel Founadi, Solomon Hykes, and Sebastien Pahl during the Y Combinator Summer 2010 startup incubator group and launched in 2011. The startup was also...","categories": ["DevOps","Docker","Basic"],
+        "title": "Docker overview",
+        "excerpt":"Hai semuanya, sebelumnya kita udah berkenalan dengan teknologi yang namanya Container virtualization, kali ini kita akan membahas salah satu tools yang biasanya digunakan untuk implementasi dari Container yaitu Docker. Tetapi sebelum kita menggunakan Docker ada baiknya kita lihat dulu pembahasan berikut: Apa itu Docker? Manfaat menggunakan Docker Docker Architecture Okay...","categories": ["DevOps","Docker","Basic"],
         "tags": [],
-        "url": "/posts/devops/docker/basic/01b-container-overview",
+        "url": "/posts/devops/docker/basic/01b-docker-overview",
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "What to know before you install Docker",

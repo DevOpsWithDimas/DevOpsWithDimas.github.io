@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Share data among containers",
+      "link": "/posts/devops/docker/volume/06c-share-data-among-containers"
+    }
+    ,
+    {
+      "title": "Use Bind Mounts",
+      "link": "/posts/devops/docker/volume/06b-use-binding-volume-flag"
+    }
+    ,
+    {
+      "title": "Management Volume",
+      "link": "/posts/devops/docker/volume/06a-management-volume"
+    }
+    ,
+    {
       "title": "Docker Volume Overview",
       "link": "/posts/devops/docker/volume/06-docker-volume"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Legacy feature of Docker Network - Container Links",
       "link": "/posts/devops/docker/network/05a-connect-to-other-container-use-link"
-    }
-    ,
-    {
-      "title": "Networking overview",
-      "link": "/posts/devops/docker/network/05-docker-network"
-    }
-    ,
-    {
-      "title": "Run a Container using Environtment File",
-      "link": "/posts/devops/docker/container/04g-docker-run-env-file"
-    }
-    ,
-    {
-      "title": "Logging, Inspect, & Resource Usage Statistics Containers",
-      "link": "/posts/devops/docker/container/04f-logging-inspect-stats-container"
     }
   ]
 }

@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Docker Inside Docker (DinD)",
+      "link": "/posts/devops/docker/context/11c-dind"
+    }
+    ,
+    {
+      "title": "Remote deployment using docker-compose",
+      "link": "/posts/devops/docker/context/11b-docker-compose-remote-access"
+    }
+    ,
+    {
+      "title": "Usage & Managing Docker Context",
+      "link": "/posts/devops/docker/context/11a-docker-context"
+    }
+    ,
+    {
       "title": "Overview of Docker Context",
       "link": "/posts/devops/docker/context/11-overview-docker-engine"
     }
@@ -34,21 +49,6 @@
     {
       "title": "PHP deployment using compose file",
       "link": "/posts/devops/docker/compose/study-cases/10a-compose-php-study-case"
-    }
-    ,
-    {
-      "title": "Overview of Study Cases using Docker Compose",
-      "link": "/posts/devops/docker/compose/study-cases/10-overview-compose-study-case"
-    }
-    ,
-    {
-      "title": "Use Compose in production",
-      "link": "/posts/devops/docker/compose/workflow/09r-compose-in-production"
-    }
-    ,
-    {
-      "title": "Scale services using compose command",
-      "link": "/posts/devops/docker/compose/scale/09q-compose-scale-services"
     }
   ]
 }

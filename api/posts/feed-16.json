@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Laravel - Using Database",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08m-build-laravel-using-db"
+    }
+    ,
+    {
+      "title": "Laravel - Using Frontend & Rest API",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08l-build-laravel-webapp-and-restapi"
+    }
+    ,
+    {
+      "title": "Build Docker image for Laravel Framework",
+      "link": "/posts/devops/docker/dockerfile/study-cases/08k-build-laravel-apps"
+    }
+    ,
+    {
       "title": "Build docker image for PHP",
       "link": "/posts/devops/docker/dockerfile/study-cases/08j-build-php"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Springboot - using Environtment",
       "link": "/posts/devops/docker/dockerfile/study-cases/08d-build-springboot-using-env"
-    }
-    ,
-    {
-      "title": "Build docker image for spring-boot",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08c-build-springboot"
-    }
-    ,
-    {
-      "title": "Build Java Web using maven-docker-plugin",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08b-using-maven-docker-plugin"
-    }
-    ,
-    {
-      "title": "Build Docker Image for Java Webapp",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08a-build-java-web-tomcat"
     }
   ]
 }

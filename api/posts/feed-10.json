@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Install minikube on Mac (Apple silicon Chip)",
+      "link": "/posts/devops/orchestration/kubernetes/02a-install-for-mac-apple-silicon"
+    }
+    ,
+    {
+      "title": "Install minikube on Mac (Intel Chip)",
+      "link": "/posts/devops/orchestration/kubernetes/02a-install-tools-for-macos"
+    }
+    ,
+    {
+      "title": "Overview Installing PostgreSQL",
+      "link": "/posts/rdbms/postgresql/getting-started/02-overview-install-postgres"
+    }
+    ,
+    {
       "title": "Accessing a Database",
       "link": "/posts/rdbms/postgresql/01d-accessing-database"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Kubernetes cluster environtments",
       "link": "/posts/devops/orchestration/kubernetes/01h-kubernetes-environtments"
-    }
-    ,
-    {
-      "title": "What is Kubernetes Namespaces?",
-      "link": "/posts/devops/orchestration/kubernetes/01g-k8s-namespaces"
-    }
-    ,
-    {
-      "title": "Kubernetes Object Names and IDs",
-      "link": "/posts/devops/orchestration/kubernetes/01f-k8s-object-names-and-uids"
-    }
-    ,
-    {
-      "title": "Managing Kubernetes Object",
-      "link": "/posts/devops/orchestration/kubernetes/01e-k8s-object-management"
     }
   ]
 }

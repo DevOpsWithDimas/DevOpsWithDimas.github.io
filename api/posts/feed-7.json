@@ -2,6 +2,21 @@
   "pages": [
     
     {
+      "title": "Install docker-machine on Linux",
+      "link": "/posts/devops/docker/machine/13a-install-docker-machine-for-linux"
+    }
+    ,
+    {
+      "title": "Install docker-machine on Windows",
+      "link": "/posts/devops/docker/machine/13a-install-docker-machine-for-windows"
+    }
+    ,
+    {
+      "title": "Silabus - Java: Pemula sampai Mahir",
+      "link": "/posts/language/java/01-silabus"
+    }
+    ,
+    {
       "title": "Silabus - Spring Framework: Pemula sampai Mahir",
       "link": "/posts/framework/java/spring/01-silabus"
     }
@@ -34,21 +49,6 @@
     {
       "title": "Sorting rows using ORDER BY clause",
       "link": "/posts/rdbms/postgresql/sql/select/03e-order-by-clause"
-    }
-    ,
-    {
-      "title": "Filtering data with WHERE clause",
-      "link": "/posts/rdbms/postgresql/sql/select/03d-where-clause"
-    }
-    ,
-    {
-      "title": "Build-in Functions",
-      "link": "/posts/rdbms/postgresql/sql/select/03c-sql-functions"
-    }
-    ,
-    {
-      "title": "Build-in Operators",
-      "link": "/posts/rdbms/postgresql/sql/select/03b-sql-operators"
     }
   ]
 }
