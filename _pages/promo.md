@@ -19,22 +19,22 @@ feature_teaser:
   - image_path: "assets/images/udemy-coupon.png"
     alt: "coupon-code"
     title: "Celebrate your learning with courses from Rp99,000"
-    excerpt: "harga special `Rp. 99.000,-` untuk semua kelas di Udemy berlaku sampai tgl `25-JULY-2023` dengan menggunakan kode coupon `NTNXCERT_NCP_MCI`<br><br> Yukk buruah sebelum expired dan kehabisa kuotanya! checkout sekarang"
+    excerpt: "harga special `Rp. 99.000,-` untuk semua kelas di Udemy berlaku sampai tgl `07-Agustus-2023` dengan menggunakan kode coupon `SKILL_DEVSECOPS`<br><br> Yukk buruah sebelum expired dan kehabisa kuotanya! checkout sekarang"
 ---
 
 {% include feature_row id="feature_teaser" type="right" %}
 
 ## Development & Operation Class (DevOps)
 
-- [Docker: Pemula sampai Mahir](https://www.udemy.com/course/docker-pemula-sampai-mahir/?couponCode=NTNXCERT_NCP_MCI)
-- [Kubernetes: Pemula sampai Mahir](https://www.udemy.com/course/devops-kubernetes-pemula-sampai-mahir/?couponCode=NTNXCERT_NCP_MCI)
-- [Gitlab: Pemula sampai Mahir](https://www.udemy.com/course/gitops-gitlab-pemula-sampai-mahir/?couponCode=NTNXCERT_NCP_MCI)
+- [Docker: Pemula sampai Mahir](https://www.udemy.com/course/docker-pemula-sampai-mahir/?couponCode=SKILL_DEVSECOPS)
+- [Kubernetes: Pemula sampai Mahir](https://www.udemy.com/course/devops-kubernetes-pemula-sampai-mahir/?couponCode=SKILL_DEVSECOPS)
+- [Gitlab: Pemula sampai Mahir](https://www.udemy.com/course/gitops-gitlab-pemula-sampai-mahir/?couponCode=SKILL_DEVSECOPS)
   
 ## Java Developer Class (Dev)
 
-- [ORM Hibernate: Pemula sampai Mahir](https://www.udemy.com/course/hibernate-orm-bahasa-indonesia/?couponCode=NTNXCERT_NCP_MCI)
+- [ORM Hibernate: Pemula sampai Mahir](https://www.udemy.com/course/hibernate-orm-bahasa-indonesia/?couponCode=SKILL_DEVSECOPS)
   
 ## Database Administrator Class (DBA)
 
-- [Oracle: Pemula sampai Mahir](https://www.udemy.com/course/rdbms-oracle-18c-indonesia/?couponCode=NTNXCERT_NCP_MCI)
-- [PostgreSQL: Pemula sampai Mahir](https://www.udemy.com/course/dba-postgresql-pemula-sampai-mahir/?couponCode=NTNXCERT_NCP_MCI)
+- [Oracle: Pemula sampai Mahir](https://www.udemy.com/course/rdbms-oracle-18c-indonesia/?couponCode=SKILL_DEVSECOPS)
+- [PostgreSQL: Pemula sampai Mahir](https://www.udemy.com/course/dba-postgresql-pemula-sampai-mahir/?couponCode=SKILL_DEVSECOPS)
