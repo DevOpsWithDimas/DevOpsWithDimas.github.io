@@ -174,7 +174,9 @@ systemctl restart docker.service
 
 Sebelum kita, melakukan pull & push kita harus login dulu ke private registry tersebut dengan perintah berikut:
 
-{% gist page.gist "03b-docker-login.bash" %}
+{% highlight bash %}
+docker login -u admin -p <your-password> <your-nexus-docker-registry>
+{% endhighlight %}
 
 - `Username`: User yang kita setup di nexus repository
 - `Password`: input passwordnya dari user tersebut
@@ -183,17 +185,27 @@ Jika ada message: `Login Succeeded` berarti anda sudah bisa melakukan push ke re
 
 Setelah itu, kita contohnya kita akan pull image `postgresql:9.3` dari private registry. berikut adalah perintahnya:
 
-{% gist page.gist "03b-docker-pull-private-registry.bash" %}
+{% highlight bash %}
+docker pull <your-nexus-docker-registry>/postgresql:9.3
+{% endhighlight %}
 
 Dan sekarang kita coba push back ke private registry
 
 For Bash script:
 
-{% gist page.gist "03b-docker-push-private-registry.bash" %}
+{% highlight bash %}
+docker pull mysql:5.7 && \
+docker tag mysql:5.7 <your-nexus-docker-registry>/database/mysql:5.7 && \
+docker push <your-nexus-docker-registry>/database/mysql:5.7
+{% endhighlight %}
 
 For Powershell script:
 
-{% gist page.gist "03b-docker-push-private-registry.ps1" %}
+{% highlight powershell %}
+docker pull mysql:5.7 `
+| docker tag mysql:5.7 <your-nexus-docker-registry>/database/mysql:5.7 `
+| docker push <your-nexus-docker-registry>/database/mysql:5.7
+{% endhighlight %}
 
 berikut hasilnya:
 
