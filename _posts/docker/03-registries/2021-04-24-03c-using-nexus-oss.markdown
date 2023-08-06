@@ -37,25 +37,43 @@ Hai semuanya, di materi kali ini kita akan membahas Insecure Registry dengan men
 Untuk install Nexus OSS, kita bisa install di Windows, Mac, atau Linux dengan system required seperti berikut
 
 1. Java runtime environtment
-2. RAM, The default JRE min and max heap size of NXRM3 is pre-configured to be 1200MB, which should be considered an absolute minimum. The codebase will consume approximately another 1GB.  So factoring in operating system overhead you will need at least 4GB of RAM on a dedicated NXRM host, assuming no other large applications are running on the machine.
-3. CPU, NXRM performance is primarily bounded by IO (disk and network) rather than CPU.  So any reasonably modern 4 core (or better) CPU will generally be sufficient for normal uses of NXRM. 
-4. Storage, Nexus Repository Manager 3 installed consumes around 500 MB.
+2. RAM, The default JRE min and max heap size of NXRM3 is pre-configured to be `1200MB`, which should be considered an absolute minimum. The codebase will consume approximately another `1GB`.  So factoring in operating system overhead you will need at least 4GB of RAM on a dedicated NXRM host, assuming no other large applications are running on the machine.
+3. CPU, NXRM performance is primarily bounded by IO (disk and network) rather than CPU.  So any reasonably modern `4 core` (or better) CPU will generally be sufficient for normal uses of NXRM. 
+4. Storage, Nexus Repository Manager 3 installed consumes around `500 MB`.
 
 ## Installing Nexus OSS
 
 Sekarang kita install, karena disini saya menggunakan Server Linux Centos 8, berikut adalah cara installnya
 
-1. Download [nexus sonatype oss](https://www.sonatype.com/download-oss-sonatype)
-2. Setelah filenya di download, kemudian extract dengan perintah berikut
-    {% gist page.gist "03b-extract-download.bash" %}
-3. Pindahkan ke lokasi yang diiginkan, sebagai contoh saya pindahkan ke `/opt` seperti berikut
-    {% gist page.gist "03b-install-nexus.bash" %}
-4. Buat user `nexus` di linux
-    {% gist page.gist "03b-add-user-nexus.bash" %}
-5. Kemudian kita buat service file dengan nama `nexus.service` di folder `/etc/systemd/system` seperti berikut
-    {% gist page.gist "03b-nexus.service" %}
-6. Yang terakhir kita jalankan servicenya
-    {% gist page.gist "03b-start-service-nexus.bash" %}
+- Download dulu [nexus sonatype oss](https://www.sonatype.com/download-oss-sonatype)
+- Setelah filenya di download, kemudian extract dengan perintah berikut
+{% highlight bash %}
+tar -zxvf nexus-<version>.unix.tar.gz
+{% endhighlight %}
+
+- Pindahkan ke lokasi yang diiginkan, sebagai contoh saya pindahkan ke `/opt` seperti berikut
+{% highlight bash %}
+sudo mkdir -p /opt/nexus && \
+sudo mv nexus-<version> /opt/nexus
+
+## create symbolic executeable
+cd /opt/nexus && \
+ln -s nexus-<version>/bin/nexus nexus
+{% endhighlight %}
+
+- Buat user `nexus` di linux
+{% highlight bash %}
+sudo adduser nexus && \
+sudo chown nexus:nexus /opt/nexus
+{% endhighlight %}
+
+- Kemudian kita buat service file dengan nama `nexus.service` di folder `/etc/systemd/system` seperti berikut
+{% gist page.gist "03b-nexus.service" %}
+
+- Yang terakhir kita jalankan servicenya dengan perintah berikut:
+{% highlight bash %}
+systemctl enable --now nexus.service
+{% endhighlight %}
 
 Kemudian coba akses, [http://localhost:8081](http://localhost:8081) maka hasilnya seperti berikut:
 
@@ -75,7 +93,7 @@ Setelah itu kita akan membuat repository, Ada 3 tipe repository
 
 Jadi kita akan buat semuanya, 
 
-## Setup proxy registry
+### Setup proxy registry
 
 Pertama kita buat dulu proxy registry. Dengan cara seperti berikut:
 
@@ -90,7 +108,7 @@ Kemudian isi form seperti berikut configurasinya:
 5. Blob store [pilih bebas]: `default`
 6. Setelah itu click **Save**
 
-## Setup hosted registry
+### Setup hosted registry
 
 Setelah itu, kita setup untuk menyimpan image yang kita miliki ke private-registry dengan menggunakan **docker (hosted)**
 
@@ -108,7 +126,7 @@ Kemudian isi form seperti berikut configurasinya:
 8. Kemudian kita allow/open port `8087` dari firewall supaya bisa di access
     {% gist page.gist "03b-firewall-cmd-registry-hosted.bash" %}
 
-## Setup group registry
+### Setup group registry
 
 Group repository, untuk mengkases ke-2 repository yang telah kita buat dalam satu port connection saja. 
 atau kita bisa pisahkan misalnya yang push repository menggunakan port `8087` sedangkan yang pull bisa menggunkan group repository ini.
@@ -128,7 +146,7 @@ Kemudian isi form seperti berikut configurasinya:
 8. Dan yang terakhir sama seperti sebelumnya, kita allow/open port `8086`
     {% gist page.gist "03b-firewall-cmd-registry-group.bash" %}
 
-## Setup authentication
+### Setup authentication
 
 Sekarang kita setup untuk authenticationnya, kita bisa menu **Security** -> **Users** Kemudian kita buat usernya
 
@@ -136,7 +154,7 @@ Setelah membuat user kita setup untuk Realm di menu **Security** -> **Realms** u
 
 ![docker realms]({{ page.image_path | prepend: site.baseurl }}/docker-realms-token.png)
 
-## Configure insecure-connection
+### Configure insecure-connection
 
 docker-engine hanya mengijinkan kita untuk melakukan pull/push dari registry docker itu sendiri, jadi kita harus daftarkan di docker-engine jika di mac kita bisa tambahkan dari Docker-Desktop -> **Preferences** -> **Daemon** -> **insecure registries** inputan [ip-nexus-server:http-connection] contohnya: `localhost:8086`, `localhost:8087`, `domain.com:8087` dan lain-lain Setelah itu **Apply & restart**
 
