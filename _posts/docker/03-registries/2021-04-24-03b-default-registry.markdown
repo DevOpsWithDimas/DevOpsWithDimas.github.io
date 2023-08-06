@@ -3,6 +3,7 @@ lang: docker
 catalog_key: docker-registry
 title: "Default Docker Registry (Docker HUB)"
 date: 2021-04-24T18:43:49+07:00
+last_modified_at: 2023-07-24T21:02:00+07:00
 categories:
 - DevOps
 - Docker
@@ -17,10 +18,11 @@ gist: dimMaryanto93/d92bd18da1c73c230d7762361f738524
 downloads: []
 ---
 
-halo semuanya, di materi kali ini kita akan membahas tentang Docker Registry, The Registry is a stateless, highly scalable server side application that stores and lets you distribute Docker images. 
-The Registry is open-source, under the permissive Apache license. Secara default, Docker Registry menggunakan [Docker Hub](hub.docker.com). Ok nah jadi sekarang kita akan membahas:
+halo semuanya, di materi kali ini kita akan membahas tentang Default docker registry yaitu adalah [Docker Hub](https://hub.docker.com), Docker HUB adalah repository yang paling umum digunakan system container image khusunya docker. 
 
-1. Apa itu Official Images
+Docker Hub adalah salah satu container registry yang sifatnya public dan private registry (cloud based) yang kita bisa gunakan untuk download/upload container image, Ada banyak sekali container image yang tersedia pada Docker Hub mulai dari Official image, Verified publisher, Community image, Opensource project image dan your own image.
+
+1. Apa itu Oficial Images
 2. Apa itu Public Images
 3. Docker Hub Repository (Public/Private repository)
 4. How to Sign-up & Sign-in to [hub.docker.com](https://hub.docker.com)
@@ -55,7 +57,9 @@ Selain official docker image, di [hub.docker.com](https://hub.docker.com/search?
 
 Dengan adanya image registry hub seperti Docker Hub, kita bisa berkolaborasi artinya image yang kita publish ke registry bisa digunakan juga oleh orang lain atau ke team (private repository). Nah untuk mempublish kita perlu daftar dulu ke [hub.docker.com](https://hub.docker.com/signup) jika belum punya account, jika sudah kita login dulu login dengan menggunakan perintah
 
-{% gist page.gist "03a-docker-login.bash" %}
+{% highlight bash %}
+docker login -u <your-username>
+{% endhighlight %}
 
 Jika di jalankan hasilnya seperti berikut:
 
@@ -85,11 +89,19 @@ Untuk mempublish suatu image ke Docker Hub dari image yang telah tersedia atau y
 
 For Bash script:
 
-{% gist page.gist "03a-publish-image.bash" %}
+{% highlight bash %}
+docker pull mysql:5.7 && \
+docker image tag mysql:5.7 dimmaryanto93/mysql:5.7 && \
+docker push dimmaryanto93/mysql:5.7
+{% endhighlight %}
 
 For Powershell script:
 
-{% gist page.gist "03a-publish-image.ps1" %}
+{% highlight powershell %}
+docker pull mysql:5.7 `
+| docker image tag mysql:5.7 dimmaryanto93/mysql:5.7 `
+| docker push dimmaryanto93/mysql:5.7
+{% endhighlight %}
 
 Jika dijalankan seperti berikut:
 
