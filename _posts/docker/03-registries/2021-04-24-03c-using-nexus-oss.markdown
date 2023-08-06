@@ -81,7 +81,7 @@ Kemudian coba akses, [http://localhost:8081](http://localhost:8081) maka hasilny
 
 ## Configure Docker Registry
 
-Untuk membuat registry di nexus kita perlu login dulu sebagai Administrator, secara default user `admin` passwordnya adalah `admin123`. setelah itu pilih Setting seperti berikut:
+Untuk membuat registry di nexus kita perlu login dulu sebagai Administrator, secara default user `admin` passwordnya by default di simpan pada file yang lokasinya di `/<path-install>/sonarworks/nexus3/initial_password`. setelah itu pilih Setting seperti berikut:
 
 ![settings]({{ page.image_path | prepend: site.baseurl }}/nexus-admin.png)
 
@@ -124,7 +124,12 @@ Kemudian isi form seperti berikut configurasinya:
 6. Deployment policy [Tergantung kebutuhan, klo saya pilih Allow redeploy supaya tanpa ganti tags]: **Allow redeploy**
 7. Setelah itu di **Save**
 8. Kemudian kita allow/open port `8087` dari firewall supaya bisa di access
-    {% gist page.gist "03b-firewall-cmd-registry-hosted.bash" %}
+
+{% highlight bash %}
+sudo firewall-cmd --zone=public --add-port=8087/tcp --permanent && \
+sudo firewall-cmd --reload
+{% endhighlight %}
+
 
 ### Setup group registry
 
@@ -144,7 +149,11 @@ Kemudian isi form seperti berikut configurasinya:
     ![group docker selected]({{ page.image_path | prepend: site.baseurl }}/member-repositories-selected.png)
 7. Setelah itu kita **Save**
 8. Dan yang terakhir sama seperti sebelumnya, kita allow/open port `8086`
-    {% gist page.gist "03b-firewall-cmd-registry-group.bash" %}
+    
+{% highlight bash %}
+sudo firewall-cmd --zone=public --add-port=8086/tcp --permanent && \
+sudo firewall-cmd --reload
+{% endhighlight %}
 
 ### Setup authentication
 
