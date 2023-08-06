@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Use host networking",
+      "link": "/posts/devops/docker/network/05e-docker-host-network"
+    }
+    ,
+    {
       "title": "Advanced user-defined bridge network",
       "link": "/posts/devops/docker/network/05d-docker-advance-user-defined-bridge-network"
     }
@@ -34,11 +39,6 @@
     {
       "title": "Insecure Registry",
       "link": "/posts/devops/docker/registry/03c-insecure-reg-with-nexus"
-    }
-    ,
-    {
-      "title": "Default Docker Registry (Docker HUB)",
-      "link": "/posts/devops/docker/registry/03b-default-registry"
     }
     ,
     {

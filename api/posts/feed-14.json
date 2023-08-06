@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Deploy httpd with ssl/https on docker",
+      "link": "/posts/devops/docker/compose/study-cases/10e-httpd-ssl-docker"
+    }
+    ,
+    {
       "title": "Angular deployment using compose file",
       "link": "/posts/devops/docker/compose/study-cases/10d-compose-angular-study-case"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Multiple Compose files to Add & Override attribute",
       "link": "/posts/devops/docker/compose/workflows/09o-multiple-compose-add-override-attr"
-    }
-    ,
-    {
-      "title": "Using profiles with Compose file",
-      "link": "/posts/devops/docker/compose/workflows/09n-compose-using-profile"
     }
   ]
 }

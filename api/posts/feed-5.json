@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "How to Install git on Linux",
+      "link": "/posts/git/version-control/01b-install-git-linux"
+    }
+    ,
+    {
       "title": "How to Install git on Windows",
       "link": "/posts/git/version-control/01b-install-git-windows"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Configure Request and Limit of Resources (CPUs & Memory)",
       "link": "/posts/devops/orchestration/kubernetes/pods/03g-pod-resource-request-and-limit"
-    }
-    ,
-    {
-      "title": "Configure env (Environment Variables) in a Pods",
-      "link": "/posts/devops/orchestration/kubernetes/pods/03f-pod-env-config"
     }
   ]
 }

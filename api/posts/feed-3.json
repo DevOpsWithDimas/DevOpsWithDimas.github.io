@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Getting started with Transaction Control (TCL)",
+      "link": "/posts/rdbms/postgresql/sql/tcl/06a-basic-tcl"
+    }
+    ,
+    {
       "title": "Overview of Concurrency Control",
       "link": "/posts/rdbms/postgresql/sql/tcl/06-overview-concurrent-control"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Deep dive into UPDATE Statement",
       "link": "/posts/rdbms/postgresql/sql/dml/05c-dml-update"
-    }
-    ,
-    {
-      "title": "Getting started with Ansible role, tasks for docker",
-      "link": "/posts/devops/docker/14c-ansible-for-docker-operations"
     }
   ]
 }

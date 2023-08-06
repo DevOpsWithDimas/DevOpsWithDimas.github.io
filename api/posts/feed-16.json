@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Environment variables in Compose",
+      "link": "/posts/devops/docker/compose/environtment/09d-compose-using-env-variables"
+    }
+    ,
+    {
       "title": "Compose file specification and syntax",
       "link": "/posts/devops/docker/compose/09c-syntax-compose-file"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Angular - Proxy to backend",
       "link": "/posts/devops/docker/dockerfile/study-cases/08i-build-angular-proxy-to-backend"
-    }
-    ,
-    {
-      "title": "Angular - Access Rest API",
-      "link": "/posts/devops/docker/dockerfile/study-cases/08h-build-angular-rest-api"
     }
   ]
 }

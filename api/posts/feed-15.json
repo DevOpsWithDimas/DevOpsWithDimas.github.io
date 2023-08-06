@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Using profiles with Compose file",
+      "link": "/posts/devops/docker/compose/workflows/09n-compose-using-profile"
+    }
+    ,
+    {
       "title": "Build docker image using Compose file",
       "link": "/posts/devops/docker/compose/build/09m-compose-build-image"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Volume in Compose",
       "link": "/posts/devops/docker/compose/volume/09e-compose-volume"
-    }
-    ,
-    {
-      "title": "Environment variables in Compose",
-      "link": "/posts/devops/docker/compose/environtment/09d-compose-using-env-variables"
     }
   ]
 }

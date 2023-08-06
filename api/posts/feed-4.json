@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Getting started with Ansible role, tasks for docker",
+      "link": "/posts/devops/docker/14c-ansible-for-docker-operations"
+    }
+    ,
+    {
       "title": "Setup Ansible Control and Managed Nodes",
       "link": "/posts/devops/docker/ansible/study-cases/14b-setup-ansible-environment"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Getting started with git",
       "link": "/posts/git/version-control/01c-basic-git-command"
-    }
-    ,
-    {
-      "title": "How to Install git on Linux",
-      "link": "/posts/git/version-control/01b-install-git-linux"
     }
   ]
 }

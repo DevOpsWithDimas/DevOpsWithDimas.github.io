@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Best practices for writing Dockerfiles",
+      "link": "/posts/devops/docker/dockerfile/07m-best-practice-dockerfile"
+    }
+    ,
+    {
       "title": "Multiple Stage Builds",
       "link": "/posts/devops/docker/dockerfile/07l-dockerfile-multi-stages"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Copying Resources",
       "link": "/posts/devops/docker/dockerfile/07d-dockerfile-copy"
-    }
-    ,
-    {
-      "title": "Environtment Replacement",
-      "link": "/posts/devops/docker/dockerfile/07c-dockerfile-env"
     }
   ]
 }

@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Minikube basic control",
+      "link": "/posts/devops/orchestration/kubernetes/02c-minikube-basic-control"
+    }
+    ,
+    {
       "title": "Deploying an apps/services into Kubernetes",
       "link": "/posts/devops/orchestration/kubernetes/02b-deploy-application"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Overview of Object Relational Database Management System (ORDBMS)",
       "link": "/posts/rdbms/postgresql/01c-postgresql-database"
-    }
-    ,
-    {
-      "title": "Architecture of PostgreSQL Database",
-      "link": "/posts/rdbms/postgresql/01b-postgresql-architecture"
     }
   ]
 }

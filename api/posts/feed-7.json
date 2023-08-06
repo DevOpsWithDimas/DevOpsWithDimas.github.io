@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Overview Pod and Container in Kubernetes",
+      "link": "/posts/devops/orchestration/kubernetes/pods/03-overview-pod-containers"
+    }
+    ,
+    {
       "title": "Joined Tables",
       "link": "/posts/rdbms/postgresql/sql/select/04b-join-tables"
     }
@@ -44,11 +49,6 @@
     {
       "title": "Overview of Docker machines",
       "link": "/posts/devops/docker/machine/13-docker-machine-overview"
-    }
-    ,
-    {
-      "title": "Single Row / Group functions",
-      "link": "/posts/rdbms/postgresql/sql/select/04a-single-group-function"
     }
   ]
 }

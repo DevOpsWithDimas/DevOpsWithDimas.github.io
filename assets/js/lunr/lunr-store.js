@@ -1770,7 +1770,7 @@ var store = [{
         "teaser": "/assets/images/500x300.png"
       },{
         "title": "Default Docker Registry (Docker HUB)",
-        "excerpt":"halo semuanya, di materi kali ini kita akan membahas tentang Docker Registry, The Registry is a stateless, highly scalable server side application that stores and lets you distribute Docker images. The Registry is open-source, under the permissive Apache license. Secara default, Docker Registry menggunakan Docker Hub. Ok nah jadi sekarang...","categories": ["DevOps","Docker","Registry"],
+        "excerpt":"halo semuanya, di materi kali ini kita akan membahas tentang Default docker registry yaitu adalah Docker Hub, Docker HUB adalah repository yang paling umum digunakan system container image khusunya docker. Docker Hub adalah salah satu container registry yang sifatnya public dan private registry (cloud based) yang kita bisa gunakan untuk...","categories": ["DevOps","Docker","Registry"],
         "tags": [],
         "url": "/posts/devops/docker/registry/03b-default-registry",
         "teaser": "/assets/images/500x300.png"

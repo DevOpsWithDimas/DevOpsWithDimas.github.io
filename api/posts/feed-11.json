@@ -2,6 +2,11 @@
   "pages": [
     
     {
+      "title": "Architecture of PostgreSQL Database",
+      "link": "/posts/rdbms/postgresql/01b-postgresql-architecture"
+    }
+    ,
+    {
       "title": "Overview of PostgreSQL Database",
       "link": "/posts/rdbms/postgresql/01a-what-is-postgresql"
     }
@@ -44,11 +49,6 @@
     {
       "title": "The Kubernetes API",
       "link": "/posts/devops/orchestration/kubernetes/01c-k8s-api"
-    }
-    ,
-    {
-      "title": "Kubernetes Components",
-      "link": "/posts/devops/orchestration/kubernetes/01b-k8s-components"
     }
   ]
 }
