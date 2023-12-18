@@ -19,22 +19,22 @@ feature_teaser:
   - image_path: "assets/images/udemy-coupon.png"
     alt: "coupon-code"
     title: "Celebrate your learning with courses from Rp99,000"
-    excerpt: "harga special `Rp. 109.000,-` untuk semua kelas di Udemy berlaku sampai tgl `17 Desember 2023` dengan menggunakan kode coupon `WAR_1212_SALE`<br><br> Yukk buruah sebelum expired dan kehabisa kuotanya! checkout sekarang"
+    excerpt: "harga special `Rp. 109.000,-` untuk semua kelas di Udemy berlaku sampai tgl `24 Desember 2023` dengan menggunakan kode coupon `PROMO_202312`<br><br> Yukk buruah sebelum expired dan kehabisa kuotanya! checkout sekarang"
 ---
 
 {% include feature_row id="feature_teaser" type="right" %}
 
 ## Development & Operation Class (DevOps)
 
-- [Docker: Pemula sampai Mahir](https://www.udemy.com/course/docker-pemula-sampai-mahir/?couponCode=WAR_1212_SALE)
-- [Kubernetes: Pemula sampai Mahir](https://www.udemy.com/course/devops-kubernetes-pemula-sampai-mahir/?couponCode=WAR_1212_SALE)
-- [Gitlab: Pemula sampai Mahir](https://www.udemy.com/course/gitops-gitlab-pemula-sampai-mahir/?couponCode=WAR_1212_SALE)
+- [Docker: Pemula sampai Mahir](https://www.udemy.com/course/docker-pemula-sampai-mahir/?couponCode=PROMO_202312)
+- [Kubernetes: Pemula sampai Mahir](https://www.udemy.com/course/devops-kubernetes-pemula-sampai-mahir/?couponCode=PROMO_202312)
+- [Gitlab: Pemula sampai Mahir](https://www.udemy.com/course/gitops-gitlab-pemula-sampai-mahir/?couponCode=PROMO_202312)
   
 ## Java Developer Class (Dev)
 
-- [ORM Hibernate: Pemula sampai Mahir](https://www.udemy.com/course/hibernate-orm-bahasa-indonesia/?couponCode=WAR_1212_SALE)
+- [ORM Hibernate: Pemula sampai Mahir](https://www.udemy.com/course/hibernate-orm-bahasa-indonesia/?couponCode=PROMO_202312)
   
 ## Database Administrator Class (DBA)
 
-- [Oracle: Pemula sampai Mahir](https://www.udemy.com/course/rdbms-oracle-18c-indonesia/?couponCode=WAR_1212_SALE)
-- [PostgreSQL: Pemula sampai Mahir](https://www.udemy.com/course/dba-postgresql-pemula-sampai-mahir/?couponCode=WAR_1212_SALE)
+- [Oracle: Pemula sampai Mahir](https://www.udemy.com/course/rdbms-oracle-18c-indonesia/?couponCode=PROMO_202312)
+- [PostgreSQL: Pemula sampai Mahir](https://www.udemy.com/course/dba-postgresql-pemula-sampai-mahir/?couponCode=PROMO_202312)
