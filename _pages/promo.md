@@ -14,7 +14,7 @@ header:
   overlay_image: "assets/images/udemy-coupon-teaser.png"
   overlay_filter: 0.5
   caption: "More info: www.udemy.com/user/dimas-maryanto-2/"
-tagline: "Voucher discount Rp. 109.000,- untuk semua kelas berlaku selama 5 Hari, jika harga tidak berubah atau kode vourcher invalid artinya sudah expired. So yukk bergabung dengan ratusan <b>Premium Member</b> dan dapatkan keutungan menjadi member!"
+tagline: "Voucher discount Rp. 99.000,- untuk semua kelas berlaku selama 5 Hari, jika harga tidak berubah atau kode vourcher invalid artinya sudah expired. So yukk bergabung dengan ratusan <b>Premium Member</b> dan dapatkan keutungan menjadi member!"
 feature_teaser:
   - image_path: "assets/images/udemy-coupon.png"
     alt: "coupon-code"
