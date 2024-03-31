@@ -19,22 +19,22 @@ feature_teaser:
   - image_path: "assets/images/udemy-coupon.png"
     alt: "coupon-code"
     title: "Celebrate your learning with courses from Rp99,000"
-    excerpt: "harga special `Rp. 109.000,-` untuk semua kelas di Udemy berlaku sampai tgl `31 Maret 2024` dengan menggunakan kode coupon `RAMADAN_2024`<br><br> Yukk buruah sebelum expired dan kehabisa kuotanya! checkout sekarang"
+    excerpt: "harga special `Rp. 109.000,-` untuk semua kelas di Udemy berlaku sampai tgl `04 April 2024` dengan menggunakan kode coupon `GAJIAN_202403`<br><br> Yukk buruah sebelum expired dan kehabisa kuotanya! checkout sekarang"
 ---
 
 {% include feature_row id="feature_teaser" type="right" %}
 
 ## Development & Operation Class (DevOps)
 
-- [Docker: Pemula sampai Mahir](https://www.udemy.com/course/docker-pemula-sampai-mahir/?couponCode=RAMADAN_2024)
-- [Kubernetes: Pemula sampai Mahir](https://www.udemy.com/course/devops-kubernetes-pemula-sampai-mahir/?couponCode=RAMADAN_2024)
-- [Gitlab: Pemula sampai Mahir](https://www.udemy.com/course/gitops-gitlab-pemula-sampai-mahir/?couponCode=RAMADAN_2024)
+- [Docker: Pemula sampai Mahir](https://www.udemy.com/course/docker-pemula-sampai-mahir/?couponCode=GAJIAN_202403)
+- [Kubernetes: Pemula sampai Mahir](https://www.udemy.com/course/devops-kubernetes-pemula-sampai-mahir/?couponCode=GAJIAN_202403)
+- [Gitlab: Pemula sampai Mahir](https://www.udemy.com/course/gitops-gitlab-pemula-sampai-mahir/?couponCode=GAJIAN_202403)
   
 ## Java Developer Class (Dev)
 
-- [ORM Hibernate: Pemula sampai Mahir](https://www.udemy.com/course/hibernate-orm-bahasa-indonesia/?couponCode=RAMADAN_2024)
+- [ORM Hibernate: Pemula sampai Mahir](https://www.udemy.com/course/hibernate-orm-bahasa-indonesia/?couponCode=GAJIAN_202403)
   
 ## Database Administrator Class (DBA)
 
-- [Oracle: Pemula sampai Mahir](https://www.udemy.com/course/rdbms-oracle-18c-indonesia/?couponCode=RAMADAN_2024)
-- [PostgreSQL: Pemula sampai Mahir](https://www.udemy.com/course/dba-postgresql-pemula-sampai-mahir/?couponCode=RAMADAN_2024)
+- [Oracle: Pemula sampai Mahir](https://www.udemy.com/course/rdbms-oracle-18c-indonesia/?couponCode=GAJIAN_202403)
+- [PostgreSQL: Pemula sampai Mahir](https://www.udemy.com/course/dba-postgresql-pemula-sampai-mahir/?couponCode=GAJIAN_202403)
